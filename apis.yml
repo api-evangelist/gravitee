@@ -16,6 +16,66 @@ apis:
       Gravitee is a universal governance layer on top of other third-party event
       brokers, such as Solace. You can auto-discover third-party event APIs,
       control API ...
+  - aid: gravitee:gravitee-management-api
+    name: Gravitee Management API
+    tags:
+      - API Management
+      - Administration
+      - Gateway
+    humanURL: https://documentation.gravitee.io/apim/management-api-reference
+    properties:
+      - url: https://documentation.gravitee.io/apim/management-api-reference
+        type: Documentation
+      - url: https://documentation.gravitee.io/apim/configure-and-manage-the-platform/management-api
+        type: GettingStarted
+    description: >-
+      The Gravitee Management API provides programmatic access to the Gravitee
+      APIM backend, enabling administrators and developers to create APIs, deploy
+      APIs to the gateway, manage applications, subscriptions, users, and access
+      analytics. The Management component exposes core APIM functionality via
+      RESTful endpoints across V1 and V2 subcomponents.
+  - aid: gravitee:gravitee-portal-api
+    name: Gravitee Portal API
+    tags:
+      - Developer Portal
+      - API Catalog
+      - Subscriptions
+    humanURL: https://documentation.gravitee.io/apim/developer-portal
+    properties:
+      - url: https://documentation.gravitee.io/apim/developer-portal
+        type: Documentation
+      - url: https://www.gravitee.io/platform/api-developer-portal
+        type: ProductPage
+    description: >-
+      The Gravitee Portal API exposes endpoints for listing and managing APIs and
+      applications in the Developer Portal UI. It powers the Developer Portal
+      experience and can be used as the backend API for building custom developer
+      portals. Consumers can discover, explore, subscribe to APIs, view
+      documentation, and access analytics around API usage.
+  - aid: gravitee:gravitee-access-management-api
+    name: Gravitee Access Management API
+    tags:
+      - Identity
+      - Access Management
+      - OAuth2
+      - OpenID Connect
+    humanURL: https://documentation.gravitee.io/am/reference/am-api-reference
+    properties:
+      - url: https://documentation.gravitee.io/am/reference/am-api-reference
+        type: Documentation
+      - url: https://documentation.gravitee.io/am
+        type: GettingStarted
+      - url: https://www.gravitee.io/platform/access-management
+        type: ProductPage
+      - url: https://github.com/gravitee-io/gravitee-access-management
+        type: GitHubOrganization
+    description: >-
+      Gravitee Access Management (AM) is a flexible, lightweight open source
+      Identity and Access Management solution. It provides a centralized
+      authentication and authorization service based on OAuth2, OpenID Connect,
+      and SAML 2.0 protocols. The AM Management API exposes a complete RESTful
+      API for scripting administration tasks including user management,
+      identity provider configuration, and authentication flows.
 name: Gravitee
 tags:
   - Platform
@@ -26,11 +86,14 @@ tags:
   - Subscriptions
   - Event-Driven
   - Multi-Protocol
+  - Federation
+  - Access Management
+  - API Design
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-01-08'
-modified: '2025-11-05'
+modified: '2026-03-03'
 position: Consuming
 segments:
   - Gateways
@@ -40,7 +103,7 @@ description: >-
   subscriptions, and publish APIs in a universal API Developer Portal.
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
   - name: 'Gravitee: API Management Platform for APIs, Events & Agents'
@@ -55,3 +118,121 @@ common:
     description: 'null'
     url: https://www.gravitee.io/pricing
     type: Pricing
+  - name: Gravitee Documentation
+    description: >-
+      Comprehensive documentation for the Gravitee platform including API
+      Management, Access Management, and Kubernetes Operator guides.
+    url: https://documentation.gravitee.io/
+    type: Documentation
+  - name: Gravitee Blog
+    description: >-
+      Gravitee blog covering API gateway, API management, Kafka gateway, API
+      strategy, API security, and technical insights.
+    url: https://www.gravitee.io/blog
+    type: Blog
+  - name: Gravitee GitHub Organization
+    description: >-
+      Open source repositories for Gravitee API Management, Access Management,
+      Kubernetes Operator, and related projects.
+    url: https://github.com/gravitee-io
+    type: GitHubOrganization
+  - name: Gravitee Community Forum
+    description: >-
+      Community forum for asking questions, getting support, and connecting with
+      the Gravitee team and API experts.
+    url: https://community.gravitee.io/
+    type: Forums
+  - name: Gravitee Support
+    description: >-
+      Support category within the Gravitee community forum for getting help with
+      the platform.
+    url: https://community.gravitee.io/c/support/11
+    type: Support
+  - name: Gravitee on LinkedIn
+    description: >-
+      Official Gravitee LinkedIn page for company news, updates, and community
+      engagement.
+    url: https://www.linkedin.com/company/gravitee-io
+    type: LinkedIn
+  - name: Gravitee on Twitter
+    description: >-
+      Official Gravitee Twitter account for announcements and community updates.
+    url: https://twitter.com/GraviteeIO
+    type: Twitter
+  - name: Contact Gravitee
+    description: >-
+      Contact page for connecting with the Gravitee team for sales, support, and
+      partnership inquiries.
+    url: https://www.gravitee.io/contact-us
+    type: Contact
+  - name: About Gravitee
+    description: >-
+      Company information page for Gravitee, including their mission, team, and
+      history.
+    url: https://www.gravitee.io/company
+    type: About
+  - name: Gravitee Privacy Policy
+    description: >-
+      Privacy policy covering how Gravitee collects, processes, and protects
+      personal data.
+    url: https://www.gravitee.io/privacy-policy
+    type: PrivacyPolicy
+  - name: Gravitee Security
+    description: >-
+      Security and privacy commitments page detailing ISO 27001, ISO 27701
+      certifications and data protection standards.
+    url: https://www.gravitee.io/security-at-gravitee
+    type: Security
+  - name: Gravitee Support Terms
+    description: >-
+      Terms governing support services provided by Gravitee as part of the
+      Software License and Support Agreement.
+    url: https://www.gravitee.io/support-terms
+    type: TermsOfService
+  - name: Gravitee API Gateway
+    description: >-
+      Product page for the Gravitee API Gateway, an event-native gateway
+      supporting REST, GraphQL, WebSockets, Kafka, MQTT, and other protocols.
+    url: https://www.gravitee.io/platform/api-gateway
+    type: ProductPage
+  - name: Gravitee Federated API Management
+    description: >-
+      Product page for federated API management enabling unified governance
+      across Gravitee, AWS, Azure, IBM, Apigee, Solace, and Confluent.
+    url: https://www.gravitee.io/platform/federated-api-management
+    type: ProductPage
+  - name: Gravitee Cockpit
+    description: >-
+      Centralized multi-environment dashboard for managing all Gravitee API
+      Management and Access Management installations.
+    url: https://www.gravitee.io/platform/cockpit
+    type: ProductPage
+  - name: Gravitee API Designer
+    description: >-
+      No-code visual API design tool with drag-and-drop interface for creating
+      data models, auto-generating OpenAPI specs, and one-click deployment.
+    url: https://www.gravitee.io/platform/api-designer
+    type: ProductPage
+  - name: Gravitee APIM Release Notes
+    description: >-
+      Release notes providing overviews of new features, improvements, and fixes
+      in Gravitee API Management releases.
+    url: https://documentation.gravitee.io/apim/release-information/release-notes
+    type: ChangeLog
+  - name: Gravitee APIM Changelog
+    description: >-
+      Detailed changelog of new features, bug fixes, and breaking changes across
+      all Gravitee API Management releases.
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+    type: ChangeLog
+  - name: Gravitee GitHub - API Management
+    description: >-
+      Open source GitHub repository for Gravitee API Management, a flexible and
+      lightweight API management solution.
+    url: https://github.com/gravitee-io/gravitee-api-management
+    type: GitHubRepository
+  - name: Gravitee SaaS Product Terms
+    description: >-
+      Terms and conditions for Gravitee SaaS product offerings.
+    url: https://www.gravitee.io/saas-product-terms
+    type: TermsOfService
