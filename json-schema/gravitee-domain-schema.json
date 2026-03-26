@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gravitee.io/schemas/gravitee/domain.json",
+  "title": "Gravitee Security Domain",
+  "description": "Represents a security domain in the Gravitee Access Management platform that defines authentication and authorization boundaries for applications and users.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the security domain."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the security domain.",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the security domain."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the domain is currently active and processing requests.",
+      "default": true
+    },
+    "path": {
+      "type": "string",
+      "description": "Context path for the domain used in URL routing."
+    },
+    "oidc": {
+      "type": "object",
+      "description": "OpenID Connect protocol configuration.",
+      "additionalProperties": true
+    },
+    "scim": {
+      "type": "object",
+      "description": "SCIM protocol configuration for user provisioning.",
+      "additionalProperties": true
+    },
+    "loginSettings": {
+      "type": "object",
+      "description": "Login page customization settings.",
+      "properties": {
+        "inherited": {
+          "type": "boolean",
+          "description": "Whether settings are inherited from the organization level."
+        },
+        "forgotPasswordEnabled": {
+          "type": "boolean",
+          "description": "Whether the forgot password feature is enabled."
+        },
+        "registerEnabled": {
+          "type": "boolean",
+          "description": "Whether self-registration is enabled."
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the domain was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the domain was last updated."
+    }
+  }
+}

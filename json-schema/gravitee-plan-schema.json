@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gravitee.io/schemas/gravitee/plan.json",
+  "title": "Gravitee Plan",
+  "description": "Represents an API plan in the Gravitee platform that defines access tiers, security policies, and rate limits for API consumers.",
+  "type": "object",
+  "required": ["name", "security"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the plan."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the plan.",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the plan and its access tier."
+    },
+    "security": {
+      "type": "string",
+      "description": "Security type required for consumers using this plan.",
+      "enum": ["KEY_LESS", "API_KEY", "OAUTH2", "JWT"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the plan.",
+      "enum": ["STAGING", "PUBLISHED", "CLOSED", "DEPRECATED"]
+    },
+    "validation": {
+      "type": "string",
+      "description": "Subscription validation mode - AUTO approves immediately, MANUAL requires admin approval.",
+      "enum": ["AUTO", "MANUAL"]
+    }
+  }
+}

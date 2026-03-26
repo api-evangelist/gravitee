@@ -1,0 +1,891 @@
+openapi: 3.1.0
+info:
+  title: Gravitee Access Management API
+  description: >-
+    The Gravitee Access Management (AM) API is a RESTful administration
+    interface for the Gravitee AM identity and access management platform.
+    It manages security domains, applications, users, roles, flows, and
+    policies, and is secured using Bearer token authorization.
+  version: '4.0'
+  contact:
+    name: Gravitee.io
+    url: https://www.gravitee.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Gravitee Access Management Documentation
+  url: https://documentation.gravitee.io/am
+servers:
+  - url: https://{am-host}/management
+    description: Gravitee Access Management API Server
+    variables:
+      am-host:
+        default: localhost:8093
+        description: Hostname and port of the Gravitee AM Management API
+tags:
+  - name: Domains
+    description: >-
+      Manage security domains that define authentication and authorization
+      boundaries for applications.
+  - name: Applications
+    description: >-
+      Manage OAuth 2.0 and OpenID Connect applications within security domains.
+  - name: Users
+    description: >-
+      Manage users within security domains including credentials, roles, and
+      consent.
+  - name: Roles
+    description: >-
+      Define and manage roles and permissions within security domains.
+  - name: Identity Providers
+    description: >-
+      Configure identity providers for authentication including LDAP, SAML,
+      social, and custom providers.
+  - name: Flows
+    description: >-
+      Configure authentication and authorization flows with pre and post steps.
+  - name: Policies
+    description: >-
+      Manage policies that enforce rules during authentication and authorization
+      flows.
+security:
+  - bearerAuth: []
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains:
+    get:
+      operationId: listDomains
+      summary: List security domains
+      description: >-
+        Returns a paginated list of all security domains within the specified
+        environment.
+      tags:
+        - Domains
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          description: Organization identifier.
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          description: Environment identifier.
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: List of domains returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainListResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createDomain
+      summary: Create a security domain
+      description: >-
+        Creates a new security domain within the specified environment.
+      tags:
+        - Domains
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDomainRequest'
+      responses:
+        '201':
+          description: Domain created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domainId}:
+    get:
+      operationId: getDomain
+      summary: Get a security domain
+      description: >-
+        Returns the full configuration of a security domain.
+      tags:
+        - Domains
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          description: The unique identifier of the security domain.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Domain returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+        '404':
+          description: Domain not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      operationId: updateDomain
+      summary: Update a security domain
+      description: >-
+        Updates the configuration of an existing security domain.
+      tags:
+        - Domains
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDomainRequest'
+      responses:
+        '200':
+          description: Domain updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Domain'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      operationId: deleteDomain
+      summary: Delete a security domain
+      description: >-
+        Deletes a security domain and all its associated resources.
+      tags:
+        - Domains
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Domain deleted successfully.
+        '404':
+          description: Domain not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domainId}/applications:
+    get:
+      operationId: listDomainApplications
+      summary: List applications in a domain
+      description: >-
+        Returns a paginated list of all applications registered within a
+        security domain.
+      tags:
+        - Applications
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Applications returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationListResponse'
+        '404':
+          description: Domain not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createDomainApplication
+      summary: Create an application in a domain
+      description: >-
+        Creates a new OAuth 2.0 / OIDC application within a security domain.
+      tags:
+        - Applications
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+      responses:
+        '201':
+          description: Application created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domainId}/users:
+    get:
+      operationId: listDomainUsers
+      summary: List users in a domain
+      description: >-
+        Returns a paginated list of all users within a security domain.
+      tags:
+        - Users
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: q
+          in: query
+          description: Search query to filter users.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Users returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '404':
+          description: Domain not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createDomainUser
+      summary: Create a user in a domain
+      description: >-
+        Creates a new user within a security domain.
+      tags:
+        - Users
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domainId}/roles:
+    get:
+      operationId: listDomainRoles
+      summary: List roles in a domain
+      description: >-
+        Returns all roles defined within a security domain.
+      tags:
+        - Roles
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Roles returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleListResponse'
+        '404':
+          description: Domain not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domainId}/identities:
+    get:
+      operationId: listIdentityProviders
+      summary: List identity providers in a domain
+      description: >-
+        Returns all identity providers configured within a security domain.
+      tags:
+        - Identity Providers
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Identity providers returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProviderListResponse'
+        '404':
+          description: Domain not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domainId}/flows:
+    get:
+      operationId: listDomainFlows
+      summary: List flows in a domain
+      description: >-
+        Returns all authentication and authorization flows configured in a
+        security domain.
+      tags:
+        - Flows
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: environmentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Flows returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Flow'
+        '404':
+          description: Domain not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Bearer token obtained via the Gravitee AM authentication endpoint or
+        an external identity provider.
+  schemas:
+    Domain:
+      type: object
+      description: A security domain defining authentication and authorization boundaries.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the domain.
+        name:
+          type: string
+          description: Name of the security domain.
+        description:
+          type: string
+          description: Description of the domain.
+        enabled:
+          type: boolean
+          description: Whether the domain is active.
+        path:
+          type: string
+          description: Context path for the domain.
+        oidc:
+          type: object
+          description: OpenID Connect configuration.
+        scim:
+          type: object
+          description: SCIM protocol configuration.
+        loginSettings:
+          type: object
+          description: Login page customization settings.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateDomainRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the security domain.
+        description:
+          type: string
+          description: Description of the domain.
+        path:
+          type: string
+          description: Context path for the domain.
+    UpdateDomainRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        path:
+          type: string
+    Application:
+      type: object
+      description: An OAuth 2.0 / OIDC application within a security domain.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          description: Application type.
+          enum:
+            - WEB
+            - NATIVE
+            - BROWSER
+            - SERVICE
+            - RESOURCE_SERVER
+        enabled:
+          type: boolean
+        domain:
+          type: string
+          description: ID of the parent security domain.
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateApplicationRequest:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+            - WEB
+            - NATIVE
+            - BROWSER
+            - SERVICE
+            - RESOURCE_SERVER
+    ApplicationSettings:
+      type: object
+      properties:
+        oauth:
+          type: object
+          description: OAuth 2.0 client settings.
+          properties:
+            clientId:
+              type: string
+            clientSecret:
+              type: string
+            grantTypes:
+              type: array
+              items:
+                type: string
+            redirectUris:
+              type: array
+              items:
+                type: string
+            responseTypes:
+              type: array
+              items:
+                type: string
+    User:
+      type: object
+      description: A user within a security domain.
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        enabled:
+          type: boolean
+        roles:
+          type: array
+          items:
+            type: string
+        source:
+          type: string
+          description: Identity provider source.
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateUserRequest:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+          format: password
+    Role:
+      type: object
+      description: A role defining permissions within a security domain.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        scope:
+          type: string
+          description: Scope of the role.
+          enum:
+            - DOMAIN
+            - APPLICATION
+        permissions:
+          type: array
+          items:
+            type: string
+        system:
+          type: boolean
+          description: Whether this is a built-in system role.
+    IdentityProvider:
+      type: object
+      description: An identity provider configured for authentication.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          description: Identity provider type.
+          enum:
+            - inline
+            - ldap
+            - mongo
+            - jdbc
+            - http
+            - saml
+            - oauth2
+            - oidc
+            - github
+            - google
+            - azure-ad
+            - facebook
+            - twitter
+        enabled:
+          type: boolean
+        configuration:
+          type: object
+          description: Provider-specific configuration.
+    Flow:
+      type: object
+      description: An authentication or authorization flow.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          description: Flow type.
+          enum:
+            - ROOT
+            - LOGIN
+            - CONSENT
+            - REGISTER
+            - RESET_PASSWORD
+        enabled:
+          type: boolean
+        pre:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowStep'
+          description: Pre-processing steps.
+        post:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowStep'
+          description: Post-processing steps.
+    FlowStep:
+      type: object
+      properties:
+        name:
+          type: string
+        policy:
+          type: string
+          description: Policy to execute.
+        enabled:
+          type: boolean
+        configuration:
+          type: object
+          description: Step-specific configuration.
+    DomainListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Domain'
+        currentPage:
+          type: integer
+        totalCount:
+          type: integer
+    ApplicationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+        currentPage:
+          type: integer
+        totalCount:
+          type: integer
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        currentPage:
+          type: integer
+        totalCount:
+          type: integer
+    RoleListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+    IdentityProviderListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdentityProvider'
+    ErrorResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        httpStatus:
+          type: integer
+          description: HTTP status code.
+        technicalCode:
+          type: string
+          description: Machine-readable error code.

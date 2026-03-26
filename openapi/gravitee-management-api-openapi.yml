@@ -1,0 +1,992 @@
+openapi: 3.1.0
+info:
+  title: Gravitee Management API
+  description: >-
+    The Gravitee Management API provides a RESTful interface for programmatic
+    administration of the Gravitee APIM platform. It exposes endpoints for
+    creating and deploying APIs, managing plans, subscriptions, applications,
+    users, and platform configuration. Covers both v2 and v4 API management
+    operations.
+  version: '4.0'
+  contact:
+    name: Gravitee.io
+    url: https://www.gravitee.io/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+externalDocs:
+  description: Gravitee Management API Documentation
+  url: https://documentation.gravitee.io/apim/configure-and-manage-the-platform/management-api
+servers:
+  - url: https://{management-host}/management/v2
+    description: Gravitee Management API v2 Server
+    variables:
+      management-host:
+        default: localhost:8083
+        description: Hostname and port of the Gravitee Management API
+tags:
+  - name: APIs
+    description: >-
+      Create, update, deploy, start, stop, and delete API definitions on the
+      Gravitee gateway.
+  - name: Plans
+    description: >-
+      Manage API plans that define access tiers, rate limits, and security
+      policies for API consumers.
+  - name: Subscriptions
+    description: >-
+      Manage subscriptions that grant applications access to API plans.
+  - name: Applications
+    description: >-
+      Register and manage applications that consume APIs through the platform.
+  - name: Users
+    description: >-
+      Manage platform users including roles, permissions, and group memberships.
+  - name: Configuration
+    description: >-
+      Manage platform-wide configuration settings, dictionaries, and metadata.
+  - name: Audit
+    description: >-
+      Access audit logs for tracking changes and actions across the platform.
+security:
+  - bearerAuth: []
+paths:
+  /apis:
+    get:
+      operationId: listApis
+      summary: List all APIs
+      description: >-
+        Returns a paginated list of all APIs available on the platform. Supports
+        filtering by name, tag, category, and lifecycle state.
+      tags:
+        - APIs
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          description: Number of items per page.
+          schema:
+            type: integer
+            default: 10
+        - name: q
+          in: query
+          description: Search query to filter APIs by name or description.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of APIs returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiListResponse'
+        '401':
+          description: Unauthorized - invalid or missing credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createApi
+      summary: Create a new API
+      description: >-
+        Creates a new API definition on the Gravitee platform. Supports both
+        v2 proxy APIs and v4 message-based APIs.
+      tags:
+        - APIs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApiRequest'
+      responses:
+        '201':
+          description: API created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api'
+        '400':
+          description: Bad request - invalid API definition.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /apis/{apiId}:
+    get:
+      operationId: getApi
+      summary: Get an API by ID
+      description: >-
+        Returns the full definition of an API including its plans, flows, and
+        deployment status.
+      tags:
+        - APIs
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: API definition returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api'
+        '404':
+          description: API not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      operationId: updateApi
+      summary: Update an API
+      description: >-
+        Updates an existing API definition. The API must be stopped or the
+        changes will require redeployment.
+      tags:
+        - APIs
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiRequest'
+      responses:
+        '200':
+          description: API updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: API not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      operationId: deleteApi
+      summary: Delete an API
+      description: >-
+        Deletes an API definition from the platform. The API must be stopped
+        before it can be deleted.
+      tags:
+        - APIs
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: API deleted successfully.
+        '404':
+          description: API not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /apis/{apiId}/_deploy:
+    post:
+      operationId: deployApi
+      summary: Deploy an API
+      description: >-
+        Deploys the current API definition to the gateway. Changes made to an
+        API are not active until the API is deployed.
+      tags:
+        - APIs
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: API deployed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api'
+        '404':
+          description: API not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /apis/{apiId}/_start:
+    post:
+      operationId: startApi
+      summary: Start an API
+      description: >-
+        Starts an API on the gateway, making it available to receive traffic.
+      tags:
+        - APIs
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: API started successfully.
+        '404':
+          description: API not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /apis/{apiId}/_stop:
+    post:
+      operationId: stopApi
+      summary: Stop an API
+      description: >-
+        Stops an API on the gateway, preventing it from receiving traffic.
+      tags:
+        - APIs
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: API stopped successfully.
+        '404':
+          description: API not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /apis/{apiId}/plans:
+    get:
+      operationId: listApiPlans
+      summary: List plans for an API
+      description: >-
+        Returns all plans defined for a specific API, including their security
+        type, rate limits, and status.
+      tags:
+        - Plans
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of plans returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanListResponse'
+        '404':
+          description: API not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createPlan
+      summary: Create a plan for an API
+      description: >-
+        Creates a new plan for the specified API with defined security type,
+        rate limiting, and access control.
+      tags:
+        - Plans
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlanRequest'
+      responses:
+        '201':
+          description: Plan created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /apis/{apiId}/subscriptions:
+    get:
+      operationId: listApiSubscriptions
+      summary: List subscriptions for an API
+      description: >-
+        Returns all subscriptions for a specific API, optionally filtered by
+        status or application.
+      tags:
+        - Subscriptions
+      parameters:
+        - name: apiId
+          in: path
+          required: true
+          description: The unique identifier of the API.
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter subscriptions by status.
+          schema:
+            type: string
+            enum:
+              - ACCEPTED
+              - PENDING
+              - REJECTED
+              - CLOSED
+              - PAUSED
+      responses:
+        '200':
+          description: List of subscriptions returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionListResponse'
+        '404':
+          description: API not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /applications:
+    get:
+      operationId: listApplications
+      summary: List all applications
+      description: >-
+        Returns a paginated list of all applications registered on the platform.
+      tags:
+        - Applications
+      parameters:
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          description: Number of items per page.
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: List of applications returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationListResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createApplication
+      summary: Create a new application
+      description: >-
+        Registers a new application on the platform that can subscribe to API
+        plans.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+      responses:
+        '201':
+          description: Application created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /users:
+    get:
+      operationId: listUsers
+      summary: List platform users
+      description: >-
+        Returns a paginated list of all users registered on the platform.
+      tags:
+        - Users
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: List of users returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /configuration:
+    get:
+      operationId: getConfiguration
+      summary: Get platform configuration
+      description: >-
+        Returns the current platform-wide configuration settings.
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: Configuration returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformConfiguration'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /audit:
+    get:
+      operationId: listAuditEvents
+      summary: List audit events
+      description: >-
+        Returns a paginated list of audit events tracking changes and actions
+        across the platform.
+      tags:
+        - Audit
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: from
+          in: query
+          description: Start timestamp for filtering audit events.
+          schema:
+            type: integer
+            format: int64
+        - name: to
+          in: query
+          description: End timestamp for filtering audit events.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Audit events returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditListResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Bearer token authentication. Obtain a token via the Gravitee
+        Management Console or by authenticating with your identity provider.
+  schemas:
+    Api:
+      type: object
+      description: An API definition managed by the Gravitee platform.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the API.
+        name:
+          type: string
+          description: Name of the API.
+        description:
+          type: string
+          description: Description of the API.
+        version:
+          type: string
+          description: Version of the API definition.
+        definitionVersion:
+          type: string
+          description: The Gravitee definition version (V2 or V4).
+          enum:
+            - V2
+            - V4
+        type:
+          type: string
+          description: The type of API (PROXY for synchronous, MESSAGE for async).
+          enum:
+            - PROXY
+            - MESSAGE
+        state:
+          type: string
+          description: Current lifecycle state of the API.
+          enum:
+            - INITIALIZED
+            - STOPPED
+            - STARTED
+            - CLOSED
+        visibility:
+          type: string
+          description: Visibility of the API.
+          enum:
+            - PUBLIC
+            - PRIVATE
+        lifecycleState:
+          type: string
+          description: Publication lifecycle state.
+          enum:
+            - CREATED
+            - PUBLISHED
+            - UNPUBLISHED
+            - DEPRECATED
+            - ARCHIVED
+        tags:
+          type: array
+          items:
+            type: string
+          description: Sharding tags for gateway routing.
+        labels:
+          type: array
+          items:
+            type: string
+          description: Labels for categorization.
+        entrypoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entrypoint'
+          description: API entrypoints (v4 APIs).
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endpoint'
+          description: Backend endpoints.
+        deployedAt:
+          type: string
+          format: date-time
+          description: Timestamp of last deployment.
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp of API creation.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp of last update.
+    CreateApiRequest:
+      type: object
+      required:
+        - name
+        - version
+        - definitionVersion
+      properties:
+        name:
+          type: string
+          description: Name of the API.
+        description:
+          type: string
+          description: Description of the API.
+        version:
+          type: string
+          description: Version of the API.
+        definitionVersion:
+          type: string
+          enum:
+            - V2
+            - V4
+        type:
+          type: string
+          enum:
+            - PROXY
+            - MESSAGE
+        listeners:
+          type: array
+          items:
+            type: object
+          description: Listener configuration for v4 APIs.
+        endpointGroups:
+          type: array
+          items:
+            type: object
+          description: Endpoint group configuration.
+    UpdateApiRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        version:
+          type: string
+        visibility:
+          type: string
+          enum:
+            - PUBLIC
+            - PRIVATE
+        lifecycleState:
+          type: string
+          enum:
+            - CREATED
+            - PUBLISHED
+            - UNPUBLISHED
+            - DEPRECATED
+    Entrypoint:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Entrypoint type (e.g., http-proxy, websocket, sse).
+        configuration:
+          type: object
+          description: Entrypoint-specific configuration.
+    Endpoint:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the endpoint.
+        target:
+          type: string
+          description: Target URL for the backend.
+        type:
+          type: string
+          description: Endpoint type.
+    Plan:
+      type: object
+      description: An API plan defining access tier and security.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        security:
+          type: string
+          description: Security type for the plan.
+          enum:
+            - KEY_LESS
+            - API_KEY
+            - OAUTH2
+            - JWT
+        status:
+          type: string
+          enum:
+            - STAGING
+            - PUBLISHED
+            - CLOSED
+            - DEPRECATED
+        validation:
+          type: string
+          description: Subscription validation mode.
+          enum:
+            - AUTO
+            - MANUAL
+    CreatePlanRequest:
+      type: object
+      required:
+        - name
+        - security
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        security:
+          type: string
+          enum:
+            - KEY_LESS
+            - API_KEY
+            - OAUTH2
+            - JWT
+        validation:
+          type: string
+          enum:
+            - AUTO
+            - MANUAL
+    Subscription:
+      type: object
+      description: A subscription granting an application access to an API plan.
+      properties:
+        id:
+          type: string
+        plan:
+          type: string
+          description: ID of the subscribed plan.
+        application:
+          type: string
+          description: ID of the subscribing application.
+        status:
+          type: string
+          enum:
+            - ACCEPTED
+            - PENDING
+            - REJECTED
+            - CLOSED
+            - PAUSED
+        createdAt:
+          type: string
+          format: date-time
+    Application:
+      type: object
+      description: An application that consumes APIs through the platform.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          description: Application type.
+          enum:
+            - SIMPLE
+            - BROWSER
+            - WEB
+            - NATIVE
+            - BACKEND_TO_BACKEND
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - ARCHIVED
+        createdAt:
+          type: string
+          format: date-time
+    CreateApplicationRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+            - SIMPLE
+            - BROWSER
+            - WEB
+            - NATIVE
+            - BACKEND_TO_BACKEND
+        settings:
+          type: object
+          description: Application settings including OAuth2 client configuration.
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+          format: email
+        roles:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - PENDING
+            - REJECTED
+        createdAt:
+          type: string
+          format: date-time
+    PlatformConfiguration:
+      type: object
+      description: Platform-wide configuration settings.
+      properties:
+        portal:
+          type: object
+          description: Developer portal configuration.
+        authentication:
+          type: object
+          description: Authentication provider configuration.
+        analytics:
+          type: object
+          description: Analytics and logging configuration.
+    AuditEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        event:
+          type: string
+          description: Type of audit event.
+        referenceType:
+          type: string
+          description: Type of resource that was affected.
+        referenceId:
+          type: string
+          description: ID of the affected resource.
+        user:
+          type: string
+          description: User who performed the action.
+        createdAt:
+          type: string
+          format: date-time
+    ApiListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Api'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    PlanListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Plan'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    SubscriptionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ApplicationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    AuditListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEvent'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        size:
+          type: integer
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+    ErrorResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        httpStatus:
+          type: integer
+          description: HTTP status code.
+        technicalCode:
+          type: string
+          description: Machine-readable error code.
+        parameters:
+          type: object
+          description: Additional error context.
