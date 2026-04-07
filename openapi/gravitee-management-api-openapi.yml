@@ -25,10 +25,15 @@ servers:
         default: localhost:8083
         description: Hostname and port of the Gravitee Management API
 tags:
-  - name: APIs
+  - name: Applications
     description: >-
-      Create, update, deploy, start, stop, and delete API definitions on the
-      Gravitee gateway.
+      Register and manage applications that consume APIs through the platform.
+  - name: Audit
+    description: >-
+      Access audit logs for tracking changes and actions across the platform.
+  - name: Configuration
+    description: >-
+      Manage platform-wide configuration settings, dictionaries, and metadata.
   - name: Plans
     description: >-
       Manage API plans that define access tiers, rate limits, and security
@@ -36,18 +41,9 @@ tags:
   - name: Subscriptions
     description: >-
       Manage subscriptions that grant applications access to API plans.
-  - name: Applications
-    description: >-
-      Register and manage applications that consume APIs through the platform.
   - name: Users
     description: >-
       Manage platform users including roles, permissions, and group memberships.
-  - name: Configuration
-    description: >-
-      Manage platform-wide configuration settings, dictionaries, and metadata.
-  - name: Audit
-    description: >-
-      Access audit logs for tracking changes and actions across the platform.
 security:
   - bearerAuth: []
 paths:
@@ -58,8 +54,7 @@ paths:
       description: >-
         Returns a paginated list of all APIs available on the platform. Supports
         filtering by name, tag, category, and lifecycle state.
-      tags:
-        - APIs
+      tags: []
       parameters:
         - name: page
           in: query
@@ -97,8 +92,7 @@ paths:
       description: >-
         Creates a new API definition on the Gravitee platform. Supports both
         v2 proxy APIs and v4 message-based APIs.
-      tags:
-        - APIs
+      tags: []
       requestBody:
         required: true
         content:
@@ -131,8 +125,7 @@ paths:
       description: >-
         Returns the full definition of an API including its plans, flows, and
         deployment status.
-      tags:
-        - APIs
+      tags: []
       parameters:
         - name: apiId
           in: path
@@ -159,8 +152,7 @@ paths:
       description: >-
         Updates an existing API definition. The API must be stopped or the
         changes will require redeployment.
-      tags:
-        - APIs
+      tags: []
       parameters:
         - name: apiId
           in: path
@@ -199,8 +191,7 @@ paths:
       description: >-
         Deletes an API definition from the platform. The API must be stopped
         before it can be deleted.
-      tags:
-        - APIs
+      tags: []
       parameters:
         - name: apiId
           in: path
@@ -224,8 +215,7 @@ paths:
       description: >-
         Deploys the current API definition to the gateway. Changes made to an
         API are not active until the API is deployed.
-      tags:
-        - APIs
+      tags: []
       parameters:
         - name: apiId
           in: path
@@ -252,8 +242,7 @@ paths:
       summary: Gravitee Start an API
       description: >-
         Starts an API on the gateway, making it available to receive traffic.
-      tags:
-        - APIs
+      tags: []
       parameters:
         - name: apiId
           in: path
@@ -276,8 +265,7 @@ paths:
       summary: Gravitee Stop an API
       description: >-
         Stops an API on the gateway, preventing it from receiving traffic.
-      tags:
-        - APIs
+      tags: []
       parameters:
         - name: apiId
           in: path
