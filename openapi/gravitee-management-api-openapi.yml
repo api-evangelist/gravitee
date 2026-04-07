@@ -54,7 +54,7 @@ paths:
   /apis:
     get:
       operationId: listApis
-      summary: List all APIs
+      summary: Gravitee List all APIs
       description: >-
         Returns a paginated list of all APIs available on the platform. Supports
         filtering by name, tag, category, and lifecycle state.
@@ -93,7 +93,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
       operationId: createApi
-      summary: Create a new API
+      summary: Gravitee Create a new API
       description: >-
         Creates a new API definition on the Gravitee platform. Supports both
         v2 proxy APIs and v4 message-based APIs.
@@ -127,7 +127,7 @@ paths:
   /apis/{apiId}:
     get:
       operationId: getApi
-      summary: Get an API by ID
+      summary: Gravitee Get an API by ID
       description: >-
         Returns the full definition of an API including its plans, flows, and
         deployment status.
@@ -155,7 +155,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     put:
       operationId: updateApi
-      summary: Update an API
+      summary: Gravitee Update an API
       description: >-
         Updates an existing API definition. The API must be stopped or the
         changes will require redeployment.
@@ -195,7 +195,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     delete:
       operationId: deleteApi
-      summary: Delete an API
+      summary: Gravitee Delete an API
       description: >-
         Deletes an API definition from the platform. The API must be stopped
         before it can be deleted.
@@ -220,7 +220,7 @@ paths:
   /apis/{apiId}/_deploy:
     post:
       operationId: deployApi
-      summary: Deploy an API
+      summary: Gravitee Deploy an API
       description: >-
         Deploys the current API definition to the gateway. Changes made to an
         API are not active until the API is deployed.
@@ -249,7 +249,7 @@ paths:
   /apis/{apiId}/_start:
     post:
       operationId: startApi
-      summary: Start an API
+      summary: Gravitee Start an API
       description: >-
         Starts an API on the gateway, making it available to receive traffic.
       tags:
@@ -273,7 +273,7 @@ paths:
   /apis/{apiId}/_stop:
     post:
       operationId: stopApi
-      summary: Stop an API
+      summary: Gravitee Stop an API
       description: >-
         Stops an API on the gateway, preventing it from receiving traffic.
       tags:
@@ -297,7 +297,7 @@ paths:
   /apis/{apiId}/plans:
     get:
       operationId: listApiPlans
-      summary: List plans for an API
+      summary: Gravitee List plans for an API
       description: >-
         Returns all plans defined for a specific API, including their security
         type, rate limits, and status.
@@ -325,7 +325,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
       operationId: createPlan
-      summary: Create a plan for an API
+      summary: Gravitee Create a plan for an API
       description: >-
         Creates a new plan for the specified API with defined security type,
         rate limiting, and access control.
@@ -360,7 +360,7 @@ paths:
   /apis/{apiId}/subscriptions:
     get:
       operationId: listApiSubscriptions
-      summary: List subscriptions for an API
+      summary: Gravitee List subscriptions for an API
       description: >-
         Returns all subscriptions for a specific API, optionally filtered by
         status or application.
@@ -400,7 +400,7 @@ paths:
   /applications:
     get:
       operationId: listApplications
-      summary: List all applications
+      summary: Gravitee List all applications
       description: >-
         Returns a paginated list of all applications registered on the platform.
       tags:
@@ -433,7 +433,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
       operationId: createApplication
-      summary: Create a new application
+      summary: Gravitee Create a new application
       description: >-
         Registers a new application on the platform that can subscribe to API
         plans.
@@ -461,7 +461,7 @@ paths:
   /users:
     get:
       operationId: listUsers
-      summary: List platform users
+      summary: Gravitee List platform users
       description: >-
         Returns a paginated list of all users registered on the platform.
       tags:
@@ -493,7 +493,7 @@ paths:
   /configuration:
     get:
       operationId: getConfiguration
-      summary: Get platform configuration
+      summary: Gravitee Get platform configuration
       description: >-
         Returns the current platform-wide configuration settings.
       tags:
@@ -514,7 +514,7 @@ paths:
   /audit:
     get:
       operationId: listAuditEvents
-      summary: List audit events
+      summary: Gravitee List audit events
       description: >-
         Returns a paginated list of audit events tracking changes and actions
         across the platform.
