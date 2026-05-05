@@ -1,0 +1,315 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Gravitee Access Management"
+  description: "Identity and access management workflow for security engineers to manage Gravitee AM security domains, OAuth2/OIDC applications, users, roles, identity providers, and authentication flows."
+  tags:
+    - Gravitee
+    - Identity
+    - Access Management
+    - OAuth2
+  created: "2026-05-04"
+  modified: "2026-05-04"
+
+binds:
+  - namespace: env
+    keys:
+      GRAVITEE_AM_URL: GRAVITEE_AM_URL
+      GRAVITEE_AM_TOKEN: GRAVITEE_AM_TOKEN
+
+capability:
+  consumes:
+    - import: gravitee-am
+      location: ./shared/gravitee-access-management.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: gravitee-access-management-api
+      description: "Unified REST API for Gravitee AM administration."
+      resources:
+        - path: /v1/domains
+          name: domains
+          description: "Security domains."
+          operations:
+            - method: GET
+              name: list-domains
+              description: "List all security domains."
+              call: "gravitee-am.list-domains"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-domain
+              description: "Create a new security domain."
+              call: "gravitee-am.create-domain"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+                name: "rest.name"
+                description: "rest.description"
+                path: "rest.path"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/domains/{domainId}
+          name: domain
+          description: "A single security domain."
+          operations:
+            - method: GET
+              name: get-domain
+              description: "Get a security domain by ID."
+              call: "gravitee-am.get-domain"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+                domainId: "rest.domainId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-domain
+              description: "Delete a security domain."
+              call: "gravitee-am.delete-domain"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+                domainId: "rest.domainId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/domains/{domainId}/applications
+          name: domain-applications
+          description: "Applications within a domain."
+          operations:
+            - method: GET
+              name: list-domain-applications
+              description: "List OAuth2/OIDC applications within a domain."
+              call: "gravitee-am.list-domain-applications"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+                domainId: "rest.domainId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/domains/{domainId}/users
+          name: domain-users
+          description: "Users within a domain."
+          operations:
+            - method: GET
+              name: list-domain-users
+              description: "List users within a security domain."
+              call: "gravitee-am.list-domain-users"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+                domainId: "rest.domainId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/domains/{domainId}/roles
+          name: domain-roles
+          description: "Roles within a domain."
+          operations:
+            - method: GET
+              name: list-domain-roles
+              description: "List roles within a security domain."
+              call: "gravitee-am.list-domain-roles"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+                domainId: "rest.domainId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/domains/{domainId}/identities
+          name: domain-identities
+          description: "Identity providers within a domain."
+          operations:
+            - method: GET
+              name: list-identity-providers
+              description: "List identity providers within a security domain."
+              call: "gravitee-am.list-identity-providers"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+                domainId: "rest.domainId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/domains/{domainId}/flows
+          name: domain-flows
+          description: "Flows within a domain."
+          operations:
+            - method: GET
+              name: list-domain-flows
+              description: "List authentication and authorization flows within a domain."
+              call: "gravitee-am.list-domain-flows"
+              with:
+                organizationId: "rest.organizationId"
+                environmentId: "rest.environmentId"
+                domainId: "rest.domainId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: gravitee-access-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted Gravitee AM administration."
+      tools:
+        - name: list-domains
+          description: "List all Gravitee AM security domains within an environment."
+          hints:
+            readOnly: true
+          call: "gravitee-am.list-domains"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-domain
+          description: "Get a Gravitee AM security domain by ID."
+          hints:
+            readOnly: true
+          call: "gravitee-am.get-domain"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-domain
+          description: "Create a new Gravitee AM security domain."
+          hints:
+            readOnly: false
+          call: "gravitee-am.create-domain"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            name: "tools.name"
+            description: "tools.description"
+            path: "tools.path"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-domain
+          description: "Update a Gravitee AM security domain."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "gravitee-am.update-domain"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-domain
+          description: "Delete a Gravitee AM security domain and its resources."
+          hints:
+            destructive: true
+          call: "gravitee-am.delete-domain"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-domain-applications
+          description: "List OAuth2/OIDC applications within a domain."
+          hints:
+            readOnly: true
+          call: "gravitee-am.list-domain-applications"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-domain-application
+          description: "Create a new OAuth2/OIDC application within a domain."
+          hints:
+            readOnly: false
+          call: "gravitee-am.create-domain-application"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+            name: "tools.name"
+            type: "tools.type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-domain-users
+          description: "List users within a security domain."
+          hints:
+            readOnly: true
+          call: "gravitee-am.list-domain-users"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-domain-user
+          description: "Create a user within a security domain."
+          hints:
+            readOnly: false
+          call: "gravitee-am.create-domain-user"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+            username: "tools.username"
+            email: "tools.email"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-domain-roles
+          description: "List roles within a security domain."
+          hints:
+            readOnly: true
+          call: "gravitee-am.list-domain-roles"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-identity-providers
+          description: "List identity providers within a security domain."
+          hints:
+            readOnly: true
+          call: "gravitee-am.list-identity-providers"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-domain-flows
+          description: "List authentication and authorization flows within a domain."
+          hints:
+            readOnly: true
+          call: "gravitee-am.list-domain-flows"
+          with:
+            organizationId: "tools.organizationId"
+            environmentId: "tools.environmentId"
+            domainId: "tools.domainId"
+          outputParameters:
+            - type: object
+              mapping: "$."

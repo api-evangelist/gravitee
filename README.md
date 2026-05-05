@@ -3,6 +3,8 @@ Gravitee.io is an open-source API management platform offering an API gateway, d
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/gravitee/refs/heads/main/apis.yml)
 
+**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+
 ## Scope
 
 - **Type:** Contract
@@ -16,7 +18,7 @@ Gravitee.io is an open-source API management platform offering an API gateway, d
 ## Timestamps
 
 - **Created:** 2026-03-18
-- **Modified:** 2026-03-26
+- **Modified:** 2026-05-04
 
 ## APIs
 
@@ -87,6 +89,22 @@ The Gravitee Access Management (AM) API is a RESTful administration interface fo
 - [JSONSchema](json-schema/gravitee-api-schema.json)
 - [JSONSchema](json-schema/gravitee-plan-schema.json)
 - [JSONSchema](json-schema/gravitee-domain-schema.json)
+
+## Capabilities
+
+Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
+
+### Shared Per-API Definitions
+
+- [Gravitee Management API](capabilities/shared/gravitee-management.yaml) -- 16 operations for APIs, plans, subscriptions, applications, users, configuration, and audit
+- [Gravitee Access Management API](capabilities/shared/gravitee-access-management.yaml) -- 12 operations for security domains, OAuth2/OIDC applications, users, roles, identity providers, and flows
+
+### Workflow Capabilities
+
+| Workflow | APIs Combined | Tools | Persona |
+|----------|--------------|-------|---------|
+| [API Management](capabilities/api-management.yaml) | Gravitee Management | 16 | API Producer / Platform Engineer |
+| [Access Management](capabilities/access-management.yaml) | Gravitee AM | 12 | Security Engineer |
 
 ## Maintainers
 

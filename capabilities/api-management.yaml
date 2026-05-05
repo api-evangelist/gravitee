@@ -1,0 +1,344 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Gravitee API Management"
+  description: "API management workflow for platform engineers and API producers to manage Gravitee APIs, plans, subscriptions, applications, and platform configuration through the Management API."
+  tags:
+    - Gravitee
+    - API Management
+    - Administration
+  created: "2026-05-04"
+  modified: "2026-05-04"
+
+binds:
+  - namespace: env
+    keys:
+      GRAVITEE_MANAGEMENT_URL: GRAVITEE_MANAGEMENT_URL
+      GRAVITEE_MANAGEMENT_TOKEN: GRAVITEE_MANAGEMENT_TOKEN
+
+capability:
+  consumes:
+    - import: gravitee-management
+      location: ./shared/gravitee-management.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: gravitee-api-management-api
+      description: "Unified REST API for Gravitee API management operations."
+      resources:
+        - path: /v1/apis
+          name: apis
+          description: "API definitions."
+          operations:
+            - method: GET
+              name: list-apis
+              description: "List all APIs."
+              call: "gravitee-management.list-apis"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-api
+              description: "Create a new API definition."
+              call: "gravitee-management.create-api"
+              with:
+                name: "rest.name"
+                description: "rest.description"
+                version: "rest.version"
+                definitionVersion: "rest.definitionVersion"
+                type: "rest.type"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/apis/{apiId}
+          name: api
+          description: "Single API definition."
+          operations:
+            - method: GET
+              name: get-api
+              description: "Get an API by ID."
+              call: "gravitee-management.get-api"
+              with:
+                apiId: "rest.apiId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-api
+              description: "Delete an API."
+              call: "gravitee-management.delete-api"
+              with:
+                apiId: "rest.apiId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/apis/{apiId}/lifecycle
+          name: api-lifecycle
+          description: "API lifecycle controls."
+          operations:
+            - method: POST
+              name: deploy-api
+              description: "Deploy an API definition to the gateway."
+              call: "gravitee-management.deploy-api"
+              with:
+                apiId: "rest.apiId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: start-api
+              description: "Start an API on the gateway."
+              call: "gravitee-management.start-api"
+              with:
+                apiId: "rest.apiId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: stop-api
+              description: "Stop an API on the gateway."
+              call: "gravitee-management.stop-api"
+              with:
+                apiId: "rest.apiId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/apis/{apiId}/plans
+          name: api-plans
+          description: "Plans for an API."
+          operations:
+            - method: GET
+              name: list-api-plans
+              description: "List plans for an API."
+              call: "gravitee-management.list-api-plans"
+              with:
+                apiId: "rest.apiId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/apis/{apiId}/subscriptions
+          name: api-subscriptions
+          description: "Subscriptions for an API."
+          operations:
+            - method: GET
+              name: list-api-subscriptions
+              description: "List subscriptions for an API."
+              call: "gravitee-management.list-api-subscriptions"
+              with:
+                apiId: "rest.apiId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/applications
+          name: applications
+          description: "Application registry."
+          operations:
+            - method: GET
+              name: list-applications
+              description: "List all applications."
+              call: "gravitee-management.list-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/users
+          name: users
+          description: "Platform users."
+          operations:
+            - method: GET
+              name: list-users
+              description: "List platform users."
+              call: "gravitee-management.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/configuration
+          name: configuration
+          description: "Platform configuration."
+          operations:
+            - method: GET
+              name: get-configuration
+              description: "Get platform-wide configuration."
+              call: "gravitee-management.get-configuration"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/audit
+          name: audit
+          description: "Audit events."
+          operations:
+            - method: GET
+              name: list-audit-events
+              description: "List platform audit events."
+              call: "gravitee-management.list-audit-events"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: gravitee-api-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted Gravitee API management."
+      tools:
+        - name: list-apis
+          description: "List all APIs on the Gravitee platform."
+          hints:
+            readOnly: true
+          call: "gravitee-management.list-apis"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-api
+          description: "Get a Gravitee API definition by ID."
+          hints:
+            readOnly: true
+          call: "gravitee-management.get-api"
+          with:
+            apiId: "tools.apiId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-api
+          description: "Create a new Gravitee API definition."
+          hints:
+            readOnly: false
+          call: "gravitee-management.create-api"
+          with:
+            name: "tools.name"
+            description: "tools.description"
+            version: "tools.version"
+            definitionVersion: "tools.definitionVersion"
+            type: "tools.type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-api
+          description: "Update a Gravitee API definition."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "gravitee-management.update-api"
+          with:
+            apiId: "tools.apiId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-api
+          description: "Delete a Gravitee API definition."
+          hints:
+            destructive: true
+          call: "gravitee-management.delete-api"
+          with:
+            apiId: "tools.apiId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: deploy-api
+          description: "Deploy a Gravitee API to the gateway."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "gravitee-management.deploy-api"
+          with:
+            apiId: "tools.apiId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: start-api
+          description: "Start a Gravitee API on the gateway."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "gravitee-management.start-api"
+          with:
+            apiId: "tools.apiId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: stop-api
+          description: "Stop a Gravitee API on the gateway."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "gravitee-management.stop-api"
+          with:
+            apiId: "tools.apiId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-api-plans
+          description: "List plans defined for an API."
+          hints:
+            readOnly: true
+          call: "gravitee-management.list-api-plans"
+          with:
+            apiId: "tools.apiId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-plan
+          description: "Create a new plan for an API."
+          hints:
+            readOnly: false
+          call: "gravitee-management.create-plan"
+          with:
+            apiId: "tools.apiId"
+            name: "tools.name"
+            security: "tools.security"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-api-subscriptions
+          description: "List subscriptions for an API."
+          hints:
+            readOnly: true
+          call: "gravitee-management.list-api-subscriptions"
+          with:
+            apiId: "tools.apiId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-applications
+          description: "List all applications registered on the platform."
+          hints:
+            readOnly: true
+          call: "gravitee-management.list-applications"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-application
+          description: "Register a new application."
+          hints:
+            readOnly: false
+          call: "gravitee-management.create-application"
+          with:
+            name: "tools.name"
+            type: "tools.type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-users
+          description: "List platform users."
+          hints:
+            readOnly: true
+          call: "gravitee-management.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-configuration
+          description: "Get platform-wide configuration settings."
+          hints:
+            readOnly: true
+          call: "gravitee-management.get-configuration"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-audit-events
+          description: "List platform audit events."
+          hints:
+            readOnly: true
+          call: "gravitee-management.list-audit-events"
+          outputParameters:
+            - type: object
+              mapping: "$."
