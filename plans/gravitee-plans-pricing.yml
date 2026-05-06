@@ -4,150 +4,236 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Gravitee
 providerId: gravitee
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - API Gateway
   - API Management
-  - GraphQL
+  - Event Streaming
   - Open Source
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Gravitee sells flat-rate platform subscriptions rather than per-call API pricing. The
+  catalog covers API Management (Planet / Galaxy / Universe), Event Management (Comet / Meteor /
+  Asteroid), plus optional Agent Management and Enterprise Auth packages. The lowest published prices
+  are $2,500/month (Planet) and $1,250/month (Comet); higher tiers are custom-quoted. Gravitee also
+  ships a free Community Edition (Apache 2.0).
+sources:
+  - https://www.gravitee.io/pricing
 plans:
-  - id: gravitee-free
-    name: Free
+  - id: gravitee-community-edition
+    name: Community Edition
     type: freemium
-    description: Free entry tier for the Gravitee API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Free, open-source distribution under Apache 2.0. Self-hosted; community support.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
+      - label: Self-hosted license
+        name: license
+        type: flat
+        metric: license
+        limit: -1
+        timeFrame: usage
         geo: global
-        domains:
-          - https://www.gravitee.io/
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://www.gravitee.io/
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Gravitee API Management
-      - name: Gravitee Management API
-      - name: Gravitee Access Management API
-  - id: gravitee-pro
-    name: Professional
-    type: paid
-    description: Production tier for Gravitee. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: Apache 2.0 license
+      - name: Self-hosted gateway
+      - name: Community support
+  - id: gravitee-apim-planet
+    name: API Management — Planet
+    type: subscription
+    description: Entry API Management tier with unlimited users and APIs, one production gateway, and
+      Gold support.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://www.gravitee.io/
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://www.gravitee.io/
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
+      - label: Monthly platform fee
+        name: planet_monthly
+        type: subscription
+        metric: month
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://www.gravitee.io/
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '2500.00'
+        userMultiplied: false
+      - label: Production gateways included
+        name: gateways_included
+        type: quota
+        metric: gateway
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Gravitee API Management
-      - name: Gravitee Management API
-      - name: Gravitee Access Management API
-  - id: gravitee-enterprise
-    name: Enterprise
+      - name: Unlimited API calls and events
+      - name: Unlimited users and APIs
+      - name: 1 production gateway
+      - name: Gold support
+  - id: gravitee-apim-galaxy
+    name: API Management — Galaxy
+    type: subscription
+    description: Mid-tier with two production gateways, enterprise plugins, and limited event-broker
+      support.
+    entries:
+      - label: Monthly platform fee
+        name: galaxy_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: Production gateways included
+        name: gateways_included
+        type: quota
+        metric: gateway
+        limit: 2
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Unlimited API calls and events
+      - name: 2 production gateways
+      - name: Enterprise plugins
+      - name: Limited event-broker support
+      - name: Gold support
+  - id: gravitee-apim-universe
+    name: API Management — Universe
     type: enterprise
-    description: Custom-negotiated tier for Gravitee. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+    description: Top API Management tier with 4+ gateways, full enterprise functionality, IAM, TAM,
+      and 24/7 support.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Monthly platform fee
+        name: universe_monthly
+        type: subscription
+        metric: month
         limit: -1
         timeFrame: month
-        geo: configurable
-        domains:
-          - https://www.gravitee.io/
+        geo: global
         unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://www.gravitee.io/
+      - label: Production gateways included
+        name: gateways_included
+        type: quota
+        metric: gateway
+        limit: -1
+        timeFrame: month
+        geo: global
         unit: 1
-        price: custom
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Gravitee API Management
-      - name: Gravitee Management API
-      - name: Gravitee Access Management API
+      - name: 4+ production gateways
+      - name: All supported event brokers
+      - name: Identity and Access Management
+      - name: Technical Account Manager
+      - name: 24/7 support
+  - id: gravitee-event-comet
+    name: Event Management — Comet
+    type: subscription
+    description: Entry Event Management tier with one gateway, one third-party broker, developer
+      portal, and Gold support.
+    entries:
+      - label: Monthly platform fee
+        name: comet_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '1250.00'
+        userMultiplied: false
+    elements:
+      - name: 1 production gateway
+      - name: 1 third-party federated broker
+      - name: Developer portal
+      - name: Gold support
+  - id: gravitee-event-meteor
+    name: Event Management — Meteor
+    type: subscription
+    description: Mid Event Management tier — two gateways, two brokers; Platinum support optional.
+    entries:
+      - label: Monthly platform fee
+        name: meteor_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: 2 production gateways
+      - name: 2 third-party federated brokers
+      - name: Developer portal
+      - name: Gold or Platinum support
+  - id: gravitee-event-asteroid
+    name: Event Management — Asteroid
+    type: enterprise
+    description: Top Event Management tier — four gateways, four brokers, Platinum support.
+    entries:
+      - label: Monthly platform fee
+        name: asteroid_monthly
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: 4 production gateways
+      - name: 4 third-party federated brokers
+      - name: Developer portal
+      - name: Platinum support
+  - id: gravitee-agent-management
+    name: Agent Management Package
+    type: enterprise
+    description: Add-on covering LLM proxy, MCP proxy, A2A proxy, and agent catalog.
+    entries:
+      - label: Add-on fee
+        name: agent_addon
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: LLM proxy
+      - name: MCP proxy
+      - name: A2A proxy
+      - name: Agent catalog
+  - id: gravitee-enterprise-auth
+    name: Enterprise Auth Package
+    type: enterprise
+    description: Add-on with MCP resource server, OpenFGA permission engine, and policy decision
+      point.
+    entries:
+      - label: Add-on fee
+        name: auth_addon
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: MCP resource server
+      - name: OpenFGA permission engine
+      - name: Policy decision point
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

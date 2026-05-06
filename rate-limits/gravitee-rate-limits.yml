@@ -4,95 +4,64 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Gravitee
 providerId: gravitee
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
+  - Rate Limiting
   - API Gateway
   - API Management
-  - GraphQL
-  - Open Source
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Gravitee API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Event Streaming
+description: Gravitee is a self-hosted (or Gravitee-hosted) API and Event Management platform; it
+  does not impose per-call rate limits on customer traffic. Instead, it provides Rate Limit, Quota,
+  and Spike Arrest policies that customers configure on their own gateways to throttle their consumers.
+  Plan-level limits (gateways included, support tier) are commercial caps rather than runtime
+  request caps, and Gravitee advertises "unlimited API calls and events" within the subscription.
+sources:
+  - https://www.gravitee.io/pricing
+  - https://documentation.gravitee.io/apim/policies/rate-limit
+  - https://documentation.gravitee.io/apim/policies/quota
 responseCodes:
   throttled: 429
   quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Gravitee API Management
-      - Gravitee Management API
-      - Gravitee Access Management API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
+  - name: Customer-facing API calls (subscription)
+    scope: subscription
     metric: requests_per_month
-    limit: 1000
+    limit: -1
     timeFrame: month
-    applies:
-      - Gravitee API Management
-      - Gravitee Management API
-      - Gravitee Access Management API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Gravitee API Management
-      - Gravitee Management API
-      - Gravitee Access Management API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Gravitee API Management
-      - Gravitee Management API
-      - Gravitee Access Management API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Gravitee API Management
-      - Gravitee Management API
-      - Gravitee Access Management API
+    notes: Gravitee subscription plans cover unlimited API calls and events; the monthly subscription
+      fee is the only volume-related ceiling.
+  - name: Production gateways (per plan)
+    scope: subscription
+    metric: gateway
+    limit: 'see plan'
+    notes: Planet=1, Galaxy=2, Universe=4+, Comet=1, Meteor=2, Asteroid=4. Beyond these, additional
+      gateways require an upgrade or add-on.
+  - name: Configurable Rate Limit policy
+    scope: api/consumer
+    metric: requests_per_second
+    limit: 'operator-defined'
+    notes: API publishers configure per-second rate limits inside the Gravitee Rate Limit policy on
+      each API.
+  - name: Configurable Quota policy
+    scope: api/consumer/subscription
+    metric: requests_per_period
+    limit: 'operator-defined'
+    notes: API publishers set per-day / per-week / per-month quotas via the Quota policy.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Rate Limit policy
+    description: Short-window throttling (e.g. requests per second) applied at the gateway, with
+      configurable burst and refill semantics.
+  - name: Quota policy
+    description: Longer-window quotas (per day / week / month) per consumer or per subscription
+      plan.
+  - name: Spike Arrest
+    description: Smooths traffic bursts by rejecting requests above an allowed peak per smaller
+      time bucket.
+  - name: Backoff strategy
+    description: When 429 is returned by the customer-configured policy, downstream consumers
+      should honor Retry-After and use exponential backoff.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
