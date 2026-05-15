@@ -1,0 +1,75 @@
+extends: [[spectral:oas, recommended]]
+documentationUrl: https://documentation.gravitee.io/apim
+rules:
+  # Gravitee operationIds follow camelCase verb-noun (e.g. listApis, createApi, deployApi)
+  gravitee-operation-id-camelcase:
+    description: Operation IDs MUST use camelCase verb-noun form (listApis, createApi, deployApi).
+    message: "{{property}} must use camelCase verb-noun (e.g. listApis)"
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+  gravitee-operation-id-verb-prefix:
+    description: Operation IDs SHOULD start with an action verb.
+    message: "{{property}} should start with a verb (list, get, create, update, delete, deploy, start, stop, accept, reject, publish, close, search, import, query)"
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(list|get|create|update|delete|deploy|start|stop|accept|reject|publish|close|search|import|query|find|add|remove|verify|patch|put|post|resolve|transfer)[A-Z]"
+  gravitee-summary-title-case:
+    description: Operation summaries MUST be Title Case.
+    message: "Operation summary must use Title Case"
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*( [a-zA-Z0-9\\-/'()]+)*$"
+  gravitee-tag-defined:
+    description: Operations MUST have at least one tag from the published tag list.
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+  gravitee-security-required:
+    description: All operations MUST declare security (Bearer, Basic, or Cookie); public endpoints must explicitly set security to an empty array.
+    severity: error
+    given: "$"
+    then:
+      field: security
+      function: truthy
+  gravitee-server-versioned:
+    description: Servers MUST reference the /management/v2 base URL.
+    severity: warn
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "/management/v\\d+"
+  gravitee-environment-path-parameter:
+    description: Environment-scoped paths MUST take envId as a path parameter.
+    severity: warn
+    given: "$.paths[?(@property.match(/^\\/environments\\/\\{envId\\}/))]"
+    then:
+      function: truthy
+  gravitee-no-trailing-slash:
+    description: Paths MUST NOT end with a trailing slash (except the root path).
+    severity: error
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(?!.*\\/$|^\\/$).*"
+  gravitee-action-paths-use-underscore-prefix:
+    description: Imperative action paths SHOULD use the _verb convention (_deploy, _start, _stop, _publish, _close, _accept, _reject, _search, _import, _verify, _process).
+    severity: hint
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^\\/.*(\\/_[a-z]+)?$"

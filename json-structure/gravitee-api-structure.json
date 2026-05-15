@@ -1,0 +1,118 @@
+{
+  "$id": "https://gravitee.io/structures/gravitee/api.json",
+  "title": "Gravitee API Structure",
+  "description": "JSON Structure description of a Gravitee API resource as represented by the APIM Management API v2.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "API unique identifier" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "apiVersion": { "type": "string" },
+    "definitionVersion": {
+      "type": "string",
+      "enum": ["V1", "V2", "V4", "FEDERATED"]
+    },
+    "type": {
+      "type": "string",
+      "enum": ["PROXY", "MESSAGE", "NATIVE"],
+      "description": "PROXY=HTTP, MESSAGE=event-driven, NATIVE=Kafka-native v4"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["STARTED", "STOPPED"]
+    },
+    "lifecycleState": {
+      "type": "string",
+      "enum": ["CREATED", "PUBLISHED", "UNPUBLISHED", "DEPRECATED", "ARCHIVED"]
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["PUBLIC", "PRIVATE"]
+    },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "labels": { "type": "array", "items": { "type": "string" } },
+    "entrypoints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Entrypoint" }
+    },
+    "endpointGroups": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/EndpointGroup" }
+    },
+    "plans": {
+      "type": "array",
+      "items": { "$ref": "https://gravitee.io/structures/gravitee/plan.json" }
+    },
+    "flows": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Flow" }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "deployedAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "Entrypoint": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["http-proxy", "http-get", "http-post", "websocket", "sse", "webhook", "kafka", "mqtt", "amqp", "mcp", "grpc-proxy"]
+        },
+        "qos": { "type": "string", "enum": ["NONE", "AUTO", "AT_MOST_ONCE", "AT_LEAST_ONCE"] },
+        "configuration": { "type": "object" }
+      }
+    },
+    "EndpointGroup": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "loadBalancer": { "type": "object" },
+        "endpoints": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Endpoint" }
+        }
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "target": { "type": "string" },
+        "type": { "type": "string" },
+        "weight": { "type": "integer" },
+        "inheritConfiguration": { "type": "boolean" }
+      }
+    },
+    "Flow": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "selectors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["HTTP", "CHANNEL", "CONDITION"] }
+            }
+          }
+        },
+        "request": { "type": "array", "items": { "$ref": "#/$defs/Step" } },
+        "response": { "type": "array", "items": { "$ref": "#/$defs/Step" } },
+        "subscribe": { "type": "array", "items": { "$ref": "#/$defs/Step" } },
+        "publish": { "type": "array", "items": { "$ref": "#/$defs/Step" } }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "policy": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "configuration": { "type": "object" },
+        "condition": { "type": "string" }
+      }
+    }
+  }
+}

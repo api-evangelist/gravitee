@@ -1,0 +1,60 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee Traffic Observability
+  description: >-
+    Workflow capability for SREs and API observers: real-time analytics
+    queries, time-series dashboards, log search, and alert engine integration
+    across all Gravitee gateways.
+  tags:
+    - Gravitee
+    - Observability
+    - Analytics
+    - Alerts
+    - Logs
+  created: '2026-05-15'
+  modified: '2026-05-15'
+binds:
+  - namespace: env
+    keys:
+      GRAVITEE_APIM_URL: GRAVITEE_APIM_URL
+      GRAVITEE_APIM_TOKEN: GRAVITEE_APIM_TOKEN
+      GRAVITEE_AE_URL: GRAVITEE_AE_URL
+      GRAVITEE_AE_TOKEN: GRAVITEE_AE_TOKEN
+imports:
+  - source: shared/gravitee-apim.yaml
+capability:
+  consumes:
+    - type: http
+      namespace: gravitee-apim
+      baseUri: '{GRAVITEE_APIM_URL}/management/v2'
+      authentication:
+        type: bearer
+        value: '{{GRAVITEE_APIM_TOKEN}}'
+      tools:
+        - query-measures
+        - query-time-series
+        - list-dashboards
+        - search-logs
+    - type: http
+      namespace: gravitee-alert-engine
+      baseUri: '{GRAVITEE_AE_URL}'
+      description: Gravitee Alert Engine for rule-based notifications.
+      authentication:
+        type: bearer
+        value: '{{GRAVITEE_AE_TOKEN}}'
+      resources:
+        - name: triggers
+          path: /alerts/triggers
+          operations:
+            - name: list-triggers
+              method: GET
+              description: List alert triggers.
+            - name: create-trigger
+              method: POST
+              description: Create an alert trigger.
+        - name: notifiers
+          path: /alerts/notifiers
+          operations:
+            - name: list-notifiers
+              method: GET
+              description: List alert notifiers.

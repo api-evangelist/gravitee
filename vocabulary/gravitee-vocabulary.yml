@@ -1,0 +1,91 @@
+vocabulary: gravitee
+version: '1.0'
+description: >-
+  Domain vocabulary for the Gravitee API management platform across APIM,
+  Access Management, Cockpit, Alert Engine, AI Agent Management, and the
+  Kubernetes Operator.
+namespaces:
+  gravitee: https://gravitee.io/ns/
+  schema: https://schema.org/
+  dcterms: http://purl.org/dc/terms/
+concepts:
+  - term: API
+    definition: A managed API resource in Gravitee APIM with a definition version (V2, V4, or FEDERATED), one or more entrypoints, endpoint groups, flows, and plans.
+    related: [Plan, Application, Subscription, Flow]
+  - term: Plan
+    definition: A productized access tier on an API specifying security (API Key, OAuth2, JWT, mTLS, Push), validation mode, and rate limits.
+    related: [API, Subscription]
+  - term: Application
+    definition: A consumer of one or more APIs registered in Gravitee with optional OAuth2 client credentials.
+    related: [Subscription, API]
+  - term: Subscription
+    definition: A grant binding an Application to a Plan on an API, with status PENDING, ACCEPTED, REJECTED, CLOSED, PAUSED, or RESUMED.
+    related: [Plan, Application]
+  - term: API Product
+    definition: A bundle of one or more APIs published as a single discoverable product to the developer portal.
+    related: [API]
+  - term: Flow
+    definition: An ordered chain of policies attached to a phase (request, response, subscribe, publish) on an API or shared policy group.
+    related: [Policy, SharedPolicyGroup]
+  - term: Policy
+    definition: A configurable unit of behavior applied at a phase of the gateway flow (rate-limit, JWT, OAuth2, transformations, AI guard-rails, etc.).
+    related: [Flow, SharedPolicyGroup]
+  - term: Shared Policy Group
+    definition: A reusable policy bundle that can be attached to many APIs via the Management API or a Kubernetes CRD.
+    related: [Policy, Flow]
+  - term: Entrypoint
+    definition: A v4 connector defining how consumers connect to a Gravitee API — HTTP, WebSocket, SSE, Webhook, Kafka, MQTT, AMQP, MCP, or gRPC.
+    related: [API, EndpointGroup]
+  - term: Endpoint
+    definition: A backend target the Gravitee gateway proxies requests to.
+    related: [EndpointGroup, API]
+  - term: Endpoint Group
+    definition: A load-balanced collection of endpoints of the same type backing an API.
+    related: [Endpoint, API]
+  - term: Security Domain
+    definition: An Access Management isolation boundary containing applications, users, identity providers, factors, flows, and forms.
+    related: [Application, IdentityProvider]
+  - term: Identity Provider
+    definition: A pluggable authentication source — LDAP, JDBC, Mongo, OIDC, SAML, Google, GitHub, Microsoft, Auth0, etc.
+    related: [SecurityDomain, User]
+  - term: MFA Factor
+    definition: A second factor enrolled per user — TOTP, SMS, email, WebAuthn, push, recovery code.
+    related: [User, SecurityDomain]
+  - term: Alert Trigger
+    definition: A rule on metrics (latency, error rate, status code) evaluated by the Alert Engine.
+    related: [AlertNotifier]
+  - term: Alert Notifier
+    definition: A channel that delivers triggered alerts — Slack, email, webhook, Teams, PagerDuty.
+    related: [AlertTrigger]
+  - term: MCP Tool Server
+    definition: A Gravitee component that exposes managed APIs as Model Context Protocol tools to AI agents.
+    related: [MCP, API]
+  - term: LLM Proxy
+    definition: A Gravitee gateway facing OpenAI, Anthropic, Azure OpenAI, Bedrock, Hugging Face, and Mistral, with prompt-token tracking, guard-rails, and routing policies.
+    related: [AIPolicy]
+  - term: AI Policy
+    definition: A policy plugin specific to AI workloads — prompt-token-tracking, prompt-guard-rails, retrieval-augmented-generation.
+    related: [Policy, LLMProxy]
+  - term: Vector Store Resource
+    definition: A pluggable resource API for embedding-based retrieval used by the RAG policy.
+    related: [AIPolicy]
+  - term: Federation
+    definition: Discovery and management of third-party API gateways and brokers (AWS API Gateway, Kong, Apigee) inside Gravitee.
+    related: [API]
+  - term: Management Context
+    definition: A Kubernetes Operator CRD pointing the operator at a specific APIM Management API endpoint and credentials.
+    related: [KubernetesOperator]
+tags:
+  - API Gateway
+  - API Management
+  - Access Management
+  - Identity
+  - Event-Driven
+  - Kafka
+  - MQTT
+  - GraphQL
+  - gRPC
+  - AI Gateway
+  - MCP
+  - Open Source
+  - Apache 2.0

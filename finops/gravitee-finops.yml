@@ -12,7 +12,7 @@ providerId: gravitee
 publisherName: Gravitee.io, Inc.
 serviceCategory: API Management
 created: '2026-05-04'
-modified: '2026-05-05'
+modified: '2026-05-15'
 reconciled: true
 tags:
   - FinOps
@@ -71,6 +71,25 @@ meters:
   - name: managed_apis
     description: APIs managed in the platform (operational metric — unlimited per subscription)
     unit: api
+    aggregation: max
+  - name: throughput_calls
+    description: Aggregate API and event throughput across all gateways (operational; not directly billed but tracked for tier-fit)
+    unit: calls
+    aggregation: sum
+    dimensions:
+      - gateway
+      - environment
+  - name: ai_tokens
+    description: LLM input / output tokens proxied through the AI Gateway (Agent Management add-on), used for internal showback even though pricing is flat-rate
+    unit: token
+    aggregation: sum
+    dimensions:
+      - model
+      - consumer
+      - route
+  - name: seats
+    description: Console / portal seats consumed against the unlimited-users entitlement (operational)
+    unit: seat
     aggregation: max
 principles:
   - name: Visibility

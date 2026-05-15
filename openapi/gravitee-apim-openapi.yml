@@ -1,0 +1,876 @@
+openapi: 3.0.3
+info:
+  title: Gravitee.io APIM Management API
+  description: |-
+    The Gravitee API Management (APIM) Management API is the administrative
+    control plane for the Gravitee platform. It exposes endpoints to create
+    and deploy APIs (both v2 "Gravitee definition v2" and v4 message-oriented
+    APIs), manage plans, applications, subscriptions, API products,
+    analytics, logs, users, plugins, UI customization, environments, and
+    organization-level installation.
+
+    This consolidated specification is synthesized from the upstream v2
+    OpenAPI fragments in `gravitee-apim-rest-api-management-v2-rest`
+    (`openapi-apis.yaml`, `openapi-environments.yaml`,
+    `openapi-analytics.yaml`, `openapi-api-products.yaml`,
+    `openapi-installation.yaml`, `openapi-plugins.yaml`,
+    `openapi-users.yaml`, `openapi-logs.yaml`, `openapi-ui.yaml`).
+  contact:
+    name: GraviteeSource Team
+    url: https://gravitee.io
+    email: team-apim@graviteesource.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 2.0.0
+servers:
+  - url: https://{host}/management/v2
+    description: APIM Management API v2 - default base URL
+    variables:
+      host:
+        default: apim.example.com
+        description: Hostname of the Gravitee APIM Management API
+  - url: https://{host}/management/v2/organizations/{orgId}
+    description: APIM Management API v2 - per-organization base URL
+    variables:
+      host:
+        default: apim.example.com
+      orgId:
+        default: DEFAULT
+security:
+  - BasicAuth: []
+  - CookieAuth: []
+  - BearerAuth: []
+tags:
+  - name: APIs
+    description: Manage APIs (v2 and v4 message-oriented APIs)
+  - name: API Products
+    description: Bundle one or more APIs into a publishable API product
+  - name: Plans
+    description: Manage plans (Keyless, API Key, OAuth2, JWT, mTLS, Push)
+  - name: Applications
+    description: Manage consumer applications
+  - name: Subscriptions
+    description: Manage subscriptions between applications and plans
+  - name: Analytics
+    description: Query analytics, time-series, and dashboards
+  - name: Logs
+    description: Search request and error logs
+  - name: Environments
+    description: Manage environments and their configuration
+  - name: Installation
+    description: Manage organizations, environments, and platform installation
+  - name: Plugins
+    description: Discover policies, endpoints, entrypoints, and resources installed in the gateway
+  - name: Users
+    description: Manage Gravitee users
+  - name: UI
+    description: Customize developer portal and console themes
+paths:
+  /environments/{envId}/apis:
+    get:
+      tags: [APIs]
+      operationId: listApis
+      summary: List APIs in an Environment
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: query
+          name: page
+          schema: { type: integer, default: 1 }
+        - in: query
+          name: perPage
+          schema: { type: integer, default: 10 }
+      responses:
+        '200':
+          description: A page of APIs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApisPage'
+    post:
+      tags: [APIs]
+      operationId: createApi
+      summary: Create an API
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApi'
+      responses:
+        '201':
+          description: API created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api'
+  /environments/{envId}/apis/_import/swagger:
+    post:
+      tags: [APIs]
+      operationId: importSwaggerApi
+      summary: Import an API from an OpenAPI/Swagger Document
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportSwaggerDescriptor'
+      responses:
+        '201':
+          description: API imported
+  /environments/{envId}/apis/_import/definition:
+    post:
+      tags: [APIs]
+      operationId: importApiDefinition
+      summary: Import an API From a Gravitee Definition
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json: { schema: { type: object } }
+      responses:
+        '201': { description: API imported }
+  /environments/{envId}/apis/_search:
+    post:
+      tags: [APIs]
+      operationId: searchApis
+      summary: Search APIs by Query
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query: { type: string }
+      responses:
+        '200': { description: Matching APIs }
+  /environments/{envId}/apis/{apiId}:
+    get:
+      tags: [APIs]
+      operationId: getApi
+      summary: Get an API by Identifier
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      responses:
+        '200':
+          description: The API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api'
+    put:
+      tags: [APIs]
+      operationId: updateApi
+      summary: Update an API
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Api'
+      responses:
+        '200': { description: API updated }
+    delete:
+      tags: [APIs]
+      operationId: deleteApi
+      summary: Delete an API
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      responses:
+        '204': { description: API deleted }
+  /environments/{envId}/apis/{apiId}/_deploy:
+    post:
+      tags: [APIs]
+      operationId: deployApi
+      summary: Deploy an API to the Gateway
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      responses:
+        '202': { description: Deployment requested }
+  /environments/{envId}/apis/{apiId}/_start:
+    post:
+      tags: [APIs]
+      operationId: startApi
+      summary: Start an API
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      responses:
+        '204': { description: API started }
+  /environments/{envId}/apis/{apiId}/_stop:
+    post:
+      tags: [APIs]
+      operationId: stopApi
+      summary: Stop an API
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      responses:
+        '204': { description: API stopped }
+  /environments/{envId}/apis/{apiId}/plans:
+    get:
+      tags: [Plans]
+      operationId: listApiPlans
+      summary: List Plans on an API
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      responses:
+        '200': { description: Plans page }
+    post:
+      tags: [Plans]
+      operationId: createApiPlan
+      summary: Create a Plan on an API
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plan'
+      responses:
+        '201': { description: Plan created }
+  /environments/{envId}/apis/{apiId}/plans/{planId}:
+    get:
+      tags: [Plans]
+      operationId: getApiPlan
+      summary: Get a Plan by Identifier
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+        - in: path
+          name: planId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: The plan }
+    put:
+      tags: [Plans]
+      operationId: updateApiPlan
+      summary: Update a Plan
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+        - in: path
+          name: planId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plan'
+      responses:
+        '200': { description: Plan updated }
+  /environments/{envId}/apis/{apiId}/plans/{planId}/_publish:
+    post:
+      tags: [Plans]
+      operationId: publishApiPlan
+      summary: Publish a Plan
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+        - in: path
+          name: planId
+          required: true
+          schema: { type: string }
+      responses:
+        '204': { description: Plan published }
+  /environments/{envId}/apis/{apiId}/plans/{planId}/_close:
+    post:
+      tags: [Plans]
+      operationId: closeApiPlan
+      summary: Close a Plan
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+        - in: path
+          name: planId
+          required: true
+          schema: { type: string }
+      responses:
+        '204': { description: Plan closed }
+  /environments/{envId}/apis/{apiId}/subscriptions:
+    get:
+      tags: [Subscriptions]
+      operationId: listApiSubscriptions
+      summary: List Subscriptions for an API
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - $ref: '#/components/parameters/ApiId'
+      responses:
+        '200': { description: Subscriptions page }
+  /environments/{envId}/applications:
+    get:
+      tags: [Applications]
+      operationId: listApplications
+      summary: List Applications
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Applications page }
+    post:
+      tags: [Applications]
+      operationId: createApplication
+      summary: Create an Application
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '201': { description: Application created }
+  /environments/{envId}/applications/{applicationId}:
+    get:
+      tags: [Applications]
+      operationId: getApplication
+      summary: Get an Application by Identifier
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: applicationId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: The application }
+  /environments/{envId}/subscriptions:
+    get:
+      tags: [Subscriptions]
+      operationId: listSubscriptions
+      summary: List Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Subscriptions page }
+    post:
+      tags: [Subscriptions]
+      operationId: createSubscription
+      summary: Create a Subscription
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '201': { description: Subscription created }
+  /environments/{envId}/subscriptions/{subscriptionId}:
+    get:
+      tags: [Subscriptions]
+      operationId: getSubscription
+      summary: Get a Subscription
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: subscriptionId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: The subscription }
+  /environments/{envId}/subscriptions/{subscriptionId}/_accept:
+    post:
+      tags: [Subscriptions]
+      operationId: acceptSubscription
+      summary: Accept a Subscription
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: subscriptionId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Subscription accepted }
+  /environments/{envId}/subscriptions/{subscriptionId}/_reject:
+    post:
+      tags: [Subscriptions]
+      operationId: rejectSubscription
+      summary: Reject a Subscription
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: subscriptionId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Subscription rejected }
+  /environments/{envId}/api-products:
+    get:
+      tags: [API Products]
+      operationId: getApiProducts
+      summary: List API Products
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: API products page }
+    post:
+      tags: [API Products]
+      operationId: createApiProduct
+      summary: Create an API Product
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '201': { description: API product created }
+  /environments/{envId}/api-products/_search:
+    post:
+      tags: [API Products]
+      operationId: searchApiProducts
+      summary: Search API Products
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Matching API products }
+  /environments/{envId}/api-products/{apiProductId}:
+    put:
+      tags: [API Products]
+      operationId: updateApiProduct
+      summary: Update an API Product
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: apiProductId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: API product updated }
+    delete:
+      tags: [API Products]
+      operationId: deleteApiProduct
+      summary: Delete an API Product
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: apiProductId
+          required: true
+          schema: { type: string }
+      responses:
+        '204': { description: API product deleted }
+  /environments/{envId}/analytics/definition/apis:
+    get:
+      tags: [Analytics]
+      operationId: queryApiSpecs
+      summary: Query API Analytics Specifications
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: API analytics specs }
+  /environments/{envId}/analytics/measures:
+    post:
+      tags: [Analytics]
+      operationId: queryMeasures
+      summary: Query Analytics Measures
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Measures result }
+  /environments/{envId}/analytics/facets:
+    post:
+      tags: [Analytics]
+      operationId: queryFacets
+      summary: Query Analytics Facets
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Facets result }
+  /environments/{envId}/analytics/time-series:
+    post:
+      tags: [Analytics]
+      operationId: queryTimeSeries
+      summary: Query Analytics Time Series
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Time series result }
+  /environments/{envId}/analytics/dashboards:
+    get:
+      tags: [Analytics]
+      operationId: listDashboards
+      summary: List Analytics Dashboards
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Dashboards page }
+    post:
+      tags: [Analytics]
+      operationId: createDashboard
+      summary: Create an Analytics Dashboard
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '201': { description: Dashboard created }
+  /environments/{envId}/analytics/dashboards/{dashboardId}:
+    get:
+      tags: [Analytics]
+      operationId: getDashboard
+      summary: Get an Analytics Dashboard
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: dashboardId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: The dashboard }
+    put:
+      tags: [Analytics]
+      operationId: updateDashboard
+      summary: Update an Analytics Dashboard
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: dashboardId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Dashboard updated }
+    delete:
+      tags: [Analytics]
+      operationId: deleteDashboard
+      summary: Delete an Analytics Dashboard
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+        - in: path
+          name: dashboardId
+          required: true
+          schema: { type: string }
+      responses:
+        '204': { description: Dashboard deleted }
+  /environments/{envId}/logs/search:
+    post:
+      tags: [Logs]
+      operationId: searchLogs
+      summary: Search Request Logs
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Logs page }
+  /environments/{envId}/logs/error-keys:
+    get:
+      tags: [Logs]
+      operationId: listErrorKeys
+      summary: List Error Keys for Logs
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: Error keys }
+  /environments:
+    get:
+      tags: [Installation]
+      operationId: listEnvironments
+      summary: List Environments
+      responses:
+        '200': { description: Environments }
+  /environments/{envId}:
+    get:
+      tags: [Installation]
+      operationId: getEnvironment
+      summary: Get an Environment
+      parameters:
+        - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200': { description: The environment }
+  /organizations/{orgId}:
+    get:
+      tags: [Installation]
+      operationId: getOrganization
+      summary: Get an Organization
+      parameters:
+        - in: path
+          name: orgId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: The organization }
+  /organizations/{orgId}/license:
+    get:
+      tags: [Installation]
+      operationId: getOrganizationLicense
+      summary: Get the Organization License
+      parameters:
+        - in: path
+          name: orgId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: The license }
+  /plugins/endpoints:
+    get:
+      tags: [Plugins]
+      operationId: listEndpointPlugins
+      summary: List Endpoint Plugins
+      responses:
+        '200': { description: Endpoint plugins }
+  /plugins/endpoints/{endpointId}:
+    get:
+      tags: [Plugins]
+      operationId: getEndpointPlugin
+      summary: Get an Endpoint Plugin
+      parameters:
+        - in: path
+          name: endpointId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: The endpoint plugin }
+  /plugins/entrypoints:
+    get:
+      tags: [Plugins]
+      operationId: listEntrypointPlugins
+      summary: List Entrypoint Plugins
+      responses:
+        '200': { description: Entrypoint plugins }
+  /plugins/policies:
+    get:
+      tags: [Plugins]
+      operationId: listPolicyPlugins
+      summary: List Policy Plugins
+      responses:
+        '200': { description: Policy plugins }
+  /plugins/policies/{policyId}:
+    get:
+      tags: [Plugins]
+      operationId: getPolicyPlugin
+      summary: Get a Policy Plugin
+      parameters:
+        - in: path
+          name: policyId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: The policy plugin }
+  /plugins/resources:
+    get:
+      tags: [Plugins]
+      operationId: listResourcePlugins
+      summary: List Resource Plugins
+      responses:
+        '200': { description: Resource plugins }
+  /users/{userId}/apis:
+    get:
+      tags: [Users]
+      operationId: listUserApis
+      summary: List APIs for a User
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: User APIs }
+  /users/{userId}/applications:
+    get:
+      tags: [Users]
+      operationId: listUserApplications
+      summary: List Applications for a User
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: User applications }
+  /ui/themes:
+    get:
+      tags: [UI]
+      operationId: listUiThemes
+      summary: List UI Themes
+      responses:
+        '200': { description: UI themes }
+    post:
+      tags: [UI]
+      operationId: createUiTheme
+      summary: Create a UI Theme
+      responses:
+        '201': { description: Theme created }
+  /ui/themes/_current:
+    get:
+      tags: [UI]
+      operationId: getCurrentUiTheme
+      summary: Get the Current UI Theme
+      responses:
+        '200': { description: The current theme }
+  /ui/customization:
+    get:
+      tags: [UI]
+      operationId: getUiCustomization
+      summary: Get UI Customization
+      responses:
+        '200': { description: UI customization }
+components:
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema: { type: string }
+      description: The environment identifier
+    ApiId:
+      in: path
+      name: apiId
+      required: true
+      schema: { type: string }
+      description: The API identifier
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: Auth-Graviteeio-APIM
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Api:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        apiVersion: { type: string }
+        definitionVersion:
+          type: string
+          enum: [V1, V2, V4, FEDERATED]
+        type:
+          type: string
+          enum: [PROXY, MESSAGE, NATIVE]
+        description: { type: string }
+        tags:
+          type: array
+          items: { type: string }
+        labels:
+          type: array
+          items: { type: string }
+        state:
+          type: string
+          enum: [STARTED, STOPPED]
+        lifecycleState:
+          type: string
+          enum: [CREATED, PUBLISHED, UNPUBLISHED, ARCHIVED, DEPRECATED]
+        visibility:
+          type: string
+          enum: [PUBLIC, PRIVATE]
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+        deployedAt: { type: string, format: date-time }
+    CreateApi:
+      type: object
+      required: [name, apiVersion, definitionVersion]
+      properties:
+        name: { type: string }
+        description: { type: string }
+        apiVersion: { type: string }
+        definitionVersion:
+          type: string
+          enum: [V2, V4]
+        type:
+          type: string
+          enum: [PROXY, MESSAGE, NATIVE]
+    ImportSwaggerDescriptor:
+      type: object
+      required: [type, payload]
+      properties:
+        type:
+          type: string
+          enum: [INLINE, URL]
+        payload: { type: string }
+        format:
+          type: string
+          enum: [YAML, JSON]
+        withDocumentation: { type: boolean }
+        withPathMapping: { type: boolean }
+    ApisPage:
+      type: object
+      properties:
+        data:
+          type: array
+          items: { $ref: '#/components/schemas/Api' }
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      properties:
+        page: { type: integer }
+        perPage: { type: integer }
+        pageItemsCount: { type: integer }
+        totalCount: { type: integer }
+        pageCount: { type: integer }
+    Plan:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { type: string }
+        security:
+          type: object
+          properties:
+            type:
+              type: string
+              enum: [KEY_LESS, API_KEY, OAUTH2, JWT, MTLS, SUBSCRIPTION, PUSH]
+            configuration: { type: object }
+        status:
+          type: string
+          enum: [STAGING, PUBLISHED, DEPRECATED, CLOSED]
+        validation:
+          type: string
+          enum: [MANUAL, AUTO]
+        order: { type: integer }
+        characteristics:
+          type: array
+          items: { type: string }
+    Application:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { type: string }
+        type:
+          type: string
+          enum: [SIMPLE, BROWSER, WEB, NATIVE, BACKEND_TO_BACKEND]
+        status:
+          type: string
+          enum: [ACTIVE, ARCHIVED]
+        settings:
+          type: object
+          properties:
+            app:
+              type: object
+              properties:
+                client_id: { type: string }
+                type: { type: string }
+            oauth:
+              type: object
+    Subscription:
+      type: object
+      properties:
+        id: { type: string }
+        api: { type: string }
+        plan: { type: string }
+        application: { type: string }
+        status:
+          type: string
+          enum: [PENDING, ACCEPTED, REJECTED, CLOSED, PAUSED, RESUMED]
+        createdAt: { type: string, format: date-time }
+        startingAt: { type: string, format: date-time }
+        endingAt: { type: string, format: date-time }

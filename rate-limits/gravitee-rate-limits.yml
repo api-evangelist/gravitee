@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Gravitee
 providerId: gravitee
 created: '2026-05-04'
-modified: '2026-05-05'
+modified: '2026-05-15'
 reconciled: true
 tags:
   - Rate Limiting
@@ -49,6 +49,12 @@ limits:
     metric: requests_per_period
     limit: 'operator-defined'
     notes: API publishers set per-day / per-week / per-month quotas via the Quota policy.
+  - name: AI Prompt Token Tracking (Agent Management)
+    scope: api/consumer/model
+    metric: llm_tokens_per_period
+    limit: 'operator-defined'
+    notes: The AI Prompt Token Tracking policy meters input / output tokens per consumer, per LLM
+      route. Combined with the Quota or Rate Limit policy, it enables LLM-cost throttling.
 policies:
   - name: Rate Limit policy
     description: Short-window throttling (e.g. requests per second) applied at the gateway, with
@@ -62,6 +68,12 @@ policies:
   - name: Backoff strategy
     description: When 429 is returned by the customer-configured policy, downstream consumers
       should honor Retry-After and use exponential backoff.
+  - name: AI Prompt Token Tracking policy
+    description: Meters LLM input / output token usage per consumer, per route, per model. Backed by
+      Redis or Hazelcast distributed counters and feeds the Quota / Rate Limit policy for AI cost caps.
+  - name: AI Prompt Guard-Rails policy
+    description: Allow / deny / classify prompts before they reach an LLM upstream; rejects matching
+      requests with 4xx response codes.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

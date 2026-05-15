@@ -1,0 +1,56 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee MCP Publishing
+  description: >-
+    Workflow capability for AI platform engineers publishing Gravitee-managed
+    APIs as MCP tools for agents and copilots. Wraps the AI Agent Management
+    suite — LLM proxy, MCP proxy, MCP tool server, and agent catalog — for
+    AI-aware identity, prompt-token tracking, prompt guard-rails, and RAG.
+  tags:
+    - Gravitee
+    - AI Gateway
+    - MCP
+    - LLM
+    - Agentic
+    - Enterprise
+  created: '2026-05-15'
+  modified: '2026-05-15'
+binds:
+  - namespace: env
+    keys:
+      GRAVITEE_APIM_URL: GRAVITEE_APIM_URL
+      GRAVITEE_APIM_TOKEN: GRAVITEE_APIM_TOKEN
+      GRAVITEE_MCP_URL: GRAVITEE_MCP_URL
+imports:
+  - source: shared/gravitee-apim.yaml
+capability:
+  consumes:
+    - type: http
+      namespace: gravitee-apim
+      baseUri: '{GRAVITEE_APIM_URL}/management/v2'
+      authentication:
+        type: bearer
+        value: '{{GRAVITEE_APIM_TOKEN}}'
+      tools:
+        - list-apis
+        - get-api
+        - create-api
+        - import-swagger
+        - list-policies
+        - list-resources
+    - type: mcp
+      namespace: gravitee-mcp
+      baseUri: '{GRAVITEE_MCP_URL}'
+      description: Gravitee MCP tool server exposing managed APIs as MCP tools.
+      authentication:
+        type: bearer
+      resources:
+        - name: mcp-tools
+          description: Tools exposed by the Gravitee MCP server.
+          operations:
+            - name: list-tools
+              description: List available MCP tools.
+            - name: call-tool
+              description: Invoke an MCP tool with arguments.
+            - name: list-resources
+              description: List MCP resources surfaced by the server.
