@@ -1,0 +1,174 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Gravitee APIs Discovery
+  description: >-
+    Pulls live APIs (v2 + v4) from a Gravitee APIM Management instance
+    into Naftiko Fleet so Backstage shows every Gravitee-managed API
+    alongside Naftiko-declared capabilities — including state, lifecycle,
+    plans, and entrypoint config. Single pane of glass for "what API
+    surface is governed and gated by Gravitee."
+  tags:
+    - Naftiko
+    - Gravitee
+    - Partnership
+    - Discovery
+    - APIM
+    - Backstage
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: gravitee-env
+    description: Gravitee APIM Management base URL + bearer token (organization API token).
+    keys:
+      GRAVITEE_APIM_BASE: GRAVITEE_APIM_BASE
+      GRAVITEE_APIM_TOKEN: GRAVITEE_APIM_TOKEN
+
+capability:
+  consumes:
+    - namespace: gravitee
+      type: http
+      baseUri: '{{GRAVITEE_APIM_BASE}}'
+      authentication:
+        type: bearer
+        token: '{{GRAVITEE_APIM_TOKEN}}'
+      resources:
+        - name: list-apis
+          path: '/management/v2/environments/{{env_id}}/apis'
+          operations:
+            - name: list-apis
+              method: GET
+              inputParameters:
+                - { name: env_id, in: path, required: true }
+                - { name: page, in: query, type: integer, required: false }
+                - { name: perPage, in: query, type: integer, required: false }
+        - name: api
+          path: '/management/v2/environments/{{env_id}}/apis/{{api_id}}'
+          operations:
+            - name: get-api
+              method: GET
+              inputParameters:
+                - { name: env_id, in: path, required: true }
+                - { name: api_id, in: path, required: true }
+        - name: api-deploy
+          path: '/management/v2/environments/{{env_id}}/apis/{{api_id}}/deployments'
+          operations:
+            - name: deploy-api
+              method: POST
+              inputParameters:
+                - { name: env_id, in: path, required: true }
+                - { name: api_id, in: path, required: true }
+        - name: api-state
+          path: '/management/v2/environments/{{env_id}}/apis/{{api_id}}/_start'
+          operations:
+            - name: start-api
+              method: POST
+              inputParameters:
+                - { name: env_id, in: path, required: true }
+                - { name: api_id, in: path, required: true }
+        - name: api-stop
+          path: '/management/v2/environments/{{env_id}}/apis/{{api_id}}/_stop'
+          operations:
+            - name: stop-api
+              method: POST
+              inputParameters:
+                - { name: env_id, in: path, required: true }
+                - { name: api_id, in: path, required: true }
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: gravitee-apis-discovery-rest
+      description: REST surface for Naftiko Fleet to discover Gravitee-managed APIs.
+      resources:
+        - name: list-apis
+          path: '/environments/{env_id}/apis'
+          operations:
+            - name: list-apis
+              method: GET
+              inputParameters:
+                - { name: env_id, in: path, type: string, required: true }
+                - { name: page, in: query, type: integer, required: false }
+                - { name: perPage, in: query, type: integer, required: false }
+              call: gravitee.list-apis
+        - name: api
+          path: '/environments/{env_id}/apis/{api_id}'
+          operations:
+            - name: get-api
+              method: GET
+              inputParameters:
+                - { name: env_id, in: path, type: string, required: true }
+                - { name: api_id, in: path, type: string, required: true }
+              call: gravitee.get-api
+        - name: deploy-api
+          path: '/environments/{env_id}/apis/{api_id}/deploy'
+          operations:
+            - name: deploy-api
+              method: POST
+              inputParameters:
+                - { name: env_id, in: path, type: string, required: true }
+                - { name: api_id, in: path, type: string, required: true }
+              call: gravitee.deploy-api
+        - name: start-api
+          path: '/environments/{env_id}/apis/{api_id}/start'
+          operations:
+            - name: start-api
+              method: POST
+              inputParameters:
+                - { name: env_id, in: path, type: string, required: true }
+                - { name: api_id, in: path, type: string, required: true }
+              call: gravitee.start-api
+        - name: stop-api
+          path: '/environments/{env_id}/apis/{api_id}/stop'
+          operations:
+            - name: stop-api
+              method: POST
+              inputParameters:
+                - { name: env_id, in: path, type: string, required: true }
+                - { name: api_id, in: path, type: string, required: true }
+              call: gravitee.stop-api
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: gravitee-apis-discovery-mcp
+      description: MCP server exposing Gravitee API discovery + lifecycle to AI agents.
+      tools:
+        - name: list-apis
+          description: List Gravitee-managed APIs in an environment.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: env_id, type: string, required: true, description: Gravitee environment ID. }
+            - { name: page, type: integer, required: false, description: Page number. }
+            - { name: perPage, type: integer, required: false, description: Page size. }
+          call: gravitee.list-apis
+        - name: get-api
+          description: Get a single Gravitee API with full definition (state, lifecycle, entrypoints, plans).
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: env_id, type: string, required: true }
+            - { name: api_id, type: string, required: true }
+          call: gravitee.get-api
+        - name: deploy-api
+          description: Deploy a Gravitee API to its gateways.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: env_id, type: string, required: true }
+            - { name: api_id, type: string, required: true }
+          call: gravitee.deploy-api
+        - name: start-api
+          description: Start a Gravitee API (move from STOPPED to STARTED state).
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: env_id, type: string, required: true }
+            - { name: api_id, type: string, required: true }
+          call: gravitee.start-api
+        - name: stop-api
+          description: Stop a Gravitee API (move to STOPPED state).
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: env_id, type: string, required: true }
+            - { name: api_id, type: string, required: true }
+          call: gravitee.stop-api
