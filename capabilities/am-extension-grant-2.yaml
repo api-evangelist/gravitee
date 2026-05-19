@@ -1,0 +1,314 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — extension grant
+  description: 'Gravitee.io - Access Management API — extension grant. 5 operations. Lead operation: List registered extension
+    grants for a security domain. Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - extension grant
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-extension-grant-2
+    baseUri: ''
+    description: Gravitee.io - Access Management API — extension grant business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-extension
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/extensionGrants
+      operations:
+      - name: listextensiongrants
+        method: GET
+        description: List registered extension grants for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+      - name: createextensiongrant
+        method: POST
+        description: Create a extension grant
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-extension
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/extensionGrants/{extensionGrant}
+      operations:
+      - name: getextensiongrant
+        method: GET
+        description: Get a extension grant
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: extensionGrant
+          in: path
+          type: string
+          required: true
+      - name: updateextensiongrant
+        method: PUT
+        description: Update an extension grant
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: extensionGrant
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteextensiongrant
+        method: DELETE
+        description: Delete a extension grant
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: extensionGrant
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-extension-grant-2-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — extension grant. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/extensiongrants
+      name: organizations-organizationid-environments-environmentid-domains-domain-extension
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-extension.
+      operations:
+      - method: GET
+        name: listextensiongrants
+        description: List registered extension grants for a security domain
+        call: am-extension-grant-2.listextensiongrants
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createextensiongrant
+        description: Create a extension grant
+        call: am-extension-grant-2.createextensiongrant
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/extensiongrants/{extensiongrant}
+      name: organizations-organizationid-environments-environmentid-domains-domain-extension
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-extension.
+      operations:
+      - method: GET
+        name: getextensiongrant
+        description: Get a extension grant
+        call: am-extension-grant-2.getextensiongrant
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          extensionGrant: rest.extensionGrant
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateextensiongrant
+        description: Update an extension grant
+        call: am-extension-grant-2.updateextensiongrant
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          extensionGrant: rest.extensionGrant
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteextensiongrant
+        description: Delete a extension grant
+        call: am-extension-grant-2.deleteextensiongrant
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          extensionGrant: rest.extensionGrant
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-extension-grant-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — extension grant. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-registered-extension-grants-security
+      description: List registered extension grants for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-extension-grant-2.listextensiongrants
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-extension-grant
+      description: Create a extension grant
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-extension-grant-2.createextensiongrant
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-extension-grant
+      description: Get a extension grant
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-extension-grant-2.getextensiongrant
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        extensionGrant: tools.extensionGrant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-extension-grant
+      description: Update an extension grant
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-extension-grant-2.updateextensiongrant
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        extensionGrant: tools.extensionGrant
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-extension-grant
+      description: Delete a extension grant
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-extension-grant-2.deleteextensiongrant
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        extensionGrant: tools.extensionGrant
+      outputParameters:
+      - type: object
+        mapping: $.

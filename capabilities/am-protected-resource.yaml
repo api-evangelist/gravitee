@@ -1,0 +1,898 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — protected-resource
+  description: 'Gravitee.io - Access Management API — protected-resource. 14 operations. Lead operation: List registered protected
+    resources for a security domain. Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - protected-resource
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-protected-resource
+    baseUri: ''
+    description: Gravitee.io - Access Management API — protected-resource business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-protected
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources
+      operations:
+      - name: listprotectedresources
+        method: GET
+        description: List registered protected resources for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: q
+          in: query
+          type: string
+        - name: type
+          in: query
+          type: string
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+        - name: sort
+          in: query
+          type: string
+      - name: createprotectedresource
+        method: POST
+        description: Create a Protected Resource definition
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-protected
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}
+      operations:
+      - name: findprotectedresource
+        method: GET
+        description: Get a Protected Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: type
+          in: query
+          type: string
+      - name: updateprotectedresource
+        method: PUT
+        description: Update a Protected Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprotectedresource
+        method: DELETE
+        description: Delete a Protected Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: type
+          in: query
+          type: string
+      - name: patchprotectedresource
+        method: PATCH
+        description: Patch a Protected Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-protected
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/members
+      operations:
+      - name: getmembers1
+        method: GET
+        description: List members for an protected resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+      - name: addorupdatemember2
+        method: POST
+        description: Add or update an protected resource member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-protected
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/members/permissions
+      operations:
+      - name: getprotectedresourcememberpermissions
+        method: GET
+        description: List protected resource member's permissions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-protected
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/members/{member}
+      operations:
+      - name: removeprotectedresourcemember
+        method: DELETE
+        description: Remove a membership
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: member
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-protected
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/secrets
+      operations:
+      - name: getsecrets
+        method: GET
+        description: List secrets of a protected resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+      - name: create
+        method: POST
+        description: Create a secret for a protected resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-protected
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/secrets/{secretId}
+      operations:
+      - name: delete
+        method: DELETE
+        description: Remove a secret for a protected resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: secretId
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-protected
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/secrets/{secretId}/_renew
+      operations:
+      - name: renew
+        method: POST
+        description: Renew a secret for a protected resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: protected-resource
+          in: path
+          type: string
+          required: true
+        - name: secretId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-protected-resource-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — protected-resource. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/protected-resources
+      name: organizations-organizationid-environments-environmentid-domains-domain-protected
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-protected.
+      operations:
+      - method: GET
+        name: listprotectedresources
+        description: List registered protected resources for a security domain
+        call: am-protected-resource.listprotectedresources
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          q: rest.q
+          type: rest.type
+          page: rest.page
+          size: rest.size
+          sort: rest.sort
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprotectedresource
+        description: Create a Protected Resource definition
+        call: am-protected-resource.createprotectedresource
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/protected-resources/{protected-resource}
+      name: organizations-organizationid-environments-environmentid-domains-domain-protected
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-protected.
+      operations:
+      - method: GET
+        name: findprotectedresource
+        description: Get a Protected Resource
+        call: am-protected-resource.findprotectedresource
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateprotectedresource
+        description: Update a Protected Resource
+        call: am-protected-resource.updateprotectedresource
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprotectedresource
+        description: Delete a Protected Resource
+        call: am-protected-resource.deleteprotectedresource
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchprotectedresource
+        description: Patch a Protected Resource
+        call: am-protected-resource.patchprotectedresource
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/protected-resources/{protected-resource}/members
+      name: organizations-organizationid-environments-environmentid-domains-domain-protected
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-protected.
+      operations:
+      - method: GET
+        name: getmembers1
+        description: List members for an protected resource
+        call: am-protected-resource.getmembers1
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addorupdatemember2
+        description: Add or update an protected resource member
+        call: am-protected-resource.addorupdatemember2
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/protected-resources/{protected-resource}/members/permissions
+      name: organizations-organizationid-environments-environmentid-domains-domain-protected
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-protected.
+      operations:
+      - method: GET
+        name: getprotectedresourcememberpermissions
+        description: List protected resource member's permissions
+        call: am-protected-resource.getprotectedresourcememberpermissions
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/protected-resources/{protected-resource}/members/{member}
+      name: organizations-organizationid-environments-environmentid-domains-domain-protected
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-protected.
+      operations:
+      - method: DELETE
+        name: removeprotectedresourcemember
+        description: Remove a membership
+        call: am-protected-resource.removeprotectedresourcemember
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          member: rest.member
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/protected-resources/{protected-resource}/secrets
+      name: organizations-organizationid-environments-environmentid-domains-domain-protected
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-protected.
+      operations:
+      - method: GET
+        name: getsecrets
+        description: List secrets of a protected resource
+        call: am-protected-resource.getsecrets
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create
+        description: Create a secret for a protected resource
+        call: am-protected-resource.create
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/protected-resources/{protected-resource}/secrets/{secretid}
+      name: organizations-organizationid-environments-environmentid-domains-domain-protected
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-protected.
+      operations:
+      - method: DELETE
+        name: delete
+        description: Remove a secret for a protected resource
+        call: am-protected-resource.delete
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          secretId: rest.secretId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/protected-resources/{protected-resource}/secrets/{secretid}/renew
+      name: organizations-organizationid-environments-environmentid-domains-domain-protected
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-protected.
+      operations:
+      - method: POST
+        name: renew
+        description: Renew a secret for a protected resource
+        call: am-protected-resource.renew
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          protected-resource: rest.protected-resource
+          secretId: rest.secretId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-protected-resource-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — protected-resource. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-registered-protected-resources-security
+      description: List registered protected resources for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-protected-resource.listprotectedresources
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        q: tools.q
+        type: tools.type
+        page: tools.page
+        size: tools.size
+        sort: tools.sort
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-protected-resource-definition
+      description: Create a Protected Resource definition
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-protected-resource.createprotectedresource
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-protected-resource
+      description: Get a Protected Resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-protected-resource.findprotectedresource
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-protected-resource
+      description: Update a Protected Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-protected-resource.updateprotectedresource
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-protected-resource
+      description: Delete a Protected Resource
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-protected-resource.deleteprotectedresource
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-protected-resource
+      description: Patch a Protected Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-protected-resource.patchprotectedresource
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-members-protected-resource
+      description: List members for an protected resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-protected-resource.getmembers1
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-update-protected-resource-member
+      description: Add or update an protected resource member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-protected-resource.addorupdatemember2
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-protected-resource-member-s-permissions
+      description: List protected resource member's permissions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-protected-resource.getprotectedresourcememberpermissions
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-membership
+      description: Remove a membership
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-protected-resource.removeprotectedresourcemember
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        member: tools.member
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-secrets-protected-resource
+      description: List secrets of a protected resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-protected-resource.getsecrets
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-secret-protected-resource
+      description: Create a secret for a protected resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-protected-resource.create
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-secret-protected-resource
+      description: Remove a secret for a protected resource
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-protected-resource.delete
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        secretId: tools.secretId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: renew-secret-protected-resource
+      description: Renew a secret for a protected resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-protected-resource.renew
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        protected-resource: tools.protected-resource
+        secretId: tools.secretId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,85 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — dataPlane
+  description: 'Gravitee.io - Access Management API — dataPlane. 1 operations. Lead operation: List of data planes. Self-contained
+    Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - dataPlane
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-dataplane
+    baseUri: ''
+    description: Gravitee.io - Access Management API — dataPlane business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-data-planes
+      path: /organizations/{organizationId}/environments/{environmentId}/data-planes
+      operations:
+      - name: listdataplanes
+        method: GET
+        description: List of data planes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-dataplane-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — dataPlane. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/data-planes
+      name: organizations-organizationid-environments-environmentid-data-planes
+      description: REST surface for organizations-organizationId-environments-environmentId-data-planes.
+      operations:
+      - method: GET
+        name: listdataplanes
+        description: List of data planes
+        call: am-dataplane.listdataplanes
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-dataplane-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — dataPlane. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-data-planes
+      description: List of data planes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-dataplane.listdataplanes
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+      outputParameters:
+      - type: object
+        mapping: $.

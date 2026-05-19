@@ -1,0 +1,336 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API
+  description: 'Gravitee.io - Access Management API. 7 operations. Lead operation: List all the environments. Self-contained
+    Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-general
+    baseUri: ''
+    description: Gravitee.io - Access Management API business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments
+      path: /organizations/{organizationId}/environments
+      operations:
+      - name: listenvironments
+        method: GET
+        description: List all the environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-members-permissions
+      path: /organizations/{organizationId}/environments/{environmentId}/members/permissions
+      operations:
+      - name: getmemberpermissions
+        method: GET
+        description: List environment member's permissions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-members
+      path: /organizations/{organizationId}/members
+      operations:
+      - name: listorganizationmembers
+        method: GET
+        description: List members for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+      - name: addorupdateorganizationmember
+        method: POST
+        description: Add or update an organization member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-members-member
+      path: /organizations/{organizationId}/members/{member}
+      operations:
+      - name: removeorganizationmember
+        method: DELETE
+        description: Remove a membership of the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: member
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-settings
+      path: /organizations/{organizationId}/settings
+      operations:
+      - name: getorganizationsettings
+        method: GET
+        description: Get organization main settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+      - name: patchorganizationsettings
+        method: PATCH
+        description: Update platform main settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-general-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments
+      name: organizations-organizationid-environments
+      description: REST surface for organizations-organizationId-environments.
+      operations:
+      - method: GET
+        name: listenvironments
+        description: List all the environments
+        call: am-general.listenvironments
+        with:
+          organizationId: rest.organizationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/members/permissions
+      name: organizations-organizationid-environments-environmentid-members-permissions
+      description: REST surface for organizations-organizationId-environments-environmentId-members-permissions.
+      operations:
+      - method: GET
+        name: getmemberpermissions
+        description: List environment member's permissions
+        call: am-general.getmemberpermissions
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/members
+      name: organizations-organizationid-members
+      description: REST surface for organizations-organizationId-members.
+      operations:
+      - method: GET
+        name: listorganizationmembers
+        description: List members for an organization
+        call: am-general.listorganizationmembers
+        with:
+          organizationId: rest.organizationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addorupdateorganizationmember
+        description: Add or update an organization member
+        call: am-general.addorupdateorganizationmember
+        with:
+          organizationId: rest.organizationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/members/{member}
+      name: organizations-organizationid-members-member
+      description: REST surface for organizations-organizationId-members-member.
+      operations:
+      - method: DELETE
+        name: removeorganizationmember
+        description: Remove a membership of the organization
+        call: am-general.removeorganizationmember
+        with:
+          organizationId: rest.organizationId
+          member: rest.member
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/settings
+      name: organizations-organizationid-settings
+      description: REST surface for organizations-organizationId-settings.
+      operations:
+      - method: GET
+        name: getorganizationsettings
+        description: Get organization main settings
+        call: am-general.getorganizationsettings
+        with:
+          organizationId: rest.organizationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchorganizationsettings
+        description: Update platform main settings
+        call: am-general.patchorganizationsettings
+        with:
+          organizationId: rest.organizationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-environments
+      description: List all the environments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-general.listenvironments
+      with:
+        organizationId: tools.organizationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-environment-member-s-permissions
+      description: List environment member's permissions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-general.getmemberpermissions
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-members-organization
+      description: List members for an organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-general.listorganizationmembers
+      with:
+        organizationId: tools.organizationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-update-organization-member
+      description: Add or update an organization member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-general.addorupdateorganizationmember
+      with:
+        organizationId: tools.organizationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-membership-organization
+      description: Remove a membership of the organization
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-general.removeorganizationmember
+      with:
+        organizationId: tools.organizationId
+        member: tools.member
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-organization-main-settings
+      description: Get organization main settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-general.getorganizationsettings
+      with:
+        organizationId: tools.organizationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-platform-main-settings
+      description: Update platform main settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-general.patchorganizationsettings
+      with:
+        organizationId: tools.organizationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,490 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — certificate
+  description: 'Gravitee.io - Access Management API — certificate. 8 operations. Lead operation: List registered certificates
+    for a security domain. Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - certificate
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-certificate-2
+    baseUri: ''
+    description: Gravitee.io - Access Management API — certificate business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-certifica
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates
+      operations:
+      - name: listcertificates
+        method: GET
+        description: List registered certificates for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: use
+          in: query
+          type: string
+      - name: createcertificate
+        method: POST
+        description: Create a certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-certifica
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates/rotate
+      operations:
+      - name: rotatecertificate
+        method: POST
+        description: Generate a new System a certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-certifica
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates/{certificate}
+      operations:
+      - name: findcertificate
+        method: GET
+        description: Get a certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: certificate
+          in: path
+          type: string
+          required: true
+      - name: updatecertificate
+        method: PUT
+        description: Update a certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: certificate
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecertificate
+        method: DELETE
+        description: Delete a certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: certificate
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-certifica
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates/{certificate}/key
+      operations:
+      - name: getcertificatepublickey
+        method: GET
+        description: Get the certificate public key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: certificate
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-certifica
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates/{certificate}/keys
+      operations:
+      - name: getcertificatepublickeys
+        method: GET
+        description: Get the certificate public keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: certificate
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-certificate-2-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — certificate. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/certificates
+      name: organizations-organizationid-environments-environmentid-domains-domain-certifica
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-certifica.
+      operations:
+      - method: GET
+        name: listcertificates
+        description: List registered certificates for a security domain
+        call: am-certificate-2.listcertificates
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          use: rest.use
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcertificate
+        description: Create a certificate
+        call: am-certificate-2.createcertificate
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/certificates/rotate
+      name: organizations-organizationid-environments-environmentid-domains-domain-certifica
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-certifica.
+      operations:
+      - method: POST
+        name: rotatecertificate
+        description: Generate a new System a certificate
+        call: am-certificate-2.rotatecertificate
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/certificates/{certificate}
+      name: organizations-organizationid-environments-environmentid-domains-domain-certifica
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-certifica.
+      operations:
+      - method: GET
+        name: findcertificate
+        description: Get a certificate
+        call: am-certificate-2.findcertificate
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          certificate: rest.certificate
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecertificate
+        description: Update a certificate
+        call: am-certificate-2.updatecertificate
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          certificate: rest.certificate
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecertificate
+        description: Delete a certificate
+        call: am-certificate-2.deletecertificate
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          certificate: rest.certificate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/certificates/{certificate}/key
+      name: organizations-organizationid-environments-environmentid-domains-domain-certifica
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-certifica.
+      operations:
+      - method: GET
+        name: getcertificatepublickey
+        description: Get the certificate public key
+        call: am-certificate-2.getcertificatepublickey
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          certificate: rest.certificate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/certificates/{certificate}/keys
+      name: organizations-organizationid-environments-environmentid-domains-domain-certifica
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-certifica.
+      operations:
+      - method: GET
+        name: getcertificatepublickeys
+        description: Get the certificate public keys
+        call: am-certificate-2.getcertificatepublickeys
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          certificate: rest.certificate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-certificate-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — certificate. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-registered-certificates-security-domain
+      description: List registered certificates for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-certificate-2.listcertificates
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        use: tools.use
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-certificate
+      description: Create a certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-certificate-2.createcertificate
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-new-system-certificate
+      description: Generate a new System a certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-certificate-2.rotatecertificate
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-certificate
+      description: Get a certificate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-certificate-2.findcertificate
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        certificate: tools.certificate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-certificate
+      description: Update a certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-certificate-2.updatecertificate
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        certificate: tools.certificate
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-certificate
+      description: Delete a certificate
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-certificate-2.deletecertificate
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        certificate: tools.certificate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-certificate-public-key
+      description: Get the certificate public key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-certificate-2.getcertificatepublickey
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        certificate: tools.certificate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-certificate-public-keys
+      description: Get the certificate public keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-certificate-2.getcertificatepublickeys
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        certificate: tools.certificate
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,152 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — Certificate
+  description: 'Gravitee.io - Access Management API — Certificate. 3 operations. Lead operation: List certificate plugins.
+    Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - Certificate
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-certificate
+    baseUri: ''
+    description: Gravitee.io - Access Management API — Certificate business capability. Self-contained, no shared references.
+    resources:
+    - name: platform-plugins-certificates
+      path: /platform/plugins/certificates
+      operations:
+      - name: listcertificatesplugins
+        method: GET
+        description: List certificate plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-certificates-certificate
+      path: /platform/plugins/certificates/{certificate}
+      operations:
+      - name: getcertificateplugin
+        method: GET
+        description: Get an certificate plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: certificate
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-certificates-certificate-schema
+      path: /platform/plugins/certificates/{certificate}/schema
+      operations:
+      - name: getcertificatepluginschema
+        method: GET
+        description: Get an certificate's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: certificate
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-certificate-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — Certificate. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/platform/plugins/certificates
+      name: platform-plugins-certificates
+      description: REST surface for platform-plugins-certificates.
+      operations:
+      - method: GET
+        name: listcertificatesplugins
+        description: List certificate plugins
+        call: am-certificate.listcertificatesplugins
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/certificates/{certificate}
+      name: platform-plugins-certificates-certificate
+      description: REST surface for platform-plugins-certificates-certificate.
+      operations:
+      - method: GET
+        name: getcertificateplugin
+        description: Get an certificate plugin
+        call: am-certificate.getcertificateplugin
+        with:
+          certificate: rest.certificate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/certificates/{certificate}/schema
+      name: platform-plugins-certificates-certificate-schema
+      description: REST surface for platform-plugins-certificates-certificate-schema.
+      operations:
+      - method: GET
+        name: getcertificatepluginschema
+        description: Get an certificate's schema
+        call: am-certificate.getcertificatepluginschema
+        with:
+          certificate: rest.certificate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-certificate-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — Certificate. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-certificate-plugins
+      description: List certificate plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-certificate.listcertificatesplugins
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-certificate-plugin
+      description: Get an certificate plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-certificate.getcertificateplugin
+      with:
+        certificate: tools.certificate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-certificate-s-schema
+      description: Get an certificate's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-certificate.getcertificatepluginschema
+      with:
+        certificate: tools.certificate
+      outputParameters:
+      - type: object
+        mapping: $.

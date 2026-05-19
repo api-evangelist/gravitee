@@ -1,0 +1,315 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — authorization engine
+  description: 'Gravitee.io - Access Management API — authorization engine. 5 operations. Lead operation: List registered
+    authorization engines for a security domain. Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - authorization engine
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-authorization-engine-2
+    baseUri: ''
+    description: Gravitee.io - Access Management API — authorization engine business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-authoriza
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/authorization-engines
+      operations:
+      - name: listauthorizationengines
+        method: GET
+        description: List registered authorization engines for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+      - name: createauthorizationengine
+        method: POST
+        description: Create an authorization engine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-authoriza
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/authorization-engines/{engineId}
+      operations:
+      - name: findauthorizationengine
+        method: GET
+        description: Get an authorization engine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: engineId
+          in: path
+          type: string
+          required: true
+      - name: updateauthorizationengine
+        method: PUT
+        description: Update an authorization engine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: engineId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteauthorizationengine
+        method: DELETE
+        description: Delete an authorization engine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: engineId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-authorization-engine-2-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — authorization engine. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/authorization-engines
+      name: organizations-organizationid-environments-environmentid-domains-domain-authoriza
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-authoriza.
+      operations:
+      - method: GET
+        name: listauthorizationengines
+        description: List registered authorization engines for a security domain
+        call: am-authorization-engine-2.listauthorizationengines
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createauthorizationengine
+        description: Create an authorization engine
+        call: am-authorization-engine-2.createauthorizationengine
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/authorization-engines/{engineid}
+      name: organizations-organizationid-environments-environmentid-domains-domain-authoriza
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-authoriza.
+      operations:
+      - method: GET
+        name: findauthorizationengine
+        description: Get an authorization engine
+        call: am-authorization-engine-2.findauthorizationengine
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          engineId: rest.engineId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateauthorizationengine
+        description: Update an authorization engine
+        call: am-authorization-engine-2.updateauthorizationengine
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          engineId: rest.engineId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteauthorizationengine
+        description: Delete an authorization engine
+        call: am-authorization-engine-2.deleteauthorizationengine
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          engineId: rest.engineId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-authorization-engine-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — authorization engine. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-registered-authorization-engines-security
+      description: List registered authorization engines for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-authorization-engine-2.listauthorizationengines
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-authorization-engine
+      description: Create an authorization engine
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-authorization-engine-2.createauthorizationengine
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-authorization-engine
+      description: Get an authorization engine
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-authorization-engine-2.findauthorizationengine
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        engineId: tools.engineId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-authorization-engine
+      description: Update an authorization engine
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-authorization-engine-2.updateauthorizationengine
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        engineId: tools.engineId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-authorization-engine
+      description: Delete an authorization engine
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-authorization-engine-2.deleteauthorizationengine
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        engineId: tools.engineId
+      outputParameters:
+      - type: object
+        mapping: $.

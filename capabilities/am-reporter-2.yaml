@@ -1,0 +1,535 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — reporter
+  description: 'Gravitee.io - Access Management API — reporter. 10 operations. Lead operation: List registered reporters for
+    a security domain. Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - reporter
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-reporter-2
+    baseUri: ''
+    description: Gravitee.io - Access Management API — reporter business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-reporters
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/reporters
+      operations:
+      - name: listdomainreporters
+        method: GET
+        description: List registered reporters for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: userProvider
+          in: query
+          type: boolean
+      - name: createdomainreporter
+        method: POST
+        description: Create a reporter for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: organizations-organizationId-environments-environmentId-domains-domain-reporters
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/reporters/{reporter}
+      operations:
+      - name: getdomainreporter
+        method: GET
+        description: Get a reporter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: reporter
+          in: path
+          type: string
+          required: true
+      - name: updatedomainreporter
+        method: PUT
+        description: Update a reporter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: reporter
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletedomainreporter
+        method: DELETE
+        description: Delete a reporter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: reporter
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-reporters
+      path: /organizations/{organizationId}/reporters
+      operations:
+      - name: getorgreporters
+        method: GET
+        description: List registered reporters for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+      - name: createorgreporter
+        method: POST
+        description: Create a reporter for an organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: organizations-organizationId-reporters-reporterId
+      path: /organizations/{organizationId}/reporters/{reporterId}
+      operations:
+      - name: getorgreporter
+        method: GET
+        description: Get a reporter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: reporterId
+          in: path
+          type: string
+          required: true
+      - name: updateorgreporter
+        method: PUT
+        description: Update a reporter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: reporterId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteorgreporter
+        method: DELETE
+        description: Delete a reporter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: reporterId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-reporter-2-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — reporter. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/reporters
+      name: organizations-organizationid-environments-environmentid-domains-domain-reporters
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-reporters.
+      operations:
+      - method: GET
+        name: listdomainreporters
+        description: List registered reporters for a security domain
+        call: am-reporter-2.listdomainreporters
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          userProvider: rest.userProvider
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdomainreporter
+        description: Create a reporter for a security domain
+        call: am-reporter-2.createdomainreporter
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/reporters/{reporter}
+      name: organizations-organizationid-environments-environmentid-domains-domain-reporters
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-reporters.
+      operations:
+      - method: GET
+        name: getdomainreporter
+        description: Get a reporter
+        call: am-reporter-2.getdomainreporter
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          reporter: rest.reporter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatedomainreporter
+        description: Update a reporter
+        call: am-reporter-2.updatedomainreporter
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          reporter: rest.reporter
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedomainreporter
+        description: Delete a reporter
+        call: am-reporter-2.deletedomainreporter
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          reporter: rest.reporter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/reporters
+      name: organizations-organizationid-reporters
+      description: REST surface for organizations-organizationId-reporters.
+      operations:
+      - method: GET
+        name: getorgreporters
+        description: List registered reporters for a security domain
+        call: am-reporter-2.getorgreporters
+        with:
+          organizationId: rest.organizationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorgreporter
+        description: Create a reporter for an organization
+        call: am-reporter-2.createorgreporter
+        with:
+          organizationId: rest.organizationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/reporters/{reporterid}
+      name: organizations-organizationid-reporters-reporterid
+      description: REST surface for organizations-organizationId-reporters-reporterId.
+      operations:
+      - method: GET
+        name: getorgreporter
+        description: Get a reporter
+        call: am-reporter-2.getorgreporter
+        with:
+          organizationId: rest.organizationId
+          reporterId: rest.reporterId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorgreporter
+        description: Update a reporter
+        call: am-reporter-2.updateorgreporter
+        with:
+          organizationId: rest.organizationId
+          reporterId: rest.reporterId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteorgreporter
+        description: Delete a reporter
+        call: am-reporter-2.deleteorgreporter
+        with:
+          organizationId: rest.organizationId
+          reporterId: rest.reporterId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-reporter-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — reporter. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-registered-reporters-security-domain
+      description: List registered reporters for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-reporter-2.listdomainreporters
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        userProvider: tools.userProvider
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-reporter-security-domain
+      description: Create a reporter for a security domain
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-reporter-2.createdomainreporter
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reporter
+      description: Get a reporter
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-reporter-2.getdomainreporter
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        reporter: tools.reporter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-reporter
+      description: Update a reporter
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-reporter-2.updatedomainreporter
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        reporter: tools.reporter
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-reporter
+      description: Delete a reporter
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-reporter-2.deletedomainreporter
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        reporter: tools.reporter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-registered-reporters-security-domain-2
+      description: List registered reporters for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-reporter-2.getorgreporters
+      with:
+        organizationId: tools.organizationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-reporter-organization
+      description: Create a reporter for an organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-reporter-2.createorgreporter
+      with:
+        organizationId: tools.organizationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reporter-2
+      description: Get a reporter
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-reporter-2.getorgreporter
+      with:
+        organizationId: tools.organizationId
+        reporterId: tools.reporterId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-reporter-2
+      description: Update a reporter
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-reporter-2.updateorgreporter
+      with:
+        organizationId: tools.organizationId
+        reporterId: tools.reporterId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-reporter-2
+      description: Delete a reporter
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-reporter-2.deleteorgreporter
+      with:
+        organizationId: tools.organizationId
+        reporterId: tools.reporterId
+      outputParameters:
+      - type: object
+        mapping: $.

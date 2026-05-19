@@ -1,0 +1,764 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — form
+  description: 'Gravitee.io - Access Management API — form. 13 operations. Lead operation: Find a form for an application.
+    Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - form
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-form
+    baseUri: ''
+    description: Gravitee.io - Access Management API — form business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms
+      operations:
+      - name: findapplicationform
+        method: GET
+        description: Find a form for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: template
+          in: query
+          type: string
+          required: true
+      - name: createapplicationform
+        method: POST
+        description: Create a form for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms/{form}
+      operations:
+      - name: updateapplicationform
+        method: PUT
+        description: Update a form for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: form
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapplicationform
+        method: DELETE
+        description: Delete a form for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: form
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-forms
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms
+      operations:
+      - name: findform
+        method: GET
+        description: Find a form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: template
+          in: query
+          type: string
+          required: true
+      - name: createform
+        method: POST
+        description: Create a form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-forms-pre
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms/preview
+      operations:
+      - name: renderdomaintemplate
+        method: POST
+        description: Render the provided template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-forms-for
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms/{form}
+      operations:
+      - name: updatedomainform
+        method: PUT
+        description: Update a form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: form
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletedomainform
+        method: DELETE
+        description: Delete a form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: form
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-forms
+      path: /organizations/{organizationId}/forms
+      operations:
+      - name: findorganizationformtemplate
+        method: GET
+        description: Find an organization form template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: template
+          in: query
+          type: string
+          required: true
+      - name: createorganizationform
+        method: POST
+        description: Create a form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-forms-form
+      path: /organizations/{organizationId}/forms/{form}
+      operations:
+      - name: updateform
+        method: PUT
+        description: Update a form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: form
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteform
+        method: DELETE
+        description: Delete a form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: form
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-form-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — form. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/forms
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: findapplicationform
+        description: Find a form for an application
+        call: am-form.findapplicationform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          template: rest.template
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapplicationform
+        description: Create a form for an application
+        call: am-form.createapplicationform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/forms/{form}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: PUT
+        name: updateapplicationform
+        description: Update a form for an application
+        call: am-form.updateapplicationform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          form: rest.form
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapplicationform
+        description: Delete a form for an application
+        call: am-form.deleteapplicationform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          form: rest.form
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/forms
+      name: organizations-organizationid-environments-environmentid-domains-domain-forms
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-forms.
+      operations:
+      - method: GET
+        name: findform
+        description: Find a form
+        call: am-form.findform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          template: rest.template
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createform
+        description: Create a form
+        call: am-form.createform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/forms/preview
+      name: organizations-organizationid-environments-environmentid-domains-domain-forms-pre
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-forms-pre.
+      operations:
+      - method: POST
+        name: renderdomaintemplate
+        description: Render the provided template
+        call: am-form.renderdomaintemplate
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/forms/{form}
+      name: organizations-organizationid-environments-environmentid-domains-domain-forms-for
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-forms-for.
+      operations:
+      - method: PUT
+        name: updatedomainform
+        description: Update a form
+        call: am-form.updatedomainform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          form: rest.form
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedomainform
+        description: Delete a form
+        call: am-form.deletedomainform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          form: rest.form
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/forms
+      name: organizations-organizationid-forms
+      description: REST surface for organizations-organizationId-forms.
+      operations:
+      - method: GET
+        name: findorganizationformtemplate
+        description: Find an organization form template
+        call: am-form.findorganizationformtemplate
+        with:
+          organizationId: rest.organizationId
+          template: rest.template
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createorganizationform
+        description: Create a form
+        call: am-form.createorganizationform
+        with:
+          organizationId: rest.organizationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/forms/{form}
+      name: organizations-organizationid-forms-form
+      description: REST surface for organizations-organizationId-forms-form.
+      operations:
+      - method: PUT
+        name: updateform
+        description: Update a form
+        call: am-form.updateform
+        with:
+          organizationId: rest.organizationId
+          form: rest.form
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteform
+        description: Delete a form
+        call: am-form.deleteform
+        with:
+          organizationId: rest.organizationId
+          form: rest.form
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-form-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — form. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: find-form-application
+      description: Find a form for an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-form.findapplicationform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        template: tools.template
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-form-application
+      description: Create a form for an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-form.createapplicationform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-form-application
+      description: Update a form for an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-form.updateapplicationform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        form: tools.form
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-form-application
+      description: Delete a form for an application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-form.deleteapplicationform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        form: tools.form
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: find-form
+      description: Find a form
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-form.findform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        template: tools.template
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-form
+      description: Create a form
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-form.createform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: render-provided-template
+      description: Render the provided template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-form.renderdomaintemplate
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-form
+      description: Update a form
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-form.updatedomainform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        form: tools.form
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-form
+      description: Delete a form
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-form.deletedomainform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        form: tools.form
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: find-organization-form-template
+      description: Find an organization form template
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-form.findorganizationformtemplate
+      with:
+        organizationId: tools.organizationId
+        template: tools.template
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-form-2
+      description: Create a form
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-form.createorganizationform
+      with:
+        organizationId: tools.organizationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-form-2
+      description: Update a form
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-form.updateform
+      with:
+        organizationId: tools.organizationId
+        form: tools.form
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-form-2
+      description: Delete a form
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-form.deleteform
+      with:
+        organizationId: tools.organizationId
+        form: tools.form
+      outputParameters:
+      - type: object
+        mapping: $.

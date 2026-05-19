@@ -1,0 +1,1770 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — platform
+  description: 'Gravitee.io - Access Management API — platform. 45 operations. Lead operation: List audit event types. Self-contained
+    Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - platform
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-platform
+    baseUri: ''
+    description: Gravitee.io - Access Management API — platform business capability. Self-contained, no shared references.
+    resources:
+    - name: platform-audits-events
+      path: /platform/audits/events
+      operations:
+      - name: listauditeventtypes
+        method: GET
+        description: List audit event types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-configuration-alerts-status
+      path: /platform/configuration/alerts/status
+      operations:
+      - name: getalertservicestatus
+        method: GET
+        description: Get the alert service status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-configuration-flow-schema
+      path: /platform/configuration/flow/schema
+      operations:
+      - name: getpolicystudioflowschema
+        method: GET
+        description: Get the Policy Studio flow schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-configuration-spel-grammar
+      path: /platform/configuration/spel/grammar
+      operations:
+      - name: getspelgrammar
+        method: GET
+        description: Get the spel grammar
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-configuration-users-email-required
+      path: /platform/configuration/users/email-required
+      operations:
+      - name: getuseremailrequired
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-installation
+      path: /platform/installation
+      operations:
+      - name: getinstallation
+        method: GET
+        description: Get installation information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-license
+      path: /platform/license
+      operations:
+      - name: getlicense
+        method: GET
+        description: Get current node License
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-auth-device-notifiers
+      path: /platform/plugins/auth-device-notifiers
+      operations:
+      - name: listauthenticationdevicenotifierplugins
+        method: GET
+        description: List authentication device notifier plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: expand
+          in: query
+          type: array
+    - name: platform-plugins-auth-device-notifiers-authDeviceNotifierId
+      path: /platform/plugins/auth-device-notifiers/{authDeviceNotifierId}
+      operations:
+      - name: getauthenticationdevicenotifierplugin
+        method: GET
+        description: Get a Authentication Device Notifier plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: authDeviceNotifierId
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-auth-device-notifiers-authDeviceNotifierId-schema
+      path: /platform/plugins/auth-device-notifiers/{authDeviceNotifierId}/schema
+      operations:
+      - name: getauthenticationdevicenotifierpluginschema
+        method: GET
+        description: Get an Authentication Device Notifier plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: authDeviceNotifierId
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-authorization-engines
+      path: /platform/plugins/authorization-engines
+      operations:
+      - name: listauthorizationengineplugins
+        method: GET
+        description: List authorization engine plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: expand
+          in: query
+          type: array
+    - name: platform-plugins-authorization-engines-authorizationEngine
+      path: /platform/plugins/authorization-engines/{authorizationEngine}
+      operations:
+      - name: getauthorizationengineplugin
+        method: GET
+        description: Get an authorization engine plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: authorizationEngine
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-authorization-engines-authorizationEngine-schema
+      path: /platform/plugins/authorization-engines/{authorizationEngine}/schema
+      operations:
+      - name: getauthorizationenginepluginschema
+        method: GET
+        description: Get an authorization engine plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: authorizationEngine
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-bot-detections
+      path: /platform/plugins/bot-detections
+      operations:
+      - name: listbotdetectionsplugins
+        method: GET
+        description: List bot detection plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-bot-detections-botDetection
+      path: /platform/plugins/bot-detections/{botDetection}
+      operations:
+      - name: getbotdetectionplugin
+        method: GET
+        description: Get a Bot Detection plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: botDetection
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-bot-detections-botDetection-schema
+      path: /platform/plugins/bot-detections/{botDetection}/schema
+      operations:
+      - name: getbotdetectionpluginschema
+        method: GET
+        description: Get a Bot Detection plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: botDetection
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-certificates
+      path: /platform/plugins/certificates
+      operations:
+      - name: listcertificatesplugins
+        method: GET
+        description: List certificate plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-certificates-certificate
+      path: /platform/plugins/certificates/{certificate}
+      operations:
+      - name: getcertificateplugin
+        method: GET
+        description: Get an certificate plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: certificate
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-certificates-certificate-schema
+      path: /platform/plugins/certificates/{certificate}/schema
+      operations:
+      - name: getcertificatepluginschema
+        method: GET
+        description: Get an certificate's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: certificate
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-device-identifiers
+      path: /platform/plugins/device-identifiers
+      operations:
+      - name: listdeviceidentifierplugins
+        method: GET
+        description: List device identifier plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-device-identifiers-deviceIdentifier
+      path: /platform/plugins/device-identifiers/{deviceIdentifier}
+      operations:
+      - name: getdeviceidentifierplugin
+        method: GET
+        description: Get a device identifier plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: deviceIdentifier
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-device-identifiers-deviceIdentifier-schema
+      path: /platform/plugins/device-identifiers/{deviceIdentifier}/schema
+      operations:
+      - name: getdeviceidentifierpluginschema
+        method: GET
+        description: Get a device identifier plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: deviceIdentifier
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-extensionGrants
+      path: /platform/plugins/extensionGrants
+      operations:
+      - name: listextensiongrants1
+        method: GET
+        description: List extension grant plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-extensionGrants-extensionGrant
+      path: /platform/plugins/extensionGrants/{extensionGrant}
+      operations:
+      - name: getextensiongrant1
+        method: GET
+        description: Get an extension grant plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: extensionGrant
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-extensionGrants-extensionGrant-schema
+      path: /platform/plugins/extensionGrants/{extensionGrant}/schema
+      operations:
+      - name: getextensiongrantschema
+        method: GET
+        description: Get an extension grant plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: extensionGrant
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-factors
+      path: /platform/plugins/factors
+      operations:
+      - name: listfactorplugins
+        method: GET
+        description: List factor plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-factors-factor
+      path: /platform/plugins/factors/{factor}
+      operations:
+      - name: getfactorplugin
+        method: GET
+        description: Get a factor plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: factor
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-factors-factor-schema
+      path: /platform/plugins/factors/{factor}/schema
+      operations:
+      - name: getfactorpluginschema
+        method: GET
+        description: Get a factor plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: factor
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-identities
+      path: /platform/plugins/identities
+      operations:
+      - name: listidentityproviders2
+        method: GET
+        description: List identity provider plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: external
+          in: query
+          type: boolean
+        - name: organization
+          in: query
+          type: boolean
+        - name: expand
+          in: query
+          type: array
+    - name: platform-plugins-identities-identity
+      path: /platform/plugins/identities/{identity}
+      operations:
+      - name: getidentityproviderplugin
+        method: GET
+        description: Get an identity provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: identity
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-identities-identity-schema
+      path: /platform/plugins/identities/{identity}/schema
+      operations:
+      - name: getidentityproviderpluginschema
+        method: GET
+        description: Get an identity provider plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: identity
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-notifiers
+      path: /platform/plugins/notifiers
+      operations:
+      - name: listnotifiers
+        method: GET
+        description: List all available notifier plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: expand
+          in: query
+          type: array
+    - name: platform-plugins-notifiers-notifierId
+      path: /platform/plugins/notifiers/{notifierId}
+      operations:
+      - name: getnotifier
+        method: GET
+        description: Get a notifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: notifierId
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-notifiers-notifierId-schema
+      path: /platform/plugins/notifiers/{notifierId}/schema
+      operations:
+      - name: getnotifierschema
+        method: GET
+        description: Get a notifier plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: notifierId
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-policies
+      path: /platform/plugins/policies
+      operations:
+      - name: listpolicies
+        method: GET
+        description: List policy plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: expand
+          in: query
+          type: array
+    - name: platform-plugins-policies-policy
+      path: /platform/plugins/policies/{policy}
+      operations:
+      - name: getpolicy
+        method: GET
+        description: Get a policy plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policy
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-policies-policy-documentation
+      path: /platform/plugins/policies/{policy}/documentation
+      operations:
+      - name: getpolicydocumentation
+        method: GET
+        description: Get a policy plugin's documentation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policy
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-policies-policy-schema
+      path: /platform/plugins/policies/{policy}/schema
+      operations:
+      - name: getpolicyschema
+        method: GET
+        description: Get a policy plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policy
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-reporters
+      path: /platform/plugins/reporters
+      operations:
+      - name: listreporterplugins
+        method: GET
+        description: List reporter plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-reporters-reporter
+      path: /platform/plugins/reporters/{reporter}
+      operations:
+      - name: getreporter
+        method: GET
+        description: Get a reporter plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: reporter
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-reporters-reporter-schema
+      path: /platform/plugins/reporters/{reporter}/schema
+      operations:
+      - name: getreporterschema
+        method: GET
+        description: Get a reporter plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: reporter
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-resources
+      path: /platform/plugins/resources
+      operations:
+      - name: listresourceplugins
+        method: GET
+        description: List resource plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: expand
+          in: query
+          type: array
+    - name: platform-plugins-resources-resource
+      path: /platform/plugins/resources/{resource}
+      operations:
+      - name: getresource1
+        method: GET
+        description: Get a resource plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resource
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-resources-resource-schema
+      path: /platform/plugins/resources/{resource}/schema
+      operations:
+      - name: getresourceschema
+        method: GET
+        description: Get a resource plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resource
+          in: path
+          type: string
+          required: true
+    - name: platform-roles-role
+      path: /platform/roles/{role}
+      operations:
+      - name: getsystemrole
+        method: GET
+        description: Get a system role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: role
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-platform-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — platform. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/platform/audits/events
+      name: platform-audits-events
+      description: REST surface for platform-audits-events.
+      operations:
+      - method: GET
+        name: listauditeventtypes
+        description: List audit event types
+        call: am-platform.listauditeventtypes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/configuration/alerts/status
+      name: platform-configuration-alerts-status
+      description: REST surface for platform-configuration-alerts-status.
+      operations:
+      - method: GET
+        name: getalertservicestatus
+        description: Get the alert service status
+        call: am-platform.getalertservicestatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/configuration/flow/schema
+      name: platform-configuration-flow-schema
+      description: REST surface for platform-configuration-flow-schema.
+      operations:
+      - method: GET
+        name: getpolicystudioflowschema
+        description: Get the Policy Studio flow schema
+        call: am-platform.getpolicystudioflowschema
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/configuration/spel/grammar
+      name: platform-configuration-spel-grammar
+      description: REST surface for platform-configuration-spel-grammar.
+      operations:
+      - method: GET
+        name: getspelgrammar
+        description: Get the spel grammar
+        call: am-platform.getspelgrammar
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/configuration/users/email-required
+      name: platform-configuration-users-email-required
+      description: REST surface for platform-configuration-users-email-required.
+      operations:
+      - method: GET
+        name: getuseremailrequired
+        description: getuseremailrequired
+        call: am-platform.getuseremailrequired
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/installation
+      name: platform-installation
+      description: REST surface for platform-installation.
+      operations:
+      - method: GET
+        name: getinstallation
+        description: Get installation information
+        call: am-platform.getinstallation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/license
+      name: platform-license
+      description: REST surface for platform-license.
+      operations:
+      - method: GET
+        name: getlicense
+        description: Get current node License
+        call: am-platform.getlicense
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/auth-device-notifiers
+      name: platform-plugins-auth-device-notifiers
+      description: REST surface for platform-plugins-auth-device-notifiers.
+      operations:
+      - method: GET
+        name: listauthenticationdevicenotifierplugins
+        description: List authentication device notifier plugins
+        call: am-platform.listauthenticationdevicenotifierplugins
+        with:
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/auth-device-notifiers/{authdevicenotifierid}
+      name: platform-plugins-auth-device-notifiers-authdevicenotifierid
+      description: REST surface for platform-plugins-auth-device-notifiers-authDeviceNotifierId.
+      operations:
+      - method: GET
+        name: getauthenticationdevicenotifierplugin
+        description: Get a Authentication Device Notifier plugin
+        call: am-platform.getauthenticationdevicenotifierplugin
+        with:
+          authDeviceNotifierId: rest.authDeviceNotifierId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/auth-device-notifiers/{authdevicenotifierid}/schema
+      name: platform-plugins-auth-device-notifiers-authdevicenotifierid-schema
+      description: REST surface for platform-plugins-auth-device-notifiers-authDeviceNotifierId-schema.
+      operations:
+      - method: GET
+        name: getauthenticationdevicenotifierpluginschema
+        description: Get an Authentication Device Notifier plugin's schema
+        call: am-platform.getauthenticationdevicenotifierpluginschema
+        with:
+          authDeviceNotifierId: rest.authDeviceNotifierId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/authorization-engines
+      name: platform-plugins-authorization-engines
+      description: REST surface for platform-plugins-authorization-engines.
+      operations:
+      - method: GET
+        name: listauthorizationengineplugins
+        description: List authorization engine plugins
+        call: am-platform.listauthorizationengineplugins
+        with:
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/authorization-engines/{authorizationengine}
+      name: platform-plugins-authorization-engines-authorizationengine
+      description: REST surface for platform-plugins-authorization-engines-authorizationEngine.
+      operations:
+      - method: GET
+        name: getauthorizationengineplugin
+        description: Get an authorization engine plugin
+        call: am-platform.getauthorizationengineplugin
+        with:
+          authorizationEngine: rest.authorizationEngine
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/authorization-engines/{authorizationengine}/schema
+      name: platform-plugins-authorization-engines-authorizationengine-schema
+      description: REST surface for platform-plugins-authorization-engines-authorizationEngine-schema.
+      operations:
+      - method: GET
+        name: getauthorizationenginepluginschema
+        description: Get an authorization engine plugin's schema
+        call: am-platform.getauthorizationenginepluginschema
+        with:
+          authorizationEngine: rest.authorizationEngine
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/bot-detections
+      name: platform-plugins-bot-detections
+      description: REST surface for platform-plugins-bot-detections.
+      operations:
+      - method: GET
+        name: listbotdetectionsplugins
+        description: List bot detection plugins
+        call: am-platform.listbotdetectionsplugins
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/bot-detections/{botdetection}
+      name: platform-plugins-bot-detections-botdetection
+      description: REST surface for platform-plugins-bot-detections-botDetection.
+      operations:
+      - method: GET
+        name: getbotdetectionplugin
+        description: Get a Bot Detection plugin
+        call: am-platform.getbotdetectionplugin
+        with:
+          botDetection: rest.botDetection
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/bot-detections/{botdetection}/schema
+      name: platform-plugins-bot-detections-botdetection-schema
+      description: REST surface for platform-plugins-bot-detections-botDetection-schema.
+      operations:
+      - method: GET
+        name: getbotdetectionpluginschema
+        description: Get a Bot Detection plugin's schema
+        call: am-platform.getbotdetectionpluginschema
+        with:
+          botDetection: rest.botDetection
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/certificates
+      name: platform-plugins-certificates
+      description: REST surface for platform-plugins-certificates.
+      operations:
+      - method: GET
+        name: listcertificatesplugins
+        description: List certificate plugins
+        call: am-platform.listcertificatesplugins
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/certificates/{certificate}
+      name: platform-plugins-certificates-certificate
+      description: REST surface for platform-plugins-certificates-certificate.
+      operations:
+      - method: GET
+        name: getcertificateplugin
+        description: Get an certificate plugin
+        call: am-platform.getcertificateplugin
+        with:
+          certificate: rest.certificate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/certificates/{certificate}/schema
+      name: platform-plugins-certificates-certificate-schema
+      description: REST surface for platform-plugins-certificates-certificate-schema.
+      operations:
+      - method: GET
+        name: getcertificatepluginschema
+        description: Get an certificate's schema
+        call: am-platform.getcertificatepluginschema
+        with:
+          certificate: rest.certificate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/device-identifiers
+      name: platform-plugins-device-identifiers
+      description: REST surface for platform-plugins-device-identifiers.
+      operations:
+      - method: GET
+        name: listdeviceidentifierplugins
+        description: List device identifier plugins
+        call: am-platform.listdeviceidentifierplugins
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/device-identifiers/{deviceidentifier}
+      name: platform-plugins-device-identifiers-deviceidentifier
+      description: REST surface for platform-plugins-device-identifiers-deviceIdentifier.
+      operations:
+      - method: GET
+        name: getdeviceidentifierplugin
+        description: Get a device identifier plugin
+        call: am-platform.getdeviceidentifierplugin
+        with:
+          deviceIdentifier: rest.deviceIdentifier
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/device-identifiers/{deviceidentifier}/schema
+      name: platform-plugins-device-identifiers-deviceidentifier-schema
+      description: REST surface for platform-plugins-device-identifiers-deviceIdentifier-schema.
+      operations:
+      - method: GET
+        name: getdeviceidentifierpluginschema
+        description: Get a device identifier plugin's schema
+        call: am-platform.getdeviceidentifierpluginschema
+        with:
+          deviceIdentifier: rest.deviceIdentifier
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/extensiongrants
+      name: platform-plugins-extensiongrants
+      description: REST surface for platform-plugins-extensionGrants.
+      operations:
+      - method: GET
+        name: listextensiongrants1
+        description: List extension grant plugins
+        call: am-platform.listextensiongrants1
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/extensiongrants/{extensiongrant}
+      name: platform-plugins-extensiongrants-extensiongrant
+      description: REST surface for platform-plugins-extensionGrants-extensionGrant.
+      operations:
+      - method: GET
+        name: getextensiongrant1
+        description: Get an extension grant plugin
+        call: am-platform.getextensiongrant1
+        with:
+          extensionGrant: rest.extensionGrant
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/extensiongrants/{extensiongrant}/schema
+      name: platform-plugins-extensiongrants-extensiongrant-schema
+      description: REST surface for platform-plugins-extensionGrants-extensionGrant-schema.
+      operations:
+      - method: GET
+        name: getextensiongrantschema
+        description: Get an extension grant plugin's schema
+        call: am-platform.getextensiongrantschema
+        with:
+          extensionGrant: rest.extensionGrant
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/factors
+      name: platform-plugins-factors
+      description: REST surface for platform-plugins-factors.
+      operations:
+      - method: GET
+        name: listfactorplugins
+        description: List factor plugins
+        call: am-platform.listfactorplugins
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/factors/{factor}
+      name: platform-plugins-factors-factor
+      description: REST surface for platform-plugins-factors-factor.
+      operations:
+      - method: GET
+        name: getfactorplugin
+        description: Get a factor plugin
+        call: am-platform.getfactorplugin
+        with:
+          factor: rest.factor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/factors/{factor}/schema
+      name: platform-plugins-factors-factor-schema
+      description: REST surface for platform-plugins-factors-factor-schema.
+      operations:
+      - method: GET
+        name: getfactorpluginschema
+        description: Get a factor plugin's schema
+        call: am-platform.getfactorpluginschema
+        with:
+          factor: rest.factor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/identities
+      name: platform-plugins-identities
+      description: REST surface for platform-plugins-identities.
+      operations:
+      - method: GET
+        name: listidentityproviders2
+        description: List identity provider plugins
+        call: am-platform.listidentityproviders2
+        with:
+          external: rest.external
+          organization: rest.organization
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/identities/{identity}
+      name: platform-plugins-identities-identity
+      description: REST surface for platform-plugins-identities-identity.
+      operations:
+      - method: GET
+        name: getidentityproviderplugin
+        description: Get an identity provider
+        call: am-platform.getidentityproviderplugin
+        with:
+          identity: rest.identity
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/identities/{identity}/schema
+      name: platform-plugins-identities-identity-schema
+      description: REST surface for platform-plugins-identities-identity-schema.
+      operations:
+      - method: GET
+        name: getidentityproviderpluginschema
+        description: Get an identity provider plugin's schema
+        call: am-platform.getidentityproviderpluginschema
+        with:
+          identity: rest.identity
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/notifiers
+      name: platform-plugins-notifiers
+      description: REST surface for platform-plugins-notifiers.
+      operations:
+      - method: GET
+        name: listnotifiers
+        description: List all available notifier plugins
+        call: am-platform.listnotifiers
+        with:
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/notifiers/{notifierid}
+      name: platform-plugins-notifiers-notifierid
+      description: REST surface for platform-plugins-notifiers-notifierId.
+      operations:
+      - method: GET
+        name: getnotifier
+        description: Get a notifier
+        call: am-platform.getnotifier
+        with:
+          notifierId: rest.notifierId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/notifiers/{notifierid}/schema
+      name: platform-plugins-notifiers-notifierid-schema
+      description: REST surface for platform-plugins-notifiers-notifierId-schema.
+      operations:
+      - method: GET
+        name: getnotifierschema
+        description: Get a notifier plugin's schema
+        call: am-platform.getnotifierschema
+        with:
+          notifierId: rest.notifierId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/policies
+      name: platform-plugins-policies
+      description: REST surface for platform-plugins-policies.
+      operations:
+      - method: GET
+        name: listpolicies
+        description: List policy plugins
+        call: am-platform.listpolicies
+        with:
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/policies/{policy}
+      name: platform-plugins-policies-policy
+      description: REST surface for platform-plugins-policies-policy.
+      operations:
+      - method: GET
+        name: getpolicy
+        description: Get a policy plugin
+        call: am-platform.getpolicy
+        with:
+          policy: rest.policy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/policies/{policy}/documentation
+      name: platform-plugins-policies-policy-documentation
+      description: REST surface for platform-plugins-policies-policy-documentation.
+      operations:
+      - method: GET
+        name: getpolicydocumentation
+        description: Get a policy plugin's documentation
+        call: am-platform.getpolicydocumentation
+        with:
+          policy: rest.policy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/policies/{policy}/schema
+      name: platform-plugins-policies-policy-schema
+      description: REST surface for platform-plugins-policies-policy-schema.
+      operations:
+      - method: GET
+        name: getpolicyschema
+        description: Get a policy plugin's schema
+        call: am-platform.getpolicyschema
+        with:
+          policy: rest.policy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/reporters
+      name: platform-plugins-reporters
+      description: REST surface for platform-plugins-reporters.
+      operations:
+      - method: GET
+        name: listreporterplugins
+        description: List reporter plugins
+        call: am-platform.listreporterplugins
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/reporters/{reporter}
+      name: platform-plugins-reporters-reporter
+      description: REST surface for platform-plugins-reporters-reporter.
+      operations:
+      - method: GET
+        name: getreporter
+        description: Get a reporter plugin
+        call: am-platform.getreporter
+        with:
+          reporter: rest.reporter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/reporters/{reporter}/schema
+      name: platform-plugins-reporters-reporter-schema
+      description: REST surface for platform-plugins-reporters-reporter-schema.
+      operations:
+      - method: GET
+        name: getreporterschema
+        description: Get a reporter plugin's schema
+        call: am-platform.getreporterschema
+        with:
+          reporter: rest.reporter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/resources
+      name: platform-plugins-resources
+      description: REST surface for platform-plugins-resources.
+      operations:
+      - method: GET
+        name: listresourceplugins
+        description: List resource plugins
+        call: am-platform.listresourceplugins
+        with:
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/resources/{resource}
+      name: platform-plugins-resources-resource
+      description: REST surface for platform-plugins-resources-resource.
+      operations:
+      - method: GET
+        name: getresource1
+        description: Get a resource plugin
+        call: am-platform.getresource1
+        with:
+          resource: rest.resource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/resources/{resource}/schema
+      name: platform-plugins-resources-resource-schema
+      description: REST surface for platform-plugins-resources-resource-schema.
+      operations:
+      - method: GET
+        name: getresourceschema
+        description: Get a resource plugin's schema
+        call: am-platform.getresourceschema
+        with:
+          resource: rest.resource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/roles/{role}
+      name: platform-roles-role
+      description: REST surface for platform-roles-role.
+      operations:
+      - method: GET
+        name: getsystemrole
+        description: Get a system role
+        call: am-platform.getsystemrole
+        with:
+          role: rest.role
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-platform-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — platform. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-audit-event-types
+      description: List audit event types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listauditeventtypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-alert-service-status
+      description: Get the alert service status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getalertservicestatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-policy-studio-flow-schema
+      description: Get the Policy Studio flow schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getpolicystudioflowschema
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-spel-grammar
+      description: Get the spel grammar
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getspelgrammar
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getuseremailrequired
+      description: getuseremailrequired
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getuseremailrequired
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-installation-information
+      description: Get installation information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getinstallation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-node-license
+      description: Get current node License
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getlicense
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-authentication-device-notifier-plugins
+      description: List authentication device notifier plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listauthenticationdevicenotifierplugins
+      with:
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-authentication-device-notifier-plugin
+      description: Get a Authentication Device Notifier plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getauthenticationdevicenotifierplugin
+      with:
+        authDeviceNotifierId: tools.authDeviceNotifierId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-authentication-device-notifier-plugin-s
+      description: Get an Authentication Device Notifier plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getauthenticationdevicenotifierpluginschema
+      with:
+        authDeviceNotifierId: tools.authDeviceNotifierId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-authorization-engine-plugins
+      description: List authorization engine plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listauthorizationengineplugins
+      with:
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-authorization-engine-plugin
+      description: Get an authorization engine plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getauthorizationengineplugin
+      with:
+        authorizationEngine: tools.authorizationEngine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-authorization-engine-plugin-s-schema
+      description: Get an authorization engine plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getauthorizationenginepluginschema
+      with:
+        authorizationEngine: tools.authorizationEngine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-bot-detection-plugins
+      description: List bot detection plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listbotdetectionsplugins
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bot-detection-plugin
+      description: Get a Bot Detection plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getbotdetectionplugin
+      with:
+        botDetection: tools.botDetection
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bot-detection-plugin-s-schema
+      description: Get a Bot Detection plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getbotdetectionpluginschema
+      with:
+        botDetection: tools.botDetection
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-certificate-plugins
+      description: List certificate plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listcertificatesplugins
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-certificate-plugin
+      description: Get an certificate plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getcertificateplugin
+      with:
+        certificate: tools.certificate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-certificate-s-schema
+      description: Get an certificate's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getcertificatepluginschema
+      with:
+        certificate: tools.certificate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-device-identifier-plugins
+      description: List device identifier plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listdeviceidentifierplugins
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-device-identifier-plugin
+      description: Get a device identifier plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getdeviceidentifierplugin
+      with:
+        deviceIdentifier: tools.deviceIdentifier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-device-identifier-plugin-s-schema
+      description: Get a device identifier plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getdeviceidentifierpluginschema
+      with:
+        deviceIdentifier: tools.deviceIdentifier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-extension-grant-plugins
+      description: List extension grant plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listextensiongrants1
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-extension-grant-plugin
+      description: Get an extension grant plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getextensiongrant1
+      with:
+        extensionGrant: tools.extensionGrant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-extension-grant-plugin-s-schema
+      description: Get an extension grant plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getextensiongrantschema
+      with:
+        extensionGrant: tools.extensionGrant
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-factor-plugins
+      description: List factor plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listfactorplugins
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-factor-plugin
+      description: Get a factor plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getfactorplugin
+      with:
+        factor: tools.factor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-factor-plugin-s-schema
+      description: Get a factor plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getfactorpluginschema
+      with:
+        factor: tools.factor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-identity-provider-plugins
+      description: List identity provider plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listidentityproviders2
+      with:
+        external: tools.external
+        organization: tools.organization
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-identity-provider
+      description: Get an identity provider
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getidentityproviderplugin
+      with:
+        identity: tools.identity
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-identity-provider-plugin-s-schema
+      description: Get an identity provider plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getidentityproviderpluginschema
+      with:
+        identity: tools.identity
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-available-notifier-plugins
+      description: List all available notifier plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listnotifiers
+      with:
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-notifier
+      description: Get a notifier
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getnotifier
+      with:
+        notifierId: tools.notifierId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-notifier-plugin-s-schema
+      description: Get a notifier plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getnotifierschema
+      with:
+        notifierId: tools.notifierId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-policy-plugins
+      description: List policy plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listpolicies
+      with:
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-policy-plugin
+      description: Get a policy plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getpolicy
+      with:
+        policy: tools.policy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-policy-plugin-s-documentation
+      description: Get a policy plugin's documentation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getpolicydocumentation
+      with:
+        policy: tools.policy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-policy-plugin-s-schema
+      description: Get a policy plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getpolicyschema
+      with:
+        policy: tools.policy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-reporter-plugins
+      description: List reporter plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listreporterplugins
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reporter-plugin
+      description: Get a reporter plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getreporter
+      with:
+        reporter: tools.reporter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reporter-plugin-s-schema
+      description: Get a reporter plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getreporterschema
+      with:
+        reporter: tools.reporter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-resource-plugins
+      description: List resource plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.listresourceplugins
+      with:
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-plugin
+      description: Get a resource plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getresource1
+      with:
+        resource: tools.resource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-plugin-s-schema
+      description: Get a resource plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getresourceschema
+      with:
+        resource: tools.resource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-system-role
+      description: Get a system role
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-platform.getsystemrole
+      with:
+        role: tools.role
+      outputParameters:
+      - type: object
+        mapping: $.

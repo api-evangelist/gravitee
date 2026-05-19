@@ -1,0 +1,201 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — Policy
+  description: 'Gravitee.io - Access Management API — Policy. 4 operations. Lead operation: List policy plugins. Self-contained
+    Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - Policy
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-policy
+    baseUri: ''
+    description: Gravitee.io - Access Management API — Policy business capability. Self-contained, no shared references.
+    resources:
+    - name: platform-plugins-policies
+      path: /platform/plugins/policies
+      operations:
+      - name: listpolicies
+        method: GET
+        description: List policy plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: expand
+          in: query
+          type: array
+    - name: platform-plugins-policies-policy
+      path: /platform/plugins/policies/{policy}
+      operations:
+      - name: getpolicy
+        method: GET
+        description: Get a policy plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policy
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-policies-policy-documentation
+      path: /platform/plugins/policies/{policy}/documentation
+      operations:
+      - name: getpolicydocumentation
+        method: GET
+        description: Get a policy plugin's documentation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policy
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-policies-policy-schema
+      path: /platform/plugins/policies/{policy}/schema
+      operations:
+      - name: getpolicyschema
+        method: GET
+        description: Get a policy plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policy
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-policy-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — Policy. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/platform/plugins/policies
+      name: platform-plugins-policies
+      description: REST surface for platform-plugins-policies.
+      operations:
+      - method: GET
+        name: listpolicies
+        description: List policy plugins
+        call: am-policy.listpolicies
+        with:
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/policies/{policy}
+      name: platform-plugins-policies-policy
+      description: REST surface for platform-plugins-policies-policy.
+      operations:
+      - method: GET
+        name: getpolicy
+        description: Get a policy plugin
+        call: am-policy.getpolicy
+        with:
+          policy: rest.policy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/policies/{policy}/documentation
+      name: platform-plugins-policies-policy-documentation
+      description: REST surface for platform-plugins-policies-policy-documentation.
+      operations:
+      - method: GET
+        name: getpolicydocumentation
+        description: Get a policy plugin's documentation
+        call: am-policy.getpolicydocumentation
+        with:
+          policy: rest.policy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/policies/{policy}/schema
+      name: platform-plugins-policies-policy-schema
+      description: REST surface for platform-plugins-policies-policy-schema.
+      operations:
+      - method: GET
+        name: getpolicyschema
+        description: Get a policy plugin's schema
+        call: am-policy.getpolicyschema
+        with:
+          policy: rest.policy
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-policy-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — Policy. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-policy-plugins
+      description: List policy plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-policy.listpolicies
+      with:
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-policy-plugin
+      description: Get a policy plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-policy.getpolicy
+      with:
+        policy: tools.policy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-policy-plugin-s-documentation
+      description: Get a policy plugin's documentation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-policy.getpolicydocumentation
+      with:
+        policy: tools.policy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-policy-plugin-s-schema
+      description: Get a policy plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-policy.getpolicyschema
+      with:
+        policy: tools.policy
+      outputParameters:
+      - type: object
+        mapping: $.

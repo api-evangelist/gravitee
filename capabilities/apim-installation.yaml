@@ -1,0 +1,184 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io APIM Management API — Installation
+  description: 'Gravitee.io APIM Management API — Installation. 4 operations. Lead operation: List Environments. Self-contained
+    Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - Installation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apim-installation
+    baseUri: https://{host}/management/v2
+    description: Gravitee.io APIM Management API — Installation business capability. Self-contained, no shared references.
+    resources:
+    - name: environments
+      path: /environments
+      operations:
+      - name: listenvironments
+        method: GET
+        description: List Environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-envId
+      path: /environments/{envId}
+      operations:
+      - name: getenvironment
+        method: GET
+        description: Get an Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: organizations-orgId
+      path: /organizations/{orgId}
+      operations:
+      - name: getorganization
+        method: GET
+        description: Get an Organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgId
+          in: path
+          type: string
+          required: true
+    - name: organizations-orgId-license
+      path: /organizations/{orgId}/license
+      operations:
+      - name: getorganizationlicense
+        method: GET
+        description: Get the Organization License
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: orgId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: apim-installation-rest
+    port: 8080
+    description: REST adapter for Gravitee.io APIM Management API — Installation. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/environments
+      name: environments
+      description: REST surface for environments.
+      operations:
+      - method: GET
+        name: listenvironments
+        description: List Environments
+        call: apim-installation.listenvironments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}
+      name: environments-envid
+      description: REST surface for environments-envId.
+      operations:
+      - method: GET
+        name: getenvironment
+        description: Get an Environment
+        call: apim-installation.getenvironment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{orgid}
+      name: organizations-orgid
+      description: REST surface for organizations-orgId.
+      operations:
+      - method: GET
+        name: getorganization
+        description: Get an Organization
+        call: apim-installation.getorganization
+        with:
+          orgId: rest.orgId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{orgid}/license
+      name: organizations-orgid-license
+      description: REST surface for organizations-orgId-license.
+      operations:
+      - method: GET
+        name: getorganizationlicense
+        description: Get the Organization License
+        call: apim-installation.getorganizationlicense
+        with:
+          orgId: rest.orgId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: apim-installation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io APIM Management API — Installation. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-environments
+      description: List Environments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-installation.listenvironments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment
+      description: Get an Environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-installation.getenvironment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-organization
+      description: Get an Organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-installation.getorganization
+      with:
+        orgId: tools.orgId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-organization-license
+      description: Get the Organization License
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-installation.getorganizationlicense
+      with:
+        orgId: tools.orgId
+      outputParameters:
+      - type: object
+        mapping: $.

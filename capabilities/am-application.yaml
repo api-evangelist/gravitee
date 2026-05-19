@@ -1,0 +1,2190 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — application
+  description: 'Gravitee.io - Access Management API — application. 34 operations. Lead operation: List registered applications
+    for a security domain. Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - application
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-application
+    baseUri: ''
+    description: Gravitee.io - Access Management API — application business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications
+      operations:
+      - name: listapplications
+        method: GET
+        description: List registered applications for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+        - name: q
+          in: query
+          type: string
+        - name: expand
+          in: query
+          type: array
+      - name: createapplication
+        method: POST
+        description: Create an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}
+      operations:
+      - name: findapplication
+        method: GET
+        description: Get an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+      - name: updateapplication
+        method: PUT
+        description: Update an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapplication
+        method: DELETE
+        description: Delete an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+      - name: patchapplication
+        method: PATCH
+        description: Patch an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/analytics
+      operations:
+      - name: getapplicationanalytics
+        method: GET
+        description: Find application analytics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: from
+          in: query
+          type: integer
+          description: Used to define the start date of the time window to query
+        - name: to
+          in: query
+          type: integer
+          description: Used to define the end date of the time window to query
+        - name: interval
+          in: query
+          type: integer
+          description: The time interval when getting histogram data
+        - name: size
+          in: query
+          type: integer
+          description: The number of data to retrieve
+        - name: type
+          in: query
+          type: string
+          description: The type of data to retrieve (group_by, date_histo, count)
+          required: true
+        - name: field
+          in: query
+          type: string
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails
+      operations:
+      - name: findapplicationemail
+        method: GET
+        description: Find a email for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: template
+          in: query
+          type: string
+          required: true
+      - name: createapplicationemail
+        method: POST
+        description: Create a email for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails/{email}
+      operations:
+      - name: updateapplicationemail
+        method: PUT
+        description: Update an email for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapplicationemail
+        method: DELETE
+        description: Delete an email for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: email
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/flows
+      operations:
+      - name: listappflows
+        method: GET
+        description: List registered flows for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+      - name: defineappflows
+        method: PUT
+        description: Create or update list of flows
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/flows/{flow}
+      operations:
+      - name: getappflow
+        method: GET
+        description: Get a flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: flow
+          in: path
+          type: string
+          required: true
+      - name: updateappflow
+        method: PUT
+        description: Update a flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: flow
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms
+      operations:
+      - name: findapplicationform
+        method: GET
+        description: Find a form for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: template
+          in: query
+          type: string
+          required: true
+      - name: createapplicationform
+        method: POST
+        description: Create a form for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms/{form}
+      operations:
+      - name: updateapplicationform
+        method: PUT
+        description: Update a form for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: form
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapplicationform
+        method: DELETE
+        description: Delete a form for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: form
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/members
+      operations:
+      - name: getmembers
+        method: GET
+        description: List members for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+      - name: addorupdatemember
+        method: POST
+        description: Add or update an application member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/members/permissions
+      operations:
+      - name: getapplicationmemberpermissions
+        method: GET
+        description: List application member's permissions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/members/{member}
+      operations:
+      - name: removeapplicationmember
+        method: DELETE
+        description: Remove a membership
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: member
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/resources
+      operations:
+      - name: listapplicationresources
+        method: GET
+        description: List resources for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/resources/{resource}
+      operations:
+      - name: getapplicationresource
+        method: GET
+        description: Get a resource for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: resource
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/resources/{resource}/policies
+      operations:
+      - name: listapplicationpolicies
+        method: GET
+        description: Get resource access policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: resource
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/resources/{resource}/policies/{policy}
+      operations:
+      - name: getapplicationresourcepolicy
+        method: GET
+        description: Get resource access policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: resource
+          in: path
+          type: string
+          required: true
+        - name: policy
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/secrets
+      operations:
+      - name: listsecrets
+        method: GET
+        description: List secrets of an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+      - name: createsecret
+        method: POST
+        description: Create a secret for an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/secrets/{secret}
+      operations:
+      - name: deleteclientsecret
+        method: DELETE
+        description: Delete a secret of an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: secret
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/secrets/{secret}/_renew
+      operations:
+      - name: renewclientsecret
+        method: POST
+        description: Renew application secret
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: secret
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-applicati
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/type
+      operations:
+      - name: updateapplicationtype
+        method: PUT
+        description: Update an application type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: application
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-cimd-appl
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/cimd/applications
+      operations:
+      - name: createapplicationfromcimd
+        method: POST
+        description: Create an application from a CIMD document URL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-cimd-vali
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/cimd/validate
+      operations:
+      - name: validatecimdurl
+        method: POST
+        description: Validate a CIMD URL and return parsed metadata preview
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-application-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — application. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: listapplications
+        description: List registered applications for a security domain
+        call: am-application.listapplications
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          page: rest.page
+          size: rest.size
+          q: rest.q
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapplication
+        description: Create an application
+        call: am-application.createapplication
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: findapplication
+        description: Get an application
+        call: am-application.findapplication
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateapplication
+        description: Update an application
+        call: am-application.updateapplication
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapplication
+        description: Delete an application
+        call: am-application.deleteapplication
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchapplication
+        description: Patch an application
+        call: am-application.patchapplication
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/analytics
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: getapplicationanalytics
+        description: Find application analytics
+        call: am-application.getapplicationanalytics
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          from: rest.from
+          to: rest.to
+          interval: rest.interval
+          size: rest.size
+          type: rest.type
+          field: rest.field
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/emails
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: findapplicationemail
+        description: Find a email for an application
+        call: am-application.findapplicationemail
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          template: rest.template
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapplicationemail
+        description: Create a email for an application
+        call: am-application.createapplicationemail
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/emails/{email}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: PUT
+        name: updateapplicationemail
+        description: Update an email for an application
+        call: am-application.updateapplicationemail
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          email: rest.email
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapplicationemail
+        description: Delete an email for an application
+        call: am-application.deleteapplicationemail
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/flows
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: listappflows
+        description: List registered flows for an application
+        call: am-application.listappflows
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: defineappflows
+        description: Create or update list of flows
+        call: am-application.defineappflows
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/flows/{flow}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: getappflow
+        description: Get a flow
+        call: am-application.getappflow
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          flow: rest.flow
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateappflow
+        description: Update a flow
+        call: am-application.updateappflow
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          flow: rest.flow
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/forms
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: findapplicationform
+        description: Find a form for an application
+        call: am-application.findapplicationform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          template: rest.template
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapplicationform
+        description: Create a form for an application
+        call: am-application.createapplicationform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/forms/{form}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: PUT
+        name: updateapplicationform
+        description: Update a form for an application
+        call: am-application.updateapplicationform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          form: rest.form
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapplicationform
+        description: Delete a form for an application
+        call: am-application.deleteapplicationform
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          form: rest.form
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/members
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: getmembers
+        description: List members for an application
+        call: am-application.getmembers
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addorupdatemember
+        description: Add or update an application member
+        call: am-application.addorupdatemember
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/members/permissions
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: getapplicationmemberpermissions
+        description: List application member's permissions
+        call: am-application.getapplicationmemberpermissions
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/members/{member}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: DELETE
+        name: removeapplicationmember
+        description: Remove a membership
+        call: am-application.removeapplicationmember
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          member: rest.member
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/resources
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: listapplicationresources
+        description: List resources for an application
+        call: am-application.listapplicationresources
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/resources/{resource}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: getapplicationresource
+        description: Get a resource for an application
+        call: am-application.getapplicationresource
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          resource: rest.resource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/resources/{resource}/policies
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: listapplicationpolicies
+        description: Get resource access policies
+        call: am-application.listapplicationpolicies
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          resource: rest.resource
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/resources/{resource}/policies/{policy}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: getapplicationresourcepolicy
+        description: Get resource access policy
+        call: am-application.getapplicationresourcepolicy
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          resource: rest.resource
+          policy: rest.policy
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/secrets
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: GET
+        name: listsecrets
+        description: List secrets of an application
+        call: am-application.listsecrets
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsecret
+        description: Create a secret for an application
+        call: am-application.createsecret
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/secrets/{secret}
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: DELETE
+        name: deleteclientsecret
+        description: Delete a secret of an application
+        call: am-application.deleteclientsecret
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          secret: rest.secret
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/secrets/{secret}/renew
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: POST
+        name: renewclientsecret
+        description: Renew application secret
+        call: am-application.renewclientsecret
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          secret: rest.secret
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/applications/{application}/type
+      name: organizations-organizationid-environments-environmentid-domains-domain-applicati
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-applicati.
+      operations:
+      - method: PUT
+        name: updateapplicationtype
+        description: Update an application type
+        call: am-application.updateapplicationtype
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          application: rest.application
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/cimd/applications
+      name: organizations-organizationid-environments-environmentid-domains-domain-cimd-appl
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-cimd-appl.
+      operations:
+      - method: POST
+        name: createapplicationfromcimd
+        description: Create an application from a CIMD document URL
+        call: am-application.createapplicationfromcimd
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/cimd/validate
+      name: organizations-organizationid-environments-environmentid-domains-domain-cimd-vali
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-cimd-vali.
+      operations:
+      - method: POST
+        name: validatecimdurl
+        description: Validate a CIMD URL and return parsed metadata preview
+        call: am-application.validatecimdurl
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-application-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — application. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-registered-applications-security-domain
+      description: List registered applications for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.listapplications
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        page: tools.page
+        size: tools.size
+        q: tools.q
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-application
+      description: Create an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-application.createapplication
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application
+      description: Get an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.findapplication
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-application
+      description: Update an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-application.updateapplication
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-application
+      description: Delete an application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-application.deleteapplication
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-application
+      description: Patch an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-application.patchapplication
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: find-application-analytics
+      description: Find application analytics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.getapplicationanalytics
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        from: tools.from
+        to: tools.to
+        interval: tools.interval
+        size: tools.size
+        type: tools.type
+        field: tools.field
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: find-email-application
+      description: Find a email for an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.findapplicationemail
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        template: tools.template
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-email-application
+      description: Create a email for an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-application.createapplicationemail
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-email-application
+      description: Update an email for an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-application.updateapplicationemail
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        email: tools.email
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-email-application
+      description: Delete an email for an application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-application.deleteapplicationemail
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-registered-flows-application
+      description: List registered flows for an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.listappflows
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-update-list-flows
+      description: Create or update list of flows
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-application.defineappflows
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-flow
+      description: Get a flow
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.getappflow
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        flow: tools.flow
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-flow
+      description: Update a flow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-application.updateappflow
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        flow: tools.flow
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: find-form-application
+      description: Find a form for an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.findapplicationform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        template: tools.template
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-form-application
+      description: Create a form for an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-application.createapplicationform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-form-application
+      description: Update a form for an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-application.updateapplicationform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        form: tools.form
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-form-application
+      description: Delete a form for an application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-application.deleteapplicationform
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        form: tools.form
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-members-application
+      description: List members for an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.getmembers
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-update-application-member
+      description: Add or update an application member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-application.addorupdatemember
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-application-member-s-permissions
+      description: List application member's permissions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.getapplicationmemberpermissions
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-membership
+      description: Remove a membership
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-application.removeapplicationmember
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        member: tools.member
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-resources-application
+      description: List resources for an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.listapplicationresources
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-application
+      description: Get a resource for an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.getapplicationresource
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        resource: tools.resource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-access-policies
+      description: Get resource access policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.listapplicationpolicies
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        resource: tools.resource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-access-policy
+      description: Get resource access policy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.getapplicationresourcepolicy
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        resource: tools.resource
+        policy: tools.policy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-secrets-application
+      description: List secrets of an application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-application.listsecrets
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-secret-application
+      description: Create a secret for an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-application.createsecret
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-secret-application
+      description: Delete a secret of an application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-application.deleteclientsecret
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        secret: tools.secret
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: renew-application-secret
+      description: Renew application secret
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-application.renewclientsecret
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        secret: tools.secret
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-application-type
+      description: Update an application type
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-application.updateapplicationtype
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        application: tools.application
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-application-cimd-document-url
+      description: Create an application from a CIMD document URL
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-application.createapplicationfromcimd
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validate-cimd-url-and-return
+      description: Validate a CIMD URL and return parsed metadata preview
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: am-application.validatecimdurl
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

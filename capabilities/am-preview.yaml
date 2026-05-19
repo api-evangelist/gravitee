@@ -1,0 +1,98 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — preview
+  description: 'Gravitee.io - Access Management API — preview. 1 operations. Lead operation: Render the provided template.
+    Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - preview
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-preview
+    baseUri: ''
+    description: Gravitee.io - Access Management API — preview business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-forms-pre
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms/preview
+      operations:
+      - name: renderdomaintemplate
+        method: POST
+        description: Render the provided template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-preview-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — preview. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/forms/preview
+      name: organizations-organizationid-environments-environmentid-domains-domain-forms-pre
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-forms-pre.
+      operations:
+      - method: POST
+        name: renderdomaintemplate
+        description: Render the provided template
+        call: am-preview.renderdomaintemplate
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-preview-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — preview. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: render-provided-template
+      description: Render the provided template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-preview.renderdomaintemplate
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

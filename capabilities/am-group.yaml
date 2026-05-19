@@ -1,0 +1,1081 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — group
+  description: 'Gravitee.io - Access Management API — group. 19 operations. Lead operation: List groups for a security domain.
+    Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - group
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-group
+    baseUri: ''
+    description: Gravitee.io - Access Management API — group business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-groups
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups
+      operations:
+      - name: listdomaingroups
+        method: GET
+        description: List groups for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+      - name: creategroup
+        method: POST
+        description: Create a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-groups-gr
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}
+      operations:
+      - name: findgroup
+        method: GET
+        description: Get a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+      - name: updategroup
+        method: PUT
+        description: Update a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletegroup
+        method: DELETE
+        description: Delete a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-groups-gr
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/members
+      operations:
+      - name: getgroupmembers
+        method: GET
+        description: List group members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+    - name: organizations-organizationId-environments-environmentId-domains-domain-groups-gr
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/members/{member}
+      operations:
+      - name: addgroupmember
+        method: POST
+        description: Add a group member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: member
+          in: path
+          type: string
+          required: true
+      - name: removegroupmember
+        method: DELETE
+        description: Remove a group member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: member
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-groups-gr
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/roles
+      operations:
+      - name: findgrouproles
+        method: GET
+        description: Get a group roles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+      - name: assignroles
+        method: POST
+        description: Assign roles to a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-groups-gr
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/roles/{role}
+      operations:
+      - name: revokerole
+        method: DELETE
+        description: Revoke role to a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-groups
+      path: /organizations/{organizationId}/groups
+      operations:
+      - name: listgroups
+        method: GET
+        description: List groups of the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+      - name: createplatformgroup
+        method: POST
+        description: Create a platform group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-groups-group
+      path: /organizations/{organizationId}/groups/{group}
+      operations:
+      - name: getorganizationgroup
+        method: GET
+        description: Get a platform group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+      - name: updateorganizationgroup
+        method: PUT
+        description: Update a platform group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteorganizationgroup
+        method: DELETE
+        description: Delete a platform group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-groups-group-members
+      path: /organizations/{organizationId}/groups/{group}/members
+      operations:
+      - name: listgroupmembers
+        method: GET
+        description: List group members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+    - name: organizations-organizationId-groups-group-members-member
+      path: /organizations/{organizationId}/groups/{group}/members/{member}
+      operations:
+      - name: addgroupmember1
+        method: POST
+        description: Add a group member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: member
+          in: path
+          type: string
+          required: true
+      - name: removegroupmember1
+        method: DELETE
+        description: Remove a group member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: group
+          in: path
+          type: string
+          required: true
+        - name: member
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-group-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — group. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/groups
+      name: organizations-organizationid-environments-environmentid-domains-domain-groups
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-groups.
+      operations:
+      - method: GET
+        name: listdomaingroups
+        description: List groups for a security domain
+        call: am-group.listdomaingroups
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: creategroup
+        description: Create a group
+        call: am-group.creategroup
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/groups/{group}
+      name: organizations-organizationid-environments-environmentid-domains-domain-groups-gr
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-groups-gr.
+      operations:
+      - method: GET
+        name: findgroup
+        description: Get a group
+        call: am-group.findgroup
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updategroup
+        description: Update a group
+        call: am-group.updategroup
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletegroup
+        description: Delete a group
+        call: am-group.deletegroup
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/groups/{group}/members
+      name: organizations-organizationid-environments-environmentid-domains-domain-groups-gr
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-groups-gr.
+      operations:
+      - method: GET
+        name: getgroupmembers
+        description: List group members
+        call: am-group.getgroupmembers
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/groups/{group}/members/{member}
+      name: organizations-organizationid-environments-environmentid-domains-domain-groups-gr
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-groups-gr.
+      operations:
+      - method: POST
+        name: addgroupmember
+        description: Add a group member
+        call: am-group.addgroupmember
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+          member: rest.member
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removegroupmember
+        description: Remove a group member
+        call: am-group.removegroupmember
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+          member: rest.member
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/groups/{group}/roles
+      name: organizations-organizationid-environments-environmentid-domains-domain-groups-gr
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-groups-gr.
+      operations:
+      - method: GET
+        name: findgrouproles
+        description: Get a group roles
+        call: am-group.findgrouproles
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: assignroles
+        description: Assign roles to a group
+        call: am-group.assignroles
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/groups/{group}/roles/{role}
+      name: organizations-organizationid-environments-environmentid-domains-domain-groups-gr
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-groups-gr.
+      operations:
+      - method: DELETE
+        name: revokerole
+        description: Revoke role to a group
+        call: am-group.revokerole
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          group: rest.group
+          role: rest.role
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/groups
+      name: organizations-organizationid-groups
+      description: REST surface for organizations-organizationId-groups.
+      operations:
+      - method: GET
+        name: listgroups
+        description: List groups of the organization
+        call: am-group.listgroups
+        with:
+          organizationId: rest.organizationId
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createplatformgroup
+        description: Create a platform group
+        call: am-group.createplatformgroup
+        with:
+          organizationId: rest.organizationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/groups/{group}
+      name: organizations-organizationid-groups-group
+      description: REST surface for organizations-organizationId-groups-group.
+      operations:
+      - method: GET
+        name: getorganizationgroup
+        description: Get a platform group
+        call: am-group.getorganizationgroup
+        with:
+          organizationId: rest.organizationId
+          group: rest.group
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateorganizationgroup
+        description: Update a platform group
+        call: am-group.updateorganizationgroup
+        with:
+          organizationId: rest.organizationId
+          group: rest.group
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteorganizationgroup
+        description: Delete a platform group
+        call: am-group.deleteorganizationgroup
+        with:
+          organizationId: rest.organizationId
+          group: rest.group
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/groups/{group}/members
+      name: organizations-organizationid-groups-group-members
+      description: REST surface for organizations-organizationId-groups-group-members.
+      operations:
+      - method: GET
+        name: listgroupmembers
+        description: List group members
+        call: am-group.listgroupmembers
+        with:
+          organizationId: rest.organizationId
+          group: rest.group
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/groups/{group}/members/{member}
+      name: organizations-organizationid-groups-group-members-member
+      description: REST surface for organizations-organizationId-groups-group-members-member.
+      operations:
+      - method: POST
+        name: addgroupmember1
+        description: Add a group member
+        call: am-group.addgroupmember1
+        with:
+          organizationId: rest.organizationId
+          group: rest.group
+          member: rest.member
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: removegroupmember1
+        description: Remove a group member
+        call: am-group.removegroupmember1
+        with:
+          organizationId: rest.organizationId
+          group: rest.group
+          member: rest.member
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-group-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — group. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-groups-security-domain
+      description: List groups for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-group.listdomaingroups
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-group
+      description: Create a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-group.creategroup
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-group
+      description: Get a group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-group.findgroup
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-group
+      description: Update a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-group.updategroup
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-group
+      description: Delete a group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-group.deletegroup
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-group-members
+      description: List group members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-group.getgroupmembers
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-group-member
+      description: Add a group member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-group.addgroupmember
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+        member: tools.member
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-group-member
+      description: Remove a group member
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-group.removegroupmember
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+        member: tools.member
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-group-roles
+      description: Get a group roles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-group.findgrouproles
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-roles-group
+      description: Assign roles to a group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-group.assignroles
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revoke-role-group
+      description: Revoke role to a group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-group.revokerole
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        group: tools.group
+        role: tools.role
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-groups-organization
+      description: List groups of the organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-group.listgroups
+      with:
+        organizationId: tools.organizationId
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-platform-group
+      description: Create a platform group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-group.createplatformgroup
+      with:
+        organizationId: tools.organizationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-platform-group
+      description: Get a platform group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-group.getorganizationgroup
+      with:
+        organizationId: tools.organizationId
+        group: tools.group
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-platform-group
+      description: Update a platform group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-group.updateorganizationgroup
+      with:
+        organizationId: tools.organizationId
+        group: tools.group
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-platform-group
+      description: Delete a platform group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-group.deleteorganizationgroup
+      with:
+        organizationId: tools.organizationId
+        group: tools.group
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-group-members-2
+      description: List group members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-group.listgroupmembers
+      with:
+        organizationId: tools.organizationId
+        group: tools.group
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-group-member-2
+      description: Add a group member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-group.addgroupmember1
+      with:
+        organizationId: tools.organizationId
+        group: tools.group
+        member: tools.member
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-group-member-2
+      description: Remove a group member
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-group.removegroupmember1
+      with:
+        organizationId: tools.organizationId
+        group: tools.group
+        member: tools.member
+      outputParameters:
+      - type: object
+        mapping: $.

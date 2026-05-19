@@ -1,0 +1,550 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — role
+  description: 'Gravitee.io - Access Management API — role. 10 operations. Lead operation: List registered roles for a security
+    domain. Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - role
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-role
+    baseUri: ''
+    description: Gravitee.io - Access Management API — role business capability. Self-contained, no shared references.
+    resources:
+    - name: organizations-organizationId-environments-environmentId-domains-domain-roles
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/roles
+      operations:
+      - name: findroles
+        method: GET
+        description: List registered roles for a security domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+        - name: q
+          in: query
+          type: string
+      - name: createrole
+        method: POST
+        description: Create a role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-environments-environmentId-domains-domain-roles-rol
+      path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/roles/{role}
+      operations:
+      - name: findrole
+        method: GET
+        description: Get a role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+      - name: updaterole
+        method: PUT
+        description: Update a role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleterole
+        method: DELETE
+        description: Delete a role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: environmentId
+          in: path
+          type: string
+          required: true
+        - name: domain
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+    - name: organizations-organizationId-roles
+      path: /organizations/{organizationId}/roles
+      operations:
+      - name: listroles
+        method: GET
+        description: List registered roles of the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: type
+          in: query
+          type: string
+      - name: createrole1
+        method: POST
+        description: Create a role for the organization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: organizations-organizationId-roles-role
+      path: /organizations/{organizationId}/roles/{role}
+      operations:
+      - name: getrole
+        method: GET
+        description: Get a platform role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+      - name: updaterole1
+        method: PUT
+        description: Update a platform role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleterole1
+        method: DELETE
+        description: Delete a plaform role
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: organizationId
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-role-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — role. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/roles
+      name: organizations-organizationid-environments-environmentid-domains-domain-roles
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-roles.
+      operations:
+      - method: GET
+        name: findroles
+        description: List registered roles for a security domain
+        call: am-role.findroles
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          page: rest.page
+          size: rest.size
+          q: rest.q
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrole
+        description: Create a role
+        call: am-role.createrole
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/environments/{environmentid}/domains/{domain}/roles/{role}
+      name: organizations-organizationid-environments-environmentid-domains-domain-roles-rol
+      description: REST surface for organizations-organizationId-environments-environmentId-domains-domain-roles-rol.
+      operations:
+      - method: GET
+        name: findrole
+        description: Get a role
+        call: am-role.findrole
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          role: rest.role
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updaterole
+        description: Update a role
+        call: am-role.updaterole
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          role: rest.role
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleterole
+        description: Delete a role
+        call: am-role.deleterole
+        with:
+          organizationId: rest.organizationId
+          environmentId: rest.environmentId
+          domain: rest.domain
+          role: rest.role
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/roles
+      name: organizations-organizationid-roles
+      description: REST surface for organizations-organizationId-roles.
+      operations:
+      - method: GET
+        name: listroles
+        description: List registered roles of the organization
+        call: am-role.listroles
+        with:
+          organizationId: rest.organizationId
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrole1
+        description: Create a role for the organization
+        call: am-role.createrole1
+        with:
+          organizationId: rest.organizationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/organizations/{organizationid}/roles/{role}
+      name: organizations-organizationid-roles-role
+      description: REST surface for organizations-organizationId-roles-role.
+      operations:
+      - method: GET
+        name: getrole
+        description: Get a platform role
+        call: am-role.getrole
+        with:
+          organizationId: rest.organizationId
+          role: rest.role
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updaterole1
+        description: Update a platform role
+        call: am-role.updaterole1
+        with:
+          organizationId: rest.organizationId
+          role: rest.role
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleterole1
+        description: Delete a plaform role
+        call: am-role.deleterole1
+        with:
+          organizationId: rest.organizationId
+          role: rest.role
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-role-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — role. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-registered-roles-security-domain
+      description: List registered roles for a security domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-role.findroles
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        page: tools.page
+        size: tools.size
+        q: tools.q
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-role
+      description: Create a role
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-role.createrole
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-role
+      description: Get a role
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-role.findrole
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        role: tools.role
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-role
+      description: Update a role
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-role.updaterole
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        role: tools.role
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-role
+      description: Delete a role
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-role.deleterole
+      with:
+        organizationId: tools.organizationId
+        environmentId: tools.environmentId
+        domain: tools.domain
+        role: tools.role
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-registered-roles-organization
+      description: List registered roles of the organization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-role.listroles
+      with:
+        organizationId: tools.organizationId
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-role-organization
+      description: Create a role for the organization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-role.createrole1
+      with:
+        organizationId: tools.organizationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-platform-role
+      description: Get a platform role
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-role.getrole
+      with:
+        organizationId: tools.organizationId
+        role: tools.role
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-platform-role
+      description: Update a platform role
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: am-role.updaterole1
+      with:
+        organizationId: tools.organizationId
+        role: tools.role
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-plaform-role
+      description: Delete a plaform role
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: am-role.deleterole1
+      with:
+        organizationId: tools.organizationId
+        role: tools.role
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,112 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — Newsletter
+  description: 'Gravitee.io - Access Management API — Newsletter. 2 operations. Lead operation: Subscribe to the newsletter
+    the authenticated user. Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - Newsletter
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-newsletter
+    baseUri: ''
+    description: Gravitee.io - Access Management API — Newsletter business capability. Self-contained, no shared references.
+    resources:
+    - name: user-newsletter-_subscribe
+      path: /user/newsletter/_subscribe
+      operations:
+      - name: subscribenewsletter
+        method: POST
+        description: Subscribe to the newsletter the authenticated user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: user-newsletter-taglines
+      path: /user/newsletter/taglines
+      operations:
+      - name: gettaglines
+        method: GET
+        description: Get taglines to display in the newsletter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-newsletter-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — Newsletter. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/user/newsletter/subscribe
+      name: user-newsletter-subscribe
+      description: REST surface for user-newsletter-_subscribe.
+      operations:
+      - method: POST
+        name: subscribenewsletter
+        description: Subscribe to the newsletter the authenticated user
+        call: am-newsletter.subscribenewsletter
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user/newsletter/taglines
+      name: user-newsletter-taglines
+      description: REST surface for user-newsletter-taglines.
+      operations:
+      - method: GET
+        name: gettaglines
+        description: Get taglines to display in the newsletter
+        call: am-newsletter.gettaglines
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-newsletter-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — Newsletter. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: subscribe-newsletter-authenticated-user
+      description: Subscribe to the newsletter the authenticated user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: am-newsletter.subscribenewsletter
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-taglines-display-newsletter
+      description: Get taglines to display in the newsletter
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-newsletter.gettaglines
+      outputParameters:
+      - type: object
+        mapping: $.

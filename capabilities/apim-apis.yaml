@@ -1,0 +1,432 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io APIM Management API — APIs
+  description: 'Gravitee.io APIM Management API — APIs. 11 operations. Lead operation: List APIs in an Environment. Self-contained
+    Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - APIs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apim-apis
+    baseUri: https://{host}/management/v2
+    description: Gravitee.io APIM Management API — APIs business capability. Self-contained, no shared references.
+    resources:
+    - name: environments-envId-apis
+      path: /environments/{envId}/apis
+      operations:
+      - name: listapis
+        method: GET
+        description: List APIs in an Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+        - name: perPage
+          in: query
+          type: integer
+      - name: createapi
+        method: POST
+        description: Create an API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: environments-envId-apis-_import-definition
+      path: /environments/{envId}/apis/_import/definition
+      operations:
+      - name: importapidefinition
+        method: POST
+        description: Import an API From a Gravitee Definition
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: environments-envId-apis-_import-swagger
+      path: /environments/{envId}/apis/_import/swagger
+      operations:
+      - name: importswaggerapi
+        method: POST
+        description: Import an API from an OpenAPI/Swagger Document
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: environments-envId-apis-_search
+      path: /environments/{envId}/apis/_search
+      operations:
+      - name: searchapis
+        method: POST
+        description: Search APIs by Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: environments-envId-apis-apiId
+      path: /environments/{envId}/apis/{apiId}
+      operations:
+      - name: getapi
+        method: GET
+        description: Get an API by Identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateapi
+        method: PUT
+        description: Update an API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapi
+        method: DELETE
+        description: Delete an API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-envId-apis-apiId-_deploy
+      path: /environments/{envId}/apis/{apiId}/_deploy
+      operations:
+      - name: deployapi
+        method: POST
+        description: Deploy an API to the Gateway
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-envId-apis-apiId-_start
+      path: /environments/{envId}/apis/{apiId}/_start
+      operations:
+      - name: startapi
+        method: POST
+        description: Start an API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-envId-apis-apiId-_stop
+      path: /environments/{envId}/apis/{apiId}/_stop
+      operations:
+      - name: stopapi
+        method: POST
+        description: Stop an API
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: apim-apis-rest
+    port: 8080
+    description: REST adapter for Gravitee.io APIM Management API — APIs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/environments/{envid}/apis
+      name: environments-envid-apis
+      description: REST surface for environments-envId-apis.
+      operations:
+      - method: GET
+        name: listapis
+        description: List APIs in an Environment
+        call: apim-apis.listapis
+        with:
+          page: rest.page
+          perPage: rest.perPage
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapi
+        description: Create an API
+        call: apim-apis.createapi
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/apis/import/definition
+      name: environments-envid-apis-import-definition
+      description: REST surface for environments-envId-apis-_import-definition.
+      operations:
+      - method: POST
+        name: importapidefinition
+        description: Import an API From a Gravitee Definition
+        call: apim-apis.importapidefinition
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/apis/import/swagger
+      name: environments-envid-apis-import-swagger
+      description: REST surface for environments-envId-apis-_import-swagger.
+      operations:
+      - method: POST
+        name: importswaggerapi
+        description: Import an API from an OpenAPI/Swagger Document
+        call: apim-apis.importswaggerapi
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/apis/search
+      name: environments-envid-apis-search
+      description: REST surface for environments-envId-apis-_search.
+      operations:
+      - method: POST
+        name: searchapis
+        description: Search APIs by Query
+        call: apim-apis.searchapis
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/apis/{apiid}
+      name: environments-envid-apis-apiid
+      description: REST surface for environments-envId-apis-apiId.
+      operations:
+      - method: GET
+        name: getapi
+        description: Get an API by Identifier
+        call: apim-apis.getapi
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateapi
+        description: Update an API
+        call: apim-apis.updateapi
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapi
+        description: Delete an API
+        call: apim-apis.deleteapi
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/apis/{apiid}/deploy
+      name: environments-envid-apis-apiid-deploy
+      description: REST surface for environments-envId-apis-apiId-_deploy.
+      operations:
+      - method: POST
+        name: deployapi
+        description: Deploy an API to the Gateway
+        call: apim-apis.deployapi
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/apis/{apiid}/start
+      name: environments-envid-apis-apiid-start
+      description: REST surface for environments-envId-apis-apiId-_start.
+      operations:
+      - method: POST
+        name: startapi
+        description: Start an API
+        call: apim-apis.startapi
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/apis/{apiid}/stop
+      name: environments-envid-apis-apiid-stop
+      description: REST surface for environments-envId-apis-apiId-_stop.
+      operations:
+      - method: POST
+        name: stopapi
+        description: Stop an API
+        call: apim-apis.stopapi
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: apim-apis-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io APIM Management API — APIs. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-apis-environment
+      description: List APIs in an Environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-apis.listapis
+      with:
+        page: tools.page
+        perPage: tools.perPage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-api
+      description: Create an API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: apim-apis.createapi
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-api-gravitee-definition
+      description: Import an API From a Gravitee Definition
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: apim-apis.importapidefinition
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-api-openapi-swagger-document
+      description: Import an API from an OpenAPI/Swagger Document
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: apim-apis.importswaggerapi
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-apis-query
+      description: Search APIs by Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: apim-apis.searchapis
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-identifier
+      description: Get an API by Identifier
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-apis.getapi
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-api
+      description: Update an API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: apim-apis.updateapi
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api
+      description: Delete an API
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: apim-apis.deleteapi
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deploy-api-gateway
+      description: Deploy an API to the Gateway
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: apim-apis.deployapi
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-api
+      description: Start an API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: apim-apis.startapi
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stop-api
+      description: Stop an API
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: apim-apis.stopapi
+      outputParameters:
+      - type: object
+        mapping: $.

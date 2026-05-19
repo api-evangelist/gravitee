@@ -1,0 +1,152 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io - Access Management API — Bot Detection
+  description: 'Gravitee.io - Access Management API — Bot Detection. 3 operations. Lead operation: List bot detection plugins.
+    Self-contained Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - Bot Detection
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: am-bot-detection
+    baseUri: ''
+    description: Gravitee.io - Access Management API — Bot Detection business capability. Self-contained, no shared references.
+    resources:
+    - name: platform-plugins-bot-detections
+      path: /platform/plugins/bot-detections
+      operations:
+      - name: listbotdetectionsplugins
+        method: GET
+        description: List bot detection plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: platform-plugins-bot-detections-botDetection
+      path: /platform/plugins/bot-detections/{botDetection}
+      operations:
+      - name: getbotdetectionplugin
+        method: GET
+        description: Get a Bot Detection plugin
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: botDetection
+          in: path
+          type: string
+          required: true
+    - name: platform-plugins-bot-detections-botDetection-schema
+      path: /platform/plugins/bot-detections/{botDetection}/schema
+      operations:
+      - name: getbotdetectionpluginschema
+        method: GET
+        description: Get a Bot Detection plugin's schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: botDetection
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: am-bot-detection-rest
+    port: 8080
+    description: REST adapter for Gravitee.io - Access Management API — Bot Detection. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/platform/plugins/bot-detections
+      name: platform-plugins-bot-detections
+      description: REST surface for platform-plugins-bot-detections.
+      operations:
+      - method: GET
+        name: listbotdetectionsplugins
+        description: List bot detection plugins
+        call: am-bot-detection.listbotdetectionsplugins
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/bot-detections/{botdetection}
+      name: platform-plugins-bot-detections-botdetection
+      description: REST surface for platform-plugins-bot-detections-botDetection.
+      operations:
+      - method: GET
+        name: getbotdetectionplugin
+        description: Get a Bot Detection plugin
+        call: am-bot-detection.getbotdetectionplugin
+        with:
+          botDetection: rest.botDetection
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/platform/plugins/bot-detections/{botdetection}/schema
+      name: platform-plugins-bot-detections-botdetection-schema
+      description: REST surface for platform-plugins-bot-detections-botDetection-schema.
+      operations:
+      - method: GET
+        name: getbotdetectionpluginschema
+        description: Get a Bot Detection plugin's schema
+        call: am-bot-detection.getbotdetectionpluginschema
+        with:
+          botDetection: rest.botDetection
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: am-bot-detection-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io - Access Management API — Bot Detection. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-bot-detection-plugins
+      description: List bot detection plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-bot-detection.listbotdetectionsplugins
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bot-detection-plugin
+      description: Get a Bot Detection plugin
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-bot-detection.getbotdetectionplugin
+      with:
+        botDetection: tools.botDetection
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bot-detection-plugin-s-schema
+      description: Get a Bot Detection plugin's schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: am-bot-detection.getbotdetectionpluginschema
+      with:
+        botDetection: tools.botDetection
+      outputParameters:
+      - type: object
+        mapping: $.

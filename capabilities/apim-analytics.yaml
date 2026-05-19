@@ -1,0 +1,332 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Gravitee.io APIM Management API — Analytics
+  description: 'Gravitee.io APIM Management API — Analytics. 9 operations. Lead operation: List Analytics Dashboards. Self-contained
+    Naftiko capability covering one Gravitee business surface.'
+  tags:
+  - Gravitee
+  - Analytics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: apim-analytics
+    baseUri: https://{host}/management/v2
+    description: Gravitee.io APIM Management API — Analytics business capability. Self-contained, no shared references.
+    resources:
+    - name: environments-envId-analytics-dashboards
+      path: /environments/{envId}/analytics/dashboards
+      operations:
+      - name: listdashboards
+        method: GET
+        description: List Analytics Dashboards
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createdashboard
+        method: POST
+        description: Create an Analytics Dashboard
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-envId-analytics-dashboards-dashboardId
+      path: /environments/{envId}/analytics/dashboards/{dashboardId}
+      operations:
+      - name: getdashboard
+        method: GET
+        description: Get an Analytics Dashboard
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dashboardId
+          in: path
+          type: string
+          required: true
+      - name: updatedashboard
+        method: PUT
+        description: Update an Analytics Dashboard
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dashboardId
+          in: path
+          type: string
+          required: true
+      - name: deletedashboard
+        method: DELETE
+        description: Delete an Analytics Dashboard
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dashboardId
+          in: path
+          type: string
+          required: true
+    - name: environments-envId-analytics-definition-apis
+      path: /environments/{envId}/analytics/definition/apis
+      operations:
+      - name: queryapispecs
+        method: GET
+        description: Query API Analytics Specifications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-envId-analytics-facets
+      path: /environments/{envId}/analytics/facets
+      operations:
+      - name: queryfacets
+        method: POST
+        description: Query Analytics Facets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-envId-analytics-measures
+      path: /environments/{envId}/analytics/measures
+      operations:
+      - name: querymeasures
+        method: POST
+        description: Query Analytics Measures
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-envId-analytics-time-series
+      path: /environments/{envId}/analytics/time-series
+      operations:
+      - name: querytimeseries
+        method: POST
+        description: Query Analytics Time Series
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.GRAVITEE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: apim-analytics-rest
+    port: 8080
+    description: REST adapter for Gravitee.io APIM Management API — Analytics. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/environments/{envid}/analytics/dashboards
+      name: environments-envid-analytics-dashboards
+      description: REST surface for environments-envId-analytics-dashboards.
+      operations:
+      - method: GET
+        name: listdashboards
+        description: List Analytics Dashboards
+        call: apim-analytics.listdashboards
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdashboard
+        description: Create an Analytics Dashboard
+        call: apim-analytics.createdashboard
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/analytics/dashboards/{dashboardid}
+      name: environments-envid-analytics-dashboards-dashboardid
+      description: REST surface for environments-envId-analytics-dashboards-dashboardId.
+      operations:
+      - method: GET
+        name: getdashboard
+        description: Get an Analytics Dashboard
+        call: apim-analytics.getdashboard
+        with:
+          dashboardId: rest.dashboardId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatedashboard
+        description: Update an Analytics Dashboard
+        call: apim-analytics.updatedashboard
+        with:
+          dashboardId: rest.dashboardId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedashboard
+        description: Delete an Analytics Dashboard
+        call: apim-analytics.deletedashboard
+        with:
+          dashboardId: rest.dashboardId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/analytics/definition/apis
+      name: environments-envid-analytics-definition-apis
+      description: REST surface for environments-envId-analytics-definition-apis.
+      operations:
+      - method: GET
+        name: queryapispecs
+        description: Query API Analytics Specifications
+        call: apim-analytics.queryapispecs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/analytics/facets
+      name: environments-envid-analytics-facets
+      description: REST surface for environments-envId-analytics-facets.
+      operations:
+      - method: POST
+        name: queryfacets
+        description: Query Analytics Facets
+        call: apim-analytics.queryfacets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/analytics/measures
+      name: environments-envid-analytics-measures
+      description: REST surface for environments-envId-analytics-measures.
+      operations:
+      - method: POST
+        name: querymeasures
+        description: Query Analytics Measures
+        call: apim-analytics.querymeasures
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{envid}/analytics/time-series
+      name: environments-envid-analytics-time-series
+      description: REST surface for environments-envId-analytics-time-series.
+      operations:
+      - method: POST
+        name: querytimeseries
+        description: Query Analytics Time Series
+        call: apim-analytics.querytimeseries
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: apim-analytics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Gravitee.io APIM Management API — Analytics. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-analytics-dashboards
+      description: List Analytics Dashboards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-analytics.listdashboards
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-analytics-dashboard
+      description: Create an Analytics Dashboard
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: apim-analytics.createdashboard
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-analytics-dashboard
+      description: Get an Analytics Dashboard
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-analytics.getdashboard
+      with:
+        dashboardId: tools.dashboardId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-analytics-dashboard
+      description: Update an Analytics Dashboard
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: apim-analytics.updatedashboard
+      with:
+        dashboardId: tools.dashboardId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-analytics-dashboard
+      description: Delete an Analytics Dashboard
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: apim-analytics.deletedashboard
+      with:
+        dashboardId: tools.dashboardId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: query-api-analytics-specifications
+      description: Query API Analytics Specifications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: apim-analytics.queryapispecs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: query-analytics-facets
+      description: Query Analytics Facets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: apim-analytics.queryfacets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: query-analytics-measures
+      description: Query Analytics Measures
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: apim-analytics.querymeasures
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: query-analytics-time-series
+      description: Query Analytics Time Series
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: apim-analytics.querytimeseries
+      outputParameters:
+      - type: object
+        mapping: $.
