@@ -1,0 +1,297 @@
+# Curated Gravitee integrations. Each entry becomes one Naftiko capability YAML in integrations/.
+# Categories reflect Gravitee's actual strengths: API gateway, event streaming (Kafka/MQTT),
+# AI gateway, developer portal, identity (Access Management), governance, and observability.
+# Gravitee-side paths use real APIM v2 + AM endpoints from temp/gravitee/openapi/.
+
+# Observability (2)
+- partner: datadog
+  name: Stream Gravitee gateway analytics into Datadog
+  category: Observability
+  use_case: Forward Gravitee APIM v4 analytics (request counts, latency, error rates) into Datadog as custom metrics for unified API observability dashboards.
+  partner_baseUri: https://api.datadoghq.com
+  partner_api: Datadog Metrics API
+  provider_ops:
+    - method: POST
+      path: /management/v2/environments/{envId}/analytics/measures
+      name: queryMeasures
+      description: Query Gravitee APIM aggregate analytics measures to forward as Datadog metrics.
+    - method: POST
+      path: /management/v2/environments/{envId}/analytics/time-series
+      name: queryTimeSeries
+      description: Pull time-series analytics from Gravitee APIM for Datadog series submission.
+    - method: GET
+      path: /management/v2/environments/{envId}/apis
+      name: listApis
+      description: List Gravitee APIs to label the Datadog metric series by API ID and name.
+  partner_ops:
+    - method: POST
+      path: /api/v2/series
+      name: submitMetrics
+    - method: POST
+      path: /api/v1/events
+      name: postEvent
+
+- partner: prometheus
+  name: Scrape Gravitee gateway metrics into Prometheus
+  category: Observability
+  use_case: Expose Gravitee APIM analytics as a Prometheus remote-write target so platform teams can keep all API metrics in their existing Prometheus / Grafana stack.
+  partner_baseUri: https://prometheus.internal.example.com
+  partner_api: Prometheus Remote Write API
+  provider_ops:
+    - method: POST
+      path: /management/v2/environments/{envId}/analytics/time-series
+      name: queryTimeSeries
+      description: Pull time-series analytics from Gravitee APIM for Prometheus remote-write.
+    - method: POST
+      path: /management/v2/environments/{envId}/analytics/facets
+      name: queryFacets
+      description: Pull faceted analytics dimensions from Gravitee APIM to add Prometheus labels.
+  partner_ops:
+    - method: POST
+      path: /api/v1/write
+      name: remoteWrite
+
+# Event streaming (3)
+- partner: kafka
+  name: Bridge Gravitee v4 message APIs to Confluent Kafka topics
+  category: Event Streaming
+  use_case: Route Gravitee APIM v4 message-oriented API traffic into Confluent Cloud Kafka topics so async event flows land in a managed streaming backbone.
+  partner_baseUri: https://pkc-example.confluent.cloud
+  partner_api: Confluent Kafka REST Proxy
+  provider_ops:
+    - method: GET
+      path: /management/v2/environments/{envId}/apis
+      name: listApis
+      description: List Gravitee v4 APIs so Kafka topic mappings can be wired to message endpoints.
+    - method: POST
+      path: /management/v2/environments/{envId}/apis/{apiId}/_deploy
+      name: deployApi
+      description: Redeploy the Gravitee API after wiring the Kafka endpoint to make routing live.
+  partner_ops:
+    - method: POST
+      path: /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records
+      name: produceRecord
+    - method: GET
+      path: /kafka/v3/clusters/{cluster_id}/topics
+      name: listTopics
+
+- partner: redpanda
+  name: Mirror Gravitee event API traffic to Redpanda topics
+  category: Event Streaming
+  use_case: Forward Gravitee APIM v4 event API messages to Redpanda topics as a low-latency Kafka-compatible alternative for streaming pipelines.
+  partner_baseUri: https://api.redpanda.com
+  partner_api: Redpanda Cloud API
+  provider_ops:
+    - method: GET
+      path: /management/v2/environments/{envId}/apis
+      name: listApis
+      description: List Gravitee v4 APIs so Redpanda topic mappings can be wired to message endpoints.
+    - method: POST
+      path: /management/v2/environments/{envId}/analytics/measures
+      name: queryMeasures
+      description: Pull message-throughput measures from Gravitee to size Redpanda partitions.
+  partner_ops:
+    - method: POST
+      path: /v1alpha2/clusters/{cluster_id}/topics
+      name: createTopic
+    - method: POST
+      path: /v1/produce
+      name: produceMessage
+
+- partner: mqtt-broker
+  name: Connect Gravitee gateway to HiveMQ MQTT broker
+  category: Event Streaming
+  use_case: Wire Gravitee APIM v4 MQTT endpoint to a HiveMQ broker so IoT clients can publish / subscribe through the gateway with policies enforced.
+  partner_baseUri: https://api.hivemq.cloud
+  partner_api: HiveMQ Cloud REST API
+  provider_ops:
+    - method: GET
+      path: /management/v2/environments/{envId}/apis/{apiId}
+      name: getApi
+      description: Read the Gravitee v4 API definition to wire its MQTT entrypoint to HiveMQ.
+    - method: POST
+      path: /management/v2/environments/{envId}/apis/{apiId}/_deploy
+      name: deployApi
+      description: Redeploy the Gravitee API after attaching the HiveMQ MQTT backend.
+  partner_ops:
+    - method: POST
+      path: /api/v1/management/clients
+      name: createClient
+    - method: GET
+      path: /api/v1/management/clients
+      name: listClients
+
+# Governance (2)
+- partner: github
+  name: Sync Gravitee API definitions to a GitHub spec repo
+  category: Governance
+  use_case: On every Gravitee API publish, commit the OpenAPI / API definition back to a GitHub repo so spec history lives in version control alongside the platform team's workflows.
+  partner_baseUri: https://api.github.com
+  partner_api: GitHub REST API
+  provider_ops:
+    - method: GET
+      path: /management/v2/environments/{envId}/apis/{apiId}
+      name: getApi
+      description: Fetch the Gravitee API definition to commit to GitHub.
+    - method: POST
+      path: /management/v2/environments/{envId}/apis/_import/swagger
+      name: importSwaggerApi
+      description: Re-import an updated Swagger / OpenAPI document from GitHub back into Gravitee.
+  partner_ops:
+    - method: PUT
+      path: /repos/{owner}/{repo}/contents/{path}
+      name: putFileContents
+    - method: GET
+      path: /repos/{owner}/{repo}/contents/{path}
+      name: getFileContents
+
+- partner: opa
+  name: Enforce Open Policy Agent decisions on Gravitee plan changes
+  category: Governance
+  use_case: When a Gravitee API plan is created, updated, or published, evaluate the change against an OPA policy bundle and reject mutations that violate governance rules.
+  partner_baseUri: https://opa.internal.example.com
+  partner_api: Open Policy Agent Data API
+  provider_ops:
+    - method: GET
+      path: /management/v2/environments/{envId}/apis/{apiId}/plans
+      name: listApiPlans
+      description: List current Gravitee API plans to feed OPA evaluation context.
+    - method: GET
+      path: /management/v2/environments/{envId}/apis/{apiId}/plans/{planId}
+      name: getApiPlan
+      description: Retrieve the Gravitee plan under change to evaluate against OPA rules.
+    - method: POST
+      path: /management/v2/environments/{envId}/apis/{apiId}/plans/{planId}/_publish
+      name: publishApiPlan
+      description: Publish the Gravitee plan only after a successful OPA allow decision.
+  partner_ops:
+    - method: POST
+      path: /v1/data/gravitee/plan/allow
+      name: evaluatePolicy
+
+# Identity / SSO (2)
+- partner: keycloak
+  name: Federate Gravitee Access Management with Keycloak as upstream IdP
+  category: Identity
+  use_case: Configure Gravitee AM domains to delegate authentication to a Keycloak realm, syncing user provisioning so apps behind the Gravitee gateway inherit Keycloak SSO.
+  partner_baseUri: https://keycloak.example.com
+  partner_api: Keycloak Admin REST API
+  provider_ops:
+    - method: GET
+      path: /management/organizations/{organizationId}/environments/{environmentId}/domains
+      name: listAmDomains
+      description: List Gravitee AM domains to attach a Keycloak identity provider to each.
+    - method: GET
+      path: /management/organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications
+      name: listAmApplications
+      description: List apps in a Gravitee AM domain to bind to Keycloak-issued tokens.
+  partner_ops:
+    - method: GET
+      path: /admin/realms/{realm}/users
+      name: listUsers
+    - method: POST
+      path: /admin/realms/{realm}/users
+      name: createUser
+
+- partner: okta
+  name: Provision Gravitee AM users from Okta workforce identities
+  category: Identity
+  use_case: When an Okta user is added to a Gravitee-bound group, mint or update the matching Gravitee Access Management user so workforce SSO flows into the dev portal.
+  partner_baseUri: https://yourdomain.okta.com
+  partner_api: Okta API
+  provider_ops:
+    - method: GET
+      path: /management/organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications
+      name: listAmApplications
+      description: List Gravitee AM applications to map Okta groups onto.
+    - method: GET
+      path: /management/organizations/{organizationId}/environments/{environmentId}/domains
+      name: listAmDomains
+      description: List Gravitee AM domains so Okta group provisioning can target the right tenant.
+  partner_ops:
+    - method: GET
+      path: /api/v1/users
+      name: listUsers
+    - method: GET
+      path: /api/v1/groups/{groupId}/users
+      name: listGroupUsers
+
+# AI gateway (2)
+- partner: openai
+  name: Front OpenAI with Gravitee AI Gateway for policy and metering
+  category: AI Gateway
+  use_case: Route OpenAI API calls through the Gravitee AI Gateway so chat completions are subject to rate-limit, key-management, prompt-policy, and per-team cost attribution policies.
+  partner_baseUri: https://api.openai.com
+  partner_api: OpenAI REST API
+  provider_ops:
+    - method: POST
+      path: /management/v2/environments/{envId}/apis/_import/swagger
+      name: importSwaggerApi
+      description: Import the OpenAI OpenAPI spec into Gravitee so it can be fronted as a managed AI API.
+    - method: POST
+      path: /management/v2/environments/{envId}/apis/{apiId}/_deploy
+      name: deployApi
+      description: Deploy the OpenAI-backed Gravitee API once AI gateway policies are attached.
+    - method: POST
+      path: /management/v2/environments/{envId}/analytics/measures
+      name: queryMeasures
+      description: Query Gravitee analytics to report per-team OpenAI token spend.
+  partner_ops:
+    - method: POST
+      path: /v1/chat/completions
+      name: chatCompletions
+    - method: GET
+      path: /v1/models
+      name: listModels
+
+- partner: anthropic
+  name: Front Anthropic Claude with Gravitee AI Gateway
+  category: AI Gateway
+  use_case: Route Anthropic Claude API calls through the Gravitee AI Gateway so messages are subject to MCP-aware policies, per-team quotas, and unified observability alongside other LLM providers.
+  partner_baseUri: https://api.anthropic.com
+  partner_api: Anthropic Messages API
+  provider_ops:
+    - method: POST
+      path: /management/v2/environments/{envId}/apis/_import/swagger
+      name: importSwaggerApi
+      description: Import the Anthropic OpenAPI spec into Gravitee so it can be fronted as a managed AI API.
+    - method: POST
+      path: /management/v2/environments/{envId}/apis/{apiId}/_deploy
+      name: deployApi
+      description: Deploy the Anthropic-backed Gravitee API once AI gateway policies are attached.
+    - method: POST
+      path: /management/v2/environments/{envId}/analytics/time-series
+      name: queryTimeSeries
+      description: Pull time-series analytics from Gravitee for per-team Claude usage reporting.
+  partner_ops:
+    - method: POST
+      path: /v1/messages
+      name: createMessage
+    - method: GET
+      path: /v1/models
+      name: listModels
+
+# Notifications (1)
+- partner: slack
+  name: Post Gravitee gateway alerts to Slack channels
+  category: Notifications
+  use_case: Forward Gravitee API lifecycle events (deploys, plan publishes, subscription approvals, error spikes) to designated Slack channels via Incoming Webhook for platform team visibility.
+  partner_baseUri: https://hooks.slack.com
+  partner_api: Slack Incoming Webhooks
+  provider_ops:
+    - method: GET
+      path: /management/v2/environments/{envId}/subscriptions
+      name: listSubscriptions
+      description: List recent Gravitee subscriptions to surface in Slack alerts.
+    - method: POST
+      path: /management/v2/environments/{envId}/logs/search
+      name: searchLogs
+      description: Query Gravitee gateway error logs to drive Slack alert payloads.
+    - method: GET
+      path: /management/v2/environments/{envId}/logs/error-keys
+      name: listErrorKeys
+      description: Enumerate Gravitee error keys so Slack alerts can group by root cause.
+  partner_ops:
+    - method: POST
+      path: /services/{T}/{B}/{X}
+      name: postMessage

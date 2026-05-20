@@ -1,0 +1,60 @@
+- slug: gravitee-datadog
+  label: Stream Gravitee gateway analytics into Datadog
+  partner: datadog
+  category: Observability
+  use_case: Forward Gravitee APIM v4 analytics (request counts, latency, error rates) into Datadog as custom metrics for unified API observability dashboards.
+- slug: gravitee-prometheus
+  label: Scrape Gravitee gateway metrics into Prometheus
+  partner: prometheus
+  category: Observability
+  use_case: Expose Gravitee APIM analytics as a Prometheus remote-write target so platform teams can keep all API metrics in their existing Prometheus / Grafana stack.
+- slug: gravitee-kafka
+  label: Bridge Gravitee v4 message APIs to Confluent Kafka topics
+  partner: kafka
+  category: Event Streaming
+  use_case: Route Gravitee APIM v4 message-oriented API traffic into Confluent Cloud Kafka topics so async event flows land in a managed streaming backbone.
+- slug: gravitee-redpanda
+  label: Mirror Gravitee event API traffic to Redpanda topics
+  partner: redpanda
+  category: Event Streaming
+  use_case: Forward Gravitee APIM v4 event API messages to Redpanda topics as a low-latency Kafka-compatible alternative for streaming pipelines.
+- slug: gravitee-mqtt-broker
+  label: Connect Gravitee gateway to HiveMQ MQTT broker
+  partner: mqtt-broker
+  category: Event Streaming
+  use_case: Wire Gravitee APIM v4 MQTT endpoint to a HiveMQ broker so IoT clients can publish / subscribe through the gateway with policies enforced.
+- slug: gravitee-github
+  label: Sync Gravitee API definitions to a GitHub spec repo
+  partner: github
+  category: Governance
+  use_case: On every Gravitee API publish, commit the OpenAPI / API definition back to a GitHub repo so spec history lives in version control alongside the platform team's workflows.
+- slug: gravitee-opa
+  label: Enforce Open Policy Agent decisions on Gravitee plan changes
+  partner: opa
+  category: Governance
+  use_case: When a Gravitee API plan is created, updated, or published, evaluate the change against an OPA policy bundle and reject mutations that violate governance rules.
+- slug: gravitee-keycloak
+  label: Federate Gravitee Access Management with Keycloak as upstream IdP
+  partner: keycloak
+  category: Identity
+  use_case: Configure Gravitee AM domains to delegate authentication to a Keycloak realm, syncing user provisioning so apps behind the Gravitee gateway inherit Keycloak SSO.
+- slug: gravitee-okta
+  label: Provision Gravitee AM users from Okta workforce identities
+  partner: okta
+  category: Identity
+  use_case: When an Okta user is added to a Gravitee-bound group, mint or update the matching Gravitee Access Management user so workforce SSO flows into the dev portal.
+- slug: gravitee-openai
+  label: Front OpenAI with Gravitee AI Gateway for policy and metering
+  partner: openai
+  category: AI Gateway
+  use_case: Route OpenAI API calls through the Gravitee AI Gateway so chat completions are subject to rate-limit, key-management, prompt-policy, and per-team cost attribution policies.
+- slug: gravitee-anthropic
+  label: Front Anthropic Claude with Gravitee AI Gateway
+  partner: anthropic
+  category: AI Gateway
+  use_case: Route Anthropic Claude API calls through the Gravitee AI Gateway so messages are subject to MCP-aware policies, per-team quotas, and unified observability alongside other LLM providers.
+- slug: gravitee-slack
+  label: Post Gravitee gateway alerts to Slack channels
+  partner: slack
+  category: Notifications
+  use_case: Forward Gravitee API lifecycle events (deploys, plan publishes, subscription approvals, error spikes) to designated Slack channels via Incoming Webhook for platform team visibility.

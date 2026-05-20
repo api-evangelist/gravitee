@@ -1,0 +1,159 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Enforce Open Policy Agent decisions on Gravitee plan changes
+  description: When a Gravitee API plan is created, updated, or published, evaluate the change against an OPA policy bundle and reject mutations that violate governance rules.
+  tags:
+  - Gravitee
+  - Integration
+  - Governance
+  - opa
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+    OPA_API_KEY: OPA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gravitee
+    baseUri: https://api.gravitee.io
+    description: Gravitee API operations consumed by this integration.
+    resources:
+    - name: management-v2-environments-envid-apis-apiid-plans
+      path: /management/v2/environments/{envId}/apis/{apiId}/plans
+      operations:
+      - name: listapiplans
+        method: GET
+        description: List current Gravitee API plans to feed OPA evaluation context.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: envId
+          in: path
+          type: string
+          description: Path parameter envId.
+          required: true
+        - name: apiId
+          in: path
+          type: string
+          description: Path parameter apiId.
+          required: true
+    - name: management-v2-environments-envid-apis-apiid-plans-planid
+      path: /management/v2/environments/{envId}/apis/{apiId}/plans/{planId}
+      operations:
+      - name: getapiplan
+        method: GET
+        description: Retrieve the Gravitee plan under change to evaluate against OPA rules.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: envId
+          in: path
+          type: string
+          description: Path parameter envId.
+          required: true
+        - name: apiId
+          in: path
+          type: string
+          description: Path parameter apiId.
+          required: true
+        - name: planId
+          in: path
+          type: string
+          description: Path parameter planId.
+          required: true
+    - name: management-v2-environments-envid-apis-apiid-plans-planid-pub
+      path: /management/v2/environments/{envId}/apis/{apiId}/plans/{planId}/_publish
+      operations:
+      - name: publishapiplan
+        method: POST
+        description: Publish the Gravitee plan only after a successful OPA allow decision.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: envId
+          in: path
+          type: string
+          description: Path parameter envId.
+          required: true
+        - name: apiId
+          in: path
+          type: string
+          description: Path parameter apiId.
+          required: true
+        - name: planId
+          in: path
+          type: string
+          description: Path parameter planId.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: opa
+    baseUri: https://opa.internal.example.com
+    description: Open Policy Agent Data API operations consumed by this integration.
+    resources:
+    - name: v1-data-gravitee-plan-allow
+      path: /v1/data/gravitee/plan/allow
+      operations:
+      - name: evaluatepolicy
+        method: POST
+        description: 'Open Policy Agent Data API: evaluatePolicy'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: gravitee-opa-mcp
+    description: MCP adapter for the gravitee-opa integration.
+    tools:
+    - name: gravitee_opa
+      description: Execute the gravitee opa integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: gravitee-opa-rest
+    port: 8080
+    description: REST adapter for the gravitee-opa integration.
+    resources:
+    - path: /gravitee-opa
+      name: gravitee-opa
+      description: REST surface for the gravitee-opa integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the gravitee-opa integration.
+        call: gravitee_opa
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

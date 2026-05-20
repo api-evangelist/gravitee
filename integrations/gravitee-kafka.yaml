@@ -1,0 +1,149 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bridge Gravitee v4 message APIs to Confluent Kafka topics
+  description: Route Gravitee APIM v4 message-oriented API traffic into Confluent Cloud Kafka topics so async event flows land in a managed streaming backbone.
+  tags:
+  - Gravitee
+  - Integration
+  - Event Streaming
+  - kafka
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+    KAFKA_API_KEY: KAFKA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gravitee
+    baseUri: https://api.gravitee.io
+    description: Gravitee API operations consumed by this integration.
+    resources:
+    - name: management-v2-environments-envid-apis
+      path: /management/v2/environments/{envId}/apis
+      operations:
+      - name: listapis
+        method: GET
+        description: List Gravitee v4 APIs so Kafka topic mappings can be wired to message endpoints.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: envId
+          in: path
+          type: string
+          description: Path parameter envId.
+          required: true
+    - name: management-v2-environments-envid-apis-apiid-deploy
+      path: /management/v2/environments/{envId}/apis/{apiId}/_deploy
+      operations:
+      - name: deployapi
+        method: POST
+        description: Redeploy the Gravitee API after wiring the Kafka endpoint to make routing live.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: envId
+          in: path
+          type: string
+          description: Path parameter envId.
+          required: true
+        - name: apiId
+          in: path
+          type: string
+          description: Path parameter apiId.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: kafka
+    baseUri: https://pkc-example.confluent.cloud
+    description: Confluent Kafka REST Proxy operations consumed by this integration.
+    resources:
+    - name: kafka-v3-clusters-cluster-id-topics-topic-name-records
+      path: /kafka/v3/clusters/{cluster_id}/topics/{topic_name}/records
+      operations:
+      - name: producerecord
+        method: POST
+        description: 'Confluent Kafka REST Proxy: produceRecord'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cluster_id
+          in: path
+          type: string
+          description: Path parameter cluster_id.
+          required: true
+        - name: topic_name
+          in: path
+          type: string
+          description: Path parameter topic_name.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: kafka-v3-clusters-cluster-id-topics
+      path: /kafka/v3/clusters/{cluster_id}/topics
+      operations:
+      - name: listtopics
+        method: GET
+        description: 'Confluent Kafka REST Proxy: listTopics'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cluster_id
+          in: path
+          type: string
+          description: Path parameter cluster_id.
+          required: true
+  exposes:
+  - type: mcp
+    namespace: gravitee-kafka-mcp
+    description: MCP adapter for the gravitee-kafka integration.
+    tools:
+    - name: gravitee_kafka
+      description: Execute the gravitee kafka integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: gravitee-kafka-rest
+    port: 8080
+    description: REST adapter for the gravitee-kafka integration.
+    resources:
+    - path: /gravitee-kafka
+      name: gravitee-kafka
+      description: REST surface for the gravitee-kafka integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the gravitee-kafka integration.
+        call: gravitee_kafka
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

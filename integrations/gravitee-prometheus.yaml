@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Scrape Gravitee gateway metrics into Prometheus
+  description: Expose Gravitee APIM analytics as a Prometheus remote-write target so platform teams can keep all API metrics in their existing Prometheus / Grafana stack.
+  tags:
+  - Gravitee
+  - Integration
+  - Observability
+  - prometheus
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    GRAVITEE_API_KEY: GRAVITEE_API_KEY
+    PROMETHEUS_API_KEY: PROMETHEUS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: gravitee
+    baseUri: https://api.gravitee.io
+    description: Gravitee API operations consumed by this integration.
+    resources:
+    - name: management-v2-environments-envid-analytics-time-series
+      path: /management/v2/environments/{envId}/analytics/time-series
+      operations:
+      - name: querytimeseries
+        method: POST
+        description: Pull time-series analytics from Gravitee APIM for Prometheus remote-write.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: envId
+          in: path
+          type: string
+          description: Path parameter envId.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: management-v2-environments-envid-analytics-facets
+      path: /management/v2/environments/{envId}/analytics/facets
+      operations:
+      - name: queryfacets
+        method: POST
+        description: Pull faceted analytics dimensions from Gravitee APIM to add Prometheus labels.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: envId
+          in: path
+          type: string
+          description: Path parameter envId.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: prometheus
+    baseUri: https://prometheus.internal.example.com
+    description: Prometheus Remote Write API operations consumed by this integration.
+    resources:
+    - name: api-v1-write
+      path: /api/v1/write
+      operations:
+      - name: remotewrite
+        method: POST
+        description: 'Prometheus Remote Write API: remoteWrite'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: gravitee-prometheus-mcp
+    description: MCP adapter for the gravitee-prometheus integration.
+    tools:
+    - name: gravitee_prometheus
+      description: Execute the gravitee prometheus integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: gravitee-prometheus-rest
+    port: 8080
+    description: REST adapter for the gravitee-prometheus integration.
+    resources:
+    - path: /gravitee-prometheus
+      name: gravitee-prometheus
+      description: REST surface for the gravitee-prometheus integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the gravitee-prometheus integration.
+        call: gravitee_prometheus
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
