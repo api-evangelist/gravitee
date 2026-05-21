@@ -13,17 +13,23 @@ tags:
 - Access Management
 - Identity
 - Event-Driven
+- Event Management
+- Kafka Gateway
 - Kafka
 - MQTT
 - GraphQL
 - gRPC
 - AI Gateway
 - MCP
+- A2A
+- LLM Proxy
+- Multi-Gateway Federation
+- Developer Portal
 - Open Source
 - Apache 2.0
 url: https://raw.githubusercontent.com/api-evangelist/gravitee/refs/heads/main/apis.yml
 created: '2026-03-18'
-modified: '2026-05-19'
+modified: '2026-05-21'
 specificationVersion: '0.20'
 apis:
 - aid: gravitee:gravitee-api-management
@@ -159,6 +165,12 @@ apis:
     description: Real-time analytics, dashboards, and OpenTelemetry integration via Elasticsearch / OpenSearch reporters.
   - name: API Scoring
     description: Quality scoring of API designs against governance rules (gravitee-scoring-api).
+  - name: Multi-Gateway / Multi-Broker Management
+    description: Centralized governance, auto-discovery, and catalog import across Gravitee, AWS API Gateway, Apigee,
+      Azure APIM, IBM, Kong, Solace, and Confluent.
+  - name: Protocol Mediation
+    description: Expose Kafka, Solace, RedPanda, and MQTT streams as HTTP, REST, WebSockets, Webhooks, and Server-Sent
+      Events for frontend consumption.
   useCases:
   - name: Internal API Platform
     description: Stand up an enterprise API platform across multiple environments with federated governance.
@@ -168,8 +180,40 @@ apis:
     description: Productize Kafka and MQTT streams as managed APIs with quota, ACL, and developer onboarding.
   - name: API Federation
     description: Catalog AWS API Gateway, Kong, Apigee, and Azure APIM assets behind a single Gravitee plane.
+  - name: Microservices and Ingress Control
+    description: Optimize Kubernetes ingress and microservices strategies with policy-driven routing and observability.
+  - name: API Security
+    description: Prevent APIs from becoming an attack vector through layered authn, authz, threat protection, and rate
+      limiting.
+  - name: Backend Reliability
+    description: Improve resilience and uptime with circuit-breaker, retry, fallback, and traffic-shaping policies.
+  - name: API Monetization
+    description: Productize and monetize APIs through plans, quotas, subscription billing hooks, and developer portal
+      onboarding.
+  - name: Centralized API Catalog
+    description: Build a unified inventory spanning Gravitee and third-party gateways through federation and discovery.
+  - name: Financial Services and Fintech
+    description: Secure regulated financial operations across API, event, and AI workloads.
+  - name: Insurance
+    description: Modernize insurance distribution, claims, and partner APIs with full-lifecycle governance.
+  - name: Government
+    description: Deliver secure public-sector services with API, identity, and event-streaming controls.
+  - name: Healthcare
+    description: Govern compliant healthcare APIs and event streams across providers, payers, and patient apps.
+  - name: Telecommunications and Media
+    description: Power real-time telecom and media workloads with streaming, eventing, and federated gateway control.
+  - name: Travel and Hospitality
+    description: Manage multi-channel travel and hospitality APIs across distribution, reservation, and loyalty systems.
+  - name: Transportation
+    description: Optimize transportation and logistics operations with event-driven and partner-facing APIs.
+  - name: Manufacturing and Industry 4.0
+    description: Enable factory-floor and supply-chain integration with MQTT, Kafka, and REST API governance.
+  - name: Software and SaaS
+    description: Scale SaaS platforms with multi-tenant API management, monetization, and developer portals.
   integrations:
   - name: Apache Kafka
+  - name: Confluent
+  - name: RedPanda
   - name: MQTT
   - name: Solace PubSub+
   - name: RabbitMQ
@@ -181,6 +225,11 @@ apis:
   - name: Grafana
   - name: OpenTelemetry
   - name: AWS Lambda
+  - name: AWS API Gateway
+  - name: Azure API Management
+  - name: Kong
+  - name: Apigee
+  - name: IBM API Connect
   - name: Keycloak
   - name: Auth0
   - name: Okta
@@ -489,36 +538,49 @@ apis:
   features:
   - name: LLM Proxy
     description: Multi-provider proxy for OpenAI, Anthropic, Azure OpenAI, Bedrock, Mistral, Hugging Face, and self-hosted
-      models.
+      models behind one unified interface.
   - name: Prompt Token Tracking
-    description: Meter input / output tokens per consumer, per model, per route.
+    description: Meter input / output tokens per consumer, per model, per route with enforceable token limits.
   - name: Prompt Guard-Rails
-    description: Apply allow / deny / classify rules to user prompts before they reach the model.
+    description: Apply allow / deny / classify rules to user prompts, including PII detection, before they reach the
+      model.
+  - name: Semantic Caching
+    description: Cache LLM responses at the semantic layer to cut latency and provider cost on repeated prompts.
   - name: Retrieval-Augmented Generation
     description: RAG policy that performs vector-store lookups and injects context into prompts.
   - name: AI Vector Store Resource
     description: Pluggable vector-store resource API for embedding-based retrieval.
   - name: MCP Proxy
-    description: Govern Model Context Protocol traffic with authentication, audit, and quota.
-  - name: MCP Tool Server
-    description: Expose existing REST and event APIs as MCP tools to AI agents.
+    description: Expose APIs as agent-ready tools using MCP standards with validation, governance, quota, and access
+      controls.
+  - name: MCP Tool Server / Agent Tool Server
+    description: Convert existing REST and event APIs into structured, reusable agent tools with standardized definitions
+      and execution patterns.
   - name: A2A Proxy
-    description: Agent-to-agent transport with identity propagation and policy enforcement.
+    description: Govern agent-to-agent interactions with full visibility, identity propagation, and enforced authentication,
+      authorization, and policy.
   - name: Agent Catalog
-    description: Discoverable directory of agents, tools, and MCP servers.
-  - name: AI Identity and Authorization
-    description: OpenFGA permission engine and AuthZen PDP for agent-aware authorization.
+    description: Centralize agent discovery, versioning, and lifecycle management across teams.
+  - name: Agentic Identity and Access Management
+    description: Zero-trust, context-aware authentication and fine-grained authorization unified across LLMs, agents,
+      and APIs (OpenFGA + AuthZen PDP).
+  - name: AI Cost and Usage Monitoring
+    description: End-to-end visibility into agent activity, prompt cost, and per-tenant LLM spend.
   - name: ML Inference Service
     description: Run text-classification and embedding models in the gateway via the inference service plugin.
   useCases:
   - name: AI Cost Governance
     description: Cap and meter LLM spend by team, by route, by tenant.
   - name: Safe AI Onramp
-    description: Apply prompt guard-rails, content classification, and audit on AI workloads.
+    description: Apply prompt guard-rails, PII detection, content classification, and audit on AI workloads.
   - name: MCP-First APIs
     description: Publish enterprise APIs as MCP tools for agents and copilots.
   - name: RAG-as-a-Service
     description: Stand up retrieval-augmented endpoints powered by managed vector stores.
+  - name: Agentic Zero-Trust
+    description: Unified identity and fine-grained authorization across LLMs, agents, and tool calls.
+  - name: Multi-Agent Workflow Governance
+    description: Track and enforce policy across A2A workflows between cooperating agents.
   integrations:
   - name: OpenAI
   - name: Anthropic Claude
@@ -536,6 +598,65 @@ apis:
   - type: API Key
   - type: Bearer Token
   - type: mTLS
+- aid: gravitee:gravitee-kafka-gateway
+  name: Gravitee Kafka Gateway
+  description: The Gravitee Kafka Gateway brings full API management discipline to Apache Kafka. It sits in front of one
+    or more Kafka clusters and applies authentication mediation, ACLs, quotas, message filtering and routing, schema and
+    serialization policies, virtual topics, and subscription workflows — exposing Kafka as a governed, productized event
+    streaming surface for internal and external consumers.
+  humanURL: https://www.gravitee.io/platform/kafka-gateway
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Kafka
+  - Event Streaming
+  - Event Gateway
+  - Message Broker
+  - Governance
+  - Open Source
+  properties:
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  features:
+  - name: API Management for Kafka
+    description: Apply policies — rate limiting, header assignment, serialization, JSON / Protobuf transformation — directly
+      to Kafka streams.
+  - name: Message Filtering and Routing
+    description: Route and filter messages by content or headers, moving routing logic off the client and into the gateway.
+  - name: Virtual Topics and Topic Mapping
+    description: Expose user-friendly aliases for complex Kafka topic names and abstract backend topic structures from
+      consumers.
+  - name: Subscription Approval Workflows
+    description: Customizable approval workflows that gate which consumers may subscribe to which Kafka topics.
+  - name: Authentication Mediation
+    description: Let consumers connect using their preferred auth (OAuth2, JWT, mTLS, SASL) while the broker keeps its
+      own auth model.
+  - name: Granular Access Control
+    description: Fine-grained ACLs over topics, partitions, and consumer groups managed centrally.
+  useCases:
+  - name: Securely Expose Kafka
+    description: Combine access control, authentication mediation, and approval workflows to safely expose Kafka to internal
+      and external consumers.
+  - name: Kafka Governance
+    description: Gain visibility and control over Kafka data flows while enforcing organizational standards via policies
+      and workflows.
+  - name: Self-Service Streaming
+    description: Let developers discover and subscribe to Kafka topics through the Gravitee Developer Portal.
+  - name: Kafka TCO Reduction
+    description: Cut Kafka cost through virtual topics, message offloading, and consolidated access management.
+  integrations:
+  - name: Apache Kafka
+  - name: Confluent
+  - name: RedPanda
+  - name: Gravitee Developer Portal
+  - name: Schema Registry
+  authentication:
+  - type: OAuth2
+  - type: JWT
+  - type: mTLS
+  - type: SASL
+  - type: API Key
 - aid: gravitee:gravitee-kubernetes-operator
   name: Gravitee Kubernetes Operator
   description: The Gravitee Kubernetes Operator (GKO) is a Go-based Kubernetes operator that lets platform teams declare Gravitee
@@ -656,9 +777,16 @@ common:
   type: MCPServer
 integrations:
 - name: Apache Kafka
+- name: Confluent
+- name: RedPanda
 - name: MQTT
 - name: Solace PubSub+
 - name: RabbitMQ
+- name: AWS API Gateway
+- name: Azure API Management
+- name: Apigee
+- name: Kong
+- name: IBM API Connect
 - name: Kubernetes
 - name: Helm
 - name: Argo CD
