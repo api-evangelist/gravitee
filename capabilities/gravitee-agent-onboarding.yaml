@@ -5,7 +5,7 @@ info:
     APIM and Gravitee AM (the only Tier 1 gateway in the field with both API management and
     access management in one product family). Plan-based scope (the cleanest gateway-native
     scope abstraction), native audit on both APIM logs and AM audits, suitable for fully
-    customer-hosted, open-core deployments.'
+    customer-hosted, open-core deployments. Runtime policy enforcement (signature verify, consent check, scope classify, audit emit) lives in the orchestration.steps below — each step that gates issuance carries on_failure: deny. Lint-time validation of this capability shape lives in the companion Polychro ruleset at https://github.com/api-evangelist/posts/blob/main/polychro/agent-onboarding-rules.yaml — Polychro is Naftiko''s governance layer, separate from the capability spec, and is the correct home for cross-object consistency rules that apply across every agent-onboarding capability.'
   tags:
   - Gravitee
   - Gravitee APIM
@@ -232,9 +232,3 @@ capability:
     skill:
       name: onboard-agent
       file: skills/onboard-agent.md
-  governance:
-  - { id: require-web-bot-auth, severity: blocking, description: 'All onboard calls must carry a valid RFC 9421 signature.', enforce_at: [runtime] }
-  - { id: require-consent-hash-match, severity: blocking, description: 'Submitted consent_hash must match AGENT_CONSENT_HASH.', enforce_at: [runtime] }
-  - { id: forbidden-scopes-deny, severity: blocking, description: 'Forbidden scopes return 403.', enforce_at: [runtime] }
-  - { id: approval-required-defer, severity: advisory, description: 'Approval-required scopes return 202 + status URL.', enforce_at: [runtime] }
-  - { id: native-audit-both-surfaces, severity: advisory, description: 'Audit lands natively on both Gravitee APIM (runtime traffic) and Gravitee AM (identity lifecycle). Worker SHOULD ingest both for the full who-onboarded-whom + what-was-called record.', enforce_at: [runtime] }
