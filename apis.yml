@@ -1,10 +1,12 @@
 aid: gravitee
 name: Gravitee
-description: Gravitee.io is an open-source API management platform from GraviteeSource, combining a high-performance API Gateway,
-  full-lifecycle API Management, Access Management (IAM), Cockpit (multi-environment control plane), an Alert Engine, a Kubernetes
-  Operator, and a new AI Agent Management suite with native MCP and LLM-proxy capabilities. The core projects are Apache 2.0
-  OSS, with an Enterprise commercial offering and a managed Gravitee Cloud SaaS. The platform supports synchronous and asynchronous
-  APIs across REST, GraphQL, WebSocket, gRPC, SSE, Webhooks, Kafka, MQTT, AMQP, and Model Context Protocol (MCP).
+description: >-
+  Gravitee.io is an open-source API management platform from GraviteeSource, combining a high-performance API Gateway,
+  full-lifecycle API Management, Access Management (IAM), Cockpit (multi-environment control plane), an Alert Engine, a
+  Kubernetes Operator, and a new AI Agent Management suite with native MCP and LLM-proxy capabilities. The core projects
+  are Apache 2.0 OSS, with an Enterprise commercial offering and a managed Gravitee Cloud SaaS. The platform supports
+  synchronous and asynchronous APIs across REST, GraphQL, WebSocket, gRPC, SSE, Webhooks, Kafka, MQTT, AMQP, and Model
+  Context Protocol (MCP).
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -34,10 +36,11 @@ specificationVersion: '0.20'
 apis:
 - aid: gravitee:gravitee-api-management
   name: Gravitee API Management
-  description: Gravitee API Management (APIM) is the core product — an open-source, flexible, blazing-fast API gateway, management
-    plane, and developer portal. It supports v2 "proxy" APIs and v4 message-oriented APIs over REST, GraphQL, WebSocket, gRPC,
-    SSE, Webhooks, Kafka, MQTT, AMQP, Solace, RabbitMQ, and MCP. Lifecycle, policies, plans, applications, subscriptions,
-    federation, and analytics are all managed through the Management API and consoles.
+  description: >-
+    Gravitee API Management (APIM) is the core product — an open-source, flexible, blazing-fast API gateway,
+    management plane, and developer portal. It supports v2 "proxy" APIs and v4 message-oriented APIs over REST,
+    GraphQL, WebSocket, gRPC, SSE, Webhooks, Kafka, MQTT, AMQP, Solace, RabbitMQ, and MCP. Lifecycle, policies, plans,
+    applications, subscriptions, federation, and analytics are all managed through the Management API and consoles.
   humanURL: https://www.gravitee.io/platform/api-management
   baseURL: https://documentation.gravitee.io/apim
   tags:
@@ -106,31 +109,12 @@ apis:
     url: capabilities/api-gateway-operations.yaml
   - type: Capabilities
     url: capabilities/traffic-observability.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-api-products.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-apis.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-analytics.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-applications.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-installation.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-logs.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-plans.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-plugins.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-subscriptions.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-ui.yaml
-  - type: NaftikoCapability
-    url: capabilities/apim-users.yaml
+  - url: graphql/gravitee-graphql.md
+    type: GraphQL
   features:
   - name: REST API Gateway
-    description: Proxy and govern HTTP/REST APIs with policy pipelines, transformation, authentication, traffic shaping, and
+    description: >-
+      Proxy and govern HTTP/REST APIs with policy pipelines, transformation, authentication, traffic shaping, and
       routing.
   - name: GraphQL Support
     description: Expose GraphQL endpoints with operation-level policies, depth limits, and query whitelisting.
@@ -153,7 +137,8 @@ apis:
   - name: Plans and Subscriptions
     description: Productized plans (Keyless, API Key, OAuth2, JWT, mTLS, Push, Subscription) with subscription lifecycle.
   - name: Policy Studio
-    description: Compose flows from 50+ policies including rate-limit, quota, OAuth2, JWT, JSON-to-JSON, XSLT, Yaegi scripting,
+    description: >-
+      Compose flows from 50+ policies including rate-limit, quota, OAuth2, JWT, JSON-to-JSON, XSLT, Yaegi scripting,
       AWS Lambda, and AI policies.
   - name: Shared Policy Groups
     description: Reusable policy bundles attached to multiple APIs via a Kubernetes CRD or the Management API.
@@ -166,11 +151,13 @@ apis:
   - name: API Scoring
     description: Quality scoring of API designs against governance rules (gravitee-scoring-api).
   - name: Multi-Gateway / Multi-Broker Management
-    description: Centralized governance, auto-discovery, and catalog import across Gravitee, AWS API Gateway, Apigee,
-      Azure APIM, IBM, Kong, Solace, and Confluent.
+    description: >-
+      Centralized governance, auto-discovery, and catalog import across Gravitee, AWS API Gateway, Apigee, Azure
+      APIM, IBM, Kong, Solace, and Confluent.
   - name: Protocol Mediation
-    description: Expose Kafka, Solace, RedPanda, and MQTT streams as HTTP, REST, WebSockets, Webhooks, and Server-Sent
-      Events for frontend consumption.
+    description: >-
+      Expose Kafka, Solace, RedPanda, and MQTT streams as HTTP, REST, WebSockets, Webhooks, and Server-Sent Events
+      for frontend consumption.
   useCases:
   - name: Internal API Platform
     description: Stand up an enterprise API platform across multiple environments with federated governance.
@@ -183,12 +170,14 @@ apis:
   - name: Microservices and Ingress Control
     description: Optimize Kubernetes ingress and microservices strategies with policy-driven routing and observability.
   - name: API Security
-    description: Prevent APIs from becoming an attack vector through layered authn, authz, threat protection, and rate
+    description: >-
+      Prevent APIs from becoming an attack vector through layered authn, authz, threat protection, and rate
       limiting.
   - name: Backend Reliability
     description: Improve resilience and uptime with circuit-breaker, retry, fallback, and traffic-shaping policies.
   - name: API Monetization
-    description: Productize and monetize APIs through plans, quotas, subscription billing hooks, and developer portal
+    description: >-
+      Productize and monetize APIs through plans, quotas, subscription billing hooks, and developer portal
       onboarding.
   - name: Centralized API Catalog
     description: Build a unified inventory spanning Gravitee and third-party gateways through federation and discovery.
@@ -245,10 +234,11 @@ apis:
   - type: Bearer Token
 - aid: gravitee:gravitee-access-management
   name: Gravitee Access Management
-  description: Gravitee Access Management (AM) is an open-source Identity and Access Management solution offering OAuth2,
-    OpenID Connect (OIDC), UMA 2.0, CIBA, SCIM 2.0, and SAML 2.0. It manages security domains, applications, users, identity
-    providers, MFA factors, bot detection, certificates, flows, forms, themes, and policies. AM provides an admin REST API
-    (Management API) and a runtime authorization server (Gateway).
+  description: >-
+    Gravitee Access Management (AM) is an open-source Identity and Access Management solution offering OAuth2, OpenID
+    Connect (OIDC), UMA 2.0, CIBA, SCIM 2.0, and SAML 2.0. It manages security domains, applications, users, identity
+    providers, MFA factors, bot detection, certificates, flows, forms, themes, and policies. AM provides an admin REST
+    API (Management API) and a runtime authorization server (Gateway).
   humanURL: https://www.gravitee.io/platform/access-management
   baseURL: https://documentation.gravitee.io/am
   tags:
@@ -285,100 +275,6 @@ apis:
     url: json-schema/gravitee-domain-schema.json
   - type: Capabilities
     url: capabilities/access-management.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-general.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-authentication-device-notifier.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-authorization-engine.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-bot-detection.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-certificate.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-device-identifier.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-extension-grant.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-factor.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-identity-provider.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-newsletter.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-notifier.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-password-policy.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-plugin.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-policy.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-reporter.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-resource.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-alerts.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-application.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-audit.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-authorization-engine-2.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-bot-detection-2.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-certificate-2.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-data-sources.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-dataplane.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-device-identifiers.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-devices.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-dictionary.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-domain.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-email.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-entrypoints.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-extension-grant-2.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-factor-2.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-flow.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-form.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-group.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-identity-provider-2.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-platform.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-preview.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-protected-resource.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-reporter-2.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-resource-2.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-role.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-scope.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-sharding-tags.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-theme.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-user.yaml
-  - type: NaftikoCapability
-    url: capabilities/am-user-notifications.yaml
   features:
   - name: OAuth2 / OIDC Provider
     description: Full OAuth2 + OpenID Connect server with discovery, dynamic client registration, and PKCE.
@@ -430,9 +326,10 @@ apis:
   - type: SAML
 - aid: gravitee:gravitee-cockpit
   name: Gravitee Cockpit
-  description: Gravitee Cockpit is the multi-environment, multi-installation control plane for Gravitee. It centralizes management
-    of multiple APIM and AM installations (dev, staging, prod, regions) into one console, enabling promotion of APIs across
-    environments, centralized inventory, and organization-wide governance.
+  description: >-
+    Gravitee Cockpit is the multi-environment, multi-installation control plane for Gravitee. It centralizes
+    management of multiple APIM and AM installations (dev, staging, prod, regions) into one console, enabling
+    promotion of APIs across environments, centralized inventory, and organization-wide governance.
   humanURL: https://documentation.gravitee.io/cockpit
   baseURL: https://cockpit.gravitee.io
   tags:
@@ -461,9 +358,10 @@ apis:
   - type: Bearer Token
 - aid: gravitee:gravitee-alert-engine
   name: Gravitee Alert Engine
-  description: Gravitee Alert Engine (AE) is a real-time API monitoring solution that tracks performance, availability, errors,
-    quota approach, and security events across all Gravitee gateways. It evaluates conditions, fires triggers, and routes
-    notifications through webhooks, email, Slack, and other channels.
+  description: >-
+    Gravitee Alert Engine (AE) is a real-time API monitoring solution that tracks performance, availability, errors,
+    quota approach, and security events across all Gravitee gateways. It evaluates conditions, fires triggers, and
+    routes notifications through webhooks, email, Slack, and other channels.
   humanURL: https://documentation.gravitee.io/ae
   baseURL: https://documentation.gravitee.io/ae
   tags:
@@ -496,10 +394,11 @@ apis:
   - type: Bearer Token
 - aid: gravitee:gravitee-ai-agent-management
   name: Gravitee AI Agent Management
-  description: Gravitee AI Agent Management brings the API management discipline to agentic AI ecosystems. It is delivered
-    as an Enterprise add-on package and includes an LLM Proxy (model routing, prompt-token tracking, prompt guard-rails, RAG),
-    an MCP Proxy and MCP Tool Server, an A2A Proxy for agent-to-agent flows, an Agent Catalog, and AI-aware Identity and Authorization
-    (MCP resource server, OpenFGA permission engine, AuthZen PDP).
+  description: >-
+    Gravitee AI Agent Management brings the API management discipline to agentic AI ecosystems. It is delivered as an
+    Enterprise add-on package and includes an LLM Proxy (model routing, prompt-token tracking, prompt guard-rails,
+    RAG), an MCP Proxy and MCP Tool Server, an A2A Proxy for agent-to-agent flows, an Agent Catalog, and AI-aware
+    Identity and Authorization (MCP resource server, OpenFGA permission engine, AuthZen PDP).
   humanURL: https://www.gravitee.io/platform/ai-agent-management
   baseURL: https://documentation.gravitee.io/apim
   tags:
@@ -537,13 +436,13 @@ apis:
     url: capabilities/mcp-publishing.yaml
   features:
   - name: LLM Proxy
-    description: Multi-provider proxy for OpenAI, Anthropic, Azure OpenAI, Bedrock, Mistral, Hugging Face, and self-hosted
+    description: >-
+      Multi-provider proxy for OpenAI, Anthropic, Azure OpenAI, Bedrock, Mistral, Hugging Face, and self-hosted
       models behind one unified interface.
   - name: Prompt Token Tracking
     description: Meter input / output tokens per consumer, per model, per route with enforceable token limits.
   - name: Prompt Guard-Rails
-    description: Apply allow / deny / classify rules to user prompts, including PII detection, before they reach the
-      model.
+    description: Apply allow / deny / classify rules to user prompts, including PII detection, before they reach the model.
   - name: Semantic Caching
     description: Cache LLM responses at the semantic layer to cut latency and provider cost on repeated prompts.
   - name: Retrieval-Augmented Generation
@@ -551,19 +450,21 @@ apis:
   - name: AI Vector Store Resource
     description: Pluggable vector-store resource API for embedding-based retrieval.
   - name: MCP Proxy
-    description: Expose APIs as agent-ready tools using MCP standards with validation, governance, quota, and access
-      controls.
+    description: Expose APIs as agent-ready tools using MCP standards with validation, governance, quota, and access controls.
   - name: MCP Tool Server / Agent Tool Server
-    description: Convert existing REST and event APIs into structured, reusable agent tools with standardized definitions
-      and execution patterns.
+    description: >-
+      Convert existing REST and event APIs into structured, reusable agent tools with standardized definitions and
+      execution patterns.
   - name: A2A Proxy
-    description: Govern agent-to-agent interactions with full visibility, identity propagation, and enforced authentication,
+    description: >-
+      Govern agent-to-agent interactions with full visibility, identity propagation, and enforced authentication,
       authorization, and policy.
   - name: Agent Catalog
     description: Centralize agent discovery, versioning, and lifecycle management across teams.
   - name: Agentic Identity and Access Management
-    description: Zero-trust, context-aware authentication and fine-grained authorization unified across LLMs, agents,
-      and APIs (OpenFGA + AuthZen PDP).
+    description: >-
+      Zero-trust, context-aware authentication and fine-grained authorization unified across LLMs, agents, and APIs
+      (OpenFGA + AuthZen PDP).
   - name: AI Cost and Usage Monitoring
     description: End-to-end visibility into agent activity, prompt cost, and per-tenant LLM spend.
   - name: ML Inference Service
@@ -600,10 +501,11 @@ apis:
   - type: mTLS
 - aid: gravitee:gravitee-kafka-gateway
   name: Gravitee Kafka Gateway
-  description: The Gravitee Kafka Gateway brings full API management discipline to Apache Kafka. It sits in front of one
-    or more Kafka clusters and applies authentication mediation, ACLs, quotas, message filtering and routing, schema and
-    serialization policies, virtual topics, and subscription workflows — exposing Kafka as a governed, productized event
-    streaming surface for internal and external consumers.
+  description: >-
+    The Gravitee Kafka Gateway brings full API management discipline to Apache Kafka. It sits in front of one or more
+    Kafka clusters and applies authentication mediation, ACLs, quotas, message filtering and routing, schema and
+    serialization policies, virtual topics, and subscription workflows — exposing Kafka as a governed, productized
+    event streaming surface for internal and external consumers.
   humanURL: https://www.gravitee.io/platform/kafka-gateway
   baseURL: https://documentation.gravitee.io/apim
   tags:
@@ -620,27 +522,32 @@ apis:
     url: https://github.com/gravitee-io/gravitee-api-management
   features:
   - name: API Management for Kafka
-    description: Apply policies — rate limiting, header assignment, serialization, JSON / Protobuf transformation — directly
-      to Kafka streams.
+    description: >-
+      Apply policies — rate limiting, header assignment, serialization, JSON / Protobuf transformation — directly to
+      Kafka streams.
   - name: Message Filtering and Routing
     description: Route and filter messages by content or headers, moving routing logic off the client and into the gateway.
   - name: Virtual Topics and Topic Mapping
-    description: Expose user-friendly aliases for complex Kafka topic names and abstract backend topic structures from
+    description: >-
+      Expose user-friendly aliases for complex Kafka topic names and abstract backend topic structures from
       consumers.
   - name: Subscription Approval Workflows
     description: Customizable approval workflows that gate which consumers may subscribe to which Kafka topics.
   - name: Authentication Mediation
-    description: Let consumers connect using their preferred auth (OAuth2, JWT, mTLS, SASL) while the broker keeps its
-      own auth model.
+    description: >-
+      Let consumers connect using their preferred auth (OAuth2, JWT, mTLS, SASL) while the broker keeps its own auth
+      model.
   - name: Granular Access Control
     description: Fine-grained ACLs over topics, partitions, and consumer groups managed centrally.
   useCases:
   - name: Securely Expose Kafka
-    description: Combine access control, authentication mediation, and approval workflows to safely expose Kafka to internal
+    description: >-
+      Combine access control, authentication mediation, and approval workflows to safely expose Kafka to internal
       and external consumers.
   - name: Kafka Governance
-    description: Gain visibility and control over Kafka data flows while enforcing organizational standards via policies
-      and workflows.
+    description: >-
+      Gain visibility and control over Kafka data flows while enforcing organizational standards via policies and
+      workflows.
   - name: Self-Service Streaming
     description: Let developers discover and subscribe to Kafka topics through the Gravitee Developer Portal.
   - name: Kafka TCO Reduction
@@ -659,9 +566,10 @@ apis:
   - type: API Key
 - aid: gravitee:gravitee-kubernetes-operator
   name: Gravitee Kubernetes Operator
-  description: The Gravitee Kubernetes Operator (GKO) is a Go-based Kubernetes operator that lets platform teams declare Gravitee
-    APIs, applications, subscriptions, shared policy groups, and management contexts as Kubernetes custom resources. It reconciles
-    those resources against one or more Gravitee APIM installations.
+  description: >-
+    The Gravitee Kubernetes Operator (GKO) is a Go-based Kubernetes operator that lets platform teams declare Gravitee
+    APIs, applications, subscriptions, shared policy groups, and management contexts as Kubernetes custom resources.
+    It reconciles those resources against one or more Gravitee APIM installations.
   humanURL: https://documentation.gravitee.io/apim/kubernetes-operator
   baseURL: https://github.com/gravitee-io/gravitee-kubernetes-operator
   tags:
