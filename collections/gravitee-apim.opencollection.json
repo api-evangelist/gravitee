@@ -1,0 +1,1318 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io APIM Management API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "APIs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List APIs in an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/apis",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List APIs in an Environment"
+        },
+        {
+          "info": {
+            "name": "Create an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an API"
+        },
+        {
+          "info": {
+            "name": "Import an API from an OpenAPI/Swagger Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/_import/swagger",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import an API from an OpenAPI/Swagger Document"
+        },
+        {
+          "info": {
+            "name": "Import an API From a Gravitee Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/_import/definition",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import an API From a Gravitee Definition"
+        },
+        {
+          "info": {
+            "name": "Search APIs by Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/_search",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search APIs by Query"
+        },
+        {
+          "info": {
+            "name": "Get an API by Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Get an API by Identifier"
+        },
+        {
+          "info": {
+            "name": "Update an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an API"
+        },
+        {
+          "info": {
+            "name": "Delete an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Delete an API"
+        },
+        {
+          "info": {
+            "name": "Deploy an API to the Gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/_deploy",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Deploy an API to the Gateway"
+        },
+        {
+          "info": {
+            "name": "Start an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/_start",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Start an API"
+        },
+        {
+          "info": {
+            "name": "Stop an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/_stop",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Stop an API"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Plans on an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/plans",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "List Plans on an API"
+        },
+        {
+          "info": {
+            "name": "Create a Plan on an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/plans",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Plan on an API"
+        },
+        {
+          "info": {
+            "name": "Get a Plan by Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/plans/:planId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Plan by Identifier"
+        },
+        {
+          "info": {
+            "name": "Update a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/plans/:planId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Plan"
+        },
+        {
+          "info": {
+            "name": "Publish a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/plans/:planId/_publish",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Publish a Plan"
+        },
+        {
+          "info": {
+            "name": "Close a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/plans/:planId/_close",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Close a Plan"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subscriptions for an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/apis/:apiId/subscriptions",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "List Subscriptions for an API"
+        },
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/subscriptions",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "List Subscriptions"
+        },
+        {
+          "info": {
+            "name": "Create a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/subscriptions",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Subscription"
+        },
+        {
+          "info": {
+            "name": "Get a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Subscription"
+        },
+        {
+          "info": {
+            "name": "Accept a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/subscriptions/:subscriptionId/_accept",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Accept a Subscription"
+        },
+        {
+          "info": {
+            "name": "Reject a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/subscriptions/:subscriptionId/_reject",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reject a Subscription"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/applications",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "List Applications"
+        },
+        {
+          "info": {
+            "name": "Create an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/applications",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Application"
+        },
+        {
+          "info": {
+            "name": "Get an Application by Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/applications/:applicationId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an Application by Identifier"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/api-products",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "List API Products"
+        },
+        {
+          "info": {
+            "name": "Create an API Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/api-products",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Create an API Product"
+        },
+        {
+          "info": {
+            "name": "Search API Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/api-products/_search",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Search API Products"
+        },
+        {
+          "info": {
+            "name": "Update an API Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/management/v2/environments/:envId/api-products/:apiProductId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiProductId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update an API Product"
+        },
+        {
+          "info": {
+            "name": "Delete an API Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/management/v2/environments/:envId/api-products/:apiProductId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiProductId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an API Product"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query API Analytics Specifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/definition/apis",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Query API Analytics Specifications"
+        },
+        {
+          "info": {
+            "name": "Query Analytics Measures",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/measures",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Query Analytics Measures"
+        },
+        {
+          "info": {
+            "name": "Query Analytics Facets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/facets",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Query Analytics Facets"
+        },
+        {
+          "info": {
+            "name": "Query Analytics Time Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/time-series",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Query Analytics Time Series"
+        },
+        {
+          "info": {
+            "name": "List Analytics Dashboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/dashboards",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "List Analytics Dashboards"
+        },
+        {
+          "info": {
+            "name": "Create an Analytics Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/dashboards",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Create an Analytics Dashboard"
+        },
+        {
+          "info": {
+            "name": "Get an Analytics Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/dashboards/:dashboardId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an Analytics Dashboard"
+        },
+        {
+          "info": {
+            "name": "Update an Analytics Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/dashboards/:dashboardId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update an Analytics Dashboard"
+        },
+        {
+          "info": {
+            "name": "Delete an Analytics Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/management/v2/environments/:envId/analytics/dashboards/:dashboardId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "dashboardId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an Analytics Dashboard"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Request Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/environments/:envId/logs/search",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Search Request Logs"
+        },
+        {
+          "info": {
+            "name": "List Error Keys for Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId/logs/error-keys",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "List Error Keys for Logs"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Installation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments"
+          },
+          "docs": "List Environments"
+        },
+        {
+          "info": {
+            "name": "Get an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/environments/:envId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Get an Environment"
+        },
+        {
+          "info": {
+            "name": "Get an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/organizations/:orgId",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an Organization"
+        },
+        {
+          "info": {
+            "name": "Get the Organization License",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/organizations/:orgId/license",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Organization License"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plugins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Endpoint Plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/plugins/endpoints"
+          },
+          "docs": "List Endpoint Plugins"
+        },
+        {
+          "info": {
+            "name": "Get an Endpoint Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/plugins/endpoints/:endpointId",
+            "params": [
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an Endpoint Plugin"
+        },
+        {
+          "info": {
+            "name": "List Entrypoint Plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/plugins/entrypoints"
+          },
+          "docs": "List Entrypoint Plugins"
+        },
+        {
+          "info": {
+            "name": "List Policy Plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/plugins/policies"
+          },
+          "docs": "List Policy Plugins"
+        },
+        {
+          "info": {
+            "name": "Get a Policy Plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/plugins/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Policy Plugin"
+        },
+        {
+          "info": {
+            "name": "List Resource Plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/plugins/resources"
+          },
+          "docs": "List Resource Plugins"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List APIs for a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/users/:userId/apis",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List APIs for a User"
+        },
+        {
+          "info": {
+            "name": "List Applications for a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/users/:userId/applications",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Applications for a User"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "UI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List UI Themes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/ui/themes"
+          },
+          "docs": "List UI Themes"
+        },
+        {
+          "info": {
+            "name": "Create a UI Theme",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/management/v2/ui/themes"
+          },
+          "docs": "Create a UI Theme"
+        },
+        {
+          "info": {
+            "name": "Get the Current UI Theme",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/ui/themes/_current"
+          },
+          "docs": "Get the Current UI Theme"
+        },
+        {
+          "info": {
+            "name": "Get UI Customization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/management/v2/ui/customization"
+          },
+          "docs": "Get UI Customization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
