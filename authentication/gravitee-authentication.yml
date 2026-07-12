@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/gravitee-am-openapi.yml, openapi/gravitee-apim-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - cookie
+schemes:
+- name: gravitee-auth
+  type: http
+  scheme: Bearer
+  sources:
+  - openapi/gravitee-am-openapi.yml
+- name: BasicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/gravitee-apim-openapi.yml
+- name: CookieAuth
+  type: apiKey
+  in: cookie
+  parameter: Auth-Graviteeio-APIM
+  sources:
+  - openapi/gravitee-apim-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/gravitee-apim-openapi.yml
