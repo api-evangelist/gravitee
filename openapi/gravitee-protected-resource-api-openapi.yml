@@ -1,0 +1,1507 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts protected-resource API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: protected-resource
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources:
+    get:
+      tags:
+      - protected-resource
+      summary: List registered protected resources for a security domain
+      description: User must have the PROTECTED_RESOURCE[LIST] permission on the specified domain, environment or organization AND either PROTECTED_RESOURCE[READ] permission on each domain's protected resource or PROTECTED_RESOURCE[READ] permission on the specified domain or PROTECTED_RESOURCE[READ] permission on the specified environment or PROTECTED_RESOURCE[READ] permission on the specified organization. Each returned protected resource is filtered and contains only basic information such as id, name, description and isEnabled.
+      operationId: listProtectedResources
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: sort
+        in: query
+        schema:
+          type: string
+          default: updatedAt.desc
+      responses:
+        '200':
+          description: List registered protected resources for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedResourcePage'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - protected-resource
+      summary: Create a Protected Resource definition
+      description: User must have PROTECTED_RESOURCE[CREATE] permission on the specified domain or PROTECTED_RESOURCE[CREATE] permission on the specified environment or PROTECTED_RESOURCE[CREATE] permission on the specified organization
+      operationId: createProtectedResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProtectedResource'
+        required: true
+      responses:
+        '201':
+          description: Protected Resource successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedResourceSecret'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}:
+    get:
+      tags:
+      - protected-resource
+      summary: Get a Protected Resource
+      description: 'User must have the PROTECTED_RESOURCE[READ] permission on the specified resource or PROTECTED_RESOURCE[READ] permission on the specified domain or PROTECTED_RESOURCE[READ] permission on the specified environment or PROTECTED_RESOURCE[READ] permission on the specified organization. '
+      operationId: findProtectedResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Protected Resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedResourcePrimaryData'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - protected-resource
+      summary: Update a Protected Resource
+      description: 'User must have the PROTECTED_RESOURCE[UPDATE] permission on the specified resource or PROTECTED_RESOURCE[UPDATE] permission on the specified domain or PROTECTED_RESOURCE[UPDATE] permission on the specified environment or PROTECTED_RESOURCE[UPDATE] permission on the specified organization. '
+      operationId: updateProtectedResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProtectedResource'
+        required: true
+      responses:
+        '200':
+          description: Protected Resource successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedResourcePrimaryData'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - protected-resource
+      summary: Delete a Protected Resource
+      description: 'User must have the PROTECTED_RESOURCE[DELETE] permission on the specified resource or PROTECTED_RESOURCE[DELETE] permission on the specified domain or PROTECTED_RESOURCE[DELETE] permission on the specified environment or PROTECTED_RESOURCE[DELETE] permission on the specified organization. '
+      operationId: deleteProtectedResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Protected Resource successfully deleted
+        '404':
+          description: Protected Resource not found
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - protected-resource
+      summary: Patch a Protected Resource
+      description: 'User must have the PROTECTED_RESOURCE[UPDATE] permission on the specified resource or PROTECTED_RESOURCE[UPDATE] permission on the specified domain or PROTECTED_RESOURCE[UPDATE] permission on the specified environment or PROTECTED_RESOURCE[UPDATE] permission on the specified organization. '
+      operationId: patchProtectedResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchProtectedResource'
+        required: true
+      responses:
+        '200':
+          description: Protected Resource successfully patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProtectedResourcePrimaryData'
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/members
+  : get:
+      tags:
+      - protected-resource
+      summary: List members for an protected resource
+      description: User must have PROTECTED_RESOURCE_MEMBER[LIST] permission on the specified protected resource or PROTECTED_RESOURCE_MEMBER[LIST] permission on the specified domain or PROTECTED_RESOURCE_MEMBER[LIST] permission on the specified environment or PROTECTED_RESOURCE_MEMBER[LIST] permission on the specified organization
+      operationId: getMembers_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List members for an protected resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MembershipListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - protected-resource
+      summary: Add or update an protected resource member
+      description: User must have PROTECTED_RESOURCE_MEMBER[CREATE] permission on the specified protected resource or PROTECTED_RESOURCE_MEMBER[CREATE] permission on the specified domain or PROTECTED_RESOURCE_MEMBER[CREATE] permission on the specified environment or PROTECTED_RESOURCE_MEMBER[CREATE] permission on the specified organization
+      operationId: addOrUpdateMember_2
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMembership'
+        required: true
+      responses:
+        '201':
+          description: Member has been added or updated successfully
+        '400':
+          description: Membership parameter is not valid
+        '404':
+          description: Domain or protected resource is not found
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/members/permissions
+  : get:
+      tags:
+      - protected-resource
+      summary: List protected resource member's permissions
+      description: User must have PROTECTED_RESOURCE[READ] permission on the specified protected resource or PROTECTED_RESOURCE[READ] permission on the specified domain or PROTECTED_RESOURCE[READ] permission on the specified environment or PROTECTED_RESOURCE[READ] permission on the specified organization
+      operationId: getProtectedResourceMemberPermissions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Protected resource member's permissions
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/members/{member}
+  : delete:
+      tags:
+      - protected-resource
+      summary: Remove a membership
+      description: User must have PROTECTED_RESOURCE_MEMBER[DELETE] permission on the specified protected resource or PROTECTED_RESOURCE_MEMBER[DELETE] permission on the specified domain or PROTECTED_RESOURCE_MEMBER[DELETE] permission on the specified environment or PROTECTED_RESOURCE_MEMBER[DELETE] permission on the specified organization
+      operationId: removeProtectedResourceMember
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: member
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Membership successfully deleted
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/secrets
+  : get:
+      tags:
+      - protected-resource
+      summary: List secrets of a protected resource
+      description: User must have the PROTECTED_RESOURCE_OAUTH[LIST] permission on the specified resource or PROTECTED_RESOURCE_OAUTH[LIST] permission on the specified domain or PROTECTED_RESOURCE_OAUTH[LIST] permission on the specified environment or PROTECTED_RESOURCE_OAUTH[LIST] permission on the specified organization.
+      operationId: getSecrets
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List secrets of a protected resource
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientSecret'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - protected-resource
+      summary: Create a secret for a protected resource
+      description: User must have the PROTECTED_RESOURCE_OAUTH[CREATE] permission on the specified resource or PROTECTED_RESOURCE_OAUTH[CREATE] permission on the specified domain or PROTECTED_RESOURCE_OAUTH[CREATE] permission on the specified environment or PROTECTED_RESOURCE_OAUTH[CREATE] permission on the specified organization.
+      operationId: create
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewClientSecret'
+        required: true
+      responses:
+        '201':
+          description: Protected Resource secret successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSecret'
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/secrets/{secretId}
+  : delete:
+      tags:
+      - protected-resource
+      summary: Remove a secret for a protected resource
+      description: User must have the PROTECTED_RESOURCE_OAUTH[DELETE] permission on the specified resource or PROTECTED_RESOURCE_OAUTH[DELETE] permission on the specified domain or PROTECTED_RESOURCE_OAUTH[DELETE] permission on the specified environment or PROTECTED_RESOURCE_OAUTH[DELETE] permission on the specified organization.
+      operationId: delete
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: secretId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Protected Resource secret successfully deleted
+        '404':
+          description: Protected Resource or secret not found
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources/{protected-resource}/secrets/{secretId}/_renew
+  : post:
+      tags:
+      - protected-resource
+      summary: Renew a secret for a protected resource
+      description: User must have the PROTECTED_RESOURCE_OAUTH[UPDATE] permission on the specified resource or PROTECTED_RESOURCE_OAUTH[UPDATE] permission on the specified domain or PROTECTED_RESOURCE_OAUTH[UPDATE] permission on the specified environment or PROTECTED_RESOURCE_OAUTH[UPDATE] permission on the specified organization.
+      operationId: renew
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: protected-resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: secretId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Protected Resource secret successfully renewed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSecret'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    LoginSettings:
+      type: object
+      properties:
+        certificateBasedAuthEnabled:
+          type: boolean
+        certificateBasedAuthUrl:
+          type: string
+        enforcePasswordPolicyEnabled:
+          type: boolean
+        forgotPasswordEnabled:
+          type: boolean
+        hideForm:
+          type: boolean
+        identifierFirstEnabled:
+          type: boolean
+        inherited:
+          type: boolean
+        magicLinkAuthEnabled:
+          type: boolean
+        passwordlessDeviceNamingEnabled:
+          type: boolean
+        passwordlessEnabled:
+          type: boolean
+        passwordlessEnforcePasswordEnabled:
+          type: boolean
+        passwordlessEnforcePasswordMaxAge:
+          type: integer
+          format: int32
+        passwordlessRememberDeviceEnabled:
+          type: boolean
+        registerEnabled:
+          type: boolean
+        rememberMeEnabled:
+          type: boolean
+        resetPasswordOnExpiration:
+          type: boolean
+    TokenClaim:
+      type: object
+      properties:
+        claimName:
+          type: string
+        claimValue:
+          type: string
+        tokenType:
+          type: string
+          enum:
+          - ACCESS_TOKEN
+          - REFRESH_TOKEN
+          - ID_TOKEN
+    MembershipListItem:
+      type: object
+      properties:
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+    ClientSecret:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        secret:
+          type: string
+        settingsId:
+          type: string
+    UpdateProtectedResourceFeature:
+      required:
+      - key
+      - type
+      type: object
+      properties:
+        description:
+          type: string
+        key:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_-]+$
+          type: string
+        type:
+          type: string
+      discriminator:
+        propertyName: type
+    RememberDeviceSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        deviceIdentifierId:
+          type: string
+        expirationTimeSeconds:
+          type: integer
+          format: int64
+        skipChallengeWhenRememberDevice:
+          type: boolean
+        skipRememberDevice:
+          type: boolean
+    ProtectedResourcePrimaryData:
+      type: object
+      properties:
+        certificate:
+          type: string
+        clientId:
+          type: string
+        description:
+          type: string
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtectedResourceFeature'
+        id:
+          type: string
+        name:
+          type: string
+        resourceIdentifiers:
+          type: array
+          items:
+            type: string
+        secretSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationSecretSettings'
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        type:
+          type: string
+          enum:
+          - MCP_SERVER
+        updatedAt:
+          type: string
+          format: date-time
+    NewProtectedResourceFeature:
+      required:
+      - key
+      - type
+      type: object
+      properties:
+        description:
+          type: string
+        key:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_-]+$
+          type: string
+        type:
+          type: string
+      discriminator:
+        propertyName: type
+    ApplicationSAMLSettings:
+      type: object
+      properties:
+        assertionAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SAMLAssertionAttribute'
+        assertionValiditySeconds:
+          type: integer
+          format: int32
+        attributeConsumeServiceUrl:
+          type: string
+        audiences:
+          type: array
+          items:
+            type: string
+        certificate:
+          type: string
+        dataEncryptionAlgorithm:
+          type: string
+        entityId:
+          type: string
+        includeAssertionConditions:
+          type: boolean
+        keyTransportEncryptionAlgorithm:
+          type: string
+        nameIdMapping:
+          type: string
+        notBeforeTimeSkewSeconds:
+          type: integer
+          format: int32
+        notOnOrAfterTimeSkewSeconds:
+          type: integer
+          format: int32
+        responseBinding:
+          type: string
+        singleLogoutServiceUrl:
+          type: string
+        wantAssertionsEncrypted:
+          type: boolean
+        wantAssertionsSigned:
+          type: boolean
+        wantResponseSigned:
+          type: boolean
+    EnrollSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        enrollmentRule:
+          type: string
+        enrollmentSkipActive:
+          type: boolean
+        enrollmentSkipRule:
+          type: string
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+          - OPTIONAL
+          - REQUIRED
+          - CONDITIONAL
+    NewClientSecret:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+    FormField:
+      type: object
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+    AccountSettings:
+      type: object
+      properties:
+        accountBlockedDuration:
+          type: integer
+          format: int32
+        autoLoginAfterRegistration:
+          type: boolean
+        autoLoginAfterResetPassword:
+          type: boolean
+        botDetectionPlugin:
+          type: string
+        completeRegistrationWhenResetPassword:
+          type: boolean
+        defaultIdentityProviderForRegistration:
+          type: string
+        deletePasswordlessDevicesAfterResetPassword:
+          type: boolean
+        dynamicUserRegistration:
+          type: boolean
+        inherited:
+          type: boolean
+        loginAttemptsDetectionEnabled:
+          type: boolean
+        loginAttemptsResetTime:
+          type: integer
+          format: int32
+        maxLoginAttempts:
+          type: integer
+          format: int32
+        mfaChallengeAttemptsDetectionEnabled:
+          type: boolean
+        mfaChallengeAttemptsResetTime:
+          type: integer
+          format: int32
+        mfaChallengeMaxAttempts:
+          type: integer
+          format: int32
+        mfaChallengeSendVerifyAlertEmail:
+          type: boolean
+        redirectUriAfterRegistration:
+          type: string
+        redirectUriAfterResetPassword:
+          type: string
+        rememberMe:
+          type: boolean
+        rememberMeDuration:
+          type: integer
+          format: int32
+        resetPasswordConfirmIdentity:
+          type: boolean
+        resetPasswordCustomForm:
+          type: boolean
+        resetPasswordCustomFormFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+        resetPasswordInvalidateTokens:
+          type: boolean
+        sendRecoverAccountEmail:
+          type: boolean
+        sendVerifyRegistrationAccountEmail:
+          type: boolean
+        useBotDetection:
+          type: boolean
+    ProtectedResourceFeature:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        key:
+          type: string
+        type:
+          type: string
+          enum:
+          - MCP_TOOL
+        updatedAt:
+          type: string
+          format: date-time
+      discriminator:
+        propertyName: type
+        mapping:
+          MCP_TOOL: '#/components/schemas/McpTool'
+    CookieSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        session:
+          $ref: '#/components/schemas/SessionSettings'
+    ApplicationOAuthSettings:
+      type: object
+      properties:
+        accessTokenValiditySeconds:
+          type: integer
+          format: int32
+        applicationType:
+          type: string
+        authorizationEncryptedResponseAlg:
+          type: string
+        authorizationEncryptedResponseEnc:
+          type: string
+        authorizationSignedResponseAlg:
+          type: string
+        backchannelAuthRequestSignAlg:
+          type: string
+        backchannelClientNotificationEndpoint:
+          type: string
+        backchannelTokenDeliveryMode:
+          type: string
+        backchannelUserCodeParameter:
+          type: boolean
+        clientId:
+          type: string
+        clientIdIssuedAt:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        clientSecret:
+          type: string
+        clientSecretExpiresAt:
+          type: string
+          format: date-time
+        clientType:
+          type: string
+        clientUri:
+          type: string
+        contacts:
+          type: array
+          items:
+            type: string
+        defaultACRvalues:
+          type: array
+          items:
+            type: string
+        defaultMaxAge:
+          type: integer
+          format: int32
+        defaultScopes:
+          type: array
+          items:
+            type: string
+        disableRefreshTokenRotation:
+          type: boolean
+        enhanceScopesWithUserPermissions:
+          type: boolean
+        forcePKCE:
+          type: boolean
+        forceS256CodeChallengeMethod:
+          type: boolean
+        grantTypes:
+          type: array
+          items:
+            type: string
+        idTokenEncryptedResponseAlg:
+          type: string
+        idTokenEncryptedResponseEnc:
+          type: string
+        idTokenSignedResponseAlg:
+          type: string
+        idTokenValiditySeconds:
+          type: integer
+          format: int32
+        initiateLoginUri:
+          type: string
+        jwks:
+          $ref: '#/components/schemas/JWKSet'
+        jwksUri:
+          type: string
+        logoUri:
+          type: string
+        policyUri:
+          type: string
+        postLogoutRedirectUris:
+          type: array
+          items:
+            type: string
+        redirectUris:
+          type: array
+          items:
+            type: string
+        refreshTokenValiditySeconds:
+          type: integer
+          format: int32
+        registrationAccessToken:
+          type: string
+        registrationClientUri:
+          type: string
+        requestObjectEncryptionAlg:
+          type: string
+        requestObjectEncryptionEnc:
+          type: string
+        requestObjectSigningAlg:
+          type: string
+        requestUris:
+          type: array
+          items:
+            type: string
+        requireAuthTime:
+          type: boolean
+        requireParRequest:
+          type: boolean
+        responseTypes:
+          type: array
+          items:
+            type: string
+        scopeApprovals:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        scopeSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationScopeSettings'
+        scopes:
+          type: array
+          items:
+            type: string
+        sectorIdentifierUri:
+          type: string
+        silentReAuthentication:
+          type: boolean
+        singleSignOut:
+          type: boolean
+        softwareId:
+          type: string
+        softwareStatement:
+          type: string
+        softwareVersion:
+          type: string
+        subjectType:
+          type: string
+        tlsClientAuthSanDns:
+          type: string
+        tlsClientAuthSanEmail:
+          type: string
+        tlsClientAuthSanIp:
+          type: string
+        tlsClientAuthSanUri:
+          type: string
+        tlsClientAuthSubjectDn:
+          type: string
+        tlsClientCertificateBoundAccessTokens:
+          type: boolean
+        tokenCustomClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenClaim'
+        tokenEndpointAuthMethod:
+          type: string
+        tokenEndpointAuthSigningAlg:
+          type: string
+        tokenExchangeOAuthSettings:
+          $ref: '#/components/schemas/TokenExchangeOAuthSettings'
+        tosUri:
+          type: string
+        userinfoCustomClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoClaim'
+        userinfoEncryptedResponseAlg:
+          type: string
+        userinfoEncryptedResponseEnc:
+          type: string
+        userinfoSignedResponseAlg:
+          type: string
+    SessionSettings:
+      type: object
+      properties:
+        persistent:
+          type: boolean
+    PatchProtectedResource:
+      type: object
+      properties:
+        certificate:
+          type: string
+        description:
+          type: string
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateProtectedResourceFeature'
+        name:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[^\s].*
+          type: string
+        resourceIdentifiers:
+          type: array
+          items:
+            type: string
+        secretSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationSecretSettings'
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+    SecretExpirationSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        expiryTimeSeconds:
+          type: integer
+          format: int64
+    StepUpAuthenticationSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        stepUpAuthenticationRule:
+          type: string
+    PasswordSettings:
+      type: object
+      properties:
+        excludePasswordsInDictionary:
+          type: boolean
+        excludeUserProfileInfoInPassword:
+          type: boolean
+        expiryDuration:
+          type: integer
+          format: int32
+        includeNumbers:
+          type: boolean
+        includeSpecialCharacters:
+          type: boolean
+        inherited:
+          type: boolean
+        lettersInMixedCase:
+          type: boolean
+        maxConsecutiveLetters:
+          type: integer
+          format: int32
+        maxLength:
+          type: integer
+          format: int32
+        minLength:
+          type: integer
+          format: int32
+        oldPasswords:
+          type: integer
+          format: int32
+        passwordHistoryEnabled:
+          type: boolean
+    ProtectedResourcePage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtectedResourcePrimaryData'
+        totalCount:
+          type: integer
+          format: int64
+    ApplicationSettings:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountSettings'
+        advanced:
+          $ref: '#/components/schemas/ApplicationAdvancedSettings'
+        cookieSettings:
+          $ref: '#/components/schemas/CookieSettings'
+        login:
+          $ref: '#/components/schemas/LoginSettings'
+        mfa:
+          $ref: '#/components/schemas/MFASettings'
+        oauth:
+          $ref: '#/components/schemas/ApplicationOAuthSettings'
+        passwordSettings:
+          $ref: '#/components/schemas/PasswordSettings'
+        riskAssessment:
+          $ref: '#/components/schemas/RiskAssessmentSettings'
+        saml:
+          $ref: '#/components/schemas/ApplicationSAMLSettings'
+        secretExpirationSettings:
+          $ref: '#/components/schemas/SecretExpirationSettings'
+    NewProtectedResource:
+      required:
+      - name
+      - resourceIdentifiers
+      - type
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        description:
+          type: string
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/NewProtectedResourceFeature'
+        name:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[^\s].*
+          type: string
+        resourceIdentifiers:
+          minItems: 1
+          type: array
+          items:
+            minLength: 1
+            type: string
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        type:
+          minLength: 1
+          pattern: ^MCP_SERVER$
+          type: string
+    AssessmentSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        thresholds:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+    MFASettings:
+      type: object
+      properties:
+        adaptiveAuthenticationRule:
+          type: string
+        challenge:
+          $ref: '#/components/schemas/ChallengeSettings'
+        enroll:
+          $ref: '#/components/schemas/EnrollSettings'
+        enrollment:
+          $ref: '#/components/schemas/EnrollmentSettings'
+        factor:
+          $ref: '#/components/schemas/FactorSettings'
+        loginRule:
+          type: string
+        rememberDevice:
+          $ref: '#/components/schemas/RememberDeviceSettings'
+        stepUpAuthentication:
+          $ref: '#/components/schemas/StepUpAuthenticationSettings'
+        stepUpAuthenticationRule:
+          type: string
+    NewMembership:
+      required:
+      - memberId
+      - memberType
+      - role
+      type: object
+      properties:
+        memberId:
+          type: string
+        memberType:
+          type: string
+          enum:
+          - USER
+          - GROUP
+        role:
+          type: string
+    JWK:
+      type: object
+      properties:
+        alg:
+          type: string
+        keyOps:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        kid:
+          type: string
+        kty:
+          type: string
+        use:
+          type: string
+        x5c:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        x5t:
+          type: string
+        x5tS256:
+          type: string
+        x5u:
+          type: string
+    ApplicationScopeSettings:
+      type: object
+      properties:
+        defaultScope:
+          type: boolean
+        scope:
+          type: string
+        scopeApproval:
+          type: integer
+          format: int32
+    Membership:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        domain:
+          type: string
+        fromRoleMapper:
+          type: boolean
+        id:
+          type: string
+        memberId:
+          type: string
+        memberType:
+          type: string
+          enum:
+          - USER
+          - GROUP
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        roleId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    ProtectedResourceSecret:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+    JWKSet:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JWK'
+    ChallengeSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        challengeRule:
+          type: string
+        type:
+          type: string
+          enum:
+          - REQUIRED
+          - CONDITIONAL
+          - RISK_BASED
+    TokenExchangeOAuthSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        scopeHandling:
+          type: string
+          enum:
+          - DOWNSCOPING
+          - PERMISSIVE
+    SAMLAssertionAttribute:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    UserInfoClaim:
+      type: object
+      properties:
+        claimName:
+          type: string
+        claimValue:
+          type: string
+    UpdateProtectedResource:
+      required:
+      - name
+      - resourceIdentifiers
+      type: object
+      properties:
+        description:
+          type: string
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateProtectedResourceFeature'
+        name:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[^\s].*
+          type: string
+        resourceIdentifiers:
+          minItems: 1
+          type: array
+          items:
+            minLength: 1
+            type: string
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+    ApplicationSecretSettings:
+      type: object
+      properties:
+        algorithm:
+          type: string
+        id:
+          type: string
+    RiskAssessmentSettings:
+      type: object
+      properties:
+        deviceAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+        enabled:
+          type: boolean
+        geoVelocityAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+        ipReputationAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+    FactorSettings:
+      type: object
+      properties:
+        applicationFactors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationFactorSettings'
+        defaultFactorId:
+          type: string
+    ApplicationAdvancedSettings:
+      type: object
+      properties:
+        flowsInherited:
+          type: boolean
+        skipConsent:
+          type: boolean
+    EnrollmentSettings:
+      type: object
+      properties:
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+    ApplicationFactorSettings:
+      type: object
+      properties:
+        id:
+          type: string
+        selectionRule:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

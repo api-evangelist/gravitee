@@ -1,0 +1,463 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts devices API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: devices
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/devices:
+    get:
+      tags:
+      - devices
+      summary: List users for a security domain
+      description: 'User must have the DOMAIN_USER_DEVICES[LIST] permission on the specified domain or DOMAIN_USER_DEVICES[LIST] permission on the specified environment or DOMAIN_USER_DEVICES[LIST] permission on the specified organization. '
+      operationId: listUserDevices
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List users for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/devices/{device}:
+    delete:
+      tags:
+      - devices
+      summary: Delete a device
+      description: User must have the DOMAIN_USER_DEVICE[DELETE] permission on the specified domain or DOMAIN_USER_DEVICE[DELETE] permission on the specified environment or DOMAIN_USER_DEVICE[DELETE] permission on the specified organization
+      operationId: deleteUserDevice
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: device
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    Address:
+      type: object
+      properties:
+        country:
+          type: string
+        formatted:
+          type: string
+        locality:
+          type: string
+        postalCode:
+          type: string
+        primary:
+          type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
+        type:
+          type: string
+    EnrolledFactorSecurity:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        type:
+          type: string
+        value:
+          type: string
+    UserId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        id:
+          type: string
+        source:
+          type: string
+    Certificate:
+      type: object
+      properties:
+        value:
+          type: string
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    UserIdentity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    User:
+      type: object
+      properties:
+        accountLockedAt:
+          type: string
+          format: date-time
+        accountLockedUntil:
+          type: string
+          format: date-time
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        address:
+          type: object
+          additionalProperties:
+            type: object
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        birthdate:
+          type: string
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        disabled:
+          type: boolean
+        displayName:
+          type: string
+        dynamicGroups:
+          type: array
+          items:
+            type: string
+        dynamicRoles:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        enabled:
+          type: boolean
+        entitlements:
+          type: array
+          items:
+            type: string
+        externalId:
+          type: string
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrolledFactor'
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        fullId:
+          $ref: '#/components/schemas/UserId'
+        groups:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        identities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserIdentity'
+        identitiesAsMap:
+          type: object
+          additionalProperties:
+            type: object
+        ims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        inactive:
+          type: boolean
+        indefinitelyLocked:
+          type: boolean
+        internal:
+          type: boolean
+        lastIdentityInformation:
+          type: object
+          additionalProperties:
+            type: object
+        lastIdentityUsed:
+          type: string
+        lastLoginWithCredentials:
+          type: string
+          format: date-time
+        lastLogoutAt:
+          type: string
+          format: date-time
+        lastName:
+          type: string
+        lastPasswordReset:
+          type: string
+          format: date-time
+        lastUsernameReset:
+          type: string
+          format: date-time
+        locale:
+          type: string
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        mfaEnrollmentSkippedAt:
+          type: string
+          format: date-time
+        middleName:
+          type: string
+        newsletter:
+          type: boolean
+        nickName:
+          type: string
+        password:
+          type: string
+        phoneNumber:
+          type: string
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        picture:
+          type: string
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        profile:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        registrationAccessToken:
+          type: string
+        registrationCompleted:
+          type: boolean
+        registrationUserUri:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        rolesPermissions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        serviceAccount:
+          type: boolean
+        source:
+          type: string
+        temporarilyLocked:
+          type: boolean
+        title:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          type: string
+        website:
+          type: string
+        x509Certificates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+        zoneInfo:
+          type: string
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    Role:
+      type: object
+      properties:
+        assignableType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        internalOnly:
+          type: boolean
+        name:
+          type: string
+        oauthScopes:
+          type: array
+          items:
+            type: string
+        permissionAcls:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              enum:
+              - CREATE
+              - READ
+              - LIST
+              - UPDATE
+              - DELETE
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

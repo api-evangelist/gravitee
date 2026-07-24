@@ -1,0 +1,711 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Plugin API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Plugin
+paths:
+  /platform/plugins/auth-device-notifiers:
+    get:
+      tags:
+      - Plugin
+      summary: List authentication device notifier plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listAuthenticationDeviceNotifierPlugins
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/auth-device-notifiers/{authDeviceNotifierId}:
+    get:
+      tags:
+      - Plugin
+      summary: Get a Authentication Device Notifier plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getAuthenticationDeviceNotifierPlugin
+      parameters:
+      - name: authDeviceNotifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/auth-device-notifiers/{authDeviceNotifierId}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get an Authentication Device Notifier plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getAuthenticationDeviceNotifierPluginSchema
+      parameters:
+      - name: authDeviceNotifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/authorization-engines:
+    get:
+      tags:
+      - Plugin
+      summary: List authorization engine plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listAuthorizationEnginePlugins
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/authorization-engines/{authorizationEngine}:
+    get:
+      tags:
+      - Plugin
+      summary: Get an authorization engine plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getAuthorizationEnginePlugin
+      parameters:
+      - name: authorizationEngine
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/authorization-engines/{authorizationEngine}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get an authorization engine plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getAuthorizationEnginePluginSchema
+      parameters:
+      - name: authorizationEngine
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/bot-detections:
+    get:
+      tags:
+      - Plugin
+      summary: List bot detection plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listBotDetectionsPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/bot-detections/{botDetection}:
+    get:
+      tags:
+      - Plugin
+      summary: Get a Bot Detection plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getBotDetectionPlugin
+      parameters:
+      - name: botDetection
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/bot-detections/{botDetection}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get a Bot Detection plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getBotDetectionPluginSchema
+      parameters:
+      - name: botDetection
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/certificates:
+    get:
+      tags:
+      - Plugin
+      summary: List certificate plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listCertificatesPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/certificates/{certificate}:
+    get:
+      tags:
+      - Plugin
+      summary: Get an certificate plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getCertificatePlugin
+      parameters:
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/certificates/{certificate}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get an certificate's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getCertificatePluginSchema
+      parameters:
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/device-identifiers:
+    get:
+      tags:
+      - Plugin
+      summary: List device identifier plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listDeviceIdentifierPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/device-identifiers/{deviceIdentifier}:
+    get:
+      tags:
+      - Plugin
+      summary: Get a device identifier plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getDeviceIdentifierPlugin
+      parameters:
+      - name: deviceIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/device-identifiers/{deviceIdentifier}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get a device identifier plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getDeviceIdentifierPluginSchema
+      parameters:
+      - name: deviceIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/extensionGrants:
+    get:
+      tags:
+      - Plugin
+      summary: List extension grant plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listExtensionGrants_1
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/extensionGrants/{extensionGrant}:
+    get:
+      tags:
+      - Plugin
+      summary: Get an extension grant plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getExtensionGrant_1
+      parameters:
+      - name: extensionGrant
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/extensionGrants/{extensionGrant}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get an extension grant plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getExtensionGrantSchema
+      parameters:
+      - name: extensionGrant
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/factors:
+    get:
+      tags:
+      - Plugin
+      summary: List factor plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listFactorPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/factors/{factor}:
+    get:
+      tags:
+      - Plugin
+      summary: Get a factor plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getFactorPlugin
+      parameters:
+      - name: factor
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/factors/{factor}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get a factor plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getFactorPluginSchema
+      parameters:
+      - name: factor
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/identities:
+    get:
+      tags:
+      - Plugin
+      summary: List identity provider plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listIdentityProviders_2
+      parameters:
+      - name: external
+        in: query
+        schema:
+          type: boolean
+      - name: organization
+        in: query
+        schema:
+          type: boolean
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/identities/{identity}:
+    get:
+      tags:
+      - Plugin
+      summary: Get an identity provider
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getIdentityProviderPlugin
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/identities/{identity}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get an identity provider plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getIdentityProviderPluginSchema
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/notifiers:
+    get:
+      tags:
+      - Plugin
+      summary: List all available notifier plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listNotifiers
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Notifier plugin list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotifierPlugin'
+        '500':
+          description: Internal server error
+  /platform/plugins/notifiers/{notifierId}:
+    get:
+      tags:
+      - Plugin
+      summary: Get a notifier
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getNotifier
+      parameters:
+      - name: notifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Notifier plugin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotifierPlugin'
+        '404':
+          description: Notifier plugin not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEntity'
+        '500':
+          description: Internal server error
+  /platform/plugins/notifiers/{notifierId}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get a notifier plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getNotifierSchema
+      parameters:
+      - name: notifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Notifier plugin schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Notifier plugin schema not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEntity'
+        '500':
+          description: Internal server error
+  /platform/plugins/policies:
+    get:
+      tags:
+      - Plugin
+      summary: List policy plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listPolicies
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/policies/{policy}:
+    get:
+      tags:
+      - Plugin
+      summary: Get a policy plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getPolicy
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/policies/{policy}/documentation:
+    get:
+      tags:
+      - Plugin
+      summary: Get a policy plugin's documentation
+      operationId: getPolicyDocumentation
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            text/plain: {}
+  /platform/plugins/policies/{policy}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get a policy plugin's schema
+      operationId: getPolicySchema
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/reporters:
+    get:
+      tags:
+      - Plugin
+      summary: List reporter plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listReporterPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/reporters/{reporter}:
+    get:
+      tags:
+      - Plugin
+      summary: Get a reporter plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getReporter
+      parameters:
+      - name: reporter
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/reporters/{reporter}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get a reporter plugin's schema
+      operationId: getReporterSchema
+      parameters:
+      - name: reporter
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/resources:
+    get:
+      tags:
+      - Plugin
+      summary: List resource plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listResourcePlugins
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/resources/{resource}:
+    get:
+      tags:
+      - Plugin
+      summary: Get a resource plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getResource_1
+      parameters:
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/resources/{resource}/schema:
+    get:
+      tags:
+      - Plugin
+      summary: Get a resource plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getResourceSchema
+      parameters:
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+components:
+  schemas:
+    ErrorEntity:
+      type: object
+      properties:
+        http_status:
+          type: integer
+          format: int32
+        message:
+          type: string
+    NotifierPlugin:
+      type: object
+      properties:
+        deployed:
+          type: boolean
+        description:
+          type: string
+        displayName:
+          type: string
+        feature:
+          type: string
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

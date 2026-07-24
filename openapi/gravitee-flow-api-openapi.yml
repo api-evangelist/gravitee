@@ -1,0 +1,265 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts flow API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: flow
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/flows:
+    get:
+      tags:
+      - flow
+      summary: List registered flows for a security domain
+      description: User must have the DOMAIN_FLOW[LIST] permission on the specified domain or DOMAIN_FLOW[LIST] permission on the specified environment or DOMAIN_FLOW[LIST] permission on the specified organization. Except if user has DOMAIN_FLOW[READ] permission on the domain, environment or organization, each returned flow is filtered and contains only basic information such as id and name and isEnabled.
+      operationId: listDomainFlows
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered flows for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - flow
+      summary: Create or update list of flows
+      description: User must have the DOMAIN_FLOW[UPDATE] permission on the specified domain or DOMAIN_FLOW[UPDATE] permission on the specified environment or DOMAIN_FLOW[UPDATE] permission on the specified organization
+      operationId: defineDomainFlows
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Flow'
+        required: true
+      responses:
+        '200':
+          description: Flows successfully updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowEntity'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/flows/{flow}:
+    get:
+      tags:
+      - flow
+      summary: Get a flow
+      description: User must have the DOMAIN_FLOW[READ] permission on the specified domain or DOMAIN_FLOW[READ] permission on the specified environment or DOMAIN_FLOW[READ] permission on the specified organization
+      operationId: getDomainFlow
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: flow
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Flow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - flow
+      summary: Update a flow
+      description: User must have the DOMAIN_FLOW[UPDATE] permission on the specified domain or DOMAIN_FLOW[UPDATE] permission on the specified environment or DOMAIN_FLOW[UPDATE] permission on the specified organization
+      operationId: updateDomainFlow
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: flow
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flow'
+        required: true
+      responses:
+        '201':
+          description: Flow successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Step:
+      type: object
+      properties:
+        condition:
+          type: string
+        configuration:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        policy:
+          type: string
+    FlowEntity:
+      type: object
+      properties:
+        condition:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        post:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        pre:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        type:
+          type: string
+          enum:
+          - ROOT
+          - LOGIN_IDENTIFIER
+          - LOGIN
+          - CONNECT
+          - CONSENT
+          - REGISTER
+          - RESET_PASSWORD
+          - REGISTRATION_CONFIRMATION
+          - TOKEN
+          - WEBAUTHN_REGISTER
+          - MFA_CHALLENGE
+          - MFA_ENROLLMENT
+        updatedAt:
+          type: string
+          format: date-time
+    Flow:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        condition:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        post:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        pre:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        type:
+          type: string
+          enum:
+          - ROOT
+          - LOGIN_IDENTIFIER
+          - LOGIN
+          - CONNECT
+          - CONSENT
+          - REGISTER
+          - RESET_PASSWORD
+          - REGISTRATION_CONFIRMATION
+          - TOKEN
+          - WEBAUTHN_REGISTER
+          - MFA_CHALLENGE
+          - MFA_ENROLLMENT
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

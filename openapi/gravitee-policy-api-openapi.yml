@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Policy API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Policy
+paths:
+  /platform/plugins/policies:
+    get:
+      tags:
+      - Policy
+      summary: List policy plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listPolicies
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/policies/{policy}:
+    get:
+      tags:
+      - Policy
+      summary: Get a policy plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getPolicy
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/policies/{policy}/documentation:
+    get:
+      tags:
+      - Policy
+      summary: Get a policy plugin's documentation
+      operationId: getPolicyDocumentation
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            text/plain: {}
+  /platform/plugins/policies/{policy}/schema:
+    get:
+      tags:
+      - Policy
+      summary: Get a policy plugin's schema
+      operationId: getPolicySchema
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+components:
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

@@ -1,0 +1,3238 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts user API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: user
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users:
+    get:
+      tags:
+      - user
+      summary: List users for a security domain
+      description: User must have the DOMAIN_USER[LIST] permission on the specified domain or DOMAIN_USER[LIST] permission on the specified environment or DOMAIN_USER[LIST] permission on the specified organization. Each returned user is filtered and contains only basic information such as id and username and displayname. Last login and identity provider name will be also returned if current user has DOMAIN_USER[READ] permission on the domain, environment or organization.
+      operationId: listUsers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          maximum: 1000
+          minimum: 1
+          type: integer
+          format: int32
+          default: 30
+      responses:
+        '200':
+          description: List users for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPage'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - user
+      summary: Create a user on the specified security domain
+      description: User must have the DOMAIN_USER[CREATE] permission on the specified domain or DOMAIN_USER[CREATE] permission on the specified environment or DOMAIN_USER[CREATE] permission on the specified organization
+      operationId: createUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+        required: true
+      responses:
+        '201':
+          description: User successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/bulk:
+    post:
+      tags:
+      - user
+      summary: Create/update/delete multiple users on the specified security domain
+      description: User must have the DOMAIN_USER[CREATE/UPDATE/DELETE] permission on the specified domain, the environment, or the organization
+      operationId: bulkUserOperation
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainUserBulkRequest'
+        required: true
+      responses:
+        '200':
+          description: Some users got created, inspect each result for details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkResponse'
+        '201':
+          description: All users successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkResponse'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}:
+    get:
+      tags:
+      - user
+      summary: Get a user
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: findUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - user
+      summary: Update a user
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: updateUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUser'
+        required: true
+      responses:
+        '201':
+          description: User successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - user
+      summary: Delete a user
+      description: User must have the DOMAIN_USER[DELETE] permission on the specified domain or DOMAIN_USER[DELETE] permission on the specified environment or DOMAIN_USER[DELETE] permission on the specified organization
+      operationId: deleteUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/audits:
+    get:
+      tags:
+      - user
+      summary: Get a user audit logs
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: listUserAuditLogs
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+      - name: from
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: User audit logs successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Audit'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/audits/{audit}:
+    get:
+      tags:
+      - user
+      summary: Get a user audit log
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: getUserAuditLog
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: audit
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User audit log successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audit'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/cert-credentials:
+    get:
+      tags:
+      - user
+      summary: Get user certificate credentials
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: listUserCertificateCredentials
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User certificate credentials successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CertificateCredential'
+        '404':
+          description: Domain not found
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - user
+      summary: Enroll a certificate credential for a user
+      description: User must have the DOMAIN_USER[CREATE] permission on the specified domain or DOMAIN_USER[CREATE] permission on the specified environment or DOMAIN_USER[CREATE] permission on the specified organization
+      operationId: enrollUserCertificateCredential
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCertificateCredential'
+        required: true
+      responses:
+        '201':
+          description: Certificate credential successfully enrolled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateCredential'
+        '400':
+          description: Invalid certificate or limit exceeded
+        '404':
+          description: Domain not found
+        '409':
+          description: Duplicate certificate
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/cert-credentials/{credential}:
+    get:
+      tags:
+      - user
+      summary: Get a user certificate credential
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: getUserCertificateCredential
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: credential
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User certificate credential successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateCredential'
+        '404':
+          description: Domain or certificate credential not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - user
+      summary: Revoke a user certificate credential
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: revokeUserCertificateCredential
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: credential
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Certificate credential successfully revoked
+        '404':
+          description: Domain or certificate credential not found
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/consents:
+    get:
+      tags:
+      - user
+      summary: Get a user consents
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: listUserConsents
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User consents successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScopeApprovalEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - user
+      summary: Revoke user consents
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: revokeUserConsents
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: clientId
+        in: query
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User consents successfully revoked
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/consents/{consent}:
+    get:
+      tags:
+      - user
+      summary: Get a user consent
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: getUserConsent
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: consent
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User consent successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScopeApprovalEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - user
+      summary: Revoke a user consent
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: revokeUserConsent
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: consent
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User consent successfully revoked
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/credentials:
+    get:
+      tags:
+      - user
+      summary: Get a user credentials
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: listUserCredentials
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User credentials successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/credentials/{credential}:
+    get:
+      tags:
+      - user
+      summary: Get a user credential
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: getUserCredential
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: credential
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User credential successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credential'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - user
+      summary: Revoke a user credential
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: revokeUserCredential
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: credential
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User credential successfully revoked
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/devices:
+    get:
+      tags:
+      - user
+      summary: List users for a security domain
+      description: 'User must have the DOMAIN_USER_DEVICES[LIST] permission on the specified domain or DOMAIN_USER_DEVICES[LIST] permission on the specified environment or DOMAIN_USER_DEVICES[LIST] permission on the specified organization. '
+      operationId: listUserDevices
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List users for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/devices/{device}:
+    delete:
+      tags:
+      - user
+      summary: Delete a device
+      description: User must have the DOMAIN_USER_DEVICE[DELETE] permission on the specified domain or DOMAIN_USER_DEVICE[DELETE] permission on the specified environment or DOMAIN_USER_DEVICE[DELETE] permission on the specified organization
+      operationId: deleteUserDevice
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: device
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/factors:
+    get:
+      tags:
+      - user
+      summary: Get a user enrolled factors
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: listUserEnrolledFactors
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User enrolled factors successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrolledFactorEntity'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/factors/{factor}:
+    delete:
+      tags:
+      - user
+      summary: Revoke user factor
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: deleteUserFactor
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: factor
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User factor successfully revoked
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/identities:
+    get:
+      tags:
+      - user
+      summary: Get a user linked identities
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: listUserIdentities
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User linked identities successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserIdentityEntity'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/identities/{identity}:
+    delete:
+      tags:
+      - user
+      summary: Unlink user identity
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: unlinkUserIdentity
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User identity successfully unlinked
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/lock:
+    post:
+      tags:
+      - user
+      summary: Lock a user
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: lockUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User locked
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/resetPassword:
+    post:
+      tags:
+      - user
+      summary: Reset password
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: resetPassword
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PasswordValue'
+        required: true
+      responses:
+        '200':
+          description: Password reset
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/roles:
+    get:
+      tags:
+      - user
+      summary: Get a user roles
+      description: User must have the DOMAIN_USER[READ] permission on the specified domain or DOMAIN_USER[READ] permission on the specified environment or DOMAIN_USER[READ] permission on the specified organization
+      operationId: listUserRoles
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: dynamic
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: User roles successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - user
+      summary: Assign roles to a user
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: assignRolesToUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: Roles successfully assigned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/roles/{role}:
+    delete:
+      tags:
+      - user
+      summary: Revoke role to a user
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: revokeUserRole
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Roles successfully revoked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/sendRegistrationConfirmation:
+    post:
+      tags:
+      - user
+      summary: Send registration confirmation email
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: sendRegistrationConfirmation
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Email sent
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/status:
+    put:
+      tags:
+      - user
+      summary: Update a user status
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: updateUserStatus
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusEntity'
+        required: true
+      responses:
+        '201':
+          description: User status successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/unlock:
+    post:
+      tags:
+      - user
+      summary: Unlock a user
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: unlockUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User unlocked
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/username:
+    patch:
+      tags:
+      - user
+      summary: Update a user username
+      description: User must have the DOMAIN_USER[UPDATE] permission on the specified domain or DOMAIN_USER[UPDATE] permission on the specified environment or DOMAIN_USER[UPDATE] permission on the specified organization
+      operationId: updateUsername
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernameEntity'
+        required: true
+      responses:
+        '201':
+          description: User username successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/users:
+    get:
+      tags:
+      - user
+      summary: List users of the organization
+      description: User must have the ORGANIZATION_USER[LIST] permission on the specified organization. Each returned user is filtered and contains only basic information such as id and username and displayname. Last login and identity provider name will be also returned if current user has ORGANIZATION_USER[READ] permission on the organization.
+      operationId: listOrganisationUsers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: filter
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          maximum: 1000
+          minimum: 1
+          type: integer
+          format: int32
+          default: 30
+      responses:
+        '200':
+          description: List users of the organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - user
+      summary: Create a platform user or Service Account
+      description: User must have the ORGANIZATION_USER[READ] permission on the specified organization
+      operationId: createOrganisationUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrganizationUser'
+        required: true
+      responses:
+        '201':
+          description: User or Service Account successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/users/bulk:
+    post:
+      tags:
+      - user
+      summary: Create/update/delete platform users or Service Accounts
+      description: User must have the ORGANIZATION_USER[CREATE/UPDATE/DELETE] permission on the specified organization
+      operationId: bulkOrganisationUserOperation
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationUserBulkRequest'
+        required: true
+      responses:
+        '200':
+          description: Some users or Service Accounts got created, inspect each result for details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkResponse'
+        '201':
+          description: Users or Service Accounts successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkResponse'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/users/{user}:
+    get:
+      tags:
+      - user
+      summary: Get a user
+      description: User must have the ORGANIZATION_USER[READ] permission on the specified organization
+      operationId: getOrganizationUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - user
+      summary: Update a user
+      description: User must have the ORGANIZATION_USER[UPDATE] permission on the specified organization
+      operationId: updateOrganizationUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUser'
+        required: true
+      responses:
+        '201':
+          description: User successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - user
+      summary: Delete a user
+      description: User must have the ORGANIZATION_USER[DELETE] permission on the specified organization
+      operationId: deleteOrganizationUser
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/users/{user}/resetPassword:
+    post:
+      tags:
+      - user
+      summary: Reset password
+      description: User must have the ORGANIZATION_USER[UPDATE] permission on the specified organization
+      operationId: resetOrganizationUserPassword
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PasswordValue'
+        required: true
+      responses:
+        '200':
+          description: Password reset
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/users/{user}/status:
+    put:
+      tags:
+      - user
+      summary: Update a user status
+      description: User must have the ORGANIZATION_USER[UPDATE] permission on the specified organization
+      operationId: updateOrganizationUserStatus
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StatusEntity'
+        required: true
+      responses:
+        '201':
+          description: User status successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/users/{user}/tokens:
+    get:
+      tags:
+      - user
+      summary: Get tokens of a user
+      description: User must have the ORGANIZATION_USER[READ] permission on the specified organization
+      operationId: getOrganizationUserTokens
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User tokens successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountAccessToken'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - user
+      summary: Generate an account access token for a user
+      description: User must have the ORGANIZATION_USER[UPDATE] permission on the specified organization
+      operationId: createAccountAccessToken
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAccountAccessToken'
+      responses:
+        '201':
+          description: Account access token generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountAccessToken'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/users/{user}/tokens/{tokenId}:
+    delete:
+      tags:
+      - user
+      summary: Revoke an account access token
+      description: User must have the ORGANIZATION_USER[UPDATE] permission on the specified organization
+      operationId: revokeAccountAccessToken
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tokenId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account access token revoked
+  /organizations/{organizationId}/users/{user}/username:
+    patch:
+      tags:
+      - user
+      summary: Update a user username
+      description: User must have the ORGANIZATION_USER[UPDATE] permission on the specified organization
+      operationId: updateOrganisationUsername
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernameEntity'
+        required: true
+      responses:
+        '201':
+          description: User username successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /user:
+    get:
+      tags:
+      - user
+      summary: Get the current user
+      operationId: getCurrentUser
+      responses:
+        '200':
+          description: Current user successfully fetched
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Internal server error
+  /user/newsletter/_subscribe:
+    post:
+      tags:
+      - user
+      summary: Subscribe to the newsletter the authenticated user
+      operationId: subscribeNewsletter
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/EmailValue'
+        required: true
+      responses:
+        '200':
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '400':
+          description: Invalid user profile
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /user/newsletter/taglines:
+    get:
+      tags:
+      - user
+      summary: Get taglines to display in the newsletter
+      operationId: getTaglines
+      responses:
+        '200':
+          description: Retrieved taglines
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+  /user/notifications:
+    get:
+      tags:
+      - user
+      summary: List notifications received by the current user
+      operationId: listNotifications
+      responses:
+        '200':
+          description: Current user notifications successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserNotificationContent'
+        '500':
+          description: Internal server error
+  /user/notifications/{notificationId}/acknowledge:
+    post:
+      tags:
+      - user
+      summary: Mark User notification as read
+      operationId: markNotificationAsRead
+      parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User notification has been marked as read
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    CertificateCredential:
+      type: object
+      properties:
+        accessedAt:
+          type: string
+          format: date-time
+        certificateExpiresAt:
+          type: string
+          format: date-time
+        certificateIssuerDN:
+          type: string
+        certificatePem:
+          type: string
+        certificateSerialNumber:
+          type: string
+        certificateSubjectDN:
+          type: string
+        certificateThumbprint:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        ipAddress:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        updatedAt:
+          type: string
+          format: date-time
+        userAgent:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    BulkDeleteUser:
+      required:
+      - action
+      - items
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            type: string
+    BaseJsonNode:
+      type: object
+    Address:
+      type: object
+      properties:
+        country:
+          type: string
+        formatted:
+          type: string
+        locality:
+          type: string
+        postalCode:
+          type: string
+        primary:
+          type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
+        type:
+          type: string
+    UserEntity:
+      type: object
+      properties:
+        accountLockedAt:
+          type: string
+          format: date-time
+        accountLockedUntil:
+          type: string
+          format: date-time
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        address:
+          type: object
+          additionalProperties:
+            type: object
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        applicationEntity:
+          $ref: '#/components/schemas/ApplicationEntity'
+        birthdate:
+          type: string
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        disabled:
+          type: boolean
+        displayName:
+          type: string
+        dynamicGroups:
+          type: array
+          items:
+            type: string
+        dynamicRoles:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        enabled:
+          type: boolean
+        entitlements:
+          type: array
+          items:
+            type: string
+        externalId:
+          type: string
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrolledFactor'
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        fullId:
+          $ref: '#/components/schemas/UserId'
+        groups:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        identities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserIdentity'
+        identitiesAsMap:
+          type: object
+          additionalProperties:
+            type: object
+        ims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        inactive:
+          type: boolean
+        indefinitelyLocked:
+          type: boolean
+        internal:
+          type: boolean
+        lastIdentityInformation:
+          type: object
+          additionalProperties:
+            type: object
+        lastIdentityUsed:
+          type: string
+        lastLoginWithCredentials:
+          type: string
+          format: date-time
+        lastLogoutAt:
+          type: string
+          format: date-time
+        lastName:
+          type: string
+        lastPasswordReset:
+          type: string
+          format: date-time
+        lastUsernameReset:
+          type: string
+          format: date-time
+        locale:
+          type: string
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        mfaEnrollmentSkippedAt:
+          type: string
+          format: date-time
+        middleName:
+          type: string
+        newsletter:
+          type: boolean
+        nickName:
+          type: string
+        password:
+          type: string
+        phoneNumber:
+          type: string
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        picture:
+          type: string
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        profile:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        registrationAccessToken:
+          type: string
+        registrationCompleted:
+          type: boolean
+        registrationUserUri:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        rolesPermissions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        serviceAccount:
+          type: boolean
+        source:
+          type: string
+        sourceId:
+          type: string
+        temporarilyLocked:
+          type: boolean
+        title:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          type: string
+        website:
+          type: string
+        x509Certificates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+        zoneInfo:
+          type: string
+    AuditOutcome:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+    UserIdentityEntity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        providerName:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    UserNotificationContent:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+          - UNREAD
+          - READ
+        title:
+          type: string
+    Page:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            type: object
+        totalCount:
+          type: integer
+          format: int64
+    NewAccountAccessToken:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+    User:
+      type: object
+      properties:
+        accountLockedAt:
+          type: string
+          format: date-time
+        accountLockedUntil:
+          type: string
+          format: date-time
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        address:
+          type: object
+          additionalProperties:
+            type: object
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        birthdate:
+          type: string
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        disabled:
+          type: boolean
+        displayName:
+          type: string
+        dynamicGroups:
+          type: array
+          items:
+            type: string
+        dynamicRoles:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        enabled:
+          type: boolean
+        entitlements:
+          type: array
+          items:
+            type: string
+        externalId:
+          type: string
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrolledFactor'
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        fullId:
+          $ref: '#/components/schemas/UserId'
+        groups:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        identities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserIdentity'
+        identitiesAsMap:
+          type: object
+          additionalProperties:
+            type: object
+        ims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        inactive:
+          type: boolean
+        indefinitelyLocked:
+          type: boolean
+        internal:
+          type: boolean
+        lastIdentityInformation:
+          type: object
+          additionalProperties:
+            type: object
+        lastIdentityUsed:
+          type: string
+        lastLoginWithCredentials:
+          type: string
+          format: date-time
+        lastLogoutAt:
+          type: string
+          format: date-time
+        lastName:
+          type: string
+        lastPasswordReset:
+          type: string
+          format: date-time
+        lastUsernameReset:
+          type: string
+          format: date-time
+        locale:
+          type: string
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        mfaEnrollmentSkippedAt:
+          type: string
+          format: date-time
+        middleName:
+          type: string
+        newsletter:
+          type: boolean
+        nickName:
+          type: string
+        password:
+          type: string
+        phoneNumber:
+          type: string
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        picture:
+          type: string
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        profile:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        registrationAccessToken:
+          type: string
+        registrationCompleted:
+          type: boolean
+        registrationUserUri:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        rolesPermissions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        serviceAccount:
+          type: boolean
+        source:
+          type: string
+        temporarilyLocked:
+          type: boolean
+        title:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          type: string
+        website:
+          type: string
+        x509Certificates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+        zoneInfo:
+          type: string
+    Role:
+      type: object
+      properties:
+        assignableType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        internalOnly:
+          type: boolean
+        name:
+          type: string
+        oauthScopes:
+          type: array
+          items:
+            type: string
+        permissionAcls:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              enum:
+              - CREATE
+              - READ
+              - LIST
+              - UPDATE
+              - DELETE
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+    Reference:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+    EmailValue:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+    EnrolledFactorEntity:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    UserPage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        totalCount:
+          type: integer
+          format: int64
+    Certificate:
+      type: object
+      properties:
+        value:
+          type: string
+    BulkCreateOrganizationUser:
+      required:
+      - action
+      - items
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/NewOrganizationUser'
+    AuditEntity:
+      type: object
+      properties:
+        alternativeId:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: object
+        displayName:
+          type: string
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    UpdateUserWithId:
+      type: object
+      properties:
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        displayName:
+          type: string
+        email:
+          maxLength: 320
+          minLength: 0
+          type: string
+        enabled:
+          type: boolean
+        externalId:
+          type: string
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        id:
+          type: string
+        lastName:
+          type: string
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        registrationCompleted:
+          type: boolean
+        source:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    UsernameEntity:
+      required:
+      - username
+      type: object
+      properties:
+        username:
+          minLength: 1
+          type: string
+    ScopeApprovalEntity:
+      type: object
+      properties:
+        clientEntity:
+          $ref: '#/components/schemas/ApplicationEntity'
+        clientId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        domain:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        scope:
+          type: string
+        scopeEntity:
+          $ref: '#/components/schemas/ScopeEntity'
+        status:
+          type: string
+          enum:
+          - APPROVED
+          - DENIED
+        transactionId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        userId:
+          $ref: '#/components/schemas/UserId'
+    OrganizationUserBulkRequest:
+      required:
+      - action
+      - items
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseJsonNode'
+      discriminator:
+        propertyName: action
+        mapping:
+          CREATE: '#/components/schemas/BulkCreateOrganizationUser'
+          UPDATE: '#/components/schemas/BulkUpdateUser'
+          DELETE: '#/components/schemas/BulkDeleteUser'
+      oneOf:
+      - $ref: '#/components/schemas/BulkCreateOrganizationUser'
+      - $ref: '#/components/schemas/BulkUpdateUser'
+      - $ref: '#/components/schemas/BulkDeleteUser'
+    NewUser:
+      required:
+      - username
+      type: object
+      properties:
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        domain:
+          type: string
+        email:
+          type: string
+        enabled:
+          type: boolean
+        externalId:
+          type: string
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        internal:
+          type: boolean
+        lastName:
+          type: string
+        lastPasswordReset:
+          type: string
+          format: date-time
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        password:
+          type: string
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        registrationCompleted:
+          type: boolean
+        source:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          minLength: 1
+          type: string
+    BulkUpdateUser:
+      required:
+      - action
+      - items
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateUserWithId'
+    Audit:
+      type: object
+      properties:
+        accessPoint:
+          $ref: '#/components/schemas/AuditAccessPoint'
+        actor:
+          $ref: '#/components/schemas/AuditEntity'
+        id:
+          type: string
+        outcome:
+          $ref: '#/components/schemas/AuditOutcome'
+        reference:
+          $ref: '#/components/schemas/Reference'
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        target:
+          $ref: '#/components/schemas/AuditEntity'
+        timestamp:
+          type: string
+          format: date-time
+          writeOnly: true
+        transactionId:
+          type: string
+        type:
+          type: string
+    StatusEntity:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    UserId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        id:
+          type: string
+        source:
+          type: string
+    NewOrganizationUser:
+      required:
+      - username
+      type: object
+      properties:
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        domain:
+          type: string
+        email:
+          type: string
+        enabled:
+          type: boolean
+        externalId:
+          type: string
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        internal:
+          type: boolean
+        lastName:
+          type: string
+        lastPasswordReset:
+          type: string
+          format: date-time
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        password:
+          type: string
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        registrationCompleted:
+          type: boolean
+        serviceAccount:
+          type: boolean
+        source:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          minLength: 1
+          type: string
+    UpdateUser:
+      type: object
+      properties:
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        displayName:
+          type: string
+        email:
+          maxLength: 320
+          minLength: 0
+          type: string
+        enabled:
+          type: boolean
+        externalId:
+          type: string
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        lastName:
+          type: string
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        registrationCompleted:
+          type: boolean
+        source:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    NewCertificateCredential:
+      required:
+      - certificatePem
+      type: object
+      properties:
+        certificatePem:
+          minLength: 1
+          type: string
+          description: The certificate in PEM format
+          example: '-----BEGIN CERTIFICATE-----
+
+            ...
+
+            -----END CERTIFICATE-----'
+    ScopeEntity:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+    DomainUserBulkRequest:
+      required:
+      - action
+      - items
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseJsonNode'
+      discriminator:
+        propertyName: action
+        mapping:
+          CREATE: '#/components/schemas/BulkCreateUser'
+          UPDATE: '#/components/schemas/BulkUpdateUser'
+          DELETE: '#/components/schemas/BulkDeleteUser'
+      oneOf:
+      - $ref: '#/components/schemas/BulkCreateUser'
+      - $ref: '#/components/schemas/BulkUpdateUser'
+      - $ref: '#/components/schemas/BulkDeleteUser'
+    BulkCreateUser:
+      required:
+      - action
+      - items
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/NewUser'
+    ApplicationEntity:
+      type: object
+      properties:
+        clientId:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    UserIdentity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    BulkOperationResultObject:
+      type: object
+      properties:
+        body:
+          type: object
+        errorDetails:
+          type: object
+        httpStatus:
+          maximum: 599
+          minimum: 100
+          type: integer
+          format: int32
+        index:
+          type: integer
+          format: int32
+        success:
+          type: boolean
+    BulkResponse:
+      type: object
+      properties:
+        allSuccessful:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkOperationResultObject'
+    EnrolledFactorSecurity:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        type:
+          type: string
+        value:
+          type: string
+    AuditAccessPoint:
+      type: object
+      properties:
+        alternativeId:
+          type: string
+        displayName:
+          type: string
+        id:
+          type: string
+        ipAddress:
+          type: string
+        userAgent:
+          type: string
+    PasswordValue:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          type: string
+    AccountAccessToken:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        issuerId:
+          type: string
+        issuerUsername:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        token:
+          type: string
+        tokenId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        userId:
+          type: string
+    Credential:
+      type: object
+      properties:
+        aaguid:
+          type: string
+        accessedAt:
+          type: string
+          format: date-time
+        attestationStatement:
+          type: string
+        attestationStatementFormat:
+          type: string
+        counter:
+          type: integer
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+        deviceName:
+          type: string
+        id:
+          type: string
+        ipAddress:
+          type: string
+        lastCheckedAt:
+          type: string
+          format: date-time
+        publicKey:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        updatedAt:
+          type: string
+          format: date-time
+        userAgent:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

@@ -1,0 +1,311 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Resource API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Resource
+paths:
+  /platform/plugins/resources:
+    get:
+      tags:
+      - Resource
+      summary: List resource plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listResourcePlugins
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/resources/{resource}:
+    get:
+      tags:
+      - Resource
+      summary: Get a resource plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getResource_1
+      parameters:
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/resources/{resource}/schema:
+    get:
+      tags:
+      - Resource
+      summary: Get a resource plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getResourceSchema
+      parameters:
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/resources:
+    get:
+      tags:
+      - Resource
+      summary: List registered resources for a security domain
+      description: User must have the DOMAIN_RESOURCE[LIST] permission on the specified domain or DOMAIN_RESOURCE[LIST] permission on the specified environment or DOMAIN_RESOURCE[LIST] permission on the specified organization Each returned resource is filtered and contains only basic information such as id, name and resource type.
+      operationId: listResources
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered resources for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceResource'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Resource
+      summary: Create a resource
+      description: User must have the DOMAIN_RESOURCE[CREATE] permission on the specified domain or DOMAIN_RESOURCE[CREATE] permission on the specified environment or DOMAIN_RESOURCE[CREATE] permission on the specified organization
+      operationId: createResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewServiceResource'
+        required: true
+      responses:
+        '201':
+          description: Resource successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResource'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/resources/{resource}:
+    get:
+      tags:
+      - Resource
+      summary: Get a resource
+      description: User must have the DOMAIN_RESOURCE[READ] permission on the specified domain or DOMAIN_RESOURCE[READ] permission on the specified environment or DOMAIN_RESOURCE[READ] permission on the specified organization
+      operationId: getResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Resource successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResource'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Resource
+      summary: Update a resource
+      description: User must have the DOMAIN_RESOURCE[UPDATE] permission on the specified domain or DOMAIN_RESOURCE[UPDATE] permission on the specified environment or DOMAIN_RESOURCE[UPDATE] permission on the specified organization
+      operationId: updateResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateServiceResource'
+        required: true
+      responses:
+        '201':
+          description: Resource successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResource'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Resource
+      summary: Delete a resource
+      description: User must have the DOMAIN_RESOURCE[DELETE] permission on the specified domain or DOMAIN_RESOURCE[DELETE] permission on the specified environment or DOMAIN_RESOURCE[DELETE] permission on the specified organization
+      operationId: deleteResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Resource successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateServiceResource:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
+    ServiceResource:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    NewServiceResource:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

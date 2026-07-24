@@ -1,0 +1,3442 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts application API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: application
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications:
+    get:
+      tags:
+      - application
+      summary: List registered applications for a security domain
+      description: User must have the APPLICATION[LIST] permission on the specified domain, environment or organization AND either APPLICATION[READ] permission on each domain's application or APPLICATION[READ] permission on the specified domain or APPLICATION[READ] permission on the specified environment or APPLICATION[READ] permission on the specified organization. Each returned application is filtered and contains only basic information such as id, name, description and isEnabled.
+      operationId: listApplications
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: List registered applications for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPage'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - application
+      summary: Create an application
+      description: User must have APPLICATION[CREATE] permission on the specified domain or APPLICATION[CREATE] permission on the specified environment or APPLICATION[CREATE] permission on the specified organization
+      operationId: createApplication
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApplication'
+        required: true
+      responses:
+        '201':
+          description: Application successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}:
+    get:
+      tags:
+      - application
+      summary: Get an application
+      description: User must have the APPLICATION[READ] permission on the specified application or APPLICATION[READ] permission on the specified domain or APPLICATION[READ] permission on the specified environment or APPLICATION[READ] permission on the specified organization. Application will be filtered according to permissions (READ on APPLICATION_IDENTITY_PROVIDER, APPLICATION_CERTIFICATE, APPLICATION_METADATA, APPLICATION_USER_ACCOUNT, APPLICATION_SETTINGS)
+      operationId: findApplication
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - application
+      summary: Update an application
+      description: User must have APPLICATION[UPDATE] permission on the specified application or APPLICATION[UPDATE] permission on the specified domain or APPLICATION[UPDATE] permission on the specified environment or APPLICATION[UPDATE] permission on the specified organization
+      operationId: updateApplication
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchApplication'
+        required: true
+      responses:
+        '200':
+          description: Application successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - application
+      summary: Delete an application
+      description: User must have APPLICATION[DELETE] permission on the specified application or APPLICATION[DELETE] permission on the specified domain or APPLICATION[DELETE] permission on the specified environment or APPLICATION[DELETE] permission on the specified organization
+      operationId: deleteApplication
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Application successfully deleted
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - application
+      summary: Patch an application
+      description: User must have APPLICATION[UPDATE] permission on the specified application or APPLICATION[UPDATE] permission on the specified domain or APPLICATION[UPDATE] permission on the specified environment or APPLICATION[UPDATE] permission on the specified organization
+      operationId: patchApplication
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchApplication'
+        required: true
+      responses:
+        '200':
+          description: Application successfully patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/analytics:
+    get:
+      tags:
+      - application
+      summary: Find application analytics
+      description: User must have APPLICATION_ANALYTICS[READ] permission on the specified application or APPLICATION_ANALYTICS[READ] permission on the specified domain or APPLICATION_ANALYTICS[READ] permission on the specified environment or APPLICATION_ANALYTICS[READ] permission on the specified organization
+      operationId: getApplicationAnalytics
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: from
+        in: query
+        description: Used to define the start date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        description: Used to define the end date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: interval
+        in: query
+        description: The time interval when getting histogram data
+        schema:
+          type: integer
+          format: int64
+      - name: size
+        in: query
+        description: The number of data to retrieve
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        description: The type of data to retrieve (group_by, date_histo, count)
+        required: true
+        schema:
+          $ref: '#/components/schemas/AnalyticsTypeParam'
+      - name: field
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Analytics successfully fetched
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails:
+    get:
+      tags:
+      - application
+      summary: Find a email for an application
+      description: User must have APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified organization
+      operationId: findApplicationEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: template
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+      responses:
+        '200':
+          description: Email successfully fetched
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - application
+      summary: Create a email for an application
+      description: User must have APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified organization
+      operationId: createApplicationEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewEmail'
+        required: true
+      responses:
+        '201':
+          description: Email successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails/{email}:
+    put:
+      tags:
+      - application
+      summary: Update an email for an application
+      description: User must have APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified organization
+      operationId: updateApplicationEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmail'
+        required: true
+      responses:
+        '201':
+          description: Email successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - application
+      summary: Delete an email for an application
+      description: User must have APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified organization
+      operationId: deleteApplicationEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Email successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/flows:
+    get:
+      tags:
+      - application
+      summary: List registered flows for an application
+      description: User must have the APPLICATION_FLOW[LIST] permission on the specified domain or APPLICATION_FLOW[LIST] permission on the specified environment or APPLICATION_FLOW[LIST] permission on the specified organization. Except if user has APPLICATION_FLOW[READ] permission on the domain, environment or organization, each returned flow is filtered and contains only basic information such as id and name and isEnabled.
+      operationId: listAppFlows
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered flows for an application
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - application
+      summary: Create or update list of flows
+      description: User must have the APPLICATION_FLOW[UPDATE] permission on the specified domain or APPLICATION_FLOW[UPDATE] permission on the specified environment or APPLICATION_FLOW[UPDATE] permission on the specified organization
+      operationId: defineAppFlows
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Flow'
+        required: true
+      responses:
+        '200':
+          description: Flows successfully updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowEntity'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/flows/{flow}:
+    get:
+      tags:
+      - application
+      summary: Get a flow
+      description: User must have the APPLICATION_FLOW[READ] permission on the specified domain or APPLICATION_FLOW[READ] permission on the specified environment or APPLICATION_FLOW[READ] permission on the specified organization
+      operationId: getAppFlow
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: flow
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Flow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - application
+      summary: Update a flow
+      description: User must have the APPLICATION_FLOW[UPDATE] permission on the specified domain or APPLICATION_FLOW[UPDATE] permission on the specified environment or APPLICATION_FLOW[UPDATE] permission on the specified organization
+      operationId: updateAppFlow
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: flow
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Flow'
+        required: true
+      responses:
+        '201':
+          description: Flow successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowEntity'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms:
+    get:
+      tags:
+      - application
+      summary: Find a form for an application
+      description: User must have APPLICATION_FORM[READ] permission on the specified application or APPLICATION_FORM[READ] permission on the specified domain or APPLICATION_FORM[READ] permission on the specified environment or APPLICATION_FORM[READ] permission on the specified organization
+      operationId: findApplicationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: template
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+      responses:
+        '200':
+          description: Form successfully fetched
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - application
+      summary: Create a form for an application
+      description: User must have APPLICATION_FORM[CREATE] permission on the specified application or APPLICATION_FORM[CREATE] permission on the specified domain or APPLICATION_FORM[CREATE] permission on the specified environment or APPLICATION_FORM[CREATE] permission on the specified organization
+      operationId: createApplicationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewForm'
+        required: true
+      responses:
+        '201':
+          description: Form successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms/{form}:
+    put:
+      tags:
+      - application
+      summary: Update a form for an application
+      description: User must have APPLICATION_FORM[UPDATE] permission on the specified application or APPLICATION_FORM[UPDATE] permission on the specified domain or APPLICATION_FORM[UPDATE] permission on the specified environment or APPLICATION_FORM[UPDATE] permission on the specified organization
+      operationId: updateApplicationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: form
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateForm'
+        required: true
+      responses:
+        '201':
+          description: Form successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - application
+      summary: Delete a form for an application
+      description: User must have APPLICATION_FORM[DELETE] permission on the specified application or APPLICATION_FORM[DELETE] permission on the specified domain or APPLICATION_FORM[DELETE] permission on the specified environment or APPLICATION_FORM[DELETE] permission on the specified organization
+      operationId: deleteApplicationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: form
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Form successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/members:
+    get:
+      tags:
+      - application
+      summary: List members for an application
+      description: User must have APPLICATION_MEMBER[LIST] permission on the specified application or APPLICATION_MEMBER[LIST] permission on the specified domain or APPLICATION_MEMBER[LIST] permission on the specified environment or APPLICATION_MEMBER[LIST] permission on the specified organization
+      operationId: getMembers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List members for an application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MembershipListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - application
+      summary: Add or update an application member
+      description: User must have APPLICATION_MEMBER[CREATE] permission on the specified application or APPLICATION_MEMBER[CREATE] permission on the specified domain or APPLICATION_MEMBER[CREATE] permission on the specified environment or APPLICATION_MEMBER[CREATE] permission on the specified organization
+      operationId: addOrUpdateMember
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMembership'
+        required: true
+      responses:
+        '201':
+          description: Member has been added or updated successfully
+        '400':
+          description: Membership parameter is not valid
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/members/permissions
+  : get:
+      tags:
+      - application
+      summary: List application member's permissions
+      description: User must have APPLICATION[READ] permission on the specified application or APPLICATION[READ] permission on the specified domain or APPLICATION[READ] permission on the specified environment or APPLICATION[READ] permission on the specified organization
+      operationId: getApplicationMemberPermissions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Application member's permissions
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/members/{member}:
+    delete:
+      tags:
+      - application
+      summary: Remove a membership
+      description: User must have APPLICATION_MEMBER[DELETE] permission on the specified application or APPLICATION_MEMBER[DELETE] permission on the specified domain or APPLICATION_MEMBER[DELETE] permission on the specified environment or APPLICATION_MEMBER[DELETE] permission on the specified organization
+      operationId: removeApplicationMember
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: member
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Membership successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/resources:
+    get:
+      tags:
+      - application
+      summary: List resources for an application
+      description: User must have APPLICATION_RESOURCE[LIST] permission on the specified application or APPLICATION_RESOURCE[LIST] permission on the specified domain or APPLICATION_RESOURCE[LIST] permission on the specified environment or APPLICATION_RESOURCE[LIST] permission on the specified organization
+      operationId: listApplicationResources
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      responses:
+        '200':
+          description: List resources for an application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListItem'
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/resources/{resource}
+  : get:
+      tags:
+      - application
+      summary: Get a resource for an application
+      description: User must have APPLICATION_RESOURCE[READ] permission on the specified application or APPLICATION_RESOURCE[READ] permission on the specified domain or APPLICATION_RESOURCE[READ] permission on the specified environment or APPLICATION_RESOURCE[READ] permission on the specified organization
+      operationId: getApplicationResource
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get a resource for an application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/resources/{resource}/policies
+  : get:
+      tags:
+      - application
+      summary: Get resource access policies
+      description: User must have APPLICATION_RESOURCE[READ] permission on the specified application or APPLICATION_RESOURCE[READ] permission on the specified domain or APPLICATION_RESOURCE[READ] permission on the specified environment or APPLICATION_RESOURCE[READ] permission on the specified organization
+      operationId: listApplicationPolicies
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get resource access policies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessPolicyListItem'
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/resources/{resource}/policies/{policy}
+  : get:
+      tags:
+      - application
+      summary: Get resource access policy
+      description: User must have APPLICATION_RESOURCE[READ] permission on the specified application or APPLICATION_RESOURCE[READ] permission on the specified domain or APPLICATION_RESOURCE[READ] permission on the specified environment or APPLICATION_RESOURCE[READ] permission on the specified organization
+      operationId: getApplicationResourcePolicy
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get resource access policy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessPolicy'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/secrets:
+    get:
+      tags:
+      - application
+      summary: List secrets of an application
+      description: User must have APPLICATION_OPENID[LIST] permission on the specified application or APPLICATION_OPENID[LIST] permission on the specified domain or APPLICATION_OPENID[LIST] permission on the specified environment or APPLICATION_OPENID[LIST] permission on the specified organization
+      operationId: listSecrets
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List secrets of an application
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientSecret'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - application
+      summary: Create a secret for an application
+      description: User must have APPLICATION_OPENID[CREATE] permission on the specified application or APPLICATION_OPENID[CREATE] permission on the specified domain or APPLICATION_OPENID[CREATE] permission on the specified environment or APPLICATION_OPENID[CREATE] permission on the specified organization
+      operationId: createSecret
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewClientSecret'
+        required: true
+      responses:
+        '200':
+          description: Application secret successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSecret'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/secrets/{secret}:
+    delete:
+      tags:
+      - application
+      summary: Delete a secret of an application
+      description: User must have APPLICATION_OPENID[DELETE] permission on the specified application or APPLICATION_OPENID[DELETE] permission on the specified domain or APPLICATION_OPENID[DELETE] permission on the specified environment or APPLICATION_OPENID[DELETE] permission on the specified organization
+      operationId: deleteClientSecret
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: secret
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Secret successfully deleted
+        '500':
+          description: Internal server error
+  ? /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/secrets/{secret}/_renew
+  : post:
+      tags:
+      - application
+      summary: Renew application secret
+      description: User must have APPLICATION_OPENID[UPDATE] permission on the specified application or APPLICATION_OPENID[UPDATE] permission on the specified domain or APPLICATION_OPENID[UPDATE] permission on the specified environment or APPLICATION_OPENID[UPDATE] permission on the specified organization
+      operationId: renewClientSecret
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: secret
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Application secret successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSecret'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/type:
+    put:
+      tags:
+      - application
+      summary: Update an application type
+      description: User must have APPLICATION[UPDATE] permission on the specified application or APPLICATION[UPDATE] permission on the specified domain or APPLICATION[UPDATE] permission on the specified environment or APPLICATION[UPDATE] permission on the specified organization
+      operationId: updateApplicationType
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchApplicationType'
+        required: true
+      responses:
+        '200':
+          description: Application type successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/cimd/applications:
+    post:
+      tags:
+      - application
+      summary: Create an application from a CIMD document URL
+      description: User must have APPLICATION[CREATE] permission on the specified domain
+      operationId: createApplicationFromCimd
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCimdApplication'
+        required: true
+      responses:
+        '201':
+          description: Application successfully created
+        '400':
+          description: Document invalid or untrusted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/cimd/validate:
+    post:
+      tags:
+      - application
+      summary: Validate a CIMD URL and return parsed metadata preview
+      description: User must have APPLICATION[CREATE] permission on the specified domain
+      operationId: validateCimdUrl
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CimdValidationRequest'
+        required: true
+      responses:
+        '200':
+          description: Document validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CimdValidationResponse'
+        '400':
+          description: Document invalid or untrusted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateForm:
+      type: object
+      properties:
+        assets:
+          type: string
+        content:
+          type: string
+        enabled:
+          type: boolean
+    TokenClaim:
+      type: object
+      properties:
+        claimName:
+          type: string
+        claimValue:
+          type: string
+        tokenType:
+          type: string
+          enum:
+          - ACCESS_TOKEN
+          - REFRESH_TOKEN
+          - ID_TOKEN
+    LoginSettings:
+      type: object
+      properties:
+        certificateBasedAuthEnabled:
+          type: boolean
+        certificateBasedAuthUrl:
+          type: string
+        enforcePasswordPolicyEnabled:
+          type: boolean
+        forgotPasswordEnabled:
+          type: boolean
+        hideForm:
+          type: boolean
+        identifierFirstEnabled:
+          type: boolean
+        inherited:
+          type: boolean
+        magicLinkAuthEnabled:
+          type: boolean
+        passwordlessDeviceNamingEnabled:
+          type: boolean
+        passwordlessEnabled:
+          type: boolean
+        passwordlessEnforcePasswordEnabled:
+          type: boolean
+        passwordlessEnforcePasswordMaxAge:
+          type: integer
+          format: int32
+        passwordlessRememberDeviceEnabled:
+          type: boolean
+        registerEnabled:
+          type: boolean
+        rememberMeEnabled:
+          type: boolean
+        resetPasswordOnExpiration:
+          type: boolean
+    NewEmail:
+      required:
+      - content
+      - expiresAfter
+      - from
+      - subject
+      - template
+      type: object
+      properties:
+        content:
+          type: string
+        enabled:
+          type: boolean
+        expiresAfter:
+          minimum: 1
+          type: integer
+          format: int32
+        from:
+          type: string
+        fromName:
+          type: string
+        subject:
+          type: string
+        template:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+    MembershipListItem:
+      type: object
+      properties:
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+    ClientSecret:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        secret:
+          type: string
+        settingsId:
+          type: string
+    UpdateEmail:
+      required:
+      - content
+      - expiresAfter
+      - from
+      - subject
+      type: object
+      properties:
+        content:
+          type: string
+        enabled:
+          type: boolean
+        expiresAfter:
+          minimum: 1
+          type: integer
+          format: int32
+        from:
+          type: string
+        fromName:
+          type: string
+        subject:
+          type: string
+    RememberDeviceSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        deviceIdentifierId:
+          type: string
+        expirationTimeSeconds:
+          type: integer
+          format: int64
+        skipChallengeWhenRememberDevice:
+          type: boolean
+        skipRememberDevice:
+          type: boolean
+    Resource:
+      type: object
+      properties:
+        clientId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        domain:
+          type: string
+        iconUri:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        resourceScopes:
+          type: array
+          items:
+            type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        userId:
+          type: string
+    PatchMFASettings:
+      type: object
+      properties:
+        adaptiveAuthenticationRule:
+          type: string
+        challenge:
+          $ref: '#/components/schemas/PatchChallengeSettings'
+        enroll:
+          $ref: '#/components/schemas/PatchEnrollSettings'
+        enrollment:
+          $ref: '#/components/schemas/PatchEnrollmentSettings'
+        factor:
+          $ref: '#/components/schemas/PatchFactorSettings'
+        loginRule:
+          type: string
+        rememberDevice:
+          $ref: '#/components/schemas/PatchRememberDeviceSettings'
+        stepUpAuthentication:
+          $ref: '#/components/schemas/PatchStepUpAuthentication'
+        stepUpAuthenticationRule:
+          type: string
+    PatchStepUpAuthentication:
+      type: object
+      properties:
+        active:
+          type: boolean
+        stepUpAuthenticationRule:
+          type: string
+    AccessPolicy:
+      type: object
+      properties:
+        condition:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        domain:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        resource:
+          type: string
+        type:
+          type: string
+          enum:
+          - GROOVY
+        updatedAt:
+          type: string
+          format: date-time
+    PatchApplicationSettings:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountSettings'
+        advanced:
+          $ref: '#/components/schemas/PatchApplicationAdvancedSettings'
+        cookieSettings:
+          $ref: '#/components/schemas/CookieSettings'
+        login:
+          $ref: '#/components/schemas/LoginSettings'
+        mfa:
+          $ref: '#/components/schemas/PatchMFASettings'
+        oauth:
+          $ref: '#/components/schemas/PatchApplicationOAuthSettings'
+        passwordSettings:
+          $ref: '#/components/schemas/PatchPasswordSettings'
+        requiredPermissions:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - ORGANIZATION
+            - ORGANIZATION_SETTINGS
+            - ORGANIZATION_IDENTITY_PROVIDER
+            - ORGANIZATION_AUDIT
+            - ORGANIZATION_REPORTER
+            - ORGANIZATION_SCOPE
+            - ORGANIZATION_USER
+            - ORGANIZATION_GROUP
+            - ORGANIZATION_ROLE
+            - ORGANIZATION_TAG
+            - ORGANIZATION_ENTRYPOINT
+            - ORGANIZATION_FORM
+            - ORGANIZATION_MEMBER
+            - ENVIRONMENT
+            - DATA_PLANE
+            - DOMAIN
+            - DOMAIN_SETTINGS
+            - DOMAIN_FORM
+            - DOMAIN_EMAIL_TEMPLATE
+            - DOMAIN_EXTENSION_POINT
+            - DOMAIN_IDENTITY_PROVIDER
+            - DOMAIN_AUTHORIZATION_ENGINE
+            - DOMAIN_AUDIT
+            - DOMAIN_CERTIFICATE
+            - DOMAIN_USER
+            - DOMAIN_USER_DEVICE
+            - DOMAIN_GROUP
+            - DOMAIN_ROLE
+            - DOMAIN_SCIM
+            - DOMAIN_SCOPE
+            - DOMAIN_EXTENSION_GRANT
+            - DOMAIN_OPENID
+            - DOMAIN_SAML
+            - DOMAIN_UMA
+            - DOMAIN_UMA_SCOPE
+            - DOMAIN_REPORTER
+            - DOMAIN_MEMBER
+            - DOMAIN_ANALYTICS
+            - DOMAIN_FACTOR
+            - DOMAIN_RESOURCE
+            - DOMAIN_FLOW
+            - DOMAIN_ALERT
+            - DOMAIN_ALERT_NOTIFIER
+            - DOMAIN_BOT_DETECTION
+            - DOMAIN_DEVICE_IDENTIFIER
+            - DOMAIN_AUTHDEVICE_NOTIFIER
+            - DOMAIN_I18N_DICTIONARY
+            - DOMAIN_THEME
+            - APPLICATION
+            - APPLICATION_SETTINGS
+            - APPLICATION_IDENTITY_PROVIDER
+            - APPLICATION_FORM
+            - APPLICATION_EMAIL_TEMPLATE
+            - APPLICATION_OPENID
+            - APPLICATION_SAML
+            - APPLICATION_CERTIFICATE
+            - APPLICATION_MEMBER
+            - APPLICATION_FACTOR
+            - APPLICATION_RESOURCE
+            - APPLICATION_ANALYTICS
+            - APPLICATION_FLOW
+            - LICENSE_NOTIFICATION
+            - PROTECTED_RESOURCE
+            - PROTECTED_RESOURCE_MEMBER
+            - PROTECTED_RESOURCE_SETTINGS
+            - PROTECTED_RESOURCE_OAUTH
+            - PROTECTED_RESOURCE_CERTIFICATE
+            - INSTALLATION
+        riskAssessment:
+          $ref: '#/components/schemas/RiskAssessmentSettings'
+        saml:
+          $ref: '#/components/schemas/PatchApplicationSAMLSettings'
+        secretExpirationSettings:
+          $ref: '#/components/schemas/SecretExpirationSettings'
+    ApplicationSAMLSettings:
+      type: object
+      properties:
+        assertionAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SAMLAssertionAttribute'
+        assertionValiditySeconds:
+          type: integer
+          format: int32
+        attributeConsumeServiceUrl:
+          type: string
+        audiences:
+          type: array
+          items:
+            type: string
+        certificate:
+          type: string
+        dataEncryptionAlgorithm:
+          type: string
+        entityId:
+          type: string
+        includeAssertionConditions:
+          type: boolean
+        keyTransportEncryptionAlgorithm:
+          type: string
+        nameIdMapping:
+          type: string
+        notBeforeTimeSkewSeconds:
+          type: integer
+          format: int32
+        notOnOrAfterTimeSkewSeconds:
+          type: integer
+          format: int32
+        responseBinding:
+          type: string
+        singleLogoutServiceUrl:
+          type: string
+        wantAssertionsEncrypted:
+          type: boolean
+        wantAssertionsSigned:
+          type: boolean
+        wantResponseSigned:
+          type: boolean
+    NewCimdApplication:
+      required:
+      - cimdUrl
+      - name
+      - type
+      type: object
+      properties:
+        cimdUrl:
+          type: string
+        clientName:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - WEB
+          - NATIVE
+          - BROWSER
+          - SERVICE
+          - RESOURCE_SERVER
+    PatchApplicationOAuthSettings:
+      type: object
+      properties:
+        accessTokenValiditySeconds:
+          type: integer
+          format: int32
+        applicationType:
+          type: string
+        authorizationEncryptedResponseAlg:
+          type: string
+        authorizationEncryptedResponseEnc:
+          type: string
+        authorizationSignedResponseAlg:
+          type: string
+        clientIdIssuedAt:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        clientSecretExpiresAt:
+          type: string
+          format: date-time
+        clientUri:
+          type: string
+        contacts:
+          type: array
+          items:
+            type: string
+        defaultACRvalues:
+          type: array
+          items:
+            type: string
+        defaultMaxAge:
+          type: integer
+          format: int32
+        disableRefreshTokenRotation:
+          type: boolean
+        enhanceScopesWithUserPermissions:
+          type: boolean
+        forcePKCE:
+          type: boolean
+        forceS256CodeChallengeMethod:
+          type: boolean
+        grantTypes:
+          type: array
+          items:
+            type: string
+        idTokenEncryptedResponseAlg:
+          type: string
+        idTokenEncryptedResponseEnc:
+          type: string
+        idTokenSignedResponseAlg:
+          type: string
+        idTokenValiditySeconds:
+          type: integer
+          format: int32
+        initiateLoginUri:
+          type: string
+        jwks:
+          $ref: '#/components/schemas/JWKSet'
+        jwksUri:
+          type: string
+        logoUri:
+          type: string
+        policyUri:
+          type: string
+        postLogoutRedirectUris:
+          type: array
+          items:
+            type: string
+        redirectUris:
+          type: array
+          items:
+            type: string
+        refreshTokenValiditySeconds:
+          type: integer
+          format: int32
+        registrationAccessToken:
+          type: string
+        registrationClientUri:
+          type: string
+        requestObjectEncryptionAlg:
+          type: string
+        requestObjectEncryptionEnc:
+          type: string
+        requestObjectSigningAlg:
+          type: string
+        requestUris:
+          type: array
+          items:
+            type: string
+        requireAuthTime:
+          type: boolean
+        responseTypes:
+          type: array
+          items:
+            type: string
+        scopeSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationScopeSettings'
+        sectorIdentifierUri:
+          type: string
+        silentReAuthentication:
+          type: boolean
+        singleSignOut:
+          type: boolean
+        softwareId:
+          type: string
+        softwareStatement:
+          type: string
+        softwareVersion:
+          type: string
+        subjectType:
+          type: string
+        tlsClientAuthSanDns:
+          type: string
+        tlsClientAuthSanEmail:
+          type: string
+        tlsClientAuthSanIp:
+          type: string
+        tlsClientAuthSanUri:
+          type: string
+        tlsClientAuthSubjectDn:
+          type: string
+        tlsClientCertificateBoundAccessTokens:
+          type: boolean
+        tokenCustomClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenClaim'
+        tokenEndpointAuthMethod:
+          type: string
+        tokenEndpointAuthSigningAlg:
+          type: string
+        tokenExchangeOAuthSettings:
+          $ref: '#/components/schemas/TokenExchangeOAuthSettings'
+        tosUri:
+          type: string
+        userinfoCustomClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoClaim'
+        userinfoEncryptedResponseAlg:
+          type: string
+        userinfoEncryptedResponseEnc:
+          type: string
+        userinfoSignedResponseAlg:
+          type: string
+    ResourceEntity:
+      type: object
+      properties:
+        clientId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        domain:
+          type: string
+        iconUri:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        policies:
+          type: integer
+          format: int64
+        resourceScopes:
+          type: array
+          items:
+            type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        userDisplayName:
+          type: string
+        userId:
+          type: string
+    EnrollSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        enrollmentRule:
+          type: string
+        enrollmentSkipActive:
+          type: boolean
+        enrollmentSkipRule:
+          type: string
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+          - OPTIONAL
+          - REQUIRED
+          - CONDITIONAL
+    NewClientSecret:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+    FormField:
+      type: object
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+    AccountSettings:
+      type: object
+      properties:
+        accountBlockedDuration:
+          type: integer
+          format: int32
+        autoLoginAfterRegistration:
+          type: boolean
+        autoLoginAfterResetPassword:
+          type: boolean
+        botDetectionPlugin:
+          type: string
+        completeRegistrationWhenResetPassword:
+          type: boolean
+        defaultIdentityProviderForRegistration:
+          type: string
+        deletePasswordlessDevicesAfterResetPassword:
+          type: boolean
+        dynamicUserRegistration:
+          type: boolean
+        inherited:
+          type: boolean
+        loginAttemptsDetectionEnabled:
+          type: boolean
+        loginAttemptsResetTime:
+          type: integer
+          format: int32
+        maxLoginAttempts:
+          type: integer
+          format: int32
+        mfaChallengeAttemptsDetectionEnabled:
+          type: boolean
+        mfaChallengeAttemptsResetTime:
+          type: integer
+          format: int32
+        mfaChallengeMaxAttempts:
+          type: integer
+          format: int32
+        mfaChallengeSendVerifyAlertEmail:
+          type: boolean
+        redirectUriAfterRegistration:
+          type: string
+        redirectUriAfterResetPassword:
+          type: string
+        rememberMe:
+          type: boolean
+        rememberMeDuration:
+          type: integer
+          format: int32
+        resetPasswordConfirmIdentity:
+          type: boolean
+        resetPasswordCustomForm:
+          type: boolean
+        resetPasswordCustomFormFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+        resetPasswordInvalidateTokens:
+          type: boolean
+        sendRecoverAccountEmail:
+          type: boolean
+        sendVerifyRegistrationAccountEmail:
+          type: boolean
+        useBotDetection:
+          type: boolean
+    Step:
+      type: object
+      properties:
+        condition:
+          type: string
+        configuration:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        policy:
+          type: string
+    CimdValidationRequest:
+      required:
+      - url
+      type: object
+      properties:
+        url:
+          type: string
+    CookieSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        session:
+          $ref: '#/components/schemas/SessionSettings'
+    SessionSettings:
+      type: object
+      properties:
+        persistent:
+          type: boolean
+    Application:
+      type: object
+      properties:
+        certificate:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        domain:
+          type: string
+        enabled:
+          type: boolean
+        factors:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        identityProviders:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationIdentityProvider'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+        name:
+          type: string
+        passwordSettings:
+          $ref: '#/components/schemas/PasswordSettings'
+        secretSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationSecretSettings'
+        secrets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientSecret'
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        template:
+          type: boolean
+        type:
+          type: string
+          enum:
+          - WEB
+          - NATIVE
+          - BROWSER
+          - SERVICE
+          - RESOURCE_SERVER
+        updatedAt:
+          type: string
+          format: date-time
+    ApplicationOAuthSettings:
+      type: object
+      properties:
+        accessTokenValiditySeconds:
+          type: integer
+          format: int32
+        applicationType:
+          type: string
+        authorizationEncryptedResponseAlg:
+          type: string
+        authorizationEncryptedResponseEnc:
+          type: string
+        authorizationSignedResponseAlg:
+          type: string
+        backchannelAuthRequestSignAlg:
+          type: string
+        backchannelClientNotificationEndpoint:
+          type: string
+        backchannelTokenDeliveryMode:
+          type: string
+        backchannelUserCodeParameter:
+          type: boolean
+        clientId:
+          type: string
+        clientIdIssuedAt:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        clientSecret:
+          type: string
+        clientSecretExpiresAt:
+          type: string
+          format: date-time
+        clientType:
+          type: string
+        clientUri:
+          type: string
+        contacts:
+          type: array
+          items:
+            type: string
+        defaultACRvalues:
+          type: array
+          items:
+            type: string
+        defaultMaxAge:
+          type: integer
+          format: int32
+        defaultScopes:
+          type: array
+          items:
+            type: string
+        disableRefreshTokenRotation:
+          type: boolean
+        enhanceScopesWithUserPermissions:
+          type: boolean
+        forcePKCE:
+          type: boolean
+        forceS256CodeChallengeMethod:
+          type: boolean
+        grantTypes:
+          type: array
+          items:
+            type: string
+        idTokenEncryptedResponseAlg:
+          type: string
+        idTokenEncryptedResponseEnc:
+          type: string
+        idTokenSignedResponseAlg:
+          type: string
+        idTokenValiditySeconds:
+          type: integer
+          format: int32
+        initiateLoginUri:
+          type: string
+        jwks:
+          $ref: '#/components/schemas/JWKSet'
+        jwksUri:
+          type: string
+        logoUri:
+          type: string
+        policyUri:
+          type: string
+        postLogoutRedirectUris:
+          type: array
+          items:
+            type: string
+        redirectUris:
+          type: array
+          items:
+            type: string
+        refreshTokenValiditySeconds:
+          type: integer
+          format: int32
+        registrationAccessToken:
+          type: string
+        registrationClientUri:
+          type: string
+        requestObjectEncryptionAlg:
+          type: string
+        requestObjectEncryptionEnc:
+          type: string
+        requestObjectSigningAlg:
+          type: string
+        requestUris:
+          type: array
+          items:
+            type: string
+        requireAuthTime:
+          type: boolean
+        requireParRequest:
+          type: boolean
+        responseTypes:
+          type: array
+          items:
+            type: string
+        scopeApprovals:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        scopeSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationScopeSettings'
+        scopes:
+          type: array
+          items:
+            type: string
+        sectorIdentifierUri:
+          type: string
+        silentReAuthentication:
+          type: boolean
+        singleSignOut:
+          type: boolean
+        softwareId:
+          type: string
+        softwareStatement:
+          type: string
+        softwareVersion:
+          type: string
+        subjectType:
+          type: string
+        tlsClientAuthSanDns:
+          type: string
+        tlsClientAuthSanEmail:
+          type: string
+        tlsClientAuthSanIp:
+          type: string
+        tlsClientAuthSanUri:
+          type: string
+        tlsClientAuthSubjectDn:
+          type: string
+        tlsClientCertificateBoundAccessTokens:
+          type: boolean
+        tokenCustomClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenClaim'
+        tokenEndpointAuthMethod:
+          type: string
+        tokenEndpointAuthSigningAlg:
+          type: string
+        tokenExchangeOAuthSettings:
+          $ref: '#/components/schemas/TokenExchangeOAuthSettings'
+        tosUri:
+          type: string
+        userinfoCustomClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoClaim'
+        userinfoEncryptedResponseAlg:
+          type: string
+        userinfoEncryptedResponseEnc:
+          type: string
+        userinfoSignedResponseAlg:
+          type: string
+    ApplicationFactorSettings:
+      type: object
+      properties:
+        id:
+          type: string
+        selectionRule:
+          type: string
+    Form:
+      type: object
+      properties:
+        assets:
+          type: string
+        client:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        template:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    SecretExpirationSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        expiryTimeSeconds:
+          type: integer
+          format: int64
+    Flow:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        condition:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        post:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        pre:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        type:
+          type: string
+          enum:
+          - ROOT
+          - LOGIN_IDENTIFIER
+          - LOGIN
+          - CONNECT
+          - CONSENT
+          - REGISTER
+          - RESET_PASSWORD
+          - REGISTRATION_CONFIRMATION
+          - TOKEN
+          - WEBAUTHN_REGISTER
+          - MFA_CHALLENGE
+          - MFA_ENROLLMENT
+    PatchApplicationType:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - WEB
+          - NATIVE
+          - BROWSER
+          - SERVICE
+          - RESOURCE_SERVER
+    FilteredApplication:
+      type: object
+      properties:
+        clientId:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        template:
+          type: boolean
+        type:
+          type: string
+          enum:
+          - WEB
+          - NATIVE
+          - BROWSER
+          - SERVICE
+          - RESOURCE_SERVER
+        updatedAt:
+          type: string
+          format: date-time
+    Email:
+      type: object
+      properties:
+        client:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        defaultTemplate:
+          type: boolean
+        enabled:
+          type: boolean
+        expiresAfter:
+          type: integer
+          format: int32
+        from:
+          type: string
+        fromName:
+          type: string
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        subject:
+          type: string
+        template:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    NewApplication:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        description:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+        name:
+          type: string
+        redirectUris:
+          type: array
+          items:
+            type: string
+        type:
+          type: string
+          enum:
+          - WEB
+          - NATIVE
+          - BROWSER
+          - SERVICE
+          - RESOURCE_SERVER
+    StepUpAuthenticationSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        stepUpAuthenticationRule:
+          type: string
+    PatchApplicationFactorSettings:
+      type: object
+      properties:
+        id:
+          type: string
+        selectionRule:
+          type: string
+    ResourceListItem:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceEntity'
+    ApplicationIdentityProvider:
+      type: object
+      properties:
+        identity:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        selectionRule:
+          type: string
+    PatchRememberDeviceSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        deviceIdentifierId:
+          type: string
+        expirationTimeSeconds:
+          type: integer
+          format: int64
+        skipRememberDevice:
+          type: boolean
+    PatchEnrollSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        enrollmentRule:
+          type: string
+        enrollmentSkipActive:
+          type: boolean
+        enrollmentSkipRule:
+          type: string
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+          - OPTIONAL
+          - REQUIRED
+          - CONDITIONAL
+    PatchEnrollmentSettings:
+      type: object
+      properties:
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+    PatchApplicationAdvancedSettings:
+      type: object
+      properties:
+        flowsInherited:
+          type: boolean
+        skipConsent:
+          type: boolean
+    PasswordSettings:
+      type: object
+      properties:
+        excludePasswordsInDictionary:
+          type: boolean
+        excludeUserProfileInfoInPassword:
+          type: boolean
+        expiryDuration:
+          type: integer
+          format: int32
+        includeNumbers:
+          type: boolean
+        includeSpecialCharacters:
+          type: boolean
+        inherited:
+          type: boolean
+        lettersInMixedCase:
+          type: boolean
+        maxConsecutiveLetters:
+          type: integer
+          format: int32
+        maxLength:
+          type: integer
+          format: int32
+        minLength:
+          type: integer
+          format: int32
+        oldPasswords:
+          type: integer
+          format: int32
+        passwordHistoryEnabled:
+          type: boolean
+    PatchPasswordSettings:
+      type: object
+      properties:
+        excludePasswordsInDictionary:
+          type: boolean
+        excludeUserProfileInfoInPassword:
+          type: boolean
+        expiryDuration:
+          type: integer
+          format: int32
+        includeNumbers:
+          type: boolean
+        includeSpecialCharacters:
+          type: boolean
+        inherited:
+          type: boolean
+        lettersInMixedCase:
+          type: boolean
+        maxConsecutiveLetters:
+          type: integer
+          format: int32
+        maxLength:
+          type: integer
+          format: int32
+        minLength:
+          type: integer
+          format: int32
+        oldPasswords:
+          type: integer
+          format: int32
+        passwordHistoryEnabled:
+          type: boolean
+    ApplicationSettings:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountSettings'
+        advanced:
+          $ref: '#/components/schemas/ApplicationAdvancedSettings'
+        cookieSettings:
+          $ref: '#/components/schemas/CookieSettings'
+        login:
+          $ref: '#/components/schemas/LoginSettings'
+        mfa:
+          $ref: '#/components/schemas/MFASettings'
+        oauth:
+          $ref: '#/components/schemas/ApplicationOAuthSettings'
+        passwordSettings:
+          $ref: '#/components/schemas/PasswordSettings'
+        riskAssessment:
+          $ref: '#/components/schemas/RiskAssessmentSettings'
+        saml:
+          $ref: '#/components/schemas/ApplicationSAMLSettings'
+        secretExpirationSettings:
+          $ref: '#/components/schemas/SecretExpirationSettings'
+    CimdValidationResponse:
+      type: object
+      properties:
+        hasInlineJwks:
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/ClientMetadata'
+        missing:
+          $ref: '#/components/schemas/Missing'
+        url:
+          type: string
+    PatchApplication:
+      type: object
+      properties:
+        certificate:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        factors:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        identityProviders:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PatchApplicationIdentityProvider'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+        name:
+          type: string
+        requiredPermissions:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - ORGANIZATION
+            - ORGANIZATION_SETTINGS
+            - ORGANIZATION_IDENTITY_PROVIDER
+            - ORGANIZATION_AUDIT
+            - ORGANIZATION_REPORTER
+            - ORGANIZATION_SCOPE
+            - ORGANIZATION_USER
+            - ORGANIZATION_GROUP
+            - ORGANIZATION_ROLE
+            - ORGANIZATION_TAG
+            - ORGANIZATION_ENTRYPOINT
+            - ORGANIZATION_FORM
+            - ORGANIZATION_MEMBER
+            - ENVIRONMENT
+            - DATA_PLANE
+            - DOMAIN
+            - DOMAIN_SETTINGS
+            - DOMAIN_FORM
+            - DOMAIN_EMAIL_TEMPLATE
+            - DOMAIN_EXTENSION_POINT
+            - DOMAIN_IDENTITY_PROVIDER
+            - DOMAIN_AUTHORIZATION_ENGINE
+            - DOMAIN_AUDIT
+            - DOMAIN_CERTIFICATE
+            - DOMAIN_USER
+            - DOMAIN_USER_DEVICE
+            - DOMAIN_GROUP
+            - DOMAIN_ROLE
+            - DOMAIN_SCIM
+            - DOMAIN_SCOPE
+            - DOMAIN_EXTENSION_GRANT
+            - DOMAIN_OPENID
+            - DOMAIN_SAML
+            - DOMAIN_UMA
+            - DOMAIN_UMA_SCOPE
+            - DOMAIN_REPORTER
+            - DOMAIN_MEMBER
+            - DOMAIN_ANALYTICS
+            - DOMAIN_FACTOR
+            - DOMAIN_RESOURCE
+            - DOMAIN_FLOW
+            - DOMAIN_ALERT
+            - DOMAIN_ALERT_NOTIFIER
+            - DOMAIN_BOT_DETECTION
+            - DOMAIN_DEVICE_IDENTIFIER
+            - DOMAIN_AUTHDEVICE_NOTIFIER
+            - DOMAIN_I18N_DICTIONARY
+            - DOMAIN_THEME
+            - APPLICATION
+            - APPLICATION_SETTINGS
+            - APPLICATION_IDENTITY_PROVIDER
+            - APPLICATION_FORM
+            - APPLICATION_EMAIL_TEMPLATE
+            - APPLICATION_OPENID
+            - APPLICATION_SAML
+            - APPLICATION_CERTIFICATE
+            - APPLICATION_MEMBER
+            - APPLICATION_FACTOR
+            - APPLICATION_RESOURCE
+            - APPLICATION_ANALYTICS
+            - APPLICATION_FLOW
+            - LICENSE_NOTIFICATION
+            - PROTECTED_RESOURCE
+            - PROTECTED_RESOURCE_MEMBER
+            - PROTECTED_RESOURCE_SETTINGS
+            - PROTECTED_RESOURCE_OAUTH
+            - PROTECTED_RESOURCE_CERTIFICATE
+            - INSTALLATION
+        settings:
+          $ref: '#/components/schemas/PatchApplicationSettings'
+        template:
+          type: boolean
+    ApplicationPage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilteredApplication'
+        totalCount:
+          type: integer
+          format: int64
+    PatchApplicationIdentityProvider:
+      type: object
+      properties:
+        identity:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        selectionRule:
+          type: string
+    PatchChallengeSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        challengeRule:
+          type: string
+        type:
+          type: string
+          enum:
+          - REQUIRED
+          - CONDITIONAL
+          - RISK_BASED
+    NewForm:
+      required:
+      - content
+      - template
+      type: object
+      properties:
+        assets:
+          type: string
+        content:
+          type: string
+        enabled:
+          type: boolean
+        template:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+    AssessmentSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        thresholds:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+    PatchApplicationSAMLSettings:
+      type: object
+      properties:
+        assertionAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SAMLAssertionAttribute'
+        assertionValiditySeconds:
+          type: integer
+          format: int32
+        attributeConsumeServiceUrl:
+          type: string
+        audiences:
+          type: array
+          items:
+            type: string
+        certificate:
+          type: string
+        dataEncryptionAlgorithm:
+          type: string
+        entityId:
+          type: string
+        includeAssertionConditions:
+          type: boolean
+        keyTransportEncryptionAlgorithm:
+          type: string
+        nameIdMapping:
+          type: string
+        notBeforeTimeSkewSeconds:
+          type: integer
+          format: int32
+        notOnOrAfterTimeSkewSeconds:
+          type: integer
+          format: int32
+        responseBinding:
+          type: string
+        singleLogoutServiceUrl:
+          type: string
+        wantAssertionsEncrypted:
+          type: boolean
+        wantAssertionsSigned:
+          type: boolean
+        wantResponseSigned:
+          type: boolean
+    PatchFactorSettings:
+      type: object
+      properties:
+        applicationFactors:
+          type: array
+          items:
+            $ref: '#/components/schemas/PatchApplicationFactorSettings'
+        defaultFactorId:
+          type: string
+    JWK:
+      type: object
+      properties:
+        alg:
+          type: string
+        keyOps:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        kid:
+          type: string
+        kty:
+          type: string
+        use:
+          type: string
+        x5c:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        x5t:
+          type: string
+        x5tS256:
+          type: string
+        x5u:
+          type: string
+    NewMembership:
+      required:
+      - memberId
+      - memberType
+      - role
+      type: object
+      properties:
+        memberId:
+          type: string
+        memberType:
+          type: string
+          enum:
+          - USER
+          - GROUP
+        role:
+          type: string
+    MFASettings:
+      type: object
+      properties:
+        adaptiveAuthenticationRule:
+          type: string
+        challenge:
+          $ref: '#/components/schemas/ChallengeSettings'
+        enroll:
+          $ref: '#/components/schemas/EnrollSettings'
+        enrollment:
+          $ref: '#/components/schemas/EnrollmentSettings'
+        factor:
+          $ref: '#/components/schemas/FactorSettings'
+        loginRule:
+          type: string
+        rememberDevice:
+          $ref: '#/components/schemas/RememberDeviceSettings'
+        stepUpAuthentication:
+          $ref: '#/components/schemas/StepUpAuthenticationSettings'
+        stepUpAuthenticationRule:
+          type: string
+    ApplicationScopeSettings:
+      type: object
+      properties:
+        defaultScope:
+          type: boolean
+        scope:
+          type: string
+        scopeApproval:
+          type: integer
+          format: int32
+    Membership:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        domain:
+          type: string
+        fromRoleMapper:
+          type: boolean
+        id:
+          type: string
+        memberId:
+          type: string
+        memberType:
+          type: string
+          enum:
+          - USER
+          - GROUP
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        roleId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    JWKSet:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JWK'
+    ChallengeSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        challengeRule:
+          type: string
+        type:
+          type: string
+          enum:
+          - REQUIRED
+          - CONDITIONAL
+          - RISK_BASED
+    ClientMetadata:
+      type: object
+      properties:
+        application_type:
+          type: string
+        backchannel_authentication_request_signing_alg:
+          type: string
+        backchannel_client_notification_endpoint:
+          type: string
+        backchannel_token_delivery_mode:
+          type: string
+        backchannel_user_code_parameter:
+          type: boolean
+        client_id:
+          type: string
+        client_name:
+          type: string
+        client_uri:
+          type: string
+        contacts:
+          type: array
+          items:
+            type: string
+        grant_types:
+          type: array
+          items:
+            type: string
+        id_token_signed_response_alg:
+          type: string
+        jwks_uri:
+          type: string
+        logo_uri:
+          type: string
+        policy_uri:
+          type: string
+        post_logout_redirect_uris:
+          type: array
+          items:
+            type: string
+        redirect_uris:
+          type: array
+          items:
+            type: string
+        request_uris:
+          type: array
+          items:
+            type: string
+        response_types:
+          type: array
+          items:
+            type: string
+        scope:
+          type: string
+        sector_identifier_uri:
+          type: string
+        software_id:
+          type: string
+        software_statement:
+          type: string
+        software_version:
+          type: string
+        subject_type:
+          type: string
+        tls_client_auth_san_dns:
+          type: string
+        tls_client_auth_san_email:
+          type: string
+        tls_client_auth_san_ip:
+          type: string
+        tls_client_auth_san_uri:
+          type: string
+        tls_client_auth_subject_dn:
+          type: string
+        tls_client_certificate_bound_access_tokens:
+          type: boolean
+        token_endpoint_auth_method:
+          type: string
+        tos_uri:
+          type: string
+      additionalProperties: true
+      description: OAuth 2.0 client metadata as defined in the IANA OAuth Parameters registry (https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#client-metadata).
+    UserInfoClaim:
+      type: object
+      properties:
+        claimName:
+          type: string
+        claimValue:
+          type: string
+    SAMLAssertionAttribute:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    AnalyticsTypeParam:
+      type: object
+      properties:
+        originalParam:
+          type: string
+        value:
+          type: string
+          enum:
+          - DATE_HISTO
+          - COUNT
+          - GROUP_BY
+    Missing:
+      type: object
+      properties:
+        clientId:
+          type: boolean
+        clientName:
+          type: boolean
+    ApplicationSecretSettings:
+      type: object
+      properties:
+        algorithm:
+          type: string
+        id:
+          type: string
+    FlowEntity:
+      type: object
+      properties:
+        condition:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        post:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        pre:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        type:
+          type: string
+          enum:
+          - ROOT
+          - LOGIN_IDENTIFIER
+          - LOGIN
+          - CONNECT
+          - CONSENT
+          - REGISTER
+          - RESET_PASSWORD
+          - REGISTRATION_CONFIRMATION
+          - TOKEN
+          - WEBAUTHN_REGISTER
+          - MFA_CHALLENGE
+          - MFA_ENROLLMENT
+        updatedAt:
+          type: string
+          format: date-time
+    RiskAssessmentSettings:
+      type: object
+      properties:
+        deviceAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+        enabled:
+          type: boolean
+        geoVelocityAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+        ipReputationAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+    AccessPolicyListItem:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    FactorSettings:
+      type: object
+      properties:
+        applicationFactors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationFactorSettings'
+        defaultFactorId:
+          type: string
+    ApplicationAdvancedSettings:
+      type: object
+      properties:
+        flowsInherited:
+          type: boolean
+        skipConsent:
+          type: boolean
+    EnrollmentSettings:
+      type: object
+      properties:
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+    TokenExchangeOAuthSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        scopeHandling:
+          type: string
+          enum:
+          - DOWNSCOPING
+          - PERMISSIVE
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

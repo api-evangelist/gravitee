@@ -1,0 +1,339 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts APIs API
+  version: 4.12.0-alpha.3
+  description: Manage APIs (v2 and v4 message-oriented APIs)
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: APIs
+  description: Manage APIs (v2 and v4 message-oriented APIs)
+paths:
+  /environments/{envId}/apis:
+    get:
+      tags:
+      - APIs
+      operationId: listApis
+      summary: List APIs in an Environment
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: perPage
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: A page of APIs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApisPage'
+    post:
+      tags:
+      - APIs
+      operationId: createApi
+      summary: Create an API
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApi'
+      responses:
+        '201':
+          description: API created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api'
+  /environments/{envId}/apis/_import/swagger:
+    post:
+      tags:
+      - APIs
+      operationId: importSwaggerApi
+      summary: Import an API from an OpenAPI/Swagger Document
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportSwaggerDescriptor'
+      responses:
+        '201':
+          description: API imported
+  /environments/{envId}/apis/_import/definition:
+    post:
+      tags:
+      - APIs
+      operationId: importApiDefinition
+      summary: Import an API From a Gravitee Definition
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: API imported
+  /environments/{envId}/apis/_search:
+    post:
+      tags:
+      - APIs
+      operationId: searchApis
+      summary: Search APIs by Query
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+      responses:
+        '200':
+          description: Matching APIs
+  /environments/{envId}/apis/{apiId}:
+    get:
+      tags:
+      - APIs
+      operationId: getApi
+      summary: Get an API by Identifier
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      responses:
+        '200':
+          description: The API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api'
+    put:
+      tags:
+      - APIs
+      operationId: updateApi
+      summary: Update an API
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Api'
+      responses:
+        '200':
+          description: API updated
+    delete:
+      tags:
+      - APIs
+      operationId: deleteApi
+      summary: Delete an API
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      responses:
+        '204':
+          description: API deleted
+  /environments/{envId}/apis/{apiId}/_deploy:
+    post:
+      tags:
+      - APIs
+      operationId: deployApi
+      summary: Deploy an API to the Gateway
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      responses:
+        '202':
+          description: Deployment requested
+  /environments/{envId}/apis/{apiId}/_start:
+    post:
+      tags:
+      - APIs
+      operationId: startApi
+      summary: Start an API
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      responses:
+        '204':
+          description: API started
+  /environments/{envId}/apis/{apiId}/_stop:
+    post:
+      tags:
+      - APIs
+      operationId: stopApi
+      summary: Stop an API
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      responses:
+        '204':
+          description: API stopped
+components:
+  schemas:
+    CreateApi:
+      type: object
+      required:
+      - name
+      - apiVersion
+      - definitionVersion
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        apiVersion:
+          type: string
+        definitionVersion:
+          type: string
+          enum:
+          - V2
+          - V4
+        type:
+          type: string
+          enum:
+          - PROXY
+          - MESSAGE
+          - NATIVE
+    ApisPage:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Api'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ImportSwaggerDescriptor:
+      type: object
+      required:
+      - type
+      - payload
+      properties:
+        type:
+          type: string
+          enum:
+          - INLINE
+          - URL
+        payload:
+          type: string
+        format:
+          type: string
+          enum:
+          - YAML
+          - JSON
+        withDocumentation:
+          type: boolean
+        withPathMapping:
+          type: boolean
+    Api:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        apiVersion:
+          type: string
+        definitionVersion:
+          type: string
+          enum:
+          - V1
+          - V2
+          - V4
+          - FEDERATED
+        type:
+          type: string
+          enum:
+          - PROXY
+          - MESSAGE
+          - NATIVE
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        labels:
+          type: array
+          items:
+            type: string
+        state:
+          type: string
+          enum:
+          - STARTED
+          - STOPPED
+        lifecycleState:
+          type: string
+          enum:
+          - CREATED
+          - PUBLISHED
+          - UNPUBLISHED
+          - ARCHIVED
+          - DEPRECATED
+        visibility:
+          type: string
+          enum:
+          - PUBLIC
+          - PRIVATE
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deployedAt:
+          type: string
+          format: date-time
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        perPage:
+          type: integer
+        pageItemsCount:
+          type: integer
+        totalCount:
+          type: integer
+        pageCount:
+          type: integer
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+    ApiId:
+      in: path
+      name: apiId
+      required: true
+      schema:
+        type: string
+      description: The API identifier
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

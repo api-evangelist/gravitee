@@ -1,0 +1,502 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts role API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: role
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/roles:
+    get:
+      tags:
+      - role
+      summary: List registered roles for a security domain
+      description: User must have the DOMAIN_ROLE[LIST] permission on the specified domain or DOMAIN_ROLE[LIST] permission on the specified environment or DOMAIN_ROLE[LIST] permission on the specified organization. Each returned role is filtered and contains only basic information such as id and name.
+      operationId: findRoles
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: q
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered roles for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolePage'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - role
+      summary: Create a role
+      description: User must have the DOMAIN_ROLE[CREATE] permission on the specified domain or DOMAIN_ROLE[CREATE] permission on the specified environment or DOMAIN_ROLE[CREATE] permission on the specified organization
+      operationId: createRole
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRole'
+        required: true
+      responses:
+        '201':
+          description: Role successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/roles/{role}:
+    get:
+      tags:
+      - role
+      summary: Get a role
+      description: User must have the DOMAIN_ROLE[READ] permission on the specified domain or DOMAIN_ROLE[READ] permission on the specified environment or DOMAIN_ROLE[READ] permission on the specified organization
+      operationId: findRole
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Role successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - role
+      summary: Update a role
+      description: User must have the DOMAIN_ROLE[UPDATE] permission on the specified domain or DOMAIN_ROLE[UPDATE] permission on the specified environment or DOMAIN_ROLE[UPDATE] permission on the specified organization
+      operationId: updateRole
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRole'
+        required: true
+      responses:
+        '201':
+          description: Role successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - role
+      summary: Delete a role
+      description: User must have the DOMAIN_ROLE[DELETE] permission on the specified domain or DOMAIN_ROLE[DELETE] permission on the specified environment or DOMAIN_ROLE[DELETE] permission on the specified organization
+      operationId: deleteRole
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Role successfully deleted
+        '400':
+          description: Role is bind to existing users
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/roles:
+    get:
+      tags:
+      - role
+      summary: List registered roles of the organization
+      description: User must have the ORGANIZATION_ROLE[LIST] permission on the specified organization. Each returned role is filtered and contains only basic information such as id, name, isSystem and assignableType.
+      operationId: listRoles
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+      responses:
+        '200':
+          description: List registered roles of the organization
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - role
+      summary: Create a role for the organization
+      description: User must have the ORGANIZATION_ROLE[CREATE] permission on the specified organization
+      operationId: createRole_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRole'
+        required: true
+      responses:
+        '201':
+          description: Role successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/roles/{role}:
+    get:
+      tags:
+      - role
+      summary: Get a platform role
+      description: User must have the ORGANIZATION_ROLE[READ] permission on the specified organization
+      operationId: getRole
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Role successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - role
+      summary: Update a platform role
+      description: User must have the ORGANIZATION_ROLE[UPDATE] permission on the specified organization
+      operationId: updateRole_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRole'
+        required: true
+      responses:
+        '201':
+          description: Role successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - role
+      summary: Delete a plaform role
+      description: User must have the ORGANIZATION_ROLE[DELETE] permission on the specified organization
+      operationId: deleteRole_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Role successfully deleted
+        '400':
+          description: Role is bind to existing users
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateRole:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        oauthScopes:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    RolePage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        totalCount:
+          type: integer
+          format: int64
+    RoleEntity:
+      type: object
+      properties:
+        assignableType:
+          type: string
+        availablePermissions:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+    NewRole:
+      required:
+      - name
+      type: object
+      properties:
+        assignableType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        description:
+          type: string
+        name:
+          type: string
+    Role:
+      type: object
+      properties:
+        assignableType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        internalOnly:
+          type: boolean
+        name:
+          type: string
+        oauthScopes:
+          type: array
+          items:
+            type: string
+        permissionAcls:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              enum:
+              - CREATE
+              - READ
+              - LIST
+              - UPDATE
+              - DELETE
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

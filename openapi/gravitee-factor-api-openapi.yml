@@ -1,0 +1,309 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Factor API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Factor
+paths:
+  /platform/plugins/factors:
+    get:
+      tags:
+      - Factor
+      summary: List factor plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listFactorPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/factors/{factor}:
+    get:
+      tags:
+      - Factor
+      summary: Get a factor plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getFactorPlugin
+      parameters:
+      - name: factor
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/factors/{factor}/schema:
+    get:
+      tags:
+      - Factor
+      summary: Get a factor plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getFactorPluginSchema
+      parameters:
+      - name: factor
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/factors:
+    get:
+      tags:
+      - Factor
+      summary: List registered factors for a security domain
+      description: User must have the DOMAIN_FACTOR[LIST] permission on the specified domain or DOMAIN_FACTOR[LIST] permission on the specified environment or DOMAIN_FACTOR[LIST] permission on the specified organization Each returned factor is filtered and contains only basic information such as id, name and factor type.
+      operationId: listFactors
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered factors for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Factor'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Factor
+      summary: Create a factor
+      description: User must have the DOMAIN_FACTOR[CREATE] permission on the specified domain or DOMAIN_FACTOR[CREATE] permission on the specified environment or DOMAIN_FACTOR[CREATE] permission on the specified organization
+      operationId: createFactor
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewFactor'
+        required: true
+      responses:
+        '201':
+          description: Factor successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Factor'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/factors/{factor}:
+    get:
+      tags:
+      - Factor
+      summary: Get a factor
+      description: User must have the DOMAIN_FACTOR[READ] permission on the specified domain or DOMAIN_FACTOR[READ] permission on the specified environment or DOMAIN_FACTOR[READ] permission on the specified organization
+      operationId: getFactor
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: factor
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Factor successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Factor'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Factor
+      summary: Update a factor
+      description: User must have the DOMAIN_FACTOR[UPDATE] permission on the specified domain or DOMAIN_FACTOR[UPDATE] permission on the specified environment or DOMAIN_FACTOR[UPDATE] permission on the specified organization
+      operationId: updateFactor
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: factor
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFactor'
+        required: true
+      responses:
+        '201':
+          description: Factor successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Factor'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Factor
+      summary: Delete a factor
+      description: User must have the DOMAIN_FACTOR[DELETE] permission on the specified domain or DOMAIN_FACTOR[DELETE] permission on the specified environment or DOMAIN_FACTOR[DELETE] permission on the specified organization
+      operationId: deleteFactor
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: factor
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Factor successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Factor:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        domain:
+          type: string
+        factorType:
+          type: string
+          enum:
+          - OTP
+          - SMS
+          - EMAIL
+          - CALL
+          - HTTP
+          - RECOVERY_CODE
+          - FIDO2
+          - MOCK
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    UpdateFactor:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
+    NewFactor:
+      required:
+      - configuration
+      - factorType
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        factorType:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

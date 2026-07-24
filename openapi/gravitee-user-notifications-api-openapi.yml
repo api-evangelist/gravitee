@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts user notifications API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: user notifications
+paths:
+  /user/notifications:
+    get:
+      tags:
+      - user notifications
+      summary: List notifications received by the current user
+      operationId: listNotifications
+      responses:
+        '200':
+          description: Current user notifications successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserNotificationContent'
+        '500':
+          description: Internal server error
+  /user/notifications/{notificationId}/acknowledge:
+    post:
+      tags:
+      - user notifications
+      summary: Mark User notification as read
+      operationId: markNotificationAsRead
+      parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: User notification has been marked as read
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UserNotificationContent:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+          - UNREAD
+          - READ
+        title:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

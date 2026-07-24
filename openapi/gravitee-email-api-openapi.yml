@@ -1,0 +1,482 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts email API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: email
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails:
+    get:
+      tags:
+      - email
+      summary: Find a email for an application
+      description: User must have APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified organization
+      operationId: findApplicationEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: template
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+      responses:
+        '200':
+          description: Email successfully fetched
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - email
+      summary: Create a email for an application
+      description: User must have APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified organization
+      operationId: createApplicationEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewEmail'
+        required: true
+      responses:
+        '201':
+          description: Email successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails/{email}:
+    put:
+      tags:
+      - email
+      summary: Update an email for an application
+      description: User must have APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified organization
+      operationId: updateApplicationEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmail'
+        required: true
+      responses:
+        '201':
+          description: Email successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - email
+      summary: Delete an email for an application
+      description: User must have APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified organization
+      operationId: deleteApplicationEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Email successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/emails:
+    get:
+      tags:
+      - email
+      summary: Find a email
+      description: User must have the DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified organization
+      operationId: findEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: template
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+      responses:
+        '200':
+          description: Email successfully fetched
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - email
+      summary: Create a email
+      description: User must have the DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified organization
+      operationId: createEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewEmail'
+        required: true
+      responses:
+        '201':
+          description: Email successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/emails/{email}:
+    put:
+      tags:
+      - email
+      summary: Update an email
+      description: User must have the DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified organization
+      operationId: updateDomainEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmail'
+        required: true
+      responses:
+        '201':
+          description: Email successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - email
+      summary: Delete an email
+      description: User must have the DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified organization
+      operationId: deleteDomainEmail
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Email successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Email:
+      type: object
+      properties:
+        client:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        defaultTemplate:
+          type: boolean
+        enabled:
+          type: boolean
+        expiresAfter:
+          type: integer
+          format: int32
+        from:
+          type: string
+        fromName:
+          type: string
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        subject:
+          type: string
+        template:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    UpdateEmail:
+      required:
+      - content
+      - expiresAfter
+      - from
+      - subject
+      type: object
+      properties:
+        content:
+          type: string
+        enabled:
+          type: boolean
+        expiresAfter:
+          minimum: 1
+          type: integer
+          format: int32
+        from:
+          type: string
+        fromName:
+          type: string
+        subject:
+          type: string
+    NewEmail:
+      required:
+      - content
+      - expiresAfter
+      - from
+      - subject
+      - template
+      type: object
+      properties:
+        content:
+          type: string
+        enabled:
+          type: boolean
+        expiresAfter:
+          minimum: 1
+          type: integer
+          format: int32
+        from:
+          type: string
+        fromName:
+          type: string
+        subject:
+          type: string
+        template:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

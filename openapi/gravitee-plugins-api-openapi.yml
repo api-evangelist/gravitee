@@ -1,0 +1,84 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Plugins API
+  version: 4.12.0-alpha.3
+  description: Discover policies, endpoints, entrypoints, and resources installed in the gateway
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Plugins
+  description: Discover policies, endpoints, entrypoints, and resources installed in the gateway
+paths:
+  /plugins/endpoints:
+    get:
+      tags:
+      - Plugins
+      operationId: listEndpointPlugins
+      summary: List Endpoint Plugins
+      responses:
+        '200':
+          description: Endpoint plugins
+  /plugins/endpoints/{endpointId}:
+    get:
+      tags:
+      - Plugins
+      operationId: getEndpointPlugin
+      summary: Get an Endpoint Plugin
+      parameters:
+      - in: path
+        name: endpointId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The endpoint plugin
+  /plugins/entrypoints:
+    get:
+      tags:
+      - Plugins
+      operationId: listEntrypointPlugins
+      summary: List Entrypoint Plugins
+      responses:
+        '200':
+          description: Entrypoint plugins
+  /plugins/policies:
+    get:
+      tags:
+      - Plugins
+      operationId: listPolicyPlugins
+      summary: List Policy Plugins
+      responses:
+        '200':
+          description: Policy plugins
+  /plugins/policies/{policyId}:
+    get:
+      tags:
+      - Plugins
+      operationId: getPolicyPlugin
+      summary: Get a Policy Plugin
+      parameters:
+      - in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The policy plugin
+  /plugins/resources:
+    get:
+      tags:
+      - Plugins
+      operationId: listResourcePlugins
+      summary: List Resource Plugins
+      responses:
+        '200':
+          description: Resource plugins
+components:
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

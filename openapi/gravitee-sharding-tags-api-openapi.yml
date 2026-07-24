@@ -1,0 +1,725 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts sharding-tags API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: sharding-tags
+paths:
+  /organizations/{organizationId}/tags:
+    get:
+      tags:
+      - sharding-tags
+      summary: List sharding tags
+      description: User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned tag is filtered and contains only basic information such as id and name.
+      operationId: listShardingTags
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List all the sharding tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Domain'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - sharding-tags
+      summary: Create a sharding tags
+      description: User must have the ORGANIZATION_TAG[CREATE] permission on the specified organization
+      operationId: createShardingTag
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTag'
+        required: true
+      responses:
+        '201':
+          description: Sharding tag successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/tags/{tag}:
+    get:
+      tags:
+      - sharding-tags
+      summary: Get a sharding tag
+      description: User must have the ORGANIZATION_TAG[READ] permission on the specified organization
+      operationId: getTag
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Sharding tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - sharding-tags
+      summary: Update the sharding tag
+      description: User must have the ORGANIZATION_TAG[UPDATE] permission on the specified organization
+      operationId: updateTag
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTag'
+        required: true
+      responses:
+        '200':
+          description: Sharding tag successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - sharding-tags
+      summary: Delete the sharding tag
+      description: User must have the ORGANIZATION_TAG[DELETE] permission on the specified organization
+      operationId: deleteTag
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Sharding tag successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    LoginSettings:
+      type: object
+      properties:
+        certificateBasedAuthEnabled:
+          type: boolean
+        certificateBasedAuthUrl:
+          type: string
+        enforcePasswordPolicyEnabled:
+          type: boolean
+        forgotPasswordEnabled:
+          type: boolean
+        hideForm:
+          type: boolean
+        identifierFirstEnabled:
+          type: boolean
+        inherited:
+          type: boolean
+        magicLinkAuthEnabled:
+          type: boolean
+        passwordlessDeviceNamingEnabled:
+          type: boolean
+        passwordlessEnabled:
+          type: boolean
+        passwordlessEnforcePasswordEnabled:
+          type: boolean
+        passwordlessEnforcePasswordMaxAge:
+          type: integer
+          format: int32
+        passwordlessRememberDeviceEnabled:
+          type: boolean
+        registerEnabled:
+          type: boolean
+        rememberMeEnabled:
+          type: boolean
+        resetPasswordOnExpiration:
+          type: boolean
+    Tag:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    CertificateSettings:
+      type: object
+      properties:
+        fallbackCertificate:
+          type: string
+    SAMLSettings:
+      type: object
+      properties:
+        certificate:
+          type: string
+        enabled:
+          type: boolean
+        entityId:
+          type: string
+    SCIMSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        idpSelectionEnabled:
+          type: boolean
+        idpSelectionRule:
+          type: string
+    TokenExchangeSettings:
+      type: object
+      properties:
+        allowDelegation:
+          type: boolean
+        allowImpersonation:
+          type: boolean
+        allowedActorTokenTypes:
+          type: array
+          items:
+            type: string
+        allowedRequestedTokenTypes:
+          type: array
+          items:
+            type: string
+        allowedSubjectTokenTypes:
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+        maxDelegationDepth:
+          type: integer
+          format: int32
+        tokenExchangeOAuthSettings:
+          $ref: '#/components/schemas/TokenExchangeOAuthSettings'
+        trustedIssuers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrustedIssuer'
+    CIBASettings:
+      type: object
+      properties:
+        authReqExpiry:
+          type: integer
+          format: int32
+        bindingMessageLength:
+          type: integer
+          format: int32
+        deviceNotifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CIBASettingNotifier'
+        enabled:
+          type: boolean
+        tokenReqInterval:
+          type: integer
+          format: int32
+    CIMDSettings:
+      type: object
+      properties:
+        allowPrivateIpAddress:
+          type: boolean
+        allowUnsecuredHttpUri:
+          type: boolean
+        allowedDomains:
+          type: array
+          items:
+            type: string
+        cacheMaxEntries:
+          type: integer
+          format: int32
+        cacheTtlSeconds:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        fetchTimeoutMs:
+          type: integer
+          format: int32
+        maxResponseSizeKb:
+          type: integer
+          format: int32
+        revokeOnDocumentChange:
+          type: boolean
+        templateId:
+          type: string
+    FormField:
+      type: object
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+    AccountSettings:
+      type: object
+      properties:
+        accountBlockedDuration:
+          type: integer
+          format: int32
+        autoLoginAfterRegistration:
+          type: boolean
+        autoLoginAfterResetPassword:
+          type: boolean
+        botDetectionPlugin:
+          type: string
+        completeRegistrationWhenResetPassword:
+          type: boolean
+        defaultIdentityProviderForRegistration:
+          type: string
+        deletePasswordlessDevicesAfterResetPassword:
+          type: boolean
+        dynamicUserRegistration:
+          type: boolean
+        inherited:
+          type: boolean
+        loginAttemptsDetectionEnabled:
+          type: boolean
+        loginAttemptsResetTime:
+          type: integer
+          format: int32
+        maxLoginAttempts:
+          type: integer
+          format: int32
+        mfaChallengeAttemptsDetectionEnabled:
+          type: boolean
+        mfaChallengeAttemptsResetTime:
+          type: integer
+          format: int32
+        mfaChallengeMaxAttempts:
+          type: integer
+          format: int32
+        mfaChallengeSendVerifyAlertEmail:
+          type: boolean
+        redirectUriAfterRegistration:
+          type: string
+        redirectUriAfterResetPassword:
+          type: string
+        rememberMe:
+          type: boolean
+        rememberMeDuration:
+          type: integer
+          format: int32
+        resetPasswordConfirmIdentity:
+          type: boolean
+        resetPasswordCustomForm:
+          type: boolean
+        resetPasswordCustomFormFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+        resetPasswordInvalidateTokens:
+          type: boolean
+        sendRecoverAccountEmail:
+          type: boolean
+        sendVerifyRegistrationAccountEmail:
+          type: boolean
+        useBotDetection:
+          type: boolean
+    SecretExpirationSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        expiryTimeSeconds:
+          type: integer
+          format: int64
+    VirtualHost:
+      type: object
+      properties:
+        host:
+          type: string
+        overrideEntrypoint:
+          type: boolean
+        path:
+          type: string
+    SelfServiceAccountManagementSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        resetPassword:
+          $ref: '#/components/schemas/ResetPasswordSettings'
+    ClientRegistrationSettings:
+      type: object
+      properties:
+        allowHttpSchemeRedirectUri:
+          type: boolean
+        allowLocalhostRedirectUri:
+          type: boolean
+        allowRedirectUriParamsExpressionLanguage:
+          type: boolean
+        allowWildCardRedirectUri:
+          type: boolean
+        allowedScopes:
+          type: array
+          items:
+            type: string
+        allowedScopesEnabled:
+          type: boolean
+        clientTemplateEnabled:
+          type: boolean
+        defaultScopes:
+          type: array
+          items:
+            type: string
+        dynamicClientRegistrationEnabled:
+          type: boolean
+        openDynamicClientRegistrationEnabled:
+          type: boolean
+    UpdateTag:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+    WebAuthnSettings:
+      type: object
+      properties:
+        attestationConveyancePreference:
+          type: string
+          enum:
+          - NONE
+          - INDIRECT
+          - DIRECT
+        authenticatorAttachment:
+          type: string
+          enum:
+          - CROSS_PLATFORM
+          - PLATFORM
+        certificates:
+          type: object
+          additionalProperties:
+            type: object
+        enforceAuthenticatorIntegrity:
+          type: boolean
+        enforceAuthenticatorIntegrityMaxAge:
+          type: integer
+          format: int32
+        forceRegistration:
+          type: boolean
+        origin:
+          type: string
+        relyingPartyId:
+          type: string
+        relyingPartyName:
+          type: string
+        requireResidentKey:
+          type: boolean
+        userVerification:
+          type: string
+          enum:
+          - REQUIRED
+          - PREFERRED
+          - DISCOURAGED
+    TrustedIssuer:
+      type: object
+      properties:
+        certificate:
+          type: string
+        issuer:
+          type: string
+        jwksUri:
+          type: string
+        keyResolutionMethod:
+          type: string
+          enum:
+          - JWKS_URL
+          - PEM
+        scopeMappings:
+          type: object
+          additionalProperties:
+            type: string
+        userBindingCriteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBindingCriterion'
+        userBindingEnabled:
+          type: boolean
+    PasswordSettings:
+      type: object
+      properties:
+        excludePasswordsInDictionary:
+          type: boolean
+        excludeUserProfileInfoInPassword:
+          type: boolean
+        expiryDuration:
+          type: integer
+          format: int32
+        includeNumbers:
+          type: boolean
+        includeSpecialCharacters:
+          type: boolean
+        inherited:
+          type: boolean
+        lettersInMixedCase:
+          type: boolean
+        maxConsecutiveLetters:
+          type: integer
+          format: int32
+        maxLength:
+          type: integer
+          format: int32
+        minLength:
+          type: integer
+          format: int32
+        oldPasswords:
+          type: integer
+          format: int32
+        passwordHistoryEnabled:
+          type: boolean
+    Domain:
+      type: object
+      properties:
+        accountSettings:
+          $ref: '#/components/schemas/AccountSettings'
+        alertEnabled:
+          type: boolean
+        certificateSettings:
+          $ref: '#/components/schemas/CertificateSettings'
+        corsSettings:
+          $ref: '#/components/schemas/CorsSettings'
+        createdAt:
+          type: string
+          format: date-time
+        dataPlaneId:
+          type: string
+        description:
+          type: string
+        dynamicClientRegistrationEnabled:
+          type: boolean
+        dynamicClientRegistrationTemplateEnabled:
+          type: boolean
+        enabled:
+          type: boolean
+        hrid:
+          type: string
+        id:
+          type: string
+        identities:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        loginSettings:
+          $ref: '#/components/schemas/LoginSettings'
+        master:
+          type: boolean
+        name:
+          type: string
+        oidc:
+          $ref: '#/components/schemas/OIDCSettings'
+        openDynamicClientRegistrationEnabled:
+          type: boolean
+        passwordSettings:
+          $ref: '#/components/schemas/PasswordSettings'
+        path:
+          type: string
+        redirectUriExpressionLanguageEnabled:
+          type: boolean
+        redirectUriLocalhostAllowed:
+          type: boolean
+        redirectUriStrictMatching:
+          type: boolean
+        redirectUriUnsecuredHttpSchemeAllowed:
+          type: boolean
+        redirectUriWildcardAllowed:
+          type: boolean
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        saml:
+          $ref: '#/components/schemas/SAMLSettings'
+        scim:
+          $ref: '#/components/schemas/SCIMSettings'
+        secretExpirationSettings:
+          $ref: '#/components/schemas/SecretExpirationSettings'
+        selfServiceAccountManagementSettings:
+          $ref: '#/components/schemas/SelfServiceAccountManagementSettings'
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        tokenExchangeSettings:
+          $ref: '#/components/schemas/TokenExchangeSettings'
+        uma:
+          $ref: '#/components/schemas/UMASettings'
+        updatedAt:
+          type: string
+          format: date-time
+        version:
+          type: string
+          enum:
+          - V1_0
+          - V2_0
+        vhostMode:
+          type: boolean
+        vhosts:
+          type: array
+          items:
+            $ref: '#/components/schemas/VirtualHost'
+        webAuthnSettings:
+          $ref: '#/components/schemas/WebAuthnSettings'
+    UserBindingCriterion:
+      type: object
+      properties:
+        attribute:
+          type: string
+        expression:
+          type: string
+    OIDCSettings:
+      type: object
+      properties:
+        cibaSettings:
+          $ref: '#/components/schemas/CIBASettings'
+        cimdSettings:
+          $ref: '#/components/schemas/CIMDSettings'
+        clientRegistrationSettings:
+          $ref: '#/components/schemas/ClientRegistrationSettings'
+        postLogoutRedirectUris:
+          type: array
+          items:
+            type: string
+        redirectUriStrictMatching:
+          type: boolean
+        requestUris:
+          type: array
+          items:
+            type: string
+        securityProfileSettings:
+          $ref: '#/components/schemas/SecurityProfileSettings'
+    ResetPasswordSettings:
+      type: object
+      properties:
+        oldPasswordRequired:
+          type: boolean
+        tokenAge:
+          type: integer
+          format: int32
+    SecurityProfileSettings:
+      type: object
+      properties:
+        enableFapiBrazil:
+          type: boolean
+        enablePlainFapi:
+          type: boolean
+    CorsSettings:
+      type: object
+      properties:
+        allowCredentials:
+          type: boolean
+        allowedHeaders:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        allowedMethods:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        allowedOrigins:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+        maxAge:
+          type: integer
+          format: int32
+    CIBASettingNotifier:
+      type: object
+      properties:
+        id:
+          type: string
+    UMASettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    NewTag:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+    TokenExchangeOAuthSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        scopeHandling:
+          type: string
+          enum:
+          - DOWNSCOPING
+          - PERMISSIVE
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

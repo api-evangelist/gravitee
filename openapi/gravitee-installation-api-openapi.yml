@@ -1,0 +1,76 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Installation API
+  version: 4.12.0-alpha.3
+  description: Manage organizations, environments, and platform installation
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Installation
+  description: Manage organizations, environments, and platform installation
+paths:
+  /environments:
+    get:
+      tags:
+      - Installation
+      operationId: listEnvironments
+      summary: List Environments
+      responses:
+        '200':
+          description: Environments
+  /environments/{envId}:
+    get:
+      tags:
+      - Installation
+      operationId: getEnvironment
+      summary: Get an Environment
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: The environment
+  /organizations/{orgId}:
+    get:
+      tags:
+      - Installation
+      operationId: getOrganization
+      summary: Get an Organization
+      parameters:
+      - in: path
+        name: orgId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The organization
+  /organizations/{orgId}/license:
+    get:
+      tags:
+      - Installation
+      operationId: getOrganizationLicense
+      summary: Get the Organization License
+      parameters:
+      - in: path
+        name: orgId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The license
+components:
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

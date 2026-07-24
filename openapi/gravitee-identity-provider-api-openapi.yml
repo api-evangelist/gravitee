@@ -1,0 +1,578 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Identity Provider API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Identity Provider
+paths:
+  /platform/plugins/identities:
+    get:
+      tags:
+      - Identity Provider
+      summary: List identity provider plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listIdentityProviders_2
+      parameters:
+      - name: external
+        in: query
+        schema:
+          type: boolean
+      - name: organization
+        in: query
+        schema:
+          type: boolean
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/identities/{identity}:
+    get:
+      tags:
+      - Identity Provider
+      summary: Get an identity provider
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getIdentityProviderPlugin
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/identities/{identity}/schema:
+    get:
+      tags:
+      - Identity Provider
+      summary: Get an identity provider plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getIdentityProviderPluginSchema
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/identities:
+    get:
+      tags:
+      - Identity Provider
+      summary: List registered identity providers for a security domain
+      description: User must have the DOMAIN_IDENTITY_PROVIDER[LIST] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[LIST] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[LIST] permission on the specified organization. Each returned identity provider is filtered and contains only basic information such as id, name and type.
+      operationId: listIdentityProviders
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userProvider
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List registered identity providers for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FilteredIdentityProviderInfo'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Identity Provider
+      summary: Create an identity provider
+      description: User must have the DOMAIN_IDENTITY_PROVIDER[CREATE] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[CREATE] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[CREATE] permission on the specified organization
+      operationId: createIdentityProvider
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewIdentityProvider'
+        required: true
+      responses:
+        '201':
+          description: Identity provider successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProvider'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/identities/{identity}:
+    get:
+      tags:
+      - Identity Provider
+      summary: Get an identity provider
+      description: User must have the DOMAIN_IDENTITY_PROVIDER[READ] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[READ] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[READ] permission on the specified organization
+      operationId: findIdentityProvider
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Identity provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProvider'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Identity Provider
+      summary: Update an identity provider
+      description: User must have the DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified organization
+      operationId: updateIdentityProvider
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIdentityProvider'
+        required: true
+      responses:
+        '201':
+          description: Identity provider successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProvider'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Identity Provider
+      summary: Delete an identity provider
+      description: User must have the DOMAIN_IDENTITY_PROVIDER[DELETE] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[DELETE] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[DELETE] permission on the specified organization
+      operationId: deleteIdentityProvider
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Identity provider successfully deleted
+        '400':
+          description: Identity provider is bind to existing clients
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/identities/{identity}/password-policy:
+    put:
+      tags:
+      - Identity Provider
+      summary: Assign password policy to identity provider
+      description: User must have the DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified organization
+      operationId: assignPasswordPolicyToIdp
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignPasswordPolicy'
+        required: true
+      responses:
+        '201':
+          description: Password Policy successfully assigned to  Identity provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignPasswordPolicy'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/identities:
+    get:
+      tags:
+      - Identity Provider
+      summary: List registered identity providers of the organization
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[LIST] permission on the specified organization. Each returned identity provider is filtered and contains only basic information such as id, name, type and isExternal.
+      operationId: listIdentityProviders_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userProvider
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List registered identity providers of the organization
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FilteredIdentityProviderInfo'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Identity Provider
+      summary: Create an identity provider for the organization
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[CREATE] permission on the specified organization
+      operationId: createIdentityProvider_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewIdentityProvider'
+        required: true
+      responses:
+        '201':
+          description: Identity provider successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/identities/{identity}:
+    get:
+      tags:
+      - Identity Provider
+      summary: Get an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[READ] permission on the specified organization
+      operationId: getIdentityProvider
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Identity provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProvider'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Identity Provider
+      summary: Update an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[UPDATE] permission on the specified organization
+      operationId: updateIdentityProvider_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIdentityProvider'
+        required: true
+      responses:
+        '201':
+          description: Identity provider successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProvider'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Identity Provider
+      summary: Delete an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[DELETE] permission on the specified organization
+      operationId: deleteIdentityProvider_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Identity provider successfully deleted
+        '400':
+          description: Identity provider is bind to existing clients
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateIdentityProvider:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        domainWhitelist:
+          type: array
+          items:
+            type: string
+        groupMapper:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        mappers:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        passwordPolicy:
+          type: string
+        roleMapper:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        type:
+          minLength: 1
+          type: string
+    IdentityProvider:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        dataPlaneId:
+          type: string
+        domainWhitelist:
+          type: array
+          items:
+            type: string
+        external:
+          type: boolean
+        groupMapper:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        id:
+          type: string
+        mappers:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        passwordPolicy:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        roleMapper:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        system:
+          type: boolean
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    FilteredIdentityProviderInfo:
+      type: object
+      properties:
+        external:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        passwordPolicy:
+          type: string
+        system:
+          type: boolean
+        type:
+          type: string
+    AssignPasswordPolicy:
+      type: object
+      properties:
+        passwordPolicy:
+          type: string
+    NewIdentityProvider:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        domainWhitelist:
+          type: array
+          items:
+            type: string
+        external:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

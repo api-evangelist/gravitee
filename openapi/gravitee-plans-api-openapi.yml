@@ -1,0 +1,178 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Plans API
+  version: 4.12.0-alpha.3
+  description: Manage plans (Keyless, API Key, OAuth2, JWT, mTLS, Push)
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Plans
+  description: Manage plans (Keyless, API Key, OAuth2, JWT, mTLS, Push)
+paths:
+  /environments/{envId}/apis/{apiId}/plans:
+    get:
+      tags:
+      - Plans
+      operationId: listApiPlans
+      summary: List Plans on an API
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      responses:
+        '200':
+          description: Plans page
+    post:
+      tags:
+      - Plans
+      operationId: createApiPlan
+      summary: Create a Plan on an API
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plan'
+      responses:
+        '201':
+          description: Plan created
+  /environments/{envId}/apis/{apiId}/plans/{planId}:
+    get:
+      tags:
+      - Plans
+      operationId: getApiPlan
+      summary: Get a Plan by Identifier
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      - in: path
+        name: planId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The plan
+    put:
+      tags:
+      - Plans
+      operationId: updateApiPlan
+      summary: Update a Plan
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      - in: path
+        name: planId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plan'
+      responses:
+        '200':
+          description: Plan updated
+  /environments/{envId}/apis/{apiId}/plans/{planId}/_publish:
+    post:
+      tags:
+      - Plans
+      operationId: publishApiPlan
+      summary: Publish a Plan
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      - in: path
+        name: planId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Plan published
+  /environments/{envId}/apis/{apiId}/plans/{planId}/_close:
+    post:
+      tags:
+      - Plans
+      operationId: closeApiPlan
+      summary: Close a Plan
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      - in: path
+        name: planId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Plan closed
+components:
+  schemas:
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        security:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - KEY_LESS
+              - API_KEY
+              - OAUTH2
+              - JWT
+              - MTLS
+              - SUBSCRIPTION
+              - PUSH
+            configuration:
+              type: object
+        status:
+          type: string
+          enum:
+          - STAGING
+          - PUBLISHED
+          - DEPRECATED
+          - CLOSED
+        validation:
+          type: string
+          enum:
+          - MANUAL
+          - AUTO
+        order:
+          type: integer
+        characteristics:
+          type: array
+          items:
+            type: string
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+    ApiId:
+      in: path
+      name: apiId
+      required: true
+      schema:
+        type: string
+      description: The API identifier
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

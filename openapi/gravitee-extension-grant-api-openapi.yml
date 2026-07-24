@@ -1,0 +1,322 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Extension Grant API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Extension Grant
+paths:
+  /platform/plugins/extensionGrants:
+    get:
+      tags:
+      - Extension Grant
+      summary: List extension grant plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listExtensionGrants_1
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/extensionGrants/{extensionGrant}:
+    get:
+      tags:
+      - Extension Grant
+      summary: Get an extension grant plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getExtensionGrant_1
+      parameters:
+      - name: extensionGrant
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/extensionGrants/{extensionGrant}/schema:
+    get:
+      tags:
+      - Extension Grant
+      summary: Get an extension grant plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getExtensionGrantSchema
+      parameters:
+      - name: extensionGrant
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/extensionGrants:
+    get:
+      tags:
+      - Extension Grant
+      summary: List registered extension grants for a security domain
+      description: User must have the DOMAIN_EXTENSION_GRANT[LIST] permission on the specified domain or DOMAIN_EXTENSION_GRANT[LIST] permission on the specified environment or DOMAIN_EXTENSION_GRANT[LIST] permission on the specified organization. Each returned extension grant is filtered and contains only basic information such as id, name and type.
+      operationId: listExtensionGrants
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered extension grants for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExtensionGrant'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Extension Grant
+      summary: Create a extension grant
+      description: User must have the DOMAIN_EXTENSION_GRANT[CREATE] permission on the specified domain or DOMAIN_EXTENSION_GRANT[CREATE] permission on the specified environment or DOMAIN_EXTENSION_GRANT[CREATE] permission on the specified organization
+      operationId: createExtensionGrant
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewExtensionGrant'
+        required: true
+      responses:
+        '201':
+          description: Extension grant successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtensionGrant'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/extensionGrants/{extensionGrant}:
+    get:
+      tags:
+      - Extension Grant
+      summary: Get a extension grant
+      description: User must have the DOMAIN_EXTENSION_GRANT[READ] permission on the specified domain or DOMAIN_EXTENSION_GRANT[READ] permission on the specified environment or DOMAIN_EXTENSION_GRANT[READ] permission on the specified organization
+      operationId: getExtensionGrant
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: extensionGrant
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Extension grant successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtensionGrant'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Extension Grant
+      summary: Update an extension grant
+      description: User must have the DOMAIN_EXTENSION_GRANT[UPDATE] permission on the specified domain or DOMAIN_EXTENSION_GRANT[UPDATE] permission on the specified environment or DOMAIN_EXTENSION_GRANT[UPDATE] permission on the specified organization
+      operationId: updateExtensionGrant
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: extensionGrant
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExtensionGrant'
+        required: true
+      responses:
+        '201':
+          description: Extension grant successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtensionGrant'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Extension Grant
+      summary: Delete a extension grant
+      description: User must have the DOMAIN_EXTENSION_GRANT[DELETE] permission on the specified domain or DOMAIN_EXTENSION_GRANT[DELETE] permission on the specified environment or DOMAIN_EXTENSION_GRANT[DELETE] permission on the specified organization
+      operationId: deleteExtensionGrant
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: extensionGrant
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Extension grant successfully deleted
+        '400':
+          description: Extension grant is bind to existing clients
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    NewExtensionGrant:
+      required:
+      - configuration
+      - grantType
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        createUser:
+          type: boolean
+        grantType:
+          pattern: '[A-Za-z][A-Za-z0-9+\-.]*:(?://(?:(?:[A-Za-z0-9\-._~!$&''()*+,;=:]|%[0-9A-Fa-f]{2})*@)?(?:\[(?:(?:(?:(?:[0-9A-Fa-f]{1,4}:){6}|::(?:[0-9A-Fa-f]{1,4}:){5}|(?:[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,1}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){3}|(?:(?:[0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){2}|(?:(?:[0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}:|(?:(?:[0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})?::)(?:[0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{1,4}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(?:(?:[0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})?::)|[Vv][0-9A-Fa-f]+\.[A-Za-z0-9\-._~!$&''()*+,;=:]+)\]|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:[A-Za-z0-9\-._~!$&''()*+,;=]|%[0-9A-Fa-f]{2})*)(?::[0-9]*)?(?:/(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})*)*|/(?:(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)?|(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})*)*|)(?:\?(?:[A-Za-z0-9\-._~!$&''()*+,;=:@/?]|%[0-9A-Fa-f]{2})*)?'
+          type: string
+        identityProvider:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        userExists:
+          type: boolean
+    UpdateExtensionGrant:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        createUser:
+          type: boolean
+        grantType:
+          pattern: '[A-Za-z][A-Za-z0-9+\-.]*:(?://(?:(?:[A-Za-z0-9\-._~!$&''()*+,;=:]|%[0-9A-Fa-f]{2})*@)?(?:\[(?:(?:(?:(?:[0-9A-Fa-f]{1,4}:){6}|::(?:[0-9A-Fa-f]{1,4}:){5}|(?:[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,1}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){3}|(?:(?:[0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){2}|(?:(?:[0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}:|(?:(?:[0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})?::)(?:[0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{1,4}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(?:(?:[0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})?::)|[Vv][0-9A-Fa-f]+\.[A-Za-z0-9\-._~!$&''()*+,;=:]+)\]|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:[A-Za-z0-9\-._~!$&''()*+,;=]|%[0-9A-Fa-f]{2})*)(?::[0-9]*)?(?:/(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})*)*|/(?:(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)?|(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\-._~!$&''()*+,;=:@]|%[0-9A-Fa-f]{2})*)*|)(?:\?(?:[A-Za-z0-9\-._~!$&''()*+,;=:@/?]|%[0-9A-Fa-f]{2})*)?'
+          type: string
+        identityProvider:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
+        userExists:
+          type: boolean
+    ExtensionGrant:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createUser:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        domain:
+          type: string
+        grantType:
+          type: string
+        id:
+          type: string
+        identityProvider:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        userExists:
+          type: boolean
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

@@ -1,0 +1,125 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Notifier API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Notifier
+paths:
+  /platform/plugins/notifiers:
+    get:
+      tags:
+      - Notifier
+      summary: List all available notifier plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listNotifiers
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Notifier plugin list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotifierPlugin'
+        '500':
+          description: Internal server error
+  /platform/plugins/notifiers/{notifierId}:
+    get:
+      tags:
+      - Notifier
+      summary: Get a notifier
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getNotifier
+      parameters:
+      - name: notifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Notifier plugin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotifierPlugin'
+        '404':
+          description: Notifier plugin not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEntity'
+        '500':
+          description: Internal server error
+  /platform/plugins/notifiers/{notifierId}/schema:
+    get:
+      tags:
+      - Notifier
+      summary: Get a notifier plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getNotifierSchema
+      parameters:
+      - name: notifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Notifier plugin schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Notifier plugin schema not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    ErrorEntity:
+      type: object
+      properties:
+        http_status:
+          type: integer
+          format: int32
+        message:
+          type: string
+    NotifierPlugin:
+      type: object
+      properties:
+        deployed:
+          type: boolean
+        description:
+          type: string
+        displayName:
+          type: string
+        feature:
+          type: string
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

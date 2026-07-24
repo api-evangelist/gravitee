@@ -1,0 +1,256 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts device identifiers API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: device identifiers
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/device-identifiers:
+    get:
+      tags:
+      - device identifiers
+      summary: List registered device identifiers for a security domain
+      description: User must have the DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified organization Each returned bot detections is filtered and contains only basic information such as id, name.
+      operationId: listDeviceIdentifiers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered device identifiers for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceIdentifier'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - device identifiers
+      summary: Create a device identifier
+      description: User must have the DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified organization
+      operationId: createDeviceIdentifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewDeviceIdentifier'
+        required: true
+      responses:
+        '201':
+          description: Device identifiers successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceIdentifier'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/device-identifiers/{deviceIdentifier}:
+    get:
+      tags:
+      - device identifiers
+      summary: Get a Device identifier
+      description: User must have the DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified organization
+      operationId: getDeviceIdentifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deviceIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Device identifier successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceIdentifier'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - device identifiers
+      summary: Update a Device identifier
+      description: User must have the DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified organization
+      operationId: updateDeviceIdentifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deviceIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeviceIdentifier'
+        required: true
+      responses:
+        '201':
+          description: Device identifier successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceIdentifier'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - device identifiers
+      summary: Delete a Device identifier
+      description: User must have the DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified organization
+      operationId: deleteDeviceIdentifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: deviceIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Device identifier successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    NewDeviceIdentifier:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+    UpdateDeviceIdentifier:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
+    DeviceIdentifier:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

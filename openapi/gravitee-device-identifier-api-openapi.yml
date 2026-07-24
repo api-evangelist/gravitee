@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Device Identifier API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Device Identifier
+paths:
+  /platform/plugins/device-identifiers:
+    get:
+      tags:
+      - Device Identifier
+      summary: List device identifier plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listDeviceIdentifierPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/device-identifiers/{deviceIdentifier}:
+    get:
+      tags:
+      - Device Identifier
+      summary: Get a device identifier plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getDeviceIdentifierPlugin
+      parameters:
+      - name: deviceIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/device-identifiers/{deviceIdentifier}/schema:
+    get:
+      tags:
+      - Device Identifier
+      summary: Get a device identifier plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getDeviceIdentifierPluginSchema
+      parameters:
+      - name: deviceIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+components:
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

@@ -1,0 +1,123 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts preview API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: preview
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms/preview:
+    post:
+      tags:
+      - preview
+      summary: Render the provided template
+      description: User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization
+      operationId: renderDomainTemplate
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewRequest'
+        required: true
+      responses:
+        '200':
+          description: Template successfully rendered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewResponse'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    PreviewRequest:
+      required:
+      - template
+      - type
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        theme:
+          $ref: '#/components/schemas/Theme'
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
+    Theme:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        css:
+          type: string
+        faviconUrl:
+          type: string
+        id:
+          type: string
+        logoUrl:
+          type: string
+        logoWidth:
+          type: integer
+          format: int32
+        primaryButtonColorHex:
+          type: string
+        primaryTextColorHex:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        secondaryButtonColorHex:
+          type: string
+        secondaryTextColorHex:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    PreviewResponse:
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

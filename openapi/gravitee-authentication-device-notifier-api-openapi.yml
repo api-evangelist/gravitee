@@ -1,0 +1,307 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Authentication Device Notifier API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Authentication Device Notifier
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/auth-device-notifiers:
+    get:
+      tags:
+      - Authentication Device Notifier
+      summary: List registered Authentication Device Notifiers for a security domain
+      description: User must have the DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified organization Each returned Authentication Device Notifier is filtered and contains only basic information such as id, name.
+      operationId: listAuthenticationDeviceNotifiers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered Authentication Device Notifiers for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthenticationDeviceNotifier'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Authentication Device Notifier
+      summary: Create an Authentication Device Notifier
+      description: User must have the DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified organization
+      operationId: createAuthenticationDeviceNotifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAuthenticationDeviceNotifier'
+        required: true
+      responses:
+        '201':
+          description: Authentication Device Notifier successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/auth-device-notifiers/{authDeviceNotifier}:
+    get:
+      tags:
+      - Authentication Device Notifier
+      summary: Get an Authentication Device Notifier
+      description: User must have the DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified organization
+      operationId: getAuthenticationDeviceNotifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: authDeviceNotifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Authentication Device Notifier successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationDeviceNotifier'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Authentication Device Notifier
+      summary: Update an Authentication Device Notifier
+      description: User must have the DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified organization
+      operationId: updateAuthenticationDeviceNotifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: authDeviceNotifier
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAuthenticationDeviceNotifier'
+        required: true
+      responses:
+        '201':
+          description: Authentication Device Notifier successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationDeviceNotifier'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Authentication Device Notifier
+      summary: Delete an Authentication Device Notifier
+      description: User must have the DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified organization
+      operationId: deleteAuthenticationDeviceNotifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: authDeviceNotifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Authentication Device Notifier successfully deleted
+        '500':
+          description: Internal server error
+  /platform/plugins/auth-device-notifiers:
+    get:
+      tags:
+      - Authentication Device Notifier
+      summary: List authentication device notifier plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listAuthenticationDeviceNotifierPlugins
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/auth-device-notifiers/{authDeviceNotifierId}:
+    get:
+      tags:
+      - Authentication Device Notifier
+      summary: Get a Authentication Device Notifier plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getAuthenticationDeviceNotifierPlugin
+      parameters:
+      - name: authDeviceNotifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/auth-device-notifiers/{authDeviceNotifierId}/schema:
+    get:
+      tags:
+      - Authentication Device Notifier
+      summary: Get an Authentication Device Notifier plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getAuthenticationDeviceNotifierPluginSchema
+      parameters:
+      - name: authDeviceNotifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+components:
+  schemas:
+    AuthenticationDeviceNotifier:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    UpdateAuthenticationDeviceNotifier:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
+    NewAuthenticationDeviceNotifier:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

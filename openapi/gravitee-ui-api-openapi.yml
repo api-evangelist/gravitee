@@ -1,0 +1,53 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts UI API
+  version: 4.12.0-alpha.3
+  description: Customize developer portal and console themes
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: UI
+  description: Customize developer portal and console themes
+paths:
+  /ui/themes:
+    get:
+      tags:
+      - UI
+      operationId: listUiThemes
+      summary: List UI Themes
+      responses:
+        '200':
+          description: UI themes
+    post:
+      tags:
+      - UI
+      operationId: createUiTheme
+      summary: Create a UI Theme
+      responses:
+        '201':
+          description: Theme created
+  /ui/themes/_current:
+    get:
+      tags:
+      - UI
+      operationId: getCurrentUiTheme
+      summary: Get the Current UI Theme
+      responses:
+        '200':
+          description: The current theme
+  /ui/customization:
+    get:
+      tags:
+      - UI
+      operationId: getUiCustomization
+      summary: Get UI Customization
+      responses:
+        '200':
+          description: UI customization
+components:
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

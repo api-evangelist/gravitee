@@ -1,0 +1,48 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Users API
+  version: 4.12.0-alpha.3
+  description: Manage Gravitee users
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Users
+  description: Manage Gravitee users
+paths:
+  /users/{userId}/apis:
+    get:
+      tags:
+      - Users
+      operationId: listUserApis
+      summary: List APIs for a User
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User APIs
+  /users/{userId}/applications:
+    get:
+      tags:
+      - Users
+      operationId: listUserApplications
+      summary: List Applications for a User
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User applications
+components:
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

@@ -1,0 +1,204 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts entrypoints API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: entrypoints
+paths:
+  /organizations/{organizationId}/entrypoints:
+    get:
+      tags:
+      - entrypoints
+      summary: List entrypoints
+      description: User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned entrypoint is filtered and contains only basic information such as id and name.
+      operationId: listEntrypoints
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List all the entrypoints
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entrypoint'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - entrypoints
+      summary: Create a entrypoint
+      description: User must have the ORGANIZATION_ENTRYPOINT[CREATE] permission on the specified organization
+      operationId: createEntrypoint
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewEntrypoint'
+        required: true
+      responses:
+        '201':
+          description: Entrypoint successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/entrypoints/{entrypointId}:
+    get:
+      tags:
+      - entrypoints
+      summary: Get a sharding entrypoint
+      description: User must have the ORGANIZATION_ENTRYPOINT[READ] permission on the specified organization
+      operationId: getEntrypoint
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: entrypointId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Sharding entrypoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entrypoint'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - entrypoints
+      summary: Update the sharding entrypoint
+      description: User must have the ORGANIZATION_ENTRYPOINT[UPDATE] permission on the specified organization
+      operationId: updateEntrypoint
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: entrypointId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEntrypoint'
+        required: true
+      responses:
+        '200':
+          description: Sharding entrypoint successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entrypoint'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - entrypoints
+      summary: Delete the sharding entrypoint
+      description: User must have the ORGANIZATION_ENTRYPOINT[DELETE] permission on the specified organization
+      operationId: deleteEntrypoint
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: entrypointId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Sharding entrypoint successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    NewEntrypoint:
+      required:
+      - name
+      - tags
+      - url
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+    Entrypoint:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        defaultEntrypoint:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        updatedAt:
+          type: string
+          format: date-time
+        url:
+          type: string
+    UpdateEntrypoint:
+      required:
+      - name
+      - tags
+      - url
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

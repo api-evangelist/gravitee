@@ -1,0 +1,359 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts scope API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: scope
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/scopes:
+    get:
+      tags:
+      - scope
+      summary: List scopes for a security domain
+      description: User must have the DOMAIN_SCOPE[LIST] permission on the specified domain or DOMAIN_SCOPE[LIST] permission on the specified environment or DOMAIN_SCOPE[LIST] permission on the specified organization Each returned scope is filtered and contains only basic information such as id, key, name, description, isSystem and isDiscovery.
+      operationId: listScopes
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: q
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List scopes for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScopePage'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - scope
+      summary: Create a scope
+      description: User must have the DOMAIN_SCOPE[CREATE] permission on the specified domain or DOMAIN_SCOPE[CREATE] permission on the specified environment or DOMAIN_SCOPE[CREATE] permission on the specified organization
+      operationId: createScope
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewScope'
+        required: true
+      responses:
+        '201':
+          description: Scope successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scope'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/scopes/{scope}:
+    get:
+      tags:
+      - scope
+      summary: Get a scope
+      description: User must have the DOMAIN_SCOPE[READ] permission on the specified domain or DOMAIN_SCOPE[READ] permission on the specified environment or DOMAIN_SCOPE[READ] permission on the specified organization
+      operationId: findScope
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: scope
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Scope
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scope'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - scope
+      summary: Update a scope
+      description: User must have the DOMAIN_SCOPE[UPDATE] permission on the specified domain or DOMAIN_SCOPE[UPDATE] permission on the specified environment or DOMAIN_SCOPE[UPDATE] permission on the specified organization
+      operationId: updateScope
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: scope
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateScope'
+        required: true
+      responses:
+        '200':
+          description: Scope successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scope'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - scope
+      summary: Delete a scope
+      description: User must have the DOMAIN_SCOPE[DELETE] permission on the specified domain or DOMAIN_SCOPE[DELETE] permission on the specified environment or DOMAIN_SCOPE[DELETE] permission on the specified organization
+      operationId: deleteScope
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: scope
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Scope successfully deleted
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - scope
+      summary: Patch a scope
+      description: User must have the DOMAIN_SCOPE[UPDATE] permission on the specified domain or DOMAIN_SCOPE[UPDATE] permission on the specified environment or DOMAIN_SCOPE[UPDATE] permission on the specified organization
+      operationId: patchScope
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: scope
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchScope'
+        required: true
+      responses:
+        '200':
+          description: Scope successfully patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scope'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    ScopePage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        totalCount:
+          type: integer
+          format: int64
+    UpdateScope:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        discovery:
+          type: boolean
+        expiresIn:
+          type: integer
+          format: int32
+        iconUri:
+          type: string
+        name:
+          type: string
+        parameterized:
+          type: boolean
+    Scope:
+      type: object
+      properties:
+        claims:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        discovery:
+          type: boolean
+        domain:
+          type: string
+        expiresIn:
+          type: integer
+          format: int32
+        iconUri:
+          type: string
+        id:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        parameterized:
+          type: boolean
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+    NewScope:
+      required:
+      - description
+      - key
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        discovery:
+          type: boolean
+        expiresIn:
+          type: integer
+          format: int32
+        iconUri:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        parameterized:
+          type: boolean
+    PatchScope:
+      type: object
+      properties:
+        description:
+          type: string
+        discovery:
+          type: boolean
+        expiresIn:
+          type: integer
+          format: int32
+        iconUri:
+          type: string
+        name:
+          type: string
+        parameterized:
+          type: boolean
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

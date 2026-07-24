@@ -1,0 +1,1159 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts group API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: group
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups:
+    get:
+      tags:
+      - group
+      summary: List groups for a security domain
+      description: User must have the DOMAIN_GROUP[LIST] permission on the specified domain or DOMAIN_GROUP[LIST] permission on the specified environment or DOMAIN_GROUP[LIST] permission on the specified organization. Each returned group is filtered and contains only basic information such as id and name.
+      operationId: listDomainGroups
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: List groups for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPage'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - group
+      summary: Create a group
+      description: User must have the DOMAIN_GROUP[CREATE] permission on the specified domain or DOMAIN_GROUP[CREATE] permission on the specified environment or DOMAIN_GROUP[CREATE] permission on the specified organization
+      operationId: createGroup
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGroup'
+        required: true
+      responses:
+        '201':
+          description: Group successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}:
+    get:
+      tags:
+      - group
+      summary: Get a group
+      description: User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization
+      operationId: findGroup
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Group successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - group
+      summary: Update a group
+      description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
+      operationId: updateGroup
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroup'
+        required: true
+      responses:
+        '201':
+          description: Group successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - group
+      summary: Delete a group
+      description: User must have the DOMAIN_GROUP[DELETE] permission on the specified domain or DOMAIN_GROUP[DELETE] permission on the specified environment or DOMAIN_GROUP[DELETE] permission on the specified organization
+      operationId: deleteGroup
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Group successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/members:
+    get:
+      tags:
+      - group
+      summary: List group members
+      description: User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization
+      operationId: getGroupMembers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 30
+      responses:
+        '200':
+          description: Group members successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPage'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/members/{member}:
+    post:
+      tags:
+      - group
+      summary: Add a group member
+      description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
+      operationId: addGroupMember
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: member
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Member has been added successfully
+        '400':
+          description: User does not exist
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - group
+      summary: Remove a group member
+      description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
+      operationId: removeGroupMember
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: member
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Member has been removed successfully
+        '400':
+          description: User does not exist
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/roles:
+    get:
+      tags:
+      - group
+      summary: Get a group roles
+      description: User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization
+      operationId: findGroupRoles
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Group roles successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - group
+      summary: Assign roles to a group
+      description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
+      operationId: assignRoles
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: Roles successfully assigned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/roles/{role}:
+    delete:
+      tags:
+      - group
+      summary: Revoke role to a group
+      description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
+      operationId: revokeRole
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Roles successfully revoked
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/groups:
+    get:
+      tags:
+      - group
+      summary: List groups of the organization
+      description: User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned group is filtered and contains only basic information such as id and name.
+      operationId: listGroups
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: List groups of the organization
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - group
+      summary: Create a platform group
+      description: User must have the ORGANIZATION_GROUP[CREATE] permission on the specified organization
+      operationId: createPlatformGroup
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGroup'
+        required: true
+      responses:
+        '201':
+          description: Group successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/groups/{group}:
+    get:
+      tags:
+      - group
+      summary: Get a platform group
+      description: User must have the ORGANIZATION_GROUP[READ] permission on the specified organization
+      operationId: getOrganizationGroup
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Group successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - group
+      summary: Update a platform group
+      description: User must have the ORGANIZATION_GROUP[READ] permission on the specified organization
+      operationId: updateOrganizationGroup
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGroup'
+        required: true
+      responses:
+        '201':
+          description: Group successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - group
+      summary: Delete a platform group
+      description: User must have the ORGANIZATION_GROUP[READ] permission on the specified organization
+      operationId: deleteOrganizationGroup
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Group successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/groups/{group}/members:
+    get:
+      tags:
+      - group
+      summary: List group members
+      description: User must have the ORGANIZATION_GROUP[READ] permission on the specified organization
+      operationId: listGroupMembers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 30
+      responses:
+        '200':
+          description: Group members successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/groups/{group}/members/{member}:
+    post:
+      tags:
+      - group
+      summary: Add a group member
+      description: User must have the ORGANIZATION_GROUP[UPDATE] permission on the specified organization
+      operationId: addGroupMember_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: member
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Member has been added successfully
+        '400':
+          description: User does not exist
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - group
+      summary: Remove a group member
+      description: User must have the ORGANIZATION_GROUP[UPDATE] permission on the specified organization
+      operationId: removeGroupMember_1
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: member
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Member has been removed successfully
+        '400':
+          description: User does not exist
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    Group:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        roles:
+          type: array
+          items:
+            type: string
+        updatedAt:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        country:
+          type: string
+        formatted:
+          type: string
+        locality:
+          type: string
+        postalCode:
+          type: string
+        primary:
+          type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
+        type:
+          type: string
+    UpdateGroup:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+    EnrolledFactorSecurity:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        type:
+          type: string
+        value:
+          type: string
+    UserId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        id:
+          type: string
+        source:
+          type: string
+    UserPage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        totalCount:
+          type: integer
+          format: int64
+    Certificate:
+      type: object
+      properties:
+        value:
+          type: string
+    GroupPage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        totalCount:
+          type: integer
+          format: int64
+    UserIdentity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    Role:
+      type: object
+      properties:
+        assignableType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        internalOnly:
+          type: boolean
+        name:
+          type: string
+        oauthScopes:
+          type: array
+          items:
+            type: string
+        permissionAcls:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              enum:
+              - CREATE
+              - READ
+              - LIST
+              - UPDATE
+              - DELETE
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    User:
+      type: object
+      properties:
+        accountLockedAt:
+          type: string
+          format: date-time
+        accountLockedUntil:
+          type: string
+          format: date-time
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        address:
+          type: object
+          additionalProperties:
+            type: object
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        birthdate:
+          type: string
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        disabled:
+          type: boolean
+        displayName:
+          type: string
+        dynamicGroups:
+          type: array
+          items:
+            type: string
+        dynamicRoles:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        emails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        enabled:
+          type: boolean
+        entitlements:
+          type: array
+          items:
+            type: string
+        externalId:
+          type: string
+        factors:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrolledFactor'
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        fullId:
+          $ref: '#/components/schemas/UserId'
+        groups:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        identities:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserIdentity'
+        identitiesAsMap:
+          type: object
+          additionalProperties:
+            type: object
+        ims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        inactive:
+          type: boolean
+        indefinitelyLocked:
+          type: boolean
+        internal:
+          type: boolean
+        lastIdentityInformation:
+          type: object
+          additionalProperties:
+            type: object
+        lastIdentityUsed:
+          type: string
+        lastLoginWithCredentials:
+          type: string
+          format: date-time
+        lastLogoutAt:
+          type: string
+          format: date-time
+        lastName:
+          type: string
+        lastPasswordReset:
+          type: string
+          format: date-time
+        lastUsernameReset:
+          type: string
+          format: date-time
+        locale:
+          type: string
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        mfaEnrollmentSkippedAt:
+          type: string
+          format: date-time
+        middleName:
+          type: string
+        newsletter:
+          type: boolean
+        nickName:
+          type: string
+        password:
+          type: string
+        phoneNumber:
+          type: string
+        phoneNumbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+        picture:
+          type: string
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        profile:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        registrationAccessToken:
+          type: string
+        registrationCompleted:
+          type: boolean
+        registrationUserUri:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        rolesPermissions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        serviceAccount:
+          type: boolean
+        source:
+          type: string
+        temporarilyLocked:
+          type: boolean
+        title:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          type: string
+        website:
+          type: string
+        x509Certificates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Certificate'
+        zoneInfo:
+          type: string
+    NewGroup:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

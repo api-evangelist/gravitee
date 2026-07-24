@@ -1,0 +1,137 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Analytics API
+  version: 4.12.0-alpha.3
+  description: Query analytics, time-series, and dashboards
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Analytics
+  description: Query analytics, time-series, and dashboards
+paths:
+  /environments/{envId}/analytics/definition/apis:
+    get:
+      tags:
+      - Analytics
+      operationId: queryApiSpecs
+      summary: Query API Analytics Specifications
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: API analytics specs
+  /environments/{envId}/analytics/measures:
+    post:
+      tags:
+      - Analytics
+      operationId: queryMeasures
+      summary: Query Analytics Measures
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Measures result
+  /environments/{envId}/analytics/facets:
+    post:
+      tags:
+      - Analytics
+      operationId: queryFacets
+      summary: Query Analytics Facets
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Facets result
+  /environments/{envId}/analytics/time-series:
+    post:
+      tags:
+      - Analytics
+      operationId: queryTimeSeries
+      summary: Query Analytics Time Series
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Time series result
+  /environments/{envId}/analytics/dashboards:
+    get:
+      tags:
+      - Analytics
+      operationId: listDashboards
+      summary: List Analytics Dashboards
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Dashboards page
+    post:
+      tags:
+      - Analytics
+      operationId: createDashboard
+      summary: Create an Analytics Dashboard
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '201':
+          description: Dashboard created
+  /environments/{envId}/analytics/dashboards/{dashboardId}:
+    get:
+      tags:
+      - Analytics
+      operationId: getDashboard
+      summary: Get an Analytics Dashboard
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: dashboardId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The dashboard
+    put:
+      tags:
+      - Analytics
+      operationId: updateDashboard
+      summary: Update an Analytics Dashboard
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: dashboardId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Dashboard updated
+    delete:
+      tags:
+      - Analytics
+      operationId: deleteDashboard
+      summary: Delete an Analytics Dashboard
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: dashboardId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Dashboard deleted
+components:
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

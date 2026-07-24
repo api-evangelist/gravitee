@@ -1,0 +1,681 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts form API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: form
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms:
+    get:
+      tags:
+      - form
+      summary: Find a form for an application
+      description: User must have APPLICATION_FORM[READ] permission on the specified application or APPLICATION_FORM[READ] permission on the specified domain or APPLICATION_FORM[READ] permission on the specified environment or APPLICATION_FORM[READ] permission on the specified organization
+      operationId: findApplicationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: template
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+      responses:
+        '200':
+          description: Form successfully fetched
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - form
+      summary: Create a form for an application
+      description: User must have APPLICATION_FORM[CREATE] permission on the specified application or APPLICATION_FORM[CREATE] permission on the specified domain or APPLICATION_FORM[CREATE] permission on the specified environment or APPLICATION_FORM[CREATE] permission on the specified organization
+      operationId: createApplicationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewForm'
+        required: true
+      responses:
+        '201':
+          description: Form successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms/{form}:
+    put:
+      tags:
+      - form
+      summary: Update a form for an application
+      description: User must have APPLICATION_FORM[UPDATE] permission on the specified application or APPLICATION_FORM[UPDATE] permission on the specified domain or APPLICATION_FORM[UPDATE] permission on the specified environment or APPLICATION_FORM[UPDATE] permission on the specified organization
+      operationId: updateApplicationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: form
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateForm'
+        required: true
+      responses:
+        '201':
+          description: Form successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - form
+      summary: Delete a form for an application
+      description: User must have APPLICATION_FORM[DELETE] permission on the specified application or APPLICATION_FORM[DELETE] permission on the specified domain or APPLICATION_FORM[DELETE] permission on the specified environment or APPLICATION_FORM[DELETE] permission on the specified organization
+      operationId: deleteApplicationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: form
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Form successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms:
+    get:
+      tags:
+      - form
+      summary: Find a form
+      description: User must have the DOMAIN_FORM[READ] permission on the specified domain or DOMAIN_FORM[READ] permission on the specified environment or DOMAIN_FORM[READ] permission on the specified organization
+      operationId: findForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: template
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+      responses:
+        '200':
+          description: Form successfully fetched
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - form
+      summary: Create a form
+      description: User must have the DOMAIN_FORM[CREATE] permission on the specified domain or DOMAIN_FORM[CREATE] permission on the specified environment or DOMAIN_FORM[CREATE] permission on the specified organization
+      operationId: createForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewForm'
+        required: true
+      responses:
+        '201':
+          description: Form successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms/preview:
+    post:
+      tags:
+      - form
+      summary: Render the provided template
+      description: User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization
+      operationId: renderDomainTemplate
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewRequest'
+        required: true
+      responses:
+        '200':
+          description: Template successfully rendered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewResponse'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms/{form}:
+    put:
+      tags:
+      - form
+      summary: Update a form
+      description: User must have the DOMAIN_FORM[UPDATE] permission on the specified domain or DOMAIN_FORM[UPDATE] permission on the specified environment or DOMAIN_FORM[UPDATE] permission on the specified organization
+      operationId: updateDomainForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: form
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateForm'
+        required: true
+      responses:
+        '201':
+          description: Form successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - form
+      summary: Delete a form
+      description: User must have the DOMAIN_FORM[DELETE] permission on the specified domain or DOMAIN_FORM[DELETE] permission on the specified environment or DOMAIN_FORM[DELETE] permission on the specified organization
+      operationId: deleteDomainForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: form
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Form successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/forms:
+    get:
+      tags:
+      - form
+      summary: Find an organization form template
+      description: User must have the ORGANIZATION_FORM[READ] permission on the specified organization
+      operationId: findOrganizationFormTemplate
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: template
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+      responses:
+        '200':
+          description: Form successfully fetched
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - form
+      summary: Create a form
+      description: User must have the ORGANIZATION_FORM[CREATE] permission on the specified organization
+      operationId: createOrganizationForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewForm'
+        required: true
+      responses:
+        '201':
+          description: Form successfully created
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/forms/{form}:
+    put:
+      tags:
+      - form
+      summary: Update a form
+      description: User must have the ORGANIZATION_FORM[UPDATE] permission on the specified organization
+      operationId: updateForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: form
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateForm'
+        required: true
+      responses:
+        '201':
+          description: Form successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - form
+      summary: Delete a form
+      description: User must have the ORGANIZATION_FORM[DELETE] permission on the specified organization
+      operationId: deleteForm
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: form
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Form successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateForm:
+      type: object
+      properties:
+        assets:
+          type: string
+        content:
+          type: string
+        enabled:
+          type: boolean
+    NewForm:
+      required:
+      - content
+      - template
+      type: object
+      properties:
+        assets:
+          type: string
+        content:
+          type: string
+        enabled:
+          type: boolean
+        template:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
+    PreviewRequest:
+      required:
+      - template
+      - type
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        theme:
+          $ref: '#/components/schemas/Theme'
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
+    PreviewResponse:
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
+    Theme:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        css:
+          type: string
+        faviconUrl:
+          type: string
+        id:
+          type: string
+        logoUrl:
+          type: string
+        logoWidth:
+          type: integer
+          format: int32
+        primaryButtonColorHex:
+          type: string
+        primaryTextColorHex:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        secondaryButtonColorHex:
+          type: string
+        secondaryTextColorHex:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    Form:
+      type: object
+      properties:
+        assets:
+          type: string
+        client:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        template:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

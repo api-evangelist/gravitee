@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts API Products API
+  version: 4.12.0-alpha.3
+  description: Bundle one or more APIs into a publishable API product
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: API Products
+  description: Bundle one or more APIs into a publishable API product
+paths:
+  /environments/{envId}/api-products:
+    get:
+      tags:
+      - API Products
+      operationId: getApiProducts
+      summary: List API Products
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: API products page
+    post:
+      tags:
+      - API Products
+      operationId: createApiProduct
+      summary: Create an API Product
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '201':
+          description: API product created
+  /environments/{envId}/api-products/_search:
+    post:
+      tags:
+      - API Products
+      operationId: searchApiProducts
+      summary: Search API Products
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Matching API products
+  /environments/{envId}/api-products/{apiProductId}:
+    put:
+      tags:
+      - API Products
+      operationId: updateApiProduct
+      summary: Update an API Product
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: apiProductId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: API product updated
+    delete:
+      tags:
+      - API Products
+      operationId: deleteApiProduct
+      summary: Delete an API Product
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: apiProductId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: API product deleted
+components:
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

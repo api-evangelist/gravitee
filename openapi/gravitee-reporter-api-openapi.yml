@@ -1,0 +1,462 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Reporter API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Reporter
+paths:
+  /platform/plugins/reporters:
+    get:
+      tags:
+      - Reporter
+      summary: List reporter plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listReporterPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/reporters/{reporter}:
+    get:
+      tags:
+      - Reporter
+      summary: Get a reporter plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getReporter
+      parameters:
+      - name: reporter
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/reporters/{reporter}/schema:
+    get:
+      tags:
+      - Reporter
+      summary: Get a reporter plugin's schema
+      operationId: getReporterSchema
+      parameters:
+      - name: reporter
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/reporters:
+    get:
+      tags:
+      - Reporter
+      summary: List registered reporters for a security domain
+      description: User must have the DOMAIN_REPORTER[LIST] permission on the specified domain or DOMAIN_REPORTER[LIST] permission on the specified environment or DOMAIN_REPORTER[LIST] permission on the specified organization. Except if user has DOMAIN_REPORTER[READ] permission on the domain, environment or organization, each returned reporter is filtered and contains only basic information such as id and name and type.
+      operationId: listDomainReporters
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userProvider
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List registered reporters for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reporter'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Reporter
+      summary: Create a reporter for a security domain
+      description: User must have the DOMAIN_REPORTER[CREATE] permission on the specified domain or DOMAIN_REPORTER[CREATE] permission on the specified environment or DOMAIN_REPORTER[CREATE] permission on the specified organization.
+      operationId: createDomainReporter
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewReporter'
+      responses:
+        '201':
+          description: Reporter created for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporter'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/reporters/{reporter}:
+    get:
+      tags:
+      - Reporter
+      summary: Get a reporter
+      description: User must have the DOMAIN_REPORTER[READ] permission on the specified domain or DOMAIN_REPORTER[READ] permission on the specified environment or DOMAIN_REPORTER[READ] permission on the specified organization
+      operationId: getDomainReporter
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: reporter
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reporter successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporter'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Reporter
+      summary: Update a reporter
+      description: User must have the DOMAIN_REPORTER[UPDATE] permission on the specified domain or DOMAIN_REPORTER[UPDATE] permission on the specified environment or DOMAIN_REPORTER[UPDATE] permission on the specified organization
+      operationId: updateDomainReporter
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: reporter
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReporter'
+        required: true
+      responses:
+        '201':
+          description: Reporter successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporter'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Reporter
+      summary: Delete a reporter
+      description: User must have the DOMAIN_REPORTER[DELETE] permission on the specified domain or DOMAIN_REPORTER[DELETE] permission on the specified environment or DOMAIN_REPORTER[DELETE] permission on the specified organization
+      operationId: deleteDomainReporter
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: reporter
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Reporter successfully removed
+          content:
+            application/json: {}
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/reporters:
+    get:
+      tags:
+      - Reporter
+      summary: List registered reporters for a security domain
+      description: User must have the ORGANIZATION_REPORTER[LIST] permission on the specified organization. Except if user has ORGANIZATION_REPORTER[READ] permission on the organization, each returned reporter is filtered and contains only basic information such as id and name and type.
+      operationId: getOrgReporters
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered reporters for an organization
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reporter'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Reporter
+      summary: Create a reporter for an organization
+      description: User must have the ORGANIZATION_REPORTER[CREATE] permission on the specified organization
+      operationId: createOrgReporter
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewReporter'
+      responses:
+        '201':
+          description: Reporter created for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporter'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/reporters/{reporterId}:
+    get:
+      tags:
+      - Reporter
+      summary: Get a reporter
+      description: User must have the ORGANIZATION_REPORTER[READ] permission on the organization
+      operationId: getOrgReporter
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: reporterId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reporter successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporter'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Reporter
+      summary: Update a reporter
+      description: User must have the ORGANIZATION_REPORTER[UPDATE] permission on the specified organization
+      operationId: updateOrgReporter
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: reporterId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReporter'
+        required: true
+      responses:
+        '201':
+          description: Reporter successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reporter'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Reporter
+      summary: Delete a reporter
+      description: User must have the ORGANIZATION_REPORTER[DELETE] permission on the specified organization
+      operationId: deleteOrgReporter
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: reporterId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Reporter successfully removed
+          content:
+            application/json: {}
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Reference:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+    UpdateReporter:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        enabled:
+          type: boolean
+        inherited:
+          type: boolean
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
+    Reporter:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        dataType:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        inherited:
+          type: boolean
+        name:
+          type: string
+        reference:
+          $ref: '#/components/schemas/Reference'
+        system:
+          type: boolean
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    NewReporter:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        inherited:
+          type: boolean
+        name:
+          type: string
+        type:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

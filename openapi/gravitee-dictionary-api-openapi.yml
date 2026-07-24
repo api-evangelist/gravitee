@@ -1,0 +1,313 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts dictionary API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: dictionary
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/i18n/dictionaries:
+    get:
+      tags:
+      - dictionary
+      summary: List all i18n dictionaries supported for a security domain
+      description: User must have the DOMAIN_I18N_DICTIONARY[LIST] permission on the specified domain or DOMAIN_I18N_DICTIONARY[LIST] permission on the specified environment or DOMAIN_I18N_DICTIONARY[LIST] permission on the specified organization.
+      operationId: listI18nDictionaries
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of i18n dictionaries for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/I18nDictionary'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - dictionary
+      summary: Create a new i18n dictionary for a supported language for a security domain
+      description: User must have the DOMAIN_I18N_DICTIONARY[CREATE] permission on the specified domain or DOMAIN_I18N_DICTIONARY[CREATE] permission on the specified environment or DOMAIN_I18N_DICTIONARY[CREATE] permission on the specified organization.
+      operationId: createI18nDictionary
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/NewDictionary'
+        required: true
+      responses:
+        '201':
+          description: Create a new i18n dictionary for a security domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/I18nDictionary'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/i18n/dictionaries/{dictionary}:
+    get:
+      tags:
+      - dictionary
+      summary: Get a i18n dictionary
+      description: User must have the DOMAIN_I18N_DICTIONARY[READ] permission on the specified domain or DOMAIN_I18N_DICTIONARY[READ] permission on the specified environment or DOMAIN_I18N_DICTIONARY[READ] permission on the specified organization.
+      operationId: getI18nDictionary
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get the i18n dictionary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/I18nDictionary'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - dictionary
+      summary: Update a i18n dictionary description
+      description: User must have the DOMAIN_I18N_DICTIONARY[UPDATE] permission on the specified domain or DOMAIN_I18N_DICTIONARY[UPDATE] permission on the specified environment or DOMAIN_I18N_DICTIONARY[UPDATE] permission on the specified organization.
+      operationId: putI18nDictionary
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdateI18nDictionary'
+        required: true
+      responses:
+        '200':
+          description: Update the i18n dictionary description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/I18nDictionary'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - dictionary
+      summary: Delete a i18n dictionary
+      description: User must have the DOMAIN_I18N_DICTIONARY[DELETE] permission on the specified domain or DOMAIN_I18N_DICTIONARY[DELETE] permission on the specified environment or DOMAIN_I18N_DICTIONARY[DELETE] permission on the specified organization.
+      operationId: deleteI18nDictionary
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete a i18n dictionary from a security domain
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/i18n/dictionaries/{dictionary}/entries:
+    put:
+      tags:
+      - dictionary
+      summary: Update all the entries for a i18n dictionary description
+      description: User must have the DOMAIN_I18N_DICTIONARY[UPDATE] permission on the specified domain or DOMAIN_I18N_DICTIONARY[UPDATE] permission on the specified environment or DOMAIN_I18N_DICTIONARY[UPDATE] permission on the specified organization.
+      operationId: replaceI18nDictionaryEntries
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: object
+              additionalProperties:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: Update the i18n entries for the given dictionary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/I18nDictionary'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateI18nDictionary:
+      type: object
+      properties:
+        entries:
+          type: object
+          additionalProperties:
+            type: string
+        locale:
+          type: string
+        name:
+          type: string
+    NewDictionary:
+      required:
+      - locale
+      - name
+      type: object
+      properties:
+        locale:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+    I18nDictionary:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        entries:
+          type: object
+          additionalProperties:
+            type: string
+        id:
+          type: string
+        locale:
+          type: string
+        name:
+          type: string
+        reference:
+          $ref: '#/components/schemas/Reference'
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        updatedAt:
+          type: string
+          format: date-time
+    Reference:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

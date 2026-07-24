@@ -1,0 +1,48 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Logs API
+  version: 4.12.0-alpha.3
+  description: Search request and error logs
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Logs
+  description: Search request and error logs
+paths:
+  /environments/{envId}/logs/search:
+    post:
+      tags:
+      - Logs
+      operationId: searchLogs
+      summary: Search Request Logs
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Logs page
+  /environments/{envId}/logs/error-keys:
+    get:
+      tags:
+      - Logs
+      operationId: listErrorKeys
+      summary: List Error Keys for Logs
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Error keys
+components:
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

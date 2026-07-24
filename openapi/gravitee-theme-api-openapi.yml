@@ -1,0 +1,264 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts theme API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: theme
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/themes:
+    get:
+      tags:
+      - theme
+      summary: List themes on the specified security domain
+      description: User must have the DOMAIN_THEME[LIST] permission on the specified domain or DOMAIN_THEME[LIST] permission on the specified environment or DOMAIN_THEME[LIST] permission on the specified organization
+      operationId: listThemes
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of themes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThemeEntity'
+        '204':
+          description: There is no themes on this domain
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - theme
+      summary: Create a theme on the specified security domain
+      description: User must have the DOMAIN_THEME[CREATE] permission on the specified domain or DOMAIN_THEME[CREATE] permission on the specified environment or DOMAIN_THEME[CREATE] permission on the specified organization
+      operationId: createTheme
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTheme'
+        required: true
+      responses:
+        '201':
+          description: Theme successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeEntity'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/themes/{themeId}:
+    get:
+      tags:
+      - theme
+      summary: Get the theme linked to the specified security domain
+      description: User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization
+      operationId: getTheme
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get theme description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeEntity'
+        '404':
+          description: Theme doesn't exist
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - theme
+      summary: Update a theme on the specified security domain
+      description: User must have the DOMAIN_THEME[UPDATE] permission on the specified domain or DOMAIN_THEME[UPDATE] permission on the specified environment or DOMAIN_THEME[UPDATE] permission on the specified organization
+      operationId: updateTheme
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThemeEntity'
+        required: true
+      responses:
+        '200':
+          description: Theme successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeEntity'
+        '404':
+          description: Theme Not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - theme
+      summary: Delete a theme on the specified security domain
+      description: User must have the DOMAIN_THEME[DELETE] permission on the specified domain or DOMAIN_THEME[DELETE] permission on the specified environment or DOMAIN_THEME[DELETE] permission on the specified organization
+      operationId: deleteTheme
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Theme successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    NewTheme:
+      type: object
+      properties:
+        css:
+          type: string
+        faviconUrl:
+          type: string
+        logoUrl:
+          type: string
+        logoWidth:
+          type: integer
+          format: int32
+        primaryButtonColorHex:
+          type: string
+        primaryTextColorHex:
+          type: string
+        secondaryButtonColorHex:
+          type: string
+        secondaryTextColorHex:
+          type: string
+    ThemeEntity:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        css:
+          type: string
+        faviconUrl:
+          type: string
+        id:
+          type: string
+        logoUrl:
+          type: string
+        logoWidth:
+          type: integer
+          format: int32
+        primaryButtonColorHex:
+          type: string
+        primaryTextColorHex:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        secondaryButtonColorHex:
+          type: string
+        secondaryTextColorHex:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

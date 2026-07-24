@@ -1,0 +1,309 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Authorization Engine API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Authorization Engine
+paths:
+  /platform/plugins/authorization-engines:
+    get:
+      tags:
+      - Authorization Engine
+      summary: List authorization engine plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listAuthorizationEnginePlugins
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/authorization-engines/{authorizationEngine}:
+    get:
+      tags:
+      - Authorization Engine
+      summary: Get an authorization engine plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getAuthorizationEnginePlugin
+      parameters:
+      - name: authorizationEngine
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/authorization-engines/{authorizationEngine}/schema:
+    get:
+      tags:
+      - Authorization Engine
+      summary: Get an authorization engine plugin's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getAuthorizationEnginePluginSchema
+      parameters:
+      - name: authorizationEngine
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/authorization-engines:
+    get:
+      tags:
+      - Authorization Engine
+      summary: List registered authorization engines for a security domain
+      description: User must have the DOMAIN_AUTHORIZATION_ENGINE[LIST] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[LIST] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[LIST] permission on the specified organization.
+      operationId: listAuthorizationEngines
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered authorization engines for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthorizationEngine'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Authorization Engine
+      summary: Create an authorization engine
+      description: User must have the DOMAIN_AUTHORIZATION_ENGINE[CREATE] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[CREATE] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[CREATE] permission on the specified organization
+      operationId: createAuthorizationEngine
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAuthorizationEngine'
+        required: true
+      responses:
+        '201':
+          description: Authorization engine successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationEngine'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/authorization-engines/{engineId}:
+    get:
+      tags:
+      - Authorization Engine
+      summary: Get an authorization engine
+      description: User must have the DOMAIN_AUTHORIZATION_ENGINE[READ] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[READ] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[READ] permission on the specified organization
+      operationId: findAuthorizationEngine
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: engineId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Authorization engine
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationEngine'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Authorization Engine
+      summary: Update an authorization engine
+      description: User must have the DOMAIN_AUTHORIZATION_ENGINE[UPDATE] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[UPDATE] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[UPDATE] permission on the specified organization
+      operationId: updateAuthorizationEngine
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: engineId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAuthorizationEngine'
+        required: true
+      responses:
+        '200':
+          description: Authorization engine successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationEngine'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Authorization Engine
+      summary: Delete an authorization engine
+      description: User must have the DOMAIN_AUTHORIZATION_ENGINE[DELETE] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[DELETE] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[DELETE] permission on the specified organization
+      operationId: deleteAuthorizationEngine
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: engineId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Authorization engine successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    NewAuthorizationEngine:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+    UpdateAuthorizationEngine:
+      required:
+      - configuration
+      - name
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+    AuthorizationEngine:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

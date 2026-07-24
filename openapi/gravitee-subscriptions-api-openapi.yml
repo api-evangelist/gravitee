@@ -1,0 +1,150 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Subscriptions API
+  version: 4.12.0-alpha.3
+  description: Manage subscriptions between applications and plans
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Subscriptions
+  description: Manage subscriptions between applications and plans
+paths:
+  /environments/{envId}/apis/{apiId}/subscriptions:
+    get:
+      tags:
+      - Subscriptions
+      operationId: listApiSubscriptions
+      summary: List Subscriptions for an API
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - $ref: '#/components/parameters/ApiId'
+      responses:
+        '200':
+          description: Subscriptions page
+  /environments/{envId}/subscriptions:
+    get:
+      tags:
+      - Subscriptions
+      operationId: listSubscriptions
+      summary: List Subscriptions
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Subscriptions page
+    post:
+      tags:
+      - Subscriptions
+      operationId: createSubscription
+      summary: Create a Subscription
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '201':
+          description: Subscription created
+  /environments/{envId}/subscriptions/{subscriptionId}:
+    get:
+      tags:
+      - Subscriptions
+      operationId: getSubscription
+      summary: Get a Subscription
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: subscriptionId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The subscription
+  /environments/{envId}/subscriptions/{subscriptionId}/_accept:
+    post:
+      tags:
+      - Subscriptions
+      operationId: acceptSubscription
+      summary: Accept a Subscription
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: subscriptionId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Subscription accepted
+  /environments/{envId}/subscriptions/{subscriptionId}/_reject:
+    post:
+      tags:
+      - Subscriptions
+      operationId: rejectSubscription
+      summary: Reject a Subscription
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: subscriptionId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Subscription rejected
+components:
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+    ApiId:
+      in: path
+      name: apiId
+      required: true
+      schema:
+        type: string
+      description: The API identifier
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        api:
+          type: string
+        plan:
+          type: string
+        application:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+          - REJECTED
+          - CLOSED
+          - PAUSED
+          - RESUMED
+        createdAt:
+          type: string
+          format: date-time
+        startingAt:
+          type: string
+          format: date-time
+        endingAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

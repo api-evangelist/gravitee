@@ -1,0 +1,378 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: alerts
+paths:
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/alerts/notifiers:
+    get:
+      tags:
+      - alerts
+      summary: List alert notifiers
+      description: List all the alert notifiers of the domain. User must have DOMAIN_ALERT_NOTIFIER[LIST] permission on the specified domain, environment or organization.
+      operationId: listAlertNotifiers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List alert notifiers for current user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlertNotifier'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - alerts
+      summary: Create an alert notifier
+      description: Create a new alert notifierUser must have DOMAIN_ALERT_NOTIFIER[CREATE] permission on the specified domain, environment or organization.
+      operationId: createAlertNotifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAlertNotifier'
+        required: true
+      responses:
+        '200':
+          description: Alert notifier successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertNotifier'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/alerts/notifiers/{notifierId}:
+    get:
+      tags:
+      - alerts
+      summary: Get an alert notifier
+      description: Get an alert notifier by its id. User must have DOMAIN_ALERT_NOTIFIER[LIST] permission on the specified domain, environment or organization.
+      operationId: getAlertNotifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: notifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The alert notifier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertNotifier'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - alerts
+      summary: Delete an alert notifier
+      description: Delete an alert notifier by its id. User must have DOMAIN_ALERT_NOTIFIER[DELETE] permission on the specified domain, environment or organization.
+      operationId: deleteAlertNotifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: notifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Alert notifier successfully deleted
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - alerts
+      summary: Update an alert notifier
+      description: Update an alert notifierUser must have DOMAIN_ALERT_NOTIFIER[UPDATE] permission on the specified domain, environment or organization.
+      operationId: patchAlertNotifier
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: notifierId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchAlertNotifier'
+        required: true
+      responses:
+        '200':
+          description: Alert notifier successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertNotifier'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/alerts/triggers:
+    get:
+      tags:
+      - alerts
+      summary: List alert triggers
+      description: List all the alert triggers of the domain accessible to the current user. User must have DOMAIN_ALERT[LIST] permission on the specified domain, environment or organization.
+      operationId: listAlertTriggers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List alert triggers for current user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlertTrigger'
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - alerts
+      summary: Update multiple alert triggers
+      description: Update multiple alert triggers in the same timeUser must have DOMAIN_ALERT[UPDATE] permission on the specified domain, environment or organization.
+      operationId: updateAlertTriggers
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PatchAlertTrigger'
+        required: true
+      responses:
+        '200':
+          description: Alert triggers successfully updated
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlertTrigger'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    PatchAlertNotifier:
+      type: object
+      properties:
+        configuration:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+    PatchAlertTrigger:
+      required:
+      - type
+      type: object
+      properties:
+        alertNotifiers:
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+        type:
+          type: string
+          enum:
+          - TOO_MANY_LOGIN_FAILURES
+          - RISK_ASSESSMENT
+    AlertNotifier:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    AlertTrigger:
+      type: object
+      properties:
+        alertNotifiers:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+          enum:
+          - TOO_MANY_LOGIN_FAILURES
+          - RISK_ASSESSMENT
+        updatedAt:
+          type: string
+          format: date-time
+    NewAlertNotifier:
+      required:
+      - configuration
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+          writeOnly: true
+        type:
+          minLength: 1
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer

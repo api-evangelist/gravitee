@@ -1,0 +1,1233 @@
+openapi: 3.0.1
+info:
+  title: Gravitee.io - Access Management alerts Certificate API
+  version: 4.12.0-alpha.3
+servers:
+- url: /management
+security:
+- gravitee-auth: []
+tags:
+- name: Certificate
+paths:
+  /platform/plugins/certificates:
+    get:
+      tags:
+      - Certificate
+      summary: List certificate plugins
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: listCertificatesPlugins
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/certificates/{certificate}:
+    get:
+      tags:
+      - Certificate
+      summary: Get an certificate plugin
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getCertificatePlugin
+      parameters:
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /platform/plugins/certificates/{certificate}/schema:
+    get:
+      tags:
+      - Certificate
+      summary: Get an certificate's schema
+      description: There is no particular permission needed. User must be authenticated.
+      operationId: getCertificatePluginSchema
+      parameters:
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates:
+    get:
+      tags:
+      - Certificate
+      summary: List registered certificates for a security domain
+      description: User must have the DOMAIN_CERTIFICATE[LIST] permission on the specified domain or DOMAIN_CERTIFICATE[LIST] permission on the specified environment or DOMAIN_CERTIFICATE[LIST] permission on the specified organization. Each returned certificate is filtered and contains only basic information such as id, name and type.
+      operationId: listCertificates
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: use
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List registered certificates for a security domain
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CertificateEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Certificate
+      summary: Create a certificate
+      description: User must have the DOMAIN_CERTIFICATE[CREATE] permission on the specified domain or DOMAIN_CERTIFICATE[CREATE] permission on the specified environment or DOMAIN_CERTIFICATE[CREATE] permission on the specified organization
+      operationId: createCertificate
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCertificate'
+        required: true
+      responses:
+        '201':
+          description: Certificate successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifiedCertificateEntity'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates/rotate:
+    post:
+      tags:
+      - Certificate
+      summary: Generate a new System a certificate
+      description: User must have the DOMAIN_CERTIFICATE[CREATE] permission on the specified domain or DOMAIN_CERTIFICATE[CREATE] permission on the specified environment or DOMAIN_CERTIFICATE[CREATE] permission on the specified organization
+      operationId: rotateCertificate
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Certificate successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateEntity'
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates/{certificate}:
+    get:
+      tags:
+      - Certificate
+      summary: Get a certificate
+      description: User must have the DOMAIN_CERTIFICATE[READ] permission on the specified domain or DOMAIN_CERTIFICATE[READ] permission on the specified environment or DOMAIN_CERTIFICATE[READ] permission on the specified organization
+      operationId: findCertificate
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Certificate successfully fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertificateEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Certificate
+      summary: Update a certificate
+      description: User must have the DOMAIN_CERTIFICATE[UPDATE] permission on the specified domain or DOMAIN_CERTIFICATE[UPDATE] permission on the specified environment or DOMAIN_CERTIFICATE[UPDATE] permission on the specified organization
+      operationId: updateCertificate
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCertificate'
+        required: true
+      responses:
+        '201':
+          description: Certificate successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifiedCertificateEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Certificate
+      summary: Delete a certificate
+      description: User must have the DOMAIN_CERTIFICATE[DELETE] permission on the specified domain or DOMAIN_CERTIFICATE[DELETE] permission on the specified environment or DOMAIN_CERTIFICATE[DELETE] permission on the specified organization
+      operationId: deleteCertificate
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Certificate successfully deleted
+        '400':
+          description: Certificate is bind to existing clients
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates/{certificate}/key:
+    get:
+      tags:
+      - Certificate
+      summary: Get the certificate public key
+      description: User must have the DOMAIN[READ] permission on the specified domain or DOMAIN[READ] permission on the specified environment or DOMAIN[READ] permission on the specified organization
+      operationId: getCertificatePublicKey
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Certificate key successfully fetched
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates/{certificate}/keys:
+    get:
+      tags:
+      - Certificate
+      summary: Get the certificate public keys
+      description: User must have the DOMAIN[READ] permission on the specified domain or DOMAIN[READ] permission on the specified environment or DOMAIN[READ] permission on the specified organization
+      operationId: getCertificatePublicKeys
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: environmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: certificate
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Certificate keys successfully fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CertificateKey'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    LoginSettings:
+      type: object
+      properties:
+        certificateBasedAuthEnabled:
+          type: boolean
+        certificateBasedAuthUrl:
+          type: string
+        enforcePasswordPolicyEnabled:
+          type: boolean
+        forgotPasswordEnabled:
+          type: boolean
+        hideForm:
+          type: boolean
+        identifierFirstEnabled:
+          type: boolean
+        inherited:
+          type: boolean
+        magicLinkAuthEnabled:
+          type: boolean
+        passwordlessDeviceNamingEnabled:
+          type: boolean
+        passwordlessEnabled:
+          type: boolean
+        passwordlessEnforcePasswordEnabled:
+          type: boolean
+        passwordlessEnforcePasswordMaxAge:
+          type: integer
+          format: int32
+        passwordlessRememberDeviceEnabled:
+          type: boolean
+        registerEnabled:
+          type: boolean
+        rememberMeEnabled:
+          type: boolean
+        resetPasswordOnExpiration:
+          type: boolean
+    TokenClaim:
+      type: object
+      properties:
+        claimName:
+          type: string
+        claimValue:
+          type: string
+        tokenType:
+          type: string
+          enum:
+          - ACCESS_TOKEN
+          - REFRESH_TOKEN
+          - ID_TOKEN
+    ClientSecret:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        secret:
+          type: string
+        settingsId:
+          type: string
+    RememberDeviceSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        deviceIdentifierId:
+          type: string
+        expirationTimeSeconds:
+          type: integer
+          format: int64
+        skipChallengeWhenRememberDevice:
+          type: boolean
+        skipRememberDevice:
+          type: boolean
+    ApplicationSAMLSettings:
+      type: object
+      properties:
+        assertionAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/SAMLAssertionAttribute'
+        assertionValiditySeconds:
+          type: integer
+          format: int32
+        attributeConsumeServiceUrl:
+          type: string
+        audiences:
+          type: array
+          items:
+            type: string
+        certificate:
+          type: string
+        dataEncryptionAlgorithm:
+          type: string
+        entityId:
+          type: string
+        includeAssertionConditions:
+          type: boolean
+        keyTransportEncryptionAlgorithm:
+          type: string
+        nameIdMapping:
+          type: string
+        notBeforeTimeSkewSeconds:
+          type: integer
+          format: int32
+        notOnOrAfterTimeSkewSeconds:
+          type: integer
+          format: int32
+        responseBinding:
+          type: string
+        singleLogoutServiceUrl:
+          type: string
+        wantAssertionsEncrypted:
+          type: boolean
+        wantAssertionsSigned:
+          type: boolean
+        wantResponseSigned:
+          type: boolean
+    NewCertificate:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          minLength: 1
+          type: string
+        type:
+          minLength: 1
+          type: string
+    EnrollSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        enrollmentRule:
+          type: string
+        enrollmentSkipActive:
+          type: boolean
+        enrollmentSkipRule:
+          type: string
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+          - OPTIONAL
+          - REQUIRED
+          - CONDITIONAL
+    FormField:
+      type: object
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+    AccountSettings:
+      type: object
+      properties:
+        accountBlockedDuration:
+          type: integer
+          format: int32
+        autoLoginAfterRegistration:
+          type: boolean
+        autoLoginAfterResetPassword:
+          type: boolean
+        botDetectionPlugin:
+          type: string
+        completeRegistrationWhenResetPassword:
+          type: boolean
+        defaultIdentityProviderForRegistration:
+          type: string
+        deletePasswordlessDevicesAfterResetPassword:
+          type: boolean
+        dynamicUserRegistration:
+          type: boolean
+        inherited:
+          type: boolean
+        loginAttemptsDetectionEnabled:
+          type: boolean
+        loginAttemptsResetTime:
+          type: integer
+          format: int32
+        maxLoginAttempts:
+          type: integer
+          format: int32
+        mfaChallengeAttemptsDetectionEnabled:
+          type: boolean
+        mfaChallengeAttemptsResetTime:
+          type: integer
+          format: int32
+        mfaChallengeMaxAttempts:
+          type: integer
+          format: int32
+        mfaChallengeSendVerifyAlertEmail:
+          type: boolean
+        redirectUriAfterRegistration:
+          type: string
+        redirectUriAfterResetPassword:
+          type: string
+        rememberMe:
+          type: boolean
+        rememberMeDuration:
+          type: integer
+          format: int32
+        resetPasswordConfirmIdentity:
+          type: boolean
+        resetPasswordCustomForm:
+          type: boolean
+        resetPasswordCustomFormFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+        resetPasswordInvalidateTokens:
+          type: boolean
+        sendRecoverAccountEmail:
+          type: boolean
+        sendVerifyRegistrationAccountEmail:
+          type: boolean
+        useBotDetection:
+          type: boolean
+    Application:
+      type: object
+      properties:
+        certificate:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        domain:
+          type: string
+        enabled:
+          type: boolean
+        factors:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        identityProviders:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationIdentityProvider'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+        name:
+          type: string
+        passwordSettings:
+          $ref: '#/components/schemas/PasswordSettings'
+        secretSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationSecretSettings'
+        secrets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientSecret'
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        template:
+          type: boolean
+        type:
+          type: string
+          enum:
+          - WEB
+          - NATIVE
+          - BROWSER
+          - SERVICE
+          - RESOURCE_SERVER
+        updatedAt:
+          type: string
+          format: date-time
+    CookieSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        session:
+          $ref: '#/components/schemas/SessionSettings'
+    ApplicationOAuthSettings:
+      type: object
+      properties:
+        accessTokenValiditySeconds:
+          type: integer
+          format: int32
+        applicationType:
+          type: string
+        authorizationEncryptedResponseAlg:
+          type: string
+        authorizationEncryptedResponseEnc:
+          type: string
+        authorizationSignedResponseAlg:
+          type: string
+        backchannelAuthRequestSignAlg:
+          type: string
+        backchannelClientNotificationEndpoint:
+          type: string
+        backchannelTokenDeliveryMode:
+          type: string
+        backchannelUserCodeParameter:
+          type: boolean
+        clientId:
+          type: string
+        clientIdIssuedAt:
+          type: string
+          format: date-time
+        clientName:
+          type: string
+        clientSecret:
+          type: string
+        clientSecretExpiresAt:
+          type: string
+          format: date-time
+        clientType:
+          type: string
+        clientUri:
+          type: string
+        contacts:
+          type: array
+          items:
+            type: string
+        defaultACRvalues:
+          type: array
+          items:
+            type: string
+        defaultMaxAge:
+          type: integer
+          format: int32
+        defaultScopes:
+          type: array
+          items:
+            type: string
+        disableRefreshTokenRotation:
+          type: boolean
+        enhanceScopesWithUserPermissions:
+          type: boolean
+        forcePKCE:
+          type: boolean
+        forceS256CodeChallengeMethod:
+          type: boolean
+        grantTypes:
+          type: array
+          items:
+            type: string
+        idTokenEncryptedResponseAlg:
+          type: string
+        idTokenEncryptedResponseEnc:
+          type: string
+        idTokenSignedResponseAlg:
+          type: string
+        idTokenValiditySeconds:
+          type: integer
+          format: int32
+        initiateLoginUri:
+          type: string
+        jwks:
+          $ref: '#/components/schemas/JWKSet'
+        jwksUri:
+          type: string
+        logoUri:
+          type: string
+        policyUri:
+          type: string
+        postLogoutRedirectUris:
+          type: array
+          items:
+            type: string
+        redirectUris:
+          type: array
+          items:
+            type: string
+        refreshTokenValiditySeconds:
+          type: integer
+          format: int32
+        registrationAccessToken:
+          type: string
+        registrationClientUri:
+          type: string
+        requestObjectEncryptionAlg:
+          type: string
+        requestObjectEncryptionEnc:
+          type: string
+        requestObjectSigningAlg:
+          type: string
+        requestUris:
+          type: array
+          items:
+            type: string
+        requireAuthTime:
+          type: boolean
+        requireParRequest:
+          type: boolean
+        responseTypes:
+          type: array
+          items:
+            type: string
+        scopeApprovals:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        scopeSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationScopeSettings'
+        scopes:
+          type: array
+          items:
+            type: string
+        sectorIdentifierUri:
+          type: string
+        silentReAuthentication:
+          type: boolean
+        singleSignOut:
+          type: boolean
+        softwareId:
+          type: string
+        softwareStatement:
+          type: string
+        softwareVersion:
+          type: string
+        subjectType:
+          type: string
+        tlsClientAuthSanDns:
+          type: string
+        tlsClientAuthSanEmail:
+          type: string
+        tlsClientAuthSanIp:
+          type: string
+        tlsClientAuthSanUri:
+          type: string
+        tlsClientAuthSubjectDn:
+          type: string
+        tlsClientCertificateBoundAccessTokens:
+          type: boolean
+        tokenCustomClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenClaim'
+        tokenEndpointAuthMethod:
+          type: string
+        tokenEndpointAuthSigningAlg:
+          type: string
+        tokenExchangeOAuthSettings:
+          $ref: '#/components/schemas/TokenExchangeOAuthSettings'
+        tosUri:
+          type: string
+        userinfoCustomClaims:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserInfoClaim'
+        userinfoEncryptedResponseAlg:
+          type: string
+        userinfoEncryptedResponseEnc:
+          type: string
+        userinfoSignedResponseAlg:
+          type: string
+    SessionSettings:
+      type: object
+      properties:
+        persistent:
+          type: boolean
+    SecretExpirationSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        expiryTimeSeconds:
+          type: integer
+          format: int64
+    StepUpAuthenticationSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        stepUpAuthenticationRule:
+          type: string
+    ApplicationIdentityProvider:
+      type: object
+      properties:
+        identity:
+          type: string
+        priority:
+          type: integer
+          format: int32
+        selectionRule:
+          type: string
+    PasswordSettings:
+      type: object
+      properties:
+        excludePasswordsInDictionary:
+          type: boolean
+        excludeUserProfileInfoInPassword:
+          type: boolean
+        expiryDuration:
+          type: integer
+          format: int32
+        includeNumbers:
+          type: boolean
+        includeSpecialCharacters:
+          type: boolean
+        inherited:
+          type: boolean
+        lettersInMixedCase:
+          type: boolean
+        maxConsecutiveLetters:
+          type: integer
+          format: int32
+        maxLength:
+          type: integer
+          format: int32
+        minLength:
+          type: integer
+          format: int32
+        oldPasswords:
+          type: integer
+          format: int32
+        passwordHistoryEnabled:
+          type: boolean
+    ApplicationSettings:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountSettings'
+        advanced:
+          $ref: '#/components/schemas/ApplicationAdvancedSettings'
+        cookieSettings:
+          $ref: '#/components/schemas/CookieSettings'
+        login:
+          $ref: '#/components/schemas/LoginSettings'
+        mfa:
+          $ref: '#/components/schemas/MFASettings'
+        oauth:
+          $ref: '#/components/schemas/ApplicationOAuthSettings'
+        passwordSettings:
+          $ref: '#/components/schemas/PasswordSettings'
+        riskAssessment:
+          $ref: '#/components/schemas/RiskAssessmentSettings'
+        saml:
+          $ref: '#/components/schemas/ApplicationSAMLSettings'
+        secretExpirationSettings:
+          $ref: '#/components/schemas/SecretExpirationSettings'
+    UpdateCertificate:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          minLength: 1
+          type: string
+        type:
+          minLength: 1
+          type: string
+    AssessmentSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        thresholds:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+    IdentityProvider:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        dataPlaneId:
+          type: string
+        domainWhitelist:
+          type: array
+          items:
+            type: string
+        external:
+          type: boolean
+        groupMapper:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        id:
+          type: string
+        mappers:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        passwordPolicy:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        roleMapper:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        system:
+          type: boolean
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    MFASettings:
+      type: object
+      properties:
+        adaptiveAuthenticationRule:
+          type: string
+        challenge:
+          $ref: '#/components/schemas/ChallengeSettings'
+        enroll:
+          $ref: '#/components/schemas/EnrollSettings'
+        enrollment:
+          $ref: '#/components/schemas/EnrollmentSettings'
+        factor:
+          $ref: '#/components/schemas/FactorSettings'
+        loginRule:
+          type: string
+        rememberDevice:
+          $ref: '#/components/schemas/RememberDeviceSettings'
+        stepUpAuthentication:
+          $ref: '#/components/schemas/StepUpAuthenticationSettings'
+        stepUpAuthenticationRule:
+          type: string
+    JWK:
+      type: object
+      properties:
+        alg:
+          type: string
+        keyOps:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        kid:
+          type: string
+        kty:
+          type: string
+        use:
+          type: string
+        x5c:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        x5t:
+          type: string
+        x5tS256:
+          type: string
+        x5u:
+          type: string
+    ApplicationScopeSettings:
+      type: object
+      properties:
+        defaultScope:
+          type: boolean
+        scope:
+          type: string
+        scopeApproval:
+          type: integer
+          format: int32
+    CertificateEntity:
+      type: object
+      properties:
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        identityProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdentityProvider'
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - VALID
+          - WILL_EXPIRE
+          - EXPIRED
+          - RENEWED
+        system:
+          type: boolean
+        type:
+          type: string
+        usage:
+          type: array
+          items:
+            type: string
+    CertificateKey:
+      type: object
+      properties:
+        fmt:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+        payload:
+          type: string
+    JWKSet:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JWK'
+    ChallengeSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        challengeRule:
+          type: string
+        type:
+          type: string
+          enum:
+          - REQUIRED
+          - CONDITIONAL
+          - RISK_BASED
+    TokenExchangeOAuthSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        scopeHandling:
+          type: string
+          enum:
+          - DOWNSCOPING
+          - PERMISSIVE
+    SAMLAssertionAttribute:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    UserInfoClaim:
+      type: object
+      properties:
+        claimName:
+          type: string
+        claimValue:
+          type: string
+    ApplicationSecretSettings:
+      type: object
+      properties:
+        algorithm:
+          type: string
+        id:
+          type: string
+    ModifiedCertificateEntity:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        domain:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+        name:
+          type: string
+        system:
+          type: boolean
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    RiskAssessmentSettings:
+      type: object
+      properties:
+        deviceAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+        enabled:
+          type: boolean
+        geoVelocityAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+        ipReputationAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+    FactorSettings:
+      type: object
+      properties:
+        applicationFactors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationFactorSettings'
+        defaultFactorId:
+          type: string
+    ApplicationAdvancedSettings:
+      type: object
+      properties:
+        flowsInherited:
+          type: boolean
+        skipConsent:
+          type: boolean
+    EnrollmentSettings:
+      type: object
+      properties:
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+    ApplicationFactorSettings:
+      type: object
+      properties:
+        id:
+          type: string
+        selectionRule:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: Bearer
