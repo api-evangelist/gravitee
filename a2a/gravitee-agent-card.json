@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "0.1-descriptor",
+  "kind": "agent-readiness-descriptor",
+  "note": "Read-only descriptor of what AI agents can discover and read about Gravitee today. This is NOT yet an executable A2A agent card (no public A2A runtime exists). Roadmap to a full A2A card: see AGENT-CARD-ROADMAP.md. All endpoints below are verified live (HTTP 200).",
+  "name": "Gravitee",
+  "description": "Unified platform: AI Agent Management, API Management, Event (Kafka) Management, Identity & Access Management. Govern MCP/A2A traffic, secure agent identities, consume APIs as agent-ready services. No lock-in.",
+  "provider": {
+    "organization": "Gravitee (GraviteeSource)",
+    "url": "https://www.gravitee.io"
+  },
+  "documentationUrl": "https://documentation.gravitee.io/",
+  "iconUrl": "https://www.gravitee.io/favicon.ico",
+  "version": "2026.06.05",
+  "read": {
+    "description": "Live, no-auth, agent-readable sources. Use these now.",
+    "endpoints": {
+      "aiMap": "https://www.gravitee.io/.well-known/ai.json",
+      "siteIndex": "https://www.gravitee.io/llms.txt",
+      "siteCorpus": "https://www.gravitee.io/llms-full.txt",
+      "siteSitemap": "https://www.gravitee.io/sitemap.xml",
+      "docsIndex": "https://documentation.gravitee.io/llms.txt",
+      "docsCorpus": "https://documentation.gravitee.io/llms-full.txt",
+      "docsSitemap": "https://documentation.gravitee.io/sitemap.xml",
+      "docsPageMarkdown": "https://documentation.gravitee.io/{path}.md"
+    },
+    "humanUiOnly": {
+      "description": "Browser-only, reCAPTCHA-protected, robots-disallowed for bots. Not callable by agents.",
+      "docsSearch": "https://documentation.gravitee.io/?q={query}",
+      "docsAskAi": "https://documentation.gravitee.io/?ask={query}"
+    }
+  },
+  "describes": {
+    "description": "Product capabilities Gravitee offers (informational; not invokable via this descriptor).",
+    "capabilities": [
+      {
+        "id": "ai-agent-management",
+        "name": "AI Agent Management",
+        "summary": "Secure agent identities, govern MCP/A2A traffic, observe agents, productize capabilities as agent-consumable services."
+      },
+      {
+        "id": "api-management",
+        "name": "API Management",
+        "summary": "Design, govern, secure, monetize APIs across hybrid and multi-cloud."
+      },
+      {
+        "id": "event-management",
+        "name": "Event / Kafka Management",
+        "summary": "Single front door to Kafka estates, decoupled from clusters or clouds."
+      },
+      {
+        "id": "identity-access-management",
+        "name": "Identity & Access Management",
+        "summary": "Verifiable identity, authorization, and agentic IAM for users, services, and AI agents."
+      }
+    ]
+  },
+  "policy": "Owner grants permission to scrape and use content from gravitee.io and documentation.gravitee.io. Docs robots.txt declares ai-train=yes, search=yes, ai-input=yes. For redistribution beyond this, contact contact@graviteesource.com."
+}
