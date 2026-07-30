@@ -34,296 +34,6 @@ created: '2026-03-18'
 modified: '2026-05-21'
 specificationVersion: '0.20'
 apis:
-- aid: gravitee:gravitee-api-management
-  name: Gravitee API Management
-  description: >-
-    Gravitee API Management (APIM) is the core product — an open-source, flexible, blazing-fast API gateway,
-    management plane, and developer portal. It supports v2 "proxy" APIs and v4 message-oriented APIs over REST,
-    GraphQL, WebSocket, gRPC, SSE, Webhooks, Kafka, MQTT, AMQP, Solace, RabbitMQ, and MCP. Lifecycle, policies, plans,
-    applications, subscriptions, federation, and analytics are all managed through the Management API and consoles.
-  humanURL: https://www.gravitee.io/platform/api-management
-  baseURL: https://documentation.gravitee.io/apim
-  tags:
-  - API Gateway
-  - API Management
-  - Lifecycle
-  - Developer Portal
-  - Federation
-  - Open Source
-  properties:
-  - type: Documentation
-    url: https://documentation.gravitee.io/apim
-  - type: GettingStarted
-    url: https://documentation.gravitee.io/apim/getting-started
-  - type: ChangeLog
-    url: https://documentation.gravitee.io/apim/release-information/changelog
-  - type: License
-    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
-  - type: GitHubRepository
-    url: https://github.com/gravitee-io/gravitee-api-management
-  - type: SDKs
-    url: https://github.com/gravitee-io/gravitee-clients-sdk
-  - type: SDKs
-    url: https://github.com/gravitee-io/terraform-provider-apim
-  - type: CLI
-    url: https://github.com/gravitee-io/graviteeio-cli
-  - type: KubernetesOperator
-    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
-  - type: HelmChart
-    url: https://github.com/gravitee-io/helm-charts
-  - type: DockerImage
-    url: https://hub.docker.com/r/graviteeio/apim-gateway
-  - type: OpenAPI
-    url: openapi/gravitee-apim-openapi.yml
-  - type: JSONLDContext
-    url: json-ld/gravitee-context.jsonld
-  - type: JSONSchema
-    url: json-schema/gravitee-api-schema.json
-  - type: JSONSchema
-    url: json-schema/gravitee-plan-schema.json
-  - type: KubernetesCRD
-    url: crd/gravitee.io_apidefinitions.yaml
-  - type: KubernetesCRD
-    url: crd/gravitee.io_apiv4definitions.yaml
-  - type: KubernetesCRD
-    url: crd/gravitee.io_apiresources.yaml
-  - type: KubernetesCRD
-    url: crd/gravitee.io_applications.yaml
-  - type: KubernetesCRD
-    url: crd/gravitee.io_subscriptions.yaml
-  - type: KubernetesCRD
-    url: crd/gravitee.io_managementcontexts.yaml
-  - type: KubernetesCRD
-    url: crd/gravitee.io_sharedpolicygroups.yaml
-  - type: KubernetesCRD
-    url: crd/gravitee.io_groups.yaml
-  - type: KubernetesCRD
-    url: crd/gravitee.io_notifications.yaml
-  - type: Plans
-    url: plans/gravitee-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/gravitee-rate-limits.yml
-  - type: FinOps
-    url: finops/gravitee-finops.yml
-  - type: Capabilities
-    url: capabilities/api-gateway-operations.yaml
-  - type: Capabilities
-    url: capabilities/traffic-observability.yaml
-  - url: graphql/gravitee-graphql.md
-    type: GraphQL
-  features:
-  - name: REST API Gateway
-    description: >-
-      Proxy and govern HTTP/REST APIs with policy pipelines, transformation, authentication, traffic shaping, and
-      routing.
-  - name: GraphQL Support
-    description: Expose GraphQL endpoints with operation-level policies, depth limits, and query whitelisting.
-  - name: WebSocket and SSE
-    description: Bi-directional streaming proxy and Server-Sent Events for v4 message APIs.
-  - name: gRPC Proxy
-    description: Native gRPC entrypoint and endpoint support in the v4 gateway.
-  - name: Kafka Gateway
-    description: Expose native Kafka topics through the gateway with auth, ACL, schema, and quota policies.
-  - name: MQTT and AMQP
-    description: Streaming endpoints for MQTT, Solace, and RabbitMQ via v4 message APIs.
-  - name: Webhooks Entrypoint
-    description: Convert message brokers into webhook subscriptions for consumer applications.
-  - name: Federation
-    description: Discover and federate third-party API gateways and brokers into a single catalog.
-  - name: Developer Portal
-    description: Branded API catalog with subscription, key management, and OpenAPI documentation.
-  - name: API Designer
-    description: No-code, drag-and-drop OpenAPI designer for design-first workflows.
-  - name: Plans and Subscriptions
-    description: Productized plans (Keyless, API Key, OAuth2, JWT, mTLS, Push, Subscription) with subscription lifecycle.
-  - name: Policy Studio
-    description: >-
-      Compose flows from 50+ policies including rate-limit, quota, OAuth2, JWT, JSON-to-JSON, XSLT, Yaegi scripting,
-      AWS Lambda, and AI policies.
-  - name: Shared Policy Groups
-    description: Reusable policy bundles attached to multiple APIs via a Kubernetes CRD or the Management API.
-  - name: Custom Policies (Yaegi / Polyglot)
-    description: Author policies in Go (Yaegi), Groovy, and JavaScript on the gateway.
-  - name: Distributed Quota and Rate Limits
-    description: Cluster-aware quota and rate limit counters backed by Redis, Hazelcast, or JDBC.
-  - name: Analytics and Observability
-    description: Real-time analytics, dashboards, and OpenTelemetry integration via Elasticsearch / OpenSearch reporters.
-  - name: API Scoring
-    description: Quality scoring of API designs against governance rules (gravitee-scoring-api).
-  - name: Multi-Gateway / Multi-Broker Management
-    description: >-
-      Centralized governance, auto-discovery, and catalog import across Gravitee, AWS API Gateway, Apigee, Azure
-      APIM, IBM, Kong, Solace, and Confluent.
-  - name: Protocol Mediation
-    description: >-
-      Expose Kafka, Solace, RedPanda, and MQTT streams as HTTP, REST, WebSockets, Webhooks, and Server-Sent Events
-      for frontend consumption.
-  useCases:
-  - name: Internal API Platform
-    description: Stand up an enterprise API platform across multiple environments with federated governance.
-  - name: Open Banking and Financial APIs
-    description: Apply OAuth2, mTLS, FAPI-aligned profiles, and granular rate limits to PSD2 / Open Banking APIs.
-  - name: Event Streaming Productization
-    description: Productize Kafka and MQTT streams as managed APIs with quota, ACL, and developer onboarding.
-  - name: API Federation
-    description: Catalog AWS API Gateway, Kong, Apigee, and Azure APIM assets behind a single Gravitee plane.
-  - name: Microservices and Ingress Control
-    description: Optimize Kubernetes ingress and microservices strategies with policy-driven routing and observability.
-  - name: API Security
-    description: >-
-      Prevent APIs from becoming an attack vector through layered authn, authz, threat protection, and rate
-      limiting.
-  - name: Backend Reliability
-    description: Improve resilience and uptime with circuit-breaker, retry, fallback, and traffic-shaping policies.
-  - name: API Monetization
-    description: >-
-      Productize and monetize APIs through plans, quotas, subscription billing hooks, and developer portal
-      onboarding.
-  - name: Centralized API Catalog
-    description: Build a unified inventory spanning Gravitee and third-party gateways through federation and discovery.
-  - name: Financial Services and Fintech
-    description: Secure regulated financial operations across API, event, and AI workloads.
-  - name: Insurance
-    description: Modernize insurance distribution, claims, and partner APIs with full-lifecycle governance.
-  - name: Government
-    description: Deliver secure public-sector services with API, identity, and event-streaming controls.
-  - name: Healthcare
-    description: Govern compliant healthcare APIs and event streams across providers, payers, and patient apps.
-  - name: Telecommunications and Media
-    description: Power real-time telecom and media workloads with streaming, eventing, and federated gateway control.
-  - name: Travel and Hospitality
-    description: Manage multi-channel travel and hospitality APIs across distribution, reservation, and loyalty systems.
-  - name: Transportation
-    description: Optimize transportation and logistics operations with event-driven and partner-facing APIs.
-  - name: Manufacturing and Industry 4.0
-    description: Enable factory-floor and supply-chain integration with MQTT, Kafka, and REST API governance.
-  - name: Software and SaaS
-    description: Scale SaaS platforms with multi-tenant API management, monetization, and developer portals.
-  integrations:
-  - name: Apache Kafka
-  - name: Confluent
-  - name: RedPanda
-  - name: MQTT
-  - name: Solace PubSub+
-  - name: RabbitMQ
-  - name: Redis (rate-limit cache)
-  - name: Hazelcast
-  - name: Elasticsearch
-  - name: OpenSearch
-  - name: Prometheus
-  - name: Grafana
-  - name: OpenTelemetry
-  - name: AWS Lambda
-  - name: AWS API Gateway
-  - name: Azure API Management
-  - name: Kong
-  - name: Apigee
-  - name: IBM API Connect
-  - name: Keycloak
-  - name: Auth0
-  - name: Okta
-  - name: Microsoft Entra ID
-  - name: Kubernetes
-  - name: Helm
-  authentication:
-  - type: API Key
-  - type: OAuth2
-  - type: JWT
-  - type: mTLS
-  - type: Basic
-  - type: Bearer Token
-- aid: gravitee:gravitee-access-management
-  name: Gravitee Access Management
-  description: >-
-    Gravitee Access Management (AM) is an open-source Identity and Access Management solution offering OAuth2, OpenID
-    Connect (OIDC), UMA 2.0, CIBA, SCIM 2.0, and SAML 2.0. It manages security domains, applications, users, identity
-    providers, MFA factors, bot detection, certificates, flows, forms, themes, and policies. AM provides an admin REST
-    API (Management API) and a runtime authorization server (Gateway).
-  humanURL: https://www.gravitee.io/platform/access-management
-  baseURL: https://documentation.gravitee.io/am
-  tags:
-  - Identity
-  - Access Management
-  - OAuth2
-  - OIDC
-  - SAML
-  - SCIM
-  - UMA
-  - Open Source
-  properties:
-  - type: Documentation
-    url: https://documentation.gravitee.io/am
-  - type: Reference
-    url: https://documentation.gravitee.io/am/reference/am-api-reference
-  - type: ChangeLog
-    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
-  - type: License
-    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
-  - type: GitHubRepository
-    url: https://github.com/gravitee-io/gravitee-access-management
-  - type: SDKs
-    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
-  - type: HelmChart
-    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
-  - type: DockerImage
-    url: https://hub.docker.com/r/graviteeio/am-gateway
-  - type: OpenAPI
-    url: openapi/gravitee-am-openapi.yml
-  - type: JSONLDContext
-    url: json-ld/gravitee-context.jsonld
-  - type: JSONSchema
-    url: json-schema/gravitee-domain-schema.json
-  - type: Capabilities
-    url: capabilities/access-management.yaml
-  features:
-  - name: OAuth2 / OIDC Provider
-    description: Full OAuth2 + OpenID Connect server with discovery, dynamic client registration, and PKCE.
-  - name: UMA 2.0
-    description: User-Managed Access for fine-grained, user-consent-driven authorization.
-  - name: SCIM 2.0
-    description: Cross-domain identity management via the SCIM 2.0 protocol.
-  - name: SAML 2.0 Federation
-    description: SAML IdP and SP capabilities for enterprise federation.
-  - name: MFA Factors
-    description: TOTP, SMS, email, WebAuthn / FIDO2, push, and recovery code factors with pluggable factor providers.
-  - name: Risk-Based Authentication
-    description: Adaptive authentication with bot detection, device identifier, and risk assessment.
-  - name: Identity Providers
-    description: LDAP, JDBC, Mongo, Google, Facebook, GitHub, Azure AD, OIDC, SAML, custom providers.
-  - name: Policy Engine
-    description: Pre / post authentication flows with policies for enrich, mfa, account-linking, JS scripting, etc.
-  - name: Themes and Forms
-    description: Branded login / registration / consent forms with theme customization.
-  - name: CIBA
-    description: Client-Initiated Backchannel Authentication for decoupled and IoT flows.
-  useCases:
-  - name: Customer IAM
-    description: Sign-up, sign-in, MFA, and consent for B2C applications.
-  - name: Workforce IAM
-    description: SSO and federation for enterprise workforce SaaS access.
-  - name: Open Banking AuthN
-    description: FAPI / PSD2-aligned OAuth2 flows for strong customer authentication.
-  - name: Machine-to-Machine Tokens
-    description: Client-credentials grants and mTLS-bound tokens for service-to-service auth.
-  integrations:
-  - name: LDAP
-  - name: MongoDB
-  - name: PostgreSQL
-  - name: MySQL
-  - name: Microsoft Entra ID
-  - name: Google Identity
-  - name: Facebook Login
-  - name: GitHub OAuth
-  - name: Okta
-  - name: Auth0
-  - name: Keycloak
-  - name: SAML 2.0 IdPs
-  authentication:
-  - type: OAuth2
-  - type: OpenID Connect
-  - type: Bearer Token
-  - type: API Key
-  - type: SAML
 - aid: gravitee:gravitee-cockpit
   name: Gravitee Cockpit
   description: >-
@@ -359,9 +69,9 @@ apis:
 - aid: gravitee:gravitee-alert-engine
   name: Gravitee Alert Engine
   description: >-
-    Gravitee Alert Engine (AE) is a real-time API monitoring solution that tracks performance, availability, errors,
-    quota approach, and security events across all Gravitee gateways. It evaluates conditions, fires triggers, and
-    routes notifications through webhooks, email, Slack, and other channels.
+    Gravitee Alert Engine (AE) is a real-time API monitoring solution that tracks performance, availability,
+    errors, quota approach, and security events across all Gravitee gateways. It evaluates conditions,
+    fires triggers, and routes notifications through webhooks, email, Slack, and other channels.
   humanURL: https://documentation.gravitee.io/ae
   baseURL: https://documentation.gravitee.io/ae
   tags:
@@ -395,10 +105,11 @@ apis:
 - aid: gravitee:gravitee-ai-agent-management
   name: Gravitee AI Agent Management
   description: >-
-    Gravitee AI Agent Management brings the API management discipline to agentic AI ecosystems. It is delivered as an
-    Enterprise add-on package and includes an LLM Proxy (model routing, prompt-token tracking, prompt guard-rails,
-    RAG), an MCP Proxy and MCP Tool Server, an A2A Proxy for agent-to-agent flows, an Agent Catalog, and AI-aware
-    Identity and Authorization (MCP resource server, OpenFGA permission engine, AuthZen PDP).
+    Gravitee AI Agent Management brings the API management discipline to agentic AI ecosystems. It is
+    delivered as an Enterprise add-on package and includes an LLM Proxy (model routing, prompt-token tracking,
+    prompt guard-rails, RAG), an MCP Proxy and MCP Tool Server, an A2A Proxy for agent-to-agent flows,
+    an Agent Catalog, and AI-aware Identity and Authorization (MCP resource server, OpenFGA permission
+    engine, AuthZen PDP).
   humanURL: https://www.gravitee.io/platform/ai-agent-management
   baseURL: https://documentation.gravitee.io/apim
   tags:
@@ -440,21 +151,27 @@ apis:
       Multi-provider proxy for OpenAI, Anthropic, Azure OpenAI, Bedrock, Mistral, Hugging Face, and self-hosted
       models behind one unified interface.
   - name: Prompt Token Tracking
-    description: Meter input / output tokens per consumer, per model, per route with enforceable token limits.
+    description: >-
+      Meter input / output tokens per consumer, per model, per route with enforceable token limits.
   - name: Prompt Guard-Rails
-    description: Apply allow / deny / classify rules to user prompts, including PII detection, before they reach the model.
+    description: >-
+      Apply allow / deny / classify rules to user prompts, including PII detection, before they reach
+      the model.
   - name: Semantic Caching
-    description: Cache LLM responses at the semantic layer to cut latency and provider cost on repeated prompts.
+    description: >-
+      Cache LLM responses at the semantic layer to cut latency and provider cost on repeated prompts.
   - name: Retrieval-Augmented Generation
     description: RAG policy that performs vector-store lookups and injects context into prompts.
   - name: AI Vector Store Resource
     description: Pluggable vector-store resource API for embedding-based retrieval.
   - name: MCP Proxy
-    description: Expose APIs as agent-ready tools using MCP standards with validation, governance, quota, and access controls.
+    description: >-
+      Expose APIs as agent-ready tools using MCP standards with validation, governance, quota, and access
+      controls.
   - name: MCP Tool Server / Agent Tool Server
     description: >-
-      Convert existing REST and event APIs into structured, reusable agent tools with standardized definitions and
-      execution patterns.
+      Convert existing REST and event APIs into structured, reusable agent tools with standardized definitions
+      and execution patterns.
   - name: A2A Proxy
     description: >-
       Govern agent-to-agent interactions with full visibility, identity propagation, and enforced authentication,
@@ -463,17 +180,19 @@ apis:
     description: Centralize agent discovery, versioning, and lifecycle management across teams.
   - name: Agentic Identity and Access Management
     description: >-
-      Zero-trust, context-aware authentication and fine-grained authorization unified across LLMs, agents, and APIs
-      (OpenFGA + AuthZen PDP).
+      Zero-trust, context-aware authentication and fine-grained authorization unified across LLMs, agents,
+      and APIs (OpenFGA + AuthZen PDP).
   - name: AI Cost and Usage Monitoring
     description: End-to-end visibility into agent activity, prompt cost, and per-tenant LLM spend.
   - name: ML Inference Service
-    description: Run text-classification and embedding models in the gateway via the inference service plugin.
+    description: >-
+      Run text-classification and embedding models in the gateway via the inference service plugin.
   useCases:
   - name: AI Cost Governance
     description: Cap and meter LLM spend by team, by route, by tenant.
   - name: Safe AI Onramp
-    description: Apply prompt guard-rails, PII detection, content classification, and audit on AI workloads.
+    description: >-
+      Apply prompt guard-rails, PII detection, content classification, and audit on AI workloads.
   - name: MCP-First APIs
     description: Publish enterprise APIs as MCP tools for agents and copilots.
   - name: RAG-as-a-Service
@@ -502,10 +221,10 @@ apis:
 - aid: gravitee:gravitee-kafka-gateway
   name: Gravitee Kafka Gateway
   description: >-
-    The Gravitee Kafka Gateway brings full API management discipline to Apache Kafka. It sits in front of one or more
-    Kafka clusters and applies authentication mediation, ACLs, quotas, message filtering and routing, schema and
-    serialization policies, virtual topics, and subscription workflows — exposing Kafka as a governed, productized
-    event streaming surface for internal and external consumers.
+    The Gravitee Kafka Gateway brings full API management discipline to Apache Kafka. It sits in front
+    of one or more Kafka clusters and applies authentication mediation, ACLs, quotas, message filtering
+    and routing, schema and serialization policies, virtual topics, and subscription workflows — exposing
+    Kafka as a governed, productized event streaming surface for internal and external consumers.
   humanURL: https://www.gravitee.io/platform/kafka-gateway
   baseURL: https://documentation.gravitee.io/apim
   tags:
@@ -523,35 +242,40 @@ apis:
   features:
   - name: API Management for Kafka
     description: >-
-      Apply policies — rate limiting, header assignment, serialization, JSON / Protobuf transformation — directly to
-      Kafka streams.
+      Apply policies — rate limiting, header assignment, serialization, JSON / Protobuf transformation
+      — directly to Kafka streams.
   - name: Message Filtering and Routing
-    description: Route and filter messages by content or headers, moving routing logic off the client and into the gateway.
+    description: >-
+      Route and filter messages by content or headers, moving routing logic off the client and into the
+      gateway.
   - name: Virtual Topics and Topic Mapping
     description: >-
-      Expose user-friendly aliases for complex Kafka topic names and abstract backend topic structures from
-      consumers.
+      Expose user-friendly aliases for complex Kafka topic names and abstract backend topic structures
+      from consumers.
   - name: Subscription Approval Workflows
-    description: Customizable approval workflows that gate which consumers may subscribe to which Kafka topics.
+    description: >-
+      Customizable approval workflows that gate which consumers may subscribe to which Kafka topics.
   - name: Authentication Mediation
     description: >-
-      Let consumers connect using their preferred auth (OAuth2, JWT, mTLS, SASL) while the broker keeps its own auth
-      model.
+      Let consumers connect using their preferred auth (OAuth2, JWT, mTLS, SASL) while the broker keeps
+      its own auth model.
   - name: Granular Access Control
     description: Fine-grained ACLs over topics, partitions, and consumer groups managed centrally.
   useCases:
   - name: Securely Expose Kafka
     description: >-
-      Combine access control, authentication mediation, and approval workflows to safely expose Kafka to internal
-      and external consumers.
+      Combine access control, authentication mediation, and approval workflows to safely expose Kafka
+      to internal and external consumers.
   - name: Kafka Governance
     description: >-
-      Gain visibility and control over Kafka data flows while enforcing organizational standards via policies and
-      workflows.
+      Gain visibility and control over Kafka data flows while enforcing organizational standards via policies
+      and workflows.
   - name: Self-Service Streaming
-    description: Let developers discover and subscribe to Kafka topics through the Gravitee Developer Portal.
+    description: >-
+      Let developers discover and subscribe to Kafka topics through the Gravitee Developer Portal.
   - name: Kafka TCO Reduction
-    description: Cut Kafka cost through virtual topics, message offloading, and consolidated access management.
+    description: >-
+      Cut Kafka cost through virtual topics, message offloading, and consolidated access management.
   integrations:
   - name: Apache Kafka
   - name: Confluent
@@ -567,9 +291,9 @@ apis:
 - aid: gravitee:gravitee-kubernetes-operator
   name: Gravitee Kubernetes Operator
   description: >-
-    The Gravitee Kubernetes Operator (GKO) is a Go-based Kubernetes operator that lets platform teams declare Gravitee
-    APIs, applications, subscriptions, shared policy groups, and management contexts as Kubernetes custom resources.
-    It reconciles those resources against one or more Gravitee APIM installations.
+    The Gravitee Kubernetes Operator (GKO) is a Go-based Kubernetes operator that lets platform teams
+    declare Gravitee APIs, applications, subscriptions, shared policy groups, and management contexts
+    as Kubernetes custom resources. It reconciles those resources against one or more Gravitee APIM installations.
   humanURL: https://documentation.gravitee.io/apim/kubernetes-operator
   baseURL: https://github.com/gravitee-io/gravitee-kubernetes-operator
   tags:
@@ -629,6 +353,4457 @@ apis:
   authentication:
   - type: Bearer Token
   - type: API Key
+- aid: gravitee:gravitee-alerts-api
+  name: Gravitee alerts API
+  description: The alerts API from Gravitee — 3 operation(s) for alerts.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-analytics-api
+  name: Gravitee Analytics API
+  description: Query analytics, time-series, and dashboards
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-api-products-api
+  name: Gravitee API Products API
+  description: Bundle one or more APIs into a publishable API product
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - API Products
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-api-products-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-apis-api
+  name: Gravitee APIs API
+  description: Manage APIs (v2 and v4 message-oriented APIs)
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - APIs
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-apis-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-application-api
+  name: Gravitee application API
+  description: The application API from Gravitee — 22 operation(s) for application.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - application
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-application-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-applications-api
+  name: Gravitee Applications API
+  description: Manage consumer applications
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-applications-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-audit-api
+  name: Gravitee audit API
+  description: The audit API from Gravitee — 4 operation(s) for audit.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - audit
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-audit-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-authentication-device-notifier-api
+  name: Gravitee Authentication Device Notifier API
+  description: >-
+    The Authentication Device Notifier API from Gravitee — 5 operation(s) for authentication device notifier.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Authentication Device Notifier
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-authentication-device-notifier-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-authorization-engine-api
+  name: Gravitee Authorization Engine API
+  description: The Authorization Engine API from Gravitee — 5 operation(s) for authorization engine.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Authorization Engine
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-authorization-engine-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-bot-detection-api
+  name: Gravitee Bot Detection API
+  description: The Bot Detection API from Gravitee — 5 operation(s) for bot detection.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Bot Detection
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-bot-detection-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-certificate-api
+  name: Gravitee Certificate API
+  description: The Certificate API from Gravitee — 8 operation(s) for certificate.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Certificate
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-certificate-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-data-sources-api
+  name: Gravitee data-sources API
+  description: The data-sources API from Gravitee — 1 operation(s) for data-sources.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - data-sources
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-data-sources-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-dataplane-api
+  name: Gravitee dataPlane API
+  description: The dataPlane API from Gravitee — 1 operation(s) for dataplane.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - dataPlane
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-dataplane-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-device-identifier-api
+  name: Gravitee Device Identifier API
+  description: The Device Identifier API from Gravitee — 3 operation(s) for device identifier.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Device Identifier
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-device-identifier-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-device-identifiers-api
+  name: Gravitee device identifiers API
+  description: The device identifiers API from Gravitee — 2 operation(s) for device identifiers.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - device identifiers
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-device-identifiers-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-devices-api
+  name: Gravitee devices API
+  description: The devices API from Gravitee — 2 operation(s) for devices.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - devices
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-devices-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-dictionary-api
+  name: Gravitee dictionary API
+  description: The dictionary API from Gravitee — 3 operation(s) for dictionary.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - dictionary
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-dictionary-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-domain-api
+  name: Gravitee domain API
+  description: The domain API from Gravitee — 120 operation(s) for domain.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - domain
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-domain-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-email-api
+  name: Gravitee email API
+  description: The email API from Gravitee — 4 operation(s) for email.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - email
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-email-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-entrypoints-api
+  name: Gravitee entrypoints API
+  description: The entrypoints API from Gravitee — 2 operation(s) for entrypoints.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - entrypoints
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-entrypoints-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-extension-grant-api
+  name: Gravitee Extension Grant API
+  description: The Extension Grant API from Gravitee — 5 operation(s) for extension grant.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Extension Grant
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-extension-grant-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-factor-api
+  name: Gravitee Factor API
+  description: The Factor API from Gravitee — 5 operation(s) for factor.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Factor
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-factor-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-flow-api
+  name: Gravitee flow API
+  description: The flow API from Gravitee — 2 operation(s) for flow.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - flow
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-flow-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-form-api
+  name: Gravitee form API
+  description: The form API from Gravitee — 7 operation(s) for form.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - form
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-form-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-group-api
+  name: Gravitee group API
+  description: The group API from Gravitee — 10 operation(s) for group.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - group
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-group-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-identity-provider-api
+  name: Gravitee Identity Provider API
+  description: The Identity Provider API from Gravitee — 8 operation(s) for identity provider.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Identity Provider
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-identity-provider-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-installation-api
+  name: Gravitee Installation API
+  description: Manage organizations, environments, and platform installation
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Installation
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-installation-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-logs-api
+  name: Gravitee Logs API
+  description: Search request and error logs
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-logs-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-newsletter-api
+  name: Gravitee Newsletter API
+  description: The Newsletter API from Gravitee — 2 operation(s) for newsletter.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Newsletter
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-newsletter-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-notifier-api
+  name: Gravitee Notifier API
+  description: The Notifier API from Gravitee — 3 operation(s) for notifier.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Notifier
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-notifier-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-organizations-api
+  name: Gravitee Organizations API
+  description: The Organizations API from Gravitee — 5 operation(s) for organizations.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-password-policy-api
+  name: Gravitee Password Policy API
+  description: The Password Policy API from Gravitee — 5 operation(s) for password policy.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Password Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-password-policy-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-plans-api
+  name: Gravitee Plans API
+  description: Manage plans (Keyless, API Key, OAuth2, JWT, mTLS, Push)
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-plans-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-platform-api
+  name: Gravitee platform API
+  description: The platform API from Gravitee — 45 operation(s) for platform.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - platform
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-platform-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-plugin-api
+  name: Gravitee Plugin API
+  description: The Plugin API from Gravitee — 37 operation(s) for plugin.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Plugin
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-plugin-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-plugins-api
+  name: Gravitee Plugins API
+  description: Discover policies, endpoints, entrypoints, and resources installed in the gateway
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Plugins
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-plugins-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-policy-api
+  name: Gravitee Policy API
+  description: The Policy API from Gravitee — 4 operation(s) for policy.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-policy-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-preview-api
+  name: Gravitee preview API
+  description: The preview API from Gravitee — 1 operation(s) for preview.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - preview
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-preview-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-protected-resource-api
+  name: Gravitee protected-resource API
+  description: The protected-resource API from Gravitee — 8 operation(s) for protected-resource.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - protected-resource
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-protected-resource-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-reporter-api
+  name: Gravitee Reporter API
+  description: The Reporter API from Gravitee — 7 operation(s) for reporter.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Reporter
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-reporter-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-resource-api
+  name: Gravitee Resource API
+  description: The Resource API from Gravitee — 5 operation(s) for resource.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Resource
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-resource-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-role-api
+  name: Gravitee role API
+  description: The role API from Gravitee — 4 operation(s) for role.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - role
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-role-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-scope-api
+  name: Gravitee scope API
+  description: The scope API from Gravitee — 2 operation(s) for scope.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - scope
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-scope-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-sharding-tags-api
+  name: Gravitee sharding-tags API
+  description: The sharding-tags API from Gravitee — 2 operation(s) for sharding-tags.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - sharding-tags
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-sharding-tags-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-subscriptions-api
+  name: Gravitee Subscriptions API
+  description: Manage subscriptions between applications and plans
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-theme-api
+  name: Gravitee theme API
+  description: The theme API from Gravitee — 2 operation(s) for theme.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - theme
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-theme-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-ui-api
+  name: Gravitee UI API
+  description: Customize developer portal and console themes
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - UI
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-ui-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-user-api
+  name: Gravitee user API
+  description: The user API from Gravitee — 38 operation(s) for user.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-user-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-user-notifications-api
+  name: Gravitee user notifications API
+  description: The user notifications API from Gravitee — 2 operation(s) for user notifications.
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - user notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-user-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
+- aid: gravitee:gravitee-users-api
+  name: Gravitee Users API
+  description: Manage Gravitee users
+  humanURL: https://www.gravitee.io/platform/api-management
+  baseURL: https://documentation.gravitee.io/apim
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/gravitee-users-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.gravitee.io/apim
+  - type: GettingStarted
+    url: https://documentation.gravitee.io/apim/getting-started
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/apim/release-information/changelog
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-api-management/blob/master/LICENSE.txt
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-api-management
+  - type: SDKs
+    url: https://github.com/gravitee-io/gravitee-clients-sdk
+  - type: SDKs
+    url: https://github.com/gravitee-io/terraform-provider-apim
+  - type: CLI
+    url: https://github.com/gravitee-io/graviteeio-cli
+  - type: KubernetesOperator
+    url: https://github.com/gravitee-io/gravitee-kubernetes-operator
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/apim-gateway
+  - type: JSONLDContext
+    url: json-ld/gravitee-context.jsonld
+  - type: JSONSchema
+    url: json-schema/gravitee-api-schema.json
+  - type: JSONSchema
+    url: json-schema/gravitee-plan-schema.json
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apidefinitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiv4definitions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_apiresources.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_applications.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_subscriptions.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_managementcontexts.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_sharedpolicygroups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_groups.yaml
+  - type: KubernetesCRD
+    url: crd/gravitee.io_notifications.yaml
+  - type: Plans
+    url: plans/gravitee-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/gravitee-rate-limits.yml
+  - type: FinOps
+    url: finops/gravitee-finops.yml
+  - type: Capabilities
+    url: capabilities/api-gateway-operations.yaml
+  - type: Capabilities
+    url: capabilities/traffic-observability.yaml
+  - type: GraphQL
+    url: graphql/gravitee-graphql.md
+  - type: Documentation
+    url: https://documentation.gravitee.io/am
+  - type: Reference
+    url: https://documentation.gravitee.io/am/reference/am-api-reference
+  - type: ChangeLog
+    url: https://documentation.gravitee.io/am/releases-and-changelog/release-notes
+  - type: License
+    url: https://github.com/gravitee-io/gravitee-access-management/blob/master/LICENSE
+  - type: GitHubRepository
+    url: https://github.com/gravitee-io/gravitee-access-management
+  - type: SDKs
+    url: >-
+      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+  - type: HelmChart
+    url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
+  - type: DockerImage
+    url: https://hub.docker.com/r/graviteeio/am-gateway
+  - type: JSONSchema
+    url: json-schema/gravitee-domain-schema.json
+  - type: Capabilities
+    url: capabilities/access-management.yaml
 common:
 - type: AgentCard
   url: a2a/gravitee-a2a.yml
