@@ -1,0 +1,222 @@
+{
+  "info": {
+    "_postman_id": "9bb49a53-138e-4790-9190-f9e058ba90f9",
+    "name": "Gravitee.io - Access Management alerts data-sources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:29.000Z",
+    "updatedAt": "2026-07-28T01:51:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9bb49a53-138e-4790-9190-f9e058ba90f9"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "data-sources",
+                      "item": [
+                        {
+                          "name": "List all the data sources",
+                          "id": "9fe9df28-31ad-4d7f-8f0d-30cb8070425f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/data-sources",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "environments",
+                                ":environmentId",
+                                "data-sources"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "81b531c4-f40c-4082-91f9-962ed83359b0",
+                                  "key": "organizationId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "6649244c-8d8f-456c-ae07-c3059310eb45",
+                                  "key": "environmentId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Returns all of the available data sources to be used in IDP creation"
+                          },
+                          "response": [
+                            {
+                              "id": "5360a594-40b8-43e6-8950-cbfdc45ad6a8",
+                              "name": "List all the IDP data sources",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/data-sources",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organizationId",
+                                    "environments",
+                                    ":environmentId",
+                                    "data-sources"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organizationId"
+                                    },
+                                    {
+                                      "key": "environmentId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T01:51:29.000Z",
+                              "updatedAt": "2026-07-28T01:51:29.000Z",
+                              "uid": "35240-5360a594-40b8-43e6-8950-cbfdc45ad6a8"
+                            },
+                            {
+                              "id": "66545ac8-a969-43a6-88bc-897b78e77b87",
+                              "name": "Internal server error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/data-sources",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organizationId",
+                                    "environments",
+                                    ":environmentId",
+                                    "data-sources"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organizationId"
+                                    },
+                                    {
+                                      "key": "environmentId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:51:29.000Z",
+                              "updatedAt": "2026-07-28T01:51:29.000Z",
+                              "uid": "35240-66545ac8-a969-43a6-88bc-897b78e77b87"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:51:29.000Z",
+                          "updatedAt": "2026-07-28T01:51:29.000Z",
+                          "uid": "35240-9fe9df28-31ad-4d7f-8f0d-30cb8070425f"
+                        }
+                      ],
+                      "id": "f4bae229-0790-4aa6-b070-6d50765bddac",
+                      "createdAt": "2026-07-28T01:51:29.000Z",
+                      "updatedAt": "2026-07-28T01:51:29.000Z",
+                      "uid": "35240-f4bae229-0790-4aa6-b070-6d50765bddac"
+                    }
+                  ],
+                  "id": "0a560379-e3d3-46d2-bf8c-d3898616116e",
+                  "createdAt": "2026-07-28T01:51:29.000Z",
+                  "updatedAt": "2026-07-28T01:51:29.000Z",
+                  "uid": "35240-0a560379-e3d3-46d2-bf8c-d3898616116e"
+                }
+              ],
+              "id": "ee1f20e3-92ec-4768-b393-f039e7f01470",
+              "createdAt": "2026-07-28T01:51:29.000Z",
+              "updatedAt": "2026-07-28T01:51:29.000Z",
+              "uid": "35240-ee1f20e3-92ec-4768-b393-f039e7f01470"
+            }
+          ],
+          "id": "e879ed2c-6b54-46d6-979b-eb2e6e289b51",
+          "createdAt": "2026-07-28T01:51:29.000Z",
+          "updatedAt": "2026-07-28T01:51:29.000Z",
+          "uid": "35240-e879ed2c-6b54-46d6-979b-eb2e6e289b51"
+        }
+      ],
+      "id": "34fbad38-3f03-477b-a4d8-c40f105eb58f",
+      "createdAt": "2026-07-28T01:51:29.000Z",
+      "updatedAt": "2026-07-28T01:51:29.000Z",
+      "uid": "35240-34fbad38-3f03-477b-a4d8-c40f105eb58f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

@@ -1,0 +1,354 @@
+{
+  "info": {
+    "_postman_id": "da997691-9b84-4310-86bc-a0ffc20301f8",
+    "name": "Gravitee.io - Access Management alerts Installation API",
+    "description": "Manage organizations, environments, and platform installation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:05.000Z",
+    "updatedAt": "2026-07-28T01:52:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-da997691-9b84-4310-86bc-a0ffc20301f8"
+  },
+  "item": [
+    {
+      "name": "environments",
+      "item": [
+        {
+          "name": "{envId}",
+          "item": [
+            {
+              "name": "Get an Environment",
+              "id": "f90cbbf1-4f3d-416f-8788-5a3ec3ba08aa",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/environments/:envId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "environments",
+                    ":envId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "31585459-e3aa-4587-ae77-a6cef37c318b",
+                      "key": "envId",
+                      "value": "<string>",
+                      "description": "(Required) The environment identifier"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "2bdeed53-c297-4950-96e3-3854e4f09de3",
+                  "name": "The environment",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/environments/:envId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "environments",
+                        ":envId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "envId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:52:05.000Z",
+                  "updatedAt": "2026-07-28T01:52:05.000Z",
+                  "uid": "35240-2bdeed53-c297-4950-96e3-3854e4f09de3"
+                }
+              ],
+              "createdAt": "2026-07-28T01:52:05.000Z",
+              "updatedAt": "2026-07-28T01:52:05.000Z",
+              "uid": "35240-f90cbbf1-4f3d-416f-8788-5a3ec3ba08aa"
+            }
+          ],
+          "id": "ec093206-3f58-4d2b-ad9b-bfad44595bf6",
+          "createdAt": "2026-07-28T01:52:05.000Z",
+          "updatedAt": "2026-07-28T01:52:05.000Z",
+          "uid": "35240-ec093206-3f58-4d2b-ad9b-bfad44595bf6"
+        },
+        {
+          "name": "List Environments",
+          "id": "d07ffa18-d793-4e18-b904-29aada5aec84",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/environments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "environments"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "88c63928-46f4-4d2e-b691-4624ada36268",
+              "name": "Environments",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/environments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "environments"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:52:05.000Z",
+              "updatedAt": "2026-07-28T01:52:05.000Z",
+              "uid": "35240-88c63928-46f4-4d2e-b691-4624ada36268"
+            }
+          ],
+          "createdAt": "2026-07-28T01:52:05.000Z",
+          "updatedAt": "2026-07-28T01:52:05.000Z",
+          "uid": "35240-d07ffa18-d793-4e18-b904-29aada5aec84"
+        }
+      ],
+      "id": "b7d5af52-6900-43ad-93b2-d91802f0bbe4",
+      "createdAt": "2026-07-28T01:52:05.000Z",
+      "updatedAt": "2026-07-28T01:52:05.000Z",
+      "uid": "35240-b7d5af52-6900-43ad-93b2-d91802f0bbe4"
+    },
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{orgId}",
+          "item": [
+            {
+              "name": "license",
+              "item": [
+                {
+                  "name": "Get the Organization License",
+                  "id": "7ad7eece-370c-479f-942c-f26bf4269a7f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:orgId/license",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":orgId",
+                        "license"
+                      ],
+                      "variable": [
+                        {
+                          "id": "036b5995-b8ea-470c-84b6-cdd778924b4d",
+                          "key": "orgId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c04e6234-a9bf-488f-9982-5c44be0c2886",
+                      "name": "The license",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:orgId/license",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":orgId",
+                            "license"
+                          ],
+                          "variable": [
+                            {
+                              "key": "orgId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:52:05.000Z",
+                      "updatedAt": "2026-07-28T01:52:05.000Z",
+                      "uid": "35240-c04e6234-a9bf-488f-9982-5c44be0c2886"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:05.000Z",
+                  "updatedAt": "2026-07-28T01:52:05.000Z",
+                  "uid": "35240-7ad7eece-370c-479f-942c-f26bf4269a7f"
+                }
+              ],
+              "id": "b9359a53-f92d-441a-9c13-421ce0498d3f",
+              "createdAt": "2026-07-28T01:52:05.000Z",
+              "updatedAt": "2026-07-28T01:52:05.000Z",
+              "uid": "35240-b9359a53-f92d-441a-9c13-421ce0498d3f"
+            },
+            {
+              "name": "Get an Organization",
+              "id": "a4e6b0ab-e05e-4a62-84a0-28cf11249a60",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/organizations/:orgId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "organizations",
+                    ":orgId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ef0f3007-f678-4b18-b19e-e4159de48dfe",
+                      "key": "orgId",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f90eb40f-f430-431f-9fd2-9050e80ad7ae",
+                  "name": "The organization",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:orgId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":orgId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "orgId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:52:05.000Z",
+                  "updatedAt": "2026-07-28T01:52:05.000Z",
+                  "uid": "35240-f90eb40f-f430-431f-9fd2-9050e80ad7ae"
+                }
+              ],
+              "createdAt": "2026-07-28T01:52:05.000Z",
+              "updatedAt": "2026-07-28T01:52:05.000Z",
+              "uid": "35240-a4e6b0ab-e05e-4a62-84a0-28cf11249a60"
+            }
+          ],
+          "id": "b8ad5915-c5ce-4c26-89a2-d609ef8226a0",
+          "createdAt": "2026-07-28T01:52:05.000Z",
+          "updatedAt": "2026-07-28T01:52:05.000Z",
+          "uid": "35240-b8ad5915-c5ce-4c26-89a2-d609ef8226a0"
+        }
+      ],
+      "id": "4da97d77-4557-4295-b4a1-aa93c7406090",
+      "createdAt": "2026-07-28T01:52:05.000Z",
+      "updatedAt": "2026-07-28T01:52:05.000Z",
+      "uid": "35240-4da97d77-4557-4295-b4a1-aa93c7406090"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

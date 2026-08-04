@@ -1,0 +1,1459 @@
+{
+  "info": {
+    "_postman_id": "6ff4d3ea-81d1-4d7d-b908-a15836cd520e",
+    "name": "Gravitee.io - Access Management alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:50:58.000Z",
+    "updatedAt": "2026-07-28T01:50:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6ff4d3ea-81d1-4d7d-b908-a15836cd520e"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "alerts",
+                              "item": [
+                                {
+                                  "name": "notifiers",
+                                  "item": [
+                                    {
+                                      "name": "{notifierId}",
+                                      "item": [
+                                        {
+                                          "name": "Get an alert notifier",
+                                          "id": "79534e1e-f943-420d-8281-6943005c7a23",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "notifiers",
+                                                ":notifierId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "9ac65fbf-cfbd-434c-ad32-5ff0fc600765",
+                                                  "key": "organizationId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "c321ebd4-d2ef-4e23-ab94-06d578d63cc6",
+                                                  "key": "environmentId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "c34379e0-821a-4e50-ae07-5f2aa4227b38",
+                                                  "key": "domain",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "09f2f71a-3434-4054-965d-dbf11b11c462",
+                                                  "key": "notifierId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "Get an alert notifier by its id. User must have DOMAIN_ALERT_NOTIFIER[LIST] permission on the specified domain, environment or organization."
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "420c8c1b-7d55-400d-9afd-d3b6aa399aca",
+                                              "name": "The alert notifier",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "alerts",
+                                                    "notifiers",
+                                                    ":notifierId"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "notifierId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"configuration\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"ENVIRONMENT\",\n  \"type\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                              "createdAt": "2026-07-28T01:50:59.000Z",
+                                              "updatedAt": "2026-07-28T01:50:59.000Z",
+                                              "uid": "35240-420c8c1b-7d55-400d-9afd-d3b6aa399aca"
+                                            },
+                                            {
+                                              "id": "35b6908f-e9b8-485c-9970-a062944f8211",
+                                              "name": "Internal server error",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "alerts",
+                                                    "notifiers",
+                                                    ":notifierId"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "notifierId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Internal Server Error",
+                                              "code": 500,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:50:59.000Z",
+                                              "updatedAt": "2026-07-28T01:50:59.000Z",
+                                              "uid": "35240-35b6908f-e9b8-485c-9970-a062944f8211"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-79534e1e-f943-420d-8281-6943005c7a23"
+                                        },
+                                        {
+                                          "name": "Delete an alert notifier",
+                                          "id": "f0195123-f6c5-4c53-bc0d-806d8eb6ca9f",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "DELETE",
+                                            "header": [],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "notifiers",
+                                                ":notifierId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "1b562d07-b746-4575-8887-53a8fa4b568c",
+                                                  "key": "organizationId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "aa380b3b-506b-4e07-91dc-78babf1a8d11",
+                                                  "key": "environmentId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "46a36cb1-9670-4a0d-89c8-0dd7aed6f5f9",
+                                                  "key": "domain",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "bc4162f3-f4a2-4102-8c19-bbf39419b810",
+                                                  "key": "notifierId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "Delete an alert notifier by its id. User must have DOMAIN_ALERT_NOTIFIER[DELETE] permission on the specified domain, environment or organization."
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "27470250-ad39-4e9b-b43d-437322435a7b",
+                                              "name": "Alert notifier successfully deleted",
+                                              "originalRequest": {
+                                                "method": "DELETE",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "alerts",
+                                                    "notifiers",
+                                                    ":notifierId"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "notifierId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "No Content",
+                                              "code": 204,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:50:59.000Z",
+                                              "updatedAt": "2026-07-28T01:50:59.000Z",
+                                              "uid": "35240-27470250-ad39-4e9b-b43d-437322435a7b"
+                                            },
+                                            {
+                                              "id": "b30db0aa-d1f5-47ab-8775-129c5e312465",
+                                              "name": "Internal server error",
+                                              "originalRequest": {
+                                                "method": "DELETE",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "alerts",
+                                                    "notifiers",
+                                                    ":notifierId"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "notifierId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Internal Server Error",
+                                              "code": 500,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:50:59.000Z",
+                                              "updatedAt": "2026-07-28T01:50:59.000Z",
+                                              "uid": "35240-b30db0aa-d1f5-47ab-8775-129c5e312465"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-f0195123-f6c5-4c53-bc0d-806d8eb6ca9f"
+                                        },
+                                        {
+                                          "name": "Update an alert notifier",
+                                          "id": "622aafa4-51b6-45c9-b496-50386b6ec9d9",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "PATCH",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"configuration\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "notifiers",
+                                                ":notifierId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "97c810dd-544c-4257-8366-28b0bbb3fe11",
+                                                  "key": "organizationId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "5855caa0-3f07-461a-b071-e0ecfcfab907",
+                                                  "key": "environmentId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "1c9b0148-9766-4e69-a2a2-80257e817857",
+                                                  "key": "domain",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "2ac445d7-6a0f-4358-9d61-f2a482e1b398",
+                                                  "key": "notifierId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "Update an alert notifierUser must have DOMAIN_ALERT_NOTIFIER[UPDATE] permission on the specified domain, environment or organization."
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "17343816-f730-4e92-8771-4b1b61297063",
+                                              "name": "Alert notifier successfully updated",
+                                              "originalRequest": {
+                                                "method": "PATCH",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"configuration\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "alerts",
+                                                    "notifiers",
+                                                    ":notifierId"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "notifierId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "{\n  \"configuration\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"ENVIRONMENT\",\n  \"type\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                              "createdAt": "2026-07-28T01:50:59.000Z",
+                                              "updatedAt": "2026-07-28T01:50:59.000Z",
+                                              "uid": "35240-17343816-f730-4e92-8771-4b1b61297063"
+                                            },
+                                            {
+                                              "id": "305ac94d-a9ca-43b3-838b-516f0686f05d",
+                                              "name": "Internal server error",
+                                              "originalRequest": {
+                                                "method": "PATCH",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"configuration\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "alerts",
+                                                    "notifiers",
+                                                    ":notifierId"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "notifierId"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Internal Server Error",
+                                              "code": 500,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:50:59.000Z",
+                                              "updatedAt": "2026-07-28T01:50:59.000Z",
+                                              "uid": "35240-305ac94d-a9ca-43b3-838b-516f0686f05d"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-622aafa4-51b6-45c9-b496-50386b6ec9d9"
+                                        }
+                                      ],
+                                      "id": "668715f4-f7e3-463e-b272-e57e37a84c22",
+                                      "createdAt": "2026-07-28T01:50:59.000Z",
+                                      "updatedAt": "2026-07-28T01:50:59.000Z",
+                                      "uid": "35240-668715f4-f7e3-463e-b272-e57e37a84c22"
+                                    },
+                                    {
+                                      "name": "List alert notifiers",
+                                      "id": "c5c6f4a5-9a10-4659-8837-e0bce86f55d1",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "alerts",
+                                            "notifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "10a6dc51-c1bb-4534-8ce2-ce5f34867928",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "9d690255-4537-4a78-b690-5c51819bb92c",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "02cd8a2a-c972-4bb0-83e6-b410886f002d",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "List all the alert notifiers of the domain. User must have DOMAIN_ALERT_NOTIFIER[LIST] permission on the specified domain, environment or organization."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "6b51f06a-1c81-4a5a-b176-7312284dec08",
+                                          "name": "List alert notifiers for current user",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "notifiers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "[\n  {\n    \"configuration\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"DOMAIN\",\n    \"type\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"configuration\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"APPLICATION\",\n    \"type\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]",
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-6b51f06a-1c81-4a5a-b176-7312284dec08"
+                                        },
+                                        {
+                                          "id": "7e8f9607-d1fb-46a8-bb8d-87184f503033",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "notifiers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-7e8f9607-d1fb-46a8-bb8d-87184f503033"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:50:59.000Z",
+                                      "updatedAt": "2026-07-28T01:50:59.000Z",
+                                      "uid": "35240-c5c6f4a5-9a10-4659-8837-e0bce86f55d1"
+                                    },
+                                    {
+                                      "name": "Create an alert notifier",
+                                      "id": "ff025db1-2d9c-4e28-ab64-247fef17686f",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"configuration\": \"<string>\",\n  \"type\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "alerts",
+                                            "notifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "c4b845b2-595d-4c73-820b-2d2b45da56ee",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "7f0702b0-7796-48fb-94ad-f700880df0fe",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "7f6ede0d-97a8-4421-b833-15d95b40e3fb",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Create a new alert notifierUser must have DOMAIN_ALERT_NOTIFIER[CREATE] permission on the specified domain, environment or organization."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "83f3a6aa-11ec-4aaf-89ae-5eaec33adf2a",
+                                          "name": "Alert notifier successfully created",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"configuration\": \"<string>\",\n  \"type\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "notifiers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"configuration\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"ENVIRONMENT\",\n  \"type\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-83f3a6aa-11ec-4aaf-89ae-5eaec33adf2a"
+                                        },
+                                        {
+                                          "id": "738dbb3b-c4b8-420d-b645-ca10a1501ccb",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"configuration\": \"<string>\",\n  \"type\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"name\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "notifiers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-738dbb3b-c4b8-420d-b645-ca10a1501ccb"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:50:59.000Z",
+                                      "updatedAt": "2026-07-28T01:50:59.000Z",
+                                      "uid": "35240-ff025db1-2d9c-4e28-ab64-247fef17686f"
+                                    }
+                                  ],
+                                  "id": "64860e92-73d1-45a0-9943-aba02d08cc9b",
+                                  "createdAt": "2026-07-28T01:50:59.000Z",
+                                  "updatedAt": "2026-07-28T01:50:59.000Z",
+                                  "uid": "35240-64860e92-73d1-45a0-9943-aba02d08cc9b"
+                                },
+                                {
+                                  "name": "triggers",
+                                  "item": [
+                                    {
+                                      "name": "List alert triggers",
+                                      "id": "fdec09e6-07a0-42a9-96da-80e30e8d44d6",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/triggers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "alerts",
+                                            "triggers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "b454185d-b5a6-4b8b-a927-aa5f28c947d2",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "1d7c6a90-79d0-44cc-8949-862d175291d4",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "f84abb49-ce95-4e95-a146-9a107efc6496",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "List all the alert triggers of the domain accessible to the current user. User must have DOMAIN_ALERT[LIST] permission on the specified domain, environment or organization."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "e21efa00-5b2e-410d-8fa4-1421a322dd3b",
+                                          "name": "List alert triggers for current user",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/triggers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "triggers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "[\n  {\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"createdAt\": \"<dateTime>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ENVIRONMENT\",\n    \"type\": \"RISK_ASSESSMENT\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"createdAt\": \"<dateTime>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PROTECTED_RESOURCE\",\n    \"type\": \"RISK_ASSESSMENT\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]",
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-e21efa00-5b2e-410d-8fa4-1421a322dd3b"
+                                        },
+                                        {
+                                          "id": "1827a962-04f9-447c-8e14-2798894c1f68",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/triggers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "triggers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-1827a962-04f9-447c-8e14-2798894c1f68"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:50:59.000Z",
+                                      "updatedAt": "2026-07-28T01:50:59.000Z",
+                                      "uid": "35240-fdec09e6-07a0-42a9-96da-80e30e8d44d6"
+                                    },
+                                    {
+                                      "name": "Update multiple alert triggers",
+                                      "id": "faca4503-d6a0-4c65-bd3c-a911667db5df",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PATCH",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "[\n  {\n    \"type\": \"RISK_ASSESSMENT\",\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"enabled\": \"<boolean>\"\n  },\n  {\n    \"type\": \"RISK_ASSESSMENT\",\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"enabled\": \"<boolean>\"\n  }\n]",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/triggers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "alerts",
+                                            "triggers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "2c7def89-65ed-407c-8765-7717a7f71200",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "f595ac82-0449-4100-a037-f98d157c5235",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "4235a2e3-01d5-40b0-b225-c928f9bc3b2c",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "Update multiple alert triggers in the same timeUser must have DOMAIN_ALERT[UPDATE] permission on the specified domain, environment or organization."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "0679edcb-af09-4637-adde-814f0b4a5c5b",
+                                          "name": "Alert triggers successfully updated",
+                                          "originalRequest": {
+                                            "method": "PATCH",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "[\n  {\n    \"type\": \"RISK_ASSESSMENT\",\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"enabled\": \"<boolean>\"\n  },\n  {\n    \"type\": \"RISK_ASSESSMENT\",\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"enabled\": \"<boolean>\"\n  }\n]",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/triggers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "triggers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "[\n  {\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"createdAt\": \"<dateTime>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ENVIRONMENT\",\n    \"type\": \"RISK_ASSESSMENT\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"createdAt\": \"<dateTime>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PROTECTED_RESOURCE\",\n    \"type\": \"RISK_ASSESSMENT\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]",
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-0679edcb-af09-4637-adde-814f0b4a5c5b"
+                                        },
+                                        {
+                                          "id": "72918298-1caa-44e5-87d2-a79e6942061f",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "PATCH",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "[\n  {\n    \"type\": \"RISK_ASSESSMENT\",\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"enabled\": \"<boolean>\"\n  },\n  {\n    \"type\": \"RISK_ASSESSMENT\",\n    \"alertNotifiers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"enabled\": \"<boolean>\"\n  }\n]",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/triggers",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "alerts",
+                                                "triggers"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:50:59.000Z",
+                                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                                          "uid": "35240-72918298-1caa-44e5-87d2-a79e6942061f"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:50:59.000Z",
+                                      "updatedAt": "2026-07-28T01:50:59.000Z",
+                                      "uid": "35240-faca4503-d6a0-4c65-bd3c-a911667db5df"
+                                    }
+                                  ],
+                                  "id": "b7864a97-f76b-4e1d-9b1a-00489d279aa6",
+                                  "createdAt": "2026-07-28T01:50:59.000Z",
+                                  "updatedAt": "2026-07-28T01:50:59.000Z",
+                                  "uid": "35240-b7864a97-f76b-4e1d-9b1a-00489d279aa6"
+                                }
+                              ],
+                              "id": "9859bb12-1ad2-42a1-96b6-f8147c265215",
+                              "createdAt": "2026-07-28T01:50:59.000Z",
+                              "updatedAt": "2026-07-28T01:50:59.000Z",
+                              "uid": "35240-9859bb12-1ad2-42a1-96b6-f8147c265215"
+                            }
+                          ],
+                          "id": "0963eee0-18ab-410b-9b98-3e44faba2054",
+                          "createdAt": "2026-07-28T01:50:59.000Z",
+                          "updatedAt": "2026-07-28T01:50:59.000Z",
+                          "uid": "35240-0963eee0-18ab-410b-9b98-3e44faba2054"
+                        }
+                      ],
+                      "id": "dc98ba03-efed-435d-ad12-dfc280bc0de4",
+                      "createdAt": "2026-07-28T01:50:59.000Z",
+                      "updatedAt": "2026-07-28T01:50:59.000Z",
+                      "uid": "35240-dc98ba03-efed-435d-ad12-dfc280bc0de4"
+                    }
+                  ],
+                  "id": "539de60e-c739-47c4-a22e-13cfe2ad7811",
+                  "createdAt": "2026-07-28T01:50:59.000Z",
+                  "updatedAt": "2026-07-28T01:50:59.000Z",
+                  "uid": "35240-539de60e-c739-47c4-a22e-13cfe2ad7811"
+                }
+              ],
+              "id": "1984b79e-ff3c-4f81-a516-8b751d471845",
+              "createdAt": "2026-07-28T01:50:59.000Z",
+              "updatedAt": "2026-07-28T01:50:59.000Z",
+              "uid": "35240-1984b79e-ff3c-4f81-a516-8b751d471845"
+            }
+          ],
+          "id": "d96ad841-cdbb-4d91-8a9f-48b0bbbeeab2",
+          "createdAt": "2026-07-28T01:50:59.000Z",
+          "updatedAt": "2026-07-28T01:50:59.000Z",
+          "uid": "35240-d96ad841-cdbb-4d91-8a9f-48b0bbbeeab2"
+        }
+      ],
+      "id": "d765b9a9-f7d3-44de-8e65-c17fe17ebe27",
+      "createdAt": "2026-07-28T01:50:59.000Z",
+      "updatedAt": "2026-07-28T01:50:59.000Z",
+      "uid": "35240-d765b9a9-f7d3-44de-8e65-c17fe17ebe27"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

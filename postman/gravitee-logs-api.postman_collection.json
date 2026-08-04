@@ -1,0 +1,229 @@
+{
+  "info": {
+    "_postman_id": "e6f9229c-9391-43ce-bdf0-0b15a1c05723",
+    "name": "Gravitee.io - Access Management alerts Logs API",
+    "description": "Search request and error logs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:06.000Z",
+    "updatedAt": "2026-07-28T01:52:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e6f9229c-9391-43ce-bdf0-0b15a1c05723"
+  },
+  "item": [
+    {
+      "name": "environments",
+      "item": [
+        {
+          "name": "{envId}",
+          "item": [
+            {
+              "name": "logs",
+              "item": [
+                {
+                  "name": "search",
+                  "item": [
+                    {
+                      "name": "Search Request Logs",
+                      "id": "b3786288-ef8c-4a01-b6d7-950085e9a4c7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:envId/logs/search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":envId",
+                            "logs",
+                            "search"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4fd7bae3-7593-495b-a189-b635bb6b4db4",
+                              "key": "envId",
+                              "value": "<string>",
+                              "description": "(Required) The environment identifier"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "834b79de-5a6c-44e9-882b-6a8f515be3c2",
+                          "name": "Logs page",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/:envId/logs/search",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                ":envId",
+                                "logs",
+                                "search"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "envId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:52:06.000Z",
+                          "updatedAt": "2026-07-28T01:52:06.000Z",
+                          "uid": "35240-834b79de-5a6c-44e9-882b-6a8f515be3c2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:06.000Z",
+                      "updatedAt": "2026-07-28T01:52:06.000Z",
+                      "uid": "35240-b3786288-ef8c-4a01-b6d7-950085e9a4c7"
+                    }
+                  ],
+                  "id": "e4b71b70-ccfe-49fe-9cec-cd174b4e2af5",
+                  "createdAt": "2026-07-28T01:52:06.000Z",
+                  "updatedAt": "2026-07-28T01:52:06.000Z",
+                  "uid": "35240-e4b71b70-ccfe-49fe-9cec-cd174b4e2af5"
+                },
+                {
+                  "name": "error-keys",
+                  "item": [
+                    {
+                      "name": "List Error Keys for Logs",
+                      "id": "c94107f7-39a0-48cf-a920-488eef022757",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:envId/logs/error-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":envId",
+                            "logs",
+                            "error-keys"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6c2ee5f5-ee9f-4394-a216-0f4b933c4605",
+                              "key": "envId",
+                              "value": "<string>",
+                              "description": "(Required) The environment identifier"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "b117e8ce-32b9-49c2-8d9b-7d68dbbf4c9d",
+                          "name": "Error keys",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/:envId/logs/error-keys",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                ":envId",
+                                "logs",
+                                "error-keys"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "envId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:52:06.000Z",
+                          "updatedAt": "2026-07-28T01:52:06.000Z",
+                          "uid": "35240-b117e8ce-32b9-49c2-8d9b-7d68dbbf4c9d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:06.000Z",
+                      "updatedAt": "2026-07-28T01:52:06.000Z",
+                      "uid": "35240-c94107f7-39a0-48cf-a920-488eef022757"
+                    }
+                  ],
+                  "id": "20864496-d857-4f91-99ee-8d886a6cd4f0",
+                  "createdAt": "2026-07-28T01:52:06.000Z",
+                  "updatedAt": "2026-07-28T01:52:06.000Z",
+                  "uid": "35240-20864496-d857-4f91-99ee-8d886a6cd4f0"
+                }
+              ],
+              "id": "cdf4dd3a-c832-486b-a57d-0fa45335337c",
+              "createdAt": "2026-07-28T01:52:06.000Z",
+              "updatedAt": "2026-07-28T01:52:06.000Z",
+              "uid": "35240-cdf4dd3a-c832-486b-a57d-0fa45335337c"
+            }
+          ],
+          "id": "fc914c24-4d44-4348-810a-d00aedb617b8",
+          "createdAt": "2026-07-28T01:52:06.000Z",
+          "updatedAt": "2026-07-28T01:52:06.000Z",
+          "uid": "35240-fc914c24-4d44-4348-810a-d00aedb617b8"
+        }
+      ],
+      "id": "ce5c9146-e92d-4adb-a934-a921399cc859",
+      "createdAt": "2026-07-28T01:52:06.000Z",
+      "updatedAt": "2026-07-28T01:52:06.000Z",
+      "uid": "35240-ce5c9146-e92d-4adb-a934-a921399cc859"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

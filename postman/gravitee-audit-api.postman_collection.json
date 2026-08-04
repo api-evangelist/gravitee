@@ -1,0 +1,921 @@
+{
+  "info": {
+    "_postman_id": "d3dd5379-b94a-4c00-9e53-12bf140f6e86",
+    "name": "Gravitee.io - Access Management alerts audit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:05.000Z",
+    "updatedAt": "2026-07-28T01:51:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d3dd5379-b94a-4c00-9e53-12bf140f6e86"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "audits",
+              "item": [
+                {
+                  "name": "{audit}",
+                  "item": [
+                    {
+                      "name": "Get an audit log",
+                      "id": "709e09b6-ddcf-4cda-bd87-979c04fbd116",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/audits/:audit",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "audits",
+                            ":audit"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b6c574ec-cdfd-443b-9885-9458a80afde4",
+                              "key": "organizationId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "712ddd3f-5650-4df4-9aa1-2ab5a4af3d71",
+                              "key": "audit",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "User must have the ORGANIZATION_AUDIT[READ] permission on the specified organization"
+                      },
+                      "response": [
+                        {
+                          "id": "7cf8ca04-0064-4f7e-8a45-c97290a764da",
+                          "name": "Audit log successfully fetched",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/audits/:audit",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "audits",
+                                ":audit"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "audit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"accessPoint\": {\n    \"alternativeId\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"id\": \"<string>\",\n    \"ipAddress\": \"<string>\",\n    \"userAgent\": \"<string>\"\n  },\n  \"actor\": {\n    \"alternativeId\": \"<string>\",\n    \"attributes\": {\n      \"cillum_6\": {},\n      \"Duis_4\": {}\n    },\n    \"displayName\": \"<string>\",\n    \"id\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ORGANIZATION\",\n    \"type\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"outcome\": {\n    \"message\": \"<string>\",\n    \"status\": \"SUCCESS\"\n  },\n  \"reference\": {\n    \"id\": \"<string>\",\n    \"type\": \"APPLICATION\"\n  },\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"PROTECTED_RESOURCE\",\n  \"target\": {\n    \"alternativeId\": \"<string>\",\n    \"attributes\": {\n      \"non_5\": {}\n    },\n    \"displayName\": \"<string>\",\n    \"id\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PLATFORM\",\n    \"type\": \"<string>\"\n  },\n  \"timestamp\": \"<dateTime>\",\n  \"transactionId\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:51:05.000Z",
+                          "updatedAt": "2026-07-28T01:51:05.000Z",
+                          "uid": "35240-7cf8ca04-0064-4f7e-8a45-c97290a764da"
+                        },
+                        {
+                          "id": "d09af706-b2db-412a-af8a-c173f46d37c8",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/audits/:audit",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "audits",
+                                ":audit"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "audit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:05.000Z",
+                          "updatedAt": "2026-07-28T01:51:05.000Z",
+                          "uid": "35240-d09af706-b2db-412a-af8a-c173f46d37c8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:05.000Z",
+                      "updatedAt": "2026-07-28T01:51:05.000Z",
+                      "uid": "35240-709e09b6-ddcf-4cda-bd87-979c04fbd116"
+                    }
+                  ],
+                  "id": "730c6a61-e8f8-4213-ad81-6b4df1d4dae0",
+                  "createdAt": "2026-07-28T01:51:05.000Z",
+                  "updatedAt": "2026-07-28T01:51:05.000Z",
+                  "uid": "35240-730c6a61-e8f8-4213-ad81-6b4df1d4dae0"
+                },
+                {
+                  "name": "List audit logs for the organization",
+                  "id": "37afec82-044f-4f88-8bd7-502a09503f1b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organizationId/audits?type=<string>&status=<string>&user=<string>&from=<long>&to=<long>&size=10&page=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organizationId",
+                        "audits"
+                      ],
+                      "query": [
+                        {
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "status",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "user",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "from",
+                          "value": "<long>"
+                        },
+                        {
+                          "key": "to",
+                          "value": "<long>"
+                        },
+                        {
+                          "key": "size",
+                          "value": "10"
+                        },
+                        {
+                          "key": "page",
+                          "value": "0"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "eabe0866-5edd-4305-8844-8bccc90724f1",
+                          "key": "organizationId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "User must have the ORGANIZATION_AUDIT[LIST] permission on the specified organization. Except if user has ORGANIZATION_AUDIT[READ] permission on the organization, each returned audit is filtered and contains only basic information such as id, date, event, actor, target and status."
+                  },
+                  "response": [
+                    {
+                      "id": "8045b3fe-9ef0-4a23-b525-59a4717ff74b",
+                      "name": "List audit logs for the platform",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/audits?type=<string>&status=<string>&user=<string>&from=<long>&to=<long>&size=10&page=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "audits"
+                          ],
+                          "query": [
+                            {
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "user",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "from",
+                              "value": "<long>"
+                            },
+                            {
+                              "key": "to",
+                              "value": "<long>"
+                            },
+                            {
+                              "key": "size",
+                              "value": "10"
+                            },
+                            {
+                              "key": "page",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"accessPoint\": {\n      \"alternativeId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"ipAddress\": \"<string>\",\n      \"userAgent\": \"<string>\"\n    },\n    \"actor\": {\n      \"alternativeId\": \"<string>\",\n      \"attributes\": {\n        \"anim_e6b\": {},\n        \"non_a\": {},\n        \"aliqua_8b\": {}\n      },\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"referenceType\": \"PROTECTED_RESOURCE\",\n      \"type\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"outcome\": {\n      \"message\": \"<string>\",\n      \"status\": \"SUCCESS\"\n    },\n    \"reference\": {\n      \"id\": \"<string>\",\n      \"type\": \"ENVIRONMENT\"\n    },\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"DOMAIN\",\n    \"target\": {\n      \"alternativeId\": \"<string>\",\n      \"attributes\": {\n        \"ipsum_3\": {},\n        \"exercitation7_\": {}\n      },\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"referenceType\": \"ENVIRONMENT\",\n      \"type\": \"<string>\"\n    },\n    \"timestamp\": \"<dateTime>\",\n    \"transactionId\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  {\n    \"accessPoint\": {\n      \"alternativeId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"ipAddress\": \"<string>\",\n      \"userAgent\": \"<string>\"\n    },\n    \"actor\": {\n      \"alternativeId\": \"<string>\",\n      \"attributes\": {\n        \"exa61\": {}\n      },\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"referenceType\": \"APPLICATION\",\n      \"type\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"outcome\": {\n      \"message\": \"<string>\",\n      \"status\": \"SUCCESS\"\n    },\n    \"reference\": {\n      \"id\": \"<string>\",\n      \"type\": \"PLATFORM\"\n    },\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ORGANIZATION\",\n    \"target\": {\n      \"alternativeId\": \"<string>\",\n      \"attributes\": {\n        \"Ut_2b\": {},\n        \"Ut1e\": {}\n      },\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"referenceType\": \"DOMAIN\",\n      \"type\": \"<string>\"\n    },\n    \"timestamp\": \"<dateTime>\",\n    \"transactionId\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:05.000Z",
+                      "updatedAt": "2026-07-28T01:51:05.000Z",
+                      "uid": "35240-8045b3fe-9ef0-4a23-b525-59a4717ff74b"
+                    },
+                    {
+                      "id": "37a8e115-19c2-407e-b040-ac67496cf8bf",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/audits?type=<string>&status=<string>&user=<string>&from=<long>&to=<long>&size=10&page=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "audits"
+                          ],
+                          "query": [
+                            {
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "user",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "from",
+                              "value": "<long>"
+                            },
+                            {
+                              "key": "to",
+                              "value": "<long>"
+                            },
+                            {
+                              "key": "size",
+                              "value": "10"
+                            },
+                            {
+                              "key": "page",
+                              "value": "0"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:05.000Z",
+                      "updatedAt": "2026-07-28T01:51:05.000Z",
+                      "uid": "35240-37a8e115-19c2-407e-b040-ac67496cf8bf"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:05.000Z",
+                  "updatedAt": "2026-07-28T01:51:05.000Z",
+                  "uid": "35240-37afec82-044f-4f88-8bd7-502a09503f1b"
+                }
+              ],
+              "id": "2f8fb724-491e-458c-a69f-b1f719f8601d",
+              "createdAt": "2026-07-28T01:51:05.000Z",
+              "updatedAt": "2026-07-28T01:51:05.000Z",
+              "uid": "35240-2f8fb724-491e-458c-a69f-b1f719f8601d"
+            },
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "audits",
+                              "item": [
+                                {
+                                  "name": "{audit}",
+                                  "item": [
+                                    {
+                                      "name": "Get an audit log",
+                                      "id": "97533406-293c-4973-900b-27c0c123e2b2",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/audits/:audit",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "audits",
+                                            ":audit"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "3e20fcd1-6328-4091-8d77-2c3653995aee",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "159a7d73-28d4-4bb5-9647-72e8e71d832e",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "759fcca7-fb23-445a-b452-8ed404b9d23a",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "c3b2e256-e9fa-46be-8bfc-664540236c02",
+                                              "key": "audit",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_AUDIT[READ] permission on the specified domain or DOMAIN_AUDIT[READ] permission on the specified environment or DOMAIN_AUDIT[READ] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "0e109258-2d19-4bf2-973c-9c1c764040f7",
+                                          "name": "Audit log successfully fetched",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/audits/:audit",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "audits",
+                                                ":audit"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "audit"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"accessPoint\": {\n    \"alternativeId\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"id\": \"<string>\",\n    \"ipAddress\": \"<string>\",\n    \"userAgent\": \"<string>\"\n  },\n  \"actor\": {\n    \"alternativeId\": \"<string>\",\n    \"attributes\": {\n      \"cillum_6\": {},\n      \"Duis_4\": {}\n    },\n    \"displayName\": \"<string>\",\n    \"id\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ORGANIZATION\",\n    \"type\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"outcome\": {\n    \"message\": \"<string>\",\n    \"status\": \"SUCCESS\"\n  },\n  \"reference\": {\n    \"id\": \"<string>\",\n    \"type\": \"APPLICATION\"\n  },\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"PROTECTED_RESOURCE\",\n  \"target\": {\n    \"alternativeId\": \"<string>\",\n    \"attributes\": {\n      \"non_5\": {}\n    },\n    \"displayName\": \"<string>\",\n    \"id\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PLATFORM\",\n    \"type\": \"<string>\"\n  },\n  \"timestamp\": \"<dateTime>\",\n  \"transactionId\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                                          "createdAt": "2026-07-28T01:51:05.000Z",
+                                          "updatedAt": "2026-07-28T01:51:05.000Z",
+                                          "uid": "35240-0e109258-2d19-4bf2-973c-9c1c764040f7"
+                                        },
+                                        {
+                                          "id": "a6e0ab9e-f5e1-4d09-a9f1-ec598ded346a",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/audits/:audit",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "audits",
+                                                ":audit"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "audit"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:05.000Z",
+                                          "updatedAt": "2026-07-28T01:51:05.000Z",
+                                          "uid": "35240-a6e0ab9e-f5e1-4d09-a9f1-ec598ded346a"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:05.000Z",
+                                      "updatedAt": "2026-07-28T01:51:05.000Z",
+                                      "uid": "35240-97533406-293c-4973-900b-27c0c123e2b2"
+                                    }
+                                  ],
+                                  "id": "e0a44fed-f594-4694-aad6-9be6491d84c4",
+                                  "createdAt": "2026-07-28T01:51:05.000Z",
+                                  "updatedAt": "2026-07-28T01:51:05.000Z",
+                                  "uid": "35240-e0a44fed-f594-4694-aad6-9be6491d84c4"
+                                },
+                                {
+                                  "name": "List audit logs for a security domain",
+                                  "id": "52179607-6466-4ffc-b505-7037bd30be2f",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/audits?type=<string>&status=<string>&user=<string>&from=<long>&to=<long>&size=10&page=0",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "audits"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "type",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "key": "status",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "key": "user",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "key": "from",
+                                          "value": "<long>"
+                                        },
+                                        {
+                                          "key": "to",
+                                          "value": "<long>"
+                                        },
+                                        {
+                                          "key": "size",
+                                          "value": "10"
+                                        },
+                                        {
+                                          "key": "page",
+                                          "value": "0"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "6a43bb74-4d75-4d55-b4f0-958cc396c0b1",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "5a36525a-bdb0-400e-9d15-43d1ec8ac427",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "b0a14939-6af7-46a1-9e19-6d9a28bebaaf",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_AUDIT[LIST] permission on the specified domain, environment or organization. Except if user has ORGANIZATION_AUDIT[READ] permission on the domain, environment or organization, each returned audit is filtered and contains only basic information such as id, date, event, actor, target and status."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "4181b8b4-3da2-44f1-9837-a4ebcf3d900c",
+                                      "name": "List audit logs for a security domain",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/audits?type=<string>&status=<string>&user=<string>&from=<long>&to=<long>&size=10&page=0",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "audits"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "type",
+                                              "value": "<string>"
+                                            },
+                                            {
+                                              "key": "status",
+                                              "value": "<string>"
+                                            },
+                                            {
+                                              "key": "user",
+                                              "value": "<string>"
+                                            },
+                                            {
+                                              "key": "from",
+                                              "value": "<long>"
+                                            },
+                                            {
+                                              "key": "to",
+                                              "value": "<long>"
+                                            },
+                                            {
+                                              "key": "size",
+                                              "value": "10"
+                                            },
+                                            {
+                                              "key": "page",
+                                              "value": "0"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"accessPoint\": {\n      \"alternativeId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"ipAddress\": \"<string>\",\n      \"userAgent\": \"<string>\"\n    },\n    \"actor\": {\n      \"alternativeId\": \"<string>\",\n      \"attributes\": {\n        \"anim_e6b\": {},\n        \"non_a\": {},\n        \"aliqua_8b\": {}\n      },\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"referenceType\": \"PROTECTED_RESOURCE\",\n      \"type\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"outcome\": {\n      \"message\": \"<string>\",\n      \"status\": \"SUCCESS\"\n    },\n    \"reference\": {\n      \"id\": \"<string>\",\n      \"type\": \"ENVIRONMENT\"\n    },\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"DOMAIN\",\n    \"target\": {\n      \"alternativeId\": \"<string>\",\n      \"attributes\": {\n        \"ipsum_3\": {},\n        \"exercitation7_\": {}\n      },\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"referenceType\": \"ENVIRONMENT\",\n      \"type\": \"<string>\"\n    },\n    \"timestamp\": \"<dateTime>\",\n    \"transactionId\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  {\n    \"accessPoint\": {\n      \"alternativeId\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"ipAddress\": \"<string>\",\n      \"userAgent\": \"<string>\"\n    },\n    \"actor\": {\n      \"alternativeId\": \"<string>\",\n      \"attributes\": {\n        \"exa61\": {}\n      },\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"referenceType\": \"APPLICATION\",\n      \"type\": \"<string>\"\n    },\n    \"id\": \"<string>\",\n    \"outcome\": {\n      \"message\": \"<string>\",\n      \"status\": \"SUCCESS\"\n    },\n    \"reference\": {\n      \"id\": \"<string>\",\n      \"type\": \"PLATFORM\"\n    },\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ORGANIZATION\",\n    \"target\": {\n      \"alternativeId\": \"<string>\",\n      \"attributes\": {\n        \"Ut_2b\": {},\n        \"Ut1e\": {}\n      },\n      \"displayName\": \"<string>\",\n      \"id\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"referenceType\": \"DOMAIN\",\n      \"type\": \"<string>\"\n    },\n    \"timestamp\": \"<dateTime>\",\n    \"transactionId\": \"<string>\",\n    \"type\": \"<string>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T01:51:05.000Z",
+                                      "updatedAt": "2026-07-28T01:51:05.000Z",
+                                      "uid": "35240-4181b8b4-3da2-44f1-9837-a4ebcf3d900c"
+                                    },
+                                    {
+                                      "id": "d3877e6b-665c-45e3-b874-fdc48558f808",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/audits?type=<string>&status=<string>&user=<string>&from=<long>&to=<long>&size=10&page=0",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "audits"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "type",
+                                              "value": "<string>"
+                                            },
+                                            {
+                                              "key": "status",
+                                              "value": "<string>"
+                                            },
+                                            {
+                                              "key": "user",
+                                              "value": "<string>"
+                                            },
+                                            {
+                                              "key": "from",
+                                              "value": "<long>"
+                                            },
+                                            {
+                                              "key": "to",
+                                              "value": "<long>"
+                                            },
+                                            {
+                                              "key": "size",
+                                              "value": "10"
+                                            },
+                                            {
+                                              "key": "page",
+                                              "value": "0"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:05.000Z",
+                                      "updatedAt": "2026-07-28T01:51:05.000Z",
+                                      "uid": "35240-d3877e6b-665c-45e3-b874-fdc48558f808"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:51:05.000Z",
+                                  "updatedAt": "2026-07-28T01:51:05.000Z",
+                                  "uid": "35240-52179607-6466-4ffc-b505-7037bd30be2f"
+                                }
+                              ],
+                              "id": "7104916e-2a94-41c0-8991-c9c1789f717d",
+                              "createdAt": "2026-07-28T01:51:05.000Z",
+                              "updatedAt": "2026-07-28T01:51:05.000Z",
+                              "uid": "35240-7104916e-2a94-41c0-8991-c9c1789f717d"
+                            }
+                          ],
+                          "id": "21d2a9ef-5f15-4560-bd73-b67dd58f5cdc",
+                          "createdAt": "2026-07-28T01:51:05.000Z",
+                          "updatedAt": "2026-07-28T01:51:05.000Z",
+                          "uid": "35240-21d2a9ef-5f15-4560-bd73-b67dd58f5cdc"
+                        }
+                      ],
+                      "id": "dd392800-c49c-4553-aecf-e784c73da7fd",
+                      "createdAt": "2026-07-28T01:51:05.000Z",
+                      "updatedAt": "2026-07-28T01:51:05.000Z",
+                      "uid": "35240-dd392800-c49c-4553-aecf-e784c73da7fd"
+                    }
+                  ],
+                  "id": "939f332c-dc75-4ba4-8bb3-326bf88165fa",
+                  "createdAt": "2026-07-28T01:51:05.000Z",
+                  "updatedAt": "2026-07-28T01:51:05.000Z",
+                  "uid": "35240-939f332c-dc75-4ba4-8bb3-326bf88165fa"
+                }
+              ],
+              "id": "774c43bf-3ec2-4256-a3c0-8f821a3a09ec",
+              "createdAt": "2026-07-28T01:51:05.000Z",
+              "updatedAt": "2026-07-28T01:51:05.000Z",
+              "uid": "35240-774c43bf-3ec2-4256-a3c0-8f821a3a09ec"
+            }
+          ],
+          "id": "39573822-16e8-4aad-a47d-2ce4f58f6d63",
+          "createdAt": "2026-07-28T01:51:05.000Z",
+          "updatedAt": "2026-07-28T01:51:05.000Z",
+          "uid": "35240-39573822-16e8-4aad-a47d-2ce4f58f6d63"
+        }
+      ],
+      "id": "edace23a-b07b-4fb3-afc8-eb04d537a62b",
+      "createdAt": "2026-07-28T01:51:05.000Z",
+      "updatedAt": "2026-07-28T01:51:05.000Z",
+      "uid": "35240-edace23a-b07b-4fb3-afc8-eb04d537a62b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

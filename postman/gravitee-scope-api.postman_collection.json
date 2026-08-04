@@ -1,0 +1,1311 @@
+{
+  "info": {
+    "_postman_id": "0486b492-7fc6-4cb8-8572-d106a7bf1f8a",
+    "name": "Gravitee.io - Access Management alerts scope API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:38.000Z",
+    "updatedAt": "2026-07-28T01:52:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0486b492-7fc6-4cb8-8572-d106a7bf1f8a"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "scopes",
+                              "item": [
+                                {
+                                  "name": "{scope}",
+                                  "item": [
+                                    {
+                                      "name": "Get a scope",
+                                      "id": "13d20673-5643-4ac8-8294-9ad555ead142",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "scopes",
+                                            ":scope"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "ab5d0fbf-c2de-4c35-9e5c-992cd2be139e",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "1c8fc9ca-cd42-4767-a9e2-8382fa6ce454",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "7663662d-917c-4bb7-98db-efd9b0f0a4e9",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "3406973e-18a7-48f9-8fb8-bdb9c490227d",
+                                              "key": "scope",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_SCOPE[READ] permission on the specified domain or DOMAIN_SCOPE[READ] permission on the specified environment or DOMAIN_SCOPE[READ] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "24f38c7b-6092-431c-b1c7-350560d373b4",
+                                          "name": "Scope",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "scopes",
+                                                ":scope"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"claims\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"id\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"parameterized\": \"<boolean>\",\n  \"system\": \"<boolean>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:52:38.000Z",
+                                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                                          "uid": "35240-24f38c7b-6092-431c-b1c7-350560d373b4"
+                                        },
+                                        {
+                                          "id": "d02a7279-8a0d-430b-b0f2-4b870d5b464e",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "scopes",
+                                                ":scope"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:38.000Z",
+                                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                                          "uid": "35240-d02a7279-8a0d-430b-b0f2-4b870d5b464e"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:52:38.000Z",
+                                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                                      "uid": "35240-13d20673-5643-4ac8-8294-9ad555ead142"
+                                    },
+                                    {
+                                      "name": "Update a scope",
+                                      "id": "ab1267bc-e091-4e38-890b-6f6021268b08",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "scopes",
+                                            ":scope"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "6b51c2e4-7a71-4908-a1da-93171012f00b",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "23a19691-1b6f-4d9f-986e-fc8921ac77a1",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "8fa235ef-2210-49fc-bfff-eca11a35bf7d",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "719d6451-940a-4db1-bba8-b252aa833bea",
+                                              "key": "scope",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_SCOPE[UPDATE] permission on the specified domain or DOMAIN_SCOPE[UPDATE] permission on the specified environment or DOMAIN_SCOPE[UPDATE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "58215b16-9c08-4a6c-8ebd-e2358318e155",
+                                          "name": "Scope successfully updated",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "scopes",
+                                                ":scope"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"claims\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"id\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"parameterized\": \"<boolean>\",\n  \"system\": \"<boolean>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:52:38.000Z",
+                                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                                          "uid": "35240-58215b16-9c08-4a6c-8ebd-e2358318e155"
+                                        },
+                                        {
+                                          "id": "8a302df3-48eb-4108-9fd4-8edfd63ffd6a",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "scopes",
+                                                ":scope"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:38.000Z",
+                                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                                          "uid": "35240-8a302df3-48eb-4108-9fd4-8edfd63ffd6a"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:52:38.000Z",
+                                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                                      "uid": "35240-ab1267bc-e091-4e38-890b-6f6021268b08"
+                                    },
+                                    {
+                                      "name": "Delete a scope",
+                                      "id": "caef94b2-e70f-4967-9866-201800e4d787",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "scopes",
+                                            ":scope"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "c9e73db8-9fb8-493b-8450-e16f59f33788",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "0015ecac-3277-4573-ac61-e22e985e2fc9",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "e2844556-6d05-43f6-8a1b-c158988631bc",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "bfb3cf9d-d216-43bb-987d-5b4ce9a1c7bb",
+                                              "key": "scope",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_SCOPE[DELETE] permission on the specified domain or DOMAIN_SCOPE[DELETE] permission on the specified environment or DOMAIN_SCOPE[DELETE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "fda82347-9d1e-4f50-81b4-815e035b3f6d",
+                                          "name": "Scope successfully deleted",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "scopes",
+                                                ":scope"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:38.000Z",
+                                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                                          "uid": "35240-fda82347-9d1e-4f50-81b4-815e035b3f6d"
+                                        },
+                                        {
+                                          "id": "b1671259-34ee-4184-a099-4521bb1c680c",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "scopes",
+                                                ":scope"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:38.000Z",
+                                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                                          "uid": "35240-b1671259-34ee-4184-a099-4521bb1c680c"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:52:38.000Z",
+                                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                                      "uid": "35240-caef94b2-e70f-4967-9866-201800e4d787"
+                                    },
+                                    {
+                                      "name": "Patch a scope",
+                                      "id": "7139a8e5-0022-4327-a505-2f47f70691e6",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PATCH",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"description\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"name\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "scopes",
+                                            ":scope"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "df5fda15-3bce-4bab-b39b-6acf71a14916",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "19dd8342-4711-42c8-9ae4-a50e5061632e",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "73ae7582-b57f-4c5e-808e-fb8efb22e087",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "62392ecb-1b34-4143-8952-67e3ea67898c",
+                                              "key": "scope",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_SCOPE[UPDATE] permission on the specified domain or DOMAIN_SCOPE[UPDATE] permission on the specified environment or DOMAIN_SCOPE[UPDATE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "3f07af72-0e56-4379-9b50-256d69ab8f1a",
+                                          "name": "Scope successfully patched",
+                                          "originalRequest": {
+                                            "method": "PATCH",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"description\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"name\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "scopes",
+                                                ":scope"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"claims\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"id\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"parameterized\": \"<boolean>\",\n  \"system\": \"<boolean>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:52:38.000Z",
+                                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                                          "uid": "35240-3f07af72-0e56-4379-9b50-256d69ab8f1a"
+                                        },
+                                        {
+                                          "id": "d882eb0e-a9c8-4ce8-a7a5-ee88ff02d454",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "PATCH",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"description\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"name\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "scopes",
+                                                ":scope"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "scope"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:38.000Z",
+                                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                                          "uid": "35240-d882eb0e-a9c8-4ce8-a7a5-ee88ff02d454"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:52:38.000Z",
+                                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                                      "uid": "35240-7139a8e5-0022-4327-a505-2f47f70691e6"
+                                    }
+                                  ],
+                                  "id": "018d196d-491d-443c-a199-ab1342b10cff",
+                                  "createdAt": "2026-07-28T01:52:38.000Z",
+                                  "updatedAt": "2026-07-28T01:52:38.000Z",
+                                  "uid": "35240-018d196d-491d-443c-a199-ab1342b10cff"
+                                },
+                                {
+                                  "name": "List scopes for a security domain",
+                                  "id": "76e4e045-f43d-4c13-adb7-d6406e7433ae",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes?page=0&size=50&q=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "scopes"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "page",
+                                          "value": "0"
+                                        },
+                                        {
+                                          "key": "size",
+                                          "value": "50"
+                                        },
+                                        {
+                                          "key": "q",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "da4319b6-3326-465c-aa5c-c27b57a3d006",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "f972f3a8-aa2a-46f3-aafc-0f9f0270d437",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "7dee9717-afc8-4142-9b8d-bf6b1636dd4f",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_SCOPE[LIST] permission on the specified domain or DOMAIN_SCOPE[LIST] permission on the specified environment or DOMAIN_SCOPE[LIST] permission on the specified organization Each returned scope is filtered and contains only basic information such as id, key, name, description, isSystem and isDiscovery."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "d148d7c0-a26f-4f9b-b215-c827bb39b45d",
+                                      "name": "List scopes for a security domain",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes?page=0&size=50&q=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "scopes"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "page",
+                                              "value": "0"
+                                            },
+                                            {
+                                              "key": "size",
+                                              "value": "50"
+                                            },
+                                            {
+                                              "key": "q",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"currentPage\": \"<integer>\",\n  \"data\": [\n    {\n      \"claims\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"description\": \"<string>\",\n      \"discovery\": \"<boolean>\",\n      \"domain\": \"<string>\",\n      \"expiresIn\": \"<integer>\",\n      \"iconUri\": \"<string>\",\n      \"id\": \"<string>\",\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"parameterized\": \"<boolean>\",\n      \"system\": \"<boolean>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"claims\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"description\": \"<string>\",\n      \"discovery\": \"<boolean>\",\n      \"domain\": \"<string>\",\n      \"expiresIn\": \"<integer>\",\n      \"iconUri\": \"<string>\",\n      \"id\": \"<string>\",\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"parameterized\": \"<boolean>\",\n      \"system\": \"<boolean>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ],\n  \"totalCount\": \"<long>\"\n}",
+                                      "createdAt": "2026-07-28T01:52:38.000Z",
+                                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                                      "uid": "35240-d148d7c0-a26f-4f9b-b215-c827bb39b45d"
+                                    },
+                                    {
+                                      "id": "1f9f024d-0b6b-47f0-99f8-d4cf456d7dea",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes?page=0&size=50&q=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "scopes"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "page",
+                                              "value": "0"
+                                            },
+                                            {
+                                              "key": "size",
+                                              "value": "50"
+                                            },
+                                            {
+                                              "key": "q",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:52:38.000Z",
+                                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                                      "uid": "35240-1f9f024d-0b6b-47f0-99f8-d4cf456d7dea"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:52:38.000Z",
+                                  "updatedAt": "2026-07-28T01:52:38.000Z",
+                                  "uid": "35240-76e4e045-f43d-4c13-adb7-d6406e7433ae"
+                                },
+                                {
+                                  "name": "Create a scope",
+                                  "id": "c7fc8410-338e-482b-bfdc-c547d7ad2c27",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"description\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "scopes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "acb4bb54-a113-450c-b6cf-986f2be916d1",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "99565670-fb0e-4ad8-bc9a-ba62e0bd7cb2",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "897e639b-0eea-4361-8801-e05b19dce6b2",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_SCOPE[CREATE] permission on the specified domain or DOMAIN_SCOPE[CREATE] permission on the specified environment or DOMAIN_SCOPE[CREATE] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "a98511e1-b78a-450d-b71d-0ca938d5b4cd",
+                                      "name": "Scope successfully created",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"description\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "scopes"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"claims\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"createdAt\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"domain\": \"<string>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"id\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"parameterized\": \"<boolean>\",\n  \"system\": \"<boolean>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T01:52:38.000Z",
+                                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                                      "uid": "35240-a98511e1-b78a-450d-b71d-0ca938d5b4cd"
+                                    },
+                                    {
+                                      "id": "52c237c2-f2db-47f6-869b-e4396888bfc3",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"description\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"discovery\": \"<boolean>\",\n  \"expiresIn\": \"<integer>\",\n  \"iconUri\": \"<string>\",\n  \"parameterized\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "scopes"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:52:38.000Z",
+                                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                                      "uid": "35240-52c237c2-f2db-47f6-869b-e4396888bfc3"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:52:38.000Z",
+                                  "updatedAt": "2026-07-28T01:52:38.000Z",
+                                  "uid": "35240-c7fc8410-338e-482b-bfdc-c547d7ad2c27"
+                                }
+                              ],
+                              "id": "0aea3303-040e-4767-8721-797c1c2565d0",
+                              "createdAt": "2026-07-28T01:52:38.000Z",
+                              "updatedAt": "2026-07-28T01:52:38.000Z",
+                              "uid": "35240-0aea3303-040e-4767-8721-797c1c2565d0"
+                            }
+                          ],
+                          "id": "2da57a3f-3b7b-4816-a063-55e46cd72c2d",
+                          "createdAt": "2026-07-28T01:52:38.000Z",
+                          "updatedAt": "2026-07-28T01:52:38.000Z",
+                          "uid": "35240-2da57a3f-3b7b-4816-a063-55e46cd72c2d"
+                        }
+                      ],
+                      "id": "5542c2b7-4090-4cdf-860f-1569c88da09b",
+                      "createdAt": "2026-07-28T01:52:38.000Z",
+                      "updatedAt": "2026-07-28T01:52:38.000Z",
+                      "uid": "35240-5542c2b7-4090-4cdf-860f-1569c88da09b"
+                    }
+                  ],
+                  "id": "0b74aa9d-e1c0-4a75-8167-bcc65777157f",
+                  "createdAt": "2026-07-28T01:52:38.000Z",
+                  "updatedAt": "2026-07-28T01:52:38.000Z",
+                  "uid": "35240-0b74aa9d-e1c0-4a75-8167-bcc65777157f"
+                }
+              ],
+              "id": "da2678f1-c14b-475d-adf9-ebb0a503af7c",
+              "createdAt": "2026-07-28T01:52:38.000Z",
+              "updatedAt": "2026-07-28T01:52:38.000Z",
+              "uid": "35240-da2678f1-c14b-475d-adf9-ebb0a503af7c"
+            }
+          ],
+          "id": "5a583918-ef63-47ff-ac12-437aacbcc5bc",
+          "createdAt": "2026-07-28T01:52:38.000Z",
+          "updatedAt": "2026-07-28T01:52:38.000Z",
+          "uid": "35240-5a583918-ef63-47ff-ac12-437aacbcc5bc"
+        }
+      ],
+      "id": "b8fd1a68-faab-424b-9a81-9825577bbca7",
+      "createdAt": "2026-07-28T01:52:38.000Z",
+      "updatedAt": "2026-07-28T01:52:38.000Z",
+      "uid": "35240-b8fd1a68-faab-424b-9a81-9825577bbca7"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

@@ -1,0 +1,488 @@
+{
+  "info": {
+    "_postman_id": "9bba3dd0-b5e3-4762-be89-a7634bcae972",
+    "name": "Gravitee.io - Access Management alerts devices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:33.000Z",
+    "updatedAt": "2026-07-28T01:51:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9bba3dd0-b5e3-4762-be89-a7634bcae972"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "users",
+                              "item": [
+                                {
+                                  "name": "{user}",
+                                  "item": [
+                                    {
+                                      "name": "devices",
+                                      "item": [
+                                        {
+                                          "name": "{device}",
+                                          "item": [
+                                            {
+                                              "name": "Delete a device",
+                                              "id": "c2fe56eb-4e10-4a32-a972-760b6a794b86",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "DELETE",
+                                                "header": [],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/users/:user/devices/:device",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "users",
+                                                    ":user",
+                                                    "devices",
+                                                    ":device"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "afe58040-e045-40d7-9d7b-668c231ee76e",
+                                                      "key": "organizationId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "57db8e49-89c2-4f74-894a-33378f04c0af",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "ba0c9568-5cd2-4844-9644-de4addd4b5ab",
+                                                      "key": "domain",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "a01d8743-da0d-4e14-88da-0ce68f08f0d3",
+                                                      "key": "user",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "0bf727aa-3b28-4305-92d8-57af62ff416a",
+                                                      "key": "device",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "User must have the DOMAIN_USER_DEVICE[DELETE] permission on the specified domain or DOMAIN_USER_DEVICE[DELETE] permission on the specified environment or DOMAIN_USER_DEVICE[DELETE] permission on the specified organization"
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "02bc967d-a979-4ec3-9ac5-0fb23868399c",
+                                                  "name": "User successfully deleted",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/users/:user/devices/:device",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "users",
+                                                        ":user",
+                                                        "devices",
+                                                        ":device"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "user"
+                                                        },
+                                                        {
+                                                          "key": "device"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "No Content",
+                                                  "code": 204,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T01:51:33.000Z",
+                                                  "updatedAt": "2026-07-28T01:51:33.000Z",
+                                                  "uid": "35240-02bc967d-a979-4ec3-9ac5-0fb23868399c"
+                                                },
+                                                {
+                                                  "id": "781b62a5-54bb-4077-9d7e-a27cfb5c8bf5",
+                                                  "name": "Internal server error",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/users/:user/devices/:device",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "users",
+                                                        ":user",
+                                                        "devices",
+                                                        ":device"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "user"
+                                                        },
+                                                        {
+                                                          "key": "device"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Internal Server Error",
+                                                  "code": 500,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T01:51:33.000Z",
+                                                  "updatedAt": "2026-07-28T01:51:33.000Z",
+                                                  "uid": "35240-781b62a5-54bb-4077-9d7e-a27cfb5c8bf5"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T01:51:33.000Z",
+                                              "updatedAt": "2026-07-28T01:51:33.000Z",
+                                              "uid": "35240-c2fe56eb-4e10-4a32-a972-760b6a794b86"
+                                            }
+                                          ],
+                                          "id": "fc3e2e3c-0f13-4b2d-91a2-d66c580a7b81",
+                                          "createdAt": "2026-07-28T01:51:33.000Z",
+                                          "updatedAt": "2026-07-28T01:51:33.000Z",
+                                          "uid": "35240-fc3e2e3c-0f13-4b2d-91a2-d66c580a7b81"
+                                        },
+                                        {
+                                          "name": "List users for a security domain",
+                                          "id": "076843e5-138d-4169-9f4d-40895af29efa",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/users/:user/devices",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "users",
+                                                ":user",
+                                                "devices"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "293af4c3-d25a-4e9a-8a1b-4cf74324794c",
+                                                  "key": "organizationId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "d1e4849e-5ed7-4625-9e97-068518626429",
+                                                  "key": "environmentId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "639c216d-8894-4d8c-9296-26ac2a4a193e",
+                                                  "key": "domain",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "dfe0249f-5ef2-48d1-9c8e-ed4724c7eb9a",
+                                                  "key": "user",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "User must have the DOMAIN_USER_DEVICES[LIST] permission on the specified domain or DOMAIN_USER_DEVICES[LIST] permission on the specified environment or DOMAIN_USER_DEVICES[LIST] permission on the specified organization. "
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "ed6230f4-ceb4-4bfd-9c9d-5499fe5ee24d",
+                                              "name": "List users for a security domain",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/users/:user/devices",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "users",
+                                                    ":user",
+                                                    "devices"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "user"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "json",
+                                              "header": [
+                                                {
+                                                  "key": "Content-Type",
+                                                  "value": "application/json"
+                                                }
+                                              ],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": "[\n  {\n    \"accountLockedAt\": \"<dateTime>\",\n    \"accountLockedUntil\": \"<dateTime>\",\n    \"accountNonExpired\": \"<boolean>\",\n    \"accountNonLocked\": \"<boolean>\",\n    \"additionalInformation\": {\n      \"esse0\": {},\n      \"est_c\": {}\n    },\n    \"address\": {\n      \"Duis505\": {},\n      \"aute_88f\": {}\n    },\n    \"addresses\": [\n      {\n        \"country\": \"<string>\",\n        \"formatted\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"region\": \"<string>\",\n        \"streetAddress\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"country\": \"<string>\",\n        \"formatted\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"region\": \"<string>\",\n        \"streetAddress\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"birthdate\": \"<string>\",\n    \"client\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"credentialsNonExpired\": \"<boolean>\",\n    \"disabled\": \"<boolean>\",\n    \"displayName\": \"<string>\",\n    \"dynamicGroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"dynamicRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"email\": \"<string>\",\n    \"emails\": [\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"enabled\": \"<boolean>\",\n    \"entitlements\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"externalId\": \"<string>\",\n    \"factors\": [\n      {\n        \"appId\": \"<string>\",\n        \"channel\": {\n          \"additionalData\": {\n            \"ipsum09\": {},\n            \"exercitation_239\": {},\n            \"non_e\": {},\n            \"incididunte0\": {},\n            \"Excepteurde2\": {}\n          },\n          \"target\": \"<string>\",\n          \"type\": \"HTTP\"\n        },\n        \"createdAt\": \"<dateTime>\",\n        \"factorId\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"security\": {\n          \"additionalData\": {\n            \"laboruma\": {}\n          },\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"status\": \"ACTIVATED\",\n        \"updatedAt\": \"<dateTime>\"\n      },\n      {\n        \"appId\": \"<string>\",\n        \"channel\": {\n          \"additionalData\": {\n            \"officia_2c\": {},\n            \"utdb7\": {}\n          },\n          \"target\": \"<string>\",\n          \"type\": \"EMAIL\"\n        },\n        \"createdAt\": \"<dateTime>\",\n        \"factorId\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"security\": {\n          \"additionalData\": {\n            \"sint9_\": {}\n          },\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"status\": \"REVOKED\",\n        \"updatedAt\": \"<dateTime>\"\n      }\n    ],\n    \"firstName\": \"<string>\",\n    \"forceResetPassword\": \"<boolean>\",\n    \"fullId\": {\n      \"externalId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"source\": \"<string>\"\n    },\n    \"groups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"identities\": [\n      {\n        \"additionalInformation\": {\n          \"qui_c77\": {},\n          \"sint__d\": {},\n          \"pariatur_9\": {}\n        },\n        \"linkedAt\": \"<dateTime>\",\n        \"providerId\": \"<string>\",\n        \"userId\": \"<string>\",\n        \"username\": \"<string>\"\n      },\n      {\n        \"additionalInformation\": {\n          \"sit_e\": {}\n        },\n        \"linkedAt\": \"<dateTime>\",\n        \"providerId\": \"<string>\",\n        \"userId\": \"<string>\",\n        \"username\": \"<string>\"\n      }\n    ],\n    \"identitiesAsMap\": {\n      \"veniamd6a\": {},\n      \"adipisicinge8\": {},\n      \"cupidatat__2\": {}\n    },\n    \"ims\": [\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"inactive\": \"<boolean>\",\n    \"indefinitelyLocked\": \"<boolean>\",\n    \"internal\": \"<boolean>\",\n    \"lastIdentityInformation\": {\n      \"et45\": {}\n    },\n    \"lastIdentityUsed\": \"<string>\",\n    \"lastLoginWithCredentials\": \"<dateTime>\",\n    \"lastLogoutAt\": \"<dateTime>\",\n    \"lastName\": \"<string>\",\n    \"lastPasswordReset\": \"<dateTime>\",\n    \"lastUsernameReset\": \"<dateTime>\",\n    \"locale\": \"<string>\",\n    \"loggedAt\": \"<dateTime>\",\n    \"loginsCount\": \"<long>\",\n    \"mfaEnrollmentSkippedAt\": \"<dateTime>\",\n    \"middleName\": \"<string>\",\n    \"newsletter\": \"<boolean>\",\n    \"nickName\": \"<string>\",\n    \"password\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"phoneNumbers\": [\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"photos\": [\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"picture\": \"<string>\",\n    \"preRegistration\": \"<boolean>\",\n    \"preferredLanguage\": \"<string>\",\n    \"profile\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PLATFORM\",\n    \"registrationAccessToken\": \"<string>\",\n    \"registrationCompleted\": \"<boolean>\",\n    \"registrationUserUri\": \"<string>\",\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rolesPermissions\": [\n      {\n        \"assignableType\": \"APPLICATION\",\n        \"createdAt\": \"<dateTime>\",\n        \"defaultRole\": \"<boolean>\",\n        \"description\": \"<string>\",\n        \"id\": \"<string>\",\n        \"internalOnly\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"oauthScopes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"permissionAcls\": {\n          \"sintc29\": [\n            \"LIST\",\n            \"READ\"\n          ]\n        },\n        \"referenceId\": \"<string>\",\n        \"referenceType\": \"PLATFORM\",\n        \"system\": \"<boolean>\",\n        \"updatedAt\": \"<dateTime>\"\n      },\n      {\n        \"assignableType\": \"PLATFORM\",\n        \"createdAt\": \"<dateTime>\",\n        \"defaultRole\": \"<boolean>\",\n        \"description\": \"<string>\",\n        \"id\": \"<string>\",\n        \"internalOnly\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"oauthScopes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"permissionAcls\": {\n          \"nostrud_50\": [\n            \"READ\",\n            \"LIST\"\n          ]\n        },\n        \"referenceId\": \"<string>\",\n        \"referenceType\": \"APPLICATION\",\n        \"system\": \"<boolean>\",\n        \"updatedAt\": \"<dateTime>\"\n      }\n    ],\n    \"serviceAccount\": \"<boolean>\",\n    \"source\": \"<string>\",\n    \"temporarilyLocked\": \"<boolean>\",\n    \"title\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"username\": \"<string>\",\n    \"website\": \"<string>\",\n    \"x509Certificates\": [\n      {\n        \"value\": \"<string>\"\n      },\n      {\n        \"value\": \"<string>\"\n      }\n    ],\n    \"zoneInfo\": \"<string>\"\n  },\n  {\n    \"accountLockedAt\": \"<dateTime>\",\n    \"accountLockedUntil\": \"<dateTime>\",\n    \"accountNonExpired\": \"<boolean>\",\n    \"accountNonLocked\": \"<boolean>\",\n    \"additionalInformation\": {\n      \"esse_1d\": {}\n    },\n    \"address\": {\n      \"ut_384\": {}\n    },\n    \"addresses\": [\n      {\n        \"country\": \"<string>\",\n        \"formatted\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"region\": \"<string>\",\n        \"streetAddress\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"country\": \"<string>\",\n        \"formatted\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"region\": \"<string>\",\n        \"streetAddress\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"birthdate\": \"<string>\",\n    \"client\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"credentialsNonExpired\": \"<boolean>\",\n    \"disabled\": \"<boolean>\",\n    \"displayName\": \"<string>\",\n    \"dynamicGroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"dynamicRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"email\": \"<string>\",\n    \"emails\": [\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"enabled\": \"<boolean>\",\n    \"entitlements\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"externalId\": \"<string>\",\n    \"factors\": [\n      {\n        \"appId\": \"<string>\",\n        \"channel\": {\n          \"additionalData\": {\n            \"laborum392\": {}\n          },\n          \"target\": \"<string>\",\n          \"type\": \"CALL\"\n        },\n        \"createdAt\": \"<dateTime>\",\n        \"factorId\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"security\": {\n          \"additionalData\": {\n            \"proident_b\": {},\n            \"deserunt7_7\": {}\n          },\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"status\": \"ACTIVATED\",\n        \"updatedAt\": \"<dateTime>\"\n      },\n      {\n        \"appId\": \"<string>\",\n        \"channel\": {\n          \"additionalData\": {\n            \"ut_17\": {},\n            \"elit_d_5\": {},\n            \"dolor_b72\": {}\n          },\n          \"target\": \"<string>\",\n          \"type\": \"HTTP\"\n        },\n        \"createdAt\": \"<dateTime>\",\n        \"factorId\": \"<string>\",\n        \"primary\": \"<boolean>\",\n        \"security\": {\n          \"additionalData\": {\n            \"laborumb02\": {},\n            \"commodob3\": {}\n          },\n          \"type\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        \"status\": \"ACTIVATED\",\n        \"updatedAt\": \"<dateTime>\"\n      }\n    ],\n    \"firstName\": \"<string>\",\n    \"forceResetPassword\": \"<boolean>\",\n    \"fullId\": {\n      \"externalId\": \"<string>\",\n      \"id\": \"<string>\",\n      \"source\": \"<string>\"\n    },\n    \"groups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"identities\": [\n      {\n        \"additionalInformation\": {\n          \"animf2\": {}\n        },\n        \"linkedAt\": \"<dateTime>\",\n        \"providerId\": \"<string>\",\n        \"userId\": \"<string>\",\n        \"username\": \"<string>\"\n      },\n      {\n        \"additionalInformation\": {\n          \"nond9\": {},\n          \"aliqua90\": {}\n        },\n        \"linkedAt\": \"<dateTime>\",\n        \"providerId\": \"<string>\",\n        \"userId\": \"<string>\",\n        \"username\": \"<string>\"\n      }\n    ],\n    \"identitiesAsMap\": {\n      \"exercitationc5\": {}\n    },\n    \"ims\": [\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"inactive\": \"<boolean>\",\n    \"indefinitelyLocked\": \"<boolean>\",\n    \"internal\": \"<boolean>\",\n    \"lastIdentityInformation\": {\n      \"magna_85\": {},\n      \"nostrud_451\": {}\n    },\n    \"lastIdentityUsed\": \"<string>\",\n    \"lastLoginWithCredentials\": \"<dateTime>\",\n    \"lastLogoutAt\": \"<dateTime>\",\n    \"lastName\": \"<string>\",\n    \"lastPasswordReset\": \"<dateTime>\",\n    \"lastUsernameReset\": \"<dateTime>\",\n    \"locale\": \"<string>\",\n    \"loggedAt\": \"<dateTime>\",\n    \"loginsCount\": \"<long>\",\n    \"mfaEnrollmentSkippedAt\": \"<dateTime>\",\n    \"middleName\": \"<string>\",\n    \"newsletter\": \"<boolean>\",\n    \"nickName\": \"<string>\",\n    \"password\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"phoneNumbers\": [\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"photos\": [\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"primary\": \"<boolean>\",\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"picture\": \"<string>\",\n    \"preRegistration\": \"<boolean>\",\n    \"preferredLanguage\": \"<string>\",\n    \"profile\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"DOMAIN\",\n    \"registrationAccessToken\": \"<string>\",\n    \"registrationCompleted\": \"<boolean>\",\n    \"registrationUserUri\": \"<string>\",\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"rolesPermissions\": [\n      {\n        \"assignableType\": \"APPLICATION\",\n        \"createdAt\": \"<dateTime>\",\n        \"defaultRole\": \"<boolean>\",\n        \"description\": \"<string>\",\n        \"id\": \"<string>\",\n        \"internalOnly\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"oauthScopes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"permissionAcls\": {\n          \"dolor59_\": [\n            \"LIST\",\n            \"LIST\"\n          ],\n          \"este\": [\n            \"DELETE\",\n            \"READ\"\n          ]\n        },\n        \"referenceId\": \"<string>\",\n        \"referenceType\": \"PLATFORM\",\n        \"system\": \"<boolean>\",\n        \"updatedAt\": \"<dateTime>\"\n      },\n      {\n        \"assignableType\": \"DOMAIN\",\n        \"createdAt\": \"<dateTime>\",\n        \"defaultRole\": \"<boolean>\",\n        \"description\": \"<string>\",\n        \"id\": \"<string>\",\n        \"internalOnly\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"oauthScopes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"permissionAcls\": {\n          \"dolord\": [\n            \"UPDATE\",\n            \"UPDATE\"\n          ],\n          \"dolor_e6\": [\n            \"UPDATE\",\n            \"READ\"\n          ],\n          \"dolorb\": [\n            \"LIST\",\n            \"READ\"\n          ]\n        },\n        \"referenceId\": \"<string>\",\n        \"referenceType\": \"DOMAIN\",\n        \"system\": \"<boolean>\",\n        \"updatedAt\": \"<dateTime>\"\n      }\n    ],\n    \"serviceAccount\": \"<boolean>\",\n    \"source\": \"<string>\",\n    \"temporarilyLocked\": \"<boolean>\",\n    \"title\": \"<string>\",\n    \"type\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"username\": \"<string>\",\n    \"website\": \"<string>\",\n    \"x509Certificates\": [\n      {\n        \"value\": \"<string>\"\n      },\n      {\n        \"value\": \"<string>\"\n      }\n    ],\n    \"zoneInfo\": \"<string>\"\n  }\n]",
+                                              "createdAt": "2026-07-28T01:51:33.000Z",
+                                              "updatedAt": "2026-07-28T01:51:33.000Z",
+                                              "uid": "35240-ed6230f4-ceb4-4bfd-9c9d-5499fe5ee24d"
+                                            },
+                                            {
+                                              "id": "4aa611fa-1969-458a-92ea-3ab1329124eb",
+                                              "name": "Internal server error",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/users/:user/devices",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "users",
+                                                    ":user",
+                                                    "devices"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "user"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Internal Server Error",
+                                              "code": 500,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:51:33.000Z",
+                                              "updatedAt": "2026-07-28T01:51:33.000Z",
+                                              "uid": "35240-4aa611fa-1969-458a-92ea-3ab1329124eb"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T01:51:33.000Z",
+                                          "updatedAt": "2026-07-28T01:51:33.000Z",
+                                          "uid": "35240-076843e5-138d-4169-9f4d-40895af29efa"
+                                        }
+                                      ],
+                                      "id": "edbc81e7-06a1-4d15-a5c7-c1b09aed9831",
+                                      "createdAt": "2026-07-28T01:51:33.000Z",
+                                      "updatedAt": "2026-07-28T01:51:33.000Z",
+                                      "uid": "35240-edbc81e7-06a1-4d15-a5c7-c1b09aed9831"
+                                    }
+                                  ],
+                                  "id": "9151927d-3012-4fde-b548-047004ae201a",
+                                  "createdAt": "2026-07-28T01:51:33.000Z",
+                                  "updatedAt": "2026-07-28T01:51:33.000Z",
+                                  "uid": "35240-9151927d-3012-4fde-b548-047004ae201a"
+                                }
+                              ],
+                              "id": "95053d3c-98da-4b3f-89b3-5f89d79cc808",
+                              "createdAt": "2026-07-28T01:51:33.000Z",
+                              "updatedAt": "2026-07-28T01:51:33.000Z",
+                              "uid": "35240-95053d3c-98da-4b3f-89b3-5f89d79cc808"
+                            }
+                          ],
+                          "id": "235be5b3-a9e5-46fe-a90f-f6d2134c6796",
+                          "createdAt": "2026-07-28T01:51:33.000Z",
+                          "updatedAt": "2026-07-28T01:51:33.000Z",
+                          "uid": "35240-235be5b3-a9e5-46fe-a90f-f6d2134c6796"
+                        }
+                      ],
+                      "id": "43950e6a-9264-4bbf-ba89-94e62309ea13",
+                      "createdAt": "2026-07-28T01:51:33.000Z",
+                      "updatedAt": "2026-07-28T01:51:33.000Z",
+                      "uid": "35240-43950e6a-9264-4bbf-ba89-94e62309ea13"
+                    }
+                  ],
+                  "id": "461d2930-2782-4f32-b02b-eee714b5b6de",
+                  "createdAt": "2026-07-28T01:51:33.000Z",
+                  "updatedAt": "2026-07-28T01:51:33.000Z",
+                  "uid": "35240-461d2930-2782-4f32-b02b-eee714b5b6de"
+                }
+              ],
+              "id": "9139a661-31c5-4fe4-8e61-842706d50a1f",
+              "createdAt": "2026-07-28T01:51:33.000Z",
+              "updatedAt": "2026-07-28T01:51:33.000Z",
+              "uid": "35240-9139a661-31c5-4fe4-8e61-842706d50a1f"
+            }
+          ],
+          "id": "138d235e-957e-4b1b-bcab-88d215b2b2c1",
+          "createdAt": "2026-07-28T01:51:33.000Z",
+          "updatedAt": "2026-07-28T01:51:33.000Z",
+          "uid": "35240-138d235e-957e-4b1b-bcab-88d215b2b2c1"
+        }
+      ],
+      "id": "cc5f5cf6-b2d4-45fb-af24-3aac72487557",
+      "createdAt": "2026-07-28T01:51:33.000Z",
+      "updatedAt": "2026-07-28T01:51:33.000Z",
+      "uid": "35240-cc5f5cf6-b2d4-45fb-af24-3aac72487557"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

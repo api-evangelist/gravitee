@@ -1,0 +1,578 @@
+{
+  "info": {
+    "_postman_id": "9c074a08-524c-4654-82e3-bc84114f3dab",
+    "name": "Gravitee.io - Access Management alerts Notifier API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:08.000Z",
+    "updatedAt": "2026-07-28T01:52:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9c074a08-524c-4654-82e3-bc84114f3dab"
+  },
+  "item": [
+    {
+      "name": "platform",
+      "item": [
+        {
+          "name": "plugins",
+          "item": [
+            {
+              "name": "notifiers",
+              "item": [
+                {
+                  "name": "{notifierId}",
+                  "item": [
+                    {
+                      "name": "schema",
+                      "item": [
+                        {
+                          "name": "Get a notifier plugin's schema",
+                          "id": "faedbf41-5fae-408a-a482-0dccde7f3615",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/platform/plugins/notifiers/:notifierId/schema",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "platform",
+                                "plugins",
+                                "notifiers",
+                                ":notifierId",
+                                "schema"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "27554dea-6aef-4d86-a44a-9d0147d17b1a",
+                                  "key": "notifierId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "There is no particular permission needed. User must be authenticated."
+                          },
+                          "response": [
+                            {
+                              "id": "fae6bf69-6168-4190-aed8-13aa8029e553",
+                              "name": "Notifier plugin schema",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/platform/plugins/notifiers/:notifierId/schema",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "platform",
+                                    "plugins",
+                                    "notifiers",
+                                    ":notifierId",
+                                    "schema"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "notifierId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T01:52:08.000Z",
+                              "updatedAt": "2026-07-28T01:52:08.000Z",
+                              "uid": "35240-fae6bf69-6168-4190-aed8-13aa8029e553"
+                            },
+                            {
+                              "id": "19e737c4-43c6-49cd-9200-2f9dc941c0ce",
+                              "name": "Notifier plugin schema not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/platform/plugins/notifiers/:notifierId/schema",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "platform",
+                                    "plugins",
+                                    "notifiers",
+                                    ":notifierId",
+                                    "schema"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "notifierId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"http_status\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:52:08.000Z",
+                              "updatedAt": "2026-07-28T01:52:08.000Z",
+                              "uid": "35240-19e737c4-43c6-49cd-9200-2f9dc941c0ce"
+                            },
+                            {
+                              "id": "1e1c8ef2-2576-4aef-8505-1272f2009ecb",
+                              "name": "Internal server error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/platform/plugins/notifiers/:notifierId/schema",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "platform",
+                                    "plugins",
+                                    "notifiers",
+                                    ":notifierId",
+                                    "schema"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "notifierId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:52:08.000Z",
+                              "updatedAt": "2026-07-28T01:52:08.000Z",
+                              "uid": "35240-1e1c8ef2-2576-4aef-8505-1272f2009ecb"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:52:08.000Z",
+                          "updatedAt": "2026-07-28T01:52:08.000Z",
+                          "uid": "35240-faedbf41-5fae-408a-a482-0dccde7f3615"
+                        }
+                      ],
+                      "id": "2b345905-cc3f-4d57-b7d4-d472284fe141",
+                      "createdAt": "2026-07-28T01:52:08.000Z",
+                      "updatedAt": "2026-07-28T01:52:08.000Z",
+                      "uid": "35240-2b345905-cc3f-4d57-b7d4-d472284fe141"
+                    },
+                    {
+                      "name": "Get a notifier",
+                      "id": "27d341e3-236e-4ed0-a348-f2a2eae9ac38",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/platform/plugins/notifiers/:notifierId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "platform",
+                            "plugins",
+                            "notifiers",
+                            ":notifierId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "92c33c87-32d5-430a-b39a-34083d8f9e97",
+                              "key": "notifierId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "There is no particular permission needed. User must be authenticated."
+                      },
+                      "response": [
+                        {
+                          "id": "79a77a99-29b6-4d19-b113-ffabb17f54b0",
+                          "name": "Notifier plugin",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/platform/plugins/notifiers/:notifierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "platform",
+                                "plugins",
+                                "notifiers",
+                                ":notifierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "notifierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"deployed\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"feature\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:52:08.000Z",
+                          "updatedAt": "2026-07-28T01:52:08.000Z",
+                          "uid": "35240-79a77a99-29b6-4d19-b113-ffabb17f54b0"
+                        },
+                        {
+                          "id": "95e8d2d1-38d6-4bf3-b064-963369a79029",
+                          "name": "Notifier plugin not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/platform/plugins/notifiers/:notifierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "platform",
+                                "plugins",
+                                "notifiers",
+                                ":notifierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "notifierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"http_status\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:52:08.000Z",
+                          "updatedAt": "2026-07-28T01:52:08.000Z",
+                          "uid": "35240-95e8d2d1-38d6-4bf3-b064-963369a79029"
+                        },
+                        {
+                          "id": "429fa34c-116d-4ce6-8e23-ca0f23c788e1",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/platform/plugins/notifiers/:notifierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "platform",
+                                "plugins",
+                                "notifiers",
+                                ":notifierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "notifierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:52:08.000Z",
+                          "updatedAt": "2026-07-28T01:52:08.000Z",
+                          "uid": "35240-429fa34c-116d-4ce6-8e23-ca0f23c788e1"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:08.000Z",
+                      "updatedAt": "2026-07-28T01:52:08.000Z",
+                      "uid": "35240-27d341e3-236e-4ed0-a348-f2a2eae9ac38"
+                    }
+                  ],
+                  "id": "c03c6b24-f439-4820-9548-cec820a7b2f3",
+                  "createdAt": "2026-07-28T01:52:08.000Z",
+                  "updatedAt": "2026-07-28T01:52:08.000Z",
+                  "uid": "35240-c03c6b24-f439-4820-9548-cec820a7b2f3"
+                },
+                {
+                  "name": "List all available notifier plugins",
+                  "id": "e1c0b959-2f74-4fc1-aa3b-cbc5df104030",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/platform/plugins/notifiers?expand=<string>&expand=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "platform",
+                        "plugins",
+                        "notifiers"
+                      ],
+                      "query": [
+                        {
+                          "key": "expand",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "expand",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "There is no particular permission needed. User must be authenticated."
+                  },
+                  "response": [
+                    {
+                      "id": "bed1ccda-ae96-481a-93cb-1144351b73c2",
+                      "name": "Notifier plugin list",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/platform/plugins/notifiers?expand=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "platform",
+                            "plugins",
+                            "notifiers"
+                          ],
+                          "query": [
+                            {
+                              "key": "expand",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"deployed\": \"<boolean>\",\n    \"description\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"feature\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"version\": \"<string>\"\n  },\n  {\n    \"deployed\": \"<boolean>\",\n    \"description\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"feature\": \"<string>\",\n    \"icon\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"version\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:52:08.000Z",
+                      "updatedAt": "2026-07-28T01:52:08.000Z",
+                      "uid": "35240-bed1ccda-ae96-481a-93cb-1144351b73c2"
+                    },
+                    {
+                      "id": "76ef37e9-7ef7-4e5e-a73f-04382bf35cfe",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/platform/plugins/notifiers?expand=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "platform",
+                            "plugins",
+                            "notifiers"
+                          ],
+                          "query": [
+                            {
+                              "key": "expand",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:52:08.000Z",
+                      "updatedAt": "2026-07-28T01:52:08.000Z",
+                      "uid": "35240-76ef37e9-7ef7-4e5e-a73f-04382bf35cfe"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:08.000Z",
+                  "updatedAt": "2026-07-28T01:52:08.000Z",
+                  "uid": "35240-e1c0b959-2f74-4fc1-aa3b-cbc5df104030"
+                }
+              ],
+              "id": "e75f5960-838e-46e9-9804-2230fbe31eaf",
+              "createdAt": "2026-07-28T01:52:08.000Z",
+              "updatedAt": "2026-07-28T01:52:08.000Z",
+              "uid": "35240-e75f5960-838e-46e9-9804-2230fbe31eaf"
+            }
+          ],
+          "id": "1ed48dfb-fdca-40dc-8546-0533bfc1e11b",
+          "createdAt": "2026-07-28T01:52:08.000Z",
+          "updatedAt": "2026-07-28T01:52:08.000Z",
+          "uid": "35240-1ed48dfb-fdca-40dc-8546-0533bfc1e11b"
+        }
+      ],
+      "id": "a722d853-5bdb-40c6-9ae6-1dd5e3c8f378",
+      "createdAt": "2026-07-28T01:52:08.000Z",
+      "updatedAt": "2026-07-28T01:52:08.000Z",
+      "uid": "35240-a722d853-5bdb-40c6-9ae6-1dd5e3c8f378"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

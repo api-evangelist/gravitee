@@ -1,0 +1,2577 @@
+{
+  "info": {
+    "_postman_id": "2b154fca-c22e-4eb0-b5c9-eb13f093e007",
+    "name": "Gravitee.io - Access Management alerts form API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:01.000Z",
+    "updatedAt": "2026-07-28T01:52:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2b154fca-c22e-4eb0-b5c9-eb13f093e007"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "applications",
+                              "item": [
+                                {
+                                  "name": "{application}",
+                                  "item": [
+                                    {
+                                      "name": "forms",
+                                      "item": [
+                                        {
+                                          "name": "{form}",
+                                          "item": [
+                                            {
+                                              "name": "Update a form for an application",
+                                              "id": "03e6fcfd-9485-4f98-abdc-4e8a949adecc",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "PUT",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "forms",
+                                                    ":form"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "153c793d-79e3-4fb4-aa1e-fa20ac0844e9",
+                                                      "key": "organizationId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "914b649c-ee93-497b-b441-34aa1e5df0f8",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "8833fd4f-63fb-40a7-9f1c-f2ae48000843",
+                                                      "key": "domain",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "72f5ddd8-c71c-4c25-9a16-92a64899e346",
+                                                      "key": "application",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "05ce5669-c511-4b1d-99c5-dc96b5c2380c",
+                                                      "key": "form",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "User must have APPLICATION_FORM[UPDATE] permission on the specified application or APPLICATION_FORM[UPDATE] permission on the specified domain or APPLICATION_FORM[UPDATE] permission on the specified environment or APPLICATION_FORM[UPDATE] permission on the specified organization"
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "f4dfde1a-e4ce-4b4f-805d-abdb03a0cfca",
+                                                  "name": "Form successfully updated",
+                                                  "originalRequest": {
+                                                    "method": "PUT",
+                                                    "header": [
+                                                      {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "body": {
+                                                      "mode": "raw",
+                                                      "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                                      "options": {
+                                                        "raw": {
+                                                          "headerFamily": "json",
+                                                          "language": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "applications",
+                                                        ":application",
+                                                        "forms",
+                                                        ":form"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "application"
+                                                        },
+                                                        {
+                                                          "key": "form"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Created",
+                                                  "code": 201,
+                                                  "_postman_previewlanguage": "json",
+                                                  "header": [
+                                                    {
+                                                      "key": "Content-Type",
+                                                      "value": "application/json"
+                                                    }
+                                                  ],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": "{\n  \"assets\": \"<string>\",\n  \"client\": \"<string>\",\n  \"content\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"PLATFORM\",\n  \"template\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                                  "uid": "35240-f4dfde1a-e4ce-4b4f-805d-abdb03a0cfca"
+                                                },
+                                                {
+                                                  "id": "82844fa1-9937-4a48-94cf-366fd4b33164",
+                                                  "name": "Internal server error",
+                                                  "originalRequest": {
+                                                    "method": "PUT",
+                                                    "header": [
+                                                      {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "body": {
+                                                      "mode": "raw",
+                                                      "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                                      "options": {
+                                                        "raw": {
+                                                          "headerFamily": "json",
+                                                          "language": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "applications",
+                                                        ":application",
+                                                        "forms",
+                                                        ":form"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "application"
+                                                        },
+                                                        {
+                                                          "key": "form"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Internal Server Error",
+                                                  "code": 500,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                                  "uid": "35240-82844fa1-9937-4a48-94cf-366fd4b33164"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T01:52:02.000Z",
+                                              "updatedAt": "2026-07-28T01:52:02.000Z",
+                                              "uid": "35240-03e6fcfd-9485-4f98-abdc-4e8a949adecc"
+                                            },
+                                            {
+                                              "name": "Delete a form for an application",
+                                              "id": "45067082-13e8-4200-868e-48e66519d85e",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "DELETE",
+                                                "header": [],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "forms",
+                                                    ":form"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "226bf4c1-4e18-4aa7-825a-b30cbda2aa25",
+                                                      "key": "organizationId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "d4852906-e643-4ae4-9cb0-cee29fac887e",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "8ba2a858-0b76-4d21-8d6e-931ff8b7e7a4",
+                                                      "key": "domain",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "e2921877-5c6e-400c-8e63-e129db1b4963",
+                                                      "key": "application",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "0fb88f5d-9420-4bfd-825b-ae026407b50a",
+                                                      "key": "form",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "User must have APPLICATION_FORM[DELETE] permission on the specified application or APPLICATION_FORM[DELETE] permission on the specified domain or APPLICATION_FORM[DELETE] permission on the specified environment or APPLICATION_FORM[DELETE] permission on the specified organization"
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "3ec53496-b5b2-44de-9408-76808d34692d",
+                                                  "name": "Form successfully deleted",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "applications",
+                                                        ":application",
+                                                        "forms",
+                                                        ":form"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "application"
+                                                        },
+                                                        {
+                                                          "key": "form"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "No Content",
+                                                  "code": 204,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                                  "uid": "35240-3ec53496-b5b2-44de-9408-76808d34692d"
+                                                },
+                                                {
+                                                  "id": "27e03102-012c-4d73-8a3e-c517bd113f29",
+                                                  "name": "Internal server error",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "applications",
+                                                        ":application",
+                                                        "forms",
+                                                        ":form"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "application"
+                                                        },
+                                                        {
+                                                          "key": "form"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Internal Server Error",
+                                                  "code": 500,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                                  "uid": "35240-27e03102-012c-4d73-8a3e-c517bd113f29"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T01:52:02.000Z",
+                                              "updatedAt": "2026-07-28T01:52:02.000Z",
+                                              "uid": "35240-45067082-13e8-4200-868e-48e66519d85e"
+                                            }
+                                          ],
+                                          "id": "ee761c4b-e2e9-4df3-8899-2400d86e34b3",
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-ee761c4b-e2e9-4df3-8899-2400d86e34b3"
+                                        },
+                                        {
+                                          "name": "Find a form for an application",
+                                          "id": "6be8fd3e-3e5a-4215-b4da-146b8c60bbd2",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "GET",
+                                            "header": [],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms?template=MAGIC_LINK_LOGIN",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "applications",
+                                                ":application",
+                                                "forms"
+                                              ],
+                                              "query": [
+                                                {
+                                                  "description": "(Required) ",
+                                                  "key": "template",
+                                                  "value": "MAGIC_LINK_LOGIN"
+                                                }
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "9c832401-14b6-4e27-b2ab-bd2e8431df75",
+                                                  "key": "organizationId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "65fc5598-9512-4f12-96c2-c6e39c0742ed",
+                                                  "key": "environmentId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "5e5deabc-ce32-4ed8-a56a-5920eabfa084",
+                                                  "key": "domain",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "5602db5d-fd9a-4f84-a396-f469b229906d",
+                                                  "key": "application",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "User must have APPLICATION_FORM[READ] permission on the specified application or APPLICATION_FORM[READ] permission on the specified domain or APPLICATION_FORM[READ] permission on the specified environment or APPLICATION_FORM[READ] permission on the specified organization"
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "398657c5-218d-4d1b-a317-cd986b94e6f5",
+                                              "name": "Form successfully fetched",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms?template=MAGIC_LINK_LOGIN",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "forms"
+                                                  ],
+                                                  "query": [
+                                                    {
+                                                      "description": "(Required) ",
+                                                      "key": "template",
+                                                      "value": "MAGIC_LINK_LOGIN"
+                                                    }
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "application"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:52:02.000Z",
+                                              "updatedAt": "2026-07-28T01:52:02.000Z",
+                                              "uid": "35240-398657c5-218d-4d1b-a317-cd986b94e6f5"
+                                            },
+                                            {
+                                              "id": "44dfe654-c4f5-46ab-b113-00fab0588870",
+                                              "name": "Internal server error",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms?template=MAGIC_LINK_LOGIN",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "forms"
+                                                  ],
+                                                  "query": [
+                                                    {
+                                                      "description": "(Required) ",
+                                                      "key": "template",
+                                                      "value": "MAGIC_LINK_LOGIN"
+                                                    }
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "application"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Internal Server Error",
+                                              "code": 500,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:52:02.000Z",
+                                              "updatedAt": "2026-07-28T01:52:02.000Z",
+                                              "uid": "35240-44dfe654-c4f5-46ab-b113-00fab0588870"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-6be8fd3e-3e5a-4215-b4da-146b8c60bbd2"
+                                        },
+                                        {
+                                          "name": "Create a form for an application",
+                                          "id": "8ea78f57-56d8-477e-818b-1780557fa24b",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "applications",
+                                                ":application",
+                                                "forms"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "e5016dec-3ecb-4d35-bdb2-1c70d2b22646",
+                                                  "key": "organizationId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "ffabc1d6-45d1-4de4-adf7-e4cbff129ff2",
+                                                  "key": "environmentId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "ef487f90-708a-46d7-8494-e8038cba5ebf",
+                                                  "key": "domain",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "f666e990-31ab-486b-8dab-1627fc5e80e8",
+                                                  "key": "application",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "User must have APPLICATION_FORM[CREATE] permission on the specified application or APPLICATION_FORM[CREATE] permission on the specified domain or APPLICATION_FORM[CREATE] permission on the specified environment or APPLICATION_FORM[CREATE] permission on the specified organization"
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "4ac75322-c510-4961-b69b-3ce99c3dffeb",
+                                              "name": "Form successfully created",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "forms"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "application"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Created",
+                                              "code": 201,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:52:02.000Z",
+                                              "updatedAt": "2026-07-28T01:52:02.000Z",
+                                              "uid": "35240-4ac75322-c510-4961-b69b-3ce99c3dffeb"
+                                            },
+                                            {
+                                              "id": "e5096d18-119e-4a8c-93a1-0357e1321fb1",
+                                              "name": "Internal server error",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "forms"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "application"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Internal Server Error",
+                                              "code": 500,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:52:02.000Z",
+                                              "updatedAt": "2026-07-28T01:52:02.000Z",
+                                              "uid": "35240-e5096d18-119e-4a8c-93a1-0357e1321fb1"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-8ea78f57-56d8-477e-818b-1780557fa24b"
+                                        }
+                                      ],
+                                      "id": "81fcac59-f564-492d-99a7-475555a18a04",
+                                      "createdAt": "2026-07-28T01:52:02.000Z",
+                                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                                      "uid": "35240-81fcac59-f564-492d-99a7-475555a18a04"
+                                    }
+                                  ],
+                                  "id": "81fadbde-83c4-474b-a763-c6cb2550681e",
+                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                  "uid": "35240-81fadbde-83c4-474b-a763-c6cb2550681e"
+                                }
+                              ],
+                              "id": "7bdda6e1-4748-4067-98fc-97c401912713",
+                              "createdAt": "2026-07-28T01:52:02.000Z",
+                              "updatedAt": "2026-07-28T01:52:02.000Z",
+                              "uid": "35240-7bdda6e1-4748-4067-98fc-97c401912713"
+                            },
+                            {
+                              "name": "forms",
+                              "item": [
+                                {
+                                  "name": "preview",
+                                  "item": [
+                                    {
+                                      "name": "Render the provided template",
+                                      "id": "86949450-7c79-4a19-ae5d-7e5c00bffc0b",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"template\": \"<string>\",\n  \"type\": \"FORM\",\n  \"content\": \"<string>\",\n  \"theme\": {\n    \"createdAt\": \"<dateTime>\",\n    \"css\": \"<string>\",\n    \"faviconUrl\": \"<string>\",\n    \"id\": \"<string>\",\n    \"logoUrl\": \"<string>\",\n    \"logoWidth\": \"<integer>\",\n    \"primaryButtonColorHex\": \"<string>\",\n    \"primaryTextColorHex\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ENVIRONMENT\",\n    \"secondaryButtonColorHex\": \"<string>\",\n    \"secondaryTextColorHex\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/preview",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "forms",
+                                            "preview"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "4e7de249-3665-4501-af99-7db932124608",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "3dd6d661-f2c4-45e1-bd32-8a217ba7ad3b",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "fa48aa65-d88e-47e5-9ae4-2585f6ca4712",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "29e5a20f-1207-4ca3-8a08-60b606da51ce",
+                                          "name": "Template successfully rendered",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"template\": \"<string>\",\n  \"type\": \"FORM\",\n  \"content\": \"<string>\",\n  \"theme\": {\n    \"createdAt\": \"<dateTime>\",\n    \"css\": \"<string>\",\n    \"faviconUrl\": \"<string>\",\n    \"id\": \"<string>\",\n    \"logoUrl\": \"<string>\",\n    \"logoWidth\": \"<integer>\",\n    \"primaryButtonColorHex\": \"<string>\",\n    \"primaryTextColorHex\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ENVIRONMENT\",\n    \"secondaryButtonColorHex\": \"<string>\",\n    \"secondaryTextColorHex\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/preview",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "forms",
+                                                "preview"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"content\": \"<string>\",\n  \"template\": \"<string>\",\n  \"type\": \"EMAIL\"\n}",
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-29e5a20f-1207-4ca3-8a08-60b606da51ce"
+                                        },
+                                        {
+                                          "id": "c45dcdb7-95f9-46f3-8360-08eca3a546b6",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"template\": \"<string>\",\n  \"type\": \"FORM\",\n  \"content\": \"<string>\",\n  \"theme\": {\n    \"createdAt\": \"<dateTime>\",\n    \"css\": \"<string>\",\n    \"faviconUrl\": \"<string>\",\n    \"id\": \"<string>\",\n    \"logoUrl\": \"<string>\",\n    \"logoWidth\": \"<integer>\",\n    \"primaryButtonColorHex\": \"<string>\",\n    \"primaryTextColorHex\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ENVIRONMENT\",\n    \"secondaryButtonColorHex\": \"<string>\",\n    \"secondaryTextColorHex\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/preview",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "forms",
+                                                "preview"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-c45dcdb7-95f9-46f3-8360-08eca3a546b6"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:52:02.000Z",
+                                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                                      "uid": "35240-86949450-7c79-4a19-ae5d-7e5c00bffc0b"
+                                    }
+                                  ],
+                                  "id": "3d7151a2-884c-4033-9757-ec8f5b951d52",
+                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                  "uid": "35240-3d7151a2-884c-4033-9757-ec8f5b951d52"
+                                },
+                                {
+                                  "name": "{form}",
+                                  "item": [
+                                    {
+                                      "name": "Update a form",
+                                      "id": "554a2268-f205-48c9-b0d7-9e5cd6812cba",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/:form",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "forms",
+                                            ":form"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "af896ca1-fca1-4b71-a236-0b9024a58c70",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "03018461-14ba-49e4-9e6b-2ee858057291",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "15c5b4f4-569d-4a42-865a-bb5a063f55fe",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "13ef3836-08a5-4eb0-9d9b-d3ad25d92ac2",
+                                              "key": "form",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_FORM[UPDATE] permission on the specified domain or DOMAIN_FORM[UPDATE] permission on the specified environment or DOMAIN_FORM[UPDATE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "f7b49463-eeee-4e34-b334-a7367bdf45af",
+                                          "name": "Form successfully updated",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/:form",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "forms",
+                                                ":form"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "form"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Created",
+                                          "code": 201,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"assets\": \"<string>\",\n  \"client\": \"<string>\",\n  \"content\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"PLATFORM\",\n  \"template\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-f7b49463-eeee-4e34-b334-a7367bdf45af"
+                                        },
+                                        {
+                                          "id": "af52c6c4-39cc-460a-92dc-9d8a3c1e9ebf",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/:form",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "forms",
+                                                ":form"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "form"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-af52c6c4-39cc-460a-92dc-9d8a3c1e9ebf"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:52:02.000Z",
+                                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                                      "uid": "35240-554a2268-f205-48c9-b0d7-9e5cd6812cba"
+                                    },
+                                    {
+                                      "name": "Delete a form",
+                                      "id": "e2d53fe1-e29c-49c5-b591-dfaf1e154835",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/:form",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "forms",
+                                            ":form"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "4e37988d-e299-45ae-a341-7270b13e295d",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "92953501-d062-40d1-a314-1a67361388f7",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "cffddb04-2126-4fa2-9d17-d0161b920c83",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "9b3ddccf-ba00-4c39-ad79-f53cf36e8789",
+                                              "key": "form",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_FORM[DELETE] permission on the specified domain or DOMAIN_FORM[DELETE] permission on the specified environment or DOMAIN_FORM[DELETE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "734f6bac-27b6-4955-bd41-0a911914cba9",
+                                          "name": "Form successfully deleted",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/:form",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "forms",
+                                                ":form"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "form"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-734f6bac-27b6-4955-bd41-0a911914cba9"
+                                        },
+                                        {
+                                          "id": "ece6dc6a-25b9-4421-9557-a3a96e27cde2",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/:form",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "forms",
+                                                ":form"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "form"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:02.000Z",
+                                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                                          "uid": "35240-ece6dc6a-25b9-4421-9557-a3a96e27cde2"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:52:02.000Z",
+                                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                                      "uid": "35240-e2d53fe1-e29c-49c5-b591-dfaf1e154835"
+                                    }
+                                  ],
+                                  "id": "25d9686a-987a-48a8-8fa9-6ae23bdbdbda",
+                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                  "uid": "35240-25d9686a-987a-48a8-8fa9-6ae23bdbdbda"
+                                },
+                                {
+                                  "name": "Find a form",
+                                  "id": "c2500be1-35d1-44c2-8858-e177f294245f",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms?template=MAGIC_LINK_LOGIN",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "forms"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) ",
+                                          "key": "template",
+                                          "value": "MAGIC_LINK_LOGIN"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "4ace59cd-5c1d-41d7-9d5e-49eb4c3c78e0",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "9778ad83-5c5c-4961-9a9c-a6dfcfce5aa3",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "35ff1ce5-6db7-4813-95c1-e5896df99109",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_FORM[READ] permission on the specified domain or DOMAIN_FORM[READ] permission on the specified environment or DOMAIN_FORM[READ] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "ff2c8c4e-60c9-4690-a069-61d4a41ac408",
+                                      "name": "Form successfully fetched",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms?template=MAGIC_LINK_LOGIN",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "forms"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "(Required) ",
+                                              "key": "template",
+                                              "value": "MAGIC_LINK_LOGIN"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:52:02.000Z",
+                                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                                      "uid": "35240-ff2c8c4e-60c9-4690-a069-61d4a41ac408"
+                                    },
+                                    {
+                                      "id": "afc1ffec-b9f3-42d0-8911-16e46397b1b0",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms?template=MAGIC_LINK_LOGIN",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "forms"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "(Required) ",
+                                              "key": "template",
+                                              "value": "MAGIC_LINK_LOGIN"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:52:02.000Z",
+                                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                                      "uid": "35240-afc1ffec-b9f3-42d0-8911-16e46397b1b0"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                  "uid": "35240-c2500be1-35d1-44c2-8858-e177f294245f"
+                                },
+                                {
+                                  "name": "Create a form",
+                                  "id": "3910572f-9c8b-42c5-8da5-ff436324d8c2",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "forms"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "930590f1-c009-45a9-9aa0-c2d6e75a7863",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "a3304221-93b5-4df0-a6fc-2f78c05ee172",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "7ebb338c-d79d-41e5-aea8-1fe7a82bc931",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_FORM[CREATE] permission on the specified domain or DOMAIN_FORM[CREATE] permission on the specified environment or DOMAIN_FORM[CREATE] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "bc5d73c7-bdbb-476c-9f61-9aee08797297",
+                                      "name": "Form successfully created",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "forms"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:52:02.000Z",
+                                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                                      "uid": "35240-bc5d73c7-bdbb-476c-9f61-9aee08797297"
+                                    },
+                                    {
+                                      "id": "dabeef81-4bf2-4ed8-a50e-52e3385a0bee",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "forms"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:52:02.000Z",
+                                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                                      "uid": "35240-dabeef81-4bf2-4ed8-a50e-52e3385a0bee"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:52:02.000Z",
+                                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                                  "uid": "35240-3910572f-9c8b-42c5-8da5-ff436324d8c2"
+                                }
+                              ],
+                              "id": "e8bc9781-99c9-4e13-a765-a83732107874",
+                              "createdAt": "2026-07-28T01:52:02.000Z",
+                              "updatedAt": "2026-07-28T01:52:02.000Z",
+                              "uid": "35240-e8bc9781-99c9-4e13-a765-a83732107874"
+                            }
+                          ],
+                          "id": "3db737ac-5757-41cb-9081-2214f65f7b90",
+                          "createdAt": "2026-07-28T01:52:02.000Z",
+                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                          "uid": "35240-3db737ac-5757-41cb-9081-2214f65f7b90"
+                        }
+                      ],
+                      "id": "69f3d2f5-3aad-4940-986e-3ca3bfa66318",
+                      "createdAt": "2026-07-28T01:52:02.000Z",
+                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                      "uid": "35240-69f3d2f5-3aad-4940-986e-3ca3bfa66318"
+                    }
+                  ],
+                  "id": "ffe651cf-7b92-4656-bfc6-ec06bb59774d",
+                  "createdAt": "2026-07-28T01:52:02.000Z",
+                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                  "uid": "35240-ffe651cf-7b92-4656-bfc6-ec06bb59774d"
+                }
+              ],
+              "id": "ab364247-d5d2-48b8-8191-c416d0335c10",
+              "createdAt": "2026-07-28T01:52:02.000Z",
+              "updatedAt": "2026-07-28T01:52:02.000Z",
+              "uid": "35240-ab364247-d5d2-48b8-8191-c416d0335c10"
+            },
+            {
+              "name": "forms",
+              "item": [
+                {
+                  "name": "{form}",
+                  "item": [
+                    {
+                      "name": "Update a form",
+                      "id": "cf34f1a7-90e8-4370-9d34-0d1fd2ad38e0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/forms/:form",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "forms",
+                            ":form"
+                          ],
+                          "variable": [
+                            {
+                              "id": "01309dd0-fbbd-42f0-9dc4-3627b34bb2e0",
+                              "key": "organizationId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "8d1b5fdd-67f4-471d-8e7e-504baf8b1302",
+                              "key": "form",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "User must have the ORGANIZATION_FORM[UPDATE] permission on the specified organization"
+                      },
+                      "response": [
+                        {
+                          "id": "c441146a-f6e9-4e56-9d2b-e540b404a84b",
+                          "name": "Form successfully updated",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/forms/:form",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "forms",
+                                ":form"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "form"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"assets\": \"<string>\",\n  \"client\": \"<string>\",\n  \"content\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"PLATFORM\",\n  \"template\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T01:52:02.000Z",
+                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                          "uid": "35240-c441146a-f6e9-4e56-9d2b-e540b404a84b"
+                        },
+                        {
+                          "id": "086efa4e-9a4b-478f-9756-fecd88752d1b",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"assets\": \"<string>\",\n  \"content\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/forms/:form",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "forms",
+                                ":form"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "form"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:52:02.000Z",
+                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                          "uid": "35240-086efa4e-9a4b-478f-9756-fecd88752d1b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:02.000Z",
+                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                      "uid": "35240-cf34f1a7-90e8-4370-9d34-0d1fd2ad38e0"
+                    },
+                    {
+                      "name": "Delete a form",
+                      "id": "291b7026-751e-4f93-a79f-103d73bfa373",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/forms/:form",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "forms",
+                            ":form"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f16cdf14-a236-4537-84b6-5bb914ece08f",
+                              "key": "organizationId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "b661b9df-485c-4710-9151-c5762e1dbe84",
+                              "key": "form",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "User must have the ORGANIZATION_FORM[DELETE] permission on the specified organization"
+                      },
+                      "response": [
+                        {
+                          "id": "657ac8e0-62ea-4572-a0f0-58aabdbe192b",
+                          "name": "Form successfully deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/forms/:form",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "forms",
+                                ":form"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "form"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:52:02.000Z",
+                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                          "uid": "35240-657ac8e0-62ea-4572-a0f0-58aabdbe192b"
+                        },
+                        {
+                          "id": "77b1de9c-dead-4fbf-8dcc-1fdfab4b886c",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/forms/:form",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "forms",
+                                ":form"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "form"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:52:02.000Z",
+                          "updatedAt": "2026-07-28T01:52:02.000Z",
+                          "uid": "35240-77b1de9c-dead-4fbf-8dcc-1fdfab4b886c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:52:02.000Z",
+                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                      "uid": "35240-291b7026-751e-4f93-a79f-103d73bfa373"
+                    }
+                  ],
+                  "id": "eec764bc-9eca-4571-8c41-fea7994fe0a9",
+                  "createdAt": "2026-07-28T01:52:02.000Z",
+                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                  "uid": "35240-eec764bc-9eca-4571-8c41-fea7994fe0a9"
+                },
+                {
+                  "name": "Find an organization form template",
+                  "id": "c193dcfa-5267-4c2d-8040-b20bb39eda98",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organizationId/forms?template=MAGIC_LINK_LOGIN",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organizationId",
+                        "forms"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "template",
+                          "value": "MAGIC_LINK_LOGIN"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9a0df86d-a54b-4d5f-ad16-490ce11f5686",
+                          "key": "organizationId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "User must have the ORGANIZATION_FORM[READ] permission on the specified organization"
+                  },
+                  "response": [
+                    {
+                      "id": "4b70286c-78b3-4f97-a396-dca23606a2e9",
+                      "name": "Form successfully fetched",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/forms?template=MAGIC_LINK_LOGIN",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "forms"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "template",
+                              "value": "MAGIC_LINK_LOGIN"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:52:02.000Z",
+                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                      "uid": "35240-4b70286c-78b3-4f97-a396-dca23606a2e9"
+                    },
+                    {
+                      "id": "0696a44e-11e1-4ca3-b153-c6e9340499a1",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/forms?template=MAGIC_LINK_LOGIN",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "forms"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "template",
+                              "value": "MAGIC_LINK_LOGIN"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:52:02.000Z",
+                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                      "uid": "35240-0696a44e-11e1-4ca3-b153-c6e9340499a1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:02.000Z",
+                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                  "uid": "35240-c193dcfa-5267-4c2d-8040-b20bb39eda98"
+                },
+                {
+                  "name": "Create a form",
+                  "id": "b8062141-6907-4ddf-b68d-311776cdd840",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organizationId/forms",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organizationId",
+                        "forms"
+                      ],
+                      "variable": [
+                        {
+                          "id": "39d85d6e-89c4-49c6-b3e7-8328f5ea7fb1",
+                          "key": "organizationId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "User must have the ORGANIZATION_FORM[CREATE] permission on the specified organization"
+                  },
+                  "response": [
+                    {
+                      "id": "3e791d8e-bc98-440a-89bd-a4414e41f439",
+                      "name": "Form successfully created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/forms",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "forms"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:52:02.000Z",
+                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                      "uid": "35240-3e791d8e-bc98-440a-89bd-a4414e41f439"
+                    },
+                    {
+                      "id": "6a9c02f0-0ab1-4de3-ae0d-e6631b1824a5",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"content\": \"<string>\",\n  \"template\": \"WEBAUTHN_REGISTER\",\n  \"assets\": \"<string>\",\n  \"enabled\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/forms",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "forms"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:52:02.000Z",
+                      "updatedAt": "2026-07-28T01:52:02.000Z",
+                      "uid": "35240-6a9c02f0-0ab1-4de3-ae0d-e6631b1824a5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:52:02.000Z",
+                  "updatedAt": "2026-07-28T01:52:02.000Z",
+                  "uid": "35240-b8062141-6907-4ddf-b68d-311776cdd840"
+                }
+              ],
+              "id": "16d78032-041b-437c-b350-d3e88f624054",
+              "createdAt": "2026-07-28T01:52:02.000Z",
+              "updatedAt": "2026-07-28T01:52:02.000Z",
+              "uid": "35240-16d78032-041b-437c-b350-d3e88f624054"
+            }
+          ],
+          "id": "3eafc453-2436-4db4-ba7a-d8cfe4f17fc1",
+          "createdAt": "2026-07-28T01:52:02.000Z",
+          "updatedAt": "2026-07-28T01:52:02.000Z",
+          "uid": "35240-3eafc453-2436-4db4-ba7a-d8cfe4f17fc1"
+        }
+      ],
+      "id": "65ff2725-7f63-48f0-a3b4-ec9015cf0f8a",
+      "createdAt": "2026-07-28T01:52:02.000Z",
+      "updatedAt": "2026-07-28T01:52:02.000Z",
+      "uid": "35240-65ff2725-7f63-48f0-a3b4-ec9015cf0f8a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "info": {
+    "_postman_id": "eb757e3d-4d4e-4051-8a46-76ac354af557",
+    "name": "Gravitee.io - Access Management alerts preview API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:52:32.000Z",
+    "updatedAt": "2026-07-28T01:52:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-eb757e3d-4d4e-4051-8a46-76ac354af557"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "forms",
+                              "item": [
+                                {
+                                  "name": "preview",
+                                  "item": [
+                                    {
+                                      "name": "Render the provided template",
+                                      "id": "9657f2ba-e911-414b-9ba4-dd91933ff7f9",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"template\": \"<string>\",\n  \"type\": \"EMAIL\",\n  \"content\": \"<string>\",\n  \"theme\": {\n    \"createdAt\": \"<dateTime>\",\n    \"css\": \"<string>\",\n    \"faviconUrl\": \"<string>\",\n    \"id\": \"<string>\",\n    \"logoUrl\": \"<string>\",\n    \"logoWidth\": \"<integer>\",\n    \"primaryButtonColorHex\": \"<string>\",\n    \"primaryTextColorHex\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ORGANIZATION\",\n    \"secondaryButtonColorHex\": \"<string>\",\n    \"secondaryTextColorHex\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/preview",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "forms",
+                                            "preview"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "26d8e874-335d-4ba6-894e-d60f1d10a230",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "04266655-adf8-48c0-93b8-931d34ec2f69",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "a08ba4e6-148d-4397-bd4d-5502f741fb29",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "31392d9c-0124-4706-a906-a1dfaf95c7cf",
+                                          "name": "Template successfully rendered",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"template\": \"<string>\",\n  \"type\": \"EMAIL\",\n  \"content\": \"<string>\",\n  \"theme\": {\n    \"createdAt\": \"<dateTime>\",\n    \"css\": \"<string>\",\n    \"faviconUrl\": \"<string>\",\n    \"id\": \"<string>\",\n    \"logoUrl\": \"<string>\",\n    \"logoWidth\": \"<integer>\",\n    \"primaryButtonColorHex\": \"<string>\",\n    \"primaryTextColorHex\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ORGANIZATION\",\n    \"secondaryButtonColorHex\": \"<string>\",\n    \"secondaryTextColorHex\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/preview",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "forms",
+                                                "preview"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"content\": \"<string>\",\n  \"template\": \"<string>\",\n  \"type\": \"FORM\"\n}",
+                                          "createdAt": "2026-07-28T01:52:32.000Z",
+                                          "updatedAt": "2026-07-28T01:52:32.000Z",
+                                          "uid": "35240-31392d9c-0124-4706-a906-a1dfaf95c7cf"
+                                        },
+                                        {
+                                          "id": "355c4e8c-dba8-4723-8966-8c107bd6a661",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"template\": \"<string>\",\n  \"type\": \"EMAIL\",\n  \"content\": \"<string>\",\n  \"theme\": {\n    \"createdAt\": \"<dateTime>\",\n    \"css\": \"<string>\",\n    \"faviconUrl\": \"<string>\",\n    \"id\": \"<string>\",\n    \"logoUrl\": \"<string>\",\n    \"logoWidth\": \"<integer>\",\n    \"primaryButtonColorHex\": \"<string>\",\n    \"primaryTextColorHex\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"ORGANIZATION\",\n    \"secondaryButtonColorHex\": \"<string>\",\n    \"secondaryTextColorHex\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/preview",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "forms",
+                                                "preview"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:52:32.000Z",
+                                          "updatedAt": "2026-07-28T01:52:32.000Z",
+                                          "uid": "35240-355c4e8c-dba8-4723-8966-8c107bd6a661"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:52:32.000Z",
+                                      "updatedAt": "2026-07-28T01:52:32.000Z",
+                                      "uid": "35240-9657f2ba-e911-414b-9ba4-dd91933ff7f9"
+                                    }
+                                  ],
+                                  "id": "8f075642-ccc2-4692-b1f8-e93c10a5a0b6",
+                                  "createdAt": "2026-07-28T01:52:32.000Z",
+                                  "updatedAt": "2026-07-28T01:52:32.000Z",
+                                  "uid": "35240-8f075642-ccc2-4692-b1f8-e93c10a5a0b6"
+                                }
+                              ],
+                              "id": "6d10a56a-630e-4c6f-ae60-ba076886c0ee",
+                              "createdAt": "2026-07-28T01:52:32.000Z",
+                              "updatedAt": "2026-07-28T01:52:32.000Z",
+                              "uid": "35240-6d10a56a-630e-4c6f-ae60-ba076886c0ee"
+                            }
+                          ],
+                          "id": "707136cd-4d84-499b-99d5-58d2dccfe2d4",
+                          "createdAt": "2026-07-28T01:52:32.000Z",
+                          "updatedAt": "2026-07-28T01:52:32.000Z",
+                          "uid": "35240-707136cd-4d84-499b-99d5-58d2dccfe2d4"
+                        }
+                      ],
+                      "id": "d2f58fab-50de-47fc-921a-037c8604e24f",
+                      "createdAt": "2026-07-28T01:52:32.000Z",
+                      "updatedAt": "2026-07-28T01:52:32.000Z",
+                      "uid": "35240-d2f58fab-50de-47fc-921a-037c8604e24f"
+                    }
+                  ],
+                  "id": "360caedb-be7d-4b5a-a4e9-58a7735e5ee4",
+                  "createdAt": "2026-07-28T01:52:32.000Z",
+                  "updatedAt": "2026-07-28T01:52:32.000Z",
+                  "uid": "35240-360caedb-be7d-4b5a-a4e9-58a7735e5ee4"
+                }
+              ],
+              "id": "9b403cdf-54fb-4a7a-9f2a-4157083108e4",
+              "createdAt": "2026-07-28T01:52:32.000Z",
+              "updatedAt": "2026-07-28T01:52:32.000Z",
+              "uid": "35240-9b403cdf-54fb-4a7a-9f2a-4157083108e4"
+            }
+          ],
+          "id": "41e037d4-1160-4895-ae9a-ee0b66189706",
+          "createdAt": "2026-07-28T01:52:32.000Z",
+          "updatedAt": "2026-07-28T01:52:32.000Z",
+          "uid": "35240-41e037d4-1160-4895-ae9a-ee0b66189706"
+        }
+      ],
+      "id": "d400038e-086c-4ed8-bf66-2fce344ae8a6",
+      "createdAt": "2026-07-28T01:52:32.000Z",
+      "updatedAt": "2026-07-28T01:52:32.000Z",
+      "uid": "35240-d400038e-086c-4ed8-bf66-2fce344ae8a6"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

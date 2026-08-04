@@ -1,0 +1,817 @@
+{
+  "info": {
+    "_postman_id": "c701ea52-1f2d-47d7-a3e9-5fa6cf8d7556",
+    "name": "Gravitee.io - Access Management alerts entrypoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:57.000Z",
+    "updatedAt": "2026-07-28T01:51:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c701ea52-1f2d-47d7-a3e9-5fa6cf8d7556"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "entrypoints",
+              "item": [
+                {
+                  "name": "{entrypointId}",
+                  "item": [
+                    {
+                      "name": "Get a sharding entrypoint",
+                      "id": "b5e0b06d-9be7-4b88-9321-f79394d5e3d3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "entrypoints",
+                            ":entrypointId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "72fc104d-29b8-4d0c-9a51-e61e81064a51",
+                              "key": "organizationId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "d908313e-1a5d-4333-8e0f-a66f9fb996c2",
+                              "key": "entrypointId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "User must have the ORGANIZATION_ENTRYPOINT[READ] permission on the specified organization"
+                      },
+                      "response": [
+                        {
+                          "id": "1e18eaa2-0f3d-4e68-9b38-11edd87ab50e",
+                          "name": "Sharding entrypoint",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "entrypoints",
+                                ":entrypointId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "entrypointId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"createdAt\": \"<dateTime>\",\n  \"defaultEntrypoint\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"updatedAt\": \"<dateTime>\",\n  \"url\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:51:58.000Z",
+                          "updatedAt": "2026-07-28T01:51:58.000Z",
+                          "uid": "35240-1e18eaa2-0f3d-4e68-9b38-11edd87ab50e"
+                        },
+                        {
+                          "id": "04658f20-3097-42c5-8c10-721af5a4a549",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "entrypoints",
+                                ":entrypointId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "entrypointId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:58.000Z",
+                          "updatedAt": "2026-07-28T01:51:58.000Z",
+                          "uid": "35240-04658f20-3097-42c5-8c10-721af5a4a549"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:58.000Z",
+                      "updatedAt": "2026-07-28T01:51:58.000Z",
+                      "uid": "35240-b5e0b06d-9be7-4b88-9321-f79394d5e3d3"
+                    },
+                    {
+                      "name": "Update the sharding entrypoint",
+                      "id": "64705b34-9d2e-4469-91c4-e9878cb86190",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "entrypoints",
+                            ":entrypointId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "43246909-de8e-402a-b12a-3adb40eeac9d",
+                              "key": "organizationId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "f265cc5a-bb47-4723-a8d7-23be2a7262d9",
+                              "key": "entrypointId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "User must have the ORGANIZATION_ENTRYPOINT[UPDATE] permission on the specified organization"
+                      },
+                      "response": [
+                        {
+                          "id": "5c3cd062-c87c-49d4-8af3-c749de39f581",
+                          "name": "Sharding entrypoint successfully updated",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "entrypoints",
+                                ":entrypointId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "entrypointId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"createdAt\": \"<dateTime>\",\n  \"defaultEntrypoint\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"organizationId\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"updatedAt\": \"<dateTime>\",\n  \"url\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:51:58.000Z",
+                          "updatedAt": "2026-07-28T01:51:58.000Z",
+                          "uid": "35240-5c3cd062-c87c-49d4-8af3-c749de39f581"
+                        },
+                        {
+                          "id": "3ad89b41-2bd7-4d1b-9aae-6c1761e1267f",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "entrypoints",
+                                ":entrypointId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "entrypointId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:58.000Z",
+                          "updatedAt": "2026-07-28T01:51:58.000Z",
+                          "uid": "35240-3ad89b41-2bd7-4d1b-9aae-6c1761e1267f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:58.000Z",
+                      "updatedAt": "2026-07-28T01:51:58.000Z",
+                      "uid": "35240-64705b34-9d2e-4469-91c4-e9878cb86190"
+                    },
+                    {
+                      "name": "Delete the sharding entrypoint",
+                      "id": "ab268fc1-552c-43a7-a1d9-4088ea8270f0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "entrypoints",
+                            ":entrypointId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "39664159-397d-4ea7-b518-74923094869a",
+                              "key": "organizationId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "d0e30c86-4918-426e-a03a-92213e699db3",
+                              "key": "entrypointId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "User must have the ORGANIZATION_ENTRYPOINT[DELETE] permission on the specified organization"
+                      },
+                      "response": [
+                        {
+                          "id": "53cafe0b-b93c-43e8-bb2f-334b2bbb320e",
+                          "name": "Sharding entrypoint successfully deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "entrypoints",
+                                ":entrypointId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "entrypointId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:58.000Z",
+                          "updatedAt": "2026-07-28T01:51:58.000Z",
+                          "uid": "35240-53cafe0b-b93c-43e8-bb2f-334b2bbb320e"
+                        },
+                        {
+                          "id": "61c72461-f3d7-4bb5-b0ad-ad0a978991c4",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints/:entrypointId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "entrypoints",
+                                ":entrypointId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "organizationId"
+                                },
+                                {
+                                  "key": "entrypointId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:58.000Z",
+                          "updatedAt": "2026-07-28T01:51:58.000Z",
+                          "uid": "35240-61c72461-f3d7-4bb5-b0ad-ad0a978991c4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:58.000Z",
+                      "updatedAt": "2026-07-28T01:51:58.000Z",
+                      "uid": "35240-ab268fc1-552c-43a7-a1d9-4088ea8270f0"
+                    }
+                  ],
+                  "id": "10100dd0-81f2-471f-b484-d53411216c6f",
+                  "createdAt": "2026-07-28T01:51:58.000Z",
+                  "updatedAt": "2026-07-28T01:51:58.000Z",
+                  "uid": "35240-10100dd0-81f2-471f-b484-d53411216c6f"
+                },
+                {
+                  "name": "List entrypoints",
+                  "id": "b0437f16-9d00-4f01-861c-a9b9b48f8afb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organizationId",
+                        "entrypoints"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7e0d3d47-629a-40f3-a9c3-733c17e618d7",
+                          "key": "organizationId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned entrypoint is filtered and contains only basic information such as id and name."
+                  },
+                  "response": [
+                    {
+                      "id": "a23f1363-1369-4f64-847a-d4b83fe62a11",
+                      "name": "List all the entrypoints",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "entrypoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"createdAt\": \"<dateTime>\",\n    \"defaultEntrypoint\": \"<boolean>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"organizationId\": \"<string>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"updatedAt\": \"<dateTime>\",\n    \"url\": \"<string>\"\n  },\n  {\n    \"createdAt\": \"<dateTime>\",\n    \"defaultEntrypoint\": \"<boolean>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"organizationId\": \"<string>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"updatedAt\": \"<dateTime>\",\n    \"url\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:51:58.000Z",
+                      "updatedAt": "2026-07-28T01:51:58.000Z",
+                      "uid": "35240-a23f1363-1369-4f64-847a-d4b83fe62a11"
+                    },
+                    {
+                      "id": "5a0fd21d-00b8-4e85-8e7f-8157b172bc47",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "entrypoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:58.000Z",
+                      "updatedAt": "2026-07-28T01:51:58.000Z",
+                      "uid": "35240-5a0fd21d-00b8-4e85-8e7f-8157b172bc47"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:58.000Z",
+                  "updatedAt": "2026-07-28T01:51:58.000Z",
+                  "uid": "35240-b0437f16-9d00-4f01-861c-a9b9b48f8afb"
+                },
+                {
+                  "name": "Create a entrypoint",
+                  "id": "ddf94fcd-cfdd-4a13-86e8-053b4e5620d9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "organizations",
+                        ":organizationId",
+                        "entrypoints"
+                      ],
+                      "variable": [
+                        {
+                          "id": "eeee5768-3b51-4994-a27c-3381e54ad98a",
+                          "key": "organizationId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "User must have the ORGANIZATION_ENTRYPOINT[CREATE] permission on the specified organization"
+                  },
+                  "response": [
+                    {
+                      "id": "f230dcd9-fc35-46f4-94da-53f1bd169cd5",
+                      "name": "Entrypoint successfully created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "entrypoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:58.000Z",
+                      "updatedAt": "2026-07-28T01:51:58.000Z",
+                      "uid": "35240-f230dcd9-fc35-46f4-94da-53f1bd169cd5"
+                    },
+                    {
+                      "id": "cea5d14e-a230-407b-8f48-da4100aaab68",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"url\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/organizations/:organizationId/entrypoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "organizations",
+                            ":organizationId",
+                            "entrypoints"
+                          ],
+                          "variable": [
+                            {
+                              "key": "organizationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:58.000Z",
+                      "updatedAt": "2026-07-28T01:51:58.000Z",
+                      "uid": "35240-cea5d14e-a230-407b-8f48-da4100aaab68"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:58.000Z",
+                  "updatedAt": "2026-07-28T01:51:58.000Z",
+                  "uid": "35240-ddf94fcd-cfdd-4a13-86e8-053b4e5620d9"
+                }
+              ],
+              "id": "df0ae29a-9f10-46f4-80d1-4282ccc5ec0d",
+              "createdAt": "2026-07-28T01:51:58.000Z",
+              "updatedAt": "2026-07-28T01:51:58.000Z",
+              "uid": "35240-df0ae29a-9f10-46f4-80d1-4282ccc5ec0d"
+            }
+          ],
+          "id": "d790a3b7-bd02-4fde-958e-29d28d542b05",
+          "createdAt": "2026-07-28T01:51:58.000Z",
+          "updatedAt": "2026-07-28T01:51:58.000Z",
+          "uid": "35240-d790a3b7-bd02-4fde-958e-29d28d542b05"
+        }
+      ],
+      "id": "8d55f0e8-0aaf-4c4c-a30a-539d37771329",
+      "createdAt": "2026-07-28T01:51:58.000Z",
+      "updatedAt": "2026-07-28T01:51:58.000Z",
+      "uid": "35240-8d55f0e8-0aaf-4c4c-a30a-539d37771329"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

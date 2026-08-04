@@ -1,0 +1,1046 @@
+{
+  "info": {
+    "_postman_id": "17c2e2d5-893a-494a-972e-c5bd30485f74",
+    "name": "Gravitee.io - Access Management alerts device identifiers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:32.000Z",
+    "updatedAt": "2026-07-28T01:51:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-17c2e2d5-893a-494a-972e-c5bd30485f74"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "device-identifiers",
+                              "item": [
+                                {
+                                  "name": "{deviceIdentifier}",
+                                  "item": [
+                                    {
+                                      "name": "Get a Device identifier",
+                                      "id": "164b01c5-e8e4-467e-bf16-45b256d94168",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "device-identifiers",
+                                            ":deviceIdentifier"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "2b53a434-1397-411b-b9d8-f6010c312fbd",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "8e58e9e5-7654-4b84-94c8-b65eb9d17372",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "c32a7726-e694-41c7-bc89-5171fad97862",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "1a67b2fe-2de7-4a9e-8815-71cd5a3d786b",
+                                              "key": "deviceIdentifier",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "b20248b3-88fb-465a-9dae-b617b47e8050",
+                                          "name": "Device identifier successfully fetched",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "device-identifiers",
+                                                ":deviceIdentifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "deviceIdentifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"configuration\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"ENVIRONMENT\",\n  \"type\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:51:32.000Z",
+                                          "updatedAt": "2026-07-28T01:51:32.000Z",
+                                          "uid": "35240-b20248b3-88fb-465a-9dae-b617b47e8050"
+                                        },
+                                        {
+                                          "id": "5b38f7cc-aedf-4605-ad48-7bcaa31bdc3e",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "device-identifiers",
+                                                ":deviceIdentifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "deviceIdentifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:32.000Z",
+                                          "updatedAt": "2026-07-28T01:51:32.000Z",
+                                          "uid": "35240-5b38f7cc-aedf-4605-ad48-7bcaa31bdc3e"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:32.000Z",
+                                      "updatedAt": "2026-07-28T01:51:32.000Z",
+                                      "uid": "35240-164b01c5-e8e4-467e-bf16-45b256d94168"
+                                    },
+                                    {
+                                      "name": "Update a Device identifier",
+                                      "id": "66d4bfc1-a26b-47ed-8c1b-87d5fccd1e50",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "device-identifiers",
+                                            ":deviceIdentifier"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "0167cf31-09a8-4a99-b53a-3fe0417dea9a",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "39803356-6f54-4d48-9e73-0d460c0c5d90",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "9a2150a7-61cd-43e5-afb1-09886ec131d6",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "ba8a5f4c-519e-4481-ac8b-614d82b7df10",
+                                              "key": "deviceIdentifier",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "dbbae35a-0004-4e9b-97b5-28c549303700",
+                                          "name": "Device identifier successfully updated",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "device-identifiers",
+                                                ":deviceIdentifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "deviceIdentifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Created",
+                                          "code": 201,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"configuration\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"ENVIRONMENT\",\n  \"type\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:51:32.000Z",
+                                          "updatedAt": "2026-07-28T01:51:32.000Z",
+                                          "uid": "35240-dbbae35a-0004-4e9b-97b5-28c549303700"
+                                        },
+                                        {
+                                          "id": "fc71d732-2e46-4355-8103-3ace72369b3a",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "device-identifiers",
+                                                ":deviceIdentifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "deviceIdentifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:32.000Z",
+                                          "updatedAt": "2026-07-28T01:51:32.000Z",
+                                          "uid": "35240-fc71d732-2e46-4355-8103-3ace72369b3a"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:32.000Z",
+                                      "updatedAt": "2026-07-28T01:51:32.000Z",
+                                      "uid": "35240-66d4bfc1-a26b-47ed-8c1b-87d5fccd1e50"
+                                    },
+                                    {
+                                      "name": "Delete a Device identifier",
+                                      "id": "7e4bf4cf-d2ab-4565-98e0-cef7091e63fb",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "device-identifiers",
+                                            ":deviceIdentifier"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "5c8af57a-e8a6-40ac-865a-c50807ef47a5",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "6e952773-7f9f-43cb-8165-03e58b44ed89",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "5b11320f-d605-45a1-a3d3-bff7a79ffc42",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "dadafa47-0d1e-4795-a559-80d841ffef8e",
+                                              "key": "deviceIdentifier",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "b77c3a07-0e00-4e3d-a0d4-94767c31f620",
+                                          "name": "Device identifier successfully deleted",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "device-identifiers",
+                                                ":deviceIdentifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "deviceIdentifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:32.000Z",
+                                          "updatedAt": "2026-07-28T01:51:32.000Z",
+                                          "uid": "35240-b77c3a07-0e00-4e3d-a0d4-94767c31f620"
+                                        },
+                                        {
+                                          "id": "c625fb01-6a05-4037-a2f3-8ac4bb6642d0",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers/:deviceIdentifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "device-identifiers",
+                                                ":deviceIdentifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "deviceIdentifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:32.000Z",
+                                          "updatedAt": "2026-07-28T01:51:32.000Z",
+                                          "uid": "35240-c625fb01-6a05-4037-a2f3-8ac4bb6642d0"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:32.000Z",
+                                      "updatedAt": "2026-07-28T01:51:32.000Z",
+                                      "uid": "35240-7e4bf4cf-d2ab-4565-98e0-cef7091e63fb"
+                                    }
+                                  ],
+                                  "id": "1be7e5ed-1c42-4ea8-8b4e-6cc8e3b5cb8d",
+                                  "createdAt": "2026-07-28T01:51:32.000Z",
+                                  "updatedAt": "2026-07-28T01:51:32.000Z",
+                                  "uid": "35240-1be7e5ed-1c42-4ea8-8b4e-6cc8e3b5cb8d"
+                                },
+                                {
+                                  "name": "List registered device identifiers for a security domain",
+                                  "id": "bbf4642f-1e3f-4218-8a99-3f2e4be6288c",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "device-identifiers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "f71cec9a-3c06-409d-a1a2-e9ab7631d471",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "0542486c-f8ed-4090-9244-f1e7e994d43a",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "456ddad5-bf8c-42b5-bc8b-bd70d178c337",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified organization Each returned bot detections is filtered and contains only basic information such as id, name."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "49775ed4-0d15-444b-94c2-5bc77439e08d",
+                                      "name": "List registered device identifiers for a security domain",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "device-identifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"configuration\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PLATFORM\",\n    \"type\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"configuration\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PLATFORM\",\n    \"type\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T01:51:32.000Z",
+                                      "updatedAt": "2026-07-28T01:51:32.000Z",
+                                      "uid": "35240-49775ed4-0d15-444b-94c2-5bc77439e08d"
+                                    },
+                                    {
+                                      "id": "a68bca8f-b43c-4da2-80f6-4da6ab36bc47",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "device-identifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:32.000Z",
+                                      "updatedAt": "2026-07-28T01:51:32.000Z",
+                                      "uid": "35240-a68bca8f-b43c-4da2-80f6-4da6ab36bc47"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:51:32.000Z",
+                                  "updatedAt": "2026-07-28T01:51:32.000Z",
+                                  "uid": "35240-bbf4642f-1e3f-4218-8a99-3f2e4be6288c"
+                                },
+                                {
+                                  "name": "Create a device identifier",
+                                  "id": "fe9415a4-1c4d-4811-b9ef-6cd0b4ec35da",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "device-identifiers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "43372559-5902-4391-b6bb-5c47aca254e4",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "41c41f7f-344c-4b5e-8e3a-140ed835548c",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "8d7bd383-6c3f-4e3b-8a8e-7f17126b0f9c",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "26f15c76-a215-4d8c-884b-1e2915495ecd",
+                                      "name": "Device identifiers successfully created",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "device-identifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"configuration\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"ENVIRONMENT\",\n  \"type\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T01:51:32.000Z",
+                                      "updatedAt": "2026-07-28T01:51:32.000Z",
+                                      "uid": "35240-26f15c76-a215-4d8c-884b-1e2915495ecd"
+                                    },
+                                    {
+                                      "id": "2809b2ca-713f-4ba8-b91d-2a2465b38c82",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/device-identifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "device-identifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:32.000Z",
+                                      "updatedAt": "2026-07-28T01:51:32.000Z",
+                                      "uid": "35240-2809b2ca-713f-4ba8-b91d-2a2465b38c82"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:51:32.000Z",
+                                  "updatedAt": "2026-07-28T01:51:32.000Z",
+                                  "uid": "35240-fe9415a4-1c4d-4811-b9ef-6cd0b4ec35da"
+                                }
+                              ],
+                              "id": "5e2efd40-5d23-41f8-a80c-5ba5eade11da",
+                              "createdAt": "2026-07-28T01:51:32.000Z",
+                              "updatedAt": "2026-07-28T01:51:32.000Z",
+                              "uid": "35240-5e2efd40-5d23-41f8-a80c-5ba5eade11da"
+                            }
+                          ],
+                          "id": "a5f93235-ed37-4985-85db-43c4e7275063",
+                          "createdAt": "2026-07-28T01:51:32.000Z",
+                          "updatedAt": "2026-07-28T01:51:32.000Z",
+                          "uid": "35240-a5f93235-ed37-4985-85db-43c4e7275063"
+                        }
+                      ],
+                      "id": "456ca139-1c2a-458b-9ab3-4c57fc33c166",
+                      "createdAt": "2026-07-28T01:51:32.000Z",
+                      "updatedAt": "2026-07-28T01:51:32.000Z",
+                      "uid": "35240-456ca139-1c2a-458b-9ab3-4c57fc33c166"
+                    }
+                  ],
+                  "id": "a1ab8d4b-0b35-48b9-91f0-443876af402c",
+                  "createdAt": "2026-07-28T01:51:32.000Z",
+                  "updatedAt": "2026-07-28T01:51:32.000Z",
+                  "uid": "35240-a1ab8d4b-0b35-48b9-91f0-443876af402c"
+                }
+              ],
+              "id": "ff5a8caf-2a63-4b44-8597-f0213a6f43c2",
+              "createdAt": "2026-07-28T01:51:32.000Z",
+              "updatedAt": "2026-07-28T01:51:32.000Z",
+              "uid": "35240-ff5a8caf-2a63-4b44-8597-f0213a6f43c2"
+            }
+          ],
+          "id": "9b8ca24d-2edc-48c6-b3c2-ee488afc1b44",
+          "createdAt": "2026-07-28T01:51:32.000Z",
+          "updatedAt": "2026-07-28T01:51:32.000Z",
+          "uid": "35240-9b8ca24d-2edc-48c6-b3c2-ee488afc1b44"
+        }
+      ],
+      "id": "b894d4ed-2654-4779-8b7e-3c2caf8db064",
+      "createdAt": "2026-07-28T01:51:32.000Z",
+      "updatedAt": "2026-07-28T01:51:32.000Z",
+      "uid": "35240-b894d4ed-2654-4779-8b7e-3c2caf8db064"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

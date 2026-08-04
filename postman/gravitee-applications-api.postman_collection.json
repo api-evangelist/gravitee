@@ -1,0 +1,331 @@
+{
+  "info": {
+    "_postman_id": "42195123-731c-44bd-afe0-72135a787528",
+    "name": "Gravitee.io - Access Management alerts Applications API",
+    "description": "Manage consumer applications",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:04.000Z",
+    "updatedAt": "2026-07-28T01:51:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-42195123-731c-44bd-afe0-72135a787528"
+  },
+  "item": [
+    {
+      "name": "environments",
+      "item": [
+        {
+          "name": "{envId}",
+          "item": [
+            {
+              "name": "applications",
+              "item": [
+                {
+                  "name": "{applicationId}",
+                  "item": [
+                    {
+                      "name": "Get an Application by Identifier",
+                      "id": "005fdeaf-e4e5-4eb1-b48f-4b9f1b987e4a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:envId/applications/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":envId",
+                            "applications",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5bb74778-94ba-4898-bcf1-86c7a5edaf56",
+                              "key": "envId",
+                              "value": "<string>",
+                              "description": "(Required) The environment identifier"
+                            },
+                            {
+                              "id": "e205a08c-8355-49d8-b769-8fbdb63b100b",
+                              "key": "applicationId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "4209c841-0c93-4a0a-bfee-99dd6fc531a8",
+                          "name": "The application",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/:envId/applications/:applicationId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                ":envId",
+                                "applications",
+                                ":applicationId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "envId"
+                                },
+                                {
+                                  "key": "applicationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:51:04.000Z",
+                          "updatedAt": "2026-07-28T01:51:04.000Z",
+                          "uid": "35240-4209c841-0c93-4a0a-bfee-99dd6fc531a8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:04.000Z",
+                      "updatedAt": "2026-07-28T01:51:04.000Z",
+                      "uid": "35240-005fdeaf-e4e5-4eb1-b48f-4b9f1b987e4a"
+                    }
+                  ],
+                  "id": "67117e50-bddc-4495-b221-ba0f26ebca1b",
+                  "createdAt": "2026-07-28T01:51:04.000Z",
+                  "updatedAt": "2026-07-28T01:51:04.000Z",
+                  "uid": "35240-67117e50-bddc-4495-b221-ba0f26ebca1b"
+                },
+                {
+                  "name": "List Applications",
+                  "id": "84b07dfe-3d42-4a38-bd4f-dd8968f5c228",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/environments/:envId/applications",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "environments",
+                        ":envId",
+                        "applications"
+                      ],
+                      "variable": [
+                        {
+                          "id": "88902727-6300-4ec8-a613-66479711f729",
+                          "key": "envId",
+                          "value": "<string>",
+                          "description": "(Required) The environment identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "1d59e3cc-2cb5-47f5-a794-a1844c010513",
+                      "name": "Applications page",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:envId/applications",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":envId",
+                            "applications"
+                          ],
+                          "variable": [
+                            {
+                              "key": "envId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:04.000Z",
+                      "updatedAt": "2026-07-28T01:51:04.000Z",
+                      "uid": "35240-1d59e3cc-2cb5-47f5-a794-a1844c010513"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:04.000Z",
+                  "updatedAt": "2026-07-28T01:51:04.000Z",
+                  "uid": "35240-84b07dfe-3d42-4a38-bd4f-dd8968f5c228"
+                },
+                {
+                  "name": "Create an Application",
+                  "id": "4cf8a0c7-e44b-48ba-b946-ebea5306a86f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"BACKEND_TO_BACKEND\",\n  \"status\": \"ACTIVE\",\n  \"settings\": {\n    \"app\": {\n      \"client_id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"oauth\": {}\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/environments/:envId/applications",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "environments",
+                        ":envId",
+                        "applications"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3f018988-9560-4ff7-98ca-ca2bfeb4db94",
+                          "key": "envId",
+                          "value": "<string>",
+                          "description": "(Required) The environment identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "7f85ebf7-aa27-4ecc-8dfd-bb578fbf24e9",
+                      "name": "Application created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"BACKEND_TO_BACKEND\",\n  \"status\": \"ACTIVE\",\n  \"settings\": {\n    \"app\": {\n      \"client_id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    \"oauth\": {}\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:envId/applications",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":envId",
+                            "applications"
+                          ],
+                          "variable": [
+                            {
+                              "key": "envId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:51:04.000Z",
+                      "updatedAt": "2026-07-28T01:51:04.000Z",
+                      "uid": "35240-7f85ebf7-aa27-4ecc-8dfd-bb578fbf24e9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:04.000Z",
+                  "updatedAt": "2026-07-28T01:51:04.000Z",
+                  "uid": "35240-4cf8a0c7-e44b-48ba-b946-ebea5306a86f"
+                }
+              ],
+              "id": "af2507c1-df6a-4a94-84f2-81a3d6dc8d59",
+              "createdAt": "2026-07-28T01:51:04.000Z",
+              "updatedAt": "2026-07-28T01:51:04.000Z",
+              "uid": "35240-af2507c1-df6a-4a94-84f2-81a3d6dc8d59"
+            }
+          ],
+          "id": "b2cf18fa-73de-4d6a-8ede-c2fc9a45d25d",
+          "createdAt": "2026-07-28T01:51:04.000Z",
+          "updatedAt": "2026-07-28T01:51:04.000Z",
+          "uid": "35240-b2cf18fa-73de-4d6a-8ede-c2fc9a45d25d"
+        }
+      ],
+      "id": "736952c6-d487-443f-8bc1-489393cf96f7",
+      "createdAt": "2026-07-28T01:51:04.000Z",
+      "updatedAt": "2026-07-28T01:51:04.000Z",
+      "uid": "35240-736952c6-d487-443f-8bc1-489393cf96f7"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

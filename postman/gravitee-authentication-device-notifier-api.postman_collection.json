@@ -1,0 +1,1357 @@
+{
+  "info": {
+    "_postman_id": "f6addc63-5c36-4450-90dc-cae12e7038a2",
+    "name": "Gravitee.io - Access Management alerts Authentication Device Notifier API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:24.000Z",
+    "updatedAt": "2026-07-28T01:51:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f6addc63-5c36-4450-90dc-cae12e7038a2"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "auth-device-notifiers",
+                              "item": [
+                                {
+                                  "name": "{authDeviceNotifier}",
+                                  "item": [
+                                    {
+                                      "name": "Get an Authentication Device Notifier",
+                                      "id": "349018e2-b375-4b00-abf2-c21e87be336c",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "auth-device-notifiers",
+                                            ":authDeviceNotifier"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "45b5e1f4-4d80-4c55-8460-1200c91cde4a",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "9e2b10e6-90e8-4172-8f35-a074ad17fade",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "7f03f01e-9da5-42e9-981c-b5a13f29c067",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "eca68e97-2fd3-4cf9-8c8b-d610df98ee9d",
+                                              "key": "authDeviceNotifier",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "13ec6142-cf75-431e-ac43-5a7b6de80a1b",
+                                          "name": "Authentication Device Notifier successfully fetched",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "auth-device-notifiers",
+                                                ":authDeviceNotifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "authDeviceNotifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"configuration\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"PLATFORM\",\n  \"type\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:51:25.000Z",
+                                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                                          "uid": "35240-13ec6142-cf75-431e-ac43-5a7b6de80a1b"
+                                        },
+                                        {
+                                          "id": "b37ff7a7-70f7-4343-b867-aa8ced71b49c",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "auth-device-notifiers",
+                                                ":authDeviceNotifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "authDeviceNotifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:25.000Z",
+                                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                                          "uid": "35240-b37ff7a7-70f7-4343-b867-aa8ced71b49c"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:25.000Z",
+                                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                                      "uid": "35240-349018e2-b375-4b00-abf2-c21e87be336c"
+                                    },
+                                    {
+                                      "name": "Update an Authentication Device Notifier",
+                                      "id": "21b5cd02-8a43-40c6-9a47-14538486b9b7",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "auth-device-notifiers",
+                                            ":authDeviceNotifier"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "24f995ab-d4d5-48b7-90ba-baa754d06806",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "a08ed3df-7e3e-45cd-9f3f-f7ac36a4f320",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "5d55acad-0ac3-4ee5-a43d-6356c8161044",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "e011ff2d-4465-4ec1-ba93-40f8a4cdad43",
+                                              "key": "authDeviceNotifier",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "d3dbff2e-713d-4296-a74d-e41fdb2f3236",
+                                          "name": "Authentication Device Notifier successfully updated",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "auth-device-notifiers",
+                                                ":authDeviceNotifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "authDeviceNotifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Created",
+                                          "code": 201,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"configuration\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"PLATFORM\",\n  \"type\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:51:25.000Z",
+                                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                                          "uid": "35240-d3dbff2e-713d-4296-a74d-e41fdb2f3236"
+                                        },
+                                        {
+                                          "id": "74dc6ffc-ff02-483b-b788-a52cecfe8585",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "auth-device-notifiers",
+                                                ":authDeviceNotifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "authDeviceNotifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:25.000Z",
+                                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                                          "uid": "35240-74dc6ffc-ff02-483b-b788-a52cecfe8585"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:25.000Z",
+                                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                                      "uid": "35240-21b5cd02-8a43-40c6-9a47-14538486b9b7"
+                                    },
+                                    {
+                                      "name": "Delete an Authentication Device Notifier",
+                                      "id": "3e46ce2d-c573-4506-8903-244219fc089b",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "auth-device-notifiers",
+                                            ":authDeviceNotifier"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "eb97e3d5-0239-451c-980b-e70543928753",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "b8bea74e-fa73-4c83-9e21-7523ec8c8af9",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "e57d96b1-11a0-4ca1-8536-e70493736468",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "6e66bd48-393d-4f86-9677-4415b00bbab3",
+                                              "key": "authDeviceNotifier",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "8891ee3e-e165-41f2-94de-d9f73b5cd517",
+                                          "name": "Authentication Device Notifier successfully deleted",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "auth-device-notifiers",
+                                                ":authDeviceNotifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "authDeviceNotifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:25.000Z",
+                                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                                          "uid": "35240-8891ee3e-e165-41f2-94de-d9f73b5cd517"
+                                        },
+                                        {
+                                          "id": "a69c8e09-e601-4e45-b5d8-6f31d2e71f4a",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "auth-device-notifiers",
+                                                ":authDeviceNotifier"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "authDeviceNotifier"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:25.000Z",
+                                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                                          "uid": "35240-a69c8e09-e601-4e45-b5d8-6f31d2e71f4a"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:25.000Z",
+                                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                                      "uid": "35240-3e46ce2d-c573-4506-8903-244219fc089b"
+                                    }
+                                  ],
+                                  "id": "66f14745-d2a3-4c3c-9539-e126c1bf42a0",
+                                  "createdAt": "2026-07-28T01:51:25.000Z",
+                                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                                  "uid": "35240-66f14745-d2a3-4c3c-9539-e126c1bf42a0"
+                                },
+                                {
+                                  "name": "List registered Authentication Device Notifiers for a security domain",
+                                  "id": "6773b6be-5ecc-46e8-8626-27764f7815e5",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "auth-device-notifiers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "3ef267be-9ca2-4497-81df-6c5fa15407f2",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "e894ac98-3fca-4f9f-aa34-0ae6c196ebe3",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "d56cab1b-3bdd-48fb-a539-3b9e815a6f0a",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified organization Each returned Authentication Device Notifier is filtered and contains only basic information such as id, name."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "41ac7c5b-913c-45f3-a2a2-0b40734c4e2d",
+                                      "name": "List registered Authentication Device Notifiers for a security domain",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "auth-device-notifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"configuration\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"APPLICATION\",\n    \"type\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"configuration\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PLATFORM\",\n    \"type\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T01:51:25.000Z",
+                                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                                      "uid": "35240-41ac7c5b-913c-45f3-a2a2-0b40734c4e2d"
+                                    },
+                                    {
+                                      "id": "41134b97-71e7-421a-b35b-a77c30128ad8",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "auth-device-notifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:25.000Z",
+                                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                                      "uid": "35240-41134b97-71e7-421a-b35b-a77c30128ad8"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:51:25.000Z",
+                                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                                  "uid": "35240-6773b6be-5ecc-46e8-8626-27764f7815e5"
+                                },
+                                {
+                                  "name": "Create an Authentication Device Notifier",
+                                  "id": "7775568d-5b07-48b5-aed5-61c92a1b6190",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "auth-device-notifiers"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "c2048767-a584-4148-8165-12cac2da1bb9",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "b1502fd1-09c2-47ee-bc75-008eacfe5231",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "779825b3-0ece-4df0-867b-5d78e8bda47e",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "ca786dbd-eda4-46ca-96fb-6d42a5ef9f2f",
+                                      "name": "Authentication Device Notifier successfully created",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "auth-device-notifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:25.000Z",
+                                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                                      "uid": "35240-ca786dbd-eda4-46ca-96fb-6d42a5ef9f2f"
+                                    },
+                                    {
+                                      "id": "8587f3ef-72f0-409d-ab7f-68e9cd09f1ce",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"configuration\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "auth-device-notifiers"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:25.000Z",
+                                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                                      "uid": "35240-8587f3ef-72f0-409d-ab7f-68e9cd09f1ce"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:51:25.000Z",
+                                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                                  "uid": "35240-7775568d-5b07-48b5-aed5-61c92a1b6190"
+                                }
+                              ],
+                              "id": "9c748428-6512-4c83-9dfc-0b115ef350cf",
+                              "createdAt": "2026-07-28T01:51:25.000Z",
+                              "updatedAt": "2026-07-28T01:51:25.000Z",
+                              "uid": "35240-9c748428-6512-4c83-9dfc-0b115ef350cf"
+                            }
+                          ],
+                          "id": "b24cb41d-8fd8-48b6-89ca-5e49a2bbac0b",
+                          "createdAt": "2026-07-28T01:51:25.000Z",
+                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                          "uid": "35240-b24cb41d-8fd8-48b6-89ca-5e49a2bbac0b"
+                        }
+                      ],
+                      "id": "0cdc6d03-76cd-48fd-8ef3-b0bacebd09c3",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-0cdc6d03-76cd-48fd-8ef3-b0bacebd09c3"
+                    }
+                  ],
+                  "id": "923b5931-66ec-4eed-b681-5f347e2bee23",
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-923b5931-66ec-4eed-b681-5f347e2bee23"
+                }
+              ],
+              "id": "fa7ef02c-d670-48d6-975b-14d02adf9592",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-fa7ef02c-d670-48d6-975b-14d02adf9592"
+            }
+          ],
+          "id": "2fb44fa8-96ad-4922-b2ca-19e35eda452a",
+          "createdAt": "2026-07-28T01:51:25.000Z",
+          "updatedAt": "2026-07-28T01:51:25.000Z",
+          "uid": "35240-2fb44fa8-96ad-4922-b2ca-19e35eda452a"
+        }
+      ],
+      "id": "36399325-1b82-48e9-a13c-5b0bd89fd57e",
+      "createdAt": "2026-07-28T01:51:25.000Z",
+      "updatedAt": "2026-07-28T01:51:25.000Z",
+      "uid": "35240-36399325-1b82-48e9-a13c-5b0bd89fd57e"
+    },
+    {
+      "name": "platform",
+      "item": [
+        {
+          "name": "plugins",
+          "item": [
+            {
+              "name": "auth-device-notifiers",
+              "item": [
+                {
+                  "name": "{authDeviceNotifierId}",
+                  "item": [
+                    {
+                      "name": "schema",
+                      "item": [
+                        {
+                          "name": "Get an Authentication Device Notifier plugin's schema",
+                          "id": "962b7a48-51c8-4251-a1b9-94deb6c2ffb8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/platform/plugins/auth-device-notifiers/:authDeviceNotifierId/schema",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "platform",
+                                "plugins",
+                                "auth-device-notifiers",
+                                ":authDeviceNotifierId",
+                                "schema"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "74871582-ee61-4dfb-859a-0eb66ac904a8",
+                                  "key": "authDeviceNotifierId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "There is no particular permission needed. User must be authenticated."
+                          },
+                          "response": [
+                            {
+                              "id": "b17685d9-bd73-4937-8130-e61c418d447e",
+                              "name": "default response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/platform/plugins/auth-device-notifiers/:authDeviceNotifierId/schema",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "platform",
+                                    "plugins",
+                                    "auth-device-notifiers",
+                                    ":authDeviceNotifierId",
+                                    "schema"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "authDeviceNotifierId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "",
+                              "createdAt": "2026-07-28T01:51:25.000Z",
+                              "updatedAt": "2026-07-28T01:51:25.000Z",
+                              "uid": "35240-b17685d9-bd73-4937-8130-e61c418d447e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:51:25.000Z",
+                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                          "uid": "35240-962b7a48-51c8-4251-a1b9-94deb6c2ffb8"
+                        }
+                      ],
+                      "id": "e181a85d-efc3-4c7a-914b-3b929772def4",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-e181a85d-efc3-4c7a-914b-3b929772def4"
+                    },
+                    {
+                      "name": "Get a Authentication Device Notifier plugin",
+                      "id": "2df30f6f-a063-47cb-9f5c-84367b301f6f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/platform/plugins/auth-device-notifiers/:authDeviceNotifierId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "platform",
+                            "plugins",
+                            "auth-device-notifiers",
+                            ":authDeviceNotifierId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "035e968b-aa06-4321-a016-a7730e5969e4",
+                              "key": "authDeviceNotifierId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "There is no particular permission needed. User must be authenticated."
+                      },
+                      "response": [
+                        {
+                          "id": "a0a024c2-7dfa-47d8-8adc-5328f09cafac",
+                          "name": "default response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/platform/plugins/auth-device-notifiers/:authDeviceNotifierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "platform",
+                                "plugins",
+                                "auth-device-notifiers",
+                                ":authDeviceNotifierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "authDeviceNotifierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "",
+                          "createdAt": "2026-07-28T01:51:25.000Z",
+                          "updatedAt": "2026-07-28T01:51:25.000Z",
+                          "uid": "35240-a0a024c2-7dfa-47d8-8adc-5328f09cafac"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-2df30f6f-a063-47cb-9f5c-84367b301f6f"
+                    }
+                  ],
+                  "id": "504e1784-31d4-4946-89f4-8f59cbfaf7a4",
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-504e1784-31d4-4946-89f4-8f59cbfaf7a4"
+                },
+                {
+                  "name": "List authentication device notifier plugins",
+                  "id": "f51cda66-650f-42c1-b2d7-b7543a34d177",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/platform/plugins/auth-device-notifiers?expand=<string>&expand=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "platform",
+                        "plugins",
+                        "auth-device-notifiers"
+                      ],
+                      "query": [
+                        {
+                          "key": "expand",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "expand",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "There is no particular permission needed. User must be authenticated."
+                  },
+                  "response": [
+                    {
+                      "id": "03acbeae-6bc8-4039-a5a8-0cbf37188c06",
+                      "name": "default response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/platform/plugins/auth-device-notifiers?expand=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "platform",
+                            "plugins",
+                            "auth-device-notifiers"
+                          ],
+                          "query": [
+                            {
+                              "key": "expand",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "",
+                      "createdAt": "2026-07-28T01:51:25.000Z",
+                      "updatedAt": "2026-07-28T01:51:25.000Z",
+                      "uid": "35240-03acbeae-6bc8-4039-a5a8-0cbf37188c06"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:51:25.000Z",
+                  "updatedAt": "2026-07-28T01:51:25.000Z",
+                  "uid": "35240-f51cda66-650f-42c1-b2d7-b7543a34d177"
+                }
+              ],
+              "id": "1a19f285-7823-42d7-9985-ac21c0163d9c",
+              "createdAt": "2026-07-28T01:51:25.000Z",
+              "updatedAt": "2026-07-28T01:51:25.000Z",
+              "uid": "35240-1a19f285-7823-42d7-9985-ac21c0163d9c"
+            }
+          ],
+          "id": "9f57cf96-bda9-431f-a038-2fdd3b8c9564",
+          "createdAt": "2026-07-28T01:51:25.000Z",
+          "updatedAt": "2026-07-28T01:51:25.000Z",
+          "uid": "35240-9f57cf96-bda9-431f-a038-2fdd3b8c9564"
+        }
+      ],
+      "id": "cd0af414-3a4b-4f8a-8599-05db4c120d35",
+      "createdAt": "2026-07-28T01:51:25.000Z",
+      "updatedAt": "2026-07-28T01:51:25.000Z",
+      "uid": "35240-cd0af414-3a4b-4f8a-8599-05db4c120d35"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

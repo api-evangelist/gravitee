@@ -1,0 +1,291 @@
+{
+  "info": {
+    "_postman_id": "95321286-9a13-4036-b243-5cf912298fb2",
+    "name": "Gravitee.io - Access Management alerts user notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:53:07.000Z",
+    "updatedAt": "2026-07-28T01:53:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-95321286-9a13-4036-b243-5cf912298fb2"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "notifications",
+          "item": [
+            {
+              "name": "{notificationId}",
+              "item": [
+                {
+                  "name": "acknowledge",
+                  "item": [
+                    {
+                      "name": "Mark User notification as read",
+                      "id": "640191b5-43cc-418d-9f19-ec448f4838be",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/user/notifications/:notificationId/acknowledge",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "notifications",
+                            ":notificationId",
+                            "acknowledge"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8b3751ca-9644-44a5-b69e-4e42b73f782a",
+                              "key": "notificationId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "3536a42f-56e0-454f-bca4-ef31154f0e11",
+                          "name": "User notification has been marked as read",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/user/notifications/:notificationId/acknowledge",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "user",
+                                "notifications",
+                                ":notificationId",
+                                "acknowledge"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "notificationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:53:08.000Z",
+                          "updatedAt": "2026-07-28T01:53:08.000Z",
+                          "uid": "35240-3536a42f-56e0-454f-bca4-ef31154f0e11"
+                        },
+                        {
+                          "id": "81e4ec8b-0911-401d-8e64-196f6bb0d495",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/user/notifications/:notificationId/acknowledge",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "user",
+                                "notifications",
+                                ":notificationId",
+                                "acknowledge"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "notificationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:53:08.000Z",
+                          "updatedAt": "2026-07-28T01:53:08.000Z",
+                          "uid": "35240-81e4ec8b-0911-401d-8e64-196f6bb0d495"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:53:08.000Z",
+                      "updatedAt": "2026-07-28T01:53:08.000Z",
+                      "uid": "35240-640191b5-43cc-418d-9f19-ec448f4838be"
+                    }
+                  ],
+                  "id": "45f2b301-a1f4-4f31-b844-b7ec784eea8e",
+                  "createdAt": "2026-07-28T01:53:08.000Z",
+                  "updatedAt": "2026-07-28T01:53:08.000Z",
+                  "uid": "35240-45f2b301-a1f4-4f31-b844-b7ec784eea8e"
+                }
+              ],
+              "id": "0e7a3c48-8004-48e7-ae1d-f458deb837f3",
+              "createdAt": "2026-07-28T01:53:08.000Z",
+              "updatedAt": "2026-07-28T01:53:08.000Z",
+              "uid": "35240-0e7a3c48-8004-48e7-ae1d-f458deb837f3"
+            },
+            {
+              "name": "List notifications received by the current user",
+              "id": "ad146545-614f-4eb4-8033-0a58d08cfc9e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/user/notifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "notifications"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "28c23455-c508-4697-ab2c-084b9f22e684",
+                  "name": "Current user notifications successfully fetched",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/notifications",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "notifications"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"READ\",\n    \"title\": \"<string>\"\n  },\n  {\n    \"createdAt\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"message\": \"<string>\",\n    \"status\": \"UNREAD\",\n    \"title\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T01:53:08.000Z",
+                  "updatedAt": "2026-07-28T01:53:08.000Z",
+                  "uid": "35240-28c23455-c508-4697-ab2c-084b9f22e684"
+                },
+                {
+                  "id": "8c6b54cd-9d40-4317-af12-4e05f975af5b",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/notifications",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "notifications"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:53:08.000Z",
+                  "updatedAt": "2026-07-28T01:53:08.000Z",
+                  "uid": "35240-8c6b54cd-9d40-4317-af12-4e05f975af5b"
+                }
+              ],
+              "createdAt": "2026-07-28T01:53:08.000Z",
+              "updatedAt": "2026-07-28T01:53:08.000Z",
+              "uid": "35240-ad146545-614f-4eb4-8033-0a58d08cfc9e"
+            }
+          ],
+          "id": "a5f9f92a-520d-4962-8110-fbd487c4db8b",
+          "createdAt": "2026-07-28T01:53:08.000Z",
+          "updatedAt": "2026-07-28T01:53:08.000Z",
+          "uid": "35240-a5f9f92a-520d-4962-8110-fbd487c4db8b"
+        }
+      ],
+      "id": "8d60a1a0-2ff9-4119-8c35-65a84ef22a01",
+      "createdAt": "2026-07-28T01:53:08.000Z",
+      "updatedAt": "2026-07-28T01:53:08.000Z",
+      "uid": "35240-8d60a1a0-2ff9-4119-8c35-65a84ef22a01"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "info": {
+    "_postman_id": "fd426ce3-ce6f-4aef-a31f-670b5db4e81b",
+    "name": "Gravitee.io - Access Management alerts dataPlane API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:30.000Z",
+    "updatedAt": "2026-07-28T01:51:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fd426ce3-ce6f-4aef-a31f-670b5db4e81b"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "data-planes",
+                      "item": [
+                        {
+                          "name": "List of data planes",
+                          "id": "9c362302-211e-4988-a4b0-a8ab78a0682c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/data-planes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "organizations",
+                                ":organizationId",
+                                "environments",
+                                ":environmentId",
+                                "data-planes"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a615f4ac-723b-468f-9cd8-558baafbce59",
+                                  "key": "organizationId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "035d057c-4f70-48d6-8470-a39d57b75c73",
+                                  "key": "environmentId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "List all the data planes accessible to the current user. User must have DATA_PLANE[READ] permission on the specified environment or organization"
+                          },
+                          "response": [
+                            {
+                              "id": "4aac4c9d-f7ac-44da-bec7-29193db2cd22",
+                              "name": "List accessible data planes for current user",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/data-planes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organizationId",
+                                    "environments",
+                                    ":environmentId",
+                                    "data-planes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organizationId"
+                                    },
+                                    {
+                                      "key": "environmentId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"delegate\": {}\n  },\n  {\n    \"delegate\": {}\n  }\n]",
+                              "createdAt": "2026-07-28T01:51:30.000Z",
+                              "updatedAt": "2026-07-28T01:51:30.000Z",
+                              "uid": "35240-4aac4c9d-f7ac-44da-bec7-29193db2cd22"
+                            },
+                            {
+                              "id": "f0da0e88-17f1-4b22-a552-2b36e90a7b28",
+                              "name": "Internal server error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/data-planes",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "organizations",
+                                    ":organizationId",
+                                    "environments",
+                                    ":environmentId",
+                                    "data-planes"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "organizationId"
+                                    },
+                                    {
+                                      "key": "environmentId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:51:30.000Z",
+                              "updatedAt": "2026-07-28T01:51:30.000Z",
+                              "uid": "35240-f0da0e88-17f1-4b22-a552-2b36e90a7b28"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:51:30.000Z",
+                          "updatedAt": "2026-07-28T01:51:30.000Z",
+                          "uid": "35240-9c362302-211e-4988-a4b0-a8ab78a0682c"
+                        }
+                      ],
+                      "id": "75b91e46-6f3d-4e88-a44d-b081f823e0fd",
+                      "createdAt": "2026-07-28T01:51:30.000Z",
+                      "updatedAt": "2026-07-28T01:51:30.000Z",
+                      "uid": "35240-75b91e46-6f3d-4e88-a44d-b081f823e0fd"
+                    }
+                  ],
+                  "id": "4dea2fcb-5577-4a14-ace3-e6d6282e7e75",
+                  "createdAt": "2026-07-28T01:51:30.000Z",
+                  "updatedAt": "2026-07-28T01:51:30.000Z",
+                  "uid": "35240-4dea2fcb-5577-4a14-ace3-e6d6282e7e75"
+                }
+              ],
+              "id": "ee42ba46-013c-44a1-ba9c-42f094a1ad5f",
+              "createdAt": "2026-07-28T01:51:30.000Z",
+              "updatedAt": "2026-07-28T01:51:30.000Z",
+              "uid": "35240-ee42ba46-013c-44a1-ba9c-42f094a1ad5f"
+            }
+          ],
+          "id": "86ffde7c-860f-452a-ba30-f4c2e622e296",
+          "createdAt": "2026-07-28T01:51:30.000Z",
+          "updatedAt": "2026-07-28T01:51:30.000Z",
+          "uid": "35240-86ffde7c-860f-452a-ba30-f4c2e622e296"
+        }
+      ],
+      "id": "2ec796b4-c8e9-419c-b16b-382ba06ea221",
+      "createdAt": "2026-07-28T01:51:30.000Z",
+      "updatedAt": "2026-07-28T01:51:30.000Z",
+      "uid": "35240-2ec796b4-c8e9-419c-b16b-382ba06ea221"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

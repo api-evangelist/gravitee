@@ -1,0 +1,1218 @@
+{
+  "info": {
+    "_postman_id": "30bcd720-1b1b-4f0a-a088-5f129e864979",
+    "name": "Gravitee.io - Access Management alerts theme API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:53:03.000Z",
+    "updatedAt": "2026-07-28T01:53:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-30bcd720-1b1b-4f0a-a088-5f129e864979"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "themes",
+                              "item": [
+                                {
+                                  "name": "{themeId}",
+                                  "item": [
+                                    {
+                                      "name": "Get the theme linked to the specified security domain",
+                                      "id": "790bdd07-3e34-4a43-b21f-2dfefcff5e9b",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "themes",
+                                            ":themeId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "e4fd2a95-5776-4299-a7b7-3d5761a16544",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "ce611786-b9b5-40f9-9f45-e1775bdb7d7a",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "768d25c5-d995-4b72-86f7-594992e225ed",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "4ff4d2d6-de54-407f-b934-96a343d3d850",
+                                              "key": "themeId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "2e101b85-2732-4ae8-9cf0-1a9feaf512e5",
+                                          "name": "Get theme description",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "themes",
+                                                ":themeId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "themeId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"createdAt\": \"<dateTime>\",\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"id\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"DOMAIN\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:53:04.000Z",
+                                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                                          "uid": "35240-2e101b85-2732-4ae8-9cf0-1a9feaf512e5"
+                                        },
+                                        {
+                                          "id": "120553b8-eeb4-46e7-8ef4-537d32314ef8",
+                                          "name": "Theme doesn't exist",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "themes",
+                                                ":themeId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "themeId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:53:04.000Z",
+                                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                                          "uid": "35240-120553b8-eeb4-46e7-8ef4-537d32314ef8"
+                                        },
+                                        {
+                                          "id": "7ffda70e-de6b-4c34-8ae3-e3d6ac7f2e36",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "themes",
+                                                ":themeId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "themeId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:53:04.000Z",
+                                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                                          "uid": "35240-7ffda70e-de6b-4c34-8ae3-e3d6ac7f2e36"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:53:04.000Z",
+                                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                                      "uid": "35240-790bdd07-3e34-4a43-b21f-2dfefcff5e9b"
+                                    },
+                                    {
+                                      "name": "Update a theme on the specified security domain",
+                                      "id": "3e178f04-eac0-498c-8d18-df607419ad4d",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"createdAt\": \"<dateTime>\",\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"id\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"DOMAIN\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "themes",
+                                            ":themeId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "d5f78b0e-a052-42fb-bebe-39e6783f293f",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "faf8928f-6fac-48ef-8976-0b10cf3d6dd7",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "2dc24f38-207c-4f6f-909d-0830d9c38400",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "bdd43632-4f35-41a3-be91-ee3b5699061f",
+                                              "key": "themeId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_THEME[UPDATE] permission on the specified domain or DOMAIN_THEME[UPDATE] permission on the specified environment or DOMAIN_THEME[UPDATE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "ec7f7f61-7a72-4c91-9787-91bd19ae0728",
+                                          "name": "Theme successfully updated",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"createdAt\": \"<dateTime>\",\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"id\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"DOMAIN\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "themes",
+                                                ":themeId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "themeId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"createdAt\": \"<dateTime>\",\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"id\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"DOMAIN\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:53:04.000Z",
+                                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                                          "uid": "35240-ec7f7f61-7a72-4c91-9787-91bd19ae0728"
+                                        },
+                                        {
+                                          "id": "fcd51dba-bc12-42e3-a0e7-498b9fcbcae9",
+                                          "name": "Theme Not found",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"createdAt\": \"<dateTime>\",\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"id\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"DOMAIN\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "themes",
+                                                ":themeId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "themeId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:53:04.000Z",
+                                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                                          "uid": "35240-fcd51dba-bc12-42e3-a0e7-498b9fcbcae9"
+                                        },
+                                        {
+                                          "id": "0d4aee75-b87d-43ff-a9f6-de3e286e9f0a",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"createdAt\": \"<dateTime>\",\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"id\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"DOMAIN\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "themes",
+                                                ":themeId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "themeId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:53:04.000Z",
+                                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                                          "uid": "35240-0d4aee75-b87d-43ff-a9f6-de3e286e9f0a"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:53:04.000Z",
+                                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                                      "uid": "35240-3e178f04-eac0-498c-8d18-df607419ad4d"
+                                    },
+                                    {
+                                      "name": "Delete a theme on the specified security domain",
+                                      "id": "d0297a7b-8e97-40d6-9b51-fdc8435cbaa2",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "themes",
+                                            ":themeId"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "ba801796-d8da-4dba-8408-11f155d8fbe2",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "a7434fac-d6cd-4133-b23c-8173f4b0202c",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "18ec895e-67da-438d-9f6c-0e204aaae9e1",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "2fb50d35-47b5-446d-b7e4-c9977cf76db5",
+                                              "key": "themeId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_THEME[DELETE] permission on the specified domain or DOMAIN_THEME[DELETE] permission on the specified environment or DOMAIN_THEME[DELETE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "0b404397-67d1-4837-854d-2057b8f3fca4",
+                                          "name": "Theme successfully deleted",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "themes",
+                                                ":themeId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "themeId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:53:04.000Z",
+                                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                                          "uid": "35240-0b404397-67d1-4837-854d-2057b8f3fca4"
+                                        },
+                                        {
+                                          "id": "2bc16bab-4f05-457c-85f4-d61b5ef656ea",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes/:themeId",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "themes",
+                                                ":themeId"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "themeId"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:53:04.000Z",
+                                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                                          "uid": "35240-2bc16bab-4f05-457c-85f4-d61b5ef656ea"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:53:04.000Z",
+                                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                                      "uid": "35240-d0297a7b-8e97-40d6-9b51-fdc8435cbaa2"
+                                    }
+                                  ],
+                                  "id": "61396fc2-a9c3-4d76-81c0-d49e9d6910de",
+                                  "createdAt": "2026-07-28T01:53:04.000Z",
+                                  "updatedAt": "2026-07-28T01:53:04.000Z",
+                                  "uid": "35240-61396fc2-a9c3-4d76-81c0-d49e9d6910de"
+                                },
+                                {
+                                  "name": "List themes on the specified security domain",
+                                  "id": "f0464c33-aa71-4f71-b6ce-59d216cb2c2e",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "themes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "5ff95ff0-f532-4420-bb1b-94acbd79667b",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "091fced6-0f2a-419b-bd2a-be15b3053c20",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "71813fc0-2729-4a32-b22a-7465db8a91f8",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_THEME[LIST] permission on the specified domain or DOMAIN_THEME[LIST] permission on the specified environment or DOMAIN_THEME[LIST] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "17e153cc-6641-4cc3-8dcb-7711d5dee4ae",
+                                      "name": "List of themes",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "themes"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "[\n  {\n    \"createdAt\": \"<dateTime>\",\n    \"css\": \"<string>\",\n    \"faviconUrl\": \"<string>\",\n    \"id\": \"<string>\",\n    \"logoUrl\": \"<string>\",\n    \"logoWidth\": \"<integer>\",\n    \"primaryButtonColorHex\": \"<string>\",\n    \"primaryTextColorHex\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PLATFORM\",\n    \"secondaryButtonColorHex\": \"<string>\",\n    \"secondaryTextColorHex\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"createdAt\": \"<dateTime>\",\n    \"css\": \"<string>\",\n    \"faviconUrl\": \"<string>\",\n    \"id\": \"<string>\",\n    \"logoUrl\": \"<string>\",\n    \"logoWidth\": \"<integer>\",\n    \"primaryButtonColorHex\": \"<string>\",\n    \"primaryTextColorHex\": \"<string>\",\n    \"referenceId\": \"<string>\",\n    \"referenceType\": \"PLATFORM\",\n    \"secondaryButtonColorHex\": \"<string>\",\n    \"secondaryTextColorHex\": \"<string>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]",
+                                      "createdAt": "2026-07-28T01:53:04.000Z",
+                                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                                      "uid": "35240-17e153cc-6641-4cc3-8dcb-7711d5dee4ae"
+                                    },
+                                    {
+                                      "id": "7382d737-3f4a-4546-8c26-c73975281707",
+                                      "name": "There is no themes on this domain",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "themes"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "No Content",
+                                      "code": 204,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:53:04.000Z",
+                                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                                      "uid": "35240-7382d737-3f4a-4546-8c26-c73975281707"
+                                    },
+                                    {
+                                      "id": "f8bce726-d04f-41af-b353-1119a9d22b9c",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "themes"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:53:04.000Z",
+                                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                                      "uid": "35240-f8bce726-d04f-41af-b353-1119a9d22b9c"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:53:04.000Z",
+                                  "updatedAt": "2026-07-28T01:53:04.000Z",
+                                  "uid": "35240-f0464c33-aa71-4f71-b6ce-59d216cb2c2e"
+                                },
+                                {
+                                  "name": "Create a theme on the specified security domain",
+                                  "id": "c705f222-9b5b-4331-af2a-cbb037f2dd61",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "themes"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "b88f35de-e057-4fd1-94de-867290bfcb1e",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "4e092a68-977b-424a-ad4b-9cc106562eeb",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "6e2e0957-cdf1-4ff0-b8fe-498fa8410f42",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_THEME[CREATE] permission on the specified domain or DOMAIN_THEME[CREATE] permission on the specified environment or DOMAIN_THEME[CREATE] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "ef108ce4-2a19-4f8b-815e-324fc85eb095",
+                                      "name": "Theme successfully created",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "themes"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"createdAt\": \"<dateTime>\",\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"id\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"DOMAIN\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T01:53:04.000Z",
+                                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                                      "uid": "35240-ef108ce4-2a19-4f8b-815e-324fc85eb095"
+                                    },
+                                    {
+                                      "id": "3ae2845b-1ef3-4921-b262-573cdd059a9c",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"css\": \"<string>\",\n  \"faviconUrl\": \"<string>\",\n  \"logoUrl\": \"<string>\",\n  \"logoWidth\": \"<integer>\",\n  \"primaryButtonColorHex\": \"<string>\",\n  \"primaryTextColorHex\": \"<string>\",\n  \"secondaryButtonColorHex\": \"<string>\",\n  \"secondaryTextColorHex\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/themes",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "themes"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:53:04.000Z",
+                                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                                      "uid": "35240-3ae2845b-1ef3-4921-b262-573cdd059a9c"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:53:04.000Z",
+                                  "updatedAt": "2026-07-28T01:53:04.000Z",
+                                  "uid": "35240-c705f222-9b5b-4331-af2a-cbb037f2dd61"
+                                }
+                              ],
+                              "id": "ee639eba-5c6d-47dc-89dd-7639c5e36951",
+                              "createdAt": "2026-07-28T01:53:04.000Z",
+                              "updatedAt": "2026-07-28T01:53:04.000Z",
+                              "uid": "35240-ee639eba-5c6d-47dc-89dd-7639c5e36951"
+                            }
+                          ],
+                          "id": "9eb552bf-5dbb-4129-a8b3-3ea7fd62317d",
+                          "createdAt": "2026-07-28T01:53:04.000Z",
+                          "updatedAt": "2026-07-28T01:53:04.000Z",
+                          "uid": "35240-9eb552bf-5dbb-4129-a8b3-3ea7fd62317d"
+                        }
+                      ],
+                      "id": "99907c90-cd3a-4f95-b810-4a2c440ac24f",
+                      "createdAt": "2026-07-28T01:53:04.000Z",
+                      "updatedAt": "2026-07-28T01:53:04.000Z",
+                      "uid": "35240-99907c90-cd3a-4f95-b810-4a2c440ac24f"
+                    }
+                  ],
+                  "id": "62145597-54e0-42c1-b226-28f7e8681b7c",
+                  "createdAt": "2026-07-28T01:53:04.000Z",
+                  "updatedAt": "2026-07-28T01:53:04.000Z",
+                  "uid": "35240-62145597-54e0-42c1-b226-28f7e8681b7c"
+                }
+              ],
+              "id": "d0561db1-47d4-4eb2-acde-73f5e2c89f2e",
+              "createdAt": "2026-07-28T01:53:04.000Z",
+              "updatedAt": "2026-07-28T01:53:04.000Z",
+              "uid": "35240-d0561db1-47d4-4eb2-acde-73f5e2c89f2e"
+            }
+          ],
+          "id": "583de3ce-f8bd-45f6-8548-8fb522443814",
+          "createdAt": "2026-07-28T01:53:04.000Z",
+          "updatedAt": "2026-07-28T01:53:04.000Z",
+          "uid": "35240-583de3ce-f8bd-45f6-8548-8fb522443814"
+        }
+      ],
+      "id": "4997bcec-68e5-48f3-bba6-15a2856b61de",
+      "createdAt": "2026-07-28T01:53:04.000Z",
+      "updatedAt": "2026-07-28T01:53:04.000Z",
+      "uid": "35240-4997bcec-68e5-48f3-bba6-15a2856b61de"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

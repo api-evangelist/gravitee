@@ -1,0 +1,640 @@
+{
+  "info": {
+    "_postman_id": "baea9240-e78e-4777-9ec2-deac4e802914",
+    "name": "Gravitee.io - Access Management alerts Subscriptions API",
+    "description": "Manage subscriptions between applications and plans",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:53:02.000Z",
+    "updatedAt": "2026-07-28T01:53:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-baea9240-e78e-4777-9ec2-deac4e802914"
+  },
+  "item": [
+    {
+      "name": "environments",
+      "item": [
+        {
+          "name": "{envId}",
+          "item": [
+            {
+              "name": "apis",
+              "item": [
+                {
+                  "name": "{apiId}",
+                  "item": [
+                    {
+                      "name": "subscriptions",
+                      "item": [
+                        {
+                          "name": "List Subscriptions for an API",
+                          "id": "fa2824e4-1b0f-460e-834f-1aea9626f372",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/:envId/apis/:apiId/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                ":envId",
+                                "apis",
+                                ":apiId",
+                                "subscriptions"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "28a12133-afb0-4b57-bf87-71c9d29504ba",
+                                  "key": "envId",
+                                  "value": "<string>",
+                                  "description": "(Required) The environment identifier"
+                                },
+                                {
+                                  "id": "8f8ef3f9-40d9-4e02-986d-675e6b89d391",
+                                  "key": "apiId",
+                                  "value": "<string>",
+                                  "description": "(Required) The API identifier"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "1d605a00-1202-48a5-b0e4-35ceade51a4a",
+                              "name": "Subscriptions page",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/environments/:envId/apis/:apiId/subscriptions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "environments",
+                                    ":envId",
+                                    "apis",
+                                    ":apiId",
+                                    "subscriptions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "envId"
+                                    },
+                                    {
+                                      "key": "apiId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:53:03.000Z",
+                              "updatedAt": "2026-07-28T01:53:03.000Z",
+                              "uid": "35240-1d605a00-1202-48a5-b0e4-35ceade51a4a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:53:03.000Z",
+                          "updatedAt": "2026-07-28T01:53:03.000Z",
+                          "uid": "35240-fa2824e4-1b0f-460e-834f-1aea9626f372"
+                        }
+                      ],
+                      "id": "2dd6de69-33ed-4080-b32e-7621bbe06aee",
+                      "createdAt": "2026-07-28T01:53:03.000Z",
+                      "updatedAt": "2026-07-28T01:53:03.000Z",
+                      "uid": "35240-2dd6de69-33ed-4080-b32e-7621bbe06aee"
+                    }
+                  ],
+                  "id": "35c60c73-c417-47a2-b12c-431cbc24e1f4",
+                  "createdAt": "2026-07-28T01:53:03.000Z",
+                  "updatedAt": "2026-07-28T01:53:03.000Z",
+                  "uid": "35240-35c60c73-c417-47a2-b12c-431cbc24e1f4"
+                }
+              ],
+              "id": "593682cd-7d47-4940-95ae-a79ecb5ac3ce",
+              "createdAt": "2026-07-28T01:53:03.000Z",
+              "updatedAt": "2026-07-28T01:53:03.000Z",
+              "uid": "35240-593682cd-7d47-4940-95ae-a79ecb5ac3ce"
+            },
+            {
+              "name": "subscriptions",
+              "item": [
+                {
+                  "name": "{subscriptionId}",
+                  "item": [
+                    {
+                      "name": "_accept",
+                      "item": [
+                        {
+                          "name": "Accept a Subscription",
+                          "id": "9770fc3f-d2c9-49e1-a6a6-735eba49a6f6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/:envId/subscriptions/:subscriptionId/_accept",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                ":envId",
+                                "subscriptions",
+                                ":subscriptionId",
+                                "_accept"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ac776f1d-6e1c-4d65-be42-c6b7f40c6720",
+                                  "key": "envId",
+                                  "value": "<string>",
+                                  "description": "(Required) The environment identifier"
+                                },
+                                {
+                                  "id": "b33fb956-7fb1-4343-bf5c-54851309db9c",
+                                  "key": "subscriptionId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b80c6609-642e-4455-803c-27a8391e778c",
+                              "name": "Subscription accepted",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/environments/:envId/subscriptions/:subscriptionId/_accept",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "environments",
+                                    ":envId",
+                                    "subscriptions",
+                                    ":subscriptionId",
+                                    "_accept"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "envId"
+                                    },
+                                    {
+                                      "key": "subscriptionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:53:03.000Z",
+                              "updatedAt": "2026-07-28T01:53:03.000Z",
+                              "uid": "35240-b80c6609-642e-4455-803c-27a8391e778c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:53:03.000Z",
+                          "updatedAt": "2026-07-28T01:53:03.000Z",
+                          "uid": "35240-9770fc3f-d2c9-49e1-a6a6-735eba49a6f6"
+                        }
+                      ],
+                      "id": "ec98adce-a5a4-467e-862b-4a4876b0d513",
+                      "createdAt": "2026-07-28T01:53:03.000Z",
+                      "updatedAt": "2026-07-28T01:53:03.000Z",
+                      "uid": "35240-ec98adce-a5a4-467e-862b-4a4876b0d513"
+                    },
+                    {
+                      "name": "_reject",
+                      "item": [
+                        {
+                          "name": "Reject a Subscription",
+                          "id": "6ed03c11-8b5f-4a20-8df8-1c06e1def7c4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/:envId/subscriptions/:subscriptionId/_reject",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                ":envId",
+                                "subscriptions",
+                                ":subscriptionId",
+                                "_reject"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7d4f51e1-890c-4937-9ec6-542decb12dd6",
+                                  "key": "envId",
+                                  "value": "<string>",
+                                  "description": "(Required) The environment identifier"
+                                },
+                                {
+                                  "id": "aabc9912-967f-4e0f-b793-2196d099315e",
+                                  "key": "subscriptionId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "255dc712-5339-4a12-a661-6d24ddf19494",
+                              "name": "Subscription rejected",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/environments/:envId/subscriptions/:subscriptionId/_reject",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "environments",
+                                    ":envId",
+                                    "subscriptions",
+                                    ":subscriptionId",
+                                    "_reject"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "envId"
+                                    },
+                                    {
+                                      "key": "subscriptionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T01:53:03.000Z",
+                              "updatedAt": "2026-07-28T01:53:03.000Z",
+                              "uid": "35240-255dc712-5339-4a12-a661-6d24ddf19494"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:53:03.000Z",
+                          "updatedAt": "2026-07-28T01:53:03.000Z",
+                          "uid": "35240-6ed03c11-8b5f-4a20-8df8-1c06e1def7c4"
+                        }
+                      ],
+                      "id": "688159eb-8749-4167-9969-9690ad9469d4",
+                      "createdAt": "2026-07-28T01:53:03.000Z",
+                      "updatedAt": "2026-07-28T01:53:03.000Z",
+                      "uid": "35240-688159eb-8749-4167-9969-9690ad9469d4"
+                    },
+                    {
+                      "name": "Get a Subscription",
+                      "id": "09dc3079-073b-45b2-976b-6339d8e63549",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:envId/subscriptions/:subscriptionId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":envId",
+                            "subscriptions",
+                            ":subscriptionId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "cb930f9c-fe30-4da7-a858-494cbfe9f726",
+                              "key": "envId",
+                              "value": "<string>",
+                              "description": "(Required) The environment identifier"
+                            },
+                            {
+                              "id": "838e704d-1680-4d20-a9d9-7f88aca7dbe0",
+                              "key": "subscriptionId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "955cf9fb-1d01-4c48-b81e-e21cde20f849",
+                          "name": "The subscription",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/environments/:envId/subscriptions/:subscriptionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "environments",
+                                ":envId",
+                                "subscriptions",
+                                ":subscriptionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "envId"
+                                },
+                                {
+                                  "key": "subscriptionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:53:03.000Z",
+                          "updatedAt": "2026-07-28T01:53:03.000Z",
+                          "uid": "35240-955cf9fb-1d01-4c48-b81e-e21cde20f849"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:53:03.000Z",
+                      "updatedAt": "2026-07-28T01:53:03.000Z",
+                      "uid": "35240-09dc3079-073b-45b2-976b-6339d8e63549"
+                    }
+                  ],
+                  "id": "bf1b7a7f-2327-469b-81ee-102156451682",
+                  "createdAt": "2026-07-28T01:53:03.000Z",
+                  "updatedAt": "2026-07-28T01:53:03.000Z",
+                  "uid": "35240-bf1b7a7f-2327-469b-81ee-102156451682"
+                },
+                {
+                  "name": "List Subscriptions",
+                  "id": "6598433a-27a6-401e-9859-082c5d3fc885",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/environments/:envId/subscriptions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "environments",
+                        ":envId",
+                        "subscriptions"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f5d1276a-cb6d-41f6-a5db-77758b2270b1",
+                          "key": "envId",
+                          "value": "<string>",
+                          "description": "(Required) The environment identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "3b8c6e0c-1b3f-43e2-bc1c-dafac200721f",
+                      "name": "Subscriptions page",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:envId/subscriptions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":envId",
+                            "subscriptions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "envId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:53:03.000Z",
+                      "updatedAt": "2026-07-28T01:53:03.000Z",
+                      "uid": "35240-3b8c6e0c-1b3f-43e2-bc1c-dafac200721f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:53:03.000Z",
+                  "updatedAt": "2026-07-28T01:53:03.000Z",
+                  "uid": "35240-6598433a-27a6-401e-9859-082c5d3fc885"
+                },
+                {
+                  "name": "Create a Subscription",
+                  "id": "b23ece79-9ae3-47a8-9fe4-6bb1dc16b9f3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"api\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"application\": \"<string>\",\n  \"status\": \"CLOSED\",\n  \"createdAt\": \"<dateTime>\",\n  \"startingAt\": \"<dateTime>\",\n  \"endingAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/environments/:envId/subscriptions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "environments",
+                        ":envId",
+                        "subscriptions"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e8645509-0eb7-492a-b10b-d21a9d909935",
+                          "key": "envId",
+                          "value": "<string>",
+                          "description": "(Required) The environment identifier"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "464782a4-8748-4922-a223-b09538bc1004",
+                      "name": "Subscription created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"api\": \"<string>\",\n  \"plan\": \"<string>\",\n  \"application\": \"<string>\",\n  \"status\": \"CLOSED\",\n  \"createdAt\": \"<dateTime>\",\n  \"startingAt\": \"<dateTime>\",\n  \"endingAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/environments/:envId/subscriptions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "environments",
+                            ":envId",
+                            "subscriptions"
+                          ],
+                          "variable": [
+                            {
+                              "key": "envId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T01:53:03.000Z",
+                      "updatedAt": "2026-07-28T01:53:03.000Z",
+                      "uid": "35240-464782a4-8748-4922-a223-b09538bc1004"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:53:03.000Z",
+                  "updatedAt": "2026-07-28T01:53:03.000Z",
+                  "uid": "35240-b23ece79-9ae3-47a8-9fe4-6bb1dc16b9f3"
+                }
+              ],
+              "id": "62ea1d6e-274a-4b15-a1b1-db64d9d26a79",
+              "createdAt": "2026-07-28T01:53:03.000Z",
+              "updatedAt": "2026-07-28T01:53:03.000Z",
+              "uid": "35240-62ea1d6e-274a-4b15-a1b1-db64d9d26a79"
+            }
+          ],
+          "id": "7acdb37e-69b4-4f11-9800-67f023985398",
+          "createdAt": "2026-07-28T01:53:03.000Z",
+          "updatedAt": "2026-07-28T01:53:03.000Z",
+          "uid": "35240-7acdb37e-69b4-4f11-9800-67f023985398"
+        }
+      ],
+      "id": "9f0d5d88-f583-4b7b-94f3-f21af9419e77",
+      "createdAt": "2026-07-28T01:53:03.000Z",
+      "updatedAt": "2026-07-28T01:53:03.000Z",
+      "uid": "35240-9f0d5d88-f583-4b7b-94f3-f21af9419e77"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}

@@ -1,0 +1,1725 @@
+{
+  "info": {
+    "_postman_id": "4a850442-ea2b-41a8-bc97-b05e4e0c1570",
+    "name": "Gravitee.io - Access Management alerts email API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:51:41.000Z",
+    "updatedAt": "2026-07-28T01:51:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4a850442-ea2b-41a8-bc97-b05e4e0c1570"
+  },
+  "item": [
+    {
+      "name": "organizations",
+      "item": [
+        {
+          "name": "{organizationId}",
+          "item": [
+            {
+              "name": "environments",
+              "item": [
+                {
+                  "name": "{environmentId}",
+                  "item": [
+                    {
+                      "name": "domains",
+                      "item": [
+                        {
+                          "name": "{domain}",
+                          "item": [
+                            {
+                              "name": "applications",
+                              "item": [
+                                {
+                                  "name": "{application}",
+                                  "item": [
+                                    {
+                                      "name": "emails",
+                                      "item": [
+                                        {
+                                          "name": "{email}",
+                                          "item": [
+                                            {
+                                              "name": "Update an email for an application",
+                                              "id": "803b604c-b0c0-4001-b9d9-a20bfa08bd17",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "PUT",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "key": "Accept",
+                                                    "value": "application/json"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails/:email",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "emails",
+                                                    ":email"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "7f5084d1-9187-40b2-9180-ad95568a1125",
+                                                      "key": "organizationId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "ef5d5183-cf99-404e-95b1-2824fa4c1159",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "c9db3765-806f-4710-b840-a115dbefd0b8",
+                                                      "key": "domain",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "d41a7790-d775-4ea9-b6c3-9f9e61ce8275",
+                                                      "key": "application",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "98e81311-2eee-4244-8258-4e265dd4e57c",
+                                                      "key": "email",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "User must have APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified organization"
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "daf56682-4588-4ffd-a932-1d6b1eb85f0e",
+                                                  "name": "Email successfully updated",
+                                                  "originalRequest": {
+                                                    "method": "PUT",
+                                                    "header": [
+                                                      {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "key": "Accept",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "body": {
+                                                      "mode": "raw",
+                                                      "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                                      "options": {
+                                                        "raw": {
+                                                          "headerFamily": "json",
+                                                          "language": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails/:email",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "applications",
+                                                        ":application",
+                                                        "emails",
+                                                        ":email"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "application"
+                                                        },
+                                                        {
+                                                          "key": "email"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Created",
+                                                  "code": 201,
+                                                  "_postman_previewlanguage": "json",
+                                                  "header": [
+                                                    {
+                                                      "key": "Content-Type",
+                                                      "value": "application/json"
+                                                    }
+                                                  ],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": "{\n  \"client\": \"<string>\",\n  \"content\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"defaultTemplate\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"fromName\": \"<string>\",\n  \"id\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"APPLICATION\",\n  \"subject\": \"<string>\",\n  \"template\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                                  "createdAt": "2026-07-28T01:51:42.000Z",
+                                                  "updatedAt": "2026-07-28T01:51:42.000Z",
+                                                  "uid": "35240-daf56682-4588-4ffd-a932-1d6b1eb85f0e"
+                                                },
+                                                {
+                                                  "id": "87bed1a0-4398-4373-b32c-84bfc355e45b",
+                                                  "name": "Internal server error",
+                                                  "originalRequest": {
+                                                    "method": "PUT",
+                                                    "header": [
+                                                      {
+                                                        "key": "Content-Type",
+                                                        "value": "application/json"
+                                                      },
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "body": {
+                                                      "mode": "raw",
+                                                      "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                                      "options": {
+                                                        "raw": {
+                                                          "headerFamily": "json",
+                                                          "language": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails/:email",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "applications",
+                                                        ":application",
+                                                        "emails",
+                                                        ":email"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "application"
+                                                        },
+                                                        {
+                                                          "key": "email"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Internal Server Error",
+                                                  "code": 500,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T01:51:42.000Z",
+                                                  "updatedAt": "2026-07-28T01:51:42.000Z",
+                                                  "uid": "35240-87bed1a0-4398-4373-b32c-84bfc355e45b"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T01:51:41.000Z",
+                                              "updatedAt": "2026-07-28T01:51:41.000Z",
+                                              "uid": "35240-803b604c-b0c0-4001-b9d9-a20bfa08bd17"
+                                            },
+                                            {
+                                              "name": "Delete an email for an application",
+                                              "id": "b9d67895-e881-496e-b771-9356f7cf106f",
+                                              "protocolProfileBehavior": {
+                                                "disableBodyPruning": true
+                                              },
+                                              "request": {
+                                                "method": "DELETE",
+                                                "header": [],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails/:email",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "emails",
+                                                    ":email"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "id": "bfefa64e-a962-499a-b668-ce9c919e7b50",
+                                                      "key": "organizationId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "51acb243-edc7-41f7-a21f-5505c7336296",
+                                                      "key": "environmentId",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "6f7e44f2-6e82-4fd0-a443-57ba69b56c58",
+                                                      "key": "domain",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "b9d8e338-df59-4b2c-8b3a-bf1eb7e5b37f",
+                                                      "key": "application",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    },
+                                                    {
+                                                      "id": "c15c9c1d-7d74-4f74-b975-94ab182469d0",
+                                                      "key": "email",
+                                                      "value": "<string>",
+                                                      "description": "(Required) "
+                                                    }
+                                                  ]
+                                                },
+                                                "description": "User must have APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified organization"
+                                              },
+                                              "response": [
+                                                {
+                                                  "id": "f36f67a3-e796-4d79-a050-4e7767793301",
+                                                  "name": "Email successfully deleted",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails/:email",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "applications",
+                                                        ":application",
+                                                        "emails",
+                                                        ":email"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "application"
+                                                        },
+                                                        {
+                                                          "key": "email"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "No Content",
+                                                  "code": 204,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T01:51:42.000Z",
+                                                  "updatedAt": "2026-07-28T01:51:42.000Z",
+                                                  "uid": "35240-f36f67a3-e796-4d79-a050-4e7767793301"
+                                                },
+                                                {
+                                                  "id": "37e8d6b6-c485-4cec-97a6-60c1c394a73a",
+                                                  "name": "Internal server error",
+                                                  "originalRequest": {
+                                                    "method": "DELETE",
+                                                    "header": [
+                                                      {
+                                                        "description": "Added as a part of security scheme: bearer",
+                                                        "key": "Authorization",
+                                                        "value": "Bearer <token>"
+                                                      }
+                                                    ],
+                                                    "url": {
+                                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails/:email",
+                                                      "host": [
+                                                        "{{baseUrl}}"
+                                                      ],
+                                                      "path": [
+                                                        "organizations",
+                                                        ":organizationId",
+                                                        "environments",
+                                                        ":environmentId",
+                                                        "domains",
+                                                        ":domain",
+                                                        "applications",
+                                                        ":application",
+                                                        "emails",
+                                                        ":email"
+                                                      ],
+                                                      "variable": [
+                                                        {
+                                                          "key": "organizationId"
+                                                        },
+                                                        {
+                                                          "key": "environmentId"
+                                                        },
+                                                        {
+                                                          "key": "domain"
+                                                        },
+                                                        {
+                                                          "key": "application"
+                                                        },
+                                                        {
+                                                          "key": "email"
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  "status": "Internal Server Error",
+                                                  "code": 500,
+                                                  "_postman_previewlanguage": "text",
+                                                  "header": [],
+                                                  "cookie": [],
+                                                  "responseTime": null,
+                                                  "body": null,
+                                                  "createdAt": "2026-07-28T01:51:42.000Z",
+                                                  "updatedAt": "2026-07-28T01:51:42.000Z",
+                                                  "uid": "35240-37e8d6b6-c485-4cec-97a6-60c1c394a73a"
+                                                }
+                                              ],
+                                              "createdAt": "2026-07-28T01:51:41.000Z",
+                                              "updatedAt": "2026-07-28T01:51:41.000Z",
+                                              "uid": "35240-b9d67895-e881-496e-b771-9356f7cf106f"
+                                            }
+                                          ],
+                                          "id": "92a0b804-0e87-47f2-8dc9-b965b1b79053",
+                                          "createdAt": "2026-07-28T01:51:41.000Z",
+                                          "updatedAt": "2026-07-28T01:51:41.000Z",
+                                          "uid": "35240-92a0b804-0e87-47f2-8dc9-b965b1b79053"
+                                        },
+                                        {
+                                          "name": "Find a email for an application",
+                                          "id": "37a08a3a-af11-49b6-a465-5cbd4c636334",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "GET",
+                                            "header": [],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails?template=VERIFY_ATTEMPT",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "applications",
+                                                ":application",
+                                                "emails"
+                                              ],
+                                              "query": [
+                                                {
+                                                  "description": "(Required) ",
+                                                  "key": "template",
+                                                  "value": "VERIFY_ATTEMPT"
+                                                }
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "553a21b7-7aa6-48e2-89df-a0dd4a9e7c77",
+                                                  "key": "organizationId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "5d0df86f-fea6-4f8e-9883-495a8bc94714",
+                                                  "key": "environmentId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "e0768979-c278-4fb3-9a01-6e5100201187",
+                                                  "key": "domain",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "d8a885ba-e503-4b55-974a-02381db8a6e8",
+                                                  "key": "application",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "User must have APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified organization"
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "04b0870a-6a4f-45b2-a53d-cd301c93c1a5",
+                                              "name": "Email successfully fetched",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails?template=VERIFY_ATTEMPT",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "emails"
+                                                  ],
+                                                  "query": [
+                                                    {
+                                                      "description": "(Required) ",
+                                                      "key": "template",
+                                                      "value": "VERIFY_ATTEMPT"
+                                                    }
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "application"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "OK",
+                                              "code": 200,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:51:42.000Z",
+                                              "updatedAt": "2026-07-28T01:51:42.000Z",
+                                              "uid": "35240-04b0870a-6a4f-45b2-a53d-cd301c93c1a5"
+                                            },
+                                            {
+                                              "id": "386bdbaa-304c-4478-906a-d92d57f29c64",
+                                              "name": "Internal server error",
+                                              "originalRequest": {
+                                                "method": "GET",
+                                                "header": [
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails?template=VERIFY_ATTEMPT",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "emails"
+                                                  ],
+                                                  "query": [
+                                                    {
+                                                      "description": "(Required) ",
+                                                      "key": "template",
+                                                      "value": "VERIFY_ATTEMPT"
+                                                    }
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "application"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Internal Server Error",
+                                              "code": 500,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:51:42.000Z",
+                                              "updatedAt": "2026-07-28T01:51:42.000Z",
+                                              "uid": "35240-386bdbaa-304c-4478-906a-d92d57f29c64"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T01:51:41.000Z",
+                                          "updatedAt": "2026-07-28T01:51:41.000Z",
+                                          "uid": "35240-37a08a3a-af11-49b6-a465-5cbd4c636334"
+                                        },
+                                        {
+                                          "name": "Create a email for an application",
+                                          "id": "75a6b2d9-d398-408d-bcd8-a8b66c0962ec",
+                                          "protocolProfileBehavior": {
+                                            "disableBodyPruning": true
+                                          },
+                                          "request": {
+                                            "method": "POST",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"template\": \"MAGIC_LINK_LOGIN\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "applications",
+                                                ":application",
+                                                "emails"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "id": "847028dd-0bf3-42e6-8de0-0ba129fcba0a",
+                                                  "key": "organizationId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "d3d9f1d6-f356-4ca2-a40d-7bebf678a8cc",
+                                                  "key": "environmentId",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "23dce980-0e6c-4b7a-9ba3-61c9984c74aa",
+                                                  "key": "domain",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                },
+                                                {
+                                                  "id": "28850218-593b-4c85-88a4-5bbffdd2fb02",
+                                                  "key": "application",
+                                                  "value": "<string>",
+                                                  "description": "(Required) "
+                                                }
+                                              ]
+                                            },
+                                            "description": "User must have APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified organization"
+                                          },
+                                          "response": [
+                                            {
+                                              "id": "f0a5844b-36d2-414e-b69b-50c05bb7a49c",
+                                              "name": "Email successfully created",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"template\": \"MAGIC_LINK_LOGIN\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "emails"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "application"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Created",
+                                              "code": 201,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:51:42.000Z",
+                                              "updatedAt": "2026-07-28T01:51:42.000Z",
+                                              "uid": "35240-f0a5844b-36d2-414e-b69b-50c05bb7a49c"
+                                            },
+                                            {
+                                              "id": "20dd60f3-34a9-44df-b461-87854db40823",
+                                              "name": "Internal server error",
+                                              "originalRequest": {
+                                                "method": "POST",
+                                                "header": [
+                                                  {
+                                                    "key": "Content-Type",
+                                                    "value": "application/json"
+                                                  },
+                                                  {
+                                                    "description": "Added as a part of security scheme: bearer",
+                                                    "key": "Authorization",
+                                                    "value": "Bearer <token>"
+                                                  }
+                                                ],
+                                                "body": {
+                                                  "mode": "raw",
+                                                  "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"template\": \"MAGIC_LINK_LOGIN\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                                  "options": {
+                                                    "raw": {
+                                                      "headerFamily": "json",
+                                                      "language": "json"
+                                                    }
+                                                  }
+                                                },
+                                                "url": {
+                                                  "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails",
+                                                  "host": [
+                                                    "{{baseUrl}}"
+                                                  ],
+                                                  "path": [
+                                                    "organizations",
+                                                    ":organizationId",
+                                                    "environments",
+                                                    ":environmentId",
+                                                    "domains",
+                                                    ":domain",
+                                                    "applications",
+                                                    ":application",
+                                                    "emails"
+                                                  ],
+                                                  "variable": [
+                                                    {
+                                                      "key": "organizationId"
+                                                    },
+                                                    {
+                                                      "key": "environmentId"
+                                                    },
+                                                    {
+                                                      "key": "domain"
+                                                    },
+                                                    {
+                                                      "key": "application"
+                                                    }
+                                                  ]
+                                                }
+                                              },
+                                              "status": "Internal Server Error",
+                                              "code": 500,
+                                              "_postman_previewlanguage": "text",
+                                              "header": [],
+                                              "cookie": [],
+                                              "responseTime": null,
+                                              "body": null,
+                                              "createdAt": "2026-07-28T01:51:42.000Z",
+                                              "updatedAt": "2026-07-28T01:51:42.000Z",
+                                              "uid": "35240-20dd60f3-34a9-44df-b461-87854db40823"
+                                            }
+                                          ],
+                                          "createdAt": "2026-07-28T01:51:41.000Z",
+                                          "updatedAt": "2026-07-28T01:51:41.000Z",
+                                          "uid": "35240-75a6b2d9-d398-408d-bcd8-a8b66c0962ec"
+                                        }
+                                      ],
+                                      "id": "fe67bbcd-f7d5-4270-a288-bf9956ae6910",
+                                      "createdAt": "2026-07-28T01:51:41.000Z",
+                                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                                      "uid": "35240-fe67bbcd-f7d5-4270-a288-bf9956ae6910"
+                                    }
+                                  ],
+                                  "id": "7a24d833-cd2c-4d4b-b637-13032292a758",
+                                  "createdAt": "2026-07-28T01:51:41.000Z",
+                                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                                  "uid": "35240-7a24d833-cd2c-4d4b-b637-13032292a758"
+                                }
+                              ],
+                              "id": "8d5135be-d7a3-48ff-bbad-576e7b0589f6",
+                              "createdAt": "2026-07-28T01:51:41.000Z",
+                              "updatedAt": "2026-07-28T01:51:41.000Z",
+                              "uid": "35240-8d5135be-d7a3-48ff-bbad-576e7b0589f6"
+                            },
+                            {
+                              "name": "emails",
+                              "item": [
+                                {
+                                  "name": "{email}",
+                                  "item": [
+                                    {
+                                      "name": "Update an email",
+                                      "id": "c359f031-daae-4aa2-9d69-e88613557f1a",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails/:email",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "emails",
+                                            ":email"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "991d24c3-1089-4fb2-bbb1-700361064072",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "6d9a85ed-ec73-4e90-9fd4-7d64ad5459b3",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "0875b2d3-5410-469f-b493-c4e9fd17fd16",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "3055c5b4-1d21-4764-abf7-bba2a8354ed7",
+                                              "key": "email",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "f37aec0a-fcc2-419b-a356-151caa85ddb2",
+                                          "name": "Email successfully updated",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails/:email",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "emails",
+                                                ":email"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "email"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Created",
+                                          "code": 201,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"client\": \"<string>\",\n  \"content\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"defaultTemplate\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"fromName\": \"<string>\",\n  \"id\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"referenceType\": \"APPLICATION\",\n  \"subject\": \"<string>\",\n  \"template\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                                          "createdAt": "2026-07-28T01:51:42.000Z",
+                                          "updatedAt": "2026-07-28T01:51:42.000Z",
+                                          "uid": "35240-f37aec0a-fcc2-419b-a356-151caa85ddb2"
+                                        },
+                                        {
+                                          "id": "190995f1-b0cc-4fb5-b306-13e82c017ada",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "PUT",
+                                            "header": [
+                                              {
+                                                "key": "Content-Type",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "body": {
+                                              "mode": "raw",
+                                              "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                              "options": {
+                                                "raw": {
+                                                  "headerFamily": "json",
+                                                  "language": "json"
+                                                }
+                                              }
+                                            },
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails/:email",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "emails",
+                                                ":email"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "email"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:42.000Z",
+                                          "updatedAt": "2026-07-28T01:51:42.000Z",
+                                          "uid": "35240-190995f1-b0cc-4fb5-b306-13e82c017ada"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:41.000Z",
+                                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                                      "uid": "35240-c359f031-daae-4aa2-9d69-e88613557f1a"
+                                    },
+                                    {
+                                      "name": "Delete an email",
+                                      "id": "cf0415b1-4f17-483f-9ffa-037055b2e4cc",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails/:email",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "emails",
+                                            ":email"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "c5af15ef-1b23-4127-863a-d7da136fe05f",
+                                              "key": "organizationId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "3cf031e8-e197-4f86-a4f5-70c3350c5822",
+                                              "key": "environmentId",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "b481c487-d34b-48c1-9f7b-8835ab03a036",
+                                              "key": "domain",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            },
+                                            {
+                                              "id": "86381b74-1493-4913-8f5a-b02482efc32e",
+                                              "key": "email",
+                                              "value": "<string>",
+                                              "description": "(Required) "
+                                            }
+                                          ]
+                                        },
+                                        "description": "User must have the DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified organization"
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "6d1b401b-9019-4f7c-a26c-0cd3b93e30ec",
+                                          "name": "Email successfully deleted",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails/:email",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "emails",
+                                                ":email"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "email"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:42.000Z",
+                                          "updatedAt": "2026-07-28T01:51:42.000Z",
+                                          "uid": "35240-6d1b401b-9019-4f7c-a26c-0cd3b93e30ec"
+                                        },
+                                        {
+                                          "id": "0c6f7be0-ce8a-4e59-88d4-0c00fcceebfd",
+                                          "name": "Internal server error",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails/:email",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "organizations",
+                                                ":organizationId",
+                                                "environments",
+                                                ":environmentId",
+                                                "domains",
+                                                ":domain",
+                                                "emails",
+                                                ":email"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "organizationId"
+                                                },
+                                                {
+                                                  "key": "environmentId"
+                                                },
+                                                {
+                                                  "key": "domain"
+                                                },
+                                                {
+                                                  "key": "email"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Internal Server Error",
+                                          "code": 500,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T01:51:42.000Z",
+                                          "updatedAt": "2026-07-28T01:51:42.000Z",
+                                          "uid": "35240-0c6f7be0-ce8a-4e59-88d4-0c00fcceebfd"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T01:51:41.000Z",
+                                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                                      "uid": "35240-cf0415b1-4f17-483f-9ffa-037055b2e4cc"
+                                    }
+                                  ],
+                                  "id": "4e669863-c8b7-421a-a6f0-d984f6b8e00c",
+                                  "createdAt": "2026-07-28T01:51:41.000Z",
+                                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                                  "uid": "35240-4e669863-c8b7-421a-a6f0-d984f6b8e00c"
+                                },
+                                {
+                                  "name": "Find a email",
+                                  "id": "7788416a-9c2e-4cfe-99ea-df78357a7073",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails?template=VERIFY_ATTEMPT",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "emails"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) ",
+                                          "key": "template",
+                                          "value": "VERIFY_ATTEMPT"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "9ab4d258-fc9e-4d0c-9cce-36f535c044d0",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "d45e7079-b7e9-42b1-a9a9-a2844c925e9c",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "d008e37a-9c11-4c5d-8f39-a85dd4e7cc7d",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "5504d4a0-1461-4616-8fad-b2c04830f77a",
+                                      "name": "Email successfully fetched",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails?template=VERIFY_ATTEMPT",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "emails"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "(Required) ",
+                                              "key": "template",
+                                              "value": "VERIFY_ATTEMPT"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:42.000Z",
+                                      "updatedAt": "2026-07-28T01:51:42.000Z",
+                                      "uid": "35240-5504d4a0-1461-4616-8fad-b2c04830f77a"
+                                    },
+                                    {
+                                      "id": "4bdeea38-6ae8-40bb-8b84-d6c1379736cd",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails?template=VERIFY_ATTEMPT",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "emails"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "(Required) ",
+                                              "key": "template",
+                                              "value": "VERIFY_ATTEMPT"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:42.000Z",
+                                      "updatedAt": "2026-07-28T01:51:42.000Z",
+                                      "uid": "35240-4bdeea38-6ae8-40bb-8b84-d6c1379736cd"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:51:41.000Z",
+                                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                                  "uid": "35240-7788416a-9c2e-4cfe-99ea-df78357a7073"
+                                },
+                                {
+                                  "name": "Create a email",
+                                  "id": "bc4e9077-132e-4c6f-a7d5-fcdc4bc8dd23",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"template\": \"MAGIC_LINK_LOGIN\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "organizations",
+                                        ":organizationId",
+                                        "environments",
+                                        ":environmentId",
+                                        "domains",
+                                        ":domain",
+                                        "emails"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "7d8e6df4-52d4-4ebf-89cf-5172bf09054b",
+                                          "key": "organizationId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "23b7ade6-9c5d-4468-b9ee-c187fc1379a5",
+                                          "key": "environmentId",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "151e6333-d1c3-47bd-b445-665ab66f8872",
+                                          "key": "domain",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    },
+                                    "description": "User must have the DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified organization"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "ce4e0116-2b17-4037-be61-a168ccee2e8e",
+                                      "name": "Email successfully created",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"template\": \"MAGIC_LINK_LOGIN\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "emails"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:42.000Z",
+                                      "updatedAt": "2026-07-28T01:51:42.000Z",
+                                      "uid": "35240-ce4e0116-2b17-4037-be61-a168ccee2e8e"
+                                    },
+                                    {
+                                      "id": "d7258c8e-c20a-4c62-bd2d-a347610c5827",
+                                      "name": "Internal server error",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"content\": \"<string>\",\n  \"expiresAfter\": \"<integer>\",\n  \"from\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"template\": \"MAGIC_LINK_LOGIN\",\n  \"enabled\": \"<boolean>\",\n  \"fromName\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/organizations/:organizationId/environments/:environmentId/domains/:domain/emails",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "organizations",
+                                            ":organizationId",
+                                            "environments",
+                                            ":environmentId",
+                                            "domains",
+                                            ":domain",
+                                            "emails"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "organizationId"
+                                            },
+                                            {
+                                              "key": "environmentId"
+                                            },
+                                            {
+                                              "key": "domain"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Internal Server Error",
+                                      "code": 500,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T01:51:42.000Z",
+                                      "updatedAt": "2026-07-28T01:51:42.000Z",
+                                      "uid": "35240-d7258c8e-c20a-4c62-bd2d-a347610c5827"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T01:51:41.000Z",
+                                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                                  "uid": "35240-bc4e9077-132e-4c6f-a7d5-fcdc4bc8dd23"
+                                }
+                              ],
+                              "id": "c3bf57b5-815c-4522-a875-a95953ca4610",
+                              "createdAt": "2026-07-28T01:51:41.000Z",
+                              "updatedAt": "2026-07-28T01:51:41.000Z",
+                              "uid": "35240-c3bf57b5-815c-4522-a875-a95953ca4610"
+                            }
+                          ],
+                          "id": "e6b7f7e5-4a48-41f3-ac14-e7f5f6c868a3",
+                          "createdAt": "2026-07-28T01:51:41.000Z",
+                          "updatedAt": "2026-07-28T01:51:41.000Z",
+                          "uid": "35240-e6b7f7e5-4a48-41f3-ac14-e7f5f6c868a3"
+                        }
+                      ],
+                      "id": "5b976119-322e-4e59-adc1-2e9641c17d1c",
+                      "createdAt": "2026-07-28T01:51:41.000Z",
+                      "updatedAt": "2026-07-28T01:51:41.000Z",
+                      "uid": "35240-5b976119-322e-4e59-adc1-2e9641c17d1c"
+                    }
+                  ],
+                  "id": "0e7949f6-42b5-44d9-b6f7-8f4cd43bd24c",
+                  "createdAt": "2026-07-28T01:51:41.000Z",
+                  "updatedAt": "2026-07-28T01:51:41.000Z",
+                  "uid": "35240-0e7949f6-42b5-44d9-b6f7-8f4cd43bd24c"
+                }
+              ],
+              "id": "1522dc04-4e7a-4f10-84bd-edde4ad668a3",
+              "createdAt": "2026-07-28T01:51:41.000Z",
+              "updatedAt": "2026-07-28T01:51:41.000Z",
+              "uid": "35240-1522dc04-4e7a-4f10-84bd-edde4ad668a3"
+            }
+          ],
+          "id": "1f9c7267-4795-491d-acb6-9c2fe07a123c",
+          "createdAt": "2026-07-28T01:51:41.000Z",
+          "updatedAt": "2026-07-28T01:51:41.000Z",
+          "uid": "35240-1f9c7267-4795-491d-acb6-9c2fe07a123c"
+        }
+      ],
+      "id": "4edc0ae1-b37d-487d-9be5-5f6d784a5b3a",
+      "createdAt": "2026-07-28T01:51:41.000Z",
+      "updatedAt": "2026-07-28T01:51:41.000Z",
+      "uid": "35240-4edc0ae1-b37d-487d-9be5-5f6d784a5b3a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/management"
+    }
+  ]
+}
