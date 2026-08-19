@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts scope API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "scope",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List scopes for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_SCOPE[LIST] permission on the specified domain or DOMAIN_SCOPE[LIST] permission on the specified environment or DOMAIN_SCOPE[LIST] permission on the specified organization Each returned scope is filtered and contains only basic information such as id, key, name, description, isSystem and isDiscovery."
+        },
+        {
+          "info": {
+            "name": "Create a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_SCOPE[CREATE] permission on the specified domain or DOMAIN_SCOPE[CREATE] permission on the specified environment or DOMAIN_SCOPE[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_SCOPE[READ] permission on the specified domain or DOMAIN_SCOPE[READ] permission on the specified environment or DOMAIN_SCOPE[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_SCOPE[UPDATE] permission on the specified domain or DOMAIN_SCOPE[UPDATE] permission on the specified environment or DOMAIN_SCOPE[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Patch a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_SCOPE[UPDATE] permission on the specified domain or DOMAIN_SCOPE[UPDATE] permission on the specified environment or DOMAIN_SCOPE[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/scopes/:scope",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_SCOPE[DELETE] permission on the specified domain or DOMAIN_SCOPE[DELETE] permission on the specified environment or DOMAIN_SCOPE[DELETE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

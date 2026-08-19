@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts entrypoints API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "entrypoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List entrypoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/entrypoints",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned entrypoint is filtered and contains only basic information such as id and name."
+        },
+        {
+          "info": {
+            "name": "Create a entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/entrypoints",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the ORGANIZATION_ENTRYPOINT[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a sharding entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/entrypoints/:entrypointId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entrypointId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION_ENTRYPOINT[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update the sharding entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/entrypoints/:entrypointId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entrypointId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the ORGANIZATION_ENTRYPOINT[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete the sharding entrypoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/entrypoints/:entrypointId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entrypointId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION_ENTRYPOINT[DELETE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

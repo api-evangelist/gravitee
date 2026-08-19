@@ -1,0 +1,435 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts form API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "form",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find a form for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "template",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_FORM[READ] permission on the specified application or APPLICATION_FORM[READ] permission on the specified domain or APPLICATION_FORM[READ] permission on the specified environment or APPLICATION_FORM[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Create a form for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION_FORM[CREATE] permission on the specified application or APPLICATION_FORM[CREATE] permission on the specified domain or APPLICATION_FORM[CREATE] permission on the specified environment or APPLICATION_FORM[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a form for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "form",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION_FORM[UPDATE] permission on the specified application or APPLICATION_FORM[UPDATE] permission on the specified domain or APPLICATION_FORM[UPDATE] permission on the specified environment or APPLICATION_FORM[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a form for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "form",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_FORM[DELETE] permission on the specified application or APPLICATION_FORM[DELETE] permission on the specified domain or APPLICATION_FORM[DELETE] permission on the specified environment or APPLICATION_FORM[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Find a form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/forms",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "template",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_FORM[READ] permission on the specified domain or DOMAIN_FORM[READ] permission on the specified environment or DOMAIN_FORM[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Create a form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/forms",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_FORM[CREATE] permission on the specified domain or DOMAIN_FORM[CREATE] permission on the specified environment or DOMAIN_FORM[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Render the provided template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/preview",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a form",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/:form",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "form",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_FORM[UPDATE] permission on the specified domain or DOMAIN_FORM[UPDATE] permission on the specified environment or DOMAIN_FORM[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a form",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/forms/:form",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "form",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_FORM[DELETE] permission on the specified domain or DOMAIN_FORM[DELETE] permission on the specified environment or DOMAIN_FORM[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Find an organization form template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/forms",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "template",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION_FORM[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Create a form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/forms",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the ORGANIZATION_FORM[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a form",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/forms/:form",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "form",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the ORGANIZATION_FORM[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a form",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/forms/:form",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "form",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION_FORM[DELETE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

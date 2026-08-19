@@ -1,0 +1,228 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Factor API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Factor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List factor plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/factors"
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get a factor plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/factors/:factor",
+            "params": [
+              {
+                "name": "factor",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get a factor plugin's schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/factors/:factor/schema",
+            "params": [
+              {
+                "name": "factor",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "List registered factors for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/factors",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_FACTOR[LIST] permission on the specified domain or DOMAIN_FACTOR[LIST] permission on the specified environment or DOMAIN_FACTOR[LIST] permission on the specified organization Each returned factor is filtered and contains only basic information such as id, name and factor type."
+        },
+        {
+          "info": {
+            "name": "Create a factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/factors",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_FACTOR[CREATE] permission on the specified domain or DOMAIN_FACTOR[CREATE] permission on the specified environment or DOMAIN_FACTOR[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/factors/:factor",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "factor",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_FACTOR[READ] permission on the specified domain or DOMAIN_FACTOR[READ] permission on the specified environment or DOMAIN_FACTOR[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/factors/:factor",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "factor",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_FACTOR[UPDATE] permission on the specified domain or DOMAIN_FACTOR[UPDATE] permission on the specified environment or DOMAIN_FACTOR[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a factor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/factors/:factor",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "factor",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_FACTOR[DELETE] permission on the specified domain or DOMAIN_FACTOR[DELETE] permission on the specified environment or DOMAIN_FACTOR[DELETE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

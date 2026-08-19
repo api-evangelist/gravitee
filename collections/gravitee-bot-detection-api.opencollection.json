@@ -1,0 +1,228 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Bot Detection API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bot Detection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List bot detection plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/bot-detections"
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get a Bot Detection plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/bot-detections/:botDetection",
+            "params": [
+              {
+                "name": "botDetection",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get a Bot Detection plugin's schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/bot-detections/:botDetection/schema",
+            "params": [
+              {
+                "name": "botDetection",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "List registered bot detections for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/bot-detections",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_BOT_DETECTION[LIST] permission on the specified domain or DOMAIN_BOT_DETECTION[LIST] permission on the specified environment or DOMAIN_BOT_DETECTION[LIST] permission on the specified organization Each returned bot detections is filtered and contains only basic information such as id, name."
+        },
+        {
+          "info": {
+            "name": "Create a bot detection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/bot-detections",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_BOT_DETECTION[CREATE] permission on the specified domain or DOMAIN_BOT_DETECTION[CREATE] permission on the specified environment or DOMAIN_BOT_DETECTION[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a bot detection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/bot-detections/:botDetection",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "botDetection",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_BOT_DETECTION[READ] permission on the specified domain or DOMAIN_BOT_DETECTION[READ] permission on the specified environment or DOMAIN_BOT_DETECTION[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a bot detection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/bot-detections/:botDetection",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "botDetection",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_BOT_DETECTION[UPDATE] permission on the specified domain or DOMAIN_BOT_DETECTION[UPDATE] permission on the specified environment or DOMAIN_BOT_DETECTION[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a bot detection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/bot-detections/:botDetection",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "botDetection",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_BOT_DETECTION[DELETE] permission on the specified domain or DOMAIN_BOT_DETECTION[DELETE] permission on the specified environment or DOMAIN_BOT_DETECTION[DELETE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1221 @@
+{
+  "item": [
+    {
+      "id": "44650901-7d63-49cc-871f-18b0dbe55467",
+      "name": "Organizations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55ff4f6a-2575-48bd-8818-5a09e2e95d7c",
+          "name": "List all the environments",
+          "request": {
+            "name": "List all the environments",
+            "description": {
+              "content": "User must have the ENVIRONMENT[LIST] permission on the specified organization AND either ENVIRONMENT[READ] permission on each environment or ENVIRONMENT[READ] permission on the specified organization.Each returned environment is filtered and contains only basic information such as id and name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8d2a6af-04f8-46ff-beba-2f41cc102bc3",
+              "name": "List all the environments of the organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"createdAt\": \"1967-12-12T22:45:49.840Z\",\n    \"description\": \"string\",\n    \"domainRestrictions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"hrids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"organizationId\": \"string\",\n    \"updatedAt\": \"2024-02-19T06:44:19.311Z\"\n  },\n  {\n    \"createdAt\": \"2016-09-01T21:21:18.689Z\",\n    \"description\": \"string\",\n    \"domainRestrictions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"hrids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"organizationId\": \"string\",\n    \"updatedAt\": \"1993-09-20T14:59:33.633Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "779259ee-421d-416c-96a1-e2fbf69f5960",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef34051a-e61b-4e9a-a2e8-fec33265d79d",
+          "name": "List environment member's permissions",
+          "request": {
+            "name": "List environment member's permissions",
+            "description": {
+              "content": "User must have ENVIRONMENT[READ] permission on the specified environment or ENVIRONMENT[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "members",
+                "permissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9852e482-d705-44ef-b630-8e5f47d24822",
+              "name": "Environment member's permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "members",
+                    "permissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c52bde86-ac1d-4e80-8e32-78027ce48dee",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "members",
+                    "permissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b90b83ea-0416-43a5-a09e-beb7018b03c6",
+          "name": "List members for an organization",
+          "request": {
+            "name": "List members for an organization",
+            "description": {
+              "content": "User must have ORGANIZATION_MEMBER[LIST] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7058da16-8e4c-4f9f-987c-436c252dbd97",
+              "name": "List members for an organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"memberships\": [\n    {\n      \"createdAt\": \"1952-03-08T23:22:10.320Z\",\n      \"domain\": \"string\",\n      \"fromRoleMapper\": true,\n      \"id\": \"string\",\n      \"memberId\": \"string\",\n      \"memberType\": \"GROUP\",\n      \"referenceId\": \"string\",\n      \"referenceType\": \"DOMAIN\",\n      \"roleId\": \"string\",\n      \"updatedAt\": \"1972-12-06T09:54:22.655Z\"\n    },\n    {\n      \"createdAt\": \"2008-09-08T21:17:20.018Z\",\n      \"domain\": \"string\",\n      \"fromRoleMapper\": false,\n      \"id\": \"string\",\n      \"memberId\": \"string\",\n      \"memberType\": \"GROUP\",\n      \"referenceId\": \"string\",\n      \"referenceType\": \"ORGANIZATION\",\n      \"roleId\": \"string\",\n      \"updatedAt\": \"1966-11-02T13:15:55.884Z\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e26e372-d027-4235-91b0-d299fe6ec250",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c540072e-a75f-485b-bc1e-11c60d22548e",
+          "name": "Add or update an organization member",
+          "request": {
+            "name": "Add or update an organization member",
+            "description": {
+              "content": "User must have ORGANIZATION_MEMBER[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"<string>\",\n  \"memberType\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6a1401dc-e90a-4286-9227-e232451ead0f",
+              "name": "Member has been added or updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"memberType\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50d44190-6325-4aff-b04d-13039cc470c4",
+              "name": "Membership parameter is not valid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"memberType\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac793692-7aa1-4c01-aea8-b1086068cffb",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberId\": \"<string>\",\n  \"memberType\": \"<string>\",\n  \"role\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abd7cfc9-e1c7-4e1d-bc39-1301bf0fbba0",
+          "name": "Remove a membership of the organization",
+          "request": {
+            "name": "Remove a membership of the organization",
+            "description": {
+              "content": "User must have ORGANIZATION_MEMBER[DELETE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "members",
+                ":member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "member",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "432fa224-b5fa-4deb-98c5-7390f7d83b57",
+              "name": "Membership successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "52442bc0-6a81-4f25-922b-d9fe084f54f3",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4ebc330-7112-4ba3-9665-fbff7bf7a4c4",
+          "name": "Get organization main settings",
+          "request": {
+            "name": "Get organization main settings",
+            "description": {
+              "content": "User must have the ORGANIZATION_SETTINGS[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f9962454-c685-4228-b1d5-4f6565f98f68",
+              "name": "Platform settings successfully fetched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountSettings\": {\n    \"accountBlockedDuration\": 9895,\n    \"autoLoginAfterRegistration\": false,\n    \"autoLoginAfterResetPassword\": false,\n    \"botDetectionPlugin\": \"string\",\n    \"completeRegistrationWhenResetPassword\": false,\n    \"defaultIdentityProviderForRegistration\": \"string\",\n    \"deletePasswordlessDevicesAfterResetPassword\": true,\n    \"dynamicUserRegistration\": true,\n    \"inherited\": true,\n    \"loginAttemptsDetectionEnabled\": true,\n    \"loginAttemptsResetTime\": 3172,\n    \"maxLoginAttempts\": 176,\n    \"mfaChallengeAttemptsDetectionEnabled\": true,\n    \"mfaChallengeAttemptsResetTime\": 9780,\n    \"mfaChallengeMaxAttempts\": 2452,\n    \"mfaChallengeSendVerifyAlertEmail\": false,\n    \"redirectUriAfterRegistration\": \"string\",\n    \"redirectUriAfterResetPassword\": \"string\",\n    \"rememberMe\": false,\n    \"rememberMeDuration\": 7690,\n    \"resetPasswordConfirmIdentity\": false,\n    \"resetPasswordCustomForm\": true,\n    \"resetPasswordCustomFormFields\": [\n      {\n        \"key\": \"string\",\n        \"label\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"key\": \"string\",\n        \"label\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"resetPasswordInvalidateTokens\": false,\n    \"sendRecoverAccountEmail\": false,\n    \"sendVerifyRegistrationAccountEmail\": false,\n    \"useBotDetection\": false\n  },\n  \"alertEnabled\": true,\n  \"certificateSettings\": {\n    \"fallbackCertificate\": \"string\"\n  },\n  \"corsSettings\": {\n    \"allowCredentials\": false,\n    \"allowedHeaders\": [\n      \"string\"\n    ],\n    \"allowedMethods\": [\n      \"string\"\n    ],\n    \"allowedOrigins\": [\n      \"string\"\n    ],\n    \"enabled\": true,\n    \"maxAge\": 1836\n  },\n  \"createdAt\": \"1978-07-28T02:32:57.211Z\",\n  \"dataPlaneId\": \"string\",\n  \"description\": \"string\",\n  \"dynamicClientRegistrationEnabled\": true,\n  \"dynamicClientRegistrationTemplateEnabled\": true,\n  \"enabled\": true,\n  \"hrid\": \"string\",\n  \"id\": \"string\",\n  \"identities\": [\n    \"string\"\n  ],\n  \"loginSettings\": {\n    \"certificateBasedAuthEnabled\": true,\n    \"certificateBasedAuthUrl\": \"string\",\n    \"enforcePasswordPolicyEnabled\": false,\n    \"forgotPasswordEnabled\": false,\n    \"hideForm\": false,\n    \"identifierFirstEnabled\": false,\n    \"inherited\": true,\n    \"magicLinkAuthEnabled\": false,\n    \"passwordlessDeviceNamingEnabled\": true,\n    \"passwordlessEnabled\": true,\n    \"passwordlessEnforcePasswordEnabled\": false,\n    \"passwordlessEnforcePasswordMaxAge\": 6839,\n    \"passwordlessRememberDeviceEnabled\": false,\n    \"registerEnabled\": false,\n    \"rememberMeEnabled\": false,\n    \"resetPasswordOnExpiration\": true\n  },\n  \"master\": true,\n  \"name\": \"string\",\n  \"oidc\": {\n    \"cibaSettings\": {\n      \"authReqExpiry\": 8045,\n      \"bindingMessageLength\": 9666,\n      \"deviceNotifiers\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ],\n      \"enabled\": false,\n      \"tokenReqInterval\": 2984\n    },\n    \"cimdSettings\": {\n      \"allowPrivateIpAddress\": false,\n      \"allowUnsecuredHttpUri\": false,\n      \"allowedDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cacheMaxEntries\": 9775,\n      \"cacheTtlSeconds\": 9492,\n      \"enabled\": true,\n      \"fetchTimeoutMs\": 9668,\n      \"maxResponseSizeKb\": 3934,\n      \"revokeOnDocumentChange\": true,\n      \"templateId\": \"string\"\n    },\n    \"clientRegistrationSettings\": {\n      \"allowHttpSchemeRedirectUri\": false,\n      \"allowLocalhostRedirectUri\": false,\n      \"allowRedirectUriParamsExpressionLanguage\": true,\n      \"allowWildCardRedirectUri\": false,\n      \"allowedScopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedScopesEnabled\": false,\n      \"clientTemplateEnabled\": true,\n      \"defaultScopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dynamicClientRegistrationEnabled\": false,\n      \"openDynamicClientRegistrationEnabled\": true\n    },\n    \"postLogoutRedirectUris\": [\n      \"string\",\n      \"string\"\n    ],\n    \"redirectUriStrictMatching\": true,\n    \"requestUris\": [\n      \"string\",\n      \"string\"\n    ],\n    \"securityProfileSettings\": {\n      \"enableFapiBrazil\": false,\n      \"enablePlainFapi\": false\n    }\n  },\n  \"openDynamicClientRegistrationEnabled\": false,\n  \"passwordSettings\": {\n    \"excludePasswordsInDictionary\": false,\n    \"excludeUserProfileInfoInPassword\": false,\n    \"expiryDuration\": 6328,\n    \"includeNumbers\": true,\n    \"includeSpecialCharacters\": false,\n    \"inherited\": false,\n    \"lettersInMixedCase\": true,\n    \"maxConsecutiveLetters\": 4670,\n    \"maxLength\": 4300,\n    \"minLength\": 7997,\n    \"oldPasswords\": 7844,\n    \"passwordHistoryEnabled\": false\n  },\n  \"path\": \"string\",\n  \"redirectUriExpressionLanguageEnabled\": true,\n  \"redirectUriLocalhostAllowed\": true,\n  \"redirectUriStrictMatching\": false,\n  \"redirectUriUnsecuredHttpSchemeAllowed\": true,\n  \"redirectUriWildcardAllowed\": false,\n  \"referenceId\": \"string\",\n  \"referenceType\": \"ENVIRONMENT\",\n  \"saml\": {\n    \"certificate\": \"string\",\n    \"enabled\": true,\n    \"entityId\": \"string\"\n  },\n  \"scim\": {\n    \"enabled\": false,\n    \"idpSelectionEnabled\": false,\n    \"idpSelectionRule\": \"string\"\n  },\n  \"secretExpirationSettings\": {\n    \"enabled\": true,\n    \"expiryTimeSeconds\": 5477\n  },\n  \"selfServiceAccountManagementSettings\": {\n    \"enabled\": false,\n    \"resetPassword\": {\n      \"oldPasswordRequired\": true,\n      \"tokenAge\": 7742\n    }\n  },\n  \"tags\": [\n    \"string\"\n  ],\n  \"tokenExchangeSettings\": {\n    \"allowDelegation\": true,\n    \"allowImpersonation\": false,\n    \"allowedActorTokenTypes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"allowedRequestedTokenTypes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"allowedSubjectTokenTypes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"enabled\": false,\n    \"maxDelegationDepth\": 8803,\n    \"tokenExchangeOAuthSettings\": {\n      \"inherited\": false,\n      \"scopeHandling\": \"DOWNSCOPING\"\n    },\n    \"trustedIssuers\": [\n      {\n        \"certificate\": \"string\",\n        \"issuer\": \"string\",\n        \"jwksUri\": \"string\",\n        \"keyResolutionMethod\": \"PEM\",\n        \"scopeMappings\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"userBindingCriteria\": [\n          {\n            \"attribute\": \"string\",\n            \"expression\": \"string\"\n          },\n          {\n            \"attribute\": \"string\",\n            \"expression\": \"string\"\n          }\n        ],\n        \"userBindingEnabled\": false\n      },\n      {\n        \"certificate\": \"string\",\n        \"issuer\": \"string\",\n        \"jwksUri\": \"string\",\n        \"keyResolutionMethod\": \"PEM\",\n        \"scopeMappings\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"userBindingCriteria\": [\n          {\n            \"attribute\": \"string\",\n            \"expression\": \"string\"\n          },\n          {\n            \"attribute\": \"string\",\n            \"expression\": \"string\"\n          }\n        ],\n        \"userBindingEnabled\": false\n      }\n    ]\n  },\n  \"uma\": {\n    \"enabled\": false\n  },\n  \"updatedAt\": \"1951-10-25T11:17:38.951Z\",\n  \"version\": \"V2_0\",\n  \"vhostMode\": false,\n  \"vhosts\": [\n    {\n      \"host\": \"string\",\n      \"overrideEntrypoint\": false,\n      \"path\": \"string\"\n    },\n    {\n      \"host\": \"string\",\n      \"overrideEntrypoint\": false,\n      \"path\": \"string\"\n    }\n  ],\n  \"webAuthnSettings\": {\n    \"attestationConveyancePreference\": \"NONE\",\n    \"authenticatorAttachment\": \"CROSS_PLATFORM\",\n    \"certificates\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"enforceAuthenticatorIntegrity\": false,\n    \"enforceAuthenticatorIntegrityMaxAge\": 9836,\n    \"forceRegistration\": false,\n    \"origin\": \"string\",\n    \"relyingPartyId\": \"string\",\n    \"relyingPartyName\": \"string\",\n    \"requireResidentKey\": true,\n    \"userVerification\": \"DISCOURAGED\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90517e67-8c48-4dc4-9f0d-074d2f45f814",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8c0acf4-4b33-4126-a729-cc1b6cf8e379",
+          "name": "Update platform main settings",
+          "request": {
+            "name": "Update platform main settings",
+            "description": {
+              "content": "User must have the ORGANIZATION_SETTINGS[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identities\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c43c8182-eac0-4eb0-ab32-26aa8453a2d0",
+              "name": "Platform settings successfully patched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identities\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountSettings\": {\n    \"accountBlockedDuration\": 5692,\n    \"autoLoginAfterRegistration\": true,\n    \"autoLoginAfterResetPassword\": true,\n    \"botDetectionPlugin\": \"string\",\n    \"completeRegistrationWhenResetPassword\": true,\n    \"defaultIdentityProviderForRegistration\": \"string\",\n    \"deletePasswordlessDevicesAfterResetPassword\": true,\n    \"dynamicUserRegistration\": false,\n    \"inherited\": false,\n    \"loginAttemptsDetectionEnabled\": false,\n    \"loginAttemptsResetTime\": 8279,\n    \"maxLoginAttempts\": 5677,\n    \"mfaChallengeAttemptsDetectionEnabled\": true,\n    \"mfaChallengeAttemptsResetTime\": 8172,\n    \"mfaChallengeMaxAttempts\": 6252,\n    \"mfaChallengeSendVerifyAlertEmail\": false,\n    \"redirectUriAfterRegistration\": \"string\",\n    \"redirectUriAfterResetPassword\": \"string\",\n    \"rememberMe\": false,\n    \"rememberMeDuration\": 3040,\n    \"resetPasswordConfirmIdentity\": true,\n    \"resetPasswordCustomForm\": false,\n    \"resetPasswordCustomFormFields\": [\n      {\n        \"key\": \"string\",\n        \"label\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"key\": \"string\",\n        \"label\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"resetPasswordInvalidateTokens\": true,\n    \"sendRecoverAccountEmail\": false,\n    \"sendVerifyRegistrationAccountEmail\": true,\n    \"useBotDetection\": false\n  },\n  \"alertEnabled\": false,\n  \"certificateSettings\": {\n    \"fallbackCertificate\": \"string\"\n  },\n  \"corsSettings\": {\n    \"allowCredentials\": true,\n    \"allowedHeaders\": [\n      \"string\"\n    ],\n    \"allowedMethods\": [\n      \"string\"\n    ],\n    \"allowedOrigins\": [\n      \"string\"\n    ],\n    \"enabled\": true,\n    \"maxAge\": 6318\n  },\n  \"createdAt\": \"2000-05-31T14:43:15.606Z\",\n  \"dataPlaneId\": \"string\",\n  \"description\": \"string\",\n  \"dynamicClientRegistrationEnabled\": false,\n  \"dynamicClientRegistrationTemplateEnabled\": true,\n  \"enabled\": true,\n  \"hrid\": \"string\",\n  \"id\": \"string\",\n  \"identities\": [\n    \"string\"\n  ],\n  \"loginSettings\": {\n    \"certificateBasedAuthEnabled\": true,\n    \"certificateBasedAuthUrl\": \"string\",\n    \"enforcePasswordPolicyEnabled\": false,\n    \"forgotPasswordEnabled\": false,\n    \"hideForm\": false,\n    \"identifierFirstEnabled\": true,\n    \"inherited\": true,\n    \"magicLinkAuthEnabled\": true,\n    \"passwordlessDeviceNamingEnabled\": true,\n    \"passwordlessEnabled\": true,\n    \"passwordlessEnforcePasswordEnabled\": true,\n    \"passwordlessEnforcePasswordMaxAge\": 3216,\n    \"passwordlessRememberDeviceEnabled\": true,\n    \"registerEnabled\": false,\n    \"rememberMeEnabled\": false,\n    \"resetPasswordOnExpiration\": true\n  },\n  \"master\": true,\n  \"name\": \"string\",\n  \"oidc\": {\n    \"cibaSettings\": {\n      \"authReqExpiry\": 5630,\n      \"bindingMessageLength\": 9067,\n      \"deviceNotifiers\": [\n        {\n          \"id\": \"string\"\n        },\n        {\n          \"id\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"tokenReqInterval\": 7647\n    },\n    \"cimdSettings\": {\n      \"allowPrivateIpAddress\": true,\n      \"allowUnsecuredHttpUri\": false,\n      \"allowedDomains\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cacheMaxEntries\": 6728,\n      \"cacheTtlSeconds\": 4917,\n      \"enabled\": false,\n      \"fetchTimeoutMs\": 8473,\n      \"maxResponseSizeKb\": 4080,\n      \"revokeOnDocumentChange\": true,\n      \"templateId\": \"string\"\n    },\n    \"clientRegistrationSettings\": {\n      \"allowHttpSchemeRedirectUri\": false,\n      \"allowLocalhostRedirectUri\": true,\n      \"allowRedirectUriParamsExpressionLanguage\": false,\n      \"allowWildCardRedirectUri\": false,\n      \"allowedScopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedScopesEnabled\": false,\n      \"clientTemplateEnabled\": true,\n      \"defaultScopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dynamicClientRegistrationEnabled\": false,\n      \"openDynamicClientRegistrationEnabled\": false\n    },\n    \"postLogoutRedirectUris\": [\n      \"string\",\n      \"string\"\n    ],\n    \"redirectUriStrictMatching\": true,\n    \"requestUris\": [\n      \"string\",\n      \"string\"\n    ],\n    \"securityProfileSettings\": {\n      \"enableFapiBrazil\": true,\n      \"enablePlainFapi\": false\n    }\n  },\n  \"openDynamicClientRegistrationEnabled\": true,\n  \"passwordSettings\": {\n    \"excludePasswordsInDictionary\": true,\n    \"excludeUserProfileInfoInPassword\": false,\n    \"expiryDuration\": 4847,\n    \"includeNumbers\": false,\n    \"includeSpecialCharacters\": true,\n    \"inherited\": true,\n    \"lettersInMixedCase\": true,\n    \"maxConsecutiveLetters\": 2819,\n    \"maxLength\": 1622,\n    \"minLength\": 9976,\n    \"oldPasswords\": 1256,\n    \"passwordHistoryEnabled\": true\n  },\n  \"path\": \"string\",\n  \"redirectUriExpressionLanguageEnabled\": true,\n  \"redirectUriLocalhostAllowed\": true,\n  \"redirectUriStrictMatching\": false,\n  \"redirectUriUnsecuredHttpSchemeAllowed\": true,\n  \"redirectUriWildcardAllowed\": false,\n  \"referenceId\": \"string\",\n  \"referenceType\": \"PLATFORM\",\n  \"saml\": {\n    \"certificate\": \"string\",\n    \"enabled\": true,\n    \"entityId\": \"string\"\n  },\n  \"scim\": {\n    \"enabled\": true,\n    \"idpSelectionEnabled\": true,\n    \"idpSelectionRule\": \"string\"\n  },\n  \"secretExpirationSettings\": {\n    \"enabled\": true,\n    \"expiryTimeSeconds\": 9350\n  },\n  \"selfServiceAccountManagementSettings\": {\n    \"enabled\": true,\n    \"resetPassword\": {\n      \"oldPasswordRequired\": false,\n      \"tokenAge\": 5081\n    }\n  },\n  \"tags\": [\n    \"string\"\n  ],\n  \"tokenExchangeSettings\": {\n    \"allowDelegation\": false,\n    \"allowImpersonation\": false,\n    \"allowedActorTokenTypes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"allowedRequestedTokenTypes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"allowedSubjectTokenTypes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"enabled\": false,\n    \"maxDelegationDepth\": 2127,\n    \"tokenExchangeOAuthSettings\": {\n      \"inherited\": false,\n      \"scopeHandling\": \"DOWNSCOPING\"\n    },\n    \"trustedIssuers\": [\n      {\n        \"certificate\": \"string\",\n        \"issuer\": \"string\",\n        \"jwksUri\": \"string\",\n        \"keyResolutionMethod\": \"PEM\",\n        \"scopeMappings\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"userBindingCriteria\": [\n          {\n            \"attribute\": \"string\",\n            \"expression\": \"string\"\n          },\n          {\n            \"attribute\": \"string\",\n            \"expression\": \"string\"\n          }\n        ],\n        \"userBindingEnabled\": true\n      },\n      {\n        \"certificate\": \"string\",\n        \"issuer\": \"string\",\n        \"jwksUri\": \"string\",\n        \"keyResolutionMethod\": \"PEM\",\n        \"scopeMappings\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"userBindingCriteria\": [\n          {\n            \"attribute\": \"string\",\n            \"expression\": \"string\"\n          },\n          {\n            \"attribute\": \"string\",\n            \"expression\": \"string\"\n          }\n        ],\n        \"userBindingEnabled\": false\n      }\n    ]\n  },\n  \"uma\": {\n    \"enabled\": false\n  },\n  \"updatedAt\": \"2000-09-04T22:37:27.227Z\",\n  \"version\": \"V1_0\",\n  \"vhostMode\": true,\n  \"vhosts\": [\n    {\n      \"host\": \"string\",\n      \"overrideEntrypoint\": true,\n      \"path\": \"string\"\n    },\n    {\n      \"host\": \"string\",\n      \"overrideEntrypoint\": true,\n      \"path\": \"string\"\n    }\n  ],\n  \"webAuthnSettings\": {\n    \"attestationConveyancePreference\": \"INDIRECT\",\n    \"authenticatorAttachment\": \"PLATFORM\",\n    \"certificates\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"enforceAuthenticatorIntegrity\": false,\n    \"enforceAuthenticatorIntegrityMaxAge\": 7606,\n    \"forceRegistration\": true,\n    \"origin\": \"string\",\n    \"relyingPartyId\": \"string\",\n    \"relyingPartyName\": \"string\",\n    \"requireResidentKey\": true,\n    \"userVerification\": \"REQUIRED\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ce8544f-630c-49eb-909d-b112d0cba156",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"identities\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/management",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5b6cf97d-9877-4bad-a913-56f94a5d0055",
+    "name": "Gravitee.io - Access Management alerts Organizations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

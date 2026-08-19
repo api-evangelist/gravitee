@@ -1,0 +1,540 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts protected-resource API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "protected-resource",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registered protected resources for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the PROTECTED_RESOURCE[LIST] permission on the specified domain, environment or organization AND either PROTECTED_RESOURCE[READ] permission on each domain's protected resource or PROTECTED_RESOURCE[READ] permission on the specified domain or PROTECTED_RESOURCE[READ] permission on the specified environment or PROTECTED_RESOURCE[READ] permission on the specified organization. Each returned protected resource is filtered and contains only basic information such as id, name, descripti"
+        },
+        {
+          "info": {
+            "name": "Create a Protected Resource definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have PROTECTED_RESOURCE[CREATE] permission on the specified domain or PROTECTED_RESOURCE[CREATE] permission on the specified environment or PROTECTED_RESOURCE[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a Protected Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the PROTECTED_RESOURCE[READ] permission on the specified resource or PROTECTED_RESOURCE[READ] permission on the specified domain or PROTECTED_RESOURCE[READ] permission on the specified environment or PROTECTED_RESOURCE[READ] permission on the specified organization. "
+        },
+        {
+          "info": {
+            "name": "Update a Protected Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the PROTECTED_RESOURCE[UPDATE] permission on the specified resource or PROTECTED_RESOURCE[UPDATE] permission on the specified domain or PROTECTED_RESOURCE[UPDATE] permission on the specified environment or PROTECTED_RESOURCE[UPDATE] permission on the specified organization. "
+        },
+        {
+          "info": {
+            "name": "Patch a Protected Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the PROTECTED_RESOURCE[UPDATE] permission on the specified resource or PROTECTED_RESOURCE[UPDATE] permission on the specified domain or PROTECTED_RESOURCE[UPDATE] permission on the specified environment or PROTECTED_RESOURCE[UPDATE] permission on the specified organization. "
+        },
+        {
+          "info": {
+            "name": "Delete a Protected Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the PROTECTED_RESOURCE[DELETE] permission on the specified resource or PROTECTED_RESOURCE[DELETE] permission on the specified domain or PROTECTED_RESOURCE[DELETE] permission on the specified environment or PROTECTED_RESOURCE[DELETE] permission on the specified organization. "
+        },
+        {
+          "info": {
+            "name": "List members for an protected resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource/members",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have PROTECTED_RESOURCE_MEMBER[LIST] permission on the specified protected resource or PROTECTED_RESOURCE_MEMBER[LIST] permission on the specified domain or PROTECTED_RESOURCE_MEMBER[LIST] permission on the specified environment or PROTECTED_RESOURCE_MEMBER[LIST] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Add or update an protected resource member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource/members",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have PROTECTED_RESOURCE_MEMBER[CREATE] permission on the specified protected resource or PROTECTED_RESOURCE_MEMBER[CREATE] permission on the specified domain or PROTECTED_RESOURCE_MEMBER[CREATE] permission on the specified environment or PROTECTED_RESOURCE_MEMBER[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List protected resource member's permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource/members/permissions",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have PROTECTED_RESOURCE[READ] permission on the specified protected resource or PROTECTED_RESOURCE[READ] permission on the specified domain or PROTECTED_RESOURCE[READ] permission on the specified environment or PROTECTED_RESOURCE[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Remove a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource/members/:member",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "member",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have PROTECTED_RESOURCE_MEMBER[DELETE] permission on the specified protected resource or PROTECTED_RESOURCE_MEMBER[DELETE] permission on the specified domain or PROTECTED_RESOURCE_MEMBER[DELETE] permission on the specified environment or PROTECTED_RESOURCE_MEMBER[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List secrets of a protected resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource/secrets",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the PROTECTED_RESOURCE_OAUTH[LIST] permission on the specified resource or PROTECTED_RESOURCE_OAUTH[LIST] permission on the specified domain or PROTECTED_RESOURCE_OAUTH[LIST] permission on the specified environment or PROTECTED_RESOURCE_OAUTH[LIST] permission on the specified organization."
+        },
+        {
+          "info": {
+            "name": "Create a secret for a protected resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource/secrets",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the PROTECTED_RESOURCE_OAUTH[CREATE] permission on the specified resource or PROTECTED_RESOURCE_OAUTH[CREATE] permission on the specified domain or PROTECTED_RESOURCE_OAUTH[CREATE] permission on the specified environment or PROTECTED_RESOURCE_OAUTH[CREATE] permission on the specified organization."
+        },
+        {
+          "info": {
+            "name": "Remove a secret for a protected resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource/secrets/:secretId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the PROTECTED_RESOURCE_OAUTH[DELETE] permission on the specified resource or PROTECTED_RESOURCE_OAUTH[DELETE] permission on the specified domain or PROTECTED_RESOURCE_OAUTH[DELETE] permission on the specified environment or PROTECTED_RESOURCE_OAUTH[DELETE] permission on the specified organization."
+        },
+        {
+          "info": {
+            "name": "Renew a secret for a protected resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/protected-resources/:protected-resource/secrets/:secretId/_renew",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "protected-resource",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "secretId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the PROTECTED_RESOURCE_OAUTH[UPDATE] permission on the specified resource or PROTECTED_RESOURCE_OAUTH[UPDATE] permission on the specified domain or PROTECTED_RESOURCE_OAUTH[UPDATE] permission on the specified environment or PROTECTED_RESOURCE_OAUTH[UPDATE] permission on the specified organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

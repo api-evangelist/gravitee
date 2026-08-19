@@ -1,0 +1,773 @@
+{
+  "item": [
+    {
+      "id": "d47de350-0cbc-43a7-800d-987fffd2d7b9",
+      "name": "Plans",
+      "description": {
+        "content": "Manage plans (Keyless, API Key, OAuth2, JWT, mTLS, Push)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e140170-ef1e-478f-acf9-128c91e7ad69",
+          "name": "List Plans on an API",
+          "request": {
+            "name": "List Plans on an API",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b68f7b69-f4e7-4c41-8f41-39fbb4e6523d",
+              "name": "Plans page",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a153d50-8825-4d0c-93a2-3173cfe18bf6",
+          "name": "Create a Plan on an API",
+          "request": {
+            "name": "Create a Plan on an API",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"security\": {\n    \"type\": \"<string>\",\n    \"configuration\": \"<object>\"\n  },\n  \"status\": \"<string>\",\n  \"validation\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"characteristics\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36876100-932d-4256-87cc-803d19ad95fc",
+              "name": "Plan created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"security\": {\n    \"type\": \"<string>\",\n    \"configuration\": \"<object>\"\n  },\n  \"status\": \"<string>\",\n  \"validation\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"characteristics\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f5dd1e7-e7a6-4135-9260-d0a7b354e230",
+          "name": "Get a Plan by Identifier",
+          "request": {
+            "name": "Get a Plan by Identifier",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8edabdb1-4a16-4146-8823-c6114ae4046a",
+              "name": "The plan",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d90d2d56-2685-4ee3-97e5-e3973c3008af",
+          "name": "Update a Plan",
+          "request": {
+            "name": "Update a Plan",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"security\": {\n    \"type\": \"<string>\",\n    \"configuration\": \"<object>\"\n  },\n  \"status\": \"<string>\",\n  \"validation\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"characteristics\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ba0a378-ed2d-468d-b281-4a9b2c2ac7f5",
+              "name": "Plan updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"security\": {\n    \"type\": \"<string>\",\n    \"configuration\": \"<object>\"\n  },\n  \"status\": \"<string>\",\n  \"validation\": \"<string>\",\n  \"order\": \"<integer>\",\n  \"characteristics\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07295a7b-31f9-45f9-99a0-b1408db48a67",
+          "name": "Publish a Plan",
+          "request": {
+            "name": "Publish a Plan",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "plans",
+                ":planId",
+                "_publish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7dc40c4a-b3a0-414a-9920-a2b4048d8902",
+              "name": "Plan published",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "plans",
+                    ":planId",
+                    "_publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f320abdd-a664-45df-9b11-3a712b8dbdcd",
+          "name": "Close a Plan",
+          "request": {
+            "name": "Close a Plan",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "plans",
+                ":planId",
+                "_close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b303b995-c8db-4ac8-96e8-748e309907a9",
+              "name": "Plan closed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "plans",
+                    ":planId",
+                    "_close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/management",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "257750cc-fdc4-49e9-9879-9a6996a8435f",
+    "name": "Gravitee.io - Access Management alerts Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage plans (Keyless, API Key, OAuth2, JWT, mTLS, Push)",
+      "type": "text/plain"
+    }
+  }
+}

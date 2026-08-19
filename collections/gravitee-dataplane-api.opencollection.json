@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts dataPlane API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dataPlane",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List of data planes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/data-planes",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all the data planes accessible to the current user. User must have DATA_PLANE[READ] permission on the specified environment or organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

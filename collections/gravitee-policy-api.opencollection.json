@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Policy API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List policy plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/policies",
+            "params": [
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get a policy plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/policies/:policy",
+            "params": [
+              {
+                "name": "policy",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get a policy plugin's documentation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/policies/:policy/documentation",
+            "params": [
+              {
+                "name": "policy",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a policy plugin's documentation"
+        },
+        {
+          "info": {
+            "name": "Get a policy plugin's schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/policies/:policy/schema",
+            "params": [
+              {
+                "name": "policy",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a policy plugin's schema"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1251 @@
+{
+  "item": [
+    {
+      "id": "c1da03dc-3c5b-4fcc-8f36-b61c7ec8b60b",
+      "name": "APIs",
+      "description": {
+        "content": "Manage APIs (v2 and v4 message-oriented APIs)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb947c5e-0b10-4a40-a1ad-6f5167c9618c",
+          "name": "List APIs in an Environment",
+          "request": {
+            "name": "List APIs in an Environment",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21dcbfe5-ccba-4c31-86e0-faa9971df69a",
+              "name": "A page of APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"apiVersion\": \"string\",\n      \"definitionVersion\": \"V2\",\n      \"type\": \"NATIVE\",\n      \"description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"state\": \"STARTED\",\n      \"lifecycleState\": \"ARCHIVED\",\n      \"visibility\": \"PUBLIC\",\n      \"createdAt\": \"1950-01-27T16:21:17.463Z\",\n      \"updatedAt\": \"1959-07-26T10:26:46.544Z\",\n      \"deployedAt\": \"2010-03-06T13:32:41.831Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"apiVersion\": \"string\",\n      \"definitionVersion\": \"V4\",\n      \"type\": \"MESSAGE\",\n      \"description\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"state\": \"STOPPED\",\n      \"lifecycleState\": \"PUBLISHED\",\n      \"visibility\": \"PUBLIC\",\n      \"createdAt\": \"2023-11-07T10:41:58.915Z\",\n      \"updatedAt\": \"1981-06-25T08:13:38.005Z\",\n      \"deployedAt\": \"1977-05-21T05:50:41.089Z\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 8771,\n    \"perPage\": 5880,\n    \"pageItemsCount\": 6355,\n    \"totalCount\": 794,\n    \"pageCount\": 8485\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "715c35fb-741c-4776-b58e-12fbe14fa0be",
+          "name": "Create an API",
+          "request": {
+            "name": "Create an API",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"apiVersion\": \"<string>\",\n  \"definitionVersion\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65b3202f-1044-469b-bda6-e00ca0b853a0",
+              "name": "API created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"apiVersion\": \"<string>\",\n  \"definitionVersion\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"apiVersion\": \"string\",\n  \"definitionVersion\": \"V2\",\n  \"type\": \"MESSAGE\",\n  \"description\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"state\": \"STOPPED\",\n  \"lifecycleState\": \"ARCHIVED\",\n  \"visibility\": \"PRIVATE\",\n  \"createdAt\": \"1952-03-25T00:08:38.644Z\",\n  \"updatedAt\": \"1960-03-19T08:53:32.158Z\",\n  \"deployedAt\": \"1981-12-02T06:18:09.684Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8580696d-86a4-4da0-87d3-f68de127142a",
+          "name": "Import an API from an OpenAPI/Swagger Document",
+          "request": {
+            "name": "Import an API from an OpenAPI/Swagger Document",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                "_import",
+                "swagger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"format\": \"<string>\",\n  \"withDocumentation\": \"<boolean>\",\n  \"withPathMapping\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "363c7fdc-a6f3-4060-9b5a-8d99fadbdef3",
+              "name": "API imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    "_import",
+                    "swagger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"format\": \"<string>\",\n  \"withDocumentation\": \"<boolean>\",\n  \"withPathMapping\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a583abf-0f21-41e6-90b4-be9da9070eb5",
+          "name": "Import an API From a Gravitee Definition",
+          "request": {
+            "name": "Import an API From a Gravitee Definition",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                "_import",
+                "definition"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e70f018-2640-45a8-8c45-8b9fc48d0de5",
+              "name": "API imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    "_import",
+                    "definition"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eca9b5a9-7f2c-43c9-a805-90df51f02811",
+          "name": "Search APIs by Query",
+          "request": {
+            "name": "Search APIs by Query",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                "_search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d754050-4b4e-444f-85b6-0179056d0227",
+              "name": "Matching APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    "_search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aced71d6-01f2-43fa-bebe-daf50b19fd78",
+          "name": "Get an API by Identifier",
+          "request": {
+            "name": "Get an API by Identifier",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bcbdd867-3857-4334-bce0-83540af23c96",
+              "name": "The API",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"apiVersion\": \"string\",\n  \"definitionVersion\": \"V2\",\n  \"type\": \"MESSAGE\",\n  \"description\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"state\": \"STOPPED\",\n  \"lifecycleState\": \"ARCHIVED\",\n  \"visibility\": \"PRIVATE\",\n  \"createdAt\": \"1952-03-25T00:08:38.644Z\",\n  \"updatedAt\": \"1960-03-19T08:53:32.158Z\",\n  \"deployedAt\": \"1981-12-02T06:18:09.684Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecce42c5-2f27-4248-b0b2-6d9b5fdd9a43",
+          "name": "Update an API",
+          "request": {
+            "name": "Update an API",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"apiVersion\": \"<string>\",\n  \"definitionVersion\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": \"<string>\",\n  \"lifecycleState\": \"<string>\",\n  \"visibility\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"deployedAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12731213-537f-4442-ba13-0a2de8969e4f",
+              "name": "API updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"apiVersion\": \"<string>\",\n  \"definitionVersion\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": \"<string>\",\n  \"lifecycleState\": \"<string>\",\n  \"visibility\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"deployedAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2169defd-04c5-4b5e-94d4-6a1023968f53",
+          "name": "Delete an API",
+          "request": {
+            "name": "Delete an API",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "943d314d-b633-4868-a163-6e37b709f9c8",
+              "name": "API deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b9a697d-0536-44d9-8619-25c575173e0a",
+          "name": "Deploy an API to the Gateway",
+          "request": {
+            "name": "Deploy an API to the Gateway",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "_deploy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23ad0023-25bd-4329-a577-87e2b283918a",
+              "name": "Deployment requested",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "_deploy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8337f74-5278-4180-8920-8929b8d937aa",
+          "name": "Start an API",
+          "request": {
+            "name": "Start an API",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "_start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b57e616-07ad-49c0-a92e-5abf8e8764fe",
+              "name": "API started",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "_start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55b96f8e-d006-4e8d-b708-30d3bd08781d",
+          "name": "Stop an API",
+          "request": {
+            "name": "Stop an API",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "apis",
+                ":apiId",
+                "_stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiId",
+                  "description": "(Required) The API identifier"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56e31b8a-8b79-4f0d-9f38-1936695235f7",
+              "name": "API stopped",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "apis",
+                    ":apiId",
+                    "_stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiId",
+                      "description": "(Required) The API identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/management",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e6650f23-5911-4993-ba3e-c2887f3d41f4",
+    "name": "Gravitee.io - Access Management alerts APIs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage APIs (v2 and v4 message-oriented APIs)",
+      "type": "text/plain"
+    }
+  }
+}

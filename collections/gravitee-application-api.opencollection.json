@@ -1,0 +1,1316 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts application API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "application",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registered applications for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the APPLICATION[LIST] permission on the specified domain, environment or organization AND either APPLICATION[READ] permission on each domain's application or APPLICATION[READ] permission on the specified domain or APPLICATION[READ] permission on the specified environment or APPLICATION[READ] permission on the specified organization. Each returned application is filtered and contains only basic information such as id, name, description and isEnabled."
+        },
+        {
+          "info": {
+            "name": "Create an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION[CREATE] permission on the specified domain or APPLICATION[CREATE] permission on the specified environment or APPLICATION[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the APPLICATION[READ] permission on the specified application or APPLICATION[READ] permission on the specified domain or APPLICATION[READ] permission on the specified environment or APPLICATION[READ] permission on the specified organization. Application will be filtered according to permissions (READ on APPLICATION_IDENTITY_PROVIDER, APPLICATION_CERTIFICATE, APPLICATION_METADATA, APPLICATION_USER_ACCOUNT, APPLICATION_SETTINGS)"
+        },
+        {
+          "info": {
+            "name": "Update an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION[UPDATE] permission on the specified application or APPLICATION[UPDATE] permission on the specified domain or APPLICATION[UPDATE] permission on the specified environment or APPLICATION[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Patch an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION[UPDATE] permission on the specified application or APPLICATION[UPDATE] permission on the specified domain or APPLICATION[UPDATE] permission on the specified environment or APPLICATION[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION[DELETE] permission on the specified application or APPLICATION[DELETE] permission on the specified domain or APPLICATION[DELETE] permission on the specified environment or APPLICATION[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Find application analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/analytics",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Used to define the start date of the time window to query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Used to define the end date of the time window to query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "The time interval when getting histogram data"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "The number of data to retrieve"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of data to retrieve (group_by, date_histo, count)"
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_ANALYTICS[READ] permission on the specified application or APPLICATION_ANALYTICS[READ] permission on the specified domain or APPLICATION_ANALYTICS[READ] permission on the specified environment or APPLICATION_ANALYTICS[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Find a email for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "template",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Create a email for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update an email for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails/:email",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete an email for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/emails/:email",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List registered flows for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/flows",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the APPLICATION_FLOW[LIST] permission on the specified domain or APPLICATION_FLOW[LIST] permission on the specified environment or APPLICATION_FLOW[LIST] permission on the specified organization. Except if user has APPLICATION_FLOW[READ] permission on the domain, environment or organization, each returned flow is filtered and contains only basic information such as id and name and isEnabled."
+        },
+        {
+          "info": {
+            "name": "Create or update list of flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/flows",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the APPLICATION_FLOW[UPDATE] permission on the specified domain or APPLICATION_FLOW[UPDATE] permission on the specified environment or APPLICATION_FLOW[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/flows/:flow",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "flow",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the APPLICATION_FLOW[READ] permission on the specified domain or APPLICATION_FLOW[READ] permission on the specified environment or APPLICATION_FLOW[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/flows/:flow",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "flow",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the APPLICATION_FLOW[UPDATE] permission on the specified domain or APPLICATION_FLOW[UPDATE] permission on the specified environment or APPLICATION_FLOW[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Find a form for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "template",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_FORM[READ] permission on the specified application or APPLICATION_FORM[READ] permission on the specified domain or APPLICATION_FORM[READ] permission on the specified environment or APPLICATION_FORM[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Create a form for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION_FORM[CREATE] permission on the specified application or APPLICATION_FORM[CREATE] permission on the specified domain or APPLICATION_FORM[CREATE] permission on the specified environment or APPLICATION_FORM[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a form for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "form",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION_FORM[UPDATE] permission on the specified application or APPLICATION_FORM[UPDATE] permission on the specified domain or APPLICATION_FORM[UPDATE] permission on the specified environment or APPLICATION_FORM[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a form for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/forms/:form",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "form",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_FORM[DELETE] permission on the specified application or APPLICATION_FORM[DELETE] permission on the specified domain or APPLICATION_FORM[DELETE] permission on the specified environment or APPLICATION_FORM[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List members for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/members",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_MEMBER[LIST] permission on the specified application or APPLICATION_MEMBER[LIST] permission on the specified domain or APPLICATION_MEMBER[LIST] permission on the specified environment or APPLICATION_MEMBER[LIST] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Add or update an application member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/members",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION_MEMBER[CREATE] permission on the specified application or APPLICATION_MEMBER[CREATE] permission on the specified domain or APPLICATION_MEMBER[CREATE] permission on the specified environment or APPLICATION_MEMBER[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List application member's permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/members/permissions",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION[READ] permission on the specified application or APPLICATION[READ] permission on the specified domain or APPLICATION[READ] permission on the specified environment or APPLICATION[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Remove a membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/members/:member",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "member",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_MEMBER[DELETE] permission on the specified application or APPLICATION_MEMBER[DELETE] permission on the specified domain or APPLICATION_MEMBER[DELETE] permission on the specified environment or APPLICATION_MEMBER[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List resources for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/resources",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_RESOURCE[LIST] permission on the specified application or APPLICATION_RESOURCE[LIST] permission on the specified domain or APPLICATION_RESOURCE[LIST] permission on the specified environment or APPLICATION_RESOURCE[LIST] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a resource for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/resources/:resource",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_RESOURCE[READ] permission on the specified application or APPLICATION_RESOURCE[READ] permission on the specified domain or APPLICATION_RESOURCE[READ] permission on the specified environment or APPLICATION_RESOURCE[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get resource access policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/resources/:resource/policies",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_RESOURCE[READ] permission on the specified application or APPLICATION_RESOURCE[READ] permission on the specified domain or APPLICATION_RESOURCE[READ] permission on the specified environment or APPLICATION_RESOURCE[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get resource access policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/resources/:resource/policies/:policy",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "policy",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_RESOURCE[READ] permission on the specified application or APPLICATION_RESOURCE[READ] permission on the specified domain or APPLICATION_RESOURCE[READ] permission on the specified environment or APPLICATION_RESOURCE[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List secrets of an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/secrets",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_OPENID[LIST] permission on the specified application or APPLICATION_OPENID[LIST] permission on the specified domain or APPLICATION_OPENID[LIST] permission on the specified environment or APPLICATION_OPENID[LIST] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Create a secret for an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/secrets",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION_OPENID[CREATE] permission on the specified application or APPLICATION_OPENID[CREATE] permission on the specified domain or APPLICATION_OPENID[CREATE] permission on the specified environment or APPLICATION_OPENID[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a secret of an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/secrets/:secret",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "secret",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_OPENID[DELETE] permission on the specified application or APPLICATION_OPENID[DELETE] permission on the specified domain or APPLICATION_OPENID[DELETE] permission on the specified environment or APPLICATION_OPENID[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Renew application secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/secrets/:secret/_renew",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "secret",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have APPLICATION_OPENID[UPDATE] permission on the specified application or APPLICATION_OPENID[UPDATE] permission on the specified domain or APPLICATION_OPENID[UPDATE] permission on the specified environment or APPLICATION_OPENID[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update an application type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/applications/:application/type",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "application",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION[UPDATE] permission on the specified application or APPLICATION[UPDATE] permission on the specified domain or APPLICATION[UPDATE] permission on the specified environment or APPLICATION[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Create an application from a CIMD document URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/cimd/applications",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION[CREATE] permission on the specified domain"
+        },
+        {
+          "info": {
+            "name": "Validate a CIMD URL and return parsed metadata preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/cimd/validate",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have APPLICATION[CREATE] permission on the specified domain"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List alert notifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all the alert notifiers of the domain. User must have DOMAIN_ALERT_NOTIFIER[LIST] permission on the specified domain, environment or organization."
+        },
+        {
+          "info": {
+            "name": "Create an alert notifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new alert notifierUser must have DOMAIN_ALERT_NOTIFIER[CREATE] permission on the specified domain, environment or organization."
+        },
+        {
+          "info": {
+            "name": "Get an alert notifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notifierId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an alert notifier by its id. User must have DOMAIN_ALERT_NOTIFIER[LIST] permission on the specified domain, environment or organization."
+        },
+        {
+          "info": {
+            "name": "Update an alert notifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notifierId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an alert notifierUser must have DOMAIN_ALERT_NOTIFIER[UPDATE] permission on the specified domain, environment or organization."
+        },
+        {
+          "info": {
+            "name": "Delete an alert notifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/notifiers/:notifierId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notifierId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an alert notifier by its id. User must have DOMAIN_ALERT_NOTIFIER[DELETE] permission on the specified domain, environment or organization."
+        },
+        {
+          "info": {
+            "name": "List alert triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/triggers",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all the alert triggers of the domain accessible to the current user. User must have DOMAIN_ALERT[LIST] permission on the specified domain, environment or organization."
+        },
+        {
+          "info": {
+            "name": "Update multiple alert triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/alerts/triggers",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update multiple alert triggers in the same timeUser must have DOMAIN_ALERT[UPDATE] permission on the specified domain, environment or organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

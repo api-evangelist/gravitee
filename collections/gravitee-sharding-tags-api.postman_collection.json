@@ -1,0 +1,888 @@
+{
+  "item": [
+    {
+      "id": "0f632b02-ebd6-4bd0-a700-375e8b8a19f3",
+      "name": "sharding-tags",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69bb7a73-95c7-4c5f-9b7b-5abd542e2610",
+          "name": "List sharding tags",
+          "request": {
+            "name": "List sharding tags",
+            "description": {
+              "content": "User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned tag is filtered and contains only basic information such as id and name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ade0ee9-17f2-4f32-b9b6-e2bf2b8683a1",
+              "name": "List all the sharding tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accountSettings\": {\n      \"accountBlockedDuration\": 5455,\n      \"autoLoginAfterRegistration\": false,\n      \"autoLoginAfterResetPassword\": true,\n      \"botDetectionPlugin\": \"string\",\n      \"completeRegistrationWhenResetPassword\": true,\n      \"defaultIdentityProviderForRegistration\": \"string\",\n      \"deletePasswordlessDevicesAfterResetPassword\": false,\n      \"dynamicUserRegistration\": true,\n      \"inherited\": false,\n      \"loginAttemptsDetectionEnabled\": false,\n      \"loginAttemptsResetTime\": 5099,\n      \"maxLoginAttempts\": 5312,\n      \"mfaChallengeAttemptsDetectionEnabled\": false,\n      \"mfaChallengeAttemptsResetTime\": 2512,\n      \"mfaChallengeMaxAttempts\": 102,\n      \"mfaChallengeSendVerifyAlertEmail\": false,\n      \"redirectUriAfterRegistration\": \"string\",\n      \"redirectUriAfterResetPassword\": \"string\",\n      \"rememberMe\": true,\n      \"rememberMeDuration\": 9120,\n      \"resetPasswordConfirmIdentity\": false,\n      \"resetPasswordCustomForm\": true,\n      \"resetPasswordCustomFormFields\": [\n        {\n          \"key\": \"string\",\n          \"label\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"label\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"resetPasswordInvalidateTokens\": false,\n      \"sendRecoverAccountEmail\": true,\n      \"sendVerifyRegistrationAccountEmail\": false,\n      \"useBotDetection\": false\n    },\n    \"alertEnabled\": true,\n    \"certificateSettings\": {\n      \"fallbackCertificate\": \"string\"\n    },\n    \"corsSettings\": {\n      \"allowCredentials\": false,\n      \"allowedHeaders\": [\n        \"string\"\n      ],\n      \"allowedMethods\": [\n        \"string\"\n      ],\n      \"allowedOrigins\": [\n        \"string\"\n      ],\n      \"enabled\": true,\n      \"maxAge\": 8895\n    },\n    \"createdAt\": \"1965-10-12T09:10:41.116Z\",\n    \"dataPlaneId\": \"string\",\n    \"description\": \"string\",\n    \"dynamicClientRegistrationEnabled\": false,\n    \"dynamicClientRegistrationTemplateEnabled\": false,\n    \"enabled\": true,\n    \"hrid\": \"string\",\n    \"id\": \"string\",\n    \"identities\": [\n      \"string\"\n    ],\n    \"loginSettings\": {\n      \"certificateBasedAuthEnabled\": true,\n      \"certificateBasedAuthUrl\": \"string\",\n      \"enforcePasswordPolicyEnabled\": false,\n      \"forgotPasswordEnabled\": false,\n      \"hideForm\": true,\n      \"identifierFirstEnabled\": true,\n      \"inherited\": false,\n      \"magicLinkAuthEnabled\": false,\n      \"passwordlessDeviceNamingEnabled\": true,\n      \"passwordlessEnabled\": false,\n      \"passwordlessEnforcePasswordEnabled\": true,\n      \"passwordlessEnforcePasswordMaxAge\": 1557,\n      \"passwordlessRememberDeviceEnabled\": true,\n      \"registerEnabled\": false,\n      \"rememberMeEnabled\": false,\n      \"resetPasswordOnExpiration\": true\n    },\n    \"master\": false,\n    \"name\": \"string\",\n    \"oidc\": {\n      \"cibaSettings\": {\n        \"authReqExpiry\": 2969,\n        \"bindingMessageLength\": 5376,\n        \"deviceNotifiers\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"enabled\": false,\n        \"tokenReqInterval\": 1867\n      },\n      \"cimdSettings\": {\n        \"allowPrivateIpAddress\": true,\n        \"allowUnsecuredHttpUri\": false,\n        \"allowedDomains\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cacheMaxEntries\": 2628,\n        \"cacheTtlSeconds\": 2746,\n        \"enabled\": false,\n        \"fetchTimeoutMs\": 6061,\n        \"maxResponseSizeKb\": 6570,\n        \"revokeOnDocumentChange\": false,\n        \"templateId\": \"string\"\n      },\n      \"clientRegistrationSettings\": {\n        \"allowHttpSchemeRedirectUri\": false,\n        \"allowLocalhostRedirectUri\": true,\n        \"allowRedirectUriParamsExpressionLanguage\": false,\n        \"allowWildCardRedirectUri\": true,\n        \"allowedScopes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"allowedScopesEnabled\": false,\n        \"clientTemplateEnabled\": true,\n        \"defaultScopes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dynamicClientRegistrationEnabled\": false,\n        \"openDynamicClientRegistrationEnabled\": false\n      },\n      \"postLogoutRedirectUris\": [\n        \"string\",\n        \"string\"\n      ],\n      \"redirectUriStrictMatching\": false,\n      \"requestUris\": [\n        \"string\",\n        \"string\"\n      ],\n      \"securityProfileSettings\": {\n        \"enableFapiBrazil\": true,\n        \"enablePlainFapi\": true\n      }\n    },\n    \"openDynamicClientRegistrationEnabled\": false,\n    \"passwordSettings\": {\n      \"excludePasswordsInDictionary\": true,\n      \"excludeUserProfileInfoInPassword\": false,\n      \"expiryDuration\": 8302,\n      \"includeNumbers\": false,\n      \"includeSpecialCharacters\": true,\n      \"inherited\": false,\n      \"lettersInMixedCase\": true,\n      \"maxConsecutiveLetters\": 8319,\n      \"maxLength\": 8717,\n      \"minLength\": 9042,\n      \"oldPasswords\": 2563,\n      \"passwordHistoryEnabled\": false\n    },\n    \"path\": \"string\",\n    \"redirectUriExpressionLanguageEnabled\": true,\n    \"redirectUriLocalhostAllowed\": true,\n    \"redirectUriStrictMatching\": false,\n    \"redirectUriUnsecuredHttpSchemeAllowed\": false,\n    \"redirectUriWildcardAllowed\": false,\n    \"referenceId\": \"string\",\n    \"referenceType\": \"PLATFORM\",\n    \"saml\": {\n      \"certificate\": \"string\",\n      \"enabled\": false,\n      \"entityId\": \"string\"\n    },\n    \"scim\": {\n      \"enabled\": false,\n      \"idpSelectionEnabled\": false,\n      \"idpSelectionRule\": \"string\"\n    },\n    \"secretExpirationSettings\": {\n      \"enabled\": true,\n      \"expiryTimeSeconds\": 9759\n    },\n    \"selfServiceAccountManagementSettings\": {\n      \"enabled\": true,\n      \"resetPassword\": {\n        \"oldPasswordRequired\": true,\n        \"tokenAge\": 7297\n      }\n    },\n    \"tags\": [\n      \"string\"\n    ],\n    \"tokenExchangeSettings\": {\n      \"allowDelegation\": false,\n      \"allowImpersonation\": true,\n      \"allowedActorTokenTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedRequestedTokenTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedSubjectTokenTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": true,\n      \"maxDelegationDepth\": 2102,\n      \"tokenExchangeOAuthSettings\": {\n        \"inherited\": false,\n        \"scopeHandling\": \"PERMISSIVE\"\n      },\n      \"trustedIssuers\": [\n        {\n          \"certificate\": \"string\",\n          \"issuer\": \"string\",\n          \"jwksUri\": \"string\",\n          \"keyResolutionMethod\": \"JWKS_URL\",\n          \"scopeMappings\": {\n            \"key_0\": \"string\"\n          },\n          \"userBindingCriteria\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"userBindingEnabled\": true\n        },\n        {\n          \"certificate\": \"string\",\n          \"issuer\": \"string\",\n          \"jwksUri\": \"string\",\n          \"keyResolutionMethod\": \"PEM\",\n          \"scopeMappings\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"userBindingCriteria\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"userBindingEnabled\": true\n        }\n      ]\n    },\n    \"uma\": {\n      \"enabled\": false\n    },\n    \"updatedAt\": \"1969-06-04T11:51:55.202Z\",\n    \"version\": \"V1_0\",\n    \"vhostMode\": false,\n    \"vhosts\": [\n      {\n        \"host\": \"string\",\n        \"overrideEntrypoint\": false,\n        \"path\": \"string\"\n      },\n      {\n        \"host\": \"string\",\n        \"overrideEntrypoint\": false,\n        \"path\": \"string\"\n      }\n    ],\n    \"webAuthnSettings\": {\n      \"attestationConveyancePreference\": \"DIRECT\",\n      \"authenticatorAttachment\": \"CROSS_PLATFORM\",\n      \"certificates\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"enforceAuthenticatorIntegrity\": false,\n      \"enforceAuthenticatorIntegrityMaxAge\": 4394,\n      \"forceRegistration\": false,\n      \"origin\": \"string\",\n      \"relyingPartyId\": \"string\",\n      \"relyingPartyName\": \"string\",\n      \"requireResidentKey\": true,\n      \"userVerification\": \"DISCOURAGED\"\n    }\n  },\n  {\n    \"accountSettings\": {\n      \"accountBlockedDuration\": 3174,\n      \"autoLoginAfterRegistration\": true,\n      \"autoLoginAfterResetPassword\": false,\n      \"botDetectionPlugin\": \"string\",\n      \"completeRegistrationWhenResetPassword\": false,\n      \"defaultIdentityProviderForRegistration\": \"string\",\n      \"deletePasswordlessDevicesAfterResetPassword\": false,\n      \"dynamicUserRegistration\": true,\n      \"inherited\": false,\n      \"loginAttemptsDetectionEnabled\": true,\n      \"loginAttemptsResetTime\": 190,\n      \"maxLoginAttempts\": 5591,\n      \"mfaChallengeAttemptsDetectionEnabled\": false,\n      \"mfaChallengeAttemptsResetTime\": 3187,\n      \"mfaChallengeMaxAttempts\": 6504,\n      \"mfaChallengeSendVerifyAlertEmail\": false,\n      \"redirectUriAfterRegistration\": \"string\",\n      \"redirectUriAfterResetPassword\": \"string\",\n      \"rememberMe\": false,\n      \"rememberMeDuration\": 6570,\n      \"resetPasswordConfirmIdentity\": true,\n      \"resetPasswordCustomForm\": true,\n      \"resetPasswordCustomFormFields\": [\n        {\n          \"key\": \"string\",\n          \"label\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"label\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"resetPasswordInvalidateTokens\": false,\n      \"sendRecoverAccountEmail\": false,\n      \"sendVerifyRegistrationAccountEmail\": true,\n      \"useBotDetection\": true\n    },\n    \"alertEnabled\": false,\n    \"certificateSettings\": {\n      \"fallbackCertificate\": \"string\"\n    },\n    \"corsSettings\": {\n      \"allowCredentials\": false,\n      \"allowedHeaders\": [\n        \"string\"\n      ],\n      \"allowedMethods\": [\n        \"string\"\n      ],\n      \"allowedOrigins\": [\n        \"string\"\n      ],\n      \"enabled\": false,\n      \"maxAge\": 2157\n    },\n    \"createdAt\": \"1969-06-02T00:10:05.301Z\",\n    \"dataPlaneId\": \"string\",\n    \"description\": \"string\",\n    \"dynamicClientRegistrationEnabled\": true,\n    \"dynamicClientRegistrationTemplateEnabled\": false,\n    \"enabled\": true,\n    \"hrid\": \"string\",\n    \"id\": \"string\",\n    \"identities\": [\n      \"string\"\n    ],\n    \"loginSettings\": {\n      \"certificateBasedAuthEnabled\": true,\n      \"certificateBasedAuthUrl\": \"string\",\n      \"enforcePasswordPolicyEnabled\": true,\n      \"forgotPasswordEnabled\": true,\n      \"hideForm\": false,\n      \"identifierFirstEnabled\": false,\n      \"inherited\": true,\n      \"magicLinkAuthEnabled\": false,\n      \"passwordlessDeviceNamingEnabled\": true,\n      \"passwordlessEnabled\": true,\n      \"passwordlessEnforcePasswordEnabled\": true,\n      \"passwordlessEnforcePasswordMaxAge\": 6837,\n      \"passwordlessRememberDeviceEnabled\": false,\n      \"registerEnabled\": false,\n      \"rememberMeEnabled\": false,\n      \"resetPasswordOnExpiration\": false\n    },\n    \"master\": true,\n    \"name\": \"string\",\n    \"oidc\": {\n      \"cibaSettings\": {\n        \"authReqExpiry\": 8531,\n        \"bindingMessageLength\": 7041,\n        \"deviceNotifiers\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"enabled\": false,\n        \"tokenReqInterval\": 2730\n      },\n      \"cimdSettings\": {\n        \"allowPrivateIpAddress\": false,\n        \"allowUnsecuredHttpUri\": false,\n        \"allowedDomains\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cacheMaxEntries\": 8816,\n        \"cacheTtlSeconds\": 2683,\n        \"enabled\": true,\n        \"fetchTimeoutMs\": 4776,\n        \"maxResponseSizeKb\": 8303,\n        \"revokeOnDocumentChange\": false,\n        \"templateId\": \"string\"\n      },\n      \"clientRegistrationSettings\": {\n        \"allowHttpSchemeRedirectUri\": true,\n        \"allowLocalhostRedirectUri\": true,\n        \"allowRedirectUriParamsExpressionLanguage\": false,\n        \"allowWildCardRedirectUri\": false,\n        \"allowedScopes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"allowedScopesEnabled\": false,\n        \"clientTemplateEnabled\": true,\n        \"defaultScopes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dynamicClientRegistrationEnabled\": true,\n        \"openDynamicClientRegistrationEnabled\": false\n      },\n      \"postLogoutRedirectUris\": [\n        \"string\",\n        \"string\"\n      ],\n      \"redirectUriStrictMatching\": false,\n      \"requestUris\": [\n        \"string\",\n        \"string\"\n      ],\n      \"securityProfileSettings\": {\n        \"enableFapiBrazil\": true,\n        \"enablePlainFapi\": false\n      }\n    },\n    \"openDynamicClientRegistrationEnabled\": true,\n    \"passwordSettings\": {\n      \"excludePasswordsInDictionary\": true,\n      \"excludeUserProfileInfoInPassword\": false,\n      \"expiryDuration\": 7971,\n      \"includeNumbers\": false,\n      \"includeSpecialCharacters\": true,\n      \"inherited\": true,\n      \"lettersInMixedCase\": false,\n      \"maxConsecutiveLetters\": 2728,\n      \"maxLength\": 1808,\n      \"minLength\": 7353,\n      \"oldPasswords\": 8283,\n      \"passwordHistoryEnabled\": false\n    },\n    \"path\": \"string\",\n    \"redirectUriExpressionLanguageEnabled\": false,\n    \"redirectUriLocalhostAllowed\": true,\n    \"redirectUriStrictMatching\": false,\n    \"redirectUriUnsecuredHttpSchemeAllowed\": false,\n    \"redirectUriWildcardAllowed\": true,\n    \"referenceId\": \"string\",\n    \"referenceType\": \"PLATFORM\",\n    \"saml\": {\n      \"certificate\": \"string\",\n      \"enabled\": true,\n      \"entityId\": \"string\"\n    },\n    \"scim\": {\n      \"enabled\": false,\n      \"idpSelectionEnabled\": false,\n      \"idpSelectionRule\": \"string\"\n    },\n    \"secretExpirationSettings\": {\n      \"enabled\": false,\n      \"expiryTimeSeconds\": 975\n    },\n    \"selfServiceAccountManagementSettings\": {\n      \"enabled\": true,\n      \"resetPassword\": {\n        \"oldPasswordRequired\": false,\n        \"tokenAge\": 829\n      }\n    },\n    \"tags\": [\n      \"string\"\n    ],\n    \"tokenExchangeSettings\": {\n      \"allowDelegation\": true,\n      \"allowImpersonation\": true,\n      \"allowedActorTokenTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedRequestedTokenTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"allowedSubjectTokenTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"enabled\": false,\n      \"maxDelegationDepth\": 1000,\n      \"tokenExchangeOAuthSettings\": {\n        \"inherited\": false,\n        \"scopeHandling\": \"DOWNSCOPING\"\n      },\n      \"trustedIssuers\": [\n        {\n          \"certificate\": \"string\",\n          \"issuer\": \"string\",\n          \"jwksUri\": \"string\",\n          \"keyResolutionMethod\": \"PEM\",\n          \"scopeMappings\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"userBindingCriteria\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"userBindingEnabled\": true\n        },\n        {\n          \"certificate\": \"string\",\n          \"issuer\": \"string\",\n          \"jwksUri\": \"string\",\n          \"keyResolutionMethod\": \"PEM\",\n          \"scopeMappings\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\",\n            \"key_3\": \"string\"\n          },\n          \"userBindingCriteria\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"userBindingEnabled\": true\n        }\n      ]\n    },\n    \"uma\": {\n      \"enabled\": false\n    },\n    \"updatedAt\": \"1974-04-26T02:02:19.176Z\",\n    \"version\": \"V2_0\",\n    \"vhostMode\": false,\n    \"vhosts\": [\n      {\n        \"host\": \"string\",\n        \"overrideEntrypoint\": true,\n        \"path\": \"string\"\n      },\n      {\n        \"host\": \"string\",\n        \"overrideEntrypoint\": false,\n        \"path\": \"string\"\n      }\n    ],\n    \"webAuthnSettings\": {\n      \"attestationConveyancePreference\": \"NONE\",\n      \"authenticatorAttachment\": \"PLATFORM\",\n      \"certificates\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"enforceAuthenticatorIntegrity\": false,\n      \"enforceAuthenticatorIntegrityMaxAge\": 8033,\n      \"forceRegistration\": true,\n      \"origin\": \"string\",\n      \"relyingPartyId\": \"string\",\n      \"relyingPartyName\": \"string\",\n      \"requireResidentKey\": true,\n      \"userVerification\": \"DISCOURAGED\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7128ac68-6394-47e8-a694-e29573c29823",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bd96efb-f8ad-4168-8393-05920c14e1a7",
+          "name": "Create a sharding tags",
+          "request": {
+            "name": "Create a sharding tags",
+            "description": {
+              "content": "User must have the ORGANIZATION_TAG[CREATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a9431c5-6eb1-4d5b-b1b2-3ffc1eed7c84",
+              "name": "Sharding tag successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98fdec47-f143-4564-aff7-80e465219e9e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48b547e5-8637-4f9f-af39-6105125f99b3",
+          "name": "Get a sharding tag",
+          "request": {
+            "name": "Get a sharding tag",
+            "description": {
+              "content": "User must have the ORGANIZATION_TAG[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "tags",
+                ":tag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4b1db40-bb51-425a-84e1-8553c910452b",
+              "name": "Sharding tag",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags",
+                    ":tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1995-09-18T12:02:51.775Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"organizationId\": \"string\",\n  \"updatedAt\": \"1966-05-31T15:06:12.774Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3caa396c-c76f-4983-ac38-8dc9c9c047c8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags",
+                    ":tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20b21096-a7d8-40bd-99df-87c05252eb7e",
+          "name": "Update the sharding tag",
+          "request": {
+            "name": "Update the sharding tag",
+            "description": {
+              "content": "User must have the ORGANIZATION_TAG[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "tags",
+                ":tag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5771096-4a16-4863-828b-1f5d0805cc08",
+              "name": "Sharding tag successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags",
+                    ":tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1995-09-18T12:02:51.775Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"organizationId\": \"string\",\n  \"updatedAt\": \"1966-05-31T15:06:12.774Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fdbca91-8714-4968-9aa0-b8fcbde4e793",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags",
+                    ":tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f08a62a-157a-4c64-bc1f-ddcfcd0f18d8",
+          "name": "Delete the sharding tag",
+          "request": {
+            "name": "Delete the sharding tag",
+            "description": {
+              "content": "User must have the ORGANIZATION_TAG[DELETE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "tags",
+                ":tag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tag",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68e0978c-e4d4-4e8f-8ecd-80033d3ade38",
+              "name": "Sharding tag successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags",
+                    ":tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8b75820-da4d-4015-ae6e-f6c3db9462fd",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "tags",
+                    ":tag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tag",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/management",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a46214c-ac4c-4942-a206-2bbbf396d1e0",
+    "name": "Gravitee.io - Access Management alerts sharding-tags API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

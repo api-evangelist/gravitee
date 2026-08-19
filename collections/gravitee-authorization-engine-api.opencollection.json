@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Authorization Engine API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorization Engine",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List authorization engine plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/authorization-engines",
+            "params": [
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an authorization engine plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/authorization-engines/:authorizationEngine",
+            "params": [
+              {
+                "name": "authorizationEngine",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an authorization engine plugin's schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/authorization-engines/:authorizationEngine/schema",
+            "params": [
+              {
+                "name": "authorizationEngine",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "List registered authorization engines for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/authorization-engines",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_AUTHORIZATION_ENGINE[LIST] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[LIST] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[LIST] permission on the specified organization."
+        },
+        {
+          "info": {
+            "name": "Create an authorization engine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/authorization-engines",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_AUTHORIZATION_ENGINE[CREATE] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[CREATE] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get an authorization engine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/authorization-engines/:engineId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "engineId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_AUTHORIZATION_ENGINE[READ] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[READ] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update an authorization engine",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/authorization-engines/:engineId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "engineId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_AUTHORIZATION_ENGINE[UPDATE] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[UPDATE] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete an authorization engine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/authorization-engines/:engineId",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "engineId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_AUTHORIZATION_ENGINE[DELETE] permission on the specified domain or DOMAIN_AUTHORIZATION_ENGINE[DELETE] permission on the specified environment or DOMAIN_AUTHORIZATION_ENGINE[DELETE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

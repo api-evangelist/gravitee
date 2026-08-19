@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Plans API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Plans on an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/apis/:apiId/plans",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "List Plans on an API"
+        },
+        {
+          "info": {
+            "name": "Create a Plan on an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/:apiId/plans",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Plan on an API"
+        },
+        {
+          "info": {
+            "name": "Get a Plan by Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/apis/:apiId/plans/:planId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Plan by Identifier"
+        },
+        {
+          "info": {
+            "name": "Update a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/environments/:envId/apis/:apiId/plans/:planId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Plan"
+        },
+        {
+          "info": {
+            "name": "Publish a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/:apiId/plans/:planId/_publish",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Publish a Plan"
+        },
+        {
+          "info": {
+            "name": "Close a Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/:apiId/plans/:planId/_close",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Close a Plan"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Installation API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Installation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments"
+          },
+          "docs": "List Environments"
+        },
+        {
+          "info": {
+            "name": "Get an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Get an Environment"
+        },
+        {
+          "info": {
+            "name": "Get an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:orgId",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an Organization"
+        },
+        {
+          "info": {
+            "name": "Get the Organization License",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:orgId/license",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Organization License"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

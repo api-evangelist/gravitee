@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts user notifications API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "user notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List notifications received by the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/user/notifications"
+          },
+          "docs": "List notifications received by the current user"
+        },
+        {
+          "info": {
+            "name": "Mark User notification as read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/user/notifications/:notificationId/acknowledge",
+            "params": [
+              {
+                "name": "notificationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Mark User notification as read"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

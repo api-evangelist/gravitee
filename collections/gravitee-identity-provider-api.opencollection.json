@@ -1,0 +1,405 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Identity Provider API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identity Provider",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List identity provider plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/identities",
+            "params": [
+              {
+                "name": "external",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/identities/:identity",
+            "params": [
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an identity provider plugin's schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/identities/:identity/schema",
+            "params": [
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "List registered identity providers for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/identities",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userProvider",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_IDENTITY_PROVIDER[LIST] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[LIST] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[LIST] permission on the specified organization. Each returned identity provider is filtered and contains only basic information such as id, name and type."
+        },
+        {
+          "info": {
+            "name": "Create an identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/identities",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_IDENTITY_PROVIDER[CREATE] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[CREATE] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get an identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/identities/:identity",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_IDENTITY_PROVIDER[READ] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[READ] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update an identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/identities/:identity",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete an identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/identities/:identity",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_IDENTITY_PROVIDER[DELETE] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[DELETE] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Assign password policy to identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/identities/:identity/password-policy",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified domain or DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified environment or DOMAIN_IDENTITY_PROVIDER[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List registered identity providers of the organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/identities",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userProvider",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION_IDENTITY_PROVIDER[LIST] permission on the specified organization. Each returned identity provider is filtered and contains only basic information such as id, name, type and isExternal."
+        },
+        {
+          "info": {
+            "name": "Create an identity provider for the organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/identities",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the ORGANIZATION_IDENTITY_PROVIDER[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get an identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/identities/:identity",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION_IDENTITY_PROVIDER[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update an identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/identities/:identity",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the ORGANIZATION_IDENTITY_PROVIDER[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete an identity provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/identities/:identity",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "identity",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION_IDENTITY_PROVIDER[DELETE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

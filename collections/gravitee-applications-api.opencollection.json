@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Applications API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/applications",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "List Applications"
+        },
+        {
+          "info": {
+            "name": "Create an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/applications",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Application"
+        },
+        {
+          "info": {
+            "name": "Get an Application by Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/applications/:applicationId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an Application by Identifier"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

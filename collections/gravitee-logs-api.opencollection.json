@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Logs API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Request Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/logs/search",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "Search Request Logs"
+        },
+        {
+          "info": {
+            "name": "List Error Keys for Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/logs/error-keys",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "List Error Keys for Logs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

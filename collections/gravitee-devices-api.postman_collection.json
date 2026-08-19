@@ -1,0 +1,511 @@
+{
+  "item": [
+    {
+      "id": "84301cf5-e3a8-47f9-aaa2-7f1d925230a7",
+      "name": "devices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4f4bbc3-3c8f-45bb-a6f9-4ada97b53a8b",
+          "name": "List users for a security domain",
+          "request": {
+            "name": "List users for a security domain",
+            "description": {
+              "content": "User must have the DOMAIN_USER_DEVICES[LIST] permission on the specified domain or DOMAIN_USER_DEVICES[LIST] permission on the specified environment or DOMAIN_USER_DEVICES[LIST] permission on the specified organization. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "users",
+                ":user",
+                "devices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53b3fa2a-c328-46fd-80cd-9b83e2ddffa2",
+              "name": "List users for a security domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "users",
+                    ":user",
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accountLockedAt\": \"1964-05-12T13:36:39.505Z\",\n    \"accountLockedUntil\": \"2023-11-02T04:57:15.581Z\",\n    \"accountNonExpired\": true,\n    \"accountNonLocked\": true,\n    \"additionalInformation\": {\n      \"key_0\": {}\n    },\n    \"address\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {},\n      \"key_3\": {}\n    },\n    \"addresses\": [\n      {\n        \"country\": \"string\",\n        \"formatted\": \"string\",\n        \"locality\": \"string\",\n        \"postalCode\": \"string\",\n        \"primary\": false,\n        \"region\": \"string\",\n        \"streetAddress\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"country\": \"string\",\n        \"formatted\": \"string\",\n        \"locality\": \"string\",\n        \"postalCode\": \"string\",\n        \"primary\": true,\n        \"region\": \"string\",\n        \"streetAddress\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"birthdate\": \"string\",\n    \"client\": \"string\",\n    \"createdAt\": \"1981-10-27T16:23:41.254Z\",\n    \"credentialsNonExpired\": false,\n    \"disabled\": false,\n    \"displayName\": \"string\",\n    \"dynamicGroups\": [\n      \"string\",\n      \"string\"\n    ],\n    \"dynamicRoles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"email\": \"string\",\n    \"emails\": [\n      {\n        \"primary\": false,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"enabled\": true,\n    \"entitlements\": [\n      \"string\",\n      \"string\"\n    ],\n    \"externalId\": \"string\",\n    \"factors\": [\n      {\n        \"appId\": \"string\",\n        \"channel\": {\n          \"additionalData\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {},\n            \"key_3\": {}\n          },\n          \"target\": \"string\",\n          \"type\": \"SMS\"\n        },\n        \"createdAt\": \"1962-08-01T21:11:48.351Z\",\n        \"factorId\": \"string\",\n        \"primary\": true,\n        \"security\": {\n          \"additionalData\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        \"status\": \"ACTIVATED\",\n        \"updatedAt\": \"2017-04-17T18:54:54.872Z\"\n      },\n      {\n        \"appId\": \"string\",\n        \"channel\": {\n          \"additionalData\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          },\n          \"target\": \"string\",\n          \"type\": \"HTTP\"\n        },\n        \"createdAt\": \"1987-11-18T04:57:36.875Z\",\n        \"factorId\": \"string\",\n        \"primary\": false,\n        \"security\": {\n          \"additionalData\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        \"status\": \"PENDING_ACTIVATION\",\n        \"updatedAt\": \"1961-08-21T12:37:03.641Z\"\n      }\n    ],\n    \"firstName\": \"string\",\n    \"forceResetPassword\": true,\n    \"fullId\": {\n      \"externalId\": \"string\",\n      \"id\": \"string\",\n      \"source\": \"string\"\n    },\n    \"groups\": [\n      \"string\",\n      \"string\"\n    ],\n    \"id\": \"string\",\n    \"identities\": [\n      {\n        \"additionalInformation\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        \"linkedAt\": \"1979-03-18T09:45:15.069Z\",\n        \"providerId\": \"string\",\n        \"userId\": \"string\",\n        \"username\": \"string\"\n      },\n      {\n        \"additionalInformation\": {\n          \"key_0\": {}\n        },\n        \"linkedAt\": \"1984-06-25T05:04:27.393Z\",\n        \"providerId\": \"string\",\n        \"userId\": \"string\",\n        \"username\": \"string\"\n      }\n    ],\n    \"identitiesAsMap\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"ims\": [\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"primary\": false,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"inactive\": true,\n    \"indefinitelyLocked\": false,\n    \"internal\": true,\n    \"lastIdentityInformation\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"lastIdentityUsed\": \"string\",\n    \"lastLoginWithCredentials\": \"1963-11-24T07:26:37.720Z\",\n    \"lastLogoutAt\": \"2014-09-10T20:59:37.686Z\",\n    \"lastName\": \"string\",\n    \"lastPasswordReset\": \"2018-11-22T01:26:27.612Z\",\n    \"lastUsernameReset\": \"1970-05-05T18:45:31.680Z\",\n    \"locale\": \"string\",\n    \"loggedAt\": \"1976-08-17T13:42:52.897Z\",\n    \"loginsCount\": 5916,\n    \"mfaEnrollmentSkippedAt\": \"2024-05-02T17:03:50.273Z\",\n    \"middleName\": \"string\",\n    \"newsletter\": false,\n    \"nickName\": \"string\",\n    \"password\": \"string\",\n    \"phoneNumber\": \"string\",\n    \"phoneNumbers\": [\n      {\n        \"primary\": false,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"photos\": [\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"primary\": false,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"picture\": \"string\",\n    \"preRegistration\": false,\n    \"preferredLanguage\": \"string\",\n    \"profile\": \"string\",\n    \"referenceId\": \"string\",\n    \"referenceType\": \"PLATFORM\",\n    \"registrationAccessToken\": \"string\",\n    \"registrationCompleted\": false,\n    \"registrationUserUri\": \"string\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rolesPermissions\": [\n      {\n        \"assignableType\": \"ORGANIZATION\",\n        \"createdAt\": \"1974-03-18T14:54:43.635Z\",\n        \"defaultRole\": false,\n        \"description\": \"string\",\n        \"id\": \"string\",\n        \"internalOnly\": true,\n        \"name\": \"string\",\n        \"oauthScopes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"permissionAcls\": {\n          \"key_0\": [\n            \"READ\",\n            \"UPDATE\"\n          ],\n          \"key_1\": [\n            \"LIST\",\n            \"CREATE\"\n          ]\n        },\n        \"referenceId\": \"string\",\n        \"referenceType\": \"PROTECTED_RESOURCE\",\n        \"system\": false,\n        \"updatedAt\": \"1999-05-16T13:12:57.348Z\"\n      },\n      {\n        \"assignableType\": \"PLATFORM\",\n        \"createdAt\": \"1997-08-17T13:53:35.573Z\",\n        \"defaultRole\": false,\n        \"description\": \"string\",\n        \"id\": \"string\",\n        \"internalOnly\": false,\n        \"name\": \"string\",\n        \"oauthScopes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"permissionAcls\": {\n          \"key_0\": [\n            \"LIST\",\n            \"READ\"\n          ]\n        },\n        \"referenceId\": \"string\",\n        \"referenceType\": \"PLATFORM\",\n        \"system\": true,\n        \"updatedAt\": \"1966-10-11T14:43:35.682Z\"\n      }\n    ],\n    \"serviceAccount\": false,\n    \"source\": \"string\",\n    \"temporarilyLocked\": true,\n    \"title\": \"string\",\n    \"type\": \"string\",\n    \"updatedAt\": \"1976-05-19T23:42:19.555Z\",\n    \"username\": \"string\",\n    \"website\": \"string\",\n    \"x509Certificates\": [\n      {\n        \"value\": \"string\"\n      },\n      {\n        \"value\": \"string\"\n      }\n    ],\n    \"zoneInfo\": \"string\"\n  },\n  {\n    \"accountLockedAt\": \"1948-10-24T12:56:19.144Z\",\n    \"accountLockedUntil\": \"1985-12-15T15:07:25.801Z\",\n    \"accountNonExpired\": false,\n    \"accountNonLocked\": true,\n    \"additionalInformation\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"address\": {\n      \"key_0\": {}\n    },\n    \"addresses\": [\n      {\n        \"country\": \"string\",\n        \"formatted\": \"string\",\n        \"locality\": \"string\",\n        \"postalCode\": \"string\",\n        \"primary\": false,\n        \"region\": \"string\",\n        \"streetAddress\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"country\": \"string\",\n        \"formatted\": \"string\",\n        \"locality\": \"string\",\n        \"postalCode\": \"string\",\n        \"primary\": false,\n        \"region\": \"string\",\n        \"streetAddress\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"birthdate\": \"string\",\n    \"client\": \"string\",\n    \"createdAt\": \"1990-04-13T23:19:10.060Z\",\n    \"credentialsNonExpired\": true,\n    \"disabled\": true,\n    \"displayName\": \"string\",\n    \"dynamicGroups\": [\n      \"string\",\n      \"string\"\n    ],\n    \"dynamicRoles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"email\": \"string\",\n    \"emails\": [\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"enabled\": true,\n    \"entitlements\": [\n      \"string\",\n      \"string\"\n    ],\n    \"externalId\": \"string\",\n    \"factors\": [\n      {\n        \"appId\": \"string\",\n        \"channel\": {\n          \"additionalData\": {\n            \"key_0\": {}\n          },\n          \"target\": \"string\",\n          \"type\": \"CALL\"\n        },\n        \"createdAt\": \"2025-09-15T10:01:08.226Z\",\n        \"factorId\": \"string\",\n        \"primary\": true,\n        \"security\": {\n          \"additionalData\": {\n            \"key_0\": {}\n          },\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        \"status\": \"REVOKED\",\n        \"updatedAt\": \"2010-09-13T20:35:17.605Z\"\n      },\n      {\n        \"appId\": \"string\",\n        \"channel\": {\n          \"additionalData\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          },\n          \"target\": \"string\",\n          \"type\": \"EMAIL\"\n        },\n        \"createdAt\": \"1946-08-21T09:37:54.754Z\",\n        \"factorId\": \"string\",\n        \"primary\": false,\n        \"security\": {\n          \"additionalData\": {\n            \"key_0\": {}\n          },\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        \"status\": \"PENDING_ACTIVATION\",\n        \"updatedAt\": \"1959-06-23T18:55:10.605Z\"\n      }\n    ],\n    \"firstName\": \"string\",\n    \"forceResetPassword\": false,\n    \"fullId\": {\n      \"externalId\": \"string\",\n      \"id\": \"string\",\n      \"source\": \"string\"\n    },\n    \"groups\": [\n      \"string\",\n      \"string\"\n    ],\n    \"id\": \"string\",\n    \"identities\": [\n      {\n        \"additionalInformation\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"linkedAt\": \"1992-04-17T06:25:28.635Z\",\n        \"providerId\": \"string\",\n        \"userId\": \"string\",\n        \"username\": \"string\"\n      },\n      {\n        \"additionalInformation\": {\n          \"key_0\": {}\n        },\n        \"linkedAt\": \"1992-08-13T02:17:28.810Z\",\n        \"providerId\": \"string\",\n        \"userId\": \"string\",\n        \"username\": \"string\"\n      }\n    ],\n    \"identitiesAsMap\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"ims\": [\n      {\n        \"primary\": false,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"inactive\": true,\n    \"indefinitelyLocked\": true,\n    \"internal\": false,\n    \"lastIdentityInformation\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"lastIdentityUsed\": \"string\",\n    \"lastLoginWithCredentials\": \"1992-01-23T02:36:58.230Z\",\n    \"lastLogoutAt\": \"1994-11-27T07:55:05.370Z\",\n    \"lastName\": \"string\",\n    \"lastPasswordReset\": \"1997-09-02T22:18:54.614Z\",\n    \"lastUsernameReset\": \"2012-12-31T14:05:49.522Z\",\n    \"locale\": \"string\",\n    \"loggedAt\": \"1947-08-13T19:48:06.379Z\",\n    \"loginsCount\": 2070,\n    \"mfaEnrollmentSkippedAt\": \"1960-04-12T14:15:11.033Z\",\n    \"middleName\": \"string\",\n    \"newsletter\": true,\n    \"nickName\": \"string\",\n    \"password\": \"string\",\n    \"phoneNumber\": \"string\",\n    \"phoneNumbers\": [\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"photos\": [\n      {\n        \"primary\": false,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"primary\": true,\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"picture\": \"string\",\n    \"preRegistration\": true,\n    \"preferredLanguage\": \"string\",\n    \"profile\": \"string\",\n    \"referenceId\": \"string\",\n    \"referenceType\": \"PLATFORM\",\n    \"registrationAccessToken\": \"string\",\n    \"registrationCompleted\": true,\n    \"registrationUserUri\": \"string\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rolesPermissions\": [\n      {\n        \"assignableType\": \"PROTECTED_RESOURCE\",\n        \"createdAt\": \"1975-04-05T06:19:12.440Z\",\n        \"defaultRole\": true,\n        \"description\": \"string\",\n        \"id\": \"string\",\n        \"internalOnly\": false,\n        \"name\": \"string\",\n        \"oauthScopes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"permissionAcls\": {\n          \"key_0\": [\n            \"DELETE\",\n            \"LIST\"\n          ],\n          \"key_1\": [\n            \"LIST\",\n            \"UPDATE\"\n          ],\n          \"key_2\": [\n            \"READ\",\n            \"UPDATE\"\n          ]\n        },\n        \"referenceId\": \"string\",\n        \"referenceType\": \"ORGANIZATION\",\n        \"system\": true,\n        \"updatedAt\": \"1959-03-08T20:09:12.695Z\"\n      },\n      {\n        \"assignableType\": \"ORGANIZATION\",\n        \"createdAt\": \"1985-08-24T07:53:40.675Z\",\n        \"defaultRole\": false,\n        \"description\": \"string\",\n        \"id\": \"string\",\n        \"internalOnly\": true,\n        \"name\": \"string\",\n        \"oauthScopes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"permissionAcls\": {\n          \"key_0\": [\n            \"CREATE\",\n            \"LIST\"\n          ]\n        },\n        \"referenceId\": \"string\",\n        \"referenceType\": \"ENVIRONMENT\",\n        \"system\": true,\n        \"updatedAt\": \"2014-09-05T22:02:32.538Z\"\n      }\n    ],\n    \"serviceAccount\": true,\n    \"source\": \"string\",\n    \"temporarilyLocked\": true,\n    \"title\": \"string\",\n    \"type\": \"string\",\n    \"updatedAt\": \"1987-11-11T07:02:14.694Z\",\n    \"username\": \"string\",\n    \"website\": \"string\",\n    \"x509Certificates\": [\n      {\n        \"value\": \"string\"\n      },\n      {\n        \"value\": \"string\"\n      }\n    ],\n    \"zoneInfo\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "373e5eb4-561b-4446-8536-d5d47f1e6a5b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "users",
+                    ":user",
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d92c361-5c45-4cac-8873-7855760fceae",
+          "name": "Delete a device",
+          "request": {
+            "name": "Delete a device",
+            "description": {
+              "content": "User must have the DOMAIN_USER_DEVICE[DELETE] permission on the specified domain or DOMAIN_USER_DEVICE[DELETE] permission on the specified environment or DOMAIN_USER_DEVICE[DELETE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "users",
+                ":user",
+                "devices",
+                ":device"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "device",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1104a29b-01ae-411b-8d10-cfe0f00cd9e2",
+              "name": "User successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "users",
+                    ":user",
+                    "devices",
+                    ":device"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "device",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c68aa38a-2c25-4bea-b777-5c557776d5fc",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "users",
+                    ":user",
+                    "devices",
+                    ":device"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "device",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/management",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a0d430e2-ea51-47ff-a509-76563dbeae98",
+    "name": "Gravitee.io - Access Management alerts devices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

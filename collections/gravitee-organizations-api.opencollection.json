@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Organizations API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all the environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the ENVIRONMENT[LIST] permission on the specified organization AND either ENVIRONMENT[READ] permission on each environment or ENVIRONMENT[READ] permission on the specified organization.Each returned environment is filtered and contains only basic information such as id and name."
+        },
+        {
+          "info": {
+            "name": "List environment member's permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/members/permissions",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have ENVIRONMENT[READ] permission on the specified environment or ENVIRONMENT[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List members for an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/members",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have ORGANIZATION_MEMBER[LIST] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Add or update an organization member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/members",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have ORGANIZATION_MEMBER[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Remove a membership of the organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/members/:member",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "member",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have ORGANIZATION_MEMBER[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get organization main settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/settings",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the ORGANIZATION_SETTINGS[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update platform main settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/management/organizations/:organizationId/settings",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the ORGANIZATION_SETTINGS[UPDATE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

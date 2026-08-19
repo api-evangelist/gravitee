@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Subscriptions API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subscriptions for an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/apis/:apiId/subscriptions",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "List Subscriptions for an API"
+        },
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/subscriptions",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ]
+          },
+          "docs": "List Subscriptions"
+        },
+        {
+          "info": {
+            "name": "Create a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/subscriptions",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Subscription"
+        },
+        {
+          "info": {
+            "name": "Get a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Subscription"
+        },
+        {
+          "info": {
+            "name": "Accept a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/subscriptions/:subscriptionId/_accept",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Accept a Subscription"
+        },
+        {
+          "info": {
+            "name": "Reject a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/subscriptions/:subscriptionId/_reject",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reject a Subscription"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

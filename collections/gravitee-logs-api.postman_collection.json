@@ -1,0 +1,215 @@
+{
+  "item": [
+    {
+      "id": "001e9486-d0d0-42d0-b9fe-9bb7fb582d45",
+      "name": "Logs",
+      "description": {
+        "content": "Search request and error logs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9727c960-d763-471b-ace6-9f1a22116ec3",
+          "name": "Search Request Logs",
+          "request": {
+            "name": "Search Request Logs",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "logs",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4832caaf-4de8-465f-a398-8048aa223676",
+              "name": "Logs page",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "logs",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7e98970-c5cf-4715-b51d-b0321317dc41",
+          "name": "List Error Keys for Logs",
+          "request": {
+            "name": "List Error Keys for Logs",
+            "description": {},
+            "url": {
+              "path": [
+                "environments",
+                ":envId",
+                "logs",
+                "error-keys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "envId",
+                  "description": "(Required) The environment identifier"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61f1f5f4-3504-451d-80a2-4d663a8b0eba",
+              "name": "Error keys",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "environments",
+                    ":envId",
+                    "logs",
+                    "error-keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "envId",
+                      "description": "(Required) The environment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/management",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "66714351-26d9-4a2f-8769-b88a0644d4a3",
+    "name": "Gravitee.io - Access Management alerts Logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Search request and error logs",
+      "type": "text/plain"
+    }
+  }
+}

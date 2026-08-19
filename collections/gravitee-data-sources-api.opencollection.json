@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts data-sources API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "data-sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all the data sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/data-sources",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns all of the available data sources to be used in IDP creation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

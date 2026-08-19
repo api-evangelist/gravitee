@@ -1,0 +1,228 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Extension Grant API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Extension Grant",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List extension grant plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/extensionGrants"
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an extension grant plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/extensionGrants/:extensionGrant",
+            "params": [
+              {
+                "name": "extensionGrant",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an extension grant plugin's schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/extensionGrants/:extensionGrant/schema",
+            "params": [
+              {
+                "name": "extensionGrant",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "List registered extension grants for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/extensionGrants",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_EXTENSION_GRANT[LIST] permission on the specified domain or DOMAIN_EXTENSION_GRANT[LIST] permission on the specified environment or DOMAIN_EXTENSION_GRANT[LIST] permission on the specified organization. Each returned extension grant is filtered and contains only basic information such as id, name and type."
+        },
+        {
+          "info": {
+            "name": "Create a extension grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/extensionGrants",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_EXTENSION_GRANT[CREATE] permission on the specified domain or DOMAIN_EXTENSION_GRANT[CREATE] permission on the specified environment or DOMAIN_EXTENSION_GRANT[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a extension grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/extensionGrants/:extensionGrant",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extensionGrant",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_EXTENSION_GRANT[READ] permission on the specified domain or DOMAIN_EXTENSION_GRANT[READ] permission on the specified environment or DOMAIN_EXTENSION_GRANT[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update an extension grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/extensionGrants/:extensionGrant",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extensionGrant",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_EXTENSION_GRANT[UPDATE] permission on the specified domain or DOMAIN_EXTENSION_GRANT[UPDATE] permission on the specified environment or DOMAIN_EXTENSION_GRANT[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a extension grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/extensionGrants/:extensionGrant",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "extensionGrant",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_EXTENSION_GRANT[DELETE] permission on the specified domain or DOMAIN_EXTENSION_GRANT[DELETE] permission on the specified environment or DOMAIN_EXTENSION_GRANT[DELETE] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,951 @@
+{
+  "item": [
+    {
+      "id": "257c779e-7031-4444-8db6-eb73f82b0616",
+      "name": "flow",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3aedddc2-6ad1-4abc-b1a3-13c4818e1181",
+          "name": "List registered flows for a security domain",
+          "request": {
+            "name": "List registered flows for a security domain",
+            "description": {
+              "content": "User must have the DOMAIN_FLOW[LIST] permission on the specified domain or DOMAIN_FLOW[LIST] permission on the specified environment or DOMAIN_FLOW[LIST] permission on the specified organization. Except if user has DOMAIN_FLOW[READ] permission on the domain, environment or organization, each returned flow is filtered and contains only basic information such as id and name and isEnabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "flows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "635c5d6b-1342-4a7e-ba54-81372cdb2aa0",
+              "name": "List registered flows for a security domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"condition\": \"string\",\n    \"createdAt\": \"1964-04-25T11:56:46.477Z\",\n    \"enabled\": false,\n    \"icon\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"post\": [\n      {\n        \"condition\": \"string\",\n        \"configuration\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": true,\n        \"name\": \"string\",\n        \"policy\": \"string\"\n      },\n      {\n        \"condition\": \"string\",\n        \"configuration\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false,\n        \"name\": \"string\",\n        \"policy\": \"string\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"string\",\n        \"configuration\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false,\n        \"name\": \"string\",\n        \"policy\": \"string\"\n      },\n      {\n        \"condition\": \"string\",\n        \"configuration\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": true,\n        \"name\": \"string\",\n        \"policy\": \"string\"\n      }\n    ],\n    \"type\": \"MFA_ENROLLMENT\",\n    \"updatedAt\": \"1980-07-16T06:55:53.928Z\"\n  },\n  {\n    \"condition\": \"string\",\n    \"createdAt\": \"2013-04-03T21:58:57.532Z\",\n    \"enabled\": false,\n    \"icon\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"post\": [\n      {\n        \"condition\": \"string\",\n        \"configuration\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false,\n        \"name\": \"string\",\n        \"policy\": \"string\"\n      },\n      {\n        \"condition\": \"string\",\n        \"configuration\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false,\n        \"name\": \"string\",\n        \"policy\": \"string\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"string\",\n        \"configuration\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": true,\n        \"name\": \"string\",\n        \"policy\": \"string\"\n      },\n      {\n        \"condition\": \"string\",\n        \"configuration\": \"string\",\n        \"description\": \"string\",\n        \"enabled\": false,\n        \"name\": \"string\",\n        \"policy\": \"string\"\n      }\n    ],\n    \"type\": \"WEBAUTHN_REGISTER\",\n    \"updatedAt\": \"1967-07-19T13:27:17.169Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da6ab61d-e626-4dfb-9465-13fb51ce3c26",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb627c19-813e-4f8a-8abc-1cbf3d050b45",
+          "name": "Create or update list of flows",
+          "request": {
+            "name": "Create or update list of flows",
+            "description": {
+              "content": "User must have the DOMAIN_FLOW[UPDATE] permission on the specified domain or DOMAIN_FLOW[UPDATE] permission on the specified environment or DOMAIN_FLOW[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "flows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"condition\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"post\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"condition\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"post\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60adccb3-6eee-4ba8-829d-b65d4ecaf91c",
+              "name": "Flows successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"condition\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"post\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"condition\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"post\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"condition\": \"string\",\n    \"createdAt\": \"2005-03-12T04:45:23.924Z\",\n    \"enabled\": true,\n    \"icon\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"post\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"type\": \"MFA_CHALLENGE\",\n    \"updatedAt\": \"1986-11-17T02:52:00.828Z\"\n  },\n  {\n    \"condition\": \"string\",\n    \"createdAt\": \"1986-10-20T03:03:08.531Z\",\n    \"enabled\": false,\n    \"icon\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"post\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"type\": \"LOGIN\",\n    \"updatedAt\": \"2011-04-17T01:10:51.406Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a05220b-48df-4b37-a7f3-0f5ddc5b0b1a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"condition\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"post\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"condition\": \"<string>\",\n    \"enabled\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"post\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ],\n    \"pre\": [\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      },\n      {\n        \"condition\": \"<string>\",\n        \"configuration\": \"<string>\",\n        \"description\": \"<string>\",\n        \"enabled\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"policy\": \"<string>\"\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d25ab64-94f0-4765-9705-1df3457f1e0c",
+          "name": "Get a flow",
+          "request": {
+            "name": "Get a flow",
+            "description": {
+              "content": "User must have the DOMAIN_FLOW[READ] permission on the specified domain or DOMAIN_FLOW[READ] permission on the specified environment or DOMAIN_FLOW[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "flows",
+                ":flow"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "flow",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfb20874-2a68-4dcf-96cc-7fa239872662",
+              "name": "Flow",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "flows",
+                    ":flow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "flow",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"condition\": \"string\",\n  \"createdAt\": \"2000-02-17T23:08:50.272Z\",\n  \"enabled\": true,\n  \"icon\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"post\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ],\n  \"pre\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ],\n  \"type\": \"REGISTER\",\n  \"updatedAt\": \"1968-09-18T09:43:55.452Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86a63044-a08f-481d-9c18-49ef07310f0d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "flows",
+                    ":flow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "flow",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6557c258-db8d-4d83-9a9b-357d496507ec",
+          "name": "Update a flow",
+          "request": {
+            "name": "Update a flow",
+            "description": {
+              "content": "User must have the DOMAIN_FLOW[UPDATE] permission on the specified domain or DOMAIN_FLOW[UPDATE] permission on the specified environment or DOMAIN_FLOW[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "flows",
+                ":flow"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "flow",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"condition\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"post\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ],\n  \"pre\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d9ecb00b-a507-49ed-93c7-e6c8513db7b6",
+              "name": "Flow successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "flows",
+                    ":flow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "flow",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"condition\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"post\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ],\n  \"pre\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"condition\": \"string\",\n  \"createdAt\": \"2000-02-17T23:08:50.272Z\",\n  \"enabled\": true,\n  \"icon\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"post\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ],\n  \"pre\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ],\n  \"type\": \"REGISTER\",\n  \"updatedAt\": \"1968-09-18T09:43:55.452Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23d243f3-686d-45aa-b20c-15e1643d1f55",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "flows",
+                    ":flow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "flow",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"condition\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"post\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ],\n  \"pre\": [\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    },\n    {\n      \"condition\": \"<string>\",\n      \"configuration\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"policy\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/management",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "38f6636f-ccd4-4326-bc31-dcd768b852fe",
+    "name": "Gravitee.io - Access Management alerts flow API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

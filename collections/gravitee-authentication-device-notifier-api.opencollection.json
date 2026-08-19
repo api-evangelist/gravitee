@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Authentication Device Notifier API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication Device Notifier",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registered Authentication Device Notifiers for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[LIST] permission on the specified organization Each returned Authentication Device Notifier is filtered and contains only basic information such as id, name."
+        },
+        {
+          "info": {
+            "name": "Create an Authentication Device Notifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get an Authentication Device Notifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "authDeviceNotifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update an Authentication Device Notifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "authDeviceNotifier",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete an Authentication Device Notifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/auth-device-notifiers/:authDeviceNotifier",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "authDeviceNotifier",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified domain or DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified environment or DOMAIN_AUTHDEVICE_NOTIFIER[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "List authentication device notifier plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/auth-device-notifiers",
+            "params": [
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get a Authentication Device Notifier plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/auth-device-notifiers/:authDeviceNotifierId",
+            "params": [
+              {
+                "name": "authDeviceNotifierId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an Authentication Device Notifier plugin's schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/auth-device-notifiers/:authDeviceNotifierId/schema",
+            "params": [
+              {
+                "name": "authDeviceNotifierId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

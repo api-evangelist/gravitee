@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts APIs API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "APIs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List APIs in an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/apis",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List APIs in an Environment"
+        },
+        {
+          "info": {
+            "name": "Create an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an API"
+        },
+        {
+          "info": {
+            "name": "Import an API from an OpenAPI/Swagger Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/_import/swagger",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import an API from an OpenAPI/Swagger Document"
+        },
+        {
+          "info": {
+            "name": "Import an API From a Gravitee Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/_import/definition",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import an API From a Gravitee Definition"
+        },
+        {
+          "info": {
+            "name": "Search APIs by Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/_search",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search APIs by Query"
+        },
+        {
+          "info": {
+            "name": "Get an API by Identifier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/environments/:envId/apis/:apiId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Get an API by Identifier"
+        },
+        {
+          "info": {
+            "name": "Update an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/environments/:envId/apis/:apiId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an API"
+        },
+        {
+          "info": {
+            "name": "Delete an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/environments/:envId/apis/:apiId",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Delete an API"
+        },
+        {
+          "info": {
+            "name": "Deploy an API to the Gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/:apiId/_deploy",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Deploy an API to the Gateway"
+        },
+        {
+          "info": {
+            "name": "Start an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/:apiId/_start",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Start an API"
+        },
+        {
+          "info": {
+            "name": "Stop an API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/environments/:envId/apis/:apiId/_stop",
+            "params": [
+              {
+                "name": "envId",
+                "value": "",
+                "type": "path",
+                "description": "The environment identifier"
+              },
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              }
+            ]
+          },
+          "docs": "Stop an API"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

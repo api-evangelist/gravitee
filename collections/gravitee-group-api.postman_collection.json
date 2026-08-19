@@ -1,0 +1,4428 @@
+{
+  "item": [
+    {
+      "id": "70512980-c0d0-4cfc-861b-63d010ed1e56",
+      "name": "group",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5b12f4e-da9d-4924-bb9e-e29258c90bde",
+          "name": "List groups for a security domain",
+          "request": {
+            "name": "List groups for a security domain",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[LIST] permission on the specified domain or DOMAIN_GROUP[LIST] permission on the specified environment or DOMAIN_GROUP[LIST] permission on the specified organization. Each returned group is filtered and contains only basic information such as id and name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bb0a408-5e18-4980-9f0a-872f085fb017",
+              "name": "List groups for a security domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currentPage\": 9275,\n  \"data\": [\n    {\n      \"createdAt\": \"2011-03-05T12:54:28.176Z\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"members\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"referenceId\": \"string\",\n      \"referenceType\": \"PROTECTED_RESOURCE\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"updatedAt\": \"2024-10-02T20:34:02.309Z\"\n    },\n    {\n      \"createdAt\": \"1998-11-18T14:22:11.768Z\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"members\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\",\n      \"referenceId\": \"string\",\n      \"referenceType\": \"DOMAIN\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"updatedAt\": \"1992-02-05T10:15:45.614Z\"\n    }\n  ],\n  \"totalCount\": 8961\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d4ba55c-d1d5-4b94-91ef-357c923872d6",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ddc7434-afc9-4c62-b104-a4c2e069a093",
+          "name": "Create a group",
+          "request": {
+            "name": "Create a group",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[CREATE] permission on the specified domain or DOMAIN_GROUP[CREATE] permission on the specified environment or DOMAIN_GROUP[CREATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf345c01-b72d-49a1-a6a7-33ec0efef754",
+              "name": "Group successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1966-04-10T05:01:58.283Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"members\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": \"string\",\n  \"referenceId\": \"string\",\n  \"referenceType\": \"PLATFORM\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updatedAt\": \"1983-09-20T23:25:58.247Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dd18ae8-a897-435c-996d-0c741546be7d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a67a7a67-fded-462a-8695-0dd841c4609e",
+          "name": "Get a group",
+          "request": {
+            "name": "Get a group",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c27c52c7-6f74-40f5-ab7a-f79a37e473df",
+              "name": "Group successfully fetched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1966-04-10T05:01:58.283Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"members\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": \"string\",\n  \"referenceId\": \"string\",\n  \"referenceType\": \"PLATFORM\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updatedAt\": \"1983-09-20T23:25:58.247Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f07157aa-d891-4c2e-a4d6-013732c8936b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7853eee-bda8-442c-9a4a-c619b67136e8",
+          "name": "Update a group",
+          "request": {
+            "name": "Update a group",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "caa42a63-b751-487b-8905-19702df1aa99",
+              "name": "Group successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1966-04-10T05:01:58.283Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"members\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": \"string\",\n  \"referenceId\": \"string\",\n  \"referenceType\": \"PLATFORM\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updatedAt\": \"1983-09-20T23:25:58.247Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e79bc31b-a5d6-4c51-81b8-f63832bb359c",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25a0d06a-0997-43e5-8492-5f5034931c19",
+          "name": "Delete a group",
+          "request": {
+            "name": "Delete a group",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[DELETE] permission on the specified domain or DOMAIN_GROUP[DELETE] permission on the specified environment or DOMAIN_GROUP[DELETE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "582fe3a7-9b29-44a1-a2d1-327d31f2fc27",
+              "name": "Group successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b59c08b-5175-4f6a-a4f4-d5569513558b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95fe7ed0-efb7-4ec3-9dfb-13d1cd01de4d",
+          "name": "List group members",
+          "request": {
+            "name": "List group members",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "30"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aefa392e-d020-4938-8415-202556580656",
+              "name": "Group members successfully fetched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currentPage\": 7306,\n  \"data\": [\n    {\n      \"accountLockedAt\": \"1961-02-20T04:30:43.539Z\",\n      \"accountLockedUntil\": \"1957-06-15T23:36:26.172Z\",\n      \"accountNonExpired\": true,\n      \"accountNonLocked\": true,\n      \"additionalInformation\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"address\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"addresses\": [\n        {\n          \"country\": \"string\",\n          \"formatted\": \"string\",\n          \"locality\": \"string\",\n          \"postalCode\": \"string\",\n          \"primary\": true,\n          \"region\": \"string\",\n          \"streetAddress\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"country\": \"string\",\n          \"formatted\": \"string\",\n          \"locality\": \"string\",\n          \"postalCode\": \"string\",\n          \"primary\": false,\n          \"region\": \"string\",\n          \"streetAddress\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"birthdate\": \"string\",\n      \"client\": \"string\",\n      \"createdAt\": \"1978-05-16T22:24:40.157Z\",\n      \"credentialsNonExpired\": true,\n      \"disabled\": false,\n      \"displayName\": \"string\",\n      \"dynamicGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dynamicRoles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"email\": \"string\",\n      \"emails\": [\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"entitlements\": [\n        \"string\",\n        \"string\"\n      ],\n      \"externalId\": \"string\",\n      \"factors\": [\n        {\n          \"appId\": \"string\",\n          \"channel\": {\n            \"additionalData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"target\": \"string\",\n            \"type\": \"SMS\"\n          },\n          \"createdAt\": \"2023-04-21T03:43:52.744Z\",\n          \"factorId\": \"string\",\n          \"primary\": true,\n          \"security\": {\n            \"additionalData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\"\n          },\n          \"status\": \"ACTIVATED\",\n          \"updatedAt\": \"1952-07-04T04:02:27.225Z\"\n        },\n        {\n          \"appId\": \"string\",\n          \"channel\": {\n            \"additionalData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"target\": \"string\",\n            \"type\": \"HTTP\"\n          },\n          \"createdAt\": \"1997-01-29T21:08:19.909Z\",\n          \"factorId\": \"string\",\n          \"primary\": false,\n          \"security\": {\n            \"additionalData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\"\n          },\n          \"status\": \"REVOKED\",\n          \"updatedAt\": \"1950-02-25T21:31:21.458Z\"\n        }\n      ],\n      \"firstName\": \"string\",\n      \"forceResetPassword\": true,\n      \"fullId\": {\n        \"externalId\": \"string\",\n        \"id\": \"string\",\n        \"source\": \"string\"\n      },\n      \"groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"identities\": [\n        {\n          \"additionalInformation\": {\n            \"key_0\": {}\n          },\n          \"linkedAt\": \"1970-04-03T05:47:46.394Z\",\n          \"providerId\": \"string\",\n          \"userId\": \"string\",\n          \"username\": \"string\"\n        },\n        {\n          \"additionalInformation\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          },\n          \"linkedAt\": \"2013-03-28T12:30:29.658Z\",\n          \"providerId\": \"string\",\n          \"userId\": \"string\",\n          \"username\": \"string\"\n        }\n      ],\n      \"identitiesAsMap\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"ims\": [\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"inactive\": false,\n      \"indefinitelyLocked\": false,\n      \"internal\": false,\n      \"lastIdentityInformation\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {},\n        \"key_3\": {}\n      },\n      \"lastIdentityUsed\": \"string\",\n      \"lastLoginWithCredentials\": \"2006-09-21T11:42:26.878Z\",\n      \"lastLogoutAt\": \"2011-09-03T04:36:21.998Z\",\n      \"lastName\": \"string\",\n      \"lastPasswordReset\": \"1948-03-08T08:29:45.158Z\",\n      \"lastUsernameReset\": \"2022-04-06T10:10:31.001Z\",\n      \"locale\": \"string\",\n      \"loggedAt\": \"1986-06-29T14:19:16.265Z\",\n      \"loginsCount\": 606,\n      \"mfaEnrollmentSkippedAt\": \"1955-09-17T07:16:38.572Z\",\n      \"middleName\": \"string\",\n      \"newsletter\": true,\n      \"nickName\": \"string\",\n      \"password\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"phoneNumbers\": [\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"photos\": [\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"picture\": \"string\",\n      \"preRegistration\": true,\n      \"preferredLanguage\": \"string\",\n      \"profile\": \"string\",\n      \"referenceId\": \"string\",\n      \"referenceType\": \"PROTECTED_RESOURCE\",\n      \"registrationAccessToken\": \"string\",\n      \"registrationCompleted\": true,\n      \"registrationUserUri\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rolesPermissions\": [\n        {\n          \"assignableType\": \"ORGANIZATION\",\n          \"createdAt\": \"1991-05-21T09:45:21.551Z\",\n          \"defaultRole\": true,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"internalOnly\": false,\n          \"name\": \"string\",\n          \"oauthScopes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"permissionAcls\": {\n            \"key_0\": [\n              \"DELETE\",\n              \"CREATE\"\n            ]\n          },\n          \"referenceId\": \"string\",\n          \"referenceType\": \"DOMAIN\",\n          \"system\": true,\n          \"updatedAt\": \"1964-08-26T11:24:47.329Z\"\n        },\n        {\n          \"assignableType\": \"ORGANIZATION\",\n          \"createdAt\": \"1947-02-13T09:40:44.630Z\",\n          \"defaultRole\": false,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"internalOnly\": true,\n          \"name\": \"string\",\n          \"oauthScopes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"permissionAcls\": {\n            \"key_0\": [\n              \"LIST\",\n              \"CREATE\"\n            ]\n          },\n          \"referenceId\": \"string\",\n          \"referenceType\": \"PROTECTED_RESOURCE\",\n          \"system\": true,\n          \"updatedAt\": \"1950-06-19T06:20:50.127Z\"\n        }\n      ],\n      \"serviceAccount\": false,\n      \"source\": \"string\",\n      \"temporarilyLocked\": true,\n      \"title\": \"string\",\n      \"type\": \"string\",\n      \"updatedAt\": \"2024-10-16T00:45:59.168Z\",\n      \"username\": \"string\",\n      \"website\": \"string\",\n      \"x509Certificates\": [\n        {\n          \"value\": \"string\"\n        },\n        {\n          \"value\": \"string\"\n        }\n      ],\n      \"zoneInfo\": \"string\"\n    },\n    {\n      \"accountLockedAt\": \"2024-01-12T16:44:54.985Z\",\n      \"accountLockedUntil\": \"1962-08-21T19:04:41.768Z\",\n      \"accountNonExpired\": true,\n      \"accountNonLocked\": true,\n      \"additionalInformation\": {\n        \"key_0\": {}\n      },\n      \"address\": {\n        \"key_0\": {}\n      },\n      \"addresses\": [\n        {\n          \"country\": \"string\",\n          \"formatted\": \"string\",\n          \"locality\": \"string\",\n          \"postalCode\": \"string\",\n          \"primary\": true,\n          \"region\": \"string\",\n          \"streetAddress\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"country\": \"string\",\n          \"formatted\": \"string\",\n          \"locality\": \"string\",\n          \"postalCode\": \"string\",\n          \"primary\": false,\n          \"region\": \"string\",\n          \"streetAddress\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"birthdate\": \"string\",\n      \"client\": \"string\",\n      \"createdAt\": \"2009-02-24T09:20:25.729Z\",\n      \"credentialsNonExpired\": false,\n      \"disabled\": true,\n      \"displayName\": \"string\",\n      \"dynamicGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dynamicRoles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"email\": \"string\",\n      \"emails\": [\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"enabled\": true,\n      \"entitlements\": [\n        \"string\",\n        \"string\"\n      ],\n      \"externalId\": \"string\",\n      \"factors\": [\n        {\n          \"appId\": \"string\",\n          \"channel\": {\n            \"additionalData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"target\": \"string\",\n            \"type\": \"CALL\"\n          },\n          \"createdAt\": \"2015-06-02T21:31:50.721Z\",\n          \"factorId\": \"string\",\n          \"primary\": true,\n          \"security\": {\n            \"additionalData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\"\n          },\n          \"status\": \"PENDING_ACTIVATION\",\n          \"updatedAt\": \"2021-03-08T15:22:48.827Z\"\n        },\n        {\n          \"appId\": \"string\",\n          \"channel\": {\n            \"additionalData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"target\": \"string\",\n            \"type\": \"CALL\"\n          },\n          \"createdAt\": \"1975-11-24T12:22:56.433Z\",\n          \"factorId\": \"string\",\n          \"primary\": false,\n          \"security\": {\n            \"additionalData\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\"\n          },\n          \"status\": \"NULL\",\n          \"updatedAt\": \"2014-09-25T02:22:14.788Z\"\n        }\n      ],\n      \"firstName\": \"string\",\n      \"forceResetPassword\": true,\n      \"fullId\": {\n        \"externalId\": \"string\",\n        \"id\": \"string\",\n        \"source\": \"string\"\n      },\n      \"groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"identities\": [\n        {\n          \"additionalInformation\": {\n            \"key_0\": {},\n            \"key_1\": {},\n            \"key_2\": {}\n          },\n          \"linkedAt\": \"1969-01-10T23:48:07.533Z\",\n          \"providerId\": \"string\",\n          \"userId\": \"string\",\n          \"username\": \"string\"\n        },\n        {\n          \"additionalInformation\": {\n            \"key_0\": {},\n            \"key_1\": {}\n          },\n          \"linkedAt\": \"1987-03-29T06:31:26.000Z\",\n          \"providerId\": \"string\",\n          \"userId\": \"string\",\n          \"username\": \"string\"\n        }\n      ],\n      \"identitiesAsMap\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"ims\": [\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"inactive\": false,\n      \"indefinitelyLocked\": true,\n      \"internal\": false,\n      \"lastIdentityInformation\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"lastIdentityUsed\": \"string\",\n      \"lastLoginWithCredentials\": \"1953-07-02T22:59:52.553Z\",\n      \"lastLogoutAt\": \"1981-04-29T15:21:28.082Z\",\n      \"lastName\": \"string\",\n      \"lastPasswordReset\": \"1971-05-15T10:03:17.560Z\",\n      \"lastUsernameReset\": \"1972-01-31T00:40:38.278Z\",\n      \"locale\": \"string\",\n      \"loggedAt\": \"1953-08-31T19:46:53.151Z\",\n      \"loginsCount\": 9752,\n      \"mfaEnrollmentSkippedAt\": \"2017-08-30T17:03:19.050Z\",\n      \"middleName\": \"string\",\n      \"newsletter\": false,\n      \"nickName\": \"string\",\n      \"password\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"phoneNumbers\": [\n        {\n          \"primary\": true,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"photos\": [\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"primary\": false,\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"picture\": \"string\",\n      \"preRegistration\": true,\n      \"preferredLanguage\": \"string\",\n      \"profile\": \"string\",\n      \"referenceId\": \"string\",\n      \"referenceType\": \"DOMAIN\",\n      \"registrationAccessToken\": \"string\",\n      \"registrationCompleted\": false,\n      \"registrationUserUri\": \"string\",\n      \"roles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rolesPermissions\": [\n        {\n          \"assignableType\": \"PROTECTED_RESOURCE\",\n          \"createdAt\": \"1946-11-17T09:51:59.915Z\",\n          \"defaultRole\": false,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"internalOnly\": true,\n          \"name\": \"string\",\n          \"oauthScopes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"permissionAcls\": {\n            \"key_0\": [\n              \"READ\",\n              \"LIST\"\n            ]\n          },\n          \"referenceId\": \"string\",\n          \"referenceType\": \"PROTECTED_RESOURCE\",\n          \"system\": true,\n          \"updatedAt\": \"2010-08-14T12:50:44.607Z\"\n        },\n        {\n          \"assignableType\": \"APPLICATION\",\n          \"createdAt\": \"2009-03-27T03:12:01.176Z\",\n          \"defaultRole\": true,\n          \"description\": \"string\",\n          \"id\": \"string\",\n          \"internalOnly\": false,\n          \"name\": \"string\",\n          \"oauthScopes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"permissionAcls\": {\n            \"key_0\": [\n              \"UPDATE\",\n              \"DELETE\"\n            ],\n            \"key_1\": [\n              \"LIST\",\n              \"UPDATE\"\n            ]\n          },\n          \"referenceId\": \"string\",\n          \"referenceType\": \"ORGANIZATION\",\n          \"system\": true,\n          \"updatedAt\": \"1962-05-28T02:31:01.092Z\"\n        }\n      ],\n      \"serviceAccount\": true,\n      \"source\": \"string\",\n      \"temporarilyLocked\": true,\n      \"title\": \"string\",\n      \"type\": \"string\",\n      \"updatedAt\": \"1954-03-17T09:52:29.559Z\",\n      \"username\": \"string\",\n      \"website\": \"string\",\n      \"x509Certificates\": [\n        {\n          \"value\": \"string\"\n        },\n        {\n          \"value\": \"string\"\n        }\n      ],\n      \"zoneInfo\": \"string\"\n    }\n  ],\n  \"totalCount\": 3247\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6916edd-94a9-46d0-b8af-41896debe04d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "253b8a31-4b9f-4227-9884-f7f028f2715c",
+          "name": "Add a group member",
+          "request": {
+            "name": "Add a group member",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group",
+                "members",
+                ":member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "member",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0db3cbd6-2620-432a-89e4-d59d0ef89af1",
+              "name": "Member has been added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "778fc5ec-e7fb-4d2c-8d8c-ad45143d3c4e",
+              "name": "User does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1996edc8-9cc0-445e-9d9a-baa0fb331dcb",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a48e67d-04f1-499a-8896-73fee2f3e01a",
+          "name": "Remove a group member",
+          "request": {
+            "name": "Remove a group member",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group",
+                "members",
+                ":member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "member",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfc9d7d5-dd2e-474d-9851-228edd55908e",
+              "name": "Member has been removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6e884e6f-f811-4b62-96ac-f4c28773336b",
+              "name": "User does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c89f33c-05a2-468e-99df-0115783e305a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e54c15be-73ab-42a2-9804-22f90e3b51c2",
+          "name": "Get a group roles",
+          "request": {
+            "name": "Get a group roles",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "091ef0a1-7c11-4ca5-8c95-c98f128ac9f1",
+              "name": "Group roles successfully fetched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"assignableType\": \"DOMAIN\",\n    \"createdAt\": \"1952-05-26T14:32:18.838Z\",\n    \"defaultRole\": true,\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"internalOnly\": false,\n    \"name\": \"string\",\n    \"oauthScopes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"permissionAcls\": {\n      \"key_0\": [\n        \"DELETE\",\n        \"READ\"\n      ]\n    },\n    \"referenceId\": \"string\",\n    \"referenceType\": \"APPLICATION\",\n    \"system\": true,\n    \"updatedAt\": \"1981-03-18T00:20:34.712Z\"\n  },\n  {\n    \"assignableType\": \"APPLICATION\",\n    \"createdAt\": \"2022-04-17T01:39:24.637Z\",\n    \"defaultRole\": true,\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"internalOnly\": true,\n    \"name\": \"string\",\n    \"oauthScopes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"permissionAcls\": {\n      \"key_0\": [\n        \"UPDATE\",\n        \"DELETE\"\n      ],\n      \"key_1\": [\n        \"DELETE\",\n        \"UPDATE\"\n      ]\n    },\n    \"referenceId\": \"string\",\n    \"referenceType\": \"PROTECTED_RESOURCE\",\n    \"system\": false,\n    \"updatedAt\": \"1969-05-23T08:37:41.396Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1d32c0f-55b5-4089-9b12-79a1f8a67acf",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ae6e82d-d356-4347-a70c-23bfdebf7a2a",
+          "name": "Assign roles to a group",
+          "request": {
+            "name": "Assign roles to a group",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "48ed1f19-cdae-4311-800a-f9ccf46e9404",
+              "name": "Roles successfully assigned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1966-04-10T05:01:58.283Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"members\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": \"string\",\n  \"referenceId\": \"string\",\n  \"referenceType\": \"PLATFORM\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updatedAt\": \"1983-09-20T23:25:58.247Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dcb8f87-2715-49af-a211-09440196301d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f218d755-860f-4ab2-832d-992e386e6932",
+          "name": "Revoke role to a group",
+          "request": {
+            "name": "Revoke role to a group",
+            "description": {
+              "content": "User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "environments",
+                ":environmentId",
+                "domains",
+                ":domain",
+                "groups",
+                ":group",
+                "roles",
+                ":role"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "role",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32bb5395-b2bb-4fe2-be33-5cd450168384",
+              "name": "Roles successfully revoked",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "roles",
+                    ":role"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "role",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1966-04-10T05:01:58.283Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"members\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": \"string\",\n  \"referenceId\": \"string\",\n  \"referenceType\": \"PLATFORM\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updatedAt\": \"1983-09-20T23:25:58.247Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12376d7d-67c1-4f3d-b571-ac99137b4b78",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "environments",
+                    ":environmentId",
+                    "domains",
+                    ":domain",
+                    "groups",
+                    ":group",
+                    "roles",
+                    ":role"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "role",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23a0b843-5d98-4016-922c-d2a5d76ab01f",
+          "name": "List groups of the organization",
+          "request": {
+            "name": "List groups of the organization",
+            "description": {
+              "content": "User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned group is filtered and contains only basic information such as id and name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "100"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7be1f08-6ea3-45d4-8ab8-b6bc917492aa",
+              "name": "List groups of the organization",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"createdAt\": \"1981-01-19T06:30:10.163Z\",\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"members\": [\n      \"string\",\n      \"string\"\n    ],\n    \"name\": \"string\",\n    \"referenceId\": \"string\",\n    \"referenceType\": \"ENVIRONMENT\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"updatedAt\": \"1993-11-07T11:06:31.099Z\"\n  },\n  {\n    \"createdAt\": \"2002-04-21T12:46:53.804Z\",\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"members\": [\n      \"string\",\n      \"string\"\n    ],\n    \"name\": \"string\",\n    \"referenceId\": \"string\",\n    \"referenceType\": \"PROTECTED_RESOURCE\",\n    \"roles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"updatedAt\": \"2006-07-20T19:38:01.948Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f055dceb-34de-4543-bd7d-071e03ceb096",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6090ff78-183e-4aae-b066-32b3b0e3354f",
+          "name": "Create a platform group",
+          "request": {
+            "name": "Create a platform group",
+            "description": {
+              "content": "User must have the ORGANIZATION_GROUP[CREATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88c155d5-a4f1-4cfa-bd8b-4e1ee4868c04",
+              "name": "Group successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e1d27f8-0b14-415a-bfa9-d211c3f9ba6b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d797821-a73b-4316-ac68-b89a449bfd51",
+          "name": "Get a platform group",
+          "request": {
+            "name": "Get a platform group",
+            "description": {
+              "content": "User must have the ORGANIZATION_GROUP[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "groups",
+                ":group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c0cf5f4-ad86-49c1-badc-438198203d22",
+              "name": "Group successfully fetched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"1966-04-10T05:01:58.283Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"members\": [\n    \"string\",\n    \"string\"\n  ],\n  \"name\": \"string\",\n  \"referenceId\": \"string\",\n  \"referenceType\": \"PLATFORM\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"updatedAt\": \"1983-09-20T23:25:58.247Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa544694-17cb-4e45-a4d8-b3d2b9615356",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a1da883-2845-4bff-bc49-779208d4217d",
+          "name": "Update a platform group",
+          "request": {
+            "name": "Update a platform group",
+            "description": {
+              "content": "User must have the ORGANIZATION_GROUP[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "groups",
+                ":group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a5e32b4-33f3-42c0-b462-27562d73454e",
+              "name": "Group successfully updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountLockedAt\": \"1961-07-07T06:35:25.961Z\",\n  \"accountLockedUntil\": \"2026-05-18T22:08:48.241Z\",\n  \"accountNonExpired\": true,\n  \"accountNonLocked\": false,\n  \"additionalInformation\": {\n    \"key_0\": {}\n  },\n  \"address\": {\n    \"key_0\": {}\n  },\n  \"addresses\": [\n    {\n      \"country\": \"string\",\n      \"formatted\": \"string\",\n      \"locality\": \"string\",\n      \"postalCode\": \"string\",\n      \"primary\": false,\n      \"region\": \"string\",\n      \"streetAddress\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"country\": \"string\",\n      \"formatted\": \"string\",\n      \"locality\": \"string\",\n      \"postalCode\": \"string\",\n      \"primary\": false,\n      \"region\": \"string\",\n      \"streetAddress\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"birthdate\": \"string\",\n  \"client\": \"string\",\n  \"createdAt\": \"1987-10-07T23:24:17.507Z\",\n  \"credentialsNonExpired\": false,\n  \"disabled\": false,\n  \"displayName\": \"string\",\n  \"dynamicGroups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dynamicRoles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"email\": \"string\",\n  \"emails\": [\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"enabled\": false,\n  \"entitlements\": [\n    \"string\",\n    \"string\"\n  ],\n  \"externalId\": \"string\",\n  \"factors\": [\n    {\n      \"appId\": \"string\",\n      \"channel\": {\n        \"additionalData\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"target\": \"string\",\n        \"type\": \"EMAIL\"\n      },\n      \"createdAt\": \"1983-05-22T15:11:37.911Z\",\n      \"factorId\": \"string\",\n      \"primary\": true,\n      \"security\": {\n        \"additionalData\": {\n          \"key_0\": {}\n        },\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"NULL\",\n      \"updatedAt\": \"2012-03-02T23:32:17.752Z\"\n    },\n    {\n      \"appId\": \"string\",\n      \"channel\": {\n        \"additionalData\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"target\": \"string\",\n        \"type\": \"SMS\"\n      },\n      \"createdAt\": \"2002-03-11T19:53:59.190Z\",\n      \"factorId\": \"string\",\n      \"primary\": false,\n      \"security\": {\n        \"additionalData\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"REVOKED\",\n      \"updatedAt\": \"1953-11-12T14:25:15.109Z\"\n    }\n  ],\n  \"firstName\": \"string\",\n  \"forceResetPassword\": false,\n  \"fullId\": {\n    \"externalId\": \"string\",\n    \"id\": \"string\",\n    \"source\": \"string\"\n  },\n  \"groups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"identities\": [\n    {\n      \"additionalInformation\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"linkedAt\": \"2025-03-25T00:04:49.964Z\",\n      \"providerId\": \"string\",\n      \"userId\": \"string\",\n      \"username\": \"string\"\n    },\n    {\n      \"additionalInformation\": {\n        \"key_0\": {}\n      },\n      \"linkedAt\": \"1964-04-21T08:07:16.619Z\",\n      \"providerId\": \"string\",\n      \"userId\": \"string\",\n      \"username\": \"string\"\n    }\n  ],\n  \"identitiesAsMap\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {}\n  },\n  \"ims\": [\n    {\n      \"primary\": false,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"inactive\": true,\n  \"indefinitelyLocked\": true,\n  \"internal\": true,\n  \"lastIdentityInformation\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"lastIdentityUsed\": \"string\",\n  \"lastLoginWithCredentials\": \"2006-03-31T21:11:40.688Z\",\n  \"lastLogoutAt\": \"1956-09-06T02:46:14.213Z\",\n  \"lastName\": \"string\",\n  \"lastPasswordReset\": \"1957-04-29T05:29:57.444Z\",\n  \"lastUsernameReset\": \"1999-01-24T12:22:46.038Z\",\n  \"locale\": \"string\",\n  \"loggedAt\": \"1999-03-11T21:03:06.667Z\",\n  \"loginsCount\": 2911,\n  \"mfaEnrollmentSkippedAt\": \"1967-02-16T21:59:14.364Z\",\n  \"middleName\": \"string\",\n  \"newsletter\": false,\n  \"nickName\": \"string\",\n  \"password\": \"string\",\n  \"phoneNumber\": \"string\",\n  \"phoneNumbers\": [\n    {\n      \"primary\": false,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"photos\": [\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": false,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"picture\": \"string\",\n  \"preRegistration\": true,\n  \"preferredLanguage\": \"string\",\n  \"profile\": \"string\",\n  \"referenceId\": \"string\",\n  \"referenceType\": \"APPLICATION\",\n  \"registrationAccessToken\": \"string\",\n  \"registrationCompleted\": false,\n  \"registrationUserUri\": \"string\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"rolesPermissions\": [\n    {\n      \"assignableType\": \"ORGANIZATION\",\n      \"createdAt\": \"1993-03-18T15:18:51.299Z\",\n      \"defaultRole\": false,\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"internalOnly\": false,\n      \"name\": \"string\",\n      \"oauthScopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"permissionAcls\": {\n        \"key_0\": [\n          \"LIST\",\n          \"UPDATE\"\n        ],\n        \"key_1\": [\n          \"LIST\",\n          \"READ\"\n        ]\n      },\n      \"referenceId\": \"string\",\n      \"referenceType\": \"APPLICATION\",\n      \"system\": true,\n      \"updatedAt\": \"2003-10-27T09:56:55.638Z\"\n    },\n    {\n      \"assignableType\": \"ORGANIZATION\",\n      \"createdAt\": \"1954-06-25T05:12:05.926Z\",\n      \"defaultRole\": false,\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"internalOnly\": true,\n      \"name\": \"string\",\n      \"oauthScopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"permissionAcls\": {\n        \"key_0\": [\n          \"READ\",\n          \"DELETE\"\n        ],\n        \"key_1\": [\n          \"UPDATE\",\n          \"LIST\"\n        ]\n      },\n      \"referenceId\": \"string\",\n      \"referenceType\": \"ORGANIZATION\",\n      \"system\": true,\n      \"updatedAt\": \"2018-11-28T07:49:48.060Z\"\n    }\n  ],\n  \"serviceAccount\": true,\n  \"source\": \"string\",\n  \"temporarilyLocked\": true,\n  \"title\": \"string\",\n  \"type\": \"string\",\n  \"updatedAt\": \"2009-05-24T15:36:36.042Z\",\n  \"username\": \"string\",\n  \"website\": \"string\",\n  \"x509Certificates\": [\n    {\n      \"value\": \"string\"\n    },\n    {\n      \"value\": \"string\"\n    }\n  ],\n  \"zoneInfo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6eb2b00-3c44-4dbd-9150-ac05b3d3afab",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f8ba551-ccc3-4c3b-8754-a8402f44dc45",
+          "name": "Delete a platform group",
+          "request": {
+            "name": "Delete a platform group",
+            "description": {
+              "content": "User must have the ORGANIZATION_GROUP[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "groups",
+                ":group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93f8eb9c-4e2e-4d25-91fc-ed5638b54b05",
+              "name": "Group successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a8606a1-8f70-4027-aa04-9cbc106c7b00",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15c799cf-6750-4f2e-9002-adeed1711f54",
+          "name": "List group members",
+          "request": {
+            "name": "List group members",
+            "description": {
+              "content": "User must have the ORGANIZATION_GROUP[READ] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "groups",
+                ":group",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "30"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46576e10-2169-47d5-a819-1d326a2b1f8b",
+              "name": "Group members successfully fetched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountLockedAt\": \"1961-07-07T06:35:25.961Z\",\n  \"accountLockedUntil\": \"2026-05-18T22:08:48.241Z\",\n  \"accountNonExpired\": true,\n  \"accountNonLocked\": false,\n  \"additionalInformation\": {\n    \"key_0\": {}\n  },\n  \"address\": {\n    \"key_0\": {}\n  },\n  \"addresses\": [\n    {\n      \"country\": \"string\",\n      \"formatted\": \"string\",\n      \"locality\": \"string\",\n      \"postalCode\": \"string\",\n      \"primary\": false,\n      \"region\": \"string\",\n      \"streetAddress\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"country\": \"string\",\n      \"formatted\": \"string\",\n      \"locality\": \"string\",\n      \"postalCode\": \"string\",\n      \"primary\": false,\n      \"region\": \"string\",\n      \"streetAddress\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"birthdate\": \"string\",\n  \"client\": \"string\",\n  \"createdAt\": \"1987-10-07T23:24:17.507Z\",\n  \"credentialsNonExpired\": false,\n  \"disabled\": false,\n  \"displayName\": \"string\",\n  \"dynamicGroups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dynamicRoles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"email\": \"string\",\n  \"emails\": [\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"enabled\": false,\n  \"entitlements\": [\n    \"string\",\n    \"string\"\n  ],\n  \"externalId\": \"string\",\n  \"factors\": [\n    {\n      \"appId\": \"string\",\n      \"channel\": {\n        \"additionalData\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"target\": \"string\",\n        \"type\": \"EMAIL\"\n      },\n      \"createdAt\": \"1983-05-22T15:11:37.911Z\",\n      \"factorId\": \"string\",\n      \"primary\": true,\n      \"security\": {\n        \"additionalData\": {\n          \"key_0\": {}\n        },\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"NULL\",\n      \"updatedAt\": \"2012-03-02T23:32:17.752Z\"\n    },\n    {\n      \"appId\": \"string\",\n      \"channel\": {\n        \"additionalData\": {\n          \"key_0\": {},\n          \"key_1\": {}\n        },\n        \"target\": \"string\",\n        \"type\": \"SMS\"\n      },\n      \"createdAt\": \"2002-03-11T19:53:59.190Z\",\n      \"factorId\": \"string\",\n      \"primary\": false,\n      \"security\": {\n        \"additionalData\": {\n          \"key_0\": {},\n          \"key_1\": {},\n          \"key_2\": {}\n        },\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"REVOKED\",\n      \"updatedAt\": \"1953-11-12T14:25:15.109Z\"\n    }\n  ],\n  \"firstName\": \"string\",\n  \"forceResetPassword\": false,\n  \"fullId\": {\n    \"externalId\": \"string\",\n    \"id\": \"string\",\n    \"source\": \"string\"\n  },\n  \"groups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"identities\": [\n    {\n      \"additionalInformation\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"linkedAt\": \"2025-03-25T00:04:49.964Z\",\n      \"providerId\": \"string\",\n      \"userId\": \"string\",\n      \"username\": \"string\"\n    },\n    {\n      \"additionalInformation\": {\n        \"key_0\": {}\n      },\n      \"linkedAt\": \"1964-04-21T08:07:16.619Z\",\n      \"providerId\": \"string\",\n      \"userId\": \"string\",\n      \"username\": \"string\"\n    }\n  ],\n  \"identitiesAsMap\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {}\n  },\n  \"ims\": [\n    {\n      \"primary\": false,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"inactive\": true,\n  \"indefinitelyLocked\": true,\n  \"internal\": true,\n  \"lastIdentityInformation\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"lastIdentityUsed\": \"string\",\n  \"lastLoginWithCredentials\": \"2006-03-31T21:11:40.688Z\",\n  \"lastLogoutAt\": \"1956-09-06T02:46:14.213Z\",\n  \"lastName\": \"string\",\n  \"lastPasswordReset\": \"1957-04-29T05:29:57.444Z\",\n  \"lastUsernameReset\": \"1999-01-24T12:22:46.038Z\",\n  \"locale\": \"string\",\n  \"loggedAt\": \"1999-03-11T21:03:06.667Z\",\n  \"loginsCount\": 2911,\n  \"mfaEnrollmentSkippedAt\": \"1967-02-16T21:59:14.364Z\",\n  \"middleName\": \"string\",\n  \"newsletter\": false,\n  \"nickName\": \"string\",\n  \"password\": \"string\",\n  \"phoneNumber\": \"string\",\n  \"phoneNumbers\": [\n    {\n      \"primary\": false,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"photos\": [\n    {\n      \"primary\": true,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"primary\": false,\n      \"type\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"picture\": \"string\",\n  \"preRegistration\": true,\n  \"preferredLanguage\": \"string\",\n  \"profile\": \"string\",\n  \"referenceId\": \"string\",\n  \"referenceType\": \"APPLICATION\",\n  \"registrationAccessToken\": \"string\",\n  \"registrationCompleted\": false,\n  \"registrationUserUri\": \"string\",\n  \"roles\": [\n    \"string\",\n    \"string\"\n  ],\n  \"rolesPermissions\": [\n    {\n      \"assignableType\": \"ORGANIZATION\",\n      \"createdAt\": \"1993-03-18T15:18:51.299Z\",\n      \"defaultRole\": false,\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"internalOnly\": false,\n      \"name\": \"string\",\n      \"oauthScopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"permissionAcls\": {\n        \"key_0\": [\n          \"LIST\",\n          \"UPDATE\"\n        ],\n        \"key_1\": [\n          \"LIST\",\n          \"READ\"\n        ]\n      },\n      \"referenceId\": \"string\",\n      \"referenceType\": \"APPLICATION\",\n      \"system\": true,\n      \"updatedAt\": \"2003-10-27T09:56:55.638Z\"\n    },\n    {\n      \"assignableType\": \"ORGANIZATION\",\n      \"createdAt\": \"1954-06-25T05:12:05.926Z\",\n      \"defaultRole\": false,\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"internalOnly\": true,\n      \"name\": \"string\",\n      \"oauthScopes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"permissionAcls\": {\n        \"key_0\": [\n          \"READ\",\n          \"DELETE\"\n        ],\n        \"key_1\": [\n          \"UPDATE\",\n          \"LIST\"\n        ]\n      },\n      \"referenceId\": \"string\",\n      \"referenceType\": \"ORGANIZATION\",\n      \"system\": true,\n      \"updatedAt\": \"2018-11-28T07:49:48.060Z\"\n    }\n  ],\n  \"serviceAccount\": true,\n  \"source\": \"string\",\n  \"temporarilyLocked\": true,\n  \"title\": \"string\",\n  \"type\": \"string\",\n  \"updatedAt\": \"2009-05-24T15:36:36.042Z\",\n  \"username\": \"string\",\n  \"website\": \"string\",\n  \"x509Certificates\": [\n    {\n      \"value\": \"string\"\n    },\n    {\n      \"value\": \"string\"\n    }\n  ],\n  \"zoneInfo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "724f7384-107f-4257-8100-e704c44a2d7b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "size",
+                      "value": "30"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ed8c998-0c03-44a2-9bdb-b507c8f9b14b",
+          "name": "Add a group member",
+          "request": {
+            "name": "Add a group member",
+            "description": {
+              "content": "User must have the ORGANIZATION_GROUP[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "groups",
+                ":group",
+                "members",
+                ":member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "member",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53f41dc9-3461-4d9b-9974-8e599225c59e",
+              "name": "Member has been added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fa89b481-6dcf-4848-9468-fe1a1fb02bcb",
+              "name": "User does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "627d53c9-4283-45f3-8627-b6a4aafc1ffd",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17c78018-b7d3-438e-87d3-b95cbc1b9b5f",
+          "name": "Remove a group member",
+          "request": {
+            "name": "Remove a group member",
+            "description": {
+              "content": "User must have the ORGANIZATION_GROUP[UPDATE] permission on the specified organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "organizations",
+                ":organizationId",
+                "groups",
+                ":group",
+                "members",
+                ":member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "group",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "member",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54bb2b60-8566-4d88-9363-fc2f56af6f00",
+              "name": "Member has been removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5abcbc2b-2ac9-4184-894a-e577223688d5",
+              "name": "User does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc8a1407-7cd3-45d9-8c65-3a7fafade549",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "organizations",
+                    ":organizationId",
+                    "groups",
+                    ":group",
+                    "members",
+                    ":member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "group",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "member",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/management",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6ac1c89d-5a40-4130-b807-fc552abb844d",
+    "name": "Gravitee.io - Access Management alerts group API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

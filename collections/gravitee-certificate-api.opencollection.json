@@ -1,0 +1,327 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gravitee.io - Access Management alerts Certificate API",
+    "version": "4.12.0-alpha.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Certificate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List certificate plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/certificates"
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an certificate plugin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/certificates/:certificate",
+            "params": [
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "Get an certificate's schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/platform/plugins/certificates/:certificate/schema",
+            "params": [
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "There is no particular permission needed. User must be authenticated."
+        },
+        {
+          "info": {
+            "name": "List registered certificates for a security domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/certificates",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "use",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_CERTIFICATE[LIST] permission on the specified domain or DOMAIN_CERTIFICATE[LIST] permission on the specified environment or DOMAIN_CERTIFICATE[LIST] permission on the specified organization. Each returned certificate is filtered and contains only basic information such as id, name and type."
+        },
+        {
+          "info": {
+            "name": "Create a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/certificates",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_CERTIFICATE[CREATE] permission on the specified domain or DOMAIN_CERTIFICATE[CREATE] permission on the specified environment or DOMAIN_CERTIFICATE[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Generate a new System a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/certificates/rotate",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_CERTIFICATE[CREATE] permission on the specified domain or DOMAIN_CERTIFICATE[CREATE] permission on the specified environment or DOMAIN_CERTIFICATE[CREATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/certificates/:certificate",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_CERTIFICATE[READ] permission on the specified domain or DOMAIN_CERTIFICATE[READ] permission on the specified environment or DOMAIN_CERTIFICATE[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Update a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/certificates/:certificate",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User must have the DOMAIN_CERTIFICATE[UPDATE] permission on the specified domain or DOMAIN_CERTIFICATE[UPDATE] permission on the specified environment or DOMAIN_CERTIFICATE[UPDATE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Delete a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/certificates/:certificate",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN_CERTIFICATE[DELETE] permission on the specified domain or DOMAIN_CERTIFICATE[DELETE] permission on the specified environment or DOMAIN_CERTIFICATE[DELETE] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get the certificate public key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/certificates/:certificate/key",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN[READ] permission on the specified domain or DOMAIN[READ] permission on the specified environment or DOMAIN[READ] permission on the specified organization"
+        },
+        {
+          "info": {
+            "name": "Get the certificate public keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/management/organizations/:organizationId/environments/:environmentId/domains/:domain/certificates/:certificate/keys",
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "environmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "certificate",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User must have the DOMAIN[READ] permission on the specified domain or DOMAIN[READ] permission on the specified environment or DOMAIN[READ] permission on the specified organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
