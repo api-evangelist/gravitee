@@ -1,0 +1,166 @@
+slug: gravitee
+provider: Gravitee
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 15
+edges:
+- tag: identity provider
+  spec_file: gravitee-identity-provider-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.92
+  evidence: '"Create an identity provider" / "Assign password policy to identity provider"'
+  reason: Registration and lifecycle of identity providers and password policies for security domains
+    — the definitional case of identity & access management / federation.
+- tag: group
+  spec_file: gravitee-group-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: '"List group members", "Assign roles to a group", "Revoke role to a group"'
+  reason: Group, membership and role assignment management within the Access Management security domain
+    — directly identity & access management (authorisation grouping), not HR organisational management.
+- tag: user
+  spec_file: gravitee-user-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: createUser  Create a user on the specified security domain; enrollUserCertificateCredential  Enroll
+    a certificate credential for a user; revokeUserCertificateCredential
+  reason: Full end-user identity lifecycle plus credential enrolment/revocation and audit in an Access
+    Management product — Identity & Access Management, not HR employee records.
+- tag: APIs
+  spec_file: gravitee-apis-api-openapi.yml
+  capability_id: BC-4270.10
+  capability_id_l1: BC-4270
+  capability_name: Public API Lifecycle Management
+  confidence: 0.82
+  evidence: POST /environments/{envId}/apis/{apiId}/_deploy  deployApi  Deploy an API to the Gateway;
+    POST .../_import/swagger  Import an API from an OpenAPI/Swagger Document
+  reason: Operations create, import from OpenAPI specs, version, deploy, start and stop managed APIs on
+    a gateway — the lifecycle management of APIs exposed to consumers, i.e. Public API Lifecycle Management.
+- tag: role
+  spec_file: gravitee-role-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: createRole  Create a role; findRoles  List registered roles for a security domain; schemas
+    RoleEntity, UpdateRole
+  reason: Role definition and lifecycle for security domains and organizations in an Access Management
+    product — role-based access control, squarely Identity & Access Management.
+- tag: application
+  spec_file: gravitee-application-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: List registered applications for a security domain; schemas ApplicationSecretSettings, ApplicationIdentityProvider,
+    LoginSettings, FactorSettings, StepUpAuthenticationSettings
+  reason: '''Application'' here is an OAuth/SAML client registration inside the Access Management product,
+    carrying client secrets, identity providers, login and MFA/step-up settings. The operations plainly
+    perform identity and access management configuration rather than any business application-portfolio
+    function.'
+- tag: factor
+  spec_file: gravitee-factor-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: '"List registered factors for a security domain" / "Create a factor"'
+  reason: Multi-factor authentication factor plugins configured per security domain in the Access Management
+    product — squarely identity & access management, not a generic 'factor' business object.
+- tag: domain
+  spec_file: gravitee-domain-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: '"Create a security domain."; schemas LoginSettings, OIDCSettings, PatchSAMLSettings, SCIMSettings,
+    WebAuthnSettings, PasswordSettings'
+  reason: Security-domain CRUD plus its login, OIDC/SAML/SCIM, WebAuthn and password settings — the core
+    configuration surface of the Access Management (IAM) product, so identity & access management.
+- tag: Password Policy
+  spec_file: gravitee-password-policy-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST .../domains/{domain}/password-policies  createPasswordPolicy  Create a password policy
+  reason: Lifecycle and evaluation of password policies for security domains in the Access Management
+    product — an access-control/credential governance mechanism, hence Identity & Access Management rather
+    than generic corporate policy management.
+- tag: authorization engine
+  spec_file: gravitee-authorization-engine-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST .../authorization-engines createAuthorizationEngine Create an authorization engine; schemas
+    NewAuthorizationEngine, AuthorizationEngine
+  reason: CRUD over authorization engines registered against a security domain in the Access Management
+    product — configuration of how access decisions are made. This is squarely identity and access management;
+    slight uncertainty only because the spec gives no description text beyond the operation names.
+- tag: extension grant
+  spec_file: gravitee-extension-grant-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: '"List registered extension grants for a security domain" / "Create a extension grant"'
+  reason: OAuth2 extension grant types registered on an IAM security domain — token issuance / authentication
+    mechanism configuration, i.e. identity & access management.
+- tag: Authentication Device Notifier
+  spec_file: gravitee-authentication-device-notifier-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST .../domains/{domain}/auth-device-notifiers  createAuthenticationDeviceNotifier  Create
+    an Authentication Device Notifier
+  reason: Configuration of device notifiers used in decoupled (CIBA) authentication flows within Gravitee
+    Access Management security domains — an identity and access management control, not a business notification
+    feature.
+- tag: device identifiers
+  spec_file: gravitee-device-identifiers-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: '"List registered device identifiers for a security domain" / schema "DeviceIdentifier"'
+  reason: 'Gravitee Access Management surface: device-identifier (fingerprint) plugins registered against
+    a security domain, used for device recognition in authentication/MFA decisions. This is identity &
+    access management configuration, not device asset management.'
+- tag: devices
+  spec_file: gravitee-devices-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: GET .../users/{user}/devices "listUserDevices"; DELETE "deleteUserDevice"; schemas User, EnrolledFactor,
+    UserIdentity
+  reason: Manages the devices enrolled by a user in the IAM security domain (tied to enrolled MFA factors),
+    i.e. identity and access management of user credentials/devices.
+- tag: protected-resource
+  spec_file: gravitee-protected-resource-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: createProtectedResource  Create a Protected Resource definition; getProtectedResourceMemberPermissions  List
+    protected resource member's permissions; schemas StepUpAuthenticationSettings, FactorSettings, ApplicationSAMLSettings
+  reason: Registration of OAuth/OIDC protected resources with login, MFA factor and secret settings inside
+    Gravitee Access Management — access control configuration, i.e. IAM. Some ambiguity as it is also
+    API-gateway resource registration.
