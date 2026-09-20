@@ -1,243 +1,76 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Gravitee
-providerId: gravitee
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-15'
-reconciled: true
-tags:
-  - API Gateway
-  - API Management
-  - Event Streaming
-  - Open Source
-description: Gravitee sells flat-rate platform subscriptions rather than per-call API pricing. The
-  catalog covers API Management (Planet / Galaxy / Universe), Event Management (Comet / Meteor /
-  Asteroid), plus optional Agent Management and Enterprise Auth packages. The lowest published prices
-  are $2,500/month (Planet) and $1,250/month (Comet); higher tiers are custom-quoted. Gravitee also
-  ships a free Community Edition (Apache 2.0).
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.gravitee.io/api-gateway-pricing-guide
 sources:
-  - https://www.gravitee.io/pricing
+- https://www.gravitee.io/api-gateway-pricing-guide
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T124425
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: tiered-subscription
+published: true
+note: Educational pricing guide comparing API gateway vendors. Numeric prices shown are competitors' (Kong,
+  Tyk); Gravitee's own tiers (Planet, Galaxy, Universe) are described as per-Gateway charging with no
+  published numbers.
+plan_count: 9
+currency: USD
 plans:
-  - id: gravitee-community-edition
-    name: Community Edition
-    type: freemium
-    description: Free, open-source distribution under Apache 2.0. Self-hosted; community support.
-    entries:
-      - label: Self-hosted license
-        name: license
-        type: flat
-        metric: license
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Apache 2.0 license
-      - name: Self-hosted gateway
-      - name: Community support
-  - id: gravitee-apim-planet
-    name: API Management — Planet
-    type: subscription
-    description: Entry API Management tier with unlimited users and APIs, one production gateway, and
-      Gold support.
-    entries:
-      - label: Monthly platform fee
-        name: planet_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '2500.00'
-        userMultiplied: false
-      - label: Production gateways included
-        name: gateways_included
-        type: quota
-        metric: gateway
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Unlimited API calls and events
-      - name: Unlimited users and APIs
-      - name: 1 production gateway
-      - name: Gold support
-  - id: gravitee-apim-galaxy
-    name: API Management — Galaxy
-    type: subscription
-    description: Mid-tier with two production gateways, enterprise plugins, and limited event-broker
-      support.
-    entries:
-      - label: Monthly platform fee
-        name: galaxy_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-      - label: Production gateways included
-        name: gateways_included
-        type: quota
-        metric: gateway
-        limit: 2
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Unlimited API calls and events
-      - name: 2 production gateways
-      - name: Enterprise plugins
-      - name: Limited event-broker support
-      - name: Gold support
-  - id: gravitee-apim-universe
-    name: API Management — Universe
-    type: enterprise
-    description: Top API Management tier with 4+ gateways, full enterprise functionality, IAM, TAM,
-      and 24/7 support.
-    entries:
-      - label: Monthly platform fee
-        name: universe_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-      - label: Production gateways included
-        name: gateways_included
-        type: quota
-        metric: gateway
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: 4+ production gateways
-      - name: All supported event brokers
-      - name: Identity and Access Management
-      - name: Technical Account Manager
-      - name: 24/7 support
-  - id: gravitee-event-comet
-    name: Event Management — Comet
-    type: subscription
-    description: Entry Event Management tier with one gateway, one third-party broker, developer
-      portal, and Gold support.
-    entries:
-      - label: Monthly platform fee
-        name: comet_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '1250.00'
-        userMultiplied: false
-    elements:
-      - name: 1 production gateway
-      - name: 1 third-party federated broker
-      - name: Developer portal
-      - name: Gold support
-  - id: gravitee-event-meteor
-    name: Event Management — Meteor
-    type: subscription
-    description: Mid Event Management tier — two gateways, two brokers; Platinum support optional.
-    entries:
-      - label: Monthly platform fee
-        name: meteor_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: 2 production gateways
-      - name: 2 third-party federated brokers
-      - name: Developer portal
-      - name: Gold or Platinum support
-  - id: gravitee-event-asteroid
-    name: Event Management — Asteroid
-    type: enterprise
-    description: Top Event Management tier — four gateways, four brokers, Platinum support.
-    entries:
-      - label: Monthly platform fee
-        name: asteroid_monthly
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: 4 production gateways
-      - name: 4 third-party federated brokers
-      - name: Developer portal
-      - name: Platinum support
-  - id: gravitee-agent-management
-    name: Agent Management Package
-    type: enterprise
-    description: Add-on covering LLM proxy, MCP proxy, A2A proxy, and agent catalog.
-    entries:
-      - label: Add-on fee
-        name: agent_addon
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: LLM proxy
-      - name: MCP proxy
-      - name: A2A proxy
-      - name: MCP tool server
-      - name: Agent catalog
-  - id: gravitee-enterprise-auth
-    name: Enterprise Auth Package
-    type: enterprise
-    description: Add-on with MCP resource server, OpenFGA permission engine, and policy decision
-      point.
-    entries:
-      - label: Add-on fee
-        name: auth_addon
-        type: subscription
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: MCP resource server
-      - name: OpenFGA permission engine
-      - name: Policy decision point
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: Kong Plus - API requests
+  price_text: $20/1 million API requests
+  price: 20
+  currency: USD
+  period: per-use
+  unit: 1 million API requests
+  included_quota: includes analytics
+- name: Kong Plus - paid plugins
+  price_text: $5/month per instance
+  price: 5
+  currency: USD
+  period: month
+  unit: instance
+- name: Kong Plus - premium plugins
+  price_text: $10/month per instance
+  price: 10
+  currency: USD
+  period: month
+  unit: instance
+- name: Kong Plus - Developer Portal
+  price_text: $299/month per Developer Portal
+  price: 299
+  currency: USD
+  period: month
+  unit: Developer Portal
+- name: Kong Plus - published API product version
+  price_text: $10/month per published API product version in the Developer Portal
+  price: 10
+  currency: USD
+  period: month
+  unit: published API product version
+- name: Tyk Starter
+  price_text: $600/month
+  price: 600
+  currency: USD
+  period: month
+  included_quota: limited to 5 APIs managed
+- name: Tyk Launch
+  price_text: $2,500/month
+  price: 2500
+  currency: USD
+  period: month
+- name: Tyk Enterprise
+  price_text: “Contact us”
+  period: none
+- name: Tyk add-ons
+  price_text: from $500-$1500/month
+  currency: USD
+  period: month
+  unit: add-on
+rate_limit_statements:
+- In Starter package, you’re limited to 5 APIs managed (unlimited in other tiers)
+- Limited number of licensed environments in the self-managed hosting model; 2 in launch tier and 3 in
+  flex/global multi-team tiers
+- 'Limited number of gateways that can be managed per environment: 2 in launch and unspecified in flex/global
+  tiers'
+- 'No limit to # of calls, users, or APIs'
