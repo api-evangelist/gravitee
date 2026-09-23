@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts audit API
+  title: Gravitee.io - Access Management Audit API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: audit
+- name: Audit
 paths:
   /organizations/{organizationId}/audits:
     get:
       tags:
-      - audit
+      - Audit
       summary: List audit logs for the organization
       description: User must have the ORGANIZATION_AUDIT[LIST] permission on the specified organization. Except if user has ORGANIZATION_AUDIT[READ] permission on the organization, each returned audit is filtered and contains only basic information such as id, date, event, actor, target and status.
       operationId: listOrganizationAudits
@@ -70,7 +70,7 @@ paths:
   /organizations/{organizationId}/audits/{audit}:
     get:
       tags:
-      - audit
+      - Audit
       summary: Get an audit log
       description: User must have the ORGANIZATION_AUDIT[READ] permission on the specified organization
       operationId: getOrganizationAudit
@@ -97,7 +97,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/audits:
     get:
       tags:
-      - audit
+      - Audit
       summary: List audit logs for a security domain
       description: User must have the DOMAIN_AUDIT[LIST] permission on the specified domain, environment or organization. Except if user has ORGANIZATION_AUDIT[READ] permission on the domain, environment or organization, each returned audit is filtered and contains only basic information such as id, date, event, actor, target and status.
       operationId: listDomainAudits
@@ -165,7 +165,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/audits/{audit}:
     get:
       tags:
-      - audit
+      - Audit
       summary: Get an audit log
       description: User must have the DOMAIN_AUDIT[READ] permission on the specified domain or DOMAIN_AUDIT[READ] permission on the specified environment or DOMAIN_AUDIT[READ] permission on the specified organization
       operationId: getDomainAudit
@@ -201,40 +201,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Audit:
-      type: object
-      properties:
-        accessPoint:
-          $ref: '#/components/schemas/AuditAccessPoint'
-        actor:
-          $ref: '#/components/schemas/AuditEntity'
-        id:
-          type: string
-        outcome:
-          $ref: '#/components/schemas/AuditOutcome'
-        reference:
-          $ref: '#/components/schemas/Reference'
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        target:
-          $ref: '#/components/schemas/AuditEntity'
-        timestamp:
-          type: string
-          format: date-time
-          writeOnly: true
-        transactionId:
-          type: string
-        type:
-          type: string
     AuditOutcome:
       type: object
       properties:
@@ -245,19 +211,6 @@ components:
           enum:
           - SUCCESS
           - FAILURE
-    AuditAccessPoint:
-      type: object
-      properties:
-        alternativeId:
-          type: string
-        displayName:
-          type: string
-        id:
-          type: string
-        ipAddress:
-          type: string
-        userAgent:
-          type: string
     AuditEntity:
       type: object
       properties:
@@ -298,6 +251,53 @@ components:
           - ORGANIZATION
           - ENVIRONMENT
           - PROTECTED_RESOURCE
+    Audit:
+      type: object
+      properties:
+        accessPoint:
+          $ref: '#/components/schemas/AuditAccessPoint'
+        actor:
+          $ref: '#/components/schemas/AuditEntity'
+        id:
+          type: string
+        outcome:
+          $ref: '#/components/schemas/AuditOutcome'
+        reference:
+          $ref: '#/components/schemas/Reference'
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        target:
+          $ref: '#/components/schemas/AuditEntity'
+        timestamp:
+          type: string
+          format: date-time
+          writeOnly: true
+        transactionId:
+          type: string
+        type:
+          type: string
+    AuditAccessPoint:
+      type: object
+      properties:
+        alternativeId:
+          type: string
+        displayName:
+          type: string
+        id:
+          type: string
+        ipAddress:
+          type: string
+        userAgent:
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

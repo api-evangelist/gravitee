@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts Resource API
+  title: Gravitee.io - Access Management Resource API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
@@ -9,61 +9,6 @@ security:
 tags:
 - name: Resource
 paths:
-  /platform/plugins/resources:
-    get:
-      tags:
-      - Resource
-      summary: List resource plugins
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: listResourcePlugins
-      parameters:
-      - name: expand
-        in: query
-        schema:
-          type: array
-          items:
-            type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
-  /platform/plugins/resources/{resource}:
-    get:
-      tags:
-      - Resource
-      summary: Get a resource plugin
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: getResource_1
-      parameters:
-      - name: resource
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
-  /platform/plugins/resources/{resource}/schema:
-    get:
-      tags:
-      - Resource
-      summary: Get a resource plugin's schema
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: getResourceSchema
-      parameters:
-      - name: resource
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/resources:
     get:
       tags:
@@ -248,20 +193,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    UpdateServiceResource:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        name:
-          type: string
-        type:
-          minLength: 1
-          type: string
     ServiceResource:
       type: object
       properties:
@@ -304,6 +235,20 @@ components:
         name:
           type: string
         type:
+          type: string
+    UpdateServiceResource:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
           type: string
   securitySchemes:
     gravitee-auth:

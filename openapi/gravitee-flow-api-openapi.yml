@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts flow API
+  title: Gravitee.io - Access Management Flow API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: flow
+- name: Flow
 paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/flows:
     get:
       tags:
-      - flow
+      - Flow
       summary: List registered flows for a security domain
       description: User must have the DOMAIN_FLOW[LIST] permission on the specified domain or DOMAIN_FLOW[LIST] permission on the specified environment or DOMAIN_FLOW[LIST] permission on the specified organization. Except if user has DOMAIN_FLOW[READ] permission on the domain, environment or organization, each returned flow is filtered and contains only basic information such as id and name and isEnabled.
       operationId: listDomainFlows
@@ -45,7 +45,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - flow
+      - Flow
       summary: Create or update list of flows
       description: User must have the DOMAIN_FLOW[UPDATE] permission on the specified domain or DOMAIN_FLOW[UPDATE] permission on the specified environment or DOMAIN_FLOW[UPDATE] permission on the specified organization
       operationId: defineDomainFlows
@@ -87,7 +87,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/flows/{flow}:
     get:
       tags:
-      - flow
+      - Flow
       summary: Get a flow
       description: User must have the DOMAIN_FLOW[READ] permission on the specified domain or DOMAIN_FLOW[READ] permission on the specified environment or DOMAIN_FLOW[READ] permission on the specified organization
       operationId: getDomainFlow
@@ -123,7 +123,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - flow
+      - Flow
       summary: Update a flow
       description: User must have the DOMAIN_FLOW[UPDATE] permission on the specified domain or DOMAIN_FLOW[UPDATE] permission on the specified environment or DOMAIN_FLOW[UPDATE] permission on the specified organization
       operationId: updateDomainFlow
@@ -165,6 +165,43 @@ paths:
           description: Internal server error
 components:
   schemas:
+    Flow:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        condition:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        post:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        pre:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        type:
+          type: string
+          enum:
+          - ROOT
+          - LOGIN_IDENTIFIER
+          - LOGIN
+          - CONNECT
+          - CONSENT
+          - REGISTER
+          - RESET_PASSWORD
+          - REGISTRATION_CONFIRMATION
+          - TOKEN
+          - WEBAUTHN_REGISTER
+          - MFA_CHALLENGE
+          - MFA_ENROLLMENT
     Step:
       type: object
       properties:
@@ -222,43 +259,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    Flow:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        condition:
-          type: string
-        enabled:
-          type: boolean
-        id:
-          type: string
-        name:
-          type: string
-        post:
-          type: array
-          items:
-            $ref: '#/components/schemas/Step'
-        pre:
-          type: array
-          items:
-            $ref: '#/components/schemas/Step'
-        type:
-          type: string
-          enum:
-          - ROOT
-          - LOGIN_IDENTIFIER
-          - LOGIN
-          - CONNECT
-          - CONSENT
-          - REGISTER
-          - RESET_PASSWORD
-          - REGISTRATION_CONFIRMATION
-          - TOKEN
-          - WEBAUTHN_REGISTER
-          - MFA_CHALLENGE
-          - MFA_ENROLLMENT
   securitySchemes:
     gravitee-auth:
       type: http

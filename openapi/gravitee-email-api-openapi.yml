@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts email API
+  title: Gravitee.io - Access Management Email API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: email
+- name: Email
 paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails:
     get:
       tags:
-      - email
+      - Email
       summary: Find a email for an application
       description: User must have APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[READ] permission on the specified organization
       operationId: findApplicationEmail
@@ -74,7 +74,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - email
+      - Email
       summary: Create a email for an application
       description: User must have APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[CREATE] permission on the specified organization
       operationId: createApplicationEmail
@@ -113,7 +113,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails/{email}:
     put:
       tags:
-      - email
+      - Email
       summary: Update an email for an application
       description: User must have APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[UPDATE] permission on the specified organization
       operationId: updateApplicationEmail
@@ -160,7 +160,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - email
+      - Email
       summary: Delete an email for an application
       description: User must have APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified application or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified domain or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified environment or APPLICATION_EMAIL_TEMPLATE[DELETE] permission on the specified organization
       operationId: deleteApplicationEmail
@@ -198,7 +198,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/emails:
     get:
       tags:
-      - email
+      - Email
       summary: Find a email
       description: User must have the DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[READ] permission on the specified organization
       operationId: findEmail
@@ -255,7 +255,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - email
+      - Email
       summary: Create a email
       description: User must have the DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[CREATE] permission on the specified organization
       operationId: createEmail
@@ -289,7 +289,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/emails/{email}:
     put:
       tags:
-      - email
+      - Email
       summary: Update an email
       description: User must have the DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[UPDATE] permission on the specified organization
       operationId: updateDomainEmail
@@ -331,7 +331,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - email
+      - Email
       summary: Delete an email
       description: User must have the DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified domain or DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified environment or DOMAIN_EMAIL_TEMPLATE[DELETE] permission on the specified organization
       operationId: deleteDomainEmail
@@ -363,6 +363,28 @@ paths:
           description: Internal server error
 components:
   schemas:
+    UpdateEmail:
+      required:
+      - content
+      - expiresAfter
+      - from
+      - subject
+      type: object
+      properties:
+        content:
+          type: string
+        enabled:
+          type: boolean
+        expiresAfter:
+          minimum: 1
+          type: integer
+          format: int32
+        from:
+          type: string
+        fromName:
+          type: string
+        subject:
+          type: string
     Email:
       type: object
       properties:
@@ -404,28 +426,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    UpdateEmail:
-      required:
-      - content
-      - expiresAfter
-      - from
-      - subject
-      type: object
-      properties:
-        content:
-          type: string
-        enabled:
-          type: boolean
-        expiresAfter:
-          minimum: 1
-          type: integer
-          format: int32
-        from:
-          type: string
-        fromName:
-          type: string
-        subject:
-          type: string
     NewEmail:
       required:
       - content

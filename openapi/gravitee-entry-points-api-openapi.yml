@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts entrypoints API
+  title: Gravitee.io - Access Management Entrypoints API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: entrypoints
+- name: Entry Points
 paths:
   /organizations/{organizationId}/entrypoints:
     get:
       tags:
-      - entrypoints
+      - Entry Points
       summary: List entrypoints
       description: User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned entrypoint is filtered and contains only basic information such as id and name.
       operationId: listEntrypoints
@@ -35,7 +35,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - entrypoints
+      - Entry Points
       summary: Create a entrypoint
       description: User must have the ORGANIZATION_ENTRYPOINT[CREATE] permission on the specified organization
       operationId: createEntrypoint
@@ -59,7 +59,7 @@ paths:
   /organizations/{organizationId}/entrypoints/{entrypointId}:
     get:
       tags:
-      - entrypoints
+      - Entry Points
       summary: Get a sharding entrypoint
       description: User must have the ORGANIZATION_ENTRYPOINT[READ] permission on the specified organization
       operationId: getEntrypoint
@@ -85,7 +85,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - entrypoints
+      - Entry Points
       summary: Update the sharding entrypoint
       description: User must have the ORGANIZATION_ENTRYPOINT[UPDATE] permission on the specified organization
       operationId: updateEntrypoint
@@ -117,7 +117,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - entrypoints
+      - Entry Points
       summary: Delete the sharding entrypoint
       description: User must have the ORGANIZATION_ENTRYPOINT[DELETE] permission on the specified organization
       operationId: deleteEntrypoint
@@ -140,6 +140,23 @@ paths:
 components:
   schemas:
     NewEntrypoint:
+      required:
+      - name
+      - tags
+      - url
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+    UpdateEntrypoint:
       required:
       - name
       - tags
@@ -179,23 +196,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-        url:
-          type: string
-    UpdateEntrypoint:
-      required:
-      - name
-      - tags
-      - url
-      type: object
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
         url:
           type: string
   securitySchemes:

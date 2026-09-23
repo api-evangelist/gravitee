@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts Newsletter API
+  title: Gravitee.io - Access Management Newsletter API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
@@ -51,13 +51,99 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Attribute:
+    Address:
       type: object
       properties:
+        country:
+          type: string
+        formatted:
+          type: string
+        locality:
+          type: string
+        postalCode:
+          type: string
         primary:
           type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
         type:
           type: string
+    EnrolledFactorSecurity:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        type:
+          type: string
+        value:
+          type: string
+    ApplicationEntity:
+      type: object
+      properties:
+        clientId:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    UserId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        id:
+          type: string
+        source:
+          type: string
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    Certificate:
+      type: object
+      properties:
         value:
           type: string
     UserEntity:
@@ -264,56 +350,12 @@ components:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
           type: string
-    Address:
-      type: object
-      properties:
-        country:
-          type: string
-        formatted:
-          type: string
-        locality:
-          type: string
-        postalCode:
-          type: string
-        primary:
-          type: boolean
-        region:
-          type: string
-        streetAddress:
-          type: string
-        type:
-          type: string
     EmailValue:
       required:
       - email
       type: object
       properties:
         email:
-          type: string
-    EnrolledFactorSecurity:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        type:
-          type: string
-        value:
-          type: string
-    UserId:
-      type: object
-      properties:
-        externalId:
-          type: string
-        id:
-          type: string
-        source:
-          type: string
-    Certificate:
-      type: object
-      properties:
-        value:
           type: string
     UserIdentity:
       type: object
@@ -331,57 +373,15 @@ components:
           type: string
         username:
           type: string
-    EnrolledFactor:
+    Attribute:
       type: object
       properties:
-        appId:
-          type: string
-        channel:
-          $ref: '#/components/schemas/EnrolledFactorChannel'
-        createdAt:
-          type: string
-          format: date-time
-        factorId:
-          type: string
         primary:
           type: boolean
-        security:
-          $ref: '#/components/schemas/EnrolledFactorSecurity'
-        status:
-          type: string
-          enum:
-          - PENDING_ACTIVATION
-          - ACTIVATED
-          - REVOKED
-          - 'NULL'
-        updatedAt:
-          type: string
-          format: date-time
-    ApplicationEntity:
-      type: object
-      properties:
-        clientId:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-    EnrolledFactorChannel:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        target:
-          type: string
         type:
           type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
+        value:
+          type: string
     Role:
       type: object
       properties:

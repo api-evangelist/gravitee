@@ -1,66 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts Factor API
+  title: Gravitee.io - Access Management Factor API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: Factor
+- name: factor
 paths:
-  /platform/plugins/factors:
-    get:
-      tags:
-      - Factor
-      summary: List factor plugins
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: listFactorPlugins
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
-  /platform/plugins/factors/{factor}:
-    get:
-      tags:
-      - Factor
-      summary: Get a factor plugin
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: getFactorPlugin
-      parameters:
-      - name: factor
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
-  /platform/plugins/factors/{factor}/schema:
-    get:
-      tags:
-      - Factor
-      summary: Get a factor plugin's schema
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: getFactorPluginSchema
-      parameters:
-      - name: factor
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/factors:
     get:
       tags:
-      - Factor
+      - factor
       summary: List registered factors for a security domain
       description: User must have the DOMAIN_FACTOR[LIST] permission on the specified domain or DOMAIN_FACTOR[LIST] permission on the specified environment or DOMAIN_FACTOR[LIST] permission on the specified organization Each returned factor is filtered and contains only basic information such as id, name and factor type.
       operationId: listFactors
@@ -93,7 +45,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - Factor
+      - factor
       summary: Create a factor
       description: User must have the DOMAIN_FACTOR[CREATE] permission on the specified domain or DOMAIN_FACTOR[CREATE] permission on the specified environment or DOMAIN_FACTOR[CREATE] permission on the specified organization
       operationId: createFactor
@@ -131,7 +83,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/factors/{factor}:
     get:
       tags:
-      - Factor
+      - factor
       summary: Get a factor
       description: User must have the DOMAIN_FACTOR[READ] permission on the specified domain or DOMAIN_FACTOR[READ] permission on the specified environment or DOMAIN_FACTOR[READ] permission on the specified organization
       operationId: getFactor
@@ -167,7 +119,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - Factor
+      - factor
       summary: Update a factor
       description: User must have the DOMAIN_FACTOR[UPDATE] permission on the specified domain or DOMAIN_FACTOR[UPDATE] permission on the specified environment or DOMAIN_FACTOR[UPDATE] permission on the specified organization
       operationId: updateFactor
@@ -209,7 +161,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - Factor
+      - factor
       summary: Delete a factor
       description: User must have the DOMAIN_FACTOR[DELETE] permission on the specified domain or DOMAIN_FACTOR[DELETE] permission on the specified environment or DOMAIN_FACTOR[DELETE] permission on the specified organization
       operationId: deleteFactor

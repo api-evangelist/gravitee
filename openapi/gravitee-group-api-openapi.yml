@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts group API
+  title: Gravitee.io - Access Management Group API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: group
+- name: Group
 paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups:
     get:
       tags:
-      - group
+      - Group
       summary: List groups for a security domain
       description: User must have the DOMAIN_GROUP[LIST] permission on the specified domain or DOMAIN_GROUP[LIST] permission on the specified environment or DOMAIN_GROUP[LIST] permission on the specified organization. Each returned group is filtered and contains only basic information such as id and name.
       operationId: listDomainGroups
@@ -55,7 +55,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - group
+      - Group
       summary: Create a group
       description: User must have the DOMAIN_GROUP[CREATE] permission on the specified domain or DOMAIN_GROUP[CREATE] permission on the specified environment or DOMAIN_GROUP[CREATE] permission on the specified organization
       operationId: createGroup
@@ -93,7 +93,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}:
     get:
       tags:
-      - group
+      - Group
       summary: Get a group
       description: User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization
       operationId: findGroup
@@ -129,7 +129,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - group
+      - Group
       summary: Update a group
       description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
       operationId: updateGroup
@@ -171,7 +171,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - group
+      - Group
       summary: Delete a group
       description: User must have the DOMAIN_GROUP[DELETE] permission on the specified domain or DOMAIN_GROUP[DELETE] permission on the specified environment or DOMAIN_GROUP[DELETE] permission on the specified organization
       operationId: deleteGroup
@@ -204,7 +204,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/members:
     get:
       tags:
-      - group
+      - Group
       summary: List group members
       description: User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization
       operationId: getGroupMembers
@@ -253,7 +253,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/members/{member}:
     post:
       tags:
-      - group
+      - Group
       summary: Add a group member
       description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
       operationId: addGroupMember
@@ -292,7 +292,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - group
+      - Group
       summary: Remove a group member
       description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
       operationId: removeGroupMember
@@ -332,7 +332,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/roles:
     get:
       tags:
-      - group
+      - Group
       summary: Get a group roles
       description: User must have the DOMAIN_GROUP[READ] permission on the specified domain or DOMAIN_GROUP[READ] permission on the specified environment or DOMAIN_GROUP[READ] permission on the specified organization
       operationId: findGroupRoles
@@ -370,7 +370,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - group
+      - Group
       summary: Assign roles to a group
       description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
       operationId: assignRoles
@@ -415,7 +415,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups/{group}/roles/{role}:
     delete:
       tags:
-      - group
+      - Group
       summary: Revoke role to a group
       description: User must have the DOMAIN_GROUP[UPDATE] permission on the specified domain or DOMAIN_GROUP[UPDATE] permission on the specified environment or DOMAIN_GROUP[UPDATE] permission on the specified organization
       operationId: revokeRole
@@ -457,7 +457,7 @@ paths:
   /organizations/{organizationId}/groups:
     get:
       tags:
-      - group
+      - Group
       summary: List groups of the organization
       description: User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned group is filtered and contains only basic information such as id and name.
       operationId: listGroups
@@ -492,7 +492,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - group
+      - Group
       summary: Create a platform group
       description: User must have the ORGANIZATION_GROUP[CREATE] permission on the specified organization
       operationId: createPlatformGroup
@@ -516,7 +516,7 @@ paths:
   /organizations/{organizationId}/groups/{group}:
     get:
       tags:
-      - group
+      - Group
       summary: Get a platform group
       description: User must have the ORGANIZATION_GROUP[READ] permission on the specified organization
       operationId: getOrganizationGroup
@@ -542,7 +542,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - group
+      - Group
       summary: Update a platform group
       description: User must have the ORGANIZATION_GROUP[READ] permission on the specified organization
       operationId: updateOrganizationGroup
@@ -574,7 +574,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - group
+      - Group
       summary: Delete a platform group
       description: User must have the ORGANIZATION_GROUP[READ] permission on the specified organization
       operationId: deleteOrganizationGroup
@@ -597,7 +597,7 @@ paths:
   /organizations/{organizationId}/groups/{group}/members:
     get:
       tags:
-      - group
+      - Group
       summary: List group members
       description: User must have the ORGANIZATION_GROUP[READ] permission on the specified organization
       operationId: listGroupMembers
@@ -636,7 +636,7 @@ paths:
   /organizations/{organizationId}/groups/{group}/members/{member}:
     post:
       tags:
-      - group
+      - Group
       summary: Add a group member
       description: User must have the ORGANIZATION_GROUP[UPDATE] permission on the specified organization
       operationId: addGroupMember_1
@@ -665,7 +665,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - group
+      - Group
       summary: Remove a group member
       description: User must have the ORGANIZATION_GROUP[UPDATE] permission on the specified organization
       operationId: removeGroupMember_1
@@ -694,15 +694,113 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Attribute:
+    Address:
       type: object
       properties:
+        country:
+          type: string
+        formatted:
+          type: string
+        locality:
+          type: string
+        postalCode:
+          type: string
         primary:
           type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
+        type:
+          type: string
+    EnrolledFactorSecurity:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
         type:
           type: string
         value:
           type: string
+    UserId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        id:
+          type: string
+        source:
+          type: string
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    NewGroup:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+    GroupPage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        totalCount:
+          type: integer
+          format: int64
     Group:
       type: object
       properties:
@@ -737,62 +835,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    Address:
-      type: object
-      properties:
-        country:
-          type: string
-        formatted:
-          type: string
-        locality:
-          type: string
-        postalCode:
-          type: string
-        primary:
-          type: boolean
-        region:
-          type: string
-        streetAddress:
-          type: string
-        type:
-          type: string
-    UpdateGroup:
-      required:
-      - name
-      type: object
-      properties:
-        description:
-          type: string
-        members:
-          type: array
-          items:
-            type: string
-        name:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-    EnrolledFactorSecurity:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        type:
-          type: string
-        value:
-          type: string
-    UserId:
-      type: object
-      properties:
-        externalId:
-          type: string
-        id:
-          type: string
-        source:
-          type: string
     UserPage:
       type: object
       properties:
@@ -811,19 +853,6 @@ components:
       properties:
         value:
           type: string
-    GroupPage:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-        totalCount:
-          type: integer
-          format: int64
     UserIdentity:
       type: object
       properties:
@@ -840,32 +869,15 @@ components:
           type: string
         username:
           type: string
-    EnrolledFactor:
+    Attribute:
       type: object
       properties:
-        appId:
-          type: string
-        channel:
-          $ref: '#/components/schemas/EnrolledFactorChannel'
-        createdAt:
-          type: string
-          format: date-time
-        factorId:
-          type: string
         primary:
           type: boolean
-        security:
-          $ref: '#/components/schemas/EnrolledFactorSecurity'
-        status:
+        type:
           type: string
-          enum:
-          - PENDING_ACTIVATION
-          - ACTIVATED
-          - REVOKED
-          - 'NULL'
-        updatedAt:
+        value:
           type: string
-          format: date-time
     Role:
       type: object
       properties:
@@ -924,22 +936,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    EnrolledFactorChannel:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        target:
-          type: string
-        type:
-          type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
     User:
       type: object
       properties:
@@ -1140,7 +1136,7 @@ components:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
           type: string
-    NewGroup:
+    UpdateGroup:
       required:
       - name
       type: object
@@ -1153,6 +1149,10 @@ components:
             type: string
         name:
           type: string
+        roles:
+          type: array
+          items:
+            type: string
   securitySchemes:
     gravitee-auth:
       type: http

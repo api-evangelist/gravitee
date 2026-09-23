@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts protected-resource API
+  title: Gravitee.io - Access Management Protected Resource API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
@@ -108,7 +108,7 @@ paths:
       tags:
       - protected-resource
       summary: Get a Protected Resource
-      description: 'User must have the PROTECTED_RESOURCE[READ] permission on the specified resource or PROTECTED_RESOURCE[READ] permission on the specified domain or PROTECTED_RESOURCE[READ] permission on the specified environment or PROTECTED_RESOURCE[READ] permission on the specified organization. '
+      description: User must have the PROTECTED_RESOURCE[READ] permission on the specified resource or PROTECTED_RESOURCE[READ] permission on the specified domain or PROTECTED_RESOURCE[READ] permission on the specified environment or PROTECTED_RESOURCE[READ] permission on the specified organization.
       operationId: findProtectedResource
       parameters:
       - name: organizationId
@@ -148,7 +148,7 @@ paths:
       tags:
       - protected-resource
       summary: Update a Protected Resource
-      description: 'User must have the PROTECTED_RESOURCE[UPDATE] permission on the specified resource or PROTECTED_RESOURCE[UPDATE] permission on the specified domain or PROTECTED_RESOURCE[UPDATE] permission on the specified environment or PROTECTED_RESOURCE[UPDATE] permission on the specified organization. '
+      description: User must have the PROTECTED_RESOURCE[UPDATE] permission on the specified resource or PROTECTED_RESOURCE[UPDATE] permission on the specified domain or PROTECTED_RESOURCE[UPDATE] permission on the specified environment or PROTECTED_RESOURCE[UPDATE] permission on the specified organization.
       operationId: updateProtectedResource
       parameters:
       - name: organizationId
@@ -190,7 +190,7 @@ paths:
       tags:
       - protected-resource
       summary: Delete a Protected Resource
-      description: 'User must have the PROTECTED_RESOURCE[DELETE] permission on the specified resource or PROTECTED_RESOURCE[DELETE] permission on the specified domain or PROTECTED_RESOURCE[DELETE] permission on the specified environment or PROTECTED_RESOURCE[DELETE] permission on the specified organization. '
+      description: User must have the PROTECTED_RESOURCE[DELETE] permission on the specified resource or PROTECTED_RESOURCE[DELETE] permission on the specified domain or PROTECTED_RESOURCE[DELETE] permission on the specified environment or PROTECTED_RESOURCE[DELETE] permission on the specified organization.
       operationId: deleteProtectedResource
       parameters:
       - name: organizationId
@@ -230,7 +230,7 @@ paths:
       tags:
       - protected-resource
       summary: Patch a Protected Resource
-      description: 'User must have the PROTECTED_RESOURCE[UPDATE] permission on the specified resource or PROTECTED_RESOURCE[UPDATE] permission on the specified domain or PROTECTED_RESOURCE[UPDATE] permission on the specified environment or PROTECTED_RESOURCE[UPDATE] permission on the specified organization. '
+      description: User must have the PROTECTED_RESOURCE[UPDATE] permission on the specified resource or PROTECTED_RESOURCE[UPDATE] permission on the specified domain or PROTECTED_RESOURCE[UPDATE] permission on the specified environment or PROTECTED_RESOURCE[UPDATE] permission on the specified organization.
       operationId: patchProtectedResource
       parameters:
       - name: organizationId
@@ -587,343 +587,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    LoginSettings:
-      type: object
-      properties:
-        certificateBasedAuthEnabled:
-          type: boolean
-        certificateBasedAuthUrl:
-          type: string
-        enforcePasswordPolicyEnabled:
-          type: boolean
-        forgotPasswordEnabled:
-          type: boolean
-        hideForm:
-          type: boolean
-        identifierFirstEnabled:
-          type: boolean
-        inherited:
-          type: boolean
-        magicLinkAuthEnabled:
-          type: boolean
-        passwordlessDeviceNamingEnabled:
-          type: boolean
-        passwordlessEnabled:
-          type: boolean
-        passwordlessEnforcePasswordEnabled:
-          type: boolean
-        passwordlessEnforcePasswordMaxAge:
-          type: integer
-          format: int32
-        passwordlessRememberDeviceEnabled:
-          type: boolean
-        registerEnabled:
-          type: boolean
-        rememberMeEnabled:
-          type: boolean
-        resetPasswordOnExpiration:
-          type: boolean
-    TokenClaim:
-      type: object
-      properties:
-        claimName:
-          type: string
-        claimValue:
-          type: string
-        tokenType:
-          type: string
-          enum:
-          - ACCESS_TOKEN
-          - REFRESH_TOKEN
-          - ID_TOKEN
-    MembershipListItem:
-      type: object
-      properties:
-        memberships:
-          type: array
-          items:
-            $ref: '#/components/schemas/Membership'
-        metadata:
-          type: object
-          additionalProperties:
-            type: object
-            additionalProperties:
-              type: object
-    ClientSecret:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-        expiresAt:
-          type: string
-          format: date-time
-        id:
-          type: string
-        name:
-          type: string
-        secret:
-          type: string
-        settingsId:
-          type: string
-    UpdateProtectedResourceFeature:
-      required:
-      - key
-      - type
-      type: object
-      properties:
-        description:
-          type: string
-        key:
-          maxLength: 64
-          minLength: 1
-          pattern: ^[a-zA-Z0-9_-]+$
-          type: string
-        type:
-          type: string
-      discriminator:
-        propertyName: type
-    RememberDeviceSettings:
-      type: object
-      properties:
-        active:
-          type: boolean
-        deviceIdentifierId:
-          type: string
-        expirationTimeSeconds:
-          type: integer
-          format: int64
-        skipChallengeWhenRememberDevice:
-          type: boolean
-        skipRememberDevice:
-          type: boolean
-    ProtectedResourcePrimaryData:
-      type: object
-      properties:
-        certificate:
-          type: string
-        clientId:
-          type: string
-        description:
-          type: string
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProtectedResourceFeature'
-        id:
-          type: string
-        name:
-          type: string
-        resourceIdentifiers:
-          type: array
-          items:
-            type: string
-        secretSettings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationSecretSettings'
-        settings:
-          $ref: '#/components/schemas/ApplicationSettings'
-        type:
-          type: string
-          enum:
-          - MCP_SERVER
-        updatedAt:
-          type: string
-          format: date-time
-    NewProtectedResourceFeature:
-      required:
-      - key
-      - type
-      type: object
-      properties:
-        description:
-          type: string
-        key:
-          maxLength: 64
-          minLength: 1
-          pattern: ^[a-zA-Z0-9_-]+$
-          type: string
-        type:
-          type: string
-      discriminator:
-        propertyName: type
-    ApplicationSAMLSettings:
-      type: object
-      properties:
-        assertionAttributes:
-          type: array
-          items:
-            $ref: '#/components/schemas/SAMLAssertionAttribute'
-        assertionValiditySeconds:
-          type: integer
-          format: int32
-        attributeConsumeServiceUrl:
-          type: string
-        audiences:
-          type: array
-          items:
-            type: string
-        certificate:
-          type: string
-        dataEncryptionAlgorithm:
-          type: string
-        entityId:
-          type: string
-        includeAssertionConditions:
-          type: boolean
-        keyTransportEncryptionAlgorithm:
-          type: string
-        nameIdMapping:
-          type: string
-        notBeforeTimeSkewSeconds:
-          type: integer
-          format: int32
-        notOnOrAfterTimeSkewSeconds:
-          type: integer
-          format: int32
-        responseBinding:
-          type: string
-        singleLogoutServiceUrl:
-          type: string
-        wantAssertionsEncrypted:
-          type: boolean
-        wantAssertionsSigned:
-          type: boolean
-        wantResponseSigned:
-          type: boolean
-    EnrollSettings:
-      type: object
-      properties:
-        active:
-          type: boolean
-        enrollmentRule:
-          type: string
-        enrollmentSkipActive:
-          type: boolean
-        enrollmentSkipRule:
-          type: string
-        forceEnrollment:
-          type: boolean
-        skipTimeSeconds:
-          type: integer
-          format: int64
-        type:
-          type: string
-          enum:
-          - OPTIONAL
-          - REQUIRED
-          - CONDITIONAL
-    NewClientSecret:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          minLength: 1
-          type: string
-    FormField:
-      type: object
-      properties:
-        key:
-          type: string
-        label:
-          type: string
-        type:
-          type: string
-    AccountSettings:
-      type: object
-      properties:
-        accountBlockedDuration:
-          type: integer
-          format: int32
-        autoLoginAfterRegistration:
-          type: boolean
-        autoLoginAfterResetPassword:
-          type: boolean
-        botDetectionPlugin:
-          type: string
-        completeRegistrationWhenResetPassword:
-          type: boolean
-        defaultIdentityProviderForRegistration:
-          type: string
-        deletePasswordlessDevicesAfterResetPassword:
-          type: boolean
-        dynamicUserRegistration:
-          type: boolean
-        inherited:
-          type: boolean
-        loginAttemptsDetectionEnabled:
-          type: boolean
-        loginAttemptsResetTime:
-          type: integer
-          format: int32
-        maxLoginAttempts:
-          type: integer
-          format: int32
-        mfaChallengeAttemptsDetectionEnabled:
-          type: boolean
-        mfaChallengeAttemptsResetTime:
-          type: integer
-          format: int32
-        mfaChallengeMaxAttempts:
-          type: integer
-          format: int32
-        mfaChallengeSendVerifyAlertEmail:
-          type: boolean
-        redirectUriAfterRegistration:
-          type: string
-        redirectUriAfterResetPassword:
-          type: string
-        rememberMe:
-          type: boolean
-        rememberMeDuration:
-          type: integer
-          format: int32
-        resetPasswordConfirmIdentity:
-          type: boolean
-        resetPasswordCustomForm:
-          type: boolean
-        resetPasswordCustomFormFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FormField'
-        resetPasswordInvalidateTokens:
-          type: boolean
-        sendRecoverAccountEmail:
-          type: boolean
-        sendVerifyRegistrationAccountEmail:
-          type: boolean
-        useBotDetection:
-          type: boolean
-    ProtectedResourceFeature:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-        description:
-          type: string
-        key:
-          type: string
-        type:
-          type: string
-          enum:
-          - MCP_TOOL
-        updatedAt:
-          type: string
-          format: date-time
-      discriminator:
-        propertyName: type
-        mapping:
-          MCP_TOOL: '#/components/schemas/McpTool'
-    CookieSettings:
-      type: object
-      properties:
-        inherited:
-          type: boolean
-        session:
-          $ref: '#/components/schemas/SessionSettings'
     ApplicationOAuthSettings:
       type: object
       properties:
@@ -1102,26 +765,284 @@ components:
           type: string
         userinfoSignedResponseAlg:
           type: string
-    SessionSettings:
+    RememberDeviceSettings:
       type: object
       properties:
-        persistent:
+        active:
           type: boolean
-    PatchProtectedResource:
+        deviceIdentifierId:
+          type: string
+        expirationTimeSeconds:
+          type: integer
+          format: int64
+        skipChallengeWhenRememberDevice:
+          type: boolean
+        skipRememberDevice:
+          type: boolean
+    TokenClaim:
+      type: object
+      properties:
+        claimName:
+          type: string
+        claimValue:
+          type: string
+        tokenType:
+          type: string
+          enum:
+          - ACCESS_TOKEN
+          - REFRESH_TOKEN
+          - ID_TOKEN
+    UserInfoClaim:
+      type: object
+      properties:
+        claimName:
+          type: string
+        claimValue:
+          type: string
+    TokenExchangeOAuthSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        scopeHandling:
+          type: string
+          enum:
+          - DOWNSCOPING
+          - PERMISSIVE
+    FactorSettings:
+      type: object
+      properties:
+        applicationFactors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationFactorSettings'
+        defaultFactorId:
+          type: string
+    NewMembership:
+      required:
+      - memberId
+      - memberType
+      - role
+      type: object
+      properties:
+        memberId:
+          type: string
+        memberType:
+          type: string
+          enum:
+          - USER
+          - GROUP
+        role:
+          type: string
+    CookieSettings:
+      type: object
+      properties:
+        inherited:
+          type: boolean
+        session:
+          $ref: '#/components/schemas/SessionSettings'
+    StepUpAuthenticationSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        stepUpAuthenticationRule:
+          type: string
+    LoginSettings:
+      type: object
+      properties:
+        certificateBasedAuthEnabled:
+          type: boolean
+        certificateBasedAuthUrl:
+          type: string
+        enforcePasswordPolicyEnabled:
+          type: boolean
+        forgotPasswordEnabled:
+          type: boolean
+        hideForm:
+          type: boolean
+        identifierFirstEnabled:
+          type: boolean
+        inherited:
+          type: boolean
+        magicLinkAuthEnabled:
+          type: boolean
+        passwordlessDeviceNamingEnabled:
+          type: boolean
+        passwordlessEnabled:
+          type: boolean
+        passwordlessEnforcePasswordEnabled:
+          type: boolean
+        passwordlessEnforcePasswordMaxAge:
+          type: integer
+          format: int32
+        passwordlessRememberDeviceEnabled:
+          type: boolean
+        registerEnabled:
+          type: boolean
+        rememberMeEnabled:
+          type: boolean
+        resetPasswordOnExpiration:
+          type: boolean
+    RiskAssessmentSettings:
+      type: object
+      properties:
+        deviceAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+        enabled:
+          type: boolean
+        geoVelocityAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+        ipReputationAssessment:
+          $ref: '#/components/schemas/AssessmentSettings'
+    EnrollSettings:
+      type: object
+      properties:
+        active:
+          type: boolean
+        enrollmentRule:
+          type: string
+        enrollmentSkipActive:
+          type: boolean
+        enrollmentSkipRule:
+          type: string
+        forceEnrollment:
+          type: boolean
+        skipTimeSeconds:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+          - OPTIONAL
+          - REQUIRED
+          - CONDITIONAL
+    AssessmentSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        thresholds:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+    AccountSettings:
+      type: object
+      properties:
+        accountBlockedDuration:
+          type: integer
+          format: int32
+        autoLoginAfterRegistration:
+          type: boolean
+        autoLoginAfterResetPassword:
+          type: boolean
+        botDetectionPlugin:
+          type: string
+        completeRegistrationWhenResetPassword:
+          type: boolean
+        defaultIdentityProviderForRegistration:
+          type: string
+        deletePasswordlessDevicesAfterResetPassword:
+          type: boolean
+        dynamicUserRegistration:
+          type: boolean
+        inherited:
+          type: boolean
+        loginAttemptsDetectionEnabled:
+          type: boolean
+        loginAttemptsResetTime:
+          type: integer
+          format: int32
+        maxLoginAttempts:
+          type: integer
+          format: int32
+        mfaChallengeAttemptsDetectionEnabled:
+          type: boolean
+        mfaChallengeAttemptsResetTime:
+          type: integer
+          format: int32
+        mfaChallengeMaxAttempts:
+          type: integer
+          format: int32
+        mfaChallengeSendVerifyAlertEmail:
+          type: boolean
+        redirectUriAfterRegistration:
+          type: string
+        redirectUriAfterResetPassword:
+          type: string
+        rememberMe:
+          type: boolean
+        rememberMeDuration:
+          type: integer
+          format: int32
+        resetPasswordConfirmIdentity:
+          type: boolean
+        resetPasswordCustomForm:
+          type: boolean
+        resetPasswordCustomFormFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormField'
+        resetPasswordInvalidateTokens:
+          type: boolean
+        sendRecoverAccountEmail:
+          type: boolean
+        sendVerifyRegistrationAccountEmail:
+          type: boolean
+        useBotDetection:
+          type: boolean
+    SAMLAssertionAttribute:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    UpdateProtectedResourceFeature:
+      required:
+      - key
+      - type
+      type: object
+      properties:
+        description:
+          type: string
+        key:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_-]+$
+          type: string
+        type:
+          type: string
+      discriminator:
+        propertyName: type
+    SecretExpirationSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        expiryTimeSeconds:
+          type: integer
+          format: int64
+    ProtectedResourcePrimaryData:
       type: object
       properties:
         certificate:
+          type: string
+        clientId:
           type: string
         description:
           type: string
         features:
           type: array
           items:
-            $ref: '#/components/schemas/UpdateProtectedResourceFeature'
+            $ref: '#/components/schemas/ProtectedResourceFeature'
+        id:
+          type: string
         name:
-          maxLength: 64
-          minLength: 1
-          pattern: ^[^\s].*
           type: string
         resourceIdentifiers:
           type: array
@@ -1133,21 +1054,43 @@ components:
             $ref: '#/components/schemas/ApplicationSecretSettings'
         settings:
           $ref: '#/components/schemas/ApplicationSettings'
-    SecretExpirationSettings:
+        type:
+          type: string
+          enum:
+          - MCP_SERVER
+        updatedAt:
+          type: string
+          format: date-time
+    EnrollmentSettings:
       type: object
       properties:
-        enabled:
+        forceEnrollment:
           type: boolean
-        expiryTimeSeconds:
+        skipTimeSeconds:
           type: integer
           format: int64
-    StepUpAuthenticationSettings:
+    FormField:
       type: object
       properties:
-        active:
-          type: boolean
-        stepUpAuthenticationRule:
+        key:
           type: string
+        label:
+          type: string
+        type:
+          type: string
+    MembershipListItem:
+      type: object
+      properties:
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
     PasswordSettings:
       type: object
       properties:
@@ -1180,42 +1123,84 @@ components:
           format: int32
         passwordHistoryEnabled:
           type: boolean
-    ProtectedResourcePage:
+    ApplicationSAMLSettings:
       type: object
       properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
+        assertionAttributes:
           type: array
           items:
-            $ref: '#/components/schemas/ProtectedResourcePrimaryData'
-        totalCount:
+            $ref: '#/components/schemas/SAMLAssertionAttribute'
+        assertionValiditySeconds:
           type: integer
-          format: int64
-    ApplicationSettings:
+          format: int32
+        attributeConsumeServiceUrl:
+          type: string
+        audiences:
+          type: array
+          items:
+            type: string
+        certificate:
+          type: string
+        dataEncryptionAlgorithm:
+          type: string
+        entityId:
+          type: string
+        includeAssertionConditions:
+          type: boolean
+        keyTransportEncryptionAlgorithm:
+          type: string
+        nameIdMapping:
+          type: string
+        notBeforeTimeSkewSeconds:
+          type: integer
+          format: int32
+        notOnOrAfterTimeSkewSeconds:
+          type: integer
+          format: int32
+        responseBinding:
+          type: string
+        singleLogoutServiceUrl:
+          type: string
+        wantAssertionsEncrypted:
+          type: boolean
+        wantAssertionsSigned:
+          type: boolean
+        wantResponseSigned:
+          type: boolean
+    NewProtectedResourceFeature:
+      required:
+      - key
+      - type
       type: object
       properties:
-        account:
-          $ref: '#/components/schemas/AccountSettings'
-        advanced:
-          $ref: '#/components/schemas/ApplicationAdvancedSettings'
-        cookieSettings:
-          $ref: '#/components/schemas/CookieSettings'
-        login:
-          $ref: '#/components/schemas/LoginSettings'
-        mfa:
-          $ref: '#/components/schemas/MFASettings'
-        oauth:
-          $ref: '#/components/schemas/ApplicationOAuthSettings'
-        passwordSettings:
-          $ref: '#/components/schemas/PasswordSettings'
-        riskAssessment:
-          $ref: '#/components/schemas/RiskAssessmentSettings'
-        saml:
-          $ref: '#/components/schemas/ApplicationSAMLSettings'
-        secretExpirationSettings:
-          $ref: '#/components/schemas/SecretExpirationSettings'
+        description:
+          type: string
+        key:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_-]+$
+          type: string
+        type:
+          type: string
+      discriminator:
+        propertyName: type
+    ClientSecret:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        secret:
+          type: string
+        settingsId:
+          type: string
     NewProtectedResource:
       required:
       - name
@@ -1250,80 +1235,61 @@ components:
           minLength: 1
           pattern: ^MCP_SERVER$
           type: string
-    AssessmentSettings:
+    ChallengeSettings:
       type: object
       properties:
-        enabled:
+        active:
           type: boolean
-        thresholds:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-    MFASettings:
-      type: object
-      properties:
-        adaptiveAuthenticationRule:
+        challengeRule:
           type: string
-        challenge:
-          $ref: '#/components/schemas/ChallengeSettings'
-        enroll:
-          $ref: '#/components/schemas/EnrollSettings'
-        enrollment:
-          $ref: '#/components/schemas/EnrollmentSettings'
-        factor:
-          $ref: '#/components/schemas/FactorSettings'
-        loginRule:
-          type: string
-        rememberDevice:
-          $ref: '#/components/schemas/RememberDeviceSettings'
-        stepUpAuthentication:
-          $ref: '#/components/schemas/StepUpAuthenticationSettings'
-        stepUpAuthenticationRule:
-          type: string
-    NewMembership:
-      required:
-      - memberId
-      - memberType
-      - role
-      type: object
-      properties:
-        memberId:
-          type: string
-        memberType:
+        type:
           type: string
           enum:
-          - USER
-          - GROUP
-        role:
-          type: string
-    JWK:
+          - REQUIRED
+          - CONDITIONAL
+          - RISK_BASED
+    ApplicationAdvancedSettings:
       type: object
       properties:
-        alg:
+        flowsInherited:
+          type: boolean
+        skipConsent:
+          type: boolean
+    ApplicationSecretSettings:
+      type: object
+      properties:
+        algorithm:
           type: string
-        keyOps:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        kid:
+        id:
           type: string
-        kty:
-          type: string
-        use:
-          type: string
-        x5c:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        x5t:
-          type: string
-        x5tS256:
-          type: string
-        x5u:
-          type: string
+    ApplicationSettings:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/AccountSettings'
+        advanced:
+          $ref: '#/components/schemas/ApplicationAdvancedSettings'
+        cookieSettings:
+          $ref: '#/components/schemas/CookieSettings'
+        login:
+          $ref: '#/components/schemas/LoginSettings'
+        mfa:
+          $ref: '#/components/schemas/MFASettings'
+        oauth:
+          $ref: '#/components/schemas/ApplicationOAuthSettings'
+        passwordSettings:
+          $ref: '#/components/schemas/PasswordSettings'
+        riskAssessment:
+          $ref: '#/components/schemas/RiskAssessmentSettings'
+        saml:
+          $ref: '#/components/schemas/ApplicationSAMLSettings'
+        secretExpirationSettings:
+          $ref: '#/components/schemas/SecretExpirationSettings'
+    SessionSettings:
+      type: object
+      properties:
+        persistent:
+          type: boolean
     ApplicationScopeSettings:
       type: object
       properties:
@@ -1334,6 +1300,45 @@ components:
         scopeApproval:
           type: integer
           format: int32
+    ProtectedResourceFeature:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        key:
+          type: string
+        type:
+          type: string
+          enum:
+          - MCP_TOOL
+        updatedAt:
+          type: string
+          format: date-time
+      discriminator:
+        propertyName: type
+        mapping:
+          MCP_TOOL: '#/components/schemas/McpTool'
+    ProtectedResourceSecret:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+    JWKSet:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JWK'
     Membership:
       type: object
       properties:
@@ -1369,63 +1374,107 @@ components:
         updatedAt:
           type: string
           format: date-time
-    ProtectedResourceSecret:
+    MFASettings:
       type: object
       properties:
-        clientId:
+        adaptiveAuthenticationRule:
           type: string
-        clientSecret:
+        challenge:
+          $ref: '#/components/schemas/ChallengeSettings'
+        enroll:
+          $ref: '#/components/schemas/EnrollSettings'
+        enrollment:
+          $ref: '#/components/schemas/EnrollmentSettings'
+        factor:
+          $ref: '#/components/schemas/FactorSettings'
+        loginRule:
           type: string
-        id:
+        rememberDevice:
+          $ref: '#/components/schemas/RememberDeviceSettings'
+        stepUpAuthentication:
+          $ref: '#/components/schemas/StepUpAuthenticationSettings'
+        stepUpAuthenticationRule:
           type: string
-        name:
-          type: string
-    JWKSet:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/JWK'
-    ChallengeSettings:
-      type: object
-      properties:
-        active:
-          type: boolean
-        challengeRule:
-          type: string
-        type:
-          type: string
-          enum:
-          - REQUIRED
-          - CONDITIONAL
-          - RISK_BASED
-    TokenExchangeOAuthSettings:
-      type: object
-      properties:
-        inherited:
-          type: boolean
-        scopeHandling:
-          type: string
-          enum:
-          - DOWNSCOPING
-          - PERMISSIVE
-    SAMLAssertionAttribute:
+    NewClientSecret:
       required:
       - name
-      - value
       type: object
       properties:
         name:
+          minLength: 1
           type: string
-        value:
-          type: string
-    UserInfoClaim:
+    PatchProtectedResource:
       type: object
       properties:
-        claimName:
+        certificate:
           type: string
-        claimValue:
+        description:
+          type: string
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateProtectedResourceFeature'
+        name:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[^\s].*
+          type: string
+        resourceIdentifiers:
+          type: array
+          items:
+            type: string
+        secretSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationSecretSettings'
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+    ProtectedResourcePage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProtectedResourcePrimaryData'
+        totalCount:
+          type: integer
+          format: int64
+    ApplicationFactorSettings:
+      type: object
+      properties:
+        id:
+          type: string
+        selectionRule:
+          type: string
+    JWK:
+      type: object
+      properties:
+        alg:
+          type: string
+        keyOps:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        kid:
+          type: string
+        kty:
+          type: string
+        use:
+          type: string
+        x5c:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        x5t:
+          type: string
+        x5tS256:
+          type: string
+        x5u:
           type: string
     UpdateProtectedResource:
       required:
@@ -1452,55 +1501,6 @@ components:
             type: string
         settings:
           $ref: '#/components/schemas/ApplicationSettings'
-    ApplicationSecretSettings:
-      type: object
-      properties:
-        algorithm:
-          type: string
-        id:
-          type: string
-    RiskAssessmentSettings:
-      type: object
-      properties:
-        deviceAssessment:
-          $ref: '#/components/schemas/AssessmentSettings'
-        enabled:
-          type: boolean
-        geoVelocityAssessment:
-          $ref: '#/components/schemas/AssessmentSettings'
-        ipReputationAssessment:
-          $ref: '#/components/schemas/AssessmentSettings'
-    FactorSettings:
-      type: object
-      properties:
-        applicationFactors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationFactorSettings'
-        defaultFactorId:
-          type: string
-    ApplicationAdvancedSettings:
-      type: object
-      properties:
-        flowsInherited:
-          type: boolean
-        skipConsent:
-          type: boolean
-    EnrollmentSettings:
-      type: object
-      properties:
-        forceEnrollment:
-          type: boolean
-        skipTimeSeconds:
-          type: integer
-          format: int64
-    ApplicationFactorSettings:
-      type: object
-      properties:
-        id:
-          type: string
-        selectionRule:
-          type: string
   securitySchemes:
     gravitee-auth:
       type: http

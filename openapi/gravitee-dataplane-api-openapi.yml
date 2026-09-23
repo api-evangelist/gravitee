@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts dataPlane API
+  title: Gravitee.io - Access Management Data Plane API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: dataPlane
+- name: Dataplane
 paths:
   /organizations/{organizationId}/environments/{environmentId}/data-planes:
     get:
       tags:
-      - dataPlane
+      - Dataplane
       summary: List of data planes
       description: List all the data planes accessible to the current user. User must have DATA_PLANE[READ] permission on the specified environment or organization
       operationId: listDataPlanes
@@ -40,13 +40,13 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Plugin:
-      type: object
     DataPlane:
       type: object
       properties:
         delegate:
           $ref: '#/components/schemas/Plugin'
+    Plugin:
+      type: object
   securitySchemes:
     gravitee-auth:
       type: http

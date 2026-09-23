@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts device identifiers API
+  title: Gravitee.io - Access Management device identifiers API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: device identifiers
+- name: Device Identifiers
 paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/device-identifiers:
     get:
       tags:
-      - device identifiers
+      - Device Identifiers
       summary: List registered device identifiers for a security domain
       description: User must have the DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIERS[LIST] permission on the specified organization Each returned bot detections is filtered and contains only basic information such as id, name.
       operationId: listDeviceIdentifiers
@@ -45,7 +45,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - device identifiers
+      - Device Identifiers
       summary: Create a device identifier
       description: User must have the DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[CREATE] permission on the specified organization
       operationId: createDeviceIdentifier
@@ -83,7 +83,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/device-identifiers/{deviceIdentifier}:
     get:
       tags:
-      - device identifiers
+      - Device Identifiers
       summary: Get a Device identifier
       description: User must have the DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[READ] permission on the specified organization
       operationId: getDeviceIdentifier
@@ -119,7 +119,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - device identifiers
+      - Device Identifiers
       summary: Update a Device identifier
       description: User must have the DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[UPDATE] permission on the specified organization
       operationId: updateDeviceIdentifier
@@ -161,7 +161,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - device identifiers
+      - Device Identifiers
       summary: Delete a Device identifier
       description: User must have the DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified domain or DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified environment or DOMAIN_DEVICE_IDENTIFIER[DELETE] permission on the specified organization
       operationId: deleteDeviceIdentifier
@@ -193,6 +193,34 @@ paths:
           description: Internal server error
 components:
   schemas:
+    DeviceIdentifier:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
     NewDeviceIdentifier:
       required:
       - configuration
@@ -222,34 +250,6 @@ components:
         type:
           minLength: 1
           type: string
-    DeviceIdentifier:
-      type: object
-      properties:
-        configuration:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        id:
-          type: string
-        name:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        type:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
   securitySchemes:
     gravitee-auth:
       type: http

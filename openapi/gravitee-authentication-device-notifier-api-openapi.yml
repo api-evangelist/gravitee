@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts Authentication Device Notifier API
+  title: Gravitee.io - Access Management Authentication Device…
   version: 4.12.0-alpha.3
 servers:
 - url: /management
@@ -187,91 +187,8 @@ paths:
           description: Authentication Device Notifier successfully deleted
         '500':
           description: Internal server error
-  /platform/plugins/auth-device-notifiers:
-    get:
-      tags:
-      - Authentication Device Notifier
-      summary: List authentication device notifier plugins
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: listAuthenticationDeviceNotifierPlugins
-      parameters:
-      - name: expand
-        in: query
-        schema:
-          type: array
-          items:
-            type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
-  /platform/plugins/auth-device-notifiers/{authDeviceNotifierId}:
-    get:
-      tags:
-      - Authentication Device Notifier
-      summary: Get a Authentication Device Notifier plugin
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: getAuthenticationDeviceNotifierPlugin
-      parameters:
-      - name: authDeviceNotifierId
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
-  /platform/plugins/auth-device-notifiers/{authDeviceNotifierId}/schema:
-    get:
-      tags:
-      - Authentication Device Notifier
-      summary: Get an Authentication Device Notifier plugin's schema
-      description: There is no particular permission needed. User must be authenticated.
-      operationId: getAuthenticationDeviceNotifierPluginSchema
-      parameters:
-      - name: authDeviceNotifierId
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json: {}
 components:
   schemas:
-    AuthenticationDeviceNotifier:
-      type: object
-      properties:
-        configuration:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        id:
-          type: string
-        name:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        type:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
     UpdateAuthenticationDeviceNotifier:
       required:
       - configuration
@@ -301,6 +218,34 @@ components:
           type: string
         type:
           type: string
+    AuthenticationDeviceNotifier:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
   securitySchemes:
     gravitee-auth:
       type: http

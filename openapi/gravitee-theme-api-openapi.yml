@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts theme API
+  title: Gravitee.io - Access Management Theme API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: theme
+- name: Theme
 paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/themes:
     get:
       tags:
-      - theme
+      - Theme
       summary: List themes on the specified security domain
       description: User must have the DOMAIN_THEME[LIST] permission on the specified domain or DOMAIN_THEME[LIST] permission on the specified environment or DOMAIN_THEME[LIST] permission on the specified organization
       operationId: listThemes
@@ -47,7 +47,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - theme
+      - Theme
       summary: Create a theme on the specified security domain
       description: User must have the DOMAIN_THEME[CREATE] permission on the specified domain or DOMAIN_THEME[CREATE] permission on the specified environment or DOMAIN_THEME[CREATE] permission on the specified organization
       operationId: createTheme
@@ -85,7 +85,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/themes/{themeId}:
     get:
       tags:
-      - theme
+      - Theme
       summary: Get the theme linked to the specified security domain
       description: User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization
       operationId: getTheme
@@ -123,7 +123,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - theme
+      - Theme
       summary: Update a theme on the specified security domain
       description: User must have the DOMAIN_THEME[UPDATE] permission on the specified domain or DOMAIN_THEME[UPDATE] permission on the specified environment or DOMAIN_THEME[UPDATE] permission on the specified organization
       operationId: updateTheme
@@ -167,7 +167,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - theme
+      - Theme
       summary: Delete a theme on the specified security domain
       description: User must have the DOMAIN_THEME[DELETE] permission on the specified domain or DOMAIN_THEME[DELETE] permission on the specified environment or DOMAIN_THEME[DELETE] permission on the specified organization
       operationId: deleteTheme
@@ -199,26 +199,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    NewTheme:
-      type: object
-      properties:
-        css:
-          type: string
-        faviconUrl:
-          type: string
-        logoUrl:
-          type: string
-        logoWidth:
-          type: integer
-          format: int32
-        primaryButtonColorHex:
-          type: string
-        primaryTextColorHex:
-          type: string
-        secondaryButtonColorHex:
-          type: string
-        secondaryTextColorHex:
-          type: string
     ThemeEntity:
       type: object
       properties:
@@ -258,6 +238,26 @@ components:
         updatedAt:
           type: string
           format: date-time
+    NewTheme:
+      type: object
+      properties:
+        css:
+          type: string
+        faviconUrl:
+          type: string
+        logoUrl:
+          type: string
+        logoWidth:
+          type: integer
+          format: int32
+        primaryButtonColorHex:
+          type: string
+        primaryTextColorHex:
+          type: string
+        secondaryButtonColorHex:
+          type: string
+        secondaryTextColorHex:
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

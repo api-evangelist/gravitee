@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts role API
+  title: Gravitee.io - Access Management Role API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: role
+- name: Role
 paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/roles:
     get:
       tags:
-      - role
+      - Role
       summary: List registered roles for a security domain
       description: User must have the DOMAIN_ROLE[LIST] permission on the specified domain or DOMAIN_ROLE[LIST] permission on the specified environment or DOMAIN_ROLE[LIST] permission on the specified organization. Each returned role is filtered and contains only basic information such as id and name.
       operationId: findRoles
@@ -59,7 +59,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - role
+      - Role
       summary: Create a role
       description: User must have the DOMAIN_ROLE[CREATE] permission on the specified domain or DOMAIN_ROLE[CREATE] permission on the specified environment or DOMAIN_ROLE[CREATE] permission on the specified organization
       operationId: createRole
@@ -97,7 +97,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/roles/{role}:
     get:
       tags:
-      - role
+      - Role
       summary: Get a role
       description: User must have the DOMAIN_ROLE[READ] permission on the specified domain or DOMAIN_ROLE[READ] permission on the specified environment or DOMAIN_ROLE[READ] permission on the specified organization
       operationId: findRole
@@ -133,7 +133,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - role
+      - Role
       summary: Update a role
       description: User must have the DOMAIN_ROLE[UPDATE] permission on the specified domain or DOMAIN_ROLE[UPDATE] permission on the specified environment or DOMAIN_ROLE[UPDATE] permission on the specified organization
       operationId: updateRole
@@ -175,7 +175,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - role
+      - Role
       summary: Delete a role
       description: User must have the DOMAIN_ROLE[DELETE] permission on the specified domain or DOMAIN_ROLE[DELETE] permission on the specified environment or DOMAIN_ROLE[DELETE] permission on the specified organization
       operationId: deleteRole
@@ -210,7 +210,7 @@ paths:
   /organizations/{organizationId}/roles:
     get:
       tags:
-      - role
+      - Role
       summary: List registered roles of the organization
       description: User must have the ORGANIZATION_ROLE[LIST] permission on the specified organization. Each returned role is filtered and contains only basic information such as id, name, isSystem and assignableType.
       operationId: listRoles
@@ -244,7 +244,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - role
+      - Role
       summary: Create a role for the organization
       description: User must have the ORGANIZATION_ROLE[CREATE] permission on the specified organization
       operationId: createRole_1
@@ -268,7 +268,7 @@ paths:
   /organizations/{organizationId}/roles/{role}:
     get:
       tags:
-      - role
+      - Role
       summary: Get a platform role
       description: User must have the ORGANIZATION_ROLE[READ] permission on the specified organization
       operationId: getRole
@@ -294,7 +294,7 @@ paths:
           description: Internal server error
     put:
       tags:
-      - role
+      - Role
       summary: Update a platform role
       description: User must have the ORGANIZATION_ROLE[UPDATE] permission on the specified organization
       operationId: updateRole_1
@@ -326,7 +326,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - role
+      - Role
       summary: Delete a plaform role
       description: User must have the ORGANIZATION_ROLE[DELETE] permission on the specified organization
       operationId: deleteRole_1
@@ -350,6 +350,19 @@ paths:
           description: Internal server error
 components:
   schemas:
+    RolePage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        totalCount:
+          type: integer
+          format: int64
     UpdateRole:
       required:
       - name
@@ -367,19 +380,24 @@ components:
           type: array
           items:
             type: string
-    RolePage:
+    NewRole:
+      required:
+      - name
       type: object
       properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        totalCount:
-          type: integer
-          format: int64
+        assignableType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        description:
+          type: string
+        name:
+          type: string
     RoleEntity:
       type: object
       properties:
@@ -420,24 +438,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    NewRole:
-      required:
-      - name
-      type: object
-      properties:
-        assignableType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        description:
-          type: string
-        name:
-          type: string
     Role:
       type: object
       properties:

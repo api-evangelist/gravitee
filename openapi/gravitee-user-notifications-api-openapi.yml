@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts user notifications API
+  title: Gravitee.io - Access Management user notifications API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: user notifications
+- name: User Notifications
 paths:
   /user/notifications:
     get:
       tags:
-      - user notifications
+      - User Notifications
       summary: List notifications received by the current user
       operationId: listNotifications
       responses:
@@ -29,7 +29,7 @@ paths:
   /user/notifications/{notificationId}/acknowledge:
     post:
       tags:
-      - user notifications
+      - User Notifications
       summary: Mark User notification as read
       operationId: markNotificationAsRead
       parameters:

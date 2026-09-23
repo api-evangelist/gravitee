@@ -1,18 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts form API
+  title: Gravitee.io - Access Management Form API
   version: 4.12.0-alpha.3
 servers:
 - url: /management
 security:
 - gravitee-auth: []
 tags:
-- name: form
+- name: Form
 paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms:
     get:
       tags:
-      - form
+      - Form
       summary: Find a form for an application
       description: User must have APPLICATION_FORM[READ] permission on the specified application or APPLICATION_FORM[READ] permission on the specified domain or APPLICATION_FORM[READ] permission on the specified environment or APPLICATION_FORM[READ] permission on the specified organization
       operationId: findApplicationForm
@@ -74,7 +74,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - form
+      - Form
       summary: Create a form for an application
       description: User must have APPLICATION_FORM[CREATE] permission on the specified application or APPLICATION_FORM[CREATE] permission on the specified domain or APPLICATION_FORM[CREATE] permission on the specified environment or APPLICATION_FORM[CREATE] permission on the specified organization
       operationId: createApplicationForm
@@ -113,7 +113,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms/{form}:
     put:
       tags:
-      - form
+      - Form
       summary: Update a form for an application
       description: User must have APPLICATION_FORM[UPDATE] permission on the specified application or APPLICATION_FORM[UPDATE] permission on the specified domain or APPLICATION_FORM[UPDATE] permission on the specified environment or APPLICATION_FORM[UPDATE] permission on the specified organization
       operationId: updateApplicationForm
@@ -160,7 +160,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - form
+      - Form
       summary: Delete a form for an application
       description: User must have APPLICATION_FORM[DELETE] permission on the specified application or APPLICATION_FORM[DELETE] permission on the specified domain or APPLICATION_FORM[DELETE] permission on the specified environment or APPLICATION_FORM[DELETE] permission on the specified organization
       operationId: deleteApplicationForm
@@ -198,7 +198,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms:
     get:
       tags:
-      - form
+      - Form
       summary: Find a form
       description: User must have the DOMAIN_FORM[READ] permission on the specified domain or DOMAIN_FORM[READ] permission on the specified environment or DOMAIN_FORM[READ] permission on the specified organization
       operationId: findForm
@@ -255,7 +255,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - form
+      - Form
       summary: Create a form
       description: User must have the DOMAIN_FORM[CREATE] permission on the specified domain or DOMAIN_FORM[CREATE] permission on the specified environment or DOMAIN_FORM[CREATE] permission on the specified organization
       operationId: createForm
@@ -289,7 +289,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms/preview:
     post:
       tags:
-      - form
+      - Form
       summary: Render the provided template
       description: User must have the DOMAIN_THEME[READ] permission on the specified domain or DOMAIN_THEME[READ] permission on the specified environment or DOMAIN_THEME[READ] permission on the specified organization
       operationId: renderDomainTemplate
@@ -327,7 +327,7 @@ paths:
   /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/forms/{form}:
     put:
       tags:
-      - form
+      - Form
       summary: Update a form
       description: User must have the DOMAIN_FORM[UPDATE] permission on the specified domain or DOMAIN_FORM[UPDATE] permission on the specified environment or DOMAIN_FORM[UPDATE] permission on the specified organization
       operationId: updateDomainForm
@@ -369,7 +369,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - form
+      - Form
       summary: Delete a form
       description: User must have the DOMAIN_FORM[DELETE] permission on the specified domain or DOMAIN_FORM[DELETE] permission on the specified environment or DOMAIN_FORM[DELETE] permission on the specified organization
       operationId: deleteDomainForm
@@ -402,7 +402,7 @@ paths:
   /organizations/{organizationId}/forms:
     get:
       tags:
-      - form
+      - Form
       summary: Find an organization form template
       description: User must have the ORGANIZATION_FORM[READ] permission on the specified organization
       operationId: findOrganizationFormTemplate
@@ -449,7 +449,7 @@ paths:
           description: Internal server error
     post:
       tags:
-      - form
+      - Form
       summary: Create a form
       description: User must have the ORGANIZATION_FORM[CREATE] permission on the specified organization
       operationId: createOrganizationForm
@@ -473,7 +473,7 @@ paths:
   /organizations/{organizationId}/forms/{form}:
     put:
       tags:
-      - form
+      - Form
       summary: Update a form
       description: User must have the ORGANIZATION_FORM[UPDATE] permission on the specified organization
       operationId: updateForm
@@ -505,7 +505,7 @@ paths:
           description: Internal server error
     delete:
       tags:
-      - form
+      - Form
       summary: Delete a form
       description: User must have the ORGANIZATION_FORM[DELETE] permission on the specified organization
       operationId: deleteForm
@@ -527,15 +527,35 @@ paths:
           description: Internal server error
 components:
   schemas:
-    UpdateForm:
+    PreviewResponse:
       type: object
       properties:
-        assets:
-          type: string
         content:
           type: string
-        enabled:
-          type: boolean
+        template:
+          type: string
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
+    PreviewRequest:
+      required:
+      - template
+      - type
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        theme:
+          $ref: '#/components/schemas/Theme'
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
     NewForm:
       required:
       - content
@@ -575,35 +595,6 @@ components:
           - CERTIFICATE_EXPIRATION
           - CLIENT_SECRET_EXPIRATION
           - VERIFY_ATTEMPT
-    PreviewRequest:
-      required:
-      - template
-      - type
-      type: object
-      properties:
-        content:
-          type: string
-        template:
-          type: string
-        theme:
-          $ref: '#/components/schemas/Theme'
-        type:
-          type: string
-          enum:
-          - EMAIL
-          - FORM
-    PreviewResponse:
-      type: object
-      properties:
-        content:
-          type: string
-        template:
-          type: string
-        type:
-          type: string
-          enum:
-          - EMAIL
-          - FORM
     Theme:
       type: object
       properties:
@@ -643,6 +634,15 @@ components:
         updatedAt:
           type: string
           format: date-time
+    UpdateForm:
+      type: object
+      properties:
+        assets:
+          type: string
+        content:
+          type: string
+        enabled:
+          type: boolean
     Form:
       type: object
       properties:

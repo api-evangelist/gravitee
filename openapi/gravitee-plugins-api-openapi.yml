@@ -1,12 +1,35 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management alerts Plugins API
-  version: 4.12.0-alpha.3
-  description: Discover policies, endpoints, entrypoints, and resources installed in the gateway
+  title: Gravitee.io APIM Management Plugins API
+  description: 'The Gravitee API Management (APIM) Management API is the administrative
+
+    control plane for the Gravitee platform.'
+  contact:
+    name: GraviteeSource Team
+    url: https://gravitee.io
+    email: team-apim@graviteesource.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 2.0.0
 servers:
-- url: /management
+- url: https://{host}/management/v2
+  description: APIM Management API v2 - default base URL
+  variables:
+    host:
+      default: apim.example.com
+      description: Hostname of the Gravitee APIM Management API
+- url: https://{host}/management/v2/organizations/{orgId}
+  description: APIM Management API v2 - per-organization base URL
+  variables:
+    host:
+      default: apim.example.com
+    orgId:
+      default: DEFAULT
 security:
-- gravitee-auth: []
+- BasicAuth: []
+- CookieAuth: []
+- BearerAuth: []
 tags:
 - name: Plugins
   description: Discover policies, endpoints, entrypoints, and resources installed in the gateway
@@ -79,6 +102,14 @@ paths:
           description: Resource plugins
 components:
   securitySchemes:
-    gravitee-auth:
+    BasicAuth:
       type: http
-      scheme: Bearer
+      scheme: basic
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: Auth-Graviteeio-APIM
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
