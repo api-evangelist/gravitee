@@ -1,1 +1,0 @@
-# Gravitee GraphQL API
