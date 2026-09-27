@@ -527,35 +527,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    PreviewResponse:
-      type: object
-      properties:
-        content:
-          type: string
-        template:
-          type: string
-        type:
-          type: string
-          enum:
-          - EMAIL
-          - FORM
-    PreviewRequest:
-      required:
-      - template
-      - type
-      type: object
-      properties:
-        content:
-          type: string
-        template:
-          type: string
-        theme:
-          $ref: '#/components/schemas/Theme'
-        type:
-          type: string
-          enum:
-          - EMAIL
-          - FORM
     NewForm:
       required:
       - content
@@ -595,6 +566,67 @@ components:
           - CERTIFICATE_EXPIRATION
           - CLIENT_SECRET_EXPIRATION
           - VERIFY_ATTEMPT
+    PreviewResponse:
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
+    PreviewRequest:
+      required:
+      - template
+      - type
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        theme:
+          $ref: '#/components/schemas/Theme'
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
+    Form:
+      type: object
+      properties:
+        assets:
+          type: string
+        client:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        enabled:
+          type: boolean
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        template:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
     Theme:
       type: object
       properties:
@@ -643,38 +675,6 @@ components:
           type: string
         enabled:
           type: boolean
-    Form:
-      type: object
-      properties:
-        assets:
-          type: string
-        client:
-          type: string
-        content:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        enabled:
-          type: boolean
-        id:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        template:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
   securitySchemes:
     gravitee-auth:
       type: http

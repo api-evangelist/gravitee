@@ -211,6 +211,53 @@ components:
           enum:
           - SUCCESS
           - FAILURE
+    AuditAccessPoint:
+      type: object
+      properties:
+        alternativeId:
+          type: string
+        displayName:
+          type: string
+        id:
+          type: string
+        ipAddress:
+          type: string
+        userAgent:
+          type: string
+    Audit:
+      type: object
+      properties:
+        accessPoint:
+          $ref: '#/components/schemas/AuditAccessPoint'
+        actor:
+          $ref: '#/components/schemas/AuditEntity'
+        id:
+          type: string
+        outcome:
+          $ref: '#/components/schemas/AuditOutcome'
+        reference:
+          $ref: '#/components/schemas/Reference'
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        target:
+          $ref: '#/components/schemas/AuditEntity'
+        timestamp:
+          type: string
+          format: date-time
+          writeOnly: true
+        transactionId:
+          type: string
+        type:
+          type: string
     AuditEntity:
       type: object
       properties:
@@ -251,53 +298,6 @@ components:
           - ORGANIZATION
           - ENVIRONMENT
           - PROTECTED_RESOURCE
-    Audit:
-      type: object
-      properties:
-        accessPoint:
-          $ref: '#/components/schemas/AuditAccessPoint'
-        actor:
-          $ref: '#/components/schemas/AuditEntity'
-        id:
-          type: string
-        outcome:
-          $ref: '#/components/schemas/AuditOutcome'
-        reference:
-          $ref: '#/components/schemas/Reference'
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        target:
-          $ref: '#/components/schemas/AuditEntity'
-        timestamp:
-          type: string
-          format: date-time
-          writeOnly: true
-        transactionId:
-          type: string
-        type:
-          type: string
-    AuditAccessPoint:
-      type: object
-      properties:
-        alternativeId:
-          type: string
-        displayName:
-          type: string
-        id:
-          type: string
-        ipAddress:
-          type: string
-        userAgent:
-          type: string
   securitySchemes:
     gravitee-auth:
       type: http

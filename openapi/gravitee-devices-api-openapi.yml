@@ -88,44 +88,10 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Address:
+    Certificate:
       type: object
       properties:
-        country:
-          type: string
-        formatted:
-          type: string
-        locality:
-          type: string
-        postalCode:
-          type: string
-        primary:
-          type: boolean
-        region:
-          type: string
-        streetAddress:
-          type: string
-        type:
-          type: string
-    EnrolledFactorSecurity:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        type:
-          type: string
         value:
-          type: string
-    UserId:
-      type: object
-      properties:
-        externalId:
-          type: string
-        id:
-          type: string
-        source:
           type: string
     EnrolledFactor:
       type: object
@@ -153,51 +119,24 @@ components:
         updatedAt:
           type: string
           format: date-time
-    EnrolledFactorChannel:
+    Address:
       type: object
       properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        target:
+        country:
           type: string
-        type:
+        formatted:
           type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
-    Certificate:
-      type: object
-      properties:
-        value:
+        locality:
           type: string
-    UserIdentity:
-      type: object
-      properties:
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        linkedAt:
+        postalCode:
           type: string
-          format: date-time
-        providerId:
-          type: string
-        userId:
-          type: string
-        username:
-          type: string
-    Attribute:
-      type: object
-      properties:
         primary:
           type: boolean
-        type:
+        region:
           type: string
-        value:
+        streetAddress:
+          type: string
+        type:
           type: string
     Role:
       type: object
@@ -456,6 +395,67 @@ components:
           items:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
+          type: string
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    UserIdentity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    EnrolledFactorSecurity:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        type:
+          type: string
+        value:
+          type: string
+    UserId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        id:
+          type: string
+        source:
           type: string
   securitySchemes:
     gravitee-auth:

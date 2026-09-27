@@ -1704,243 +1704,70 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Address:
+    AuditOutcome:
       type: object
       properties:
-        country:
+        message:
           type: string
-        formatted:
+        status:
           type: string
-        locality:
+          enum:
+          - SUCCESS
+          - FAILURE
+    NewCertificateCredential:
+      required:
+      - certificatePem
+      type: object
+      properties:
+        certificatePem:
+          minLength: 1
           type: string
-        postalCode:
-          type: string
-        primary:
+          description: The certificate in PEM format
+          example: '-----BEGIN CERTIFICATE-----
+
+            ...
+
+            -----END CERTIFICATE-----'
+    StatusEntity:
+      type: object
+      properties:
+        enabled:
           type: boolean
-        region:
-          type: string
-        streetAddress:
-          type: string
-        type:
-          type: string
-    ApplicationEntity:
+    EnrolledFactorEntity:
       type: object
       properties:
-        clientId:
+        createdAt:
           type: string
+          format: date-time
         id:
           type: string
         name:
           type: string
-    NewUser:
-      required:
-      - username
-      type: object
-      properties:
-        accountNonExpired:
-          type: boolean
-        accountNonLocked:
-          type: boolean
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        client:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        credentialsNonExpired:
-          type: boolean
-        domain:
-          type: string
-        email:
-          type: string
-        enabled:
-          type: boolean
-        externalId:
-          type: string
-        firstName:
-          type: string
-        forceResetPassword:
-          type: boolean
-        internal:
-          type: boolean
-        lastName:
-          type: string
-        lastPasswordReset:
-          type: string
-          format: date-time
-        loggedAt:
-          type: string
-          format: date-time
-        loginsCount:
-          type: integer
-          format: int64
-        password:
-          type: string
-        preRegistration:
-          type: boolean
-        preferredLanguage:
-          type: string
-        registrationCompleted:
-          type: boolean
-        source:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-        username:
-          minLength: 1
-          type: string
-    EnrolledFactor:
-      type: object
-      properties:
-        appId:
-          type: string
-        channel:
-          $ref: '#/components/schemas/EnrolledFactorChannel'
-        createdAt:
-          type: string
-          format: date-time
-        factorId:
-          type: string
-        primary:
-          type: boolean
-        security:
-          $ref: '#/components/schemas/EnrolledFactorSecurity'
-        status:
-          type: string
-          enum:
-          - PENDING_ACTIVATION
-          - ACTIVATED
-          - REVOKED
-          - 'NULL'
-        updatedAt:
-          type: string
-          format: date-time
-    UsernameEntity:
-      required:
-      - username
-      type: object
-      properties:
-        username:
-          minLength: 1
-          type: string
-    AuditEntity:
-      type: object
-      properties:
-        alternativeId:
-          type: string
-        attributes:
-          type: object
-          additionalProperties:
-            type: object
-        displayName:
-          type: string
-        id:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
         type:
           type: string
-    BulkUpdateUser:
-      required:
-      - action
-      - items
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - CREATE
-          - UPDATE
-          - DELETE
-        failOnErrors:
-          type: integer
-          format: int32
-        items:
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateUserWithId'
-    DomainUserBulkRequest:
-      required:
-      - action
-      - items
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - CREATE
-          - UPDATE
-          - DELETE
-        failOnErrors:
-          type: integer
-          format: int32
-        items:
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseJsonNode'
-      discriminator:
-        propertyName: action
-        mapping:
-          CREATE: '#/components/schemas/BulkCreateUser'
-          UPDATE: '#/components/schemas/BulkUpdateUser'
-          DELETE: '#/components/schemas/BulkDeleteUser'
-      oneOf:
-      - $ref: '#/components/schemas/BulkCreateUser'
-      - $ref: '#/components/schemas/BulkUpdateUser'
-      - $ref: '#/components/schemas/BulkDeleteUser'
-    ScopeApprovalEntity:
-      type: object
-      properties:
-        clientEntity:
-          $ref: '#/components/schemas/ApplicationEntity'
-        clientId:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        domain:
-          type: string
-        expiresAt:
-          type: string
-          format: date-time
-        id:
-          type: string
-        scope:
-          type: string
-        scopeEntity:
-          $ref: '#/components/schemas/ScopeEntity'
-        status:
-          type: string
-          enum:
-          - APPROVED
-          - DENIED
-        transactionId:
-          type: string
         updatedAt:
           type: string
           format: date-time
-        userId:
-          $ref: '#/components/schemas/UserId'
-    Certificate:
+    BulkDeleteUser:
+      required:
+      - action
+      - items
       type: object
       properties:
-        value:
+        action:
           type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            type: string
     AuditAccessPoint:
       type: object
       properties:
@@ -1954,205 +1781,24 @@ components:
           type: string
         userAgent:
           type: string
-    StatusEntity:
+    UserIdentityEntity:
       type: object
       properties:
-        enabled:
-          type: boolean
-    ScopeEntity:
-      type: object
-      properties:
-        description:
-          type: string
-        id:
-          type: string
-        key:
-          type: string
-        name:
-          type: string
-    EnrolledFactorSecurity:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        type:
-          type: string
-        value:
-          type: string
-    BulkResponse:
-      type: object
-      properties:
-        allSuccessful:
-          type: boolean
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkOperationResultObject'
-    UpdateUser:
-      type: object
-      properties:
-        accountNonExpired:
-          type: boolean
-        accountNonLocked:
-          type: boolean
         additionalInformation:
           type: object
           additionalProperties:
             type: object
-        client:
-          type: string
-        createdAt:
+        linkedAt:
           type: string
           format: date-time
-        credentialsNonExpired:
-          type: boolean
-        displayName:
+        providerId:
           type: string
-        email:
-          maxLength: 320
-          minLength: 0
+        providerName:
           type: string
-        enabled:
-          type: boolean
-        externalId:
+        userId:
           type: string
-        firstName:
+        username:
           type: string
-        forceResetPassword:
-          type: boolean
-        lastName:
-          type: string
-        loggedAt:
-          type: string
-          format: date-time
-        loginsCount:
-          type: integer
-          format: int64
-        preRegistration:
-          type: boolean
-        preferredLanguage:
-          type: string
-        registrationCompleted:
-          type: boolean
-        source:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-    BulkOperationResultObject:
-      type: object
-      properties:
-        body:
-          type: object
-        errorDetails:
-          type: object
-        httpStatus:
-          maximum: 599
-          minimum: 100
-          type: integer
-          format: int32
-        index:
-          type: integer
-          format: int32
-        success:
-          type: boolean
-    UserId:
-      type: object
-      properties:
-        externalId:
-          type: string
-        id:
-          type: string
-        source:
-          type: string
-    UpdateUserWithId:
-      type: object
-      properties:
-        accountNonExpired:
-          type: boolean
-        accountNonLocked:
-          type: boolean
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        client:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        credentialsNonExpired:
-          type: boolean
-        displayName:
-          type: string
-        email:
-          maxLength: 320
-          minLength: 0
-          type: string
-        enabled:
-          type: boolean
-        externalId:
-          type: string
-        firstName:
-          type: string
-        forceResetPassword:
-          type: boolean
-        id:
-          type: string
-        lastName:
-          type: string
-        loggedAt:
-          type: string
-          format: date-time
-        loginsCount:
-          type: integer
-          format: int64
-        preRegistration:
-          type: boolean
-        preferredLanguage:
-          type: string
-        registrationCompleted:
-          type: boolean
-        source:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-    UserPage:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        totalCount:
-          type: integer
-          format: int64
-    BulkCreateOrganizationUser:
-      required:
-      - action
-      - items
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - CREATE
-          - UPDATE
-          - DELETE
-        failOnErrors:
-          type: integer
-          format: int32
-        items:
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/NewOrganizationUser'
     UserEntity:
       type: object
       properties:
@@ -2357,80 +2003,6 @@ components:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
           type: string
-    Credential:
-      type: object
-      properties:
-        aaguid:
-          type: string
-        accessedAt:
-          type: string
-          format: date-time
-        attestationStatement:
-          type: string
-        attestationStatementFormat:
-          type: string
-        counter:
-          type: integer
-          format: int64
-        createdAt:
-          type: string
-          format: date-time
-        credentialId:
-          type: string
-        deviceName:
-          type: string
-        id:
-          type: string
-        ipAddress:
-          type: string
-        lastCheckedAt:
-          type: string
-          format: date-time
-        publicKey:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        updatedAt:
-          type: string
-          format: date-time
-        userAgent:
-          type: string
-        userId:
-          type: string
-        username:
-          type: string
-    NewCertificateCredential:
-      required:
-      - certificatePem
-      type: object
-      properties:
-        certificatePem:
-          minLength: 1
-          type: string
-          description: The certificate in PEM format
-          example: '-----BEGIN CERTIFICATE-----
-
-            ...
-
-            -----END CERTIFICATE-----'
-    Attribute:
-      type: object
-      properties:
-        primary:
-          type: boolean
-        type:
-          type: string
-        value:
-          type: string
     Role:
       type: object
       properties:
@@ -2489,89 +2061,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    BulkCreateUser:
-      required:
-      - action
-      - items
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - CREATE
-          - UPDATE
-          - DELETE
-        failOnErrors:
-          type: integer
-          format: int32
-        items:
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/NewUser'
-    NewOrganizationUser:
-      required:
-      - username
-      type: object
-      properties:
-        accountNonExpired:
-          type: boolean
-        accountNonLocked:
-          type: boolean
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        client:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        credentialsNonExpired:
-          type: boolean
-        domain:
-          type: string
-        email:
-          type: string
-        enabled:
-          type: boolean
-        externalId:
-          type: string
-        firstName:
-          type: string
-        forceResetPassword:
-          type: boolean
-        internal:
-          type: boolean
-        lastName:
-          type: string
-        lastPasswordReset:
-          type: string
-          format: date-time
-        loggedAt:
-          type: string
-          format: date-time
-        loginsCount:
-          type: integer
-          format: int64
-        password:
-          type: string
-        preRegistration:
-          type: boolean
-        preferredLanguage:
-          type: string
-        registrationCompleted:
-          type: boolean
-        serviceAccount:
-          type: boolean
-        source:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-        username:
-          minLength: 1
-          type: string
     User:
       type: object
       properties:
@@ -2772,44 +2261,61 @@ components:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
           type: string
-    Page:
+    Audit:
       type: object
       properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            type: object
-        totalCount:
-          type: integer
-          format: int64
-    NewAccountAccessToken:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          minLength: 1
+        accessPoint:
+          $ref: '#/components/schemas/AuditAccessPoint'
+        actor:
+          $ref: '#/components/schemas/AuditEntity'
+        id:
           type: string
-    UserIdentity:
-      type: object
-      properties:
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        linkedAt:
+        outcome:
+          $ref: '#/components/schemas/AuditOutcome'
+        reference:
+          $ref: '#/components/schemas/Reference'
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        target:
+          $ref: '#/components/schemas/AuditEntity'
+        timestamp:
           type: string
           format: date-time
-        providerId:
+          writeOnly: true
+        transactionId:
           type: string
-        userId:
+        type:
           type: string
-        username:
+    BulkResponse:
+      type: object
+      properties:
+        allSuccessful:
+          type: boolean
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkOperationResultObject'
+    ScopeEntity:
+      type: object
+      properties:
+        description:
           type: string
-    BulkDeleteUser:
+        id:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+    BulkCreateOrganizationUser:
       required:
       - action
       - items
@@ -2828,71 +2334,66 @@ components:
           minItems: 1
           type: array
           items:
-            type: string
-    AccountAccessToken:
+            $ref: '#/components/schemas/NewOrganizationUser'
+    UserId:
       type: object
       properties:
-        createdAt:
+        externalId:
           type: string
-          format: date-time
-        issuerId:
+        id:
           type: string
-        issuerUsername:
+        source:
           type: string
-        name:
+    Certificate:
+      type: object
+      properties:
+        value:
           type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        token:
-          type: string
-        tokenId:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-        userId:
-          type: string
-    PasswordValue:
+    NewAccountAccessToken:
       required:
-      - password
+      - name
       type: object
       properties:
-        password:
+        name:
+          minLength: 1
           type: string
-    AuditOutcome:
+    BulkUpdateUser:
+      required:
+      - action
+      - items
       type: object
       properties:
-        message:
-          type: string
-        status:
+        action:
           type: string
           enum:
-          - SUCCESS
-          - FAILURE
-    EnrolledFactorEntity:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateUserWithId'
+    ApplicationEntity:
       type: object
       properties:
-        createdAt:
+        clientId:
           type: string
-          format: date-time
         id:
           type: string
         name:
           type: string
-        type:
+    UsernameEntity:
+      required:
+      - username
+      type: object
+      properties:
+        username:
+          minLength: 1
           type: string
-        updatedAt:
-          type: string
-          format: date-time
     Reference:
       type: object
       properties:
@@ -2907,7 +2408,245 @@ components:
           - ORGANIZATION
           - ENVIRONMENT
           - PROTECTED_RESOURCE
-    UserIdentityEntity:
+    OrganizationUserBulkRequest:
+      required:
+      - action
+      - items
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseJsonNode'
+      discriminator:
+        propertyName: action
+        mapping:
+          CREATE: '#/components/schemas/BulkCreateOrganizationUser'
+          UPDATE: '#/components/schemas/BulkUpdateUser'
+          DELETE: '#/components/schemas/BulkDeleteUser'
+      oneOf:
+      - $ref: '#/components/schemas/BulkCreateOrganizationUser'
+      - $ref: '#/components/schemas/BulkUpdateUser'
+      - $ref: '#/components/schemas/BulkDeleteUser'
+    UpdateUser:
+      type: object
+      properties:
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        displayName:
+          type: string
+        email:
+          maxLength: 320
+          minLength: 0
+          type: string
+        enabled:
+          type: boolean
+        externalId:
+          type: string
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        lastName:
+          type: string
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        registrationCompleted:
+          type: boolean
+        source:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    BulkOperationResultObject:
+      type: object
+      properties:
+        body:
+          type: object
+        errorDetails:
+          type: object
+        httpStatus:
+          maximum: 599
+          minimum: 100
+          type: integer
+          format: int32
+        index:
+          type: integer
+          format: int32
+        success:
+          type: boolean
+    NewUser:
+      required:
+      - username
+      type: object
+      properties:
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        domain:
+          type: string
+        email:
+          type: string
+        enabled:
+          type: boolean
+        externalId:
+          type: string
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        internal:
+          type: boolean
+        lastName:
+          type: string
+        lastPasswordReset:
+          type: string
+          format: date-time
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        password:
+          type: string
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        registrationCompleted:
+          type: boolean
+        source:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          minLength: 1
+          type: string
+    PasswordValue:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          type: string
+    AuditEntity:
+      type: object
+      properties:
+        alternativeId:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: object
+        displayName:
+          type: string
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+    BulkCreateUser:
+      required:
+      - action
+      - items
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          - DELETE
+        failOnErrors:
+          type: integer
+          format: int32
+        items:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/NewUser'
+    BaseJsonNode:
+      type: object
+    Page:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            type: object
+        totalCount:
+          type: integer
+          format: int64
+    EnrolledFactorSecurity:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        type:
+          type: string
+        value:
+          type: string
+    UserIdentity:
       type: object
       properties:
         additionalInformation:
@@ -2919,11 +2658,31 @@ components:
           format: date-time
         providerId:
           type: string
-        providerName:
-          type: string
         userId:
           type: string
         username:
+          type: string
+    UserPage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        totalCount:
+          type: integer
+          format: int64
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
           type: string
     CertificateCredential:
       type: object
@@ -2975,19 +2734,97 @@ components:
           type: string
         username:
           type: string
-    Audit:
+    UpdateUserWithId:
       type: object
       properties:
-        accessPoint:
-          $ref: '#/components/schemas/AuditAccessPoint'
-        actor:
-          $ref: '#/components/schemas/AuditEntity'
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        displayName:
+          type: string
+        email:
+          maxLength: 320
+          minLength: 0
+          type: string
+        enabled:
+          type: boolean
+        externalId:
+          type: string
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
         id:
           type: string
-        outcome:
-          $ref: '#/components/schemas/AuditOutcome'
-        reference:
-          $ref: '#/components/schemas/Reference'
+        lastName:
+          type: string
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        registrationCompleted:
+          type: boolean
+        source:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    AccountAccessToken:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        issuerId:
+          type: string
+        issuerUsername:
+          type: string
+        name:
+          type: string
         referenceId:
           type: string
         referenceType:
@@ -2999,35 +2836,16 @@ components:
           - ORGANIZATION
           - ENVIRONMENT
           - PROTECTED_RESOURCE
-        target:
-          $ref: '#/components/schemas/AuditEntity'
-        timestamp:
+        token:
+          type: string
+        tokenId:
+          type: string
+        updatedAt:
           type: string
           format: date-time
-          writeOnly: true
-        transactionId:
+        userId:
           type: string
-        type:
-          type: string
-    BaseJsonNode:
-      type: object
-    EnrolledFactorChannel:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        target:
-          type: string
-        type:
-          type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
-    OrganizationUserBulkRequest:
+    DomainUserBulkRequest:
       required:
       - action
       - items
@@ -3050,13 +2868,195 @@ components:
       discriminator:
         propertyName: action
         mapping:
-          CREATE: '#/components/schemas/BulkCreateOrganizationUser'
+          CREATE: '#/components/schemas/BulkCreateUser'
           UPDATE: '#/components/schemas/BulkUpdateUser'
           DELETE: '#/components/schemas/BulkDeleteUser'
       oneOf:
-      - $ref: '#/components/schemas/BulkCreateOrganizationUser'
+      - $ref: '#/components/schemas/BulkCreateUser'
       - $ref: '#/components/schemas/BulkUpdateUser'
       - $ref: '#/components/schemas/BulkDeleteUser'
+    Address:
+      type: object
+      properties:
+        country:
+          type: string
+        formatted:
+          type: string
+        locality:
+          type: string
+        postalCode:
+          type: string
+        primary:
+          type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
+        type:
+          type: string
+    Credential:
+      type: object
+      properties:
+        aaguid:
+          type: string
+        accessedAt:
+          type: string
+          format: date-time
+        attestationStatement:
+          type: string
+        attestationStatementFormat:
+          type: string
+        counter:
+          type: integer
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        credentialId:
+          type: string
+        deviceName:
+          type: string
+        id:
+          type: string
+        ipAddress:
+          type: string
+        lastCheckedAt:
+          type: string
+          format: date-time
+        publicKey:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        updatedAt:
+          type: string
+          format: date-time
+        userAgent:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    ScopeApprovalEntity:
+      type: object
+      properties:
+        clientEntity:
+          $ref: '#/components/schemas/ApplicationEntity'
+        clientId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        domain:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        scope:
+          type: string
+        scopeEntity:
+          $ref: '#/components/schemas/ScopeEntity'
+        status:
+          type: string
+          enum:
+          - APPROVED
+          - DENIED
+        transactionId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        userId:
+          $ref: '#/components/schemas/UserId'
+    NewOrganizationUser:
+      required:
+      - username
+      type: object
+      properties:
+        accountNonExpired:
+          type: boolean
+        accountNonLocked:
+          type: boolean
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        client:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        credentialsNonExpired:
+          type: boolean
+        domain:
+          type: string
+        email:
+          type: string
+        enabled:
+          type: boolean
+        externalId:
+          type: string
+        firstName:
+          type: string
+        forceResetPassword:
+          type: boolean
+        internal:
+          type: boolean
+        lastName:
+          type: string
+        lastPasswordReset:
+          type: string
+          format: date-time
+        loggedAt:
+          type: string
+          format: date-time
+        loginsCount:
+          type: integer
+          format: int64
+        password:
+          type: string
+        preRegistration:
+          type: boolean
+        preferredLanguage:
+          type: string
+        registrationCompleted:
+          type: boolean
+        serviceAccount:
+          type: boolean
+        source:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          minLength: 1
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

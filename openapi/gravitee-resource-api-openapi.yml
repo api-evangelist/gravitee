@@ -193,6 +193,35 @@ paths:
           description: Internal server error
 components:
   schemas:
+    UpdateServiceResource:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
+    NewServiceResource:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
     ServiceResource:
       type: object
       properties:
@@ -221,35 +250,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    NewServiceResource:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-    UpdateServiceResource:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        name:
-          type: string
-        type:
-          minLength: 1
-          type: string
   securitySchemes:
     gravitee-auth:
       type: http

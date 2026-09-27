@@ -249,6 +249,41 @@ paths:
           description: Internal server error
 components:
   schemas:
+    PatchScope:
+      type: object
+      properties:
+        description:
+          type: string
+        discovery:
+          type: boolean
+        expiresIn:
+          type: integer
+          format: int32
+        iconUri:
+          type: string
+        name:
+          type: string
+        parameterized:
+          type: boolean
+    UpdateScope:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        discovery:
+          type: boolean
+        expiresIn:
+          type: integer
+          format: int32
+        iconUri:
+          type: string
+        name:
+          type: string
+        parameterized:
+          type: boolean
     ScopePage:
       type: object
       properties:
@@ -262,28 +297,6 @@ components:
         totalCount:
           type: integer
           format: int64
-    NewScope:
-      required:
-      - description
-      - key
-      - name
-      type: object
-      properties:
-        description:
-          type: string
-        discovery:
-          type: boolean
-        expiresIn:
-          type: integer
-          format: int32
-        iconUri:
-          type: string
-        key:
-          type: string
-        name:
-          type: string
-        parameterized:
-          type: boolean
     Scope:
       type: object
       properties:
@@ -318,25 +331,10 @@ components:
         updatedAt:
           type: string
           format: date-time
-    PatchScope:
-      type: object
-      properties:
-        description:
-          type: string
-        discovery:
-          type: boolean
-        expiresIn:
-          type: integer
-          format: int32
-        iconUri:
-          type: string
-        name:
-          type: string
-        parameterized:
-          type: boolean
-    UpdateScope:
+    NewScope:
       required:
       - description
+      - key
       - name
       type: object
       properties:
@@ -348,6 +346,8 @@ components:
           type: integer
           format: int32
         iconUri:
+          type: string
+        key:
           type: string
         name:
           type: string

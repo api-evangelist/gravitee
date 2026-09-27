@@ -199,6 +199,26 @@ paths:
           description: Internal server error
 components:
   schemas:
+    NewTheme:
+      type: object
+      properties:
+        css:
+          type: string
+        faviconUrl:
+          type: string
+        logoUrl:
+          type: string
+        logoWidth:
+          type: integer
+          format: int32
+        primaryButtonColorHex:
+          type: string
+        primaryTextColorHex:
+          type: string
+        secondaryButtonColorHex:
+          type: string
+        secondaryTextColorHex:
+          type: string
     ThemeEntity:
       type: object
       properties:
@@ -238,26 +258,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    NewTheme:
-      type: object
-      properties:
-        css:
-          type: string
-        faviconUrl:
-          type: string
-        logoUrl:
-          type: string
-        logoWidth:
-          type: integer
-          format: int32
-        primaryButtonColorHex:
-          type: string
-        primaryTextColorHex:
-          type: string
-        secondaryButtonColorHex:
-          type: string
-        secondaryTextColorHex:
-          type: string
   securitySchemes:
     gravitee-auth:
       type: http

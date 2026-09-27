@@ -193,6 +193,20 @@ paths:
           description: Internal server error
 components:
   schemas:
+    UpdateBotDetection:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
     BotDetection:
       type: object
       properties:
@@ -223,20 +237,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    UpdateBotDetection:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        name:
-          type: string
-        type:
-          minLength: 1
-          type: string
     NewBotDetection:
       required:
       - configuration

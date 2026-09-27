@@ -268,39 +268,38 @@ paths:
           description: Internal server error
 components:
   schemas:
-    AlertTrigger:
+    NewAlertNotifier:
+      required:
+      - configuration
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+          writeOnly: true
+        type:
+          minLength: 1
+          type: string
+    PatchAlertTrigger:
+      required:
+      - type
       type: object
       properties:
         alertNotifiers:
           type: array
           items:
             type: string
-        createdAt:
-          type: string
-          format: date-time
         enabled:
           type: boolean
-        id:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
         type:
           type: string
           enum:
           - TOO_MANY_LOGIN_FAILURES
           - RISK_ASSESSMENT
-        updatedAt:
-          type: string
-          format: date-time
     PatchAlertNotifier:
       type: object
       properties:
@@ -340,38 +339,39 @@ components:
         updatedAt:
           type: string
           format: date-time
-    NewAlertNotifier:
-      required:
-      - configuration
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        enabled:
-          type: boolean
-        name:
-          type: string
-          writeOnly: true
-        type:
-          minLength: 1
-          type: string
-    PatchAlertTrigger:
-      required:
-      - type
+    AlertTrigger:
       type: object
       properties:
         alertNotifiers:
           type: array
           items:
             type: string
+        createdAt:
+          type: string
+          format: date-time
         enabled:
           type: boolean
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
         type:
           type: string
           enum:
           - TOO_MANY_LOGIN_FAILURES
           - RISK_ASSESSMENT
+        updatedAt:
+          type: string
+          format: date-time
   securitySchemes:
     gravitee-auth:
       type: http

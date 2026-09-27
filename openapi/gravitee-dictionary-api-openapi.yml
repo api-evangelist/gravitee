@@ -238,6 +238,32 @@ paths:
           description: Internal server error
 components:
   schemas:
+    NewDictionary:
+      required:
+      - locale
+      - name
+      type: object
+      properties:
+        locale:
+          minLength: 1
+          type: string
+        name:
+          minLength: 1
+          type: string
+    Reference:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
     UpdateI18nDictionary:
       type: object
       properties:
@@ -281,32 +307,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    Reference:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-    NewDictionary:
-      required:
-      - locale
-      - name
-      type: object
-      properties:
-        locale:
-          minLength: 1
-          type: string
-        name:
-          minLength: 1
-          type: string
   securitySchemes:
     gravitee-auth:
       type: http

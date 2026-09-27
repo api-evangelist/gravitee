@@ -694,44 +694,40 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Address:
+    UserPage:
       type: object
       properties:
-        country:
-          type: string
-        formatted:
-          type: string
-        locality:
-          type: string
-        postalCode:
-          type: string
-        primary:
-          type: boolean
-        region:
-          type: string
-        streetAddress:
-          type: string
-        type:
-          type: string
-    EnrolledFactorSecurity:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        totalCount:
+          type: integer
+          format: int64
+    UpdateGroup:
+      required:
+      - name
       type: object
       properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        type:
+        description:
           type: string
+        members:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+    Certificate:
+      type: object
+      properties:
         value:
-          type: string
-    UserId:
-      type: object
-      properties:
-        externalId:
-          type: string
-        id:
-          type: string
-        source:
           type: string
     EnrolledFactor:
       type: object
@@ -759,35 +755,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    EnrolledFactorChannel:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        target:
-          type: string
-        type:
-          type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
-    NewGroup:
-      required:
-      - name
-      type: object
-      properties:
-        description:
-          type: string
-        members:
-          type: array
-          items:
-            type: string
-        name:
-          type: string
     GroupPage:
       type: object
       properties:
@@ -801,82 +768,24 @@ components:
         totalCount:
           type: integer
           format: int64
-    Group:
+    Address:
       type: object
       properties:
-        createdAt:
+        country:
           type: string
-          format: date-time
-        description:
+        formatted:
           type: string
-        id:
+        locality:
           type: string
-        members:
-          type: array
-          items:
-            type: string
-        name:
+        postalCode:
           type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        roles:
-          type: array
-          items:
-            type: string
-        updatedAt:
-          type: string
-          format: date-time
-    UserPage:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        totalCount:
-          type: integer
-          format: int64
-    Certificate:
-      type: object
-      properties:
-        value:
-          type: string
-    UserIdentity:
-      type: object
-      properties:
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        linkedAt:
-          type: string
-          format: date-time
-        providerId:
-          type: string
-        userId:
-          type: string
-        username:
-          type: string
-    Attribute:
-      type: object
-      properties:
         primary:
           type: boolean
-        type:
+        region:
           type: string
-        value:
+        streetAddress:
+          type: string
+        type:
           type: string
     Role:
       type: object
@@ -1136,7 +1045,86 @@ components:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
           type: string
-    UpdateGroup:
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    UserId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        id:
+          type: string
+        source:
+          type: string
+    Group:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        roles:
+          type: array
+          items:
+            type: string
+        updatedAt:
+          type: string
+          format: date-time
+    EnrolledFactorSecurity:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        type:
+          type: string
+        value:
+          type: string
+    NewGroup:
       required:
       - name
       type: object
@@ -1149,10 +1137,22 @@ components:
             type: string
         name:
           type: string
-        roles:
-          type: array
-          items:
-            type: string
+    UserIdentity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

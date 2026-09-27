@@ -363,28 +363,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    UpdateEmail:
-      required:
-      - content
-      - expiresAfter
-      - from
-      - subject
-      type: object
-      properties:
-        content:
-          type: string
-        enabled:
-          type: boolean
-        expiresAfter:
-          minimum: 1
-          type: integer
-          format: int32
-        from:
-          type: string
-        fromName:
-          type: string
-        subject:
-          type: string
     Email:
       type: object
       properties:
@@ -476,6 +454,28 @@ components:
           - CERTIFICATE_EXPIRATION
           - CLIENT_SECRET_EXPIRATION
           - VERIFY_ATTEMPT
+    UpdateEmail:
+      required:
+      - content
+      - expiresAfter
+      - from
+      - subject
+      type: object
+      properties:
+        content:
+          type: string
+        enabled:
+          type: boolean
+        expiresAfter:
+          minimum: 1
+          type: integer
+          format: int32
+        from:
+          type: string
+        fromName:
+          type: string
+        subject:
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

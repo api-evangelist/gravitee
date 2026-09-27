@@ -149,93 +149,6 @@ components:
           enum:
           - DOWNSCOPING
           - PERMISSIVE
-    LoginSettings:
-      type: object
-      properties:
-        certificateBasedAuthEnabled:
-          type: boolean
-        certificateBasedAuthUrl:
-          type: string
-        enforcePasswordPolicyEnabled:
-          type: boolean
-        forgotPasswordEnabled:
-          type: boolean
-        hideForm:
-          type: boolean
-        identifierFirstEnabled:
-          type: boolean
-        inherited:
-          type: boolean
-        magicLinkAuthEnabled:
-          type: boolean
-        passwordlessDeviceNamingEnabled:
-          type: boolean
-        passwordlessEnabled:
-          type: boolean
-        passwordlessEnforcePasswordEnabled:
-          type: boolean
-        passwordlessEnforcePasswordMaxAge:
-          type: integer
-          format: int32
-        passwordlessRememberDeviceEnabled:
-          type: boolean
-        registerEnabled:
-          type: boolean
-        rememberMeEnabled:
-          type: boolean
-        resetPasswordOnExpiration:
-          type: boolean
-    WebAuthnSettings:
-      type: object
-      properties:
-        attestationConveyancePreference:
-          type: string
-          enum:
-          - NONE
-          - INDIRECT
-          - DIRECT
-        authenticatorAttachment:
-          type: string
-          enum:
-          - CROSS_PLATFORM
-          - PLATFORM
-        certificates:
-          type: object
-          additionalProperties:
-            type: object
-        enforceAuthenticatorIntegrity:
-          type: boolean
-        enforceAuthenticatorIntegrityMaxAge:
-          type: integer
-          format: int32
-        forceRegistration:
-          type: boolean
-        origin:
-          type: string
-        relyingPartyId:
-          type: string
-        relyingPartyName:
-          type: string
-        requireResidentKey:
-          type: boolean
-        userVerification:
-          type: string
-          enum:
-          - REQUIRED
-          - PREFERRED
-          - DISCOURAGED
-    SelfServiceAccountManagementSettings:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-        resetPassword:
-          $ref: '#/components/schemas/ResetPasswordSettings'
-    CertificateSettings:
-      type: object
-      properties:
-        fallbackCertificate:
-          type: string
     AccountSettings:
       type: object
       properties:
@@ -301,14 +214,84 @@ components:
           type: boolean
         useBotDetection:
           type: boolean
-    SCIMSettings:
+    CIBASettingNotifier:
+      type: object
+      properties:
+        id:
+          type: string
+    SelfServiceAccountManagementSettings:
       type: object
       properties:
         enabled:
           type: boolean
-        idpSelectionEnabled:
+        resetPassword:
+          $ref: '#/components/schemas/ResetPasswordSettings'
+    CertificateSettings:
+      type: object
+      properties:
+        fallbackCertificate:
+          type: string
+    Tag:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    LoginSettings:
+      type: object
+      properties:
+        certificateBasedAuthEnabled:
           type: boolean
-        idpSelectionRule:
+        certificateBasedAuthUrl:
+          type: string
+        enforcePasswordPolicyEnabled:
+          type: boolean
+        forgotPasswordEnabled:
+          type: boolean
+        hideForm:
+          type: boolean
+        identifierFirstEnabled:
+          type: boolean
+        inherited:
+          type: boolean
+        magicLinkAuthEnabled:
+          type: boolean
+        passwordlessDeviceNamingEnabled:
+          type: boolean
+        passwordlessEnabled:
+          type: boolean
+        passwordlessEnforcePasswordEnabled:
+          type: boolean
+        passwordlessEnforcePasswordMaxAge:
+          type: integer
+          format: int32
+        passwordlessRememberDeviceEnabled:
+          type: boolean
+        registerEnabled:
+          type: boolean
+        rememberMeEnabled:
+          type: boolean
+        resetPasswordOnExpiration:
+          type: boolean
+    UpdateTag:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        name:
           type: string
     OIDCSettings:
       type: object
@@ -331,6 +314,65 @@ components:
             type: string
         securityProfileSettings:
           $ref: '#/components/schemas/SecurityProfileSettings'
+    SecurityProfileSettings:
+      type: object
+      properties:
+        enableFapiBrazil:
+          type: boolean
+        enablePlainFapi:
+          type: boolean
+    CorsSettings:
+      type: object
+      properties:
+        allowCredentials:
+          type: boolean
+        allowedHeaders:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        allowedMethods:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        allowedOrigins:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+        maxAge:
+          type: integer
+          format: int32
+    SAMLSettings:
+      type: object
+      properties:
+        certificate:
+          type: string
+        enabled:
+          type: boolean
+        entityId:
+          type: string
+    SCIMSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        idpSelectionEnabled:
+          type: boolean
+        idpSelectionRule:
+          type: string
+    VirtualHost:
+      type: object
+      properties:
+        host:
+          type: string
+        overrideEntrypoint:
+          type: boolean
+        path:
+          type: string
     ResetPasswordSettings:
       type: object
       properties:
@@ -339,88 +381,45 @@ components:
         tokenAge:
           type: integer
           format: int32
-    TrustedIssuer:
+    WebAuthnSettings:
       type: object
       properties:
-        certificate:
-          type: string
-        issuer:
-          type: string
-        jwksUri:
-          type: string
-        keyResolutionMethod:
+        attestationConveyancePreference:
           type: string
           enum:
-          - JWKS_URL
-          - PEM
-        scopeMappings:
+          - NONE
+          - INDIRECT
+          - DIRECT
+        authenticatorAttachment:
+          type: string
+          enum:
+          - CROSS_PLATFORM
+          - PLATFORM
+        certificates:
           type: object
           additionalProperties:
-            type: string
-        userBindingCriteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserBindingCriterion'
-        userBindingEnabled:
+            type: object
+        enforceAuthenticatorIntegrity:
           type: boolean
-    UserBindingCriterion:
-      type: object
-      properties:
-        attribute:
-          type: string
-        expression:
-          type: string
-    CIMDSettings:
-      type: object
-      properties:
-        allowPrivateIpAddress:
-          type: boolean
-        allowUnsecuredHttpUri:
-          type: boolean
-        allowedDomains:
-          type: array
-          items:
-            type: string
-        cacheMaxEntries:
+        enforceAuthenticatorIntegrityMaxAge:
           type: integer
           format: int32
-        cacheTtlSeconds:
-          type: integer
-          format: int32
-        enabled:
+        forceRegistration:
           type: boolean
-        fetchTimeoutMs:
-          type: integer
-          format: int32
-        maxResponseSizeKb:
-          type: integer
-          format: int32
-        revokeOnDocumentChange:
-          type: boolean
-        templateId:
+        origin:
           type: string
-    UpdateTag:
-      required:
-      - name
-      type: object
-      properties:
-        description:
+        relyingPartyId:
           type: string
-        name:
+        relyingPartyName:
           type: string
-    SecretExpirationSettings:
-      type: object
-      properties:
-        enabled:
+        requireResidentKey:
           type: boolean
-        expiryTimeSeconds:
-          type: integer
-          format: int64
-    UMASettings:
-      type: object
-      properties:
-        enabled:
-          type: boolean
+        userVerification:
+          type: string
+          enum:
+          - REQUIRED
+          - PREFERRED
+          - DISCOURAGED
     PasswordSettings:
       type: object
       properties:
@@ -453,57 +452,6 @@ components:
           format: int32
         passwordHistoryEnabled:
           type: boolean
-    FormField:
-      type: object
-      properties:
-        key:
-          type: string
-        label:
-          type: string
-        type:
-          type: string
-    Tag:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-        description:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        organizationId:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-    CorsSettings:
-      type: object
-      properties:
-        allowCredentials:
-          type: boolean
-        allowedHeaders:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        allowedMethods:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        allowedOrigins:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        enabled:
-          type: boolean
-        maxAge:
-          type: integer
-          format: int32
     Domain:
       type: object
       properties:
@@ -605,6 +553,91 @@ components:
             $ref: '#/components/schemas/VirtualHost'
         webAuthnSettings:
           $ref: '#/components/schemas/WebAuthnSettings'
+    SecretExpirationSettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        expiryTimeSeconds:
+          type: integer
+          format: int64
+    FormField:
+      type: object
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+    CIMDSettings:
+      type: object
+      properties:
+        allowPrivateIpAddress:
+          type: boolean
+        allowUnsecuredHttpUri:
+          type: boolean
+        allowedDomains:
+          type: array
+          items:
+            type: string
+        cacheMaxEntries:
+          type: integer
+          format: int32
+        cacheTtlSeconds:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        fetchTimeoutMs:
+          type: integer
+          format: int32
+        maxResponseSizeKb:
+          type: integer
+          format: int32
+        revokeOnDocumentChange:
+          type: boolean
+        templateId:
+          type: string
+    UserBindingCriterion:
+      type: object
+      properties:
+        attribute:
+          type: string
+        expression:
+          type: string
+    UMASettings:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    ClientRegistrationSettings:
+      type: object
+      properties:
+        allowHttpSchemeRedirectUri:
+          type: boolean
+        allowLocalhostRedirectUri:
+          type: boolean
+        allowRedirectUriParamsExpressionLanguage:
+          type: boolean
+        allowWildCardRedirectUri:
+          type: boolean
+        allowedScopes:
+          type: array
+          items:
+            type: string
+        allowedScopesEnabled:
+          type: boolean
+        clientTemplateEnabled:
+          type: boolean
+        defaultScopes:
+          type: array
+          items:
+            type: string
+        dynamicClientRegistrationEnabled:
+          type: boolean
+        openDynamicClientRegistrationEnabled:
+          type: boolean
     CIBASettings:
       type: object
       properties:
@@ -623,20 +656,6 @@ components:
         tokenReqInterval:
           type: integer
           format: int32
-    VirtualHost:
-      type: object
-      properties:
-        host:
-          type: string
-        overrideEntrypoint:
-          type: boolean
-        path:
-          type: string
-    CIBASettingNotifier:
-      type: object
-      properties:
-        id:
-          type: string
     TokenExchangeSettings:
       type: object
       properties:
@@ -676,49 +695,30 @@ components:
           type: string
         name:
           type: string
-    ClientRegistrationSettings:
-      type: object
-      properties:
-        allowHttpSchemeRedirectUri:
-          type: boolean
-        allowLocalhostRedirectUri:
-          type: boolean
-        allowRedirectUriParamsExpressionLanguage:
-          type: boolean
-        allowWildCardRedirectUri:
-          type: boolean
-        allowedScopes:
-          type: array
-          items:
-            type: string
-        allowedScopesEnabled:
-          type: boolean
-        clientTemplateEnabled:
-          type: boolean
-        defaultScopes:
-          type: array
-          items:
-            type: string
-        dynamicClientRegistrationEnabled:
-          type: boolean
-        openDynamicClientRegistrationEnabled:
-          type: boolean
-    SecurityProfileSettings:
-      type: object
-      properties:
-        enableFapiBrazil:
-          type: boolean
-        enablePlainFapi:
-          type: boolean
-    SAMLSettings:
+    TrustedIssuer:
       type: object
       properties:
         certificate:
           type: string
-        enabled:
-          type: boolean
-        entityId:
+        issuer:
           type: string
+        jwksUri:
+          type: string
+        keyResolutionMethod:
+          type: string
+          enum:
+          - JWKS_URL
+          - PEM
+        scopeMappings:
+          type: object
+          additionalProperties:
+            type: string
+        userBindingCriteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBindingCriterion'
+        userBindingEnabled:
+          type: boolean
   securitySchemes:
     gravitee-auth:
       type: http

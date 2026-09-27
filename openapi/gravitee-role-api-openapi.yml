@@ -350,36 +350,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    RolePage:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        totalCount:
-          type: integer
-          format: int64
-    UpdateRole:
-      required:
-      - name
-      type: object
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        oauthScopes:
-          type: array
-          items:
-            type: string
-        permissions:
-          type: array
-          items:
-            type: string
     NewRole:
       required:
       - name
@@ -398,46 +368,6 @@ components:
           type: string
         name:
           type: string
-    RoleEntity:
-      type: object
-      properties:
-        assignableType:
-          type: string
-        availablePermissions:
-          type: array
-          items:
-            type: string
-        createdAt:
-          type: string
-          format: date-time
-        defaultRole:
-          type: boolean
-        description:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        system:
-          type: boolean
-        updatedAt:
-          type: string
-          format: date-time
     Role:
       type: object
       properties:
@@ -496,6 +426,76 @@ components:
         updatedAt:
           type: string
           format: date-time
+    RoleEntity:
+      type: object
+      properties:
+        assignableType:
+          type: string
+        availablePermissions:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+    UpdateRole:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        oauthScopes:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    RolePage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        totalCount:
+          type: integer
+          format: int64
   securitySchemes:
     gravitee-auth:
       type: http

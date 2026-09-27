@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io APIM Management AP Is API
+  title: Gravitee.io APIM Management APIs API
   description: 'The Gravitee API Management (APIM) Management API is the administrative
 
     control plane for the Gravitee platform.'
@@ -214,6 +214,39 @@ paths:
           description: API stopped
 components:
   schemas:
+    CreateApi:
+      type: object
+      required:
+      - name
+      - apiVersion
+      - definitionVersion
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        apiVersion:
+          type: string
+        definitionVersion:
+          type: string
+          enum:
+          - V2
+          - V4
+        type:
+          type: string
+          enum:
+          - PROXY
+          - MESSAGE
+          - NATIVE
+    ApisPage:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Api'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Api:
       type: object
       properties:
@@ -273,43 +306,6 @@ components:
         deployedAt:
           type: string
           format: date-time
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        perPage:
-          type: integer
-        pageItemsCount:
-          type: integer
-        totalCount:
-          type: integer
-        pageCount:
-          type: integer
-    CreateApi:
-      type: object
-      required:
-      - name
-      - apiVersion
-      - definitionVersion
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        apiVersion:
-          type: string
-        definitionVersion:
-          type: string
-          enum:
-          - V2
-          - V4
-        type:
-          type: string
-          enum:
-          - PROXY
-          - MESSAGE
-          - NATIVE
     ImportSwaggerDescriptor:
       type: object
       required:
@@ -332,15 +328,19 @@ components:
           type: boolean
         withPathMapping:
           type: boolean
-    ApisPage:
+    Pagination:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Api'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        page:
+          type: integer
+        perPage:
+          type: integer
+        pageItemsCount:
+          type: integer
+        totalCount:
+          type: integer
+        pageCount:
+          type: integer
   parameters:
     ApiId:
       in: path

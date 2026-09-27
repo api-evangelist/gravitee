@@ -195,6 +195,33 @@ paths:
           description: Internal server error
 components:
   schemas:
+    ExtensionGrant:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createUser:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        domain:
+          type: string
+        grantType:
+          type: string
+        id:
+          type: string
+        identityProvider:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        userExists:
+          type: boolean
     NewExtensionGrant:
       required:
       - configuration
@@ -239,33 +266,6 @@ components:
         type:
           minLength: 1
           type: string
-        userExists:
-          type: boolean
-    ExtensionGrant:
-      type: object
-      properties:
-        configuration:
-          type: string
-        createUser:
-          type: boolean
-        createdAt:
-          type: string
-          format: date-time
-        domain:
-          type: string
-        grantType:
-          type: string
-        id:
-          type: string
-        identityProvider:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
         userExists:
           type: boolean
   securitySchemes:

@@ -678,14 +678,6 @@ paths:
             application/json: {}
 components:
   schemas:
-    ErrorEntity:
-      type: object
-      properties:
-        http_status:
-          type: integer
-          format: int32
-        message:
-          type: string
     NotifierPlugin:
       type: object
       properties:
@@ -704,6 +696,14 @@ components:
         name:
           type: string
         version:
+          type: string
+    ErrorEntity:
+      type: object
+      properties:
+        http_status:
+          type: integer
+          format: int32
+        message:
           type: string
   securitySchemes:
     gravitee-auth:
