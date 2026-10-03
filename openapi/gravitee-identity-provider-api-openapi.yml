@@ -376,47 +376,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    AssignPasswordPolicy:
-      type: object
-      properties:
-        passwordPolicy:
-          type: string
-    NewIdentityProvider:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        domainWhitelist:
-          type: array
-          items:
-            type: string
-        external:
-          type: boolean
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-    FilteredIdentityProviderInfo:
-      type: object
-      properties:
-        external:
-          type: boolean
-        id:
-          type: string
-        name:
-          type: string
-        passwordPolicy:
-          type: string
-        system:
-          type: boolean
-        type:
-          type: string
     IdentityProvider:
       type: object
       properties:
@@ -473,6 +432,32 @@ components:
         updatedAt:
           type: string
           format: date-time
+    AssignPasswordPolicy:
+      type: object
+      properties:
+        passwordPolicy:
+          type: string
+    NewIdentityProvider:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        domainWhitelist:
+          type: array
+          items:
+            type: string
+        external:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
     UpdateIdentityProvider:
       required:
       - configuration
@@ -508,6 +493,21 @@ components:
               type: string
         type:
           minLength: 1
+          type: string
+    FilteredIdentityProviderInfo:
+      type: object
+      properties:
+        external:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        passwordPolicy:
+          type: string
+        system:
+          type: boolean
+        type:
           type: string
   securitySchemes:
     gravitee-auth:

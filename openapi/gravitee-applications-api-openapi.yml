@@ -78,14 +78,6 @@ paths:
         '200':
           description: The application
 components:
-  parameters:
-    EnvId:
-      in: path
-      name: envId
-      required: true
-      schema:
-        type: string
-      description: The environment identifier
   schemas:
     Application:
       type: object
@@ -121,6 +113,14 @@ components:
                   type: string
             oauth:
               type: object
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
   securitySchemes:
     BasicAuth:
       type: http

@@ -223,6 +223,20 @@ components:
         updatedAt:
           type: string
           format: date-time
+    UpdateFactor:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
     NewFactor:
       required:
       - configuration
@@ -240,20 +254,6 @@ components:
         name:
           type: string
         type:
-          type: string
-    UpdateFactor:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        name:
-          type: string
-        type:
-          minLength: 1
           type: string
   securitySchemes:
     gravitee-auth:

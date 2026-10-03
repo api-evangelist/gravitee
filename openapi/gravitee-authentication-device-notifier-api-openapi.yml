@@ -189,6 +189,21 @@ paths:
           description: Internal server error
 components:
   schemas:
+    NewAuthenticationDeviceNotifier:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
     AuthenticationDeviceNotifier:
       type: object
       properties:
@@ -217,21 +232,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    NewAuthenticationDeviceNotifier:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
     UpdateAuthenticationDeviceNotifier:
       required:
       - configuration

@@ -193,6 +193,34 @@ paths:
           description: Internal server error
 components:
   schemas:
+    DeviceIdentifier:
+      type: object
+      properties:
+        configuration:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
     NewDeviceIdentifier:
       required:
       - configuration
@@ -222,34 +250,6 @@ components:
         type:
           minLength: 1
           type: string
-    DeviceIdentifier:
-      type: object
-      properties:
-        configuration:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        id:
-          type: string
-        name:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        type:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
   securitySchemes:
     gravitee-auth:
       type: http

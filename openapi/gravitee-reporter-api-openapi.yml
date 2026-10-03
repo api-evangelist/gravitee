@@ -331,39 +331,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    NewReporter:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        enabled:
-          type: boolean
-        id:
-          type: string
-        inherited:
-          type: boolean
-        name:
-          type: string
-        type:
-          type: string
-    Reference:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
     UpdateReporter:
       required:
       - configuration
@@ -409,6 +376,39 @@ components:
         updatedAt:
           type: string
           format: date-time
+    Reference:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+    NewReporter:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        inherited:
+          type: boolean
+        name:
+          type: string
+        type:
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

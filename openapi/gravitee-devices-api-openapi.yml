@@ -88,114 +88,31 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Certificate:
+    UserId:
       type: object
       properties:
-        value:
-          type: string
-    EnrolledFactor:
-      type: object
-      properties:
-        appId:
-          type: string
-        channel:
-          $ref: '#/components/schemas/EnrolledFactorChannel'
-        createdAt:
-          type: string
-          format: date-time
-        factorId:
-          type: string
-        primary:
-          type: boolean
-        security:
-          $ref: '#/components/schemas/EnrolledFactorSecurity'
-        status:
-          type: string
-          enum:
-          - PENDING_ACTIVATION
-          - ACTIVATED
-          - REVOKED
-          - 'NULL'
-        updatedAt:
-          type: string
-          format: date-time
-    Address:
-      type: object
-      properties:
-        country:
-          type: string
-        formatted:
-          type: string
-        locality:
-          type: string
-        postalCode:
-          type: string
-        primary:
-          type: boolean
-        region:
-          type: string
-        streetAddress:
-          type: string
-        type:
-          type: string
-    Role:
-      type: object
-      properties:
-        assignableType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        createdAt:
-          type: string
-          format: date-time
-        defaultRole:
-          type: boolean
-        description:
+        externalId:
           type: string
         id:
           type: string
-        internalOnly:
-          type: boolean
-        name:
+        source:
           type: string
-        oauthScopes:
-          type: array
-          items:
-            type: string
-        permissionAcls:
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
           type: object
           additionalProperties:
-            uniqueItems: true
-            type: array
-            items:
-              type: string
-              enum:
-              - CREATE
-              - READ
-              - LIST
-              - UPDATE
-              - DELETE
-        referenceId:
+            type: object
+        target:
           type: string
-        referenceType:
+        type:
           type: string
           enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        system:
-          type: boolean
-        updatedAt:
-          type: string
-          format: date-time
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
     User:
       type: object
       properties:
@@ -396,29 +313,28 @@ components:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
           type: string
-    EnrolledFactorChannel:
+    Address:
       type: object
       properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        target:
+        country:
           type: string
-        type:
+        formatted:
           type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
-    Attribute:
-      type: object
-      properties:
+        locality:
+          type: string
+        postalCode:
+          type: string
         primary:
           type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
         type:
           type: string
+    Certificate:
+      type: object
+      properties:
         value:
           type: string
     UserIdentity:
@@ -437,6 +353,99 @@ components:
           type: string
         username:
           type: string
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    Role:
+      type: object
+      properties:
+        assignableType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        internalOnly:
+          type: boolean
+        name:
+          type: string
+        oauthScopes:
+          type: array
+          items:
+            type: string
+        permissionAcls:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              enum:
+              - CREATE
+              - READ
+              - LIST
+              - UPDATE
+              - DELETE
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
     EnrolledFactorSecurity:
       type: object
       properties:
@@ -447,15 +456,6 @@ components:
         type:
           type: string
         value:
-          type: string
-    UserId:
-      type: object
-      properties:
-        externalId:
-          type: string
-        id:
-          type: string
-        source:
           type: string
   securitySchemes:
     gravitee-auth:

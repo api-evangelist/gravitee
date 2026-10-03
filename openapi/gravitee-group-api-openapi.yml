@@ -694,6 +694,31 @@ paths:
           description: Internal server error
 components:
   schemas:
+    UserId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        id:
+          type: string
+        source:
+          type: string
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
     UserPage:
       type: object
       properties:
@@ -704,6 +729,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
+        totalCount:
+          type: integer
+          format: int64
+    GroupPage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
         totalCount:
           type: integer
           format: int64
@@ -724,127 +762,6 @@ components:
           type: array
           items:
             type: string
-    Certificate:
-      type: object
-      properties:
-        value:
-          type: string
-    EnrolledFactor:
-      type: object
-      properties:
-        appId:
-          type: string
-        channel:
-          $ref: '#/components/schemas/EnrolledFactorChannel'
-        createdAt:
-          type: string
-          format: date-time
-        factorId:
-          type: string
-        primary:
-          type: boolean
-        security:
-          $ref: '#/components/schemas/EnrolledFactorSecurity'
-        status:
-          type: string
-          enum:
-          - PENDING_ACTIVATION
-          - ACTIVATED
-          - REVOKED
-          - 'NULL'
-        updatedAt:
-          type: string
-          format: date-time
-    GroupPage:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-        totalCount:
-          type: integer
-          format: int64
-    Address:
-      type: object
-      properties:
-        country:
-          type: string
-        formatted:
-          type: string
-        locality:
-          type: string
-        postalCode:
-          type: string
-        primary:
-          type: boolean
-        region:
-          type: string
-        streetAddress:
-          type: string
-        type:
-          type: string
-    Role:
-      type: object
-      properties:
-        assignableType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        createdAt:
-          type: string
-          format: date-time
-        defaultRole:
-          type: boolean
-        description:
-          type: string
-        id:
-          type: string
-        internalOnly:
-          type: boolean
-        name:
-          type: string
-        oauthScopes:
-          type: array
-          items:
-            type: string
-        permissionAcls:
-          type: object
-          additionalProperties:
-            uniqueItems: true
-            type: array
-            items:
-              type: string
-              enum:
-              - CREATE
-              - READ
-              - LIST
-              - UPDATE
-              - DELETE
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        system:
-          type: boolean
-        updatedAt:
-          type: string
-          format: date-time
     User:
       type: object
       properties:
@@ -1045,39 +962,24 @@ components:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
           type: string
-    EnrolledFactorChannel:
+    Address:
       type: object
       properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        target:
+        country:
           type: string
-        type:
+        formatted:
           type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
-    Attribute:
-      type: object
-      properties:
+        locality:
+          type: string
+        postalCode:
+          type: string
         primary:
           type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
         type:
-          type: string
-        value:
-          type: string
-    UserId:
-      type: object
-      properties:
-        externalId:
-          type: string
-        id:
-          type: string
-        source:
           type: string
     Group:
       type: object
@@ -1113,6 +1015,120 @@ components:
         updatedAt:
           type: string
           format: date-time
+    Certificate:
+      type: object
+      properties:
+        value:
+          type: string
+    UserIdentity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    Role:
+      type: object
+      properties:
+        assignableType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        internalOnly:
+          type: boolean
+        name:
+          type: string
+        oauthScopes:
+          type: array
+          items:
+            type: string
+        permissionAcls:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+              enum:
+              - CREATE
+              - READ
+              - LIST
+              - UPDATE
+              - DELETE
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
     EnrolledFactorSecurity:
       type: object
       properties:
@@ -1136,22 +1152,6 @@ components:
           items:
             type: string
         name:
-          type: string
-    UserIdentity:
-      type: object
-      properties:
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        linkedAt:
-          type: string
-          format: date-time
-        providerId:
-          type: string
-        userId:
-          type: string
-        username:
           type: string
   securitySchemes:
     gravitee-auth:

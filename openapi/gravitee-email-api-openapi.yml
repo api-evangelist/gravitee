@@ -363,47 +363,28 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Email:
+    UpdateEmail:
+      required:
+      - content
+      - expiresAfter
+      - from
+      - subject
       type: object
       properties:
-        client:
-          type: string
         content:
           type: string
-        createdAt:
-          type: string
-          format: date-time
-        defaultTemplate:
-          type: boolean
         enabled:
           type: boolean
         expiresAfter:
+          minimum: 1
           type: integer
           format: int32
         from:
           type: string
         fromName:
           type: string
-        id:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
         subject:
           type: string
-        template:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
     NewEmail:
       required:
       - content
@@ -454,28 +435,47 @@ components:
           - CERTIFICATE_EXPIRATION
           - CLIENT_SECRET_EXPIRATION
           - VERIFY_ATTEMPT
-    UpdateEmail:
-      required:
-      - content
-      - expiresAfter
-      - from
-      - subject
+    Email:
       type: object
       properties:
+        client:
+          type: string
         content:
           type: string
+        createdAt:
+          type: string
+          format: date-time
+        defaultTemplate:
+          type: boolean
         enabled:
           type: boolean
         expiresAfter:
-          minimum: 1
           type: integer
           format: int32
         from:
           type: string
         fromName:
           type: string
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
         subject:
           type: string
+        template:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
   securitySchemes:
     gravitee-auth:
       type: http

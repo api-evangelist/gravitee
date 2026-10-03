@@ -165,58 +165,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    Step:
-      type: object
-      properties:
-        condition:
-          type: string
-        configuration:
-          type: string
-        description:
-          type: string
-        enabled:
-          type: boolean
-        name:
-          type: string
-        policy:
-          type: string
-    Flow:
-      required:
-      - name
-      - type
-      type: object
-      properties:
-        condition:
-          type: string
-        enabled:
-          type: boolean
-        id:
-          type: string
-        name:
-          type: string
-        post:
-          type: array
-          items:
-            $ref: '#/components/schemas/Step'
-        pre:
-          type: array
-          items:
-            $ref: '#/components/schemas/Step'
-        type:
-          type: string
-          enum:
-          - ROOT
-          - LOGIN_IDENTIFIER
-          - LOGIN
-          - CONNECT
-          - CONSENT
-          - REGISTER
-          - RESET_PASSWORD
-          - REGISTRATION_CONFIRMATION
-          - TOKEN
-          - WEBAUTHN_REGISTER
-          - MFA_CHALLENGE
-          - MFA_ENROLLMENT
     FlowEntity:
       type: object
       properties:
@@ -259,6 +207,58 @@ components:
         updatedAt:
           type: string
           format: date-time
+    Flow:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        condition:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        post:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        pre:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        type:
+          type: string
+          enum:
+          - ROOT
+          - LOGIN_IDENTIFIER
+          - LOGIN
+          - CONNECT
+          - CONSENT
+          - REGISTER
+          - RESET_PASSWORD
+          - REGISTRATION_CONFIRMATION
+          - TOKEN
+          - WEBAUTHN_REGISTER
+          - MFA_CHALLENGE
+          - MFA_ENROLLMENT
+    Step:
+      type: object
+      properties:
+        condition:
+          type: string
+        configuration:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        policy:
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

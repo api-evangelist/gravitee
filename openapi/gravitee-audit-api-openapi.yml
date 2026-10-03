@@ -211,6 +211,32 @@ components:
           enum:
           - SUCCESS
           - FAILURE
+    AuditEntity:
+      type: object
+      properties:
+        alternativeId:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: object
+        displayName:
+          type: string
+        id:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        type:
+          type: string
     AuditAccessPoint:
       type: object
       properties:
@@ -256,32 +282,6 @@ components:
           writeOnly: true
         transactionId:
           type: string
-        type:
-          type: string
-    AuditEntity:
-      type: object
-      properties:
-        alternativeId:
-          type: string
-        attributes:
-          type: object
-          additionalProperties:
-            type: object
-        displayName:
-          type: string
-        id:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
         type:
           type: string
     Reference:

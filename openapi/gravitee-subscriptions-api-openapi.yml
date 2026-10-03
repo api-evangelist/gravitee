@@ -122,21 +122,6 @@ paths:
         '200':
           description: Subscription rejected
 components:
-  parameters:
-    ApiId:
-      in: path
-      name: apiId
-      required: true
-      schema:
-        type: string
-      description: The API identifier
-    EnvId:
-      in: path
-      name: envId
-      required: true
-      schema:
-        type: string
-      description: The environment identifier
   schemas:
     Subscription:
       type: object
@@ -167,6 +152,21 @@ components:
         endingAt:
           type: string
           format: date-time
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+    ApiId:
+      in: path
+      name: apiId
+      required: true
+      schema:
+        type: string
+      description: The API identifier
   securitySchemes:
     BasicAuth:
       type: http

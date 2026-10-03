@@ -250,31 +250,6 @@ components:
         name:
           minLength: 1
           type: string
-    Reference:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-    UpdateI18nDictionary:
-      type: object
-      properties:
-        entries:
-          type: object
-          additionalProperties:
-            type: string
-        locale:
-          type: string
-        name:
-          type: string
     I18nDictionary:
       type: object
       properties:
@@ -307,6 +282,31 @@ components:
         updatedAt:
           type: string
           format: date-time
+    Reference:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+    UpdateI18nDictionary:
+      type: object
+      properties:
+        entries:
+          type: object
+          additionalProperties:
+            type: string
+        locale:
+          type: string
+        name:
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

@@ -139,6 +139,23 @@ paths:
           description: Internal server error
 components:
   schemas:
+    NewEntrypoint:
+      required:
+      - name
+      - tags
+      - url
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
     Entrypoint:
       type: object
       properties:
@@ -162,23 +179,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-        url:
-          type: string
-    NewEntrypoint:
-      required:
-      - name
-      - tags
-      - url
-      type: object
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
         url:
           type: string
     UpdateEntrypoint:

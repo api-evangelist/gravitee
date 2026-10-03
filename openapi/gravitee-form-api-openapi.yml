@@ -527,6 +527,15 @@ paths:
           description: Internal server error
 components:
   schemas:
+    UpdateForm:
+      type: object
+      properties:
+        assets:
+          type: string
+        content:
+          type: string
+        enabled:
+          type: boolean
     NewForm:
       required:
       - content
@@ -566,35 +575,6 @@ components:
           - CERTIFICATE_EXPIRATION
           - CLIENT_SECRET_EXPIRATION
           - VERIFY_ATTEMPT
-    PreviewResponse:
-      type: object
-      properties:
-        content:
-          type: string
-        template:
-          type: string
-        type:
-          type: string
-          enum:
-          - EMAIL
-          - FORM
-    PreviewRequest:
-      required:
-      - template
-      - type
-      type: object
-      properties:
-        content:
-          type: string
-        template:
-          type: string
-        theme:
-          $ref: '#/components/schemas/Theme'
-        type:
-          type: string
-          enum:
-          - EMAIL
-          - FORM
     Form:
       type: object
       properties:
@@ -627,6 +607,35 @@ components:
         updatedAt:
           type: string
           format: date-time
+    PreviewRequest:
+      required:
+      - template
+      - type
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        theme:
+          $ref: '#/components/schemas/Theme'
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
+    PreviewResponse:
+      type: object
+      properties:
+        content:
+          type: string
+        template:
+          type: string
+        type:
+          type: string
+          enum:
+          - EMAIL
+          - FORM
     Theme:
       type: object
       properties:
@@ -666,15 +675,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    UpdateForm:
-      type: object
-      properties:
-        assets:
-          type: string
-        content:
-          type: string
-        enabled:
-          type: boolean
   securitySchemes:
     gravitee-auth:
       type: http

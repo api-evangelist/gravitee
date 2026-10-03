@@ -214,6 +214,15 @@ paths:
           description: API stopped
 components:
   schemas:
+    ApisPage:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Api'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     CreateApi:
       type: object
       required:
@@ -238,15 +247,41 @@ components:
           - PROXY
           - MESSAGE
           - NATIVE
-    ApisPage:
+    Pagination:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Api'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        page:
+          type: integer
+        perPage:
+          type: integer
+        pageItemsCount:
+          type: integer
+        totalCount:
+          type: integer
+        pageCount:
+          type: integer
+    ImportSwaggerDescriptor:
+      type: object
+      required:
+      - type
+      - payload
+      properties:
+        type:
+          type: string
+          enum:
+          - INLINE
+          - URL
+        payload:
+          type: string
+        format:
+          type: string
+          enum:
+          - YAML
+          - JSON
+        withDocumentation:
+          type: boolean
+        withPathMapping:
+          type: boolean
     Api:
       type: object
       properties:
@@ -306,49 +341,7 @@ components:
         deployedAt:
           type: string
           format: date-time
-    ImportSwaggerDescriptor:
-      type: object
-      required:
-      - type
-      - payload
-      properties:
-        type:
-          type: string
-          enum:
-          - INLINE
-          - URL
-        payload:
-          type: string
-        format:
-          type: string
-          enum:
-          - YAML
-          - JSON
-        withDocumentation:
-          type: boolean
-        withPathMapping:
-          type: boolean
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        perPage:
-          type: integer
-        pageItemsCount:
-          type: integer
-        totalCount:
-          type: integer
-        pageCount:
-          type: integer
   parameters:
-    ApiId:
-      in: path
-      name: apiId
-      required: true
-      schema:
-        type: string
-      description: The API identifier
     EnvId:
       in: path
       name: envId
@@ -356,6 +349,13 @@ components:
       schema:
         type: string
       description: The environment identifier
+    ApiId:
+      in: path
+      name: apiId
+      required: true
+      schema:
+        type: string
+      description: The API identifier
   securitySchemes:
     BasicAuth:
       type: http
