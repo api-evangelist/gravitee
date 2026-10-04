@@ -1,17 +1,12 @@
 aid: gravitee
-
 name: Gravitee
-
-description: >-
-  Gravitee.io is an open-source API management platform from GraviteeSource, combining a high-performance API Gateway,
-  full-lifecycle API Management, Access Management (IAM), Cockpit (multi-environment control plane), an Alert Engine, a
-  Kubernetes Operator, and a new AI Agent Management suite with native MCP and LLM-proxy capabilities. The core projects
-  are Apache 2.0 OSS, with an Enterprise commercial offering and a managed Gravitee Cloud SaaS. The platform supports
-  synchronous and asynchronous APIs across REST, GraphQL, WebSocket, gRPC, SSE, Webhooks, Kafka, MQTT, AMQP, and Model
-  Context Protocol (MCP).
-
+description: Gravitee.io is an open-source API management platform from GraviteeSource, combining a high-performance
+  API Gateway, full-lifecycle API Management, Access Management (IAM), Cockpit (multi-environment control
+  plane), an Alert Engine, a Kubernetes Operator, and a new AI Agent Management suite with native MCP
+  and LLM-proxy capabilities. The core projects are Apache 2.0 OSS, with an Enterprise commercial offering
+  and a managed Gravitee Cloud SaaS. The platform supports synchronous and asynchronous APIs across REST,
+  GraphQL, WebSocket, gRPC, SSE, Webhooks, Kafka, MQTT, AMQP, and Model Context Protocol (MCP).
 type: Index
-
 deliveryModel:
   model: open-core
   license: Apache-2.0
@@ -30,7 +25,6 @@ deliveryModel:
   - repository-license
   generated: '2026-09-25'
   method: derived
-
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -45,9 +39,7 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
-
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-
 tags:
 - API Gateway
 - API Management
@@ -67,7 +59,6 @@ tags:
 - Developer Portal
 - Open Source
 - Apache 2.0
-
 tags_raw:
 - API Gateway
 - API Management
@@ -88,19 +79,13 @@ tags_raw:
 - Open Source
 - Apache 2.0
 - Open-Source
-
 url: https://raw.githubusercontent.com/api-evangelist/gravitee/refs/heads/main/apis.yml
-
 created: '2026-03-18'
-
 modified: '2026-05-21'
-
 specificationVersion: '0.23'
-
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-
 common:
 - type: Spectral
   url: rules/gravitee-rules.yml
@@ -209,14 +194,13 @@ common:
 - name: MCP Server
   url: https://github.com/gravitee-io/gravitee-apim-mcp-server
   type: MCPServer
-
 apis:
 - aid: gravitee:gravitee-cockpit
   name: Gravitee Cockpit
-  description: >-
-    Gravitee Cockpit is the multi-environment, multi-installation control plane for Gravitee. It centralizes
-    management of multiple APIM and AM installations (dev, staging, prod, regions) into one console, enabling
-    promotion of APIs across environments, centralized inventory, and organization-wide governance.
+  description: Gravitee Cockpit is the multi-environment, multi-installation control plane for Gravitee.
+    It centralizes management of multiple APIM and AM installations (dev, staging, prod, regions) into
+    one console, enabling promotion of APIs across environments, centralized inventory, and organization-wide
+    governance.
   humanURL: https://documentation.gravitee.io/cockpit
   baseURL: https://cockpit.gravitee.io
   tags:
@@ -245,10 +229,9 @@ apis:
   - type: Bearer Token
 - aid: gravitee:gravitee-alert-engine
   name: Gravitee Alert Engine
-  description: >-
-    Gravitee Alert Engine (AE) is a real-time API monitoring solution that tracks performance, availability,
-    errors, quota approach, and security events across all Gravitee gateways. It evaluates conditions,
-    fires triggers, and routes notifications through webhooks, email, Slack, and other channels.
+  description: Gravitee Alert Engine (AE) is a real-time API monitoring solution that tracks performance,
+    availability, errors, quota approach, and security events across all Gravitee gateways. It evaluates
+    conditions, fires triggers, and routes notifications through webhooks, email, Slack, and other channels.
   humanURL: https://documentation.gravitee.io/ae
   baseURL: https://documentation.gravitee.io/ae
   tags:
@@ -286,11 +269,10 @@ apis:
   - type: Bearer Token
 - aid: gravitee:gravitee-ai-agent-management
   name: Gravitee AI Agent Management
-  description: >-
-    Gravitee AI Agent Management brings the API management discipline to agentic AI ecosystems. It is
-    delivered as an Enterprise add-on package and includes an LLM Proxy (model routing, prompt-token tracking,
-    prompt guard-rails, RAG), an MCP Proxy and MCP Tool Server, an A2A Proxy for agent-to-agent flows,
-    an Agent Catalog, and AI-aware Identity and Authorization (MCP resource server, OpenFGA permission
+  description: Gravitee AI Agent Management brings the API management discipline to agentic AI ecosystems.
+    It is delivered as an Enterprise add-on package and includes an LLM Proxy (model routing, prompt-token
+    tracking, prompt guard-rails, RAG), an MCP Proxy and MCP Tool Server, an A2A Proxy for agent-to-agent
+    flows, an Agent Catalog, and AI-aware Identity and Authorization (MCP resource server, OpenFGA permission
     engine, AuthZen PDP).
   humanURL: https://www.gravitee.io/platform/ai-agent-management
   baseURL: https://documentation.gravitee.io/apim
@@ -335,52 +317,45 @@ apis:
     url: https://github.com/gravitee-io/llamaj.cpp
   features:
   - name: LLM Proxy
-    description: >-
-      Multi-provider proxy for OpenAI, Anthropic, Azure OpenAI, Bedrock, Mistral, Hugging Face, and self-hosted
-      models behind one unified interface.
+    description: Multi-provider proxy for OpenAI, Anthropic, Azure OpenAI, Bedrock, Mistral, Hugging Face,
+      and self-hosted models behind one unified interface.
   - name: Prompt Token Tracking
-    description: >-
-      Meter input / output tokens per consumer, per model, per route with enforceable token limits.
+    description: Meter input / output tokens per consumer, per model, per route with enforceable token
+      limits.
   - name: Prompt Guard-Rails
-    description: >-
-      Apply allow / deny / classify rules to user prompts, including PII detection, before they reach
-      the model.
+    description: Apply allow / deny / classify rules to user prompts, including PII detection, before
+      they reach the model.
   - name: Semantic Caching
-    description: >-
-      Cache LLM responses at the semantic layer to cut latency and provider cost on repeated prompts.
+    description: Cache LLM responses at the semantic layer to cut latency and provider cost on repeated
+      prompts.
   - name: Retrieval-Augmented Generation
     description: RAG policy that performs vector-store lookups and injects context into prompts.
   - name: AI Vector Store Resource
     description: Pluggable vector-store resource API for embedding-based retrieval.
   - name: MCP Proxy
-    description: >-
-      Expose APIs as agent-ready tools using MCP standards with validation, governance, quota, and access
-      controls.
+    description: Expose APIs as agent-ready tools using MCP standards with validation, governance, quota,
+      and access controls.
   - name: MCP Tool Server / Agent Tool Server
-    description: >-
-      Convert existing REST and event APIs into structured, reusable agent tools with standardized definitions
-      and execution patterns.
+    description: Convert existing REST and event APIs into structured, reusable agent tools with standardized
+      definitions and execution patterns.
   - name: A2A Proxy
-    description: >-
-      Govern agent-to-agent interactions with full visibility, identity propagation, and enforced authentication,
-      authorization, and policy.
+    description: Govern agent-to-agent interactions with full visibility, identity propagation, and enforced
+      authentication, authorization, and policy.
   - name: Agent Catalog
     description: Centralize agent discovery, versioning, and lifecycle management across teams.
   - name: Agentic Identity and Access Management
-    description: >-
-      Zero-trust, context-aware authentication and fine-grained authorization unified across LLMs, agents,
-      and APIs (OpenFGA + AuthZen PDP).
+    description: Zero-trust, context-aware authentication and fine-grained authorization unified across
+      LLMs, agents, and APIs (OpenFGA + AuthZen PDP).
   - name: AI Cost and Usage Monitoring
     description: End-to-end visibility into agent activity, prompt cost, and per-tenant LLM spend.
   - name: ML Inference Service
-    description: >-
-      Run text-classification and embedding models in the gateway via the inference service plugin.
+    description: Run text-classification and embedding models in the gateway via the inference service
+      plugin.
   useCases:
   - name: AI Cost Governance
     description: Cap and meter LLM spend by team, by route, by tenant.
   - name: Safe AI Onramp
-    description: >-
-      Apply prompt guard-rails, PII detection, content classification, and audit on AI workloads.
+    description: Apply prompt guard-rails, PII detection, content classification, and audit on AI workloads.
   - name: MCP-First APIs
     description: Publish enterprise APIs as MCP tools for agents and copilots.
   - name: RAG-as-a-Service
@@ -408,11 +383,10 @@ apis:
   - type: mTLS
 - aid: gravitee:gravitee-kafka-gateway
   name: Gravitee Kafka Gateway
-  description: >-
-    The Gravitee Kafka Gateway brings full API management discipline to Apache Kafka. It sits in front
-    of one or more Kafka clusters and applies authentication mediation, ACLs, quotas, message filtering
-    and routing, schema and serialization policies, virtual topics, and subscription workflows — exposing
-    Kafka as a governed, productized event streaming surface for internal and external consumers.
+  description: The Gravitee Kafka Gateway brings full API management discipline to Apache Kafka. It sits
+    in front of one or more Kafka clusters and applies authentication mediation, ACLs, quotas, message
+    filtering and routing, schema and serialization policies, virtual topics, and subscription workflows
+    — exposing Kafka as a governed, productized event streaming surface for internal and external consumers.
   humanURL: https://www.gravitee.io/platform/kafka-gateway
   baseURL: https://documentation.gravitee.io/apim
   tags:
@@ -437,41 +411,34 @@ apis:
     url: https://github.com/gravitee-io/gravitee-api-management
   features:
   - name: API Management for Kafka
-    description: >-
-      Apply policies — rate limiting, header assignment, serialization, JSON / Protobuf transformation
+    description: Apply policies — rate limiting, header assignment, serialization, JSON / Protobuf transformation
       — directly to Kafka streams.
   - name: Message Filtering and Routing
-    description: >-
-      Route and filter messages by content or headers, moving routing logic off the client and into the
-      gateway.
+    description: Route and filter messages by content or headers, moving routing logic off the client
+      and into the gateway.
   - name: Virtual Topics and Topic Mapping
-    description: >-
-      Expose user-friendly aliases for complex Kafka topic names and abstract backend topic structures
-      from consumers.
+    description: Expose user-friendly aliases for complex Kafka topic names and abstract backend topic
+      structures from consumers.
   - name: Subscription Approval Workflows
-    description: >-
-      Customizable approval workflows that gate which consumers may subscribe to which Kafka topics.
+    description: Customizable approval workflows that gate which consumers may subscribe to which Kafka
+      topics.
   - name: Authentication Mediation
-    description: >-
-      Let consumers connect using their preferred auth (OAuth2, JWT, mTLS, SASL) while the broker keeps
-      its own auth model.
+    description: Let consumers connect using their preferred auth (OAuth2, JWT, mTLS, SASL) while the
+      broker keeps its own auth model.
   - name: Granular Access Control
     description: Fine-grained ACLs over topics, partitions, and consumer groups managed centrally.
   useCases:
   - name: Securely Expose Kafka
-    description: >-
-      Combine access control, authentication mediation, and approval workflows to safely expose Kafka
-      to internal and external consumers.
+    description: Combine access control, authentication mediation, and approval workflows to safely expose
+      Kafka to internal and external consumers.
   - name: Kafka Governance
-    description: >-
-      Gain visibility and control over Kafka data flows while enforcing organizational standards via policies
-      and workflows.
+    description: Gain visibility and control over Kafka data flows while enforcing organizational standards
+      via policies and workflows.
   - name: Self-Service Streaming
-    description: >-
-      Let developers discover and subscribe to Kafka topics through the Gravitee Developer Portal.
+    description: Let developers discover and subscribe to Kafka topics through the Gravitee Developer
+      Portal.
   - name: Kafka TCO Reduction
-    description: >-
-      Cut Kafka cost through virtual topics, message offloading, and consolidated access management.
+    description: Cut Kafka cost through virtual topics, message offloading, and consolidated access management.
   integrations:
   - name: Apache Kafka
   - name: Confluent
@@ -486,9 +453,8 @@ apis:
   - type: API Key
 - aid: gravitee:gravitee-kubernetes-operator
   name: Gravitee Kubernetes Operator
-  description: >-
-    The Gravitee Kubernetes Operator (GKO) is a Go-based Kubernetes operator that lets platform teams
-    declare Gravitee APIs, applications, subscriptions, shared policy groups, and management contexts
+  description: The Gravitee Kubernetes Operator (GKO) is a Go-based Kubernetes operator that lets platform
+    teams declare Gravitee APIs, applications, subscriptions, shared policy groups, and management contexts
     as Kubernetes custom resources. It reconciles those resources against one or more Gravitee APIM installations.
   humanURL: https://documentation.gravitee.io/apim/kubernetes-operator
   baseURL: https://github.com/gravitee-io/gravitee-kubernetes-operator
@@ -631,8 +597,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -712,8 +677,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -793,8 +757,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -876,8 +839,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -959,8 +921,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1042,8 +1003,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1052,8 +1012,8 @@ apis:
     url: json-schema/gravitee-domain-schema.json
 - aid: gravitee:gravitee-authentication-device-notifier-api
   name: Gravitee Authentication Device Notifier API
-  description: >-
-    The Authentication Device Notifier API from Gravitee — 5 operation(s) for authentication device notifier.
+  description: The Authentication Device Notifier API from Gravitee — 5 operation(s) for authentication
+    device notifier.
   humanURL: https://www.gravitee.io/platform/api-management
   baseURL: https://documentation.gravitee.io/apim
   tags:
@@ -1124,8 +1084,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1205,8 +1164,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1286,8 +1244,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1367,8 +1324,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1450,8 +1406,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1533,8 +1488,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1616,8 +1570,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1699,8 +1652,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1782,8 +1734,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1865,8 +1816,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -1948,8 +1898,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2029,8 +1978,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2110,8 +2058,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2193,8 +2140,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2276,8 +2222,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2359,8 +2304,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2440,8 +2384,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2523,8 +2466,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2604,8 +2546,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2687,8 +2628,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2770,8 +2710,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2851,8 +2790,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -2932,8 +2870,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3015,8 +2952,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3098,8 +3034,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3179,8 +3114,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3260,8 +3194,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3341,8 +3274,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3422,8 +3354,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3505,8 +3436,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3588,8 +3518,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3669,8 +3598,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3752,8 +3680,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3835,8 +3762,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3916,8 +3842,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -3999,8 +3924,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -4082,8 +4006,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -4165,8 +4088,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -4247,8 +4169,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -4328,8 +4249,7 @@ apis:
   - type: GitHubRepository
     url: https://github.com/gravitee-io/gravitee-access-management
   - type: SDKs
-    url: >-
-      https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
+    url: https://github.com/gravitee-io/gravitee-access-management/tree/master/gravitee-am-management-api-sdk-java
   - type: HelmChart
     url: https://github.com/gravitee-io/helm-charts/tree/master/helm/gravitee-am
   - type: DockerImage
@@ -4359,13 +4279,13 @@ integrations:
 - name: AWS Bedrock
 - name: Slack
 - name: PagerDuty
-
 x-correction-request:
   requested: '2026-10-03'
   source:
   - apis.io Influence-tier request queue (kinlane-test-influence)
-  request: 'Influence-tier fact correction 76797ed7 (2026-09-23): proposed {"industries": ["developer-tools", "cybersecurity",
-    "enterprise-software"]}. Verify against the provider''s own site; use catalog industry/tag vocabulary.'
+  request: 'Influence-tier fact correction 76797ed7 (2026-09-23): proposed {"industries": ["developer-tools",
+    "cybersecurity", "enterprise-software"]}. Verify against the provider''s own site; use catalog industry/tag
+    vocabulary.'
 x-enrichment:
   date: '2026-10-03'
   status: enriched
