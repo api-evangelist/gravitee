@@ -51,39 +51,12 @@ paths:
           description: Internal server error
 components:
   schemas:
-    UserId:
+    EmailValue:
+      required:
+      - email
       type: object
       properties:
-        externalId:
-          type: string
-        id:
-          type: string
-        source:
-          type: string
-    EnrolledFactorChannel:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        target:
-          type: string
-        type:
-          type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
-    ApplicationEntity:
-      type: object
-      properties:
-        clientId:
-          type: string
-        id:
-          type: string
-        name:
+        email:
           type: string
     Address:
       type: object
@@ -104,68 +77,30 @@ components:
           type: string
         type:
           type: string
-    EmailValue:
-      required:
-      - email
+    EnrolledFactorSecurity:
       type: object
       properties:
-        email:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        type:
+          type: string
+        value:
           type: string
     Certificate:
       type: object
       properties:
         value:
           type: string
-    UserIdentity:
+    UserId:
       type: object
       properties:
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        linkedAt:
+        externalId:
           type: string
-          format: date-time
-        providerId:
+        id:
           type: string
-        userId:
-          type: string
-        username:
-          type: string
-    EnrolledFactor:
-      type: object
-      properties:
-        appId:
-          type: string
-        channel:
-          $ref: '#/components/schemas/EnrolledFactorChannel'
-        createdAt:
-          type: string
-          format: date-time
-        factorId:
-          type: string
-        primary:
-          type: boolean
-        security:
-          $ref: '#/components/schemas/EnrolledFactorSecurity'
-        status:
-          type: string
-          enum:
-          - PENDING_ACTIVATION
-          - ACTIVATED
-          - REVOKED
-          - 'NULL'
-        updatedAt:
-          type: string
-          format: date-time
-    Attribute:
-      type: object
-      properties:
-        primary:
-          type: boolean
-        type:
-          type: string
-        value:
+        source:
           type: string
     Role:
       type: object
@@ -225,17 +160,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    EnrolledFactorSecurity:
-      type: object
-      properties:
-        additionalData:
-          type: object
-          additionalProperties:
-            type: object
-        type:
-          type: string
-        value:
-          type: string
     UserEntity:
       type: object
       properties:
@@ -439,6 +363,82 @@ components:
           items:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
+          type: string
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    EnrolledFactorChannel:
+      type: object
+      properties:
+        additionalData:
+          type: object
+          additionalProperties:
+            type: object
+        target:
+          type: string
+        type:
+          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
+    ApplicationEntity:
+      type: object
+      properties:
+        clientId:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+    UserIdentity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        userId:
+          type: string
+        username:
           type: string
   securitySchemes:
     gravitee-auth:

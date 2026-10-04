@@ -350,6 +350,59 @@ paths:
           description: Internal server error
 components:
   schemas:
+    RolePage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        totalCount:
+          type: integer
+          format: int64
+    RoleEntity:
+      type: object
+      properties:
+        assignableType:
+          type: string
+        availablePermissions:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        defaultRole:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+          enum:
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
+        system:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
     UpdateRole:
       required:
       - name
@@ -409,59 +462,6 @@ components:
               - LIST
               - UPDATE
               - DELETE
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        system:
-          type: boolean
-        updatedAt:
-          type: string
-          format: date-time
-    RolePage:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        totalCount:
-          type: integer
-          format: int64
-    RoleEntity:
-      type: object
-      properties:
-        assignableType:
-          type: string
-        availablePermissions:
-          type: array
-          items:
-            type: string
-        createdAt:
-          type: string
-          format: date-time
-        defaultRole:
-          type: boolean
-        description:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string
         referenceId:
           type: string
         referenceType:

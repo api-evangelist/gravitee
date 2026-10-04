@@ -201,16 +201,20 @@ paths:
           description: Internal server error
 components:
   schemas:
-    AuditOutcome:
+    Reference:
       type: object
       properties:
-        message:
+        id:
           type: string
-        status:
+        type:
           type: string
           enum:
-          - SUCCESS
-          - FAILURE
+          - PLATFORM
+          - DOMAIN
+          - APPLICATION
+          - ORGANIZATION
+          - ENVIRONMENT
+          - PROTECTED_RESOURCE
     AuditEntity:
       type: object
       properties:
@@ -237,6 +241,16 @@ components:
           - PROTECTED_RESOURCE
         type:
           type: string
+    AuditOutcome:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
     AuditAccessPoint:
       type: object
       properties:
@@ -284,20 +298,6 @@ components:
           type: string
         type:
           type: string
-    Reference:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
   securitySchemes:
     gravitee-auth:
       type: http

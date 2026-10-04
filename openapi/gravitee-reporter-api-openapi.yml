@@ -331,24 +331,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    UpdateReporter:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        enabled:
-          type: boolean
-        inherited:
-          type: boolean
-        name:
-          type: string
-        type:
-          minLength: 1
-          type: string
     Reporter:
       type: object
       properties:
@@ -390,6 +372,24 @@ components:
           - ORGANIZATION
           - ENVIRONMENT
           - PROTECTED_RESOURCE
+    UpdateReporter:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        enabled:
+          type: boolean
+        inherited:
+          type: boolean
+        name:
+          type: string
+        type:
+          minLength: 1
+          type: string
     NewReporter:
       required:
       - configuration

@@ -527,54 +527,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    UpdateForm:
-      type: object
-      properties:
-        assets:
-          type: string
-        content:
-          type: string
-        enabled:
-          type: boolean
-    NewForm:
-      required:
-      - content
-      - template
-      type: object
-      properties:
-        assets:
-          type: string
-        content:
-          type: string
-        enabled:
-          type: boolean
-        template:
-          type: string
-          enum:
-          - LOGIN
-          - REGISTRATION
-          - REGISTRATION_CONFIRMATION
-          - REGISTRATION_VERIFY
-          - FORGOT_PASSWORD
-          - RESET_PASSWORD
-          - OAUTH2_USER_CONSENT
-          - MFA_ENROLL
-          - MFA_CHALLENGE
-          - MFA_CHALLENGE_ALTERNATIVES
-          - MFA_RECOVERY_CODE
-          - BLOCKED_ACCOUNT
-          - COMPLETE_PROFILE
-          - WEBAUTHN_REGISTER
-          - WEBAUTHN_REGISTER_SUCCESS
-          - WEBAUTHN_LOGIN
-          - CBA_LOGIN
-          - MAGIC_LINK_LOGIN
-          - MAGIC_LINK
-          - IDENTIFIER_FIRST_LOGIN
-          - ERROR
-          - CERTIFICATE_EXPIRATION
-          - CLIENT_SECRET_EXPIRATION
-          - VERIFY_ATTEMPT
     Form:
       type: object
       properties:
@@ -624,6 +576,15 @@ components:
           enum:
           - EMAIL
           - FORM
+    UpdateForm:
+      type: object
+      properties:
+        assets:
+          type: string
+        content:
+          type: string
+        enabled:
+          type: boolean
     PreviewResponse:
       type: object
       properties:
@@ -636,6 +597,45 @@ components:
           enum:
           - EMAIL
           - FORM
+    NewForm:
+      required:
+      - content
+      - template
+      type: object
+      properties:
+        assets:
+          type: string
+        content:
+          type: string
+        enabled:
+          type: boolean
+        template:
+          type: string
+          enum:
+          - LOGIN
+          - REGISTRATION
+          - REGISTRATION_CONFIRMATION
+          - REGISTRATION_VERIFY
+          - FORGOT_PASSWORD
+          - RESET_PASSWORD
+          - OAUTH2_USER_CONSENT
+          - MFA_ENROLL
+          - MFA_CHALLENGE
+          - MFA_CHALLENGE_ALTERNATIVES
+          - MFA_RECOVERY_CODE
+          - BLOCKED_ACCOUNT
+          - COMPLETE_PROFILE
+          - WEBAUTHN_REGISTER
+          - WEBAUTHN_REGISTER_SUCCESS
+          - WEBAUTHN_LOGIN
+          - CBA_LOGIN
+          - MAGIC_LINK_LOGIN
+          - MAGIC_LINK
+          - IDENTIFIER_FIRST_LOGIN
+          - ERROR
+          - CERTIFICATE_EXPIRATION
+          - CLIENT_SECRET_EXPIRATION
+          - VERIFY_ATTEMPT
     Theme:
       type: object
       properties:

@@ -165,6 +165,21 @@ paths:
           description: Internal server error
 components:
   schemas:
+    Step:
+      type: object
+      properties:
+        condition:
+          type: string
+        configuration:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        policy:
+          type: string
     FlowEntity:
       type: object
       properties:
@@ -244,21 +259,6 @@ components:
           - WEBAUTHN_REGISTER
           - MFA_CHALLENGE
           - MFA_ENROLLMENT
-    Step:
-      type: object
-      properties:
-        condition:
-          type: string
-        configuration:
-          type: string
-        description:
-          type: string
-        enabled:
-          type: boolean
-        name:
-          type: string
-        policy:
-          type: string
   securitySchemes:
     gravitee-auth:
       type: http

@@ -432,30 +432,19 @@ components:
         updatedAt:
           type: string
           format: date-time
-    AssignPasswordPolicy:
+    FilteredIdentityProviderInfo:
       type: object
       properties:
-        passwordPolicy:
-          type: string
-    NewIdentityProvider:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        domainWhitelist:
-          type: array
-          items:
-            type: string
         external:
           type: boolean
         id:
           type: string
         name:
           type: string
+        passwordPolicy:
+          type: string
+        system:
+          type: boolean
         type:
           type: string
     UpdateIdentityProvider:
@@ -494,20 +483,31 @@ components:
         type:
           minLength: 1
           type: string
-    FilteredIdentityProviderInfo:
+    NewIdentityProvider:
+      required:
+      - configuration
+      - name
+      - type
       type: object
       properties:
+        configuration:
+          type: string
+        domainWhitelist:
+          type: array
+          items:
+            type: string
         external:
           type: boolean
         id:
           type: string
         name:
           type: string
-        passwordPolicy:
-          type: string
-        system:
-          type: boolean
         type:
+          type: string
+    AssignPasswordPolicy:
+      type: object
+      properties:
+        passwordPolicy:
           type: string
   securitySchemes:
     gravitee-auth:

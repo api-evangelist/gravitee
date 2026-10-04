@@ -694,31 +694,36 @@ paths:
           description: Internal server error
 components:
   schemas:
-    UserId:
+    Address:
       type: object
       properties:
-        externalId:
+        country:
           type: string
-        id:
+        formatted:
           type: string
-        source:
+        locality:
           type: string
-    EnrolledFactorChannel:
+        postalCode:
+          type: string
+        primary:
+          type: boolean
+        region:
+          type: string
+        streetAddress:
+          type: string
+        type:
+          type: string
+    EnrolledFactorSecurity:
       type: object
       properties:
         additionalData:
           type: object
           additionalProperties:
             type: object
-        target:
-          type: string
         type:
           type: string
-          enum:
-          - SMS
-          - EMAIL
-          - HTTP
-          - CALL
+        value:
+          type: string
     UserPage:
       type: object
       properties:
@@ -729,19 +734,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
-        totalCount:
-          type: integer
-          format: int64
-    GroupPage:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
         totalCount:
           type: integer
           format: int64
@@ -762,6 +754,11 @@ components:
           type: array
           items:
             type: string
+    Certificate:
+      type: object
+      properties:
+        value:
+          type: string
     User:
       type: object
       properties:
@@ -962,24 +959,27 @@ components:
             $ref: '#/components/schemas/Certificate'
         zoneInfo:
           type: string
-    Address:
+    GroupPage:
       type: object
       properties:
-        country:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        totalCount:
+          type: integer
+          format: int64
+    UserId:
+      type: object
+      properties:
+        externalId:
           type: string
-        formatted:
+        id:
           type: string
-        locality:
-          type: string
-        postalCode:
-          type: string
-        primary:
-          type: boolean
-        region:
-          type: string
-        streetAddress:
-          type: string
-        type:
+        source:
           type: string
     Group:
       type: object
@@ -1015,62 +1015,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    Certificate:
-      type: object
-      properties:
-        value:
-          type: string
-    UserIdentity:
-      type: object
-      properties:
-        additionalInformation:
-          type: object
-          additionalProperties:
-            type: object
-        linkedAt:
-          type: string
-          format: date-time
-        providerId:
-          type: string
-        userId:
-          type: string
-        username:
-          type: string
-    EnrolledFactor:
-      type: object
-      properties:
-        appId:
-          type: string
-        channel:
-          $ref: '#/components/schemas/EnrolledFactorChannel'
-        createdAt:
-          type: string
-          format: date-time
-        factorId:
-          type: string
-        primary:
-          type: boolean
-        security:
-          $ref: '#/components/schemas/EnrolledFactorSecurity'
-        status:
-          type: string
-          enum:
-          - PENDING_ACTIVATION
-          - ACTIVATED
-          - REVOKED
-          - 'NULL'
-        updatedAt:
-          type: string
-          format: date-time
-    Attribute:
-      type: object
-      properties:
-        primary:
-          type: boolean
-        type:
-          type: string
-        value:
-          type: string
     Role:
       type: object
       properties:
@@ -1129,17 +1073,57 @@ components:
         updatedAt:
           type: string
           format: date-time
-    EnrolledFactorSecurity:
+    EnrolledFactor:
+      type: object
+      properties:
+        appId:
+          type: string
+        channel:
+          $ref: '#/components/schemas/EnrolledFactorChannel'
+        createdAt:
+          type: string
+          format: date-time
+        factorId:
+          type: string
+        primary:
+          type: boolean
+        security:
+          $ref: '#/components/schemas/EnrolledFactorSecurity'
+        status:
+          type: string
+          enum:
+          - PENDING_ACTIVATION
+          - ACTIVATED
+          - REVOKED
+          - 'NULL'
+        updatedAt:
+          type: string
+          format: date-time
+    Attribute:
+      type: object
+      properties:
+        primary:
+          type: boolean
+        type:
+          type: string
+        value:
+          type: string
+    EnrolledFactorChannel:
       type: object
       properties:
         additionalData:
           type: object
           additionalProperties:
             type: object
+        target:
+          type: string
         type:
           type: string
-        value:
-          type: string
+          enum:
+          - SMS
+          - EMAIL
+          - HTTP
+          - CALL
     NewGroup:
       required:
       - name
@@ -1152,6 +1136,22 @@ components:
           items:
             type: string
         name:
+          type: string
+    UserIdentity:
+      type: object
+      properties:
+        additionalInformation:
+          type: object
+          additionalProperties:
+            type: object
+        linkedAt:
+          type: string
+          format: date-time
+        providerId:
+          type: string
+        userId:
+          type: string
+        username:
           type: string
   securitySchemes:
     gravitee-auth:

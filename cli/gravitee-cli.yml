@@ -1,0 +1,73 @@
+generated: '2026-10-03'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://documentation.gravitee.io/gravitee-gamma/platform-management/install/self-hosted-installation-guides/docker/docker-cli.md
+sources:
+- https://documentation.gravitee.io/gravitee-gamma/platform-management/install/self-hosted-installation-guides/docker/docker-cli.md
+- https://documentation.gravitee.io/gravitee-gamma/platform-management/install/hybrid-installation-guides/docker/docker-cli.md
+- https://documentation.gravitee.io/gravitee-gamma/agent-management/import/create-api-tools.md
+- https://documentation.gravitee.io/gravitee-gamma/agent-management/build/llm-proxies/third-party-ai-tools.md
+install:
+- method: Docker CLI
+  command: docker
+commands:
+- group: Create networks
+  commands:
+  - docker network create storage
+  - docker network create frontend
+  - docker network create gravitee-network
+- group: Run MongoDB
+  commands:
+  - "docker run --detach --name gamma-mongodb \\\n  --net storage \\\n  mongo:7.0"
+- group: Run Elasticsearch
+  commands:
+  - "docker run --detach --name gamma-elasticsearch \\\n  --net storage \\\n  --env discovery.type=single-node \\\n  --env xpack.security.enabled=false\
+    \ \\\n  --env \"ES_JAVA_OPTS=-Xms512m -Xmx512m\" \\\n  docker.elastic.co/elasticsearch/elasticsearch:8.17.2"
+- group: Run Management API
+  commands:
+  - "docker run --detach --name gamma-management-api \\\n  --net storage \\\n  --publish 8083:8083 \\\n  --volume \"$(pwd)/license.key:/opt/graviteeio-management-api/license/license.key:ro\"\
+    \ \\\n  --env gravitee_gamma_enabled=true \\\n  --env gravitee_management_mongodb_uri=\"mongodb://gamma-mongodb:27017/gravitee?serverSelectionTimeoutMS=5000&connectTimeoutMS=5000&socketTimeoutMS=5000\"\
+    \ \\\n  --env gravitee_analytics_elasticsearch_endpoints_0=\"http://gamma-elasticsearch:9200\" \\\n  --env gravitee_installation_standalone_console_url=\"\
+    http://localhost:8084\" \\\n  --env gravitee_installation_standalone_portal_url=\"http://localhost:8085\" \\\n  --env gravitee_http_cors_enabled=true\
+    \ \\\n  --env gravitee_http_cors_allow-origin_0=\"http://localhost:8084\" \\\n  --env gravitee_http_cors_allow-origin_1=\"http://localhost:8085\"\
+    \ \\\n  --env gravitee_http_cors_allow-origin_2=\"http://localhost:8086\" \\\n  --env gravitee_http_cors_allow-headers=\"Authorization,Content-Type,X-Requested-With,Accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Cookie\"\
+    \ \\\n  --env gravitee_http_cors_allow-methods=\"GET,POST,PUT,DELETE,OPTIONS\" \\\n  --env gravitee_http_cors_exposed-headers=\"X-Total-Count,Set-Cookie\"\
+    \ \\\n  --env gravitee_http_cors_allow-credentials=true \\\n  --env gravitee_http_cookie_sameSite=Lax \\\n  --env gravitee_http_cookie_secure=false\
+    \ \\\n  graviteeio/apim-management-api:4.12"
+  - docker network connect frontend gamma-management-api
+- group: Run Gateway (self‑hosted)
+  commands:
+  - "docker run --detach --name gamma-gateway \\\n  --net storage \\\n  --publish 8082:8082 \\\n  --env gravitee_gamma_enabled=true \\\n  --env\
+    \ gravitee_management_mongodb_uri=\"mongodb://gamma-mongodb:27017/gravitee?serverSelectionTimeoutMS=5000&connectTimeoutMS=5000&socketTimeoutMS=5000\"\
+    \ \\\n  --env gravitee_ratelimit_mongodb_uri=\"mongodb://gamma-mongodb:27017/gravitee?serverSelectionTimeoutMS=5000&connectTimeoutMS=5000&socketTimeoutMS=5000\"\
+    \ \\\n  --env gravitee_reporters_elasticsearch_endpoints_0=\"http://gamma-elasticsearch:9200\" \\\n  graviteeio/apim-gateway:4.12"
+  - docker network connect frontend gamma-gateway
+- group: Run Gateway (hybrid)
+  commands:
+  - "docker run -d \\\n  --name gio-gamma-hybrid-gateway \\\n  --hostname gamma-gateway \\\n  --network gravitee-network \\\n  -p 8082:8082 \\\
+    \n  -e gravitee_gamma_enabled=true \\\n  -e gravitee_ratelimit_type=redis \\\n  -e gravitee_ratelimit_redis_host=redis \\\n  -e gravitee_ratelimit_redis_port=6379\
+    \ \\\n  -e gravitee_ratelimit_redis_password=<redis-password> \\\n  -e gravitee_ratelimit_redis_ssl=false \\\n  -e gravitee_cloud_token=<cloud-token>\
+    \ \\\n  -e gravitee_license_key=<license-key> \\\n  graviteeio/apim-gateway:4.12"
+- group: Run Redis (hybrid)
+  commands:
+  - "docker run -d \\\n  --name gio-gamma-hybrid-redis \\\n  --hostname redis \\\n  --network gravitee-network \\\n  -p 6379:6379 \\\n  redis:7.2-alpine\
+    \ redis-server --requirepass <redis-password>"
+- group: Run APIM Console
+  commands:
+  - "docker run --detach --name gamma-apim-console \\\n  --net frontend \\\n  --publish 8084:8080 \\\n  --env MGMT_API_URL=\"http://localhost:8083/management/organizations/DEFAULT/environments/DEFAULT/\"\
+    \ \\\n  graviteeio/apim-management-ui:4.12"
+- group: Run Developer Portal
+  commands:
+  - "docker run --detach --name gamma-developer-portal \\\n  --net frontend \\\n  --publish 8085:8080 \\\n  --env PORTAL_API_URL=\"http://localhost:8083/portal/environments/DEFAULT\"\
+    \ \\\n  graviteeio/apim-portal-ui:4.12"
+- group: Run Gamma console
+  commands:
+  - "docker run --detach --name gamma-console \\\n  --net frontend \\\n  --publish 8086:808"
+- group: Utility commands
+  commands:
+  - docker ps
+  - docker logs -f gio-gamma-hybrid-gateway
+  - docker stop gio-gamma-hybrid-gateway gio-gamma-hybrid-redis
+  - docker rm -f gio-gamma-hybrid-gateway gio-gamma-hybrid-redis
+  - docker network rm gravitee-network
+docs: https://documentation.gravitee.io/gravitee-gamma/platform-management/install/self-hosted-installation-guides/docker/docker-cli.md

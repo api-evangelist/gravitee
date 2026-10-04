@@ -1,0 +1,63 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/gravitee-alerts-api-openapi.yml
+- openapi/gravitee-analytics-api-openapi.yml
+- openapi/gravitee-api-products-api-openapi.yml
+- openapi/gravitee-apis-api-openapi.yml
+- openapi/gravitee-application-api-openapi.yml
+- openapi/gravitee-applications-api-openapi.yml
+- openapi/gravitee-audit-api-openapi.yml
+- openapi/gravitee-authentication-device-notifier-api-openapi.yml
+- openapi/gravitee-authorization-engine-api-openapi.yml
+- openapi/gravitee-bot-detection-api-openapi.yml
+- openapi/gravitee-certificate-api-openapi.yml
+- openapi/gravitee-data-sources-api-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: ErrorEntity
+coverage:
+  operations: 381
+  statuses_declared: 6
+problems:
+- status: 400
+  title: Bad Request
+  description: Membership parameter is not valid
+  operations: 18
+  media_types: []
+  schema: null
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  operations: 1
+  media_types: []
+  schema: null
+- status: 404
+  title: Not Found
+  description: Domain not found
+  operations: 13
+  media_types:
+  - application/json
+  schema: ErrorEntity
+- status: 409
+  title: Conflict
+  description: Duplicate certificate
+  operations: 1
+  media_types: []
+  schema: null
+- status: 500
+  title: Internal Server Error
+  description: Internal server error
+  operations: 281
+  media_types: []
+  schema: null
+- status: default
+  title: null
+  description: default response
+  operations: 40
+  media_types:
+  - application/json
+  - text/plain
+  schema: null

@@ -193,33 +193,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    UpdateAuthorizationEngine:
-      required:
-      - configuration
-      - name
-      type: object
-      properties:
-        configuration:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-    NewAuthorizationEngine:
-      required:
-      - configuration
-      - name
-      - type
-      type: object
-      properties:
-        configuration:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
     AuthorizationEngine:
       type: object
       properties:
@@ -248,6 +221,33 @@ components:
         updatedAt:
           type: string
           format: date-time
+    NewAuthorizationEngine:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+    UpdateAuthorizationEngine:
+      required:
+      - configuration
+      - name
+      type: object
+      properties:
+        configuration:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
   securitySchemes:
     gravitee-auth:
       type: http

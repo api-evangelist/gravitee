@@ -1,0 +1,253 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/gravitee-alerts-api-openapi.yml
+- openapi/gravitee-analytics-api-openapi.yml
+- openapi/gravitee-api-products-api-openapi.yml
+- openapi/gravitee-apis-api-openapi.yml
+- openapi/gravitee-application-api-openapi.yml
+- openapi/gravitee-applications-api-openapi.yml
+- openapi/gravitee-audit-api-openapi.yml
+- openapi/gravitee-authentication-device-notifier-api-openapi.yml
+- openapi/gravitee-authorization-engine-api-openapi.yml
+- openapi/gravitee-bot-detection-api-openapi.yml
+- openapi/gravitee-certificate-api-openapi.yml
+- openapi/gravitee-data-sources-api-openapi.yml
+- openapi/gravitee-dataplane-api-openapi.yml
+- openapi/gravitee-device-identifiers-api-openapi.yml
+- openapi/gravitee-devices-api-openapi.yml
+- openapi/gravitee-dictionary-api-openapi.yml
+- openapi/gravitee-domain-api-openapi.yml
+- openapi/gravitee-email-api-openapi.yml
+- openapi/gravitee-entry-points-api-openapi.yml
+- openapi/gravitee-extension-grant-api-openapi.yml
+- openapi/gravitee-factor-api-openapi.yml
+- openapi/gravitee-flow-api-openapi.yml
+- openapi/gravitee-form-api-openapi.yml
+- openapi/gravitee-group-api-openapi.yml
+- openapi/gravitee-identity-provider-api-openapi.yml
+- openapi/gravitee-installation-api-openapi.yml
+- openapi/gravitee-logs-api-openapi.yml
+- openapi/gravitee-newsletter-api-openapi.yml
+- openapi/gravitee-organizations-api-openapi.yml
+- openapi/gravitee-password-policy-api-openapi.yml
+- openapi/gravitee-plans-api-openapi.yml
+- openapi/gravitee-platform-api-openapi.yml
+- openapi/gravitee-plugin-api-openapi.yml
+- openapi/gravitee-plugins-api-openapi.yml
+- openapi/gravitee-protected-resource-api-openapi.yml
+- openapi/gravitee-reporter-api-openapi.yml
+- openapi/gravitee-resource-api-openapi.yml
+- openapi/gravitee-role-api-openapi.yml
+- openapi/gravitee-scope-api-openapi.yml
+- openapi/gravitee-sharding-tags-api-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: No MCP server was found. The pre-flight posted tools/list to /mcp on api.github.com, api.apache.org, api.getambassador.io, cockpit.gravitee.io;
+  verdict absent. Candidate tools below are derived from the 377 operation(s) in the provider's own OpenAPI (40 listed); they describe what a
+  server WOULD expose, not one that exists.
+tools:
+- name: list_alert_notifiers
+  operationId: listAlertNotifiers
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/alerts/notifiers
+  description: List alert notifiers
+- name: query_api_specs
+  operationId: queryApiSpecs
+  method: GET
+  path: /environments/{envId}/analytics/definition/apis
+  description: Query API Analytics Specifications
+- name: get_api_products
+  operationId: getApiProducts
+  method: GET
+  path: /environments/{envId}/api-products
+  description: List API Products
+- name: list_apis
+  operationId: listApis
+  method: GET
+  path: /environments/{envId}/apis
+  description: List APIs in an Environment
+- name: list_applications
+  operationId: listApplications
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications
+  description: List registered applications for a security domain
+- name: get_application
+  operationId: getApplication
+  method: GET
+  path: /environments/{envId}/applications/{applicationId}
+  description: Get an Application by Identifier
+- name: list_organization_audits
+  operationId: listOrganizationAudits
+  method: GET
+  path: /organizations/{organizationId}/audits
+  description: List audit logs for the organization
+- name: list_authentication_device_notifiers
+  operationId: listAuthenticationDeviceNotifiers
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/auth-device-notifiers
+  description: List registered Authentication Device Notifiers for a security domain
+- name: list_authorization_engines
+  operationId: listAuthorizationEngines
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/authorization-engines
+  description: List registered authorization engines for a security domain
+- name: list_bot_detections
+  operationId: listBotDetections
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/bot-detections
+  description: List registered bot detections for a security domain
+- name: list_certificates
+  operationId: listCertificates
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/certificates
+  description: List registered certificates for a security domain
+- name: list_all_data_sources
+  operationId: listAllDataSources
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/data-sources
+  description: List all the data sources
+- name: list_data_planes
+  operationId: listDataPlanes
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/data-planes
+  description: List of data planes
+- name: list_device_identifiers
+  operationId: listDeviceIdentifiers
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/device-identifiers
+  description: List registered device identifiers for a security domain
+- name: list_user_devices
+  operationId: listUserDevices
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/users/{user}/devices
+  description: List users for a security domain
+- name: list_i18n_dictionaries
+  operationId: listI18nDictionaries
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/i18n/dictionaries
+  description: List all i18n dictionaries supported for a security domain
+- name: list_domains
+  operationId: listDomains
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains
+  description: List security domains for an environment
+- name: find_application_email
+  operationId: findApplicationEmail
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/emails
+  description: Find a email for an application
+- name: list_entrypoints
+  operationId: listEntrypoints
+  method: GET
+  path: /organizations/{organizationId}/entrypoints
+  description: List entrypoints
+- name: list_extension_grants
+  operationId: listExtensionGrants
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/extensionGrants
+  description: List registered extension grants for a security domain
+- name: list_factors
+  operationId: listFactors
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/factors
+  description: List registered factors for a security domain
+- name: list_domain_flows
+  operationId: listDomainFlows
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/flows
+  description: List registered flows for a security domain
+- name: find_application_form
+  operationId: findApplicationForm
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/applications/{application}/forms
+  description: Find a form for an application
+- name: list_domain_groups
+  operationId: listDomainGroups
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/groups
+  description: List groups for a security domain
+- name: list_identity_providers
+  operationId: listIdentityProviders
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/identities
+  description: List registered identity providers for a security domain
+- name: list_environments
+  operationId: listEnvironments
+  method: GET
+  path: /environments
+  description: List Environments
+- name: search_logs
+  operationId: searchLogs
+  method: POST
+  path: /environments/{envId}/logs/search
+  description: Search Request Logs
+- name: subscribe_newsletter
+  operationId: subscribeNewsletter
+  method: POST
+  path: /user/newsletter/_subscribe
+  description: Subscribe to the newsletter the authenticated user
+- name: get_member_permissions
+  operationId: getMemberPermissions
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/members/permissions
+  description: List environment member's permissions
+- name: list_password_policies
+  operationId: listPasswordPolicies
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/password-policies
+  description: List registered password policies for a security domain
+- name: list_api_plans
+  operationId: listApiPlans
+  method: GET
+  path: /environments/{envId}/apis/{apiId}/plans
+  description: List Plans on an API
+- name: list_audit_event_types
+  operationId: listAuditEventTypes
+  method: GET
+  path: /platform/audits/events
+  description: List audit event types
+- name: list_authentication_device_notifier_plugins
+  operationId: listAuthenticationDeviceNotifierPlugins
+  method: GET
+  path: /platform/plugins/auth-device-notifiers
+  description: List authentication device notifier plugins
+- name: list_endpoint_plugins
+  operationId: listEndpointPlugins
+  method: GET
+  path: /plugins/endpoints
+  description: List Endpoint Plugins
+- name: list_protected_resources
+  operationId: listProtectedResources
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/protected-resources
+  description: List registered protected resources for a security domain
+- name: list_domain_reporters
+  operationId: listDomainReporters
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/reporters
+  description: List registered reporters for a security domain
+- name: list_resources
+  operationId: listResources
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/resources
+  description: List registered resources for a security domain
+- name: find_roles
+  operationId: findRoles
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/roles
+  description: List registered roles for a security domain
+- name: list_scopes
+  operationId: listScopes
+  method: GET
+  path: /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/scopes
+  description: List scopes for a security domain
+- name: list_sharding_tags
+  operationId: listShardingTags
+  method: GET
+  path: /organizations/{organizationId}/tags
+  description: List sharding tags

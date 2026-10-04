@@ -249,10 +249,61 @@ paths:
           description: Internal server error
 components:
   schemas:
+    ScopePage:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Scope'
+        totalCount:
+          type: integer
+          format: int64
     UpdateScope:
       required:
       - description
       - name
+      type: object
+      properties:
+        description:
+          type: string
+        discovery:
+          type: boolean
+        expiresIn:
+          type: integer
+          format: int32
+        iconUri:
+          type: string
+        name:
+          type: string
+        parameterized:
+          type: boolean
+    NewScope:
+      required:
+      - description
+      - key
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        discovery:
+          type: boolean
+        expiresIn:
+          type: integer
+          format: int32
+        iconUri:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        parameterized:
+          type: boolean
+    PatchScope:
       type: object
       properties:
         description:
@@ -302,57 +353,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    NewScope:
-      required:
-      - description
-      - key
-      - name
-      type: object
-      properties:
-        description:
-          type: string
-        discovery:
-          type: boolean
-        expiresIn:
-          type: integer
-          format: int32
-        iconUri:
-          type: string
-        key:
-          type: string
-        name:
-          type: string
-        parameterized:
-          type: boolean
-    PatchScope:
-      type: object
-      properties:
-        description:
-          type: string
-        discovery:
-          type: boolean
-        expiresIn:
-          type: integer
-          format: int32
-        iconUri:
-          type: string
-        name:
-          type: string
-        parameterized:
-          type: boolean
-    ScopePage:
-      type: object
-      properties:
-        currentPage:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Scope'
-        totalCount:
-          type: integer
-          format: int64
   securitySchemes:
     gravitee-auth:
       type: http
