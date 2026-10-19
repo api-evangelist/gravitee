@@ -1,0 +1,546 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Application Alerts API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Application Alerts
+paths:
+  /organizations/{orgId}/environments/{envId}/applications/{application}/alerts:
+    get:
+      tags:
+      - Application Alerts
+      summary: List configured alerts of an application
+      description: User must have the APPLICATION_ALERT[READ] permission to use this service
+      operationId: getApplicationAlerts
+      parameters:
+      - name: event_counts
+        in: query
+        schema:
+          type: boolean
+          default: true
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of alerts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlertTriggerEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Application Alerts
+      summary: Create an alert for an application
+      description: User must have the APPLICATION_ALERT[CREATE] permission to use this service
+      operationId: createApplicationAlert
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAlertTriggerEntity'
+        required: true
+      responses:
+        '200':
+          description: Alert successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertTriggerEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/alerts/status:
+    get:
+      tags:
+      - Application Alerts
+      summary: Get alerting status
+      description: User must have the MANAGEMENT_ALERT[READ] permission to use this service
+      operationId: getApplicationAlertsStatus
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Alerting status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertStatusEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/alerts/{alert}:
+    put:
+      tags:
+      - Application Alerts
+      summary: Update an alert for an application
+      description: User must have the APPLICATION_ALERT[UPDATE] permission to use this service
+      operationId: updateApplicationAlert
+      parameters:
+      - name: alert
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAlertTriggerEntity'
+        required: true
+      responses:
+        '200':
+          description: Alert successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertTriggerEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Application Alerts
+      summary: Delete an alert for an application
+      description: User must have the APPLICATION_ALERT[DELETE] permission to use this service
+      operationId: deleteApplicationAlert
+      parameters:
+      - name: alert
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Alert successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertTriggerEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        configuration:
+          type: string
+        periods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Period'
+        type:
+          type: string
+    Period:
+      required:
+      - beginHour
+      - endHour
+      - zoneId
+      type: object
+      properties:
+        beginHour:
+          type: integer
+          format: int32
+        days:
+          type: array
+          items:
+            type: integer
+            format: int32
+        endHour:
+          type: integer
+          format: int32
+        zoneId:
+          type: string
+    AlertEventRuleEntity:
+      type: object
+      properties:
+        event:
+          type: string
+    Filter:
+      type: object
+      properties:
+        projections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Projection'
+        type:
+          type: string
+          enum:
+          - STRING
+          - THRESHOLD
+          - THRESHOLD_RANGE
+          - RATE
+          - FREQUENCY
+          - AGGREGATION
+          - COMPARE
+          - STRING_COMPARE
+          - MISSING_DATA
+    Condition:
+      type: object
+      properties:
+        projections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Projection'
+        type:
+          type: string
+          enum:
+          - STRING
+          - THRESHOLD
+          - THRESHOLD_RANGE
+          - RATE
+          - FREQUENCY
+          - AGGREGATION
+          - COMPARE
+          - STRING_COMPARE
+          - MISSING_DATA
+      discriminator:
+        propertyName: type
+    UpdateAlertTriggerEntity:
+      required:
+      - name
+      - severity
+      type: object
+      properties:
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        dampening:
+          $ref: '#/components/schemas/Dampening'
+        description:
+          maxLength: 256
+          minLength: 0
+          type: string
+        enabled:
+          type: boolean
+        event_rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertEventRuleEntity'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        id:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+        name:
+          type: string
+        notificationPeriods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Period'
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        reference_id:
+          type: string
+        reference_type:
+          $ref: '#/components/schemas/AlertReferenceType'
+        severity:
+          type: string
+          enum:
+          - INFO
+          - WARNING
+          - CRITICAL
+        source:
+          type: string
+    AlertStatusEntity:
+      type: object
+      properties:
+        available_plugins:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+    Projection:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - PROPERTY
+      discriminator:
+        propertyName: type
+    Dampening:
+      required:
+      - mode
+      type: object
+      properties:
+        duration:
+          type: integer
+          format: int64
+        mode:
+          type: string
+          enum:
+          - STRICT_COUNT
+          - RELAXED_COUNT
+          - RELAXED_TIME
+          - STRICT_TIME
+        timeUnit:
+          type: string
+          enum:
+          - NANOSECONDS
+          - MICROSECONDS
+          - MILLISECONDS
+          - SECONDS
+          - MINUTES
+          - HOURS
+          - DAYS
+        totalEvaluations:
+          type: integer
+          format: int32
+        trueEvaluations:
+          type: integer
+          format: int32
+    AlertTriggerEntity:
+      type: object
+      properties:
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        counters:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        created_at:
+          type: string
+          format: date-time
+        dampening:
+          $ref: '#/components/schemas/Dampening'
+        description:
+          type: string
+        enabled:
+          type: boolean
+        environment_id:
+          type: string
+        event_rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertEventRuleEntity'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        id:
+          type: string
+        last_alert_at:
+          type: string
+          format: date-time
+        last_alert_message:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+        name:
+          type: string
+        notificationPeriods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Period'
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        parent_id:
+          type: string
+        reference_id:
+          type: string
+        reference_type:
+          $ref: '#/components/schemas/AlertReferenceType'
+        severity:
+          type: string
+          enum:
+          - INFO
+          - WARNING
+          - CRITICAL
+        source:
+          type: string
+        template:
+          type: boolean
+        type:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    AlertReferenceType:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - ENVIRONMENT
+    NewAlertTriggerEntity:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        dampening:
+          $ref: '#/components/schemas/Dampening'
+        description:
+          maxLength: 256
+          minLength: 0
+          type: string
+        enabled:
+          type: boolean
+        event_rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertEventRuleEntity'
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        id:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+        name:
+          type: string
+        notificationPeriods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Period'
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        reference_id:
+          type: string
+        reference_type:
+          $ref: '#/components/schemas/AlertReferenceType'
+        severity:
+          type: string
+          enum:
+          - INFO
+          - WARNING
+          - CRITICAL
+        source:
+          type: string
+        template:
+          type: boolean
+        type:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

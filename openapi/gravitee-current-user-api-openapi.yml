@@ -1,0 +1,696 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Current User API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Current User
+paths:
+  /organizations/{orgId}/environments/{envId}/user:
+    get:
+      tags:
+      - Current User
+      summary: Get the authenticated user
+      operationId: getCurrentUser_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+        '401':
+          description: Unauthorized user
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Current User
+      summary: Update the authenticated user
+      operationId: updateCurrentUser_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdateUserEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '400':
+          description: Invalid user profile
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Current User
+      summary: Delete the current logged user
+      operationId: deleteCurrentUser_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Current user successfully deleted
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/user/avatar:
+    get:
+      tags:
+      - Current User
+      summary: Get user's avatar
+      operationId: getCurrentUserPicture_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's avatar
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/user/login:
+    post:
+      tags:
+      - Current User
+      summary: Login
+      operationId: login_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{orgId}/environments/{envId}/user/logout:
+    post:
+      tags:
+      - Current User
+      summary: Logout
+      operationId: logoutCurrentUser_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+  /organizations/{orgId}/environments/{envId}/user/tags:
+    get:
+      tags:
+      - Current User
+      summary: Get the user's allowed sharding tags
+      operationId: getUserShardingTags_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's sharding tags
+          content:
+            application/json:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  type: string
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/user/tasks:
+    get:
+      tags:
+      - Current User
+      summary: Get the user's tasks
+      operationId: getUserTasks_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's tasks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskEntityPagedResult'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/user:
+    get:
+      tags:
+      - Current User
+      summary: Get the authenticated user
+      operationId: getCurrentUser
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+        '401':
+          description: Unauthorized user
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Current User
+      summary: Update the authenticated user
+      operationId: updateCurrentUser
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdateUserEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '400':
+          description: Invalid user profile
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Current User
+      summary: Delete the current logged user
+      operationId: deleteCurrentUser
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Current user successfully deleted
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/user/avatar:
+    get:
+      tags:
+      - Current User
+      summary: Get user's avatar
+      operationId: getCurrentUserPicture
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's avatar
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/user/login:
+    post:
+      tags:
+      - Current User
+      summary: Login
+      operationId: login
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{orgId}/user/logout:
+    post:
+      tags:
+      - Current User
+      summary: Logout
+      operationId: logoutCurrentUser
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+  /organizations/{orgId}/user/tags:
+    get:
+      tags:
+      - Current User
+      summary: Get the user's allowed sharding tags
+      operationId: getUserShardingTags
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's sharding tags
+          content:
+            application/json:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  type: string
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/user/tasks:
+    get:
+      tags:
+      - Current User
+      summary: Get the user's tasks
+      operationId: getUserTasks
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's tasks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskEntityPagedResult'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    TaskEntityPagedResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEntity'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        page:
+          $ref: '#/components/schemas/Page'
+    UserDetailRole:
+      type: object
+      properties:
+        name:
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        scope:
+          type: string
+    UserRoleEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        scope:
+          $ref: '#/components/schemas/RoleScope'
+    TaskType:
+      type: string
+      enum:
+      - SUBSCRIPTION_APPROVAL
+      - IN_REVIEW
+      - REQUEST_FOR_CHANGES
+      - USER_REGISTRATION_APPROVAL
+      - PROMOTION_APPROVAL
+    GrantedAuthority:
+      type: object
+      properties:
+        authority:
+          type: string
+    Page:
+      type: object
+      properties:
+        current:
+          type: integer
+          format: int32
+        per_page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        total_elements:
+          type: integer
+          format: int32
+        total_pages:
+          type: integer
+          format: int32
+    UpdateUserEntity:
+      type: object
+      properties:
+        customFields:
+          type: object
+          additionalProperties:
+            type: object
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        newsletter:
+          type: boolean
+        picture:
+          type: string
+        status:
+          type: string
+    RoleScope:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - GROUP
+      - ENVIRONMENT
+      - ORGANIZATION
+      - PLATFORM
+    TaskEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        data:
+          type: object
+        type:
+          $ref: '#/components/schemas/TaskType'
+    UserEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        customFields:
+          type: object
+          additionalProperties:
+            type: object
+        displayName:
+          type: string
+          readOnly: true
+        email:
+          type: string
+        envRoles:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              $ref: '#/components/schemas/UserRoleEntity'
+        firstConnectionAt:
+          type: string
+          format: date-time
+        firstname:
+          type: string
+        id:
+          type: string
+        lastConnectionAt:
+          type: string
+          format: date-time
+        lastname:
+          type: string
+        loginCount:
+          type: integer
+          format: int64
+        newsletterSubscribed:
+          type: boolean
+        number_of_active_tokens:
+          type: integer
+          format: int32
+        password:
+          type: string
+        picture:
+          type: string
+        primary_owner:
+          type: boolean
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRoleEntity'
+        source:
+          type: string
+        sourceId:
+          type: string
+        status:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    UserDetails:
+      type: object
+      properties:
+        authorities:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantedAuthority'
+        created_at:
+          type: string
+          format: date-time
+        customFields:
+          type: object
+          additionalProperties:
+            type: object
+        displayName:
+          type: string
+        displayNewsletterSubscription:
+          type: boolean
+        email:
+          type: string
+        enabled:
+          type: boolean
+        firstLogin:
+          type: boolean
+        firstname:
+          type: string
+        groupsByEnvironment:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        id:
+          type: string
+        last_connection_at:
+          type: string
+          format: date-time
+        lastname:
+          type: string
+        picture:
+          type: array
+          items:
+            type: string
+            format: byte
+        primaryOwner:
+          type: boolean
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDetailRole'
+        source:
+          type: string
+        sourceId:
+          type: string
+        system:
+          type: boolean
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

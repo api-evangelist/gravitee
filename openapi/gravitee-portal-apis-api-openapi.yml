@@ -1,0 +1,217 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Portal APIs API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Portal APIs
+paths:
+  /organizations/{orgId}/environments/{envId}/portal/apis/_search:
+    post:
+      tags:
+      - Portal APIs
+      summary: Search for API using the search engine
+      operationId: searchPortalApis
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List accessible APIs for current user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiListItem'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Visibility:
+      type: string
+      description: The visibility of the API regarding the portal.
+      example: PUBLIC
+      enum:
+      - PUBLIC
+      - PRIVATE
+    DefinitionContext:
+      type: object
+      properties:
+        mode:
+          type: string
+        origin:
+          type: string
+      description: the context where the api definition was created from
+    PrimaryOwnerEntity:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user or group display name.
+          example: John Doe
+        email:
+          type: string
+          description: The user or group email.
+          example: contact@gravitee.io
+        id:
+          type: string
+          description: The user or group id.
+          example: 005197cc-cc84-86a6-a75a-88f9772c67db
+        type:
+          type: string
+          description: The primary owner type
+          example: USER
+      description: The user with role PRIMARY_OWNER on this API.
+    ApiLifecycleState:
+      type: string
+      enum:
+      - CREATED
+      - PUBLISHED
+      - UNPUBLISHED
+      - DEPRECATED
+      - ARCHIVED
+    WorkflowState:
+      type: string
+      enum:
+      - DRAFT
+      - IN_REVIEW
+      - REQUEST_FOR_CHANGES
+      - REVIEW_OK
+    VirtualHost:
+      type: object
+      properties:
+        host:
+          type: string
+        override_entrypoint:
+          type: boolean
+        path:
+          type: string
+    ApiListItem:
+      type: object
+      properties:
+        categories:
+          uniqueItems: true
+          type: array
+          description: the list of categories associated with this API
+          example: Product, Customer, Misc
+          items:
+            type: string
+            description: the list of categories associated with this API
+            example: Product, Customer, Misc
+        context_path:
+          type: string
+          description: API's context path.
+          example: /my-awesome-api
+        created_at:
+          type: string
+          description: The date (as a timestamp) when the API was created.
+          format: date-time
+        definition_context:
+          $ref: '#/components/schemas/DefinitionContext'
+        description:
+          type: string
+          description: Api's version. It's a simple string only used in the portal.
+          example: v1.0
+        gravitee:
+          type: string
+          description: API's gravitee definition version
+        healthcheck_enabled:
+          type: boolean
+          description: true if HealthCheck is enabled globally or on one endpoint
+        id:
+          type: string
+          description: Api's uuid.
+          example: 00f8c9e7-78fc-4907-b8c9-e778fc790750
+        labels:
+          type: array
+          description: the free list of labels associated with this API
+          example: json, read_only, awesome
+          items:
+            type: string
+            description: the free list of labels associated with this API
+            example: json, read_only, awesome
+        lifecycle_state:
+          $ref: '#/components/schemas/ApiLifecycleState'
+        name:
+          type: string
+          description: Api's name. Duplicate names can exists.
+          example: My Api
+        numberOfRatings:
+          type: integer
+          description: How many consumers have evaluated the API
+          format: int32
+          example: 4
+        owner:
+          $ref: '#/components/schemas/PrimaryOwnerEntity'
+        picture_url:
+          type: string
+          description: the API logo url.
+          example: https://gravitee.mycompany.com/management/apis/6c530064-0b2c-4004-9300-640b2ce0047b/picture
+        rate:
+          type: number
+          description: How consumers have evaluated the API (between 0 to 5)
+          format: double
+          example: 4
+        role:
+          type: string
+        state:
+          type: string
+          description: The status of the API regarding the gateway.
+          example: STARTED
+          enum:
+          - INITIALIZED
+          - STOPPED
+          - STOPPING
+          - STARTED
+          - CLOSED
+        tags:
+          uniqueItems: true
+          type: array
+          description: the list of sharding tags associated with this API.
+          example: public, private
+          items:
+            type: string
+            description: the list of sharding tags associated with this API.
+            example: public, private
+        updated_at:
+          type: string
+          description: The last date (as a timestamp) when the API was updated.
+          format: date-time
+        version:
+          type: string
+          description: Api's version. It's a simple string only used in the portal.
+          example: v1.0
+        virtual_hosts:
+          type: array
+          items:
+            $ref: '#/components/schemas/VirtualHost'
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+        workflow_state:
+          $ref: '#/components/schemas/WorkflowState'
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

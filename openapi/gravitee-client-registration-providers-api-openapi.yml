@@ -1,0 +1,320 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Client Registration Providers API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Client Registration Providers
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/applications/registration/providers:
+    get:
+      tags:
+      - Client Registration Providers
+      summary: Get the list of client registration providers
+      description: User must have the PORTAL_CLIENT_REGISTRATION_PROVIDER[READ] permission to use this service
+      operationId: getClientRegistrationProviders
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List client registration providers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientRegistrationProviderListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Client Registration Providers
+      summary: Create a client registration provider
+      description: User must have the PORTAL_CLIENT_REGISTRATION_PROVIDER[CREATE] permission to use this service
+      operationId: createClientRegistrationProvider
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewClientRegistrationProviderEntity'
+        required: true
+      responses:
+        '201':
+          description: Client registration provider provider successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientRegistrationProviderEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/applications/registration/providers/{clientRegistrationProvider}:
+    get:
+      tags:
+      - Client Registration Providers
+      summary: Get a client registration provider
+      description: User must have the PORTAL_CLIENT_REGISTRATION_PROVIDER[READ] permission to use this service
+      operationId: getClientRegistrationProvider
+      parameters:
+      - name: clientRegistrationProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A client registration provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientRegistrationProviderEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Client Registration Providers
+      summary: Update a client registration provider
+      description: User must have the PORTAL_CLIENT_REGISTRATION_PROVIDER[UPDATE] permission to use this service
+      operationId: updateClientRegistrationProvider
+      parameters:
+      - name: clientRegistrationProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateClientRegistrationProviderEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated client registration provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientRegistrationProviderEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Client Registration Providers
+      summary: Delete a client registration provider
+      description: User must have the PORTAL_CLIENT_REGISTRATION_PROVIDER[DELETE] permission to use this service
+      operationId: deleteClientRegistrationProvider
+      parameters:
+      - name: clientRegistrationProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Client registration provider successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    ClientRegistrationProviderEntity:
+      type: object
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        discovery_endpoint:
+          type: string
+        id:
+          type: string
+        initial_access_token:
+          type: string
+        initial_access_token_type:
+          $ref: '#/components/schemas/InitialAccessTokenType'
+        name:
+          type: string
+        renew_client_secret_endpoint:
+          type: string
+        renew_client_secret_method:
+          type: string
+        renew_client_secret_support:
+          type: boolean
+        scopes:
+          type: array
+          items:
+            type: string
+        software_id:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    NewClientRegistrationProviderEntity:
+      required:
+      - discovery_endpoint
+      - initial_access_token_type
+      - name
+      type: object
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        description:
+          type: string
+        discovery_endpoint:
+          type: string
+        initial_access_token:
+          type: string
+        initial_access_token_type:
+          $ref: '#/components/schemas/InitialAccessTokenType'
+        name:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+        renew_client_secret_endpoint:
+          type: string
+        renew_client_secret_method:
+          type: string
+        renew_client_secret_support:
+          type: boolean
+        scopes:
+          type: array
+          items:
+            type: string
+        software_id:
+          type: string
+    UpdateClientRegistrationProviderEntity:
+      required:
+      - discovery_endpoint
+      - initial_access_token_type
+      - name
+      type: object
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        description:
+          type: string
+        discovery_endpoint:
+          type: string
+        initial_access_token:
+          type: string
+        initial_access_token_type:
+          $ref: '#/components/schemas/InitialAccessTokenType'
+        name:
+          type: string
+        renew_client_secret_endpoint:
+          type: string
+        renew_client_secret_method:
+          type: string
+        renew_client_secret_support:
+          type: boolean
+        scopes:
+          type: array
+          items:
+            type: string
+        software_id:
+          type: string
+    InitialAccessTokenType:
+      type: string
+      enum:
+      - INITIAL_ACCESS_TOKEN
+      - CLIENT_CREDENTIALS
+    ClientRegistrationProviderListItem:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Authentication API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Authentication
+paths:
+  /organizations/{orgId}/auth/oauth2/{identity}:
+    post:
+      tags:
+      - Authentication
+      operationId: exchangeAuthorizationCode_1
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Payload'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+      summary: Exchange authorization code 1
+      x-summary-source: derived
+  /organizations/{orgId}/auth/oauth2/{identity}/exchange:
+    post:
+      tags:
+      - Authentication
+      operationId: tokenExchange_2
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: query
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+      summary: Token exchange 2
+      x-summary-source: derived
+  /organizations/{orgId}/environments/{envId}/auth/oauth2/{identity}:
+    post:
+      tags:
+      - Authentication
+      operationId: exchangeAuthorizationCode
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Payload'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+      summary: Exchange authorization code
+      x-summary-source: derived
+  /organizations/{orgId}/environments/{envId}/auth/oauth2/{identity}/exchange:
+    post:
+      tags:
+      - Authentication
+      operationId: tokenExchange_1
+      parameters:
+      - name: identity
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: token
+        in: query
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+      summary: Token exchange 1
+      x-summary-source: derived
+components:
+  schemas:
+    Payload:
+      required:
+      - clientId
+      - code
+      - redirectUri
+      type: object
+      properties:
+        clientId:
+          type: string
+        code:
+          type: string
+        redirectUri:
+          type: string
+        state:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

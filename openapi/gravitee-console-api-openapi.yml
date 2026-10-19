@@ -1,0 +1,323 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Console API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Console
+paths:
+  /organizations/{orgId}/console:
+    get:
+      tags:
+      - Console
+      summary: Get the console configuration needed for runtime
+      description: Every users can use this service
+      operationId: getConsoleConfig
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Console configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsoleConfigEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Console
+      summary: Save the console configuration
+      operationId: saveConsoleConfig
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsoleSettingsEntity'
+        required: true
+      responses:
+        '200':
+          description: Console configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsoleSettingsEntity'
+        '500':
+          description: Internal server error
+      deprecated: true
+components:
+  schemas:
+    OAuth2Authentication:
+      type: object
+      properties:
+        clientId:
+          type: string
+    Email:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        from:
+          type: string
+        host:
+          type: string
+        password:
+          type: string
+        port:
+          type: integer
+          format: int32
+        properties:
+          $ref: '#/components/schemas/EmailProperties'
+        protocol:
+          type: string
+        subject:
+          type: string
+        username:
+          type: string
+    EmailProperties:
+      type: object
+      properties:
+        auth:
+          type: boolean
+        sslTrust:
+          type: string
+        startTlsEnable:
+          type: boolean
+    ConsoleConfigEntity:
+      type: object
+      properties:
+        alert:
+          $ref: '#/components/schemas/Alert'
+        analyticsPendo:
+          $ref: '#/components/schemas/ConsoleAnalyticsPendo'
+        authentication:
+          $ref: '#/components/schemas/ConsoleAuthentication'
+        jupiterMode:
+          $ref: '#/components/schemas/JupiterMode'
+        logging:
+          $ref: '#/components/schemas/Logging'
+        maintenance:
+          $ref: '#/components/schemas/Maintenance'
+        management:
+          $ref: '#/components/schemas/Management'
+        newsletter:
+          $ref: '#/components/schemas/Newsletter'
+        reCaptcha:
+          $ref: '#/components/schemas/ConsoleReCaptcha'
+        scheduler:
+          $ref: '#/components/schemas/ConsoleScheduler'
+        theme:
+          $ref: '#/components/schemas/Theme'
+    ConsoleSettingsEntity:
+      type: object
+      properties:
+        alert:
+          $ref: '#/components/schemas/Alert'
+        analyticsPendo:
+          $ref: '#/components/schemas/ConsoleAnalyticsPendo'
+        authentication:
+          $ref: '#/components/schemas/ConsoleAuthentication'
+        cors:
+          $ref: '#/components/schemas/ConsoleCors'
+        email:
+          $ref: '#/components/schemas/Email'
+        jupiterMode:
+          $ref: '#/components/schemas/JupiterMode'
+        logging:
+          $ref: '#/components/schemas/Logging'
+        maintenance:
+          $ref: '#/components/schemas/Maintenance'
+        management:
+          $ref: '#/components/schemas/Management'
+        metadata:
+          type: object
+          properties:
+            all:
+              type: object
+              additionalProperties:
+                type: string
+              writeOnly: true
+            empty:
+              type: boolean
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          readOnly: true
+        newsletter:
+          $ref: '#/components/schemas/Newsletter'
+        reCaptcha:
+          $ref: '#/components/schemas/ConsoleReCaptcha'
+        scheduler:
+          $ref: '#/components/schemas/ConsoleScheduler'
+        theme:
+          $ref: '#/components/schemas/Theme'
+    ConsoleAuthentication:
+      type: object
+      properties:
+        github:
+          $ref: '#/components/schemas/GithubAuthentication'
+        google:
+          $ref: '#/components/schemas/GoogleAuthentication'
+        localLogin:
+          $ref: '#/components/schemas/Enabled'
+        oauth2:
+          $ref: '#/components/schemas/OAuth2Authentication'
+    Maintenance:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    JupiterMode:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        isDefault:
+          type: string
+    GoogleAuthentication:
+      type: object
+      properties:
+        clientId:
+          type: string
+    GithubAuthentication:
+      type: object
+      properties:
+        clientId:
+          type: string
+    Logging:
+      type: object
+      properties:
+        condition:
+          type: string
+        content:
+          type: string
+          enum:
+          - NONE
+          - HEADERS
+          - PAYLOADS
+          - HEADERS_PAYLOADS
+        mode:
+          type: string
+          enum:
+          - NONE
+          - CLIENT
+          - PROXY
+          - CLIENT_PROXY
+        scope:
+          type: string
+          enum:
+          - NONE
+          - REQUEST
+          - RESPONSE
+          - REQUEST_RESPONSE
+    Alert:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    ConsoleReCaptcha:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        siteKey:
+          type: string
+    Newsletter:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    ConsoleAnalyticsPendo:
+      type: object
+      properties:
+        apiKey:
+          type: string
+        enabled:
+          type: boolean
+    Enabled:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    Management:
+      type: object
+      properties:
+        automaticValidation:
+          $ref: '#/components/schemas/Enabled'
+        pathBasedApiCreation:
+          $ref: '#/components/schemas/Enabled'
+        support:
+          $ref: '#/components/schemas/Enabled'
+        systemRoleEdition:
+          $ref: '#/components/schemas/Enabled'
+        title:
+          type: string
+        url:
+          type: string
+        userCreation:
+          $ref: '#/components/schemas/Enabled'
+    ConsoleScheduler:
+      type: object
+      properties:
+        notifications:
+          type: integer
+          format: int32
+        tasks:
+          type: integer
+          format: int32
+    ConsoleCors:
+      type: object
+      properties:
+        allowHeaders:
+          type: array
+          items:
+            type: string
+        allowMethods:
+          type: array
+          items:
+            type: string
+        allowOrigin:
+          type: array
+          items:
+            type: string
+        exposedHeaders:
+          type: array
+          items:
+            type: string
+        maxAge:
+          type: integer
+          format: int32
+    Theme:
+      type: object
+      properties:
+        css:
+          type: string
+        loader:
+          type: string
+        logo:
+          type: string
+        name:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

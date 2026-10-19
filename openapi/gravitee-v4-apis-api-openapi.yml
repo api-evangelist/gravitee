@@ -1,0 +1,1278 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management 🧪 V4 - APIs API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: 🧪 V4 - APIs
+paths:
+  /organizations/{orgId}/environments/{envId}/v4/apis:
+    post:
+      tags:
+      - 🧪 V4 - APIs
+      summary: 🧪 Create an API
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have API_PUBLISHER or ADMIN role to create an API.'
+      operationId: createApi_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiEntityV4'
+        required: true
+      responses:
+        '201':
+          description: API successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEntityV4'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}:
+    get:
+      tags:
+      - 🧪 V4 - APIs
+      summary: 🧪 Get the API
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the READ permission on the API_DEFINITION to use this service on a private API.'
+      operationId: getApi_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEntityV4'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - 🧪 V4 - APIs
+      summary: 🧪 Update the API
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the MANAGE_API permission to use this service'
+      operationId: updateApi_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiEntityV4'
+        required: true
+      responses:
+        '200':
+          description: API successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEntityV4'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - 🧪 V4 - APIs
+      summary: 🧪 Manage the API's lifecycle
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the MANAGE_LIFECYCLE permission to use this service'
+      operationId: doApiLifecycleAction_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: action
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/LifecycleAction'
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - 🧪 V4 - APIs
+      summary: 🧪 Delete the API
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the DELETE permission to use this service'
+      operationId: deleteApi_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: closePlans
+        in: query
+        schema:
+          type: boolean
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: API successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/deploy:
+    post:
+      tags:
+      - 🧪 V4 - APIs
+      summary: 🧪 Deploy API to gateway instances
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the MANAGE_LIFECYCLE permission to use this service'
+      operationId: deployApi_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiDeploymentEntity'
+      responses:
+        '200':
+          description: API successfully deployed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEntityV4'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/groups:
+    get:
+      tags:
+      - 🧪 V4 - APIs
+      summary: Get API groups mapped to members
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: getApiGroupsWithMembers_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API groups with members
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiGroupsWithMembersMap'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    ListenerV4:
+      required:
+      - entrypoints
+      - type
+      type: object
+      properties:
+        entrypoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntrypointV4'
+        type:
+          type: string
+          enum:
+          - HTTP
+          - SUBSCRIPTION
+          - TCP
+      description: A list of listeners used to describe our you api could be reached.
+      discriminator:
+        propertyName: type
+        mapping:
+          http: '#/components/schemas/HttpListenerV4'
+          tcp: '#/components/schemas/TcpListenerV4'
+          subscription: '#/components/schemas/SubscriptionListenerV4'
+      oneOf:
+      - $ref: '#/components/schemas/HttpListenerV4'
+      - $ref: '#/components/schemas/TcpListenerV4'
+      - $ref: '#/components/schemas/SubscriptionListenerV4'
+    FlowV4:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        name:
+          type: string
+        publish:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepV4'
+        request:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepV4'
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepV4'
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Selector'
+        subscribe:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepV4'
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+      description: A list of flows containing the policies configuration.
+    PrimaryOwnerEntity:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user or group display name.
+          example: John Doe
+        email:
+          type: string
+          description: The user or group email.
+          example: contact@gravitee.io
+        id:
+          type: string
+          description: The user or group id.
+          example: 005197cc-cc84-86a6-a75a-88f9772c67db
+        type:
+          type: string
+          description: The primary owner type
+          example: USER
+      description: The user with role PRIMARY_OWNER on this API.
+    ApiLifecycleState:
+      type: string
+      enum:
+      - CREATED
+      - PUBLISHED
+      - UNPUBLISHED
+      - DEPRECATED
+      - ARCHIVED
+    ApiGroupsWithMembersMap:
+      type: object
+      properties:
+        empty:
+          type: boolean
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/GroupMemberEntity'
+    ServiceV4:
+      required:
+      - type
+      type: object
+      properties:
+        configuration:
+          type: object
+        enabled:
+          type: boolean
+        type:
+          type: string
+    Cors:
+      type: object
+      properties:
+        allowCredentials:
+          type: boolean
+        allowHeaders:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        allowMethods:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        allowOrigin:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+        exposeHeaders:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        maxAge:
+          type: integer
+          format: int32
+        runPolicies:
+          type: boolean
+    PlanEntityV4:
+      type: object
+      properties:
+        apiId:
+          type: string
+        characteristics:
+          type: array
+          items:
+            type: string
+        closedAt:
+          type: string
+          format: date-time
+        commentMessage:
+          type: string
+        commentRequired:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        crossId:
+          type: string
+        description:
+          type: string
+        excludedGroups:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowV4'
+        generalConditions:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        planSecurity:
+          $ref: '#/components/schemas/PlanSecurityV4'
+        planStatus:
+          type: string
+          enum:
+          - STAGING
+          - PUBLISHED
+          - DEPRECATED
+          - CLOSED
+        planValidation:
+          $ref: '#/components/schemas/PlanValidationTypeV4'
+        publishedAt:
+          type: string
+          format: date-time
+        security:
+          $ref: '#/components/schemas/PlanSecurityV4'
+        selectionRule:
+          type: string
+        status:
+          type: string
+          enum:
+          - STAGING
+          - PUBLISHED
+          - DEPRECATED
+          - CLOSED
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        type:
+          $ref: '#/components/schemas/PlanTypeV4'
+        updatedAt:
+          type: string
+          format: date-time
+        validation:
+          $ref: '#/components/schemas/PlanValidationTypeV4'
+      description: A list of plans to apply on the API
+    PropertyEntityV4:
+      required:
+      - key
+      - value
+      type: object
+      properties:
+        dynamic:
+          type: boolean
+        encryptable:
+          type: boolean
+        encrypted:
+          type: boolean
+        key:
+          type: string
+        value:
+          type: string
+      description: A dictionary (could be dynamic) of properties available in the API context.
+    ResponseTemplate:
+      type: object
+      properties:
+        body:
+          type: string
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+        status:
+          type: integer
+          format: int32
+      description: 'A map that allows you to configure the output of a request based on the event throws by the gateway. Example : Quota exceeded, api-key is missing, ...'
+    ResourceV4:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: object
+        enabled:
+          type: boolean
+        name:
+          type: string
+        type:
+          type: string
+      description: The list of API resources used by policies like cache resources or oauth2
+    TcpListenerV4:
+      required:
+      - entrypoints
+      - type
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ListenerV4'
+    WorkflowState:
+      type: string
+      enum:
+      - DRAFT
+      - IN_REVIEW
+      - REQUEST_FOR_CHANGES
+      - REVIEW_OK
+    GroupMemberEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        displayName:
+          type: string
+        id:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            type: string
+        updated_at:
+          type: string
+          format: date-time
+    MetadataFormat:
+      type: string
+      enum:
+      - STRING
+      - NUMERIC
+      - BOOLEAN
+      - DATE
+      - MAIL
+      - URL
+    EndpointGroupServicesV4:
+      type: object
+      properties:
+        discovery:
+          $ref: '#/components/schemas/ServiceV4'
+        healthCheck:
+          $ref: '#/components/schemas/ServiceV4'
+    StepV4:
+      required:
+      - description
+      - name
+      - policy
+      type: object
+      properties:
+        condition:
+          type: string
+        configuration:
+          type: object
+        description:
+          type: string
+        enabled:
+          type: boolean
+        messageCondition:
+          type: string
+        name:
+          type: string
+        policy:
+          type: string
+    LoadBalancerV4:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - ROUND_ROBIN
+          - RANDOM
+          - WEIGHTED_ROUND_ROBIN
+          - WEIGHTED_RANDOM
+    Logging:
+      type: object
+      properties:
+        condition:
+          type: string
+        content:
+          type: string
+          enum:
+          - NONE
+          - HEADERS
+          - PAYLOADS
+          - HEADERS_PAYLOADS
+        mode:
+          type: string
+          enum:
+          - NONE
+          - CLIENT
+          - PROXY
+          - CLIENT_PROXY
+        scope:
+          type: string
+          enum:
+          - NONE
+          - REQUEST
+          - RESPONSE
+          - REQUEST_RESPONSE
+    ApiEntityV4:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: Api's version. It's a simple string only used in the portal.
+          example: v1.0
+        background:
+          type: string
+          description: the API background encoded in base64
+        backgroundUrl:
+          type: string
+          description: the API background url.
+          example: https://gravitee.mycompany.com/management/apis/6c530064-0b2c-4004-9300-640b2ce0047b/background
+        categories:
+          uniqueItems: true
+          type: array
+          description: the list of categories associated with this API
+          example: Product, Customer, Misc
+          items:
+            type: string
+            description: the list of categories associated with this API
+            example: Product, Customer, Misc
+        createdAt:
+          type: string
+          description: The date (as a timestamp) when the API was created.
+          format: date-time
+        crossId:
+          type: string
+          description: API's crossId. Identifies API across environments.
+          example: df83b2a4-cc3e-3f80-9f0d-c138c106c076
+        definitionContext:
+          $ref: '#/components/schemas/DefinitionContext'
+        definitionVersion:
+          type: string
+          description: API's gravitee definition version
+          enum:
+          - 1.0.0
+          - 2.0.0
+          - 4.0.0
+        deployedAt:
+          type: string
+          description: The last date (as timestamp) when the API was deployed.
+          format: date-time
+        description:
+          type: string
+          description: API's description. A short description of your API.
+          example: I can use a hundred characters to describe this API.
+        disableMembershipNotifications:
+          type: boolean
+        endpointGroups:
+          type: array
+          description: A list of endpoint describing the endpoints to contact.
+          items:
+            $ref: '#/components/schemas/EndpointGroupV4'
+        flowMode:
+          type: string
+          description: API's flow mode.
+          example: BEST_MATCH
+          enum:
+          - DEFAULT
+          - BEST_MATCH
+        flows:
+          type: array
+          description: A list of flows containing the policies configuration.
+          items:
+            $ref: '#/components/schemas/FlowV4'
+        groups:
+          uniqueItems: true
+          type: array
+          description: API's groups. Used to add team in your API.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: API's groups. Used to add team in your API.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        id:
+          type: string
+          description: API's uuid.
+          example: 00f8c9e7-78fc-4907-b8c9-e778fc790750
+        labels:
+          type: array
+          description: the free list of labels associated with this API
+          example: json, read_only, awesome
+          items:
+            type: string
+            description: the free list of labels associated with this API
+            example: json, read_only, awesome
+        lifecycleState:
+          $ref: '#/components/schemas/ApiLifecycleState'
+        listeners:
+          type: array
+          description: A list of listeners used to describe our you api could be reached.
+          items:
+            $ref: '#/components/schemas/ListenerV4'
+        name:
+          type: string
+          description: API's name. Duplicate names can exists.
+          example: My Api
+        picture:
+          type: string
+          description: the API logo encoded in base64
+        pictureUrl:
+          type: string
+          description: the API logo URL.
+          example: https://gravitee.mycompany.com/management/apis/6c530064-0b2c-4004-9300-640b2ce0047b/picture
+        plans:
+          uniqueItems: true
+          type: array
+          description: A list of plans to apply on the API
+          items:
+            $ref: '#/components/schemas/PlanEntityV4'
+        primaryOwner:
+          $ref: '#/components/schemas/PrimaryOwnerEntity'
+        properties:
+          type: array
+          description: A dictionary (could be dynamic) of properties available in the API context.
+          items:
+            $ref: '#/components/schemas/PropertyV4'
+        resources:
+          type: array
+          description: The list of API resources used by policies like cache resources or oauth2
+          items:
+            $ref: '#/components/schemas/ResourceV4'
+        responseTemplates:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/ResponseTemplate'
+            description: 'A map that allows you to configure the output of a request based on the event throws by the gateway. Example : Quota exceeded, api-key is missing, ...'
+          description: 'A map that allows you to configure the output of a request based on the event throws by the gateway. Example : Quota exceeded, api-key is missing, ...'
+        services:
+          $ref: '#/components/schemas/ApiServicesV4'
+        state:
+          type: string
+          description: The status of the API regarding the gateway.
+          example: STARTED
+          enum:
+          - INITIALIZED
+          - STOPPED
+          - STOPPING
+          - STARTED
+          - CLOSED
+        tags:
+          uniqueItems: true
+          type: array
+          description: The list of sharding tags associated with this API.
+          example: public, private
+          items:
+            type: string
+            description: The list of sharding tags associated with this API.
+            example: public, private
+        type:
+          type: string
+          description: API's type
+          example: async
+          enum:
+          - SYNC
+          - ASYNC
+        updatedAt:
+          type: string
+          description: The last date (as a timestamp) when the API was updated.
+          format: date-time
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+        workflowState:
+          $ref: '#/components/schemas/WorkflowState'
+    Visibility:
+      type: string
+      description: The visibility of the API regarding the portal.
+      example: PUBLIC
+      enum:
+      - PUBLIC
+      - PRIVATE
+    ApiDeploymentEntity:
+      type: object
+      properties:
+        deploymentLabel:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Label for an Api deployment. Duplicate names can exists.
+          example: My deployment
+    PlanSecurityV4:
+      required:
+      - type
+      type: object
+      properties:
+        configuration:
+          type: object
+        type:
+          type: string
+    EndpointGroupV4:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        endpoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndpointV4'
+        loadBalancer:
+          $ref: '#/components/schemas/LoadBalancerV4'
+        name:
+          type: string
+        services:
+          $ref: '#/components/schemas/EndpointGroupServicesV4'
+        sharedConfiguration:
+          type: object
+        type:
+          type: string
+      description: A list of endpoint describing the endpoints to contact.
+    PlanTypeV4:
+      type: string
+      enum:
+      - API
+      - CATALOG
+    SubscriptionListenerV4:
+      required:
+      - entrypoints
+      - type
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ListenerV4'
+    EndpointServicesV4:
+      type: object
+      properties:
+        healthCheck:
+          $ref: '#/components/schemas/ServiceV4'
+    LifecycleAction:
+      type: string
+      enum:
+      - START
+      - STOP
+    NewApiEntityV4:
+      required:
+      - apiVersion
+      - definitionVersion
+      - description
+      - endpointGroups
+      - listeners
+      - name
+      - type
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: Api's version. It's a simple string only used in the portal.
+          example: v1.0
+        definitionVersion:
+          type: string
+          description: API's gravitee definition version
+          enum:
+          - 1.0.0
+          - 2.0.0
+          - 4.0.0
+        description:
+          type: string
+          description: API's description. A short description of your API.
+          example: I can use a hundred characters to describe this API.
+        endpointGroups:
+          type: array
+          description: A list of endpoint describing the endpoints to contact.
+          items:
+            $ref: '#/components/schemas/EndpointGroupV4'
+        flowMode:
+          type: string
+          description: API's flow mode.
+          example: BEST_MATCH
+          enum:
+          - DEFAULT
+          - BEST_MATCH
+        flows:
+          type: array
+          description: A list of flows containing the policies configuration.
+          items:
+            $ref: '#/components/schemas/FlowV4'
+        groups:
+          uniqueItems: true
+          type: array
+          description: API's groups. Used to add team in your API.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: API's groups. Used to add team in your API.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        listeners:
+          type: array
+          description: A list of listeners used to describe our you api could be reached.
+          items:
+            $ref: '#/components/schemas/ListenerV4'
+        name:
+          type: string
+          description: API's name. Duplicate names can exists.
+          example: My Api
+        tags:
+          uniqueItems: true
+          type: array
+          description: The list of sharding tags associated with this API.
+          example: public, private
+          items:
+            type: string
+            description: The list of sharding tags associated with this API.
+            example: public, private
+        type:
+          type: string
+          description: API's type
+          example: async
+          enum:
+          - SYNC
+          - ASYNC
+    PlanValidationTypeV4:
+      type: string
+      enum:
+      - AUTO
+      - MANUAL
+    DefinitionContext:
+      type: object
+      properties:
+        mode:
+          type: string
+        origin:
+          type: string
+      description: the context where the api definition was created from
+    Selector:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - HTTP
+          - CHANNEL
+          - CONDITION
+      discriminator:
+        propertyName: type
+    EntrypointV4:
+      required:
+      - type
+      type: object
+      properties:
+        configuration:
+          type: object
+        qos:
+          type: string
+          enum:
+          - NONE
+          - AUTO
+          - AT_MOST_ONCE
+          - AT_LEAST_ONCE
+        type:
+          type: string
+    ApiMetadataEntity:
+      required:
+      - key
+      - value
+      type: object
+      properties:
+        apiId:
+          type: string
+        defaultValue:
+          type: string
+        format:
+          $ref: '#/components/schemas/MetadataFormat'
+        key:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        name:
+          type: string
+        value:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+    EndpointV4:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: object
+        inheritConfiguration:
+          type: boolean
+        name:
+          type: string
+        secondary:
+          type: boolean
+        services:
+          $ref: '#/components/schemas/EndpointServicesV4'
+        type:
+          type: string
+        weight:
+          type: integer
+          format: int32
+    UpdateApiEntityV4:
+      required:
+      - apiVersion
+      - definitionVersion
+      - description
+      - endpointGroups
+      - listeners
+      - name
+      - type
+      - visibility
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: Api's version. It's a simple string only used in the portal.
+          example: v1.0
+        background:
+          type: string
+          description: the API background encoded in base64
+        backgroundUrl:
+          type: string
+          description: the API background url.
+          example: https://gravitee.mycompany.com/management/apis/6c530064-0b2c-4004-9300-640b2ce0047b/background
+        categories:
+          uniqueItems: true
+          type: array
+          description: the list of categories associated with this API
+          example: Product, Customer, Misc
+          items:
+            type: string
+            description: the list of categories associated with this API
+            example: Product, Customer, Misc
+        crossId:
+          type: string
+          description: API's crossId. Identifies API across environments.
+          example: 00f8c9e7-78fc-4907-b8c9-e778fc790750
+        definitionVersion:
+          type: string
+          description: API's gravitee definition version
+          enum:
+          - 1.0.0
+          - 2.0.0
+          - 4.0.0
+        description:
+          type: string
+          description: API's description. A short description of your API.
+          example: I can use a hundred characters to describe this API.
+        disableMembershipNotifications:
+          type: boolean
+        endpointGroups:
+          type: array
+          description: A list of endpoint describing the endpoints to contact.
+          items:
+            $ref: '#/components/schemas/EndpointGroupV4'
+        flowMode:
+          type: string
+          description: API's flow mode.
+          example: BEST_MATCH
+          enum:
+          - DEFAULT
+          - BEST_MATCH
+        flows:
+          type: array
+          description: A list of flows containing the policies configuration.
+          items:
+            $ref: '#/components/schemas/FlowV4'
+        groups:
+          uniqueItems: true
+          type: array
+          description: API's groups. Used to add team in your API.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: API's groups. Used to add team in your API.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        id:
+          type: string
+          description: API's uuid.
+          example: 00f8c9e7-78fc-4907-b8c9-e778fc790750
+        labels:
+          type: array
+          description: the free list of labels associated with this API
+          example: json, read_only, awesome
+          items:
+            type: string
+            description: the free list of labels associated with this API
+            example: json, read_only, awesome
+        lifecycleState:
+          $ref: '#/components/schemas/ApiLifecycleState'
+        listeners:
+          type: array
+          description: A list of listeners used to describe our you api could be reached.
+          items:
+            $ref: '#/components/schemas/ListenerV4'
+        metadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiMetadataEntity'
+        name:
+          type: string
+          description: API's name. Duplicate names can exists.
+          example: My Api
+        picture:
+          type: string
+          description: the API logo encoded in base64
+        pictureUrl:
+          type: string
+          description: the API logo URL.
+          example: https://gravitee.mycompany.com/management/apis/6c530064-0b2c-4004-9300-640b2ce0047b/picture
+        plans:
+          uniqueItems: true
+          type: array
+          description: A list of plans to apply on the API
+          items:
+            $ref: '#/components/schemas/PlanEntityV4'
+        properties:
+          type: array
+          description: A dictionary (could be dynamic) of properties available in the API context.
+          items:
+            $ref: '#/components/schemas/PropertyEntityV4'
+        resources:
+          type: array
+          description: The list of API resources used by policies like cache resources or oauth2
+          items:
+            $ref: '#/components/schemas/ResourceV4'
+        responseTemplates:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/ResponseTemplate'
+            description: 'A map that allows you to configure the output of a request based on the event throws by the gateway. Example : Quota exceeded, api-key is missing, ...'
+          description: 'A map that allows you to configure the output of a request based on the event throws by the gateway. Example : Quota exceeded, api-key is missing, ...'
+        services:
+          $ref: '#/components/schemas/ApiServicesV4'
+        tags:
+          uniqueItems: true
+          type: array
+          description: The list of sharding tags associated with this API.
+          example: public, private
+          items:
+            type: string
+            description: The list of sharding tags associated with this API.
+            example: public, private
+        type:
+          type: string
+          description: API's type
+          example: async
+          enum:
+          - SYNC
+          - ASYNC
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    HttpListenerV4:
+      required:
+      - entrypoints
+      - paths
+      - type
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ListenerV4'
+      - type: object
+        properties:
+          paths:
+            type: array
+            items:
+              $ref: '#/components/schemas/PathV4'
+          pathMappings:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+          cors:
+            $ref: '#/components/schemas/Cors'
+          logging:
+            $ref: '#/components/schemas/Logging'
+    PropertyV4:
+      required:
+      - key
+      - value
+      type: object
+      properties:
+        dynamic:
+          type: boolean
+        encrypted:
+          type: boolean
+        key:
+          type: string
+        value:
+          type: string
+      description: A dictionary (could be dynamic) of properties available in the API context.
+    PathV4:
+      required:
+      - path
+      type: object
+      properties:
+        host:
+          type: string
+        overrideAccess:
+          type: boolean
+        path:
+          type: string
+    ApiServicesV4:
+      type: object
+      properties:
+        dynamicProperty:
+          $ref: '#/components/schemas/ServiceV4'
+      description: The configuration of API services like the dynamic properties.
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

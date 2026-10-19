@@ -1,0 +1,211 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Metadata API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Metadata
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/metadata:
+    get:
+      tags:
+      - Metadata
+      summary: Retrieve the list of platform metadata
+      description: User must have the PORTAL_METADATA[READ] permission to use this service
+      operationId: getMetadatas
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of platform metadata
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MetadataEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Metadata
+      summary: Update a platform metadata
+      description: User must have the PORTAL_METADATA[UPDATE] permission to use this service
+      operationId: updateMetadata
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMetadataEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Metadata
+      summary: Create a platform metadata
+      description: User must have the PORTAL_METADATA[CREATE] permission to use this service
+      operationId: createMetadata
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMetadataEntity'
+        required: true
+      responses:
+        '201':
+          description: Metadata successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/metadata/{metadata}:
+    delete:
+      tags:
+      - Metadata
+      summary: Delete a platform metadata
+      description: User must have the PORTAL_METADATA[DELETE] permission to use this service
+      operationId: deleteMetadata
+      parameters:
+      - name: metadata
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Metadata successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    MetadataEntity:
+      required:
+      - name
+      type: object
+      properties:
+        format:
+          $ref: '#/components/schemas/MetadataFormat'
+        key:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        value:
+          type: string
+    NewMetadataEntity:
+      required:
+      - name
+      type: object
+      properties:
+        format:
+          $ref: '#/components/schemas/MetadataFormat'
+        hidden:
+          type: boolean
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        value:
+          type: string
+    MetadataFormat:
+      type: string
+      enum:
+      - STRING
+      - NUMERIC
+      - BOOLEAN
+      - DATE
+      - MAIL
+      - URL
+    UpdateMetadataEntity:
+      required:
+      - name
+      type: object
+      properties:
+        format:
+          $ref: '#/components/schemas/MetadataFormat'
+        hidden:
+          type: boolean
+        key:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        value:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

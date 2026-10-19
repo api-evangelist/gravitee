@@ -1,0 +1,107 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Promotions API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Promotions
+paths:
+  /organizations/{orgId}/promotions/_search:
+    post:
+      tags:
+      - Promotions
+      summary: Search for Promotion
+      operationId: searchPromotions
+      parameters:
+      - name: statuses
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: apiId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List promotions matching request parameters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PromotionEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    PromotionEntity:
+      type: object
+      properties:
+        apiDefinition:
+          type: string
+        apiId:
+          type: string
+        author:
+          $ref: '#/components/schemas/PromotionEntityAuthor'
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        sourceEnvCockpitId:
+          type: string
+        sourceEnvName:
+          type: string
+        status:
+          $ref: '#/components/schemas/PromotionEntityStatus'
+        targetApiId:
+          type: string
+        targetEnvCockpitId:
+          type: string
+        targetEnvName:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    PromotionEntityAuthor:
+      type: object
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        picture:
+          type: string
+        source:
+          type: string
+        sourceId:
+          type: string
+        userId:
+          type: string
+    PromotionEntityStatus:
+      type: string
+      enum:
+      - CREATED
+      - TO_BE_VALIDATED
+      - ACCEPTED
+      - REJECTED
+      - ERROR
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

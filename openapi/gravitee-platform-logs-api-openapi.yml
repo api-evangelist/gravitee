@@ -1,0 +1,433 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Platform Logs API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Platform Logs
+paths:
+  /organizations/{orgId}/environments/{envId}/platform/logs:
+    get:
+      tags:
+      - Platform Logs
+      summary: Get platform logs
+      description: User must have the MANAGEMENT_PLATFORM[READ] permission to use this service
+      operationId: getPlatformLogs
+      parameters:
+      - name: from
+        in: query
+        description: Timestamp used to define the start date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        description: Timestamp used to define the end date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: query
+        in: query
+        description: 'The expresion used to search for logs. It looks like ''transaction:123-456-789 AND uri=\\/path\\/to\\/resource* AND response-time:[100 TO 200]''. Reserved characters that must be escaped + - = && || > < ! ( ) { } [ ] ^ " ~ * ? : \ /'
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: The number of data to retrieve
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: field
+        in: query
+        description: The field to query when doing `group_by` queries
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: true means ASC order, false means DESC
+        schema:
+          type: boolean
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Platform logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformRequestItemSearchLogResponse'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/platform/logs/export:
+    get:
+      tags:
+      - Platform Logs
+      summary: Export platform logs as CSV
+      description: User must have the MANAGEMENT_PLATFORM[READ] permission to use this service
+      operationId: exportPlatformLogsAsCSV
+      parameters:
+      - name: from
+        in: query
+        description: Timestamp used to define the start date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        description: Timestamp used to define the end date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: query
+        in: query
+        description: 'The expresion used to search for logs. It looks like ''transaction:123-456-789 AND uri=\\/path\\/to\\/resource* AND response-time:[100 TO 200]''. Reserved characters that must be escaped + - = && || > < ! ( ) { } [ ] ^ " ~ * ? : \ /'
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: The number of data to retrieve
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: field
+        in: query
+        description: The field to query when doing `group_by` queries
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: true means ASC order, false means DESC
+        schema:
+          type: boolean
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Platform logs as CSV
+          content:
+            text/csv:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/platform/logs/{log}:
+    get:
+      tags:
+      - Platform Logs
+      summary: Get a specific log
+      description: User must have the MANAGEMENT_PLATFORM[READ] permission to use this service
+      operationId: getPlatformLog
+      parameters:
+      - name: log
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: timestamp
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Single log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiRequest'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    PlatformRequestItemSearchLogResponse:
+      type: object
+      properties:
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlatformRequestItem'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+        total:
+          type: integer
+          format: int64
+    PlatformRequestItem:
+      type: object
+      properties:
+        api:
+          type: string
+        application:
+          type: string
+        endpoint:
+          type: boolean
+        id:
+          type: string
+        method:
+          type: string
+          enum:
+          - CONNECT
+          - DELETE
+          - GET
+          - HEAD
+          - OPTIONS
+          - PATCH
+          - POST
+          - PUT
+          - TRACE
+          - OTHER
+        path:
+          type: string
+        plan:
+          type: string
+        responseTime:
+          type: integer
+          format: int64
+        status:
+          type: integer
+          format: int32
+        timestamp:
+          type: integer
+          format: int64
+        transactionId:
+          type: string
+        user:
+          type: string
+    ApiRequest:
+      type: object
+      properties:
+        api:
+          type: string
+        apiResponseTime:
+          type: integer
+          format: int64
+        application:
+          type: string
+        clientRequest:
+          $ref: '#/components/schemas/Request'
+        clientResponse:
+          $ref: '#/components/schemas/Response'
+        endpoint:
+          type: string
+        gateway:
+          type: string
+        host:
+          type: string
+        id:
+          type: string
+        localAddress:
+          type: string
+        message:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+        method:
+          type: string
+          enum:
+          - CONNECT
+          - DELETE
+          - GET
+          - HEAD
+          - OPTIONS
+          - PATCH
+          - POST
+          - PUT
+          - TRACE
+          - OTHER
+        path:
+          type: string
+        plan:
+          type: string
+        proxyRequest:
+          $ref: '#/components/schemas/Request'
+        proxyResponse:
+          $ref: '#/components/schemas/Response'
+        remoteAddress:
+          type: string
+        requestContentLength:
+          type: integer
+          format: int64
+        responseContentLength:
+          type: integer
+          format: int64
+        responseTime:
+          type: integer
+          format: int64
+        securityToken:
+          type: string
+        securityType:
+          type: string
+        status:
+          type: integer
+          format: int32
+        subscription:
+          type: string
+        tenant:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+        transactionId:
+          type: string
+        uri:
+          type: string
+        user:
+          type: string
+    MediaType:
+      type: object
+      properties:
+        QUALITY_FACTOR_PARAMETER:
+          type: string
+        charset:
+          type: object
+          properties:
+            registered:
+              type: boolean
+        concrete:
+          type: boolean
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+        qualityFactor:
+          type: number
+          format: double
+        subtype:
+          type: string
+        type:
+          type: string
+        wildcardSubtype:
+          type: boolean
+        wildcardType:
+          type: boolean
+    Request:
+      type: object
+      properties:
+        body:
+          type: string
+        headers:
+          type: object
+          properties:
+            accept:
+              type: array
+              items:
+                $ref: '#/components/schemas/MediaType'
+            all:
+              type: object
+              additionalProperties:
+                type: string
+              writeOnly: true
+            empty:
+              type: boolean
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        method:
+          type: string
+          enum:
+          - CONNECT
+          - DELETE
+          - GET
+          - HEAD
+          - OPTIONS
+          - PATCH
+          - POST
+          - PUT
+          - TRACE
+          - OTHER
+        uri:
+          type: string
+    Response:
+      type: object
+      properties:
+        body:
+          type: string
+        headers:
+          type: object
+          properties:
+            accept:
+              type: array
+              items:
+                $ref: '#/components/schemas/MediaType'
+            all:
+              type: object
+              additionalProperties:
+                type: string
+              writeOnly: true
+            empty:
+              type: boolean
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        status:
+          type: integer
+          format: int32
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

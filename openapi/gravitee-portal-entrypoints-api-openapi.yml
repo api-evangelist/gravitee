@@ -1,0 +1,60 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Portal entrypoints API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Portal entrypoints
+paths:
+  /organizations/{orgId}/environments/{envId}/entrypoints:
+    get:
+      tags:
+      - Portal entrypoints
+      operationId: getPortalEntrypoints
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntrypointEntity'
+      summary: Get portal entrypoints
+      x-summary-source: derived
+components:
+  schemas:
+    EntrypointEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        value:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

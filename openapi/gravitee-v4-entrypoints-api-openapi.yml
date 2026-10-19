@@ -1,0 +1,432 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management 🧪 V4 - Entrypoints API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: 🧪 V4 - Entrypoints
+paths:
+  /organizations/{orgId}/environments/{envId}/v4/endpoints/{entrypoint}:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 Get an entrypoint
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypoint_2
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Entrypoint plugin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformPluginEntity'
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/endpoints/{entrypoint}/documentation:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 Get a entrypoint's documentation
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypointDoc
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Entrypoint documentation
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+        '204':
+          description: Documentation not found
+  /organizations/{orgId}/environments/{envId}/v4/endpoints/{entrypoint}/schema:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 Get a entrypoint's schema
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypointSchema
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Entrypoint schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+        '204':
+          description: Schema not found
+  /organizations/{orgId}/environments/{envId}/v4/endpoints/{entrypoint}/subscriptionSchema:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 Get a entrypoint's subscription schema
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypointSubscriptionSchema
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Entrypoint schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+        '204':
+          description: Subscription schema not found
+  /organizations/{orgId}/environments/{envId}/v4/entrypoints:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 List entrypoint plugins
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypoints_2
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of entrypoints
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectorListItem'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/entrypoints/{entrypoint}:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 Get an entrypoint
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypoint_3
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Entrypoint plugin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformPluginEntity'
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/entrypoints/{entrypoint}/documentation:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 Get a entrypoint's documentation
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypointDoc_1
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Entrypoint documentation
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+        '204':
+          description: Documentation not found
+  /organizations/{orgId}/environments/{envId}/v4/entrypoints/{entrypoint}/schema:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 Get a entrypoint's schema
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypointSchema_1
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Entrypoint schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+        '204':
+          description: Schema not found
+  /organizations/{orgId}/environments/{envId}/v4/entrypoints/{entrypoint}/subscriptionSchema:
+    get:
+      tags:
+      - 🧪 V4 - Entrypoints
+      summary: 🧪 Get a entrypoint's subscription schema
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the ENVIRONMENT_API[READ] permission to use this service'
+      operationId: getEntrypointSubscriptionSchema_1
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Entrypoint schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+        '204':
+          description: Subscription schema not found
+components:
+  schemas:
+    ConnectorListItem:
+      type: object
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        schema:
+          type: string
+        supportedTypes:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+    PlatformPluginEntity:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,124 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Environment API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Environment
+paths:
+  /organizations/{orgId}/environments/{envId}:
+    get:
+      tags:
+      - Environment
+      summary: Get an Environment
+      operationId: getEnvironment
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Found Environment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/identities:
+    put:
+      tags:
+      - Environment
+      summary: Update available environment identities
+      operationId: updateEnvironmentIdentities
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IdentityProviderActivationEntity'
+      responses:
+        '204':
+          description: Environment successfully updated
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    IdentityProviderActivationReferenceType:
+      type: string
+      enum:
+      - ENVIRONMENT
+      - ORGANIZATION
+    IdentityProviderActivationEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        identityProvider:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/IdentityProviderActivationReferenceType'
+    EnvironmentEntity:
+      required:
+      - name
+      - organizationId
+      type: object
+      properties:
+        cockpitId:
+          type: string
+        description:
+          type: string
+        domainRestrictions:
+          type: array
+          items:
+            type: string
+        hrids:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        organizationId:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

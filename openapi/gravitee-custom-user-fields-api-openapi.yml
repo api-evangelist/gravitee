@@ -1,0 +1,150 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Custom User Fields API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Custom User Fields
+paths:
+  /organizations/{orgId}/configuration/custom-user-fields:
+    get:
+      tags:
+      - Custom User Fields
+      summary: List All Custom User Fields
+      description: User must have the CUSTOM_USER_FIELDS[READ] permission to use this service
+      operationId: getCustomUserFields
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Custom User Field deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomUserFieldEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Custom User Fields
+      summary: Create a Custom User Field
+      description: User must have the CUSTOM_USER_FIELDS[CREATE] permission to use this service
+      operationId: createCustomUserField
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomUserFieldEntity'
+      responses:
+        '201':
+          description: Custom User Field Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUserFieldEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/custom-user-fields/{key}:
+    put:
+      tags:
+      - Custom User Fields
+      summary: Update a Custom User Field
+      description: User must have the CUSTOM_USER_FIELDS[UPDATE] permission to use this service
+      operationId: updateCustomUserField
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomUserFieldEntity'
+      responses:
+        '200':
+          description: Custom User Field updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomUserFieldEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Custom User Fields
+      summary: Delete a Custom User Field
+      description: User must have the CUSTOM_USER_FIELDS[DELETE] permission to use this service
+      operationId: deleteCustomUserField
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Custom User Field deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    CustomUserFieldEntity:
+      required:
+      - key
+      - label
+      type: object
+      properties:
+        key:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        label:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        required:
+          type: boolean
+        values:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

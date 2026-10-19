@@ -1,0 +1,755 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Portal Pages API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Portal Pages
+paths:
+  /organizations/{orgId}/environments/{envId}/portal/pages:
+    get:
+      tags:
+      - Portal Pages
+      summary: List pages
+      description: Every users can use this service
+      operationId: getPortalPages
+      parameters:
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+      - name: homepage
+        in: query
+        schema:
+          type: boolean
+      - name: published
+        in: query
+        schema:
+          type: boolean
+      - name: type
+        in: query
+        schema:
+          $ref: '#/components/schemas/PageType'
+      - name: parent
+        in: query
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: root
+        in: query
+        schema:
+          type: boolean
+      - name: translated
+        in: query
+        schema:
+          type: boolean
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of pages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Portal Pages
+      summary: Create a page
+      description: User must have the ENVIRONMENT_DOCUMENTATION[CREATE] permission to use this service
+      operationId: createPortalPage
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/portal/pages/_fetch:
+    post:
+      tags:
+      - Portal Pages
+      summary: Refresh all pages by calling their associated fetcher
+      description: User must have the ENVIRONMENT_DOCUMENTATION[UPDATE] permission to use this service
+      operationId: fetchAllPortalPages
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: Pages successfully refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/portal/pages/_import:
+    put:
+      tags:
+      - Portal Pages
+      summary: Import pages
+      description: User must have the ENVIRONMENT_DOCUMENTATION[CREATE] permission to use this service
+      operationId: updateImportedPortalPageFromFiles
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Portal Pages
+      summary: Import pages
+      description: User must have the ENVIRONMENT_DOCUMENTATION[CREATE] permission to use this service
+      operationId: importPortalPageFromFiles
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/portal/pages/{page}:
+    get:
+      tags:
+      - Portal Pages
+      summary: Get a page
+      description: Every users can use this service
+      operationId: getPortalPage
+      parameters:
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: portal
+        in: query
+        schema:
+          type: boolean
+      - name: translated
+        in: query
+        schema:
+          type: boolean
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Portal Pages
+      summary: Update a page
+      description: User must have the ENVIRONMENT_DOCUMENTATION[UPDATE] permission to use this service
+      operationId: updatePortalPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Portal Pages
+      summary: Delete a page
+      description: User must have the ENVIRONMENT_DOCUMENTATION[DELETE] permission to use this service
+      operationId: deletePortalPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Page successfully deleted
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - Portal Pages
+      summary: Update a page
+      description: User must have the ENVIRONMENT_DOCUMENTATION[UPDATE] permission to use this service
+      operationId: partialUpdatePortalPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/portal/pages/{page}/_fetch:
+    post:
+      tags:
+      - Portal Pages
+      summary: Refresh page by calling the associated fetcher
+      description: User must have the ENVIRONMENT_DOCUMENTATION[UPDATE] permission to use this service
+      operationId: fetchPortalPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: Page successfully refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/portal/pages/{page}/content:
+    get:
+      tags:
+      - Portal Pages
+      summary: Get the page's content
+      description: Every users can use this service
+      operationId: getPortalPageContent
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Page's content
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Portal Pages
+      summary: Update a page content
+      description: User must have the PORTAL_DOCUMENTATION[UPDATE] permission to use this service
+      operationId: updatePageContent_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: Page content successfully updated
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Visibility:
+      type: string
+      description: The visibility of the API regarding the portal.
+      example: PUBLIC
+      enum:
+      - PUBLIC
+      - PRIVATE
+    PageSourceEntity:
+      type: object
+      properties:
+        configuration:
+          type: string
+        type:
+          type: string
+    PageType:
+      type: string
+      enum:
+      - ASCIIDOC
+      - ASYNCAPI
+      - MARKDOWN
+      - MARKDOWN_TEMPLATE
+      - SWAGGER
+      - FOLDER
+      - LINK
+      - ROOT
+      - SYSTEM_FOLDER
+      - TRANSLATION
+    PageMediaEntity:
+      type: object
+      properties:
+        attachedAt:
+          type: string
+          format: date-time
+        mediaHash:
+          type: string
+        mediaName:
+          type: string
+    UpdatePageEntity:
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        attached_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageMediaEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        content:
+          type: string
+        crossId:
+          type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        homepage:
+          type: boolean
+        lastContributor:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        parentId:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        useAutoFetch:
+          type: boolean
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    NewPageEntity:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        attached_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageMediaEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        content:
+          type: string
+        crossId:
+          type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        homepage:
+          type: boolean
+        lastContributor:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        order:
+          type: integer
+          format: int32
+        parentId:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        type:
+          $ref: '#/components/schemas/PageType'
+        useAutoFetch:
+          type: boolean
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    AccessControlEntity:
+      type: object
+      properties:
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+    PageEntity:
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        attached_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageMediaEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        content:
+          type: string
+        contentRevisionId:
+          $ref: '#/components/schemas/PageRevisionId'
+        contentType:
+          type: string
+        crossId:
+          type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        generalConditions:
+          type: boolean
+          readOnly: true
+        homepage:
+          type: boolean
+        id:
+          type: string
+        lastContributor:
+          type: string
+        lastModificationDate:
+          type: string
+          format: date-time
+        messages:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        parentId:
+          type: string
+        parentPath:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        translations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageEntity'
+        type:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    PageRevisionId:
+      type: object
+      properties:
+        pageId:
+          type: string
+        revision:
+          type: integer
+          format: int32
+    ImportPageEntity:
+      required:
+      - type
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        lastContributor:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        type:
+          $ref: '#/components/schemas/PageType'
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

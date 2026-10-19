@@ -1,0 +1,121 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Environment Analytics API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Environment Analytics
+paths:
+  /organizations/{orgId}/environments/{envId}/analytics:
+    get:
+      tags:
+      - Environment Analytics
+      summary: Get environment analytics
+      operationId: getPlatformAnalytics
+      parameters:
+      - name: from
+        in: query
+        description: Timestamp used to define the start date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        description: Timestamp used to define the end date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: interval
+        in: query
+        description: The time interval when getting histogram data (in milliseconds)
+        schema:
+          type: integer
+          format: int64
+        example: 600000
+      - name: query
+        in: query
+        description: The Lucene query used to filter data
+        schema:
+          type: string
+        example: api:xxxx-xxxx-xxxx-xxxx AND plan:yyyy-yyyy-yyyy-yyyy AND host:"demo.gravitee.io" AND path:/test
+      - name: field
+        in: query
+        description: The field to query when doing `group_by` queries
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: The number of data to retrieve
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        description: The type of data to retrieve
+        required: true
+        schema:
+          $ref: '#/components/schemas/AnalyticsType'
+      - name: ranges
+        in: query
+        description: Ranges allows you to group field's data. Mainly used to group HTTP statuses code with `group_by` queries
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+        example: 100:199,200:299,300:399,400:499,500:599
+      - name: aggs
+        in: query
+        description: Aggregations are used when doing `date_histo` queries and allows you to group field's data. Mainly used to group HTTP statuses code
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+        example: avg:response-time,avg:api-response-time
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Environment analytics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Analytics:
+      type: object
+      properties:
+        clientTimeout:
+          type: integer
+          format: int64
+    AnalyticsType:
+      type: string
+      enum:
+      - GROUP_BY
+      - DATE_HISTO
+      - COUNT
+      - STATS
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,620 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Media API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Media
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/media/upload:
+    post:
+      tags:
+      - API Media
+      summary: Create a media for an API
+      description: User must have the API_DOCUMENTATION[CREATE] permission to use this service
+      operationId: uploadApiMediaImage
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  $ref: '#/components/schemas/FormDataBodyPart'
+      responses:
+        '201':
+          description: Media successfully created
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/media/{hash}:
+    get:
+      tags:
+      - API Media
+      summary: Retrieve a media for an API
+      operationId: getApiMediaImage
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: hash
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+    delete:
+      tags:
+      - API Media
+      summary: Delete media matching hash and API id
+      description: User must have the API_DOCUMENTATION[UPDATE] permission to use this endpoint
+      operationId: deleteApiMedia
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: hash
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Media successfully deleted
+        '404':
+          description: Media not found
+        '403':
+          description: Unauthorized user
+        '500':
+          description: Unexpected error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/pages/{page}/media:
+    get:
+      tags:
+      - API Media
+      summary: Retrieve all media for an API page
+      description: User must have the API_DOCUMENTATION[READ] permission to use this service
+      operationId: getApiPageMedia
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+    post:
+      tags:
+      - API Media
+      summary: Attach a media to an API page
+      description: User must have the API_DOCUMENTATION[UPDATE] permission to use this service
+      operationId: attachApiPageMedia
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  $ref: '#/components/schemas/FormDataBodyPart'
+                fileName:
+                  type: string
+      responses:
+        '201':
+          description: Media successfully added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/pages/{page}/media:
+    get:
+      tags:
+      - API Media
+      summary: Retrieve all media for an API page
+      description: User must have the API_DOCUMENTATION[READ] permission to use this service
+      operationId: getApiPageMedia_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+    post:
+      tags:
+      - API Media
+      summary: Attach a media to an API page
+      description: User must have the API_DOCUMENTATION[UPDATE] permission to use this service
+      operationId: attachApiPageMedia_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  $ref: '#/components/schemas/FormDataBodyPart'
+                fileName:
+                  type: string
+      responses:
+        '201':
+          description: Media successfully added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Visibility:
+      type: string
+      description: The visibility of the API regarding the portal.
+      example: PUBLIC
+      enum:
+      - PUBLIC
+      - PRIVATE
+    BodyPart:
+      type: object
+      properties:
+        contentDisposition:
+          $ref: '#/components/schemas/ContentDisposition'
+        entity:
+          type: object
+        headers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        mediaType:
+          type: object
+          properties:
+            parameters:
+              type: object
+              additionalProperties:
+                type: string
+            subtype:
+              type: string
+            type:
+              type: string
+            wildcardSubtype:
+              type: boolean
+            wildcardType:
+              type: boolean
+        messageBodyWorkers:
+          $ref: '#/components/schemas/MessageBodyWorkers'
+        parameterizedHeaders:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ParameterizedHeader'
+        parent:
+          $ref: '#/components/schemas/MultiPart'
+        providers:
+          type: object
+    PageSourceEntity:
+      type: object
+      properties:
+        configuration:
+          type: string
+        type:
+          type: string
+    FormDataBodyPart:
+      type: object
+      properties:
+        contentDisposition:
+          $ref: '#/components/schemas/ContentDisposition'
+        entity:
+          type: object
+        formDataContentDisposition:
+          $ref: '#/components/schemas/FormDataContentDisposition'
+        headers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        mediaType:
+          type: object
+          properties:
+            parameters:
+              type: object
+              additionalProperties:
+                type: string
+            subtype:
+              type: string
+            type:
+              type: string
+            wildcardSubtype:
+              type: boolean
+            wildcardType:
+              type: boolean
+        messageBodyWorkers:
+          $ref: '#/components/schemas/MessageBodyWorkers'
+        name:
+          type: string
+        parameterizedHeaders:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ParameterizedHeader'
+        parent:
+          $ref: '#/components/schemas/MultiPart'
+        providers:
+          type: object
+        simple:
+          type: boolean
+        value:
+          type: string
+    MessageBodyWorkers:
+      type: object
+    PageMediaEntity:
+      type: object
+      properties:
+        attachedAt:
+          type: string
+          format: date-time
+        mediaHash:
+          type: string
+        mediaName:
+          type: string
+    FormDataContentDisposition:
+      type: object
+      properties:
+        creationDate:
+          type: string
+          format: date-time
+        fileName:
+          type: string
+        modificationDate:
+          type: string
+          format: date-time
+        name:
+          type: string
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+        readDate:
+          type: string
+          format: date-time
+        size:
+          type: integer
+          format: int64
+        type:
+          type: string
+    AccessControlEntity:
+      type: object
+      properties:
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+    ParameterizedHeader:
+      type: object
+      properties:
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+        value:
+          type: string
+    PageEntity:
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        attached_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageMediaEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        content:
+          type: string
+        contentRevisionId:
+          $ref: '#/components/schemas/PageRevisionId'
+        contentType:
+          type: string
+        crossId:
+          type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        generalConditions:
+          type: boolean
+          readOnly: true
+        homepage:
+          type: boolean
+        id:
+          type: string
+        lastContributor:
+          type: string
+        lastModificationDate:
+          type: string
+          format: date-time
+        messages:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        parentId:
+          type: string
+        parentPath:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        translations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageEntity'
+        type:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    PageRevisionId:
+      type: object
+      properties:
+        pageId:
+          type: string
+        revision:
+          type: integer
+          format: int32
+    ContentDisposition:
+      type: object
+      properties:
+        creationDate:
+          type: string
+          format: date-time
+        fileName:
+          type: string
+        modificationDate:
+          type: string
+          format: date-time
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+        readDate:
+          type: string
+          format: date-time
+        size:
+          type: integer
+          format: int64
+        type:
+          type: string
+    MultiPart:
+      type: object
+      properties:
+        bodyParts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BodyPart'
+        contentDisposition:
+          $ref: '#/components/schemas/ContentDisposition'
+        entity:
+          type: object
+        headers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        mediaType:
+          type: object
+          properties:
+            parameters:
+              type: object
+              additionalProperties:
+                type: string
+            subtype:
+              type: string
+            type:
+              type: string
+            wildcardSubtype:
+              type: boolean
+            wildcardType:
+              type: boolean
+        messageBodyWorkers:
+          $ref: '#/components/schemas/MessageBodyWorkers'
+        parameterizedHeaders:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ParameterizedHeader'
+        parent:
+          $ref: '#/components/schemas/MultiPart'
+        providers:
+          type: object
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

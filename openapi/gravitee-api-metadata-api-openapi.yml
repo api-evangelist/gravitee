@@ -1,0 +1,507 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Metadata API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Metadata
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/metadata:
+    get:
+      tags:
+      - API Metadata
+      summary: List metadata for the given API
+      description: User must have the API_METADATA[READ] permission to use this service
+      operationId: getApiMetadatas
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of metadata
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiMetadataEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Metadata
+      summary: Create an API metadata
+      description: User must have the API_METADATA[CREATE] permission to use this service
+      operationId: createApiMetadata
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiMetadataEntity'
+        required: true
+      responses:
+        '201':
+          description: A new API metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMetadataEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/metadata/{metadata}:
+    get:
+      tags:
+      - API Metadata
+      summary: A metadata for the given API and metadata id
+      description: User must have the API_METADATA[READ] permission to use this service
+      operationId: getApiMetadata
+      parameters:
+      - name: metadata
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMetadataEntity'
+        '404':
+          description: Metadata not found
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - API Metadata
+      summary: Update an API metadata
+      description: User must have the API_METADATA[UPDATE] permission to use this service
+      operationId: updateApiMetadata
+      parameters:
+      - name: metadata
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiMetadataEntity'
+        required: true
+      responses:
+        '201':
+          description: API metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMetadataEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - API Metadata
+      summary: Delete a metadata
+      description: User must have the API_METADATA[DELETE] permission to use this service
+      operationId: deleteApiMetadata
+      parameters:
+      - name: metadata
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Metadata successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/metadata:
+    get:
+      tags:
+      - API Metadata
+      summary: List metadata for the given API
+      description: User must have the API_METADATA[READ] permission to use this service
+      operationId: getApiMetadatas_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of metadata
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiMetadataEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Metadata
+      summary: Create an API metadata
+      description: User must have the API_METADATA[CREATE] permission to use this service
+      operationId: createApiMetadata_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiMetadataEntity'
+        required: true
+      responses:
+        '201':
+          description: A new API metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMetadataEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/metadata/{metadata}:
+    get:
+      tags:
+      - API Metadata
+      summary: A metadata for the given API and metadata id
+      description: User must have the API_METADATA[READ] permission to use this service
+      operationId: getApiMetadata_1
+      parameters:
+      - name: metadata
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMetadataEntity'
+        '404':
+          description: Metadata not found
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - API Metadata
+      summary: Update an API metadata
+      description: User must have the API_METADATA[UPDATE] permission to use this service
+      operationId: updateApiMetadata_1
+      parameters:
+      - name: metadata
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiMetadataEntity'
+        required: true
+      responses:
+        '201':
+          description: API metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMetadataEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - API Metadata
+      summary: Delete a metadata
+      description: User must have the API_METADATA[DELETE] permission to use this service
+      operationId: deleteApiMetadata_1
+      parameters:
+      - name: metadata
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Metadata successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    MetadataFormat:
+      type: string
+      enum:
+      - STRING
+      - NUMERIC
+      - BOOLEAN
+      - DATE
+      - MAIL
+      - URL
+    NewApiMetadataEntity:
+      required:
+      - name
+      type: object
+      properties:
+        apiId:
+          type: string
+        defaultValue:
+          type: string
+        format:
+          $ref: '#/components/schemas/MetadataFormat'
+        hidden:
+          type: boolean
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        value:
+          type: string
+    ApiMetadataEntity:
+      required:
+      - key
+      - value
+      type: object
+      properties:
+        apiId:
+          type: string
+        defaultValue:
+          type: string
+        format:
+          $ref: '#/components/schemas/MetadataFormat'
+        key:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        name:
+          type: string
+        value:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+    UpdateApiMetadataEntity:
+      required:
+      - name
+      type: object
+      properties:
+        apiId:
+          type: string
+        defaultValue:
+          type: string
+        format:
+          $ref: '#/components/schemas/MetadataFormat'
+        hidden:
+          type: boolean
+        key:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        value:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

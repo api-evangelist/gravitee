@@ -1,0 +1,231 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Group Memberships API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Group Memberships
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/groups/{group}/members:
+    get:
+      tags:
+      - Group Memberships
+      summary: List group members
+      operationId: getGroupMembers
+      parameters:
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of group's members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupMemberEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Group Memberships
+      summary: Add or update a group member
+      operationId: addOrUpdateGroupMember
+      parameters:
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GroupMembership'
+        required: true
+      responses:
+        '201':
+          description: Member has been added
+        '200':
+          description: Member has been updated
+        '400':
+          description: Membership is not valid
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/groups/{group}/members/_paged:
+    get:
+      tags:
+      - Group Memberships
+      summary: List group members with pagination
+      operationId: getGroupMembers_1
+      parameters:
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of group's members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupMemberEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/groups/{group}/members/{member}:
+    delete:
+      tags:
+      - Group Memberships
+      summary: Remove a group member
+      operationId: deleteGroupMember
+      parameters:
+      - name: member
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Member has been removed successfully
+        '400':
+          description: User does not exist
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    GroupMembership:
+      type: object
+      properties:
+        id:
+          type: string
+        reference:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberRoleEntity'
+    MemberRoleEntity:
+      type: object
+      properties:
+        name:
+          type: string
+        scope:
+          $ref: '#/components/schemas/RoleScope'
+    RoleScope:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - GROUP
+      - ENVIRONMENT
+      - ORGANIZATION
+      - PLATFORM
+    GroupMemberEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        displayName:
+          type: string
+        id:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            type: string
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,304 +1,286 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management Audit API
-  version: 4.12.0-alpha.3
+  title: Gravitee.io - Management Audit API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
 servers:
-- url: /management
+- url: http://localhost:8083/management
 security:
 - gravitee-auth: []
 tags:
 - name: Audit
 paths:
-  /organizations/{organizationId}/audits:
+  /organizations/{orgId}/audit:
     get:
       tags:
       - Audit
-      summary: List audit logs for the organization
-      description: User must have the ORGANIZATION_AUDIT[LIST] permission on the specified organization. Except if user has ORGANIZATION_AUDIT[READ] permission on the organization, each returned audit is filtered and contains only basic information such as id, date, event, actor, target and status.
-      operationId: listOrganizationAudits
+      summary: Retrieve audit logs for the environment
+      description: User must have the ENVIRONMENT_AUDIT[READ] or ORGANIZATION_AUDIT[READ] permission to use this service
+      operationId: getAudits
       parameters:
-      - name: organizationId
-        in: path
-        required: true
+      - name: environment
+        in: query
+        schema:
+          type: string
+      - name: api
+        in: query
+        schema:
+          type: string
+      - name: application
+        in: query
         schema:
           type: string
       - name: type
         in: query
+        description: filter on the type of audit
         schema:
-          type: string
-      - name: status
+          $ref: '#/components/schemas/AuditType'
+      - name: event
         in: query
+        description: filter by the name of an event.
         schema:
           type: string
-      - name: user
-        in: query
-        schema:
-          type: string
+        example: APPLICATION_UPDATED, API_CREATED, METADATA_DELETED, ...
       - name: from
         in: query
+        description: Timestamp used to define the start date of the time window to query
         schema:
           type: integer
           format: int64
       - name: to
         in: query
+        description: Timestamp used to define the end date of the time window to query
         schema:
           type: integer
           format: int64
       - name: size
         in: query
+        description: Number of elements per page
         schema:
           type: integer
           format: int32
-          default: 10
+          default: 20
       - name: page
         in: query
         schema:
           type: integer
           format: int32
-          default: 0
+          default: 1
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '200':
-          description: List audit logs for the platform
+          description: List of audits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditEntityMetadataPage'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/audit/events:
+    get:
+      tags:
+      - Audit
+      summary: List available audit event type for the environment
+      description: User must have the ENVIRONMENT_AUDIT[READ] or ORGANIZATION_AUDIT[READ] permission to use this service
+      operationId: getAuditEvents
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of audits
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Audit'
+                  $ref: '#/components/schemas/AuditEvent'
         '500':
           description: Internal server error
-  /organizations/{organizationId}/audits/{audit}:
+  /organizations/{orgId}/environments/{envId}/audit:
     get:
       tags:
       - Audit
-      summary: Get an audit log
-      description: User must have the ORGANIZATION_AUDIT[READ] permission on the specified organization
-      operationId: getOrganizationAudit
+      summary: Retrieve audit logs for the environment
+      description: User must have the ENVIRONMENT_AUDIT[READ] or ORGANIZATION_AUDIT[READ] permission to use this service
+      operationId: getAudits_1
       parameters:
-      - name: organizationId
-        in: path
-        required: true
+      - name: environment
+        in: query
         schema:
           type: string
-      - name: audit
-        in: path
-        required: true
+      - name: api
+        in: query
         schema:
           type: string
-      responses:
-        '200':
-          description: Audit log successfully fetched
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Audit'
-        '500':
-          description: Internal server error
-  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/audits:
-    get:
-      tags:
-      - Audit
-      summary: List audit logs for a security domain
-      description: User must have the DOMAIN_AUDIT[LIST] permission on the specified domain, environment or organization. Except if user has ORGANIZATION_AUDIT[READ] permission on the domain, environment or organization, each returned audit is filtered and contains only basic information such as id, date, event, actor, target and status.
-      operationId: listDomainAudits
-      parameters:
-      - name: organizationId
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: domain
-        in: path
-        required: true
+      - name: application
+        in: query
         schema:
           type: string
       - name: type
         in: query
+        description: filter on the type of audit
         schema:
-          type: string
-      - name: status
+          $ref: '#/components/schemas/AuditType'
+      - name: event
         in: query
+        description: filter by the name of an event.
         schema:
           type: string
-      - name: user
-        in: query
-        schema:
-          type: string
+        example: APPLICATION_UPDATED, API_CREATED, METADATA_DELETED, ...
       - name: from
         in: query
+        description: Timestamp used to define the start date of the time window to query
         schema:
           type: integer
           format: int64
       - name: to
         in: query
+        description: Timestamp used to define the end date of the time window to query
         schema:
           type: integer
           format: int64
       - name: size
         in: query
+        description: Number of elements per page
         schema:
           type: integer
           format: int32
-          default: 10
+          default: 20
       - name: page
         in: query
         schema:
           type: integer
           format: int32
-          default: 0
+          default: 1
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '200':
-          description: List audit logs for a security domain
+          description: List of audits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditEntityMetadataPage'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/audit/events:
+    get:
+      tags:
+      - Audit
+      summary: List available audit event type for the environment
+      description: User must have the ENVIRONMENT_AUDIT[READ] or ORGANIZATION_AUDIT[READ] permission to use this service
+      operationId: getAuditEvents_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of audits
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Audit'
-        '500':
-          description: Internal server error
-  /organizations/{organizationId}/environments/{environmentId}/domains/{domain}/audits/{audit}:
-    get:
-      tags:
-      - Audit
-      summary: Get an audit log
-      description: User must have the DOMAIN_AUDIT[READ] permission on the specified domain or DOMAIN_AUDIT[READ] permission on the specified environment or DOMAIN_AUDIT[READ] permission on the specified organization
-      operationId: getDomainAudit
-      parameters:
-      - name: organizationId
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: environmentId
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: domain
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: audit
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Audit log successfully fetched
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Audit'
+                  $ref: '#/components/schemas/AuditEvent'
         '500':
           description: Internal server error
 components:
   schemas:
-    Reference:
+    AuditEntityMetadataPage:
       type: object
       properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEntity'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        pageElements:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
     AuditEntity:
       type: object
       properties:
-        alternativeId:
-          type: string
-        attributes:
-          type: object
-          additionalProperties:
-            type: object
-        displayName:
-          type: string
-        id:
-          type: string
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        type:
-          type: string
-    AuditOutcome:
-      type: object
-      properties:
-        message:
-          type: string
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILURE
-    AuditAccessPoint:
-      type: object
-      properties:
-        alternativeId:
-          type: string
-        displayName:
-          type: string
-        id:
-          type: string
-        ipAddress:
-          type: string
-        userAgent:
-          type: string
-    Audit:
-      type: object
-      properties:
-        accessPoint:
-          $ref: '#/components/schemas/AuditAccessPoint'
-        actor:
-          $ref: '#/components/schemas/AuditEntity'
-        id:
-          type: string
-        outcome:
-          $ref: '#/components/schemas/AuditOutcome'
-        reference:
-          $ref: '#/components/schemas/Reference'
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        target:
-          $ref: '#/components/schemas/AuditEntity'
-        timestamp:
+        createdAt:
           type: string
           format: date-time
-          writeOnly: true
-        transactionId:
+        event:
           type: string
-        type:
+        id:
           type: string
+        patch:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        referenceId:
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/AuditReferenceType'
+        user:
+          type: string
+    AuditReferenceType:
+      type: string
+      enum:
+      - ORGANIZATION
+      - ENVIRONMENT
+      - APPLICATION
+      - API
+    AuditType:
+      type: string
+      enum:
+      - ORGANIZATION
+      - ENVIRONMENT
+      - APPLICATION
+      - API
+    AuditEvent:
+      type: object
   securitySchemes:
     gravitee-auth:
       type: http
-      scheme: Bearer
+      scheme: basic

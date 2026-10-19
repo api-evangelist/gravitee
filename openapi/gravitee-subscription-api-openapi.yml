@@ -1,0 +1,176 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Subscription API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Subscription
+paths:
+  /organizations/{orgId}/environments/{envId}/subscriptions:
+    get:
+      tags:
+      - Subscription
+      summary: List subscriptions for authenticated user
+      operationId: getUserSubscriptions
+      parameters:
+      - name: application
+        in: query
+        schema:
+          type: string
+      - name: plan
+        in: query
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of subscriptions
+          content:
+            application/json:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    ApiKeyMode:
+      type: string
+      enum:
+      - SHARED
+      - EXCLUSIVE
+      - UNSPECIFIED
+    SubscriptionConsumerStatus:
+      type: string
+      enum:
+      - STARTED
+      - STOPPED
+    User:
+      type: object
+      properties:
+        displayName:
+          type: string
+        id:
+          type: string
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        security:
+          type: string
+    Application:
+      type: object
+      properties:
+        apiKeyMode:
+          $ref: '#/components/schemas/ApiKeyMode'
+        description:
+          type: string
+        domain:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/User'
+        type:
+          type: string
+    Api:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/User'
+        version:
+          type: string
+    SubscriptionStatus:
+      type: string
+      enum:
+      - PENDING
+      - REJECTED
+      - ACCEPTED
+      - CLOSED
+      - PAUSED
+      - RESUMED
+    Subscription:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/Api'
+        application:
+          $ref: '#/components/schemas/Application'
+        client_id:
+          type: string
+        closed_at:
+          type: string
+          format: date-time
+        consumerStatus:
+          $ref: '#/components/schemas/SubscriptionConsumerStatus'
+        consumer_paused_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        ending_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        paused_at:
+          type: string
+          format: date-time
+        plan:
+          $ref: '#/components/schemas/Plan'
+        processed_at:
+          type: string
+          format: date-time
+        processed_by:
+          type: string
+        reason:
+          type: string
+        request:
+          type: string
+        starting_at:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/SubscriptionStatus'
+        subscribed_by:
+          $ref: '#/components/schemas/User'
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,669 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Settings API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Settings
+paths:
+  /organizations/{orgId}/environments/{envId}/settings:
+    get:
+      tags:
+      - Settings
+      summary: Get the portal settings
+      operationId: getPortalSettings
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Portal configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalSettingsEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Settings
+      summary: Save the portal settings
+      operationId: savePortalSettings
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortalSettingsEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated portal settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalSettingsEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/settings:
+    get:
+      tags:
+      - Settings
+      summary: Get the console settings
+      operationId: getConsoleSettings
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Console configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsoleSettingsEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Settings
+      summary: Save the console settings
+      operationId: saveConsoleSettings
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsoleSettingsEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated console settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsoleSettingsEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    OAuth2Authentication:
+      type: object
+      properties:
+        clientId:
+          type: string
+    Email:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        from:
+          type: string
+        host:
+          type: string
+        password:
+          type: string
+        port:
+          type: integer
+          format: int32
+        properties:
+          $ref: '#/components/schemas/EmailProperties'
+        protocol:
+          type: string
+        subject:
+          type: string
+        username:
+          type: string
+    OpenAPIDocType:
+      type: object
+      properties:
+        defaultType:
+          type: string
+        redoc:
+          $ref: '#/components/schemas/Enabled'
+        swagger:
+          $ref: '#/components/schemas/Enabled'
+    EmailProperties:
+      type: object
+      properties:
+        auth:
+          type: boolean
+        sslTrust:
+          type: string
+        startTlsEnable:
+          type: boolean
+    ConsoleSettingsEntity:
+      type: object
+      properties:
+        alert:
+          $ref: '#/components/schemas/Alert'
+        analyticsPendo:
+          $ref: '#/components/schemas/ConsoleAnalyticsPendo'
+        authentication:
+          $ref: '#/components/schemas/ConsoleAuthentication'
+        cors:
+          $ref: '#/components/schemas/ConsoleCors'
+        email:
+          $ref: '#/components/schemas/Email'
+        jupiterMode:
+          $ref: '#/components/schemas/JupiterMode'
+        logging:
+          $ref: '#/components/schemas/Logging'
+        maintenance:
+          $ref: '#/components/schemas/Maintenance'
+        management:
+          $ref: '#/components/schemas/Management'
+        metadata:
+          type: object
+          properties:
+            all:
+              type: object
+              additionalProperties:
+                type: string
+              writeOnly: true
+            empty:
+              type: boolean
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          readOnly: true
+        newsletter:
+          $ref: '#/components/schemas/Newsletter'
+        reCaptcha:
+          $ref: '#/components/schemas/ConsoleReCaptcha'
+        scheduler:
+          $ref: '#/components/schemas/ConsoleScheduler'
+        theme:
+          $ref: '#/components/schemas/Theme'
+    ConsoleAuthentication:
+      type: object
+      properties:
+        github:
+          $ref: '#/components/schemas/GithubAuthentication'
+        google:
+          $ref: '#/components/schemas/GoogleAuthentication'
+        localLogin:
+          $ref: '#/components/schemas/Enabled'
+        oauth2:
+          $ref: '#/components/schemas/OAuth2Authentication'
+    User:
+      type: object
+      properties:
+        displayName:
+          type: string
+        id:
+          type: string
+    PortalSettingsEntity:
+      type: object
+      properties:
+        analytics:
+          $ref: '#/components/schemas/Analytics'
+        api:
+          $ref: '#/components/schemas/Api'
+        apiQualityMetrics:
+          $ref: '#/components/schemas/ApiQualityMetrics'
+        apiReview:
+          $ref: '#/components/schemas/ApiReview'
+        application:
+          $ref: '#/components/schemas/PortalApplicationSettings'
+        authentication:
+          $ref: '#/components/schemas/PortalAuthentication'
+        company:
+          $ref: '#/components/schemas/Company'
+        cors:
+          $ref: '#/components/schemas/PortalCors'
+        dashboards:
+          $ref: '#/components/schemas/Dashboards'
+        documentation:
+          $ref: '#/components/schemas/Documentation'
+        email:
+          $ref: '#/components/schemas/Email'
+        metadata:
+          type: object
+          properties:
+            all:
+              type: object
+              additionalProperties:
+                type: string
+              writeOnly: true
+            empty:
+              type: boolean
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          readOnly: true
+        openAPIDocViewer:
+          $ref: '#/components/schemas/OpenAPIDocViewer'
+        plan:
+          $ref: '#/components/schemas/PlanSettings'
+        portal:
+          $ref: '#/components/schemas/Portal'
+        reCaptcha:
+          $ref: '#/components/schemas/PortalReCaptcha'
+        scheduler:
+          $ref: '#/components/schemas/PortalScheduler'
+    ApiQualityMetrics:
+      type: object
+      properties:
+        categoriesWeight:
+          type: integer
+          format: int32
+        descriptionMinLength:
+          type: integer
+          format: int32
+        descriptionWeight:
+          type: integer
+          format: int32
+        enabled:
+          type: boolean
+        functionalDocumentationWeight:
+          type: integer
+          format: int32
+        healthcheckWeight:
+          type: integer
+          format: int32
+        labelsWeight:
+          type: integer
+          format: int32
+        logoWeight:
+          type: integer
+          format: int32
+        technicalDocumentationWeight:
+          type: integer
+          format: int32
+    PortalUploadMedia:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        maxSizeInOctet:
+          type: integer
+          format: int32
+    PortalScheduler:
+      type: object
+      properties:
+        notifications:
+          type: integer
+          format: int32
+        tasks:
+          type: integer
+          format: int32
+    Maintenance:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    JupiterMode:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        isDefault:
+          type: string
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+    PortalApplicationSettings:
+      type: object
+      properties:
+        registration:
+          $ref: '#/components/schemas/ClientRegistration'
+        types:
+          $ref: '#/components/schemas/ApplicationTypes'
+    PlanSettings:
+      type: object
+      properties:
+        security:
+          $ref: '#/components/schemas/PlanSecurity'
+    Documentation:
+      type: object
+      properties:
+        url:
+          type: string
+    GoogleAuthentication:
+      type: object
+      properties:
+        clientId:
+          type: string
+    GithubAuthentication:
+      type: object
+      properties:
+        clientId:
+          type: string
+    Logging:
+      type: object
+      properties:
+        condition:
+          type: string
+        content:
+          type: string
+          enum:
+          - NONE
+          - HEADERS
+          - PAYLOADS
+          - HEADERS_PAYLOADS
+        mode:
+          type: string
+          enum:
+          - NONE
+          - CLIENT
+          - PROXY
+          - CLIENT_PROXY
+        scope:
+          type: string
+          enum:
+          - NONE
+          - REQUEST
+          - RESPONSE
+          - REQUEST_RESPONSE
+    Alert:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    ConsoleReCaptcha:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        siteKey:
+          type: string
+    PortalApis:
+      type: object
+      properties:
+        apiHeaderShowCategories:
+          $ref: '#/components/schemas/Enabled'
+        apiHeaderShowTags:
+          $ref: '#/components/schemas/Enabled'
+        categoryMode:
+          $ref: '#/components/schemas/Enabled'
+        promotedApiMode:
+          $ref: '#/components/schemas/Enabled'
+        tilesMode:
+          $ref: '#/components/schemas/Enabled'
+    ClientRegistration:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    PortalReCaptcha:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        siteKey:
+          type: string
+    Newsletter:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    PortalAuthentication:
+      type: object
+      properties:
+        forceLogin:
+          $ref: '#/components/schemas/Enabled'
+        github:
+          $ref: '#/components/schemas/GithubAuthentication'
+        google:
+          $ref: '#/components/schemas/GoogleAuthentication'
+        localLogin:
+          $ref: '#/components/schemas/Enabled'
+        oauth2:
+          $ref: '#/components/schemas/OAuth2Authentication'
+    ApiReview:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    ConsoleAnalyticsPendo:
+      type: object
+      properties:
+        apiKey:
+          type: string
+        enabled:
+          type: boolean
+    RatingComment:
+      type: object
+      properties:
+        mandatory:
+          type: boolean
+    Analytics:
+      type: object
+      properties:
+        clientTimeout:
+          type: integer
+          format: int64
+    Portal:
+      type: object
+      properties:
+        analytics:
+          $ref: '#/components/schemas/PortalAnalytics'
+        apikeyHeader:
+          type: string
+        apis:
+          $ref: '#/components/schemas/PortalApis'
+        entrypoint:
+          type: string
+        homepageTitle:
+          type: string
+        rating:
+          $ref: '#/components/schemas/PortalRating'
+        support:
+          $ref: '#/components/schemas/Enabled'
+        uploadMedia:
+          $ref: '#/components/schemas/PortalUploadMedia'
+        url:
+          type: string
+        userCreation:
+          $ref: '#/components/schemas/PortalUserCreation'
+    Enabled:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    PortalUserCreation:
+      type: object
+      properties:
+        automaticValidation:
+          $ref: '#/components/schemas/Enabled'
+        enabled:
+          type: boolean
+    OpenAPIDocViewer:
+      type: object
+      properties:
+        openAPIDocType:
+          $ref: '#/components/schemas/OpenAPIDocType'
+    PortalAnalytics:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        trackingId:
+          type: string
+    PortalRating:
+      type: object
+      properties:
+        comment:
+          $ref: '#/components/schemas/RatingComment'
+        enabled:
+          type: boolean
+    ApiStatus:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+    Management:
+      type: object
+      properties:
+        automaticValidation:
+          $ref: '#/components/schemas/Enabled'
+        pathBasedApiCreation:
+          $ref: '#/components/schemas/Enabled'
+        support:
+          $ref: '#/components/schemas/Enabled'
+        systemRoleEdition:
+          $ref: '#/components/schemas/Enabled'
+        title:
+          type: string
+        url:
+          type: string
+        userCreation:
+          $ref: '#/components/schemas/Enabled'
+    PlanSecurity:
+      type: object
+      properties:
+        apikey:
+          $ref: '#/components/schemas/Enabled'
+        customApiKey:
+          $ref: '#/components/schemas/Enabled'
+        jwt:
+          $ref: '#/components/schemas/Enabled'
+        keyless:
+          $ref: '#/components/schemas/Enabled'
+        oauth2:
+          $ref: '#/components/schemas/Enabled'
+        sharedApiKey:
+          $ref: '#/components/schemas/Enabled'
+    ConsoleScheduler:
+      type: object
+      properties:
+        notifications:
+          type: integer
+          format: int32
+        tasks:
+          type: integer
+          format: int32
+    Dashboards:
+      type: object
+      properties:
+        apiStatus:
+          $ref: '#/components/schemas/ApiStatus'
+    Api:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/User'
+        version:
+          type: string
+    ConsoleCors:
+      type: object
+      properties:
+        allowHeaders:
+          type: array
+          items:
+            type: string
+        allowMethods:
+          type: array
+          items:
+            type: string
+        allowOrigin:
+          type: array
+          items:
+            type: string
+        exposedHeaders:
+          type: array
+          items:
+            type: string
+        maxAge:
+          type: integer
+          format: int32
+    Theme:
+      type: object
+      properties:
+        css:
+          type: string
+        loader:
+          type: string
+        logo:
+          type: string
+        name:
+          type: string
+    PortalCors:
+      type: object
+      properties:
+        allowHeaders:
+          type: array
+          items:
+            type: string
+        allowMethods:
+          type: array
+          items:
+            type: string
+        allowOrigin:
+          type: array
+          items:
+            type: string
+        exposedHeaders:
+          type: array
+          items:
+            type: string
+        maxAge:
+          type: integer
+          format: int32
+    ApplicationTypes:
+      type: object
+      properties:
+        backend_to_backend:
+          $ref: '#/components/schemas/Enabled'
+        browser:
+          $ref: '#/components/schemas/Enabled'
+        native:
+          $ref: '#/components/schemas/Enabled'
+        simple:
+          $ref: '#/components/schemas/Enabled'
+        web:
+          $ref: '#/components/schemas/Enabled'
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

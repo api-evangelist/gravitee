@@ -1,0 +1,725 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management 🧪 V4 - API Plans API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: 🧪 V4 - API Plans
+paths:
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/plans:
+    get:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 List plans for an API
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        List all the plans accessible to the current user.'
+      operationId: getApiPlans_1
+      parameters:
+      - name: status
+        in: query
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            default: PUBLISHED
+            enum:
+            - STAGING
+            - PUBLISHED
+            - DEPRECATED
+            - CLOSED
+      - name: security
+        in: query
+        explode: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlanSecurityTypeV4'
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List accessible plans for current user
+          content:
+            application/json:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanEntityV4'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 Create a plan
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the MANAGE_PLANS permission to use this service'
+      operationId: createApiPlan_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPlanEntityV4'
+        required: true
+      responses:
+        '201':
+          description: Plan successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanEntityV4'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/plans/{plan}:
+    get:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 Get a plan
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the READ permission to use this service'
+      operationId: getApiPlan_1
+      parameters:
+      - name: plan
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Plan information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanEntityV4'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 Update a plan
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the MANAGE_PLANS permission to use this service'
+      operationId: updateApiPlan_1
+      parameters:
+      - name: plan
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanEntityV4'
+        required: true
+      responses:
+        '200':
+          description: Plan successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanEntityV4'
+        '400':
+          description: Bad plan format
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 Delete a plan
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the MANAGE_PLANS permission to use this service'
+      operationId: deleteApiPlan_1
+      parameters:
+      - name: plan
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Plan successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/plans/{plan}/_close:
+    post:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 Close a plan
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the MANAGE_PLANS permission to use this service'
+      operationId: closeApiPlan_1
+      parameters:
+      - name: plan
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Plan successfully closed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanEntityV4'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/plans/{plan}/_deprecate:
+    post:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 Deprecate a plan
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the API_PLAN[UPDATE] permission to use this service'
+      operationId: deprecateApiPlan_1
+      parameters:
+      - name: plan
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Plan successfully deprecated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanEntityV4'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/plans/{plan}/_depreciate:
+    post:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 Deprecated, use '_deprecate' instead. Deprecate a plan
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the API_PLAN[UPDATE] permission to use this service'
+      operationId: depreciateApiPlan_1
+      parameters:
+      - name: plan
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Plan successfully deprecated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanEntityV4'
+        '500':
+          description: Internal server error
+      deprecated: true
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/plans/{plan}/_publish:
+    post:
+      tags:
+      - 🧪 V4 - API Plans
+      summary: 🧪 Publicly publish plan
+      description: '⚠️ This resource is in alpha version. This implies that it is likely to be modified or even removed in future versions. ⚠️.
+
+
+        User must have the MANAGE_PLANS permission to use this service'
+      operationId: publishApiPlan_1
+      parameters:
+      - name: plan
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Plan successfully published
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlanEntityV4'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Selector:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - HTTP
+          - CHANNEL
+          - CONDITION
+      discriminator:
+        propertyName: type
+    FlowV4:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        name:
+          type: string
+        publish:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepV4'
+        request:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepV4'
+        response:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepV4'
+        selectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Selector'
+        subscribe:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepV4'
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+      description: A list of flows containing the policies configuration.
+    PlanSecurityV4:
+      required:
+      - type
+      type: object
+      properties:
+        configuration:
+          type: object
+        type:
+          type: string
+    PlanTypeV4:
+      type: string
+      enum:
+      - API
+      - CATALOG
+    UpdatePlanEntityV4:
+      required:
+      - description
+      - name
+      - order
+      - validation
+      type: object
+      properties:
+        characteristics:
+          type: array
+          items:
+            type: string
+        commentMessage:
+          type: string
+        commentRequired:
+          type: boolean
+        crossId:
+          type: string
+        description:
+          type: string
+        excludedGroups:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowV4'
+        generalConditions:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        security:
+          $ref: '#/components/schemas/PlanSecurityV4'
+        selectionRule:
+          type: string
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        validation:
+          $ref: '#/components/schemas/PlanValidationTypeV4'
+    NewPlanEntityV4:
+      required:
+      - description
+      - flows
+      - name
+      - status
+      - type
+      - validation
+      type: object
+      properties:
+        apiId:
+          type: string
+        characteristics:
+          type: array
+          items:
+            type: string
+        commentMessage:
+          type: string
+        commentRequired:
+          type: boolean
+        crossId:
+          type: string
+        description:
+          type: string
+        excludedGroups:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowV4'
+        generalConditions:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        security:
+          $ref: '#/components/schemas/PlanSecurityV4'
+        selectionRule:
+          type: string
+        status:
+          type: string
+          enum:
+          - STAGING
+          - PUBLISHED
+          - DEPRECATED
+          - CLOSED
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        type:
+          $ref: '#/components/schemas/PlanTypeV4'
+        validation:
+          $ref: '#/components/schemas/PlanValidationTypeV4'
+    PlanSecurityTypeV4:
+      type: string
+      enum:
+      - key-less
+      - api-key
+      - oauth2
+      - jwt
+      - subscription
+    PlanValidationTypeV4:
+      type: string
+      enum:
+      - AUTO
+      - MANUAL
+    StepV4:
+      required:
+      - description
+      - name
+      - policy
+      type: object
+      properties:
+        condition:
+          type: string
+        configuration:
+          type: object
+        description:
+          type: string
+        enabled:
+          type: boolean
+        messageCondition:
+          type: string
+        name:
+          type: string
+        policy:
+          type: string
+    PlanEntityV4:
+      type: object
+      properties:
+        apiId:
+          type: string
+        characteristics:
+          type: array
+          items:
+            type: string
+        closedAt:
+          type: string
+          format: date-time
+        commentMessage:
+          type: string
+        commentRequired:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        crossId:
+          type: string
+        description:
+          type: string
+        excludedGroups:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowV4'
+        generalConditions:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        planSecurity:
+          $ref: '#/components/schemas/PlanSecurityV4'
+        planStatus:
+          type: string
+          enum:
+          - STAGING
+          - PUBLISHED
+          - DEPRECATED
+          - CLOSED
+        planValidation:
+          $ref: '#/components/schemas/PlanValidationTypeV4'
+        publishedAt:
+          type: string
+          format: date-time
+        security:
+          $ref: '#/components/schemas/PlanSecurityV4'
+        selectionRule:
+          type: string
+        status:
+          type: string
+          enum:
+          - STAGING
+          - PUBLISHED
+          - DEPRECATED
+          - CLOSED
+        tags:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        type:
+          $ref: '#/components/schemas/PlanTypeV4'
+        updatedAt:
+          type: string
+          format: date-time
+        validation:
+          $ref: '#/components/schemas/PlanValidationTypeV4'
+      description: A list of plans to apply on the API
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,492 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Events API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Events
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/events:
+    get:
+      tags:
+      - API Events
+      summary: Get API's events
+      description: User must have the MANAGE_LIFECYCLE permission to use this service
+      operationId: getApiEventsEvents
+      parameters:
+      - name: type
+        in: query
+        explode: false
+        schema:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API's events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/events/search:
+    get:
+      tags:
+      - API Events
+      summary: Get API's events
+      description: User must have the API_EVENT[READ] permission to use this service
+      operationId: searchApiEvents
+      parameters:
+      - name: type
+        in: query
+        explode: false
+        schema:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+      - name: from
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: api_ids
+        in: query
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Page of API events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEntityPage'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/events/{eventId}:
+    get:
+      tags:
+      - API Events
+      summary: Get an API event with its id
+      description: User must have the READ API_EVENT permission to use this service
+      operationId: getEvent
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/events:
+    get:
+      tags:
+      - API Events
+      summary: Get API's events
+      description: User must have the MANAGE_LIFECYCLE permission to use this service
+      operationId: getApiEventsEvents_1
+      parameters:
+      - name: type
+        in: query
+        explode: false
+        schema:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API's events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/events/search:
+    get:
+      tags:
+      - API Events
+      summary: Get API's events
+      description: User must have the API_EVENT[READ] permission to use this service
+      operationId: searchApiEvents_1
+      parameters:
+      - name: type
+        in: query
+        explode: false
+        schema:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+      - name: from
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: api_ids
+        in: query
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Page of API events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEntityPage'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/events/{eventId}:
+    get:
+      tags:
+      - API Events
+      summary: Get an API event with its id
+      description: User must have the READ API_EVENT permission to use this service
+      operationId: getEvent_1
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    EventEntityPage:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventEntity'
+        pageElements:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+    UserRoleEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        scope:
+          $ref: '#/components/schemas/RoleScope'
+    RoleScope:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - GROUP
+      - ENVIRONMENT
+      - ORGANIZATION
+      - PLATFORM
+    UserEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        customFields:
+          type: object
+          additionalProperties:
+            type: object
+        displayName:
+          type: string
+          readOnly: true
+        email:
+          type: string
+        envRoles:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              $ref: '#/components/schemas/UserRoleEntity'
+        firstConnectionAt:
+          type: string
+          format: date-time
+        firstname:
+          type: string
+        id:
+          type: string
+        lastConnectionAt:
+          type: string
+          format: date-time
+        lastname:
+          type: string
+        loginCount:
+          type: integer
+          format: int64
+        newsletterSubscribed:
+          type: boolean
+        number_of_active_tokens:
+          type: integer
+          format: int32
+        password:
+          type: string
+        picture:
+          type: string
+        primary_owner:
+          type: boolean
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRoleEntity'
+        source:
+          type: string
+        sourceId:
+          type: string
+        status:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    EventEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        environments:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        parentId:
+          type: string
+        payload:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        type:
+          $ref: '#/components/schemas/EventType'
+        updated_at:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/UserEntity'
+    EventType:
+      type: string
+      enum:
+      - PUBLISH_API
+      - PUBLISH_API_RESULT
+      - UNPUBLISH_API
+      - UNPUBLISH_API_RESULT
+      - START_API
+      - STOP_API
+      - GATEWAY_STARTED
+      - GATEWAY_STOPPED
+      - PUBLISH_DICTIONARY
+      - UNPUBLISH_DICTIONARY
+      - START_DICTIONARY
+      - STOP_DICTIONARY
+      - ALERT_NOTIFICATION
+      - PUBLISH_ORGANIZATION
+      - DEBUG_API
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

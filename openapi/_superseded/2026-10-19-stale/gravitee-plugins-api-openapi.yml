@@ -1,0 +1,115 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io APIM Management Plugins API
+  description: 'The Gravitee API Management (APIM) Management API is the administrative
+
+    control plane for the Gravitee platform.'
+  contact:
+    name: GraviteeSource Team
+    url: https://gravitee.io
+    email: team-apim@graviteesource.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 2.0.0
+servers:
+- url: https://{host}/management/v2
+  description: APIM Management API v2 - default base URL
+  variables:
+    host:
+      default: apim.example.com
+      description: Hostname of the Gravitee APIM Management API
+- url: https://{host}/management/v2/organizations/{orgId}
+  description: APIM Management API v2 - per-organization base URL
+  variables:
+    host:
+      default: apim.example.com
+    orgId:
+      default: DEFAULT
+security:
+- BasicAuth: []
+- CookieAuth: []
+- BearerAuth: []
+tags:
+- name: Plugins
+  description: Discover policies, endpoints, entrypoints, and resources installed in the gateway
+paths:
+  /plugins/endpoints:
+    get:
+      tags:
+      - Plugins
+      operationId: listEndpointPlugins
+      summary: List Endpoint Plugins
+      responses:
+        '200':
+          description: Endpoint plugins
+  /plugins/endpoints/{endpointId}:
+    get:
+      tags:
+      - Plugins
+      operationId: getEndpointPlugin
+      summary: Get an Endpoint Plugin
+      parameters:
+      - in: path
+        name: endpointId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The endpoint plugin
+  /plugins/entrypoints:
+    get:
+      tags:
+      - Plugins
+      operationId: listEntrypointPlugins
+      summary: List Entrypoint Plugins
+      responses:
+        '200':
+          description: Entrypoint plugins
+  /plugins/policies:
+    get:
+      tags:
+      - Plugins
+      operationId: listPolicyPlugins
+      summary: List Policy Plugins
+      responses:
+        '200':
+          description: Policy plugins
+  /plugins/policies/{policyId}:
+    get:
+      tags:
+      - Plugins
+      operationId: getPolicyPlugin
+      summary: Get a Policy Plugin
+      parameters:
+      - in: path
+        name: policyId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The policy plugin
+  /plugins/resources:
+    get:
+      tags:
+      - Plugins
+      operationId: listResourcePlugins
+      summary: List Resource Plugins
+      responses:
+        '200':
+          description: Resource plugins
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: Auth-Graviteeio-APIM
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

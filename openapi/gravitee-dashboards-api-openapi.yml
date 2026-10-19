@@ -1,0 +1,288 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Dashboards API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Dashboards
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/dashboards:
+    get:
+      tags:
+      - Dashboards
+      summary: Retrieve the list of platform dashboards
+      operationId: getDashboards
+      parameters:
+      - name: reference_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - PLATFORM
+          - API
+          - APPLICATION
+          - HOME
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of platform dashboards
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DashboardEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Dashboards
+      summary: Create a platform dashboard
+      description: User must have the MANAGEMENT_DASHBOARD[CREATE] permission to use this service
+      operationId: createDashboard
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewDashboardEntity'
+        required: true
+      responses:
+        '201':
+          description: Dashboard successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/dashboards/{dashboardId}:
+    get:
+      tags:
+      - Dashboards
+      summary: Retrieve a platform dashboard
+      description: User must have the MANAGEMENT_DASHBOARD[READ] permission to use this service
+      operationId: getDashboard
+      parameters:
+      - name: dashboardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Platform dashboard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Dashboards
+      summary: Update a platform dashboard
+      description: User must have the MANAGEMENT_DASHBOARD[UPDATE] permission to use this service
+      operationId: updateDashboard
+      parameters:
+      - name: dashboardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDashboardEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated dashboard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Dashboards
+      summary: Delete a platform dashboard
+      description: User must have the MANAGEMENT_DASHBOARD[DELETE] permission to use this service
+      operationId: deleteDashboard
+      parameters:
+      - name: dashboardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Dashboard successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    NewDashboardEntity:
+      required:
+      - name
+      - reference_id
+      - reference_type
+      type: object
+      properties:
+        definition:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        query_filter:
+          type: string
+        reference_id:
+          maxLength: 64
+          minLength: 0
+          type: string
+        reference_type:
+          $ref: '#/components/schemas/DashboardReferenceType'
+    UpdateDashboardEntity:
+      required:
+      - name
+      - order
+      - reference_id
+      - reference_type
+      type: object
+      properties:
+        definition:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        order:
+          type: integer
+          format: int32
+        query_filter:
+          type: string
+        reference_id:
+          maxLength: 64
+          minLength: 0
+          type: string
+        reference_type:
+          $ref: '#/components/schemas/DashboardReferenceType'
+    DashboardReferenceType:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - PLATFORM
+      - HOME
+    DashboardEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        definition:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        query_filter:
+          type: string
+        reference_id:
+          type: string
+        reference_type:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

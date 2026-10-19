@@ -1,204 +1,376 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management Entrypoints API
-  version: 4.12.0-alpha.3
+  title: Gravitee.io - Management Entrypoints API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
 servers:
-- url: /management
+- url: http://localhost:8083/management
 security:
 - gravitee-auth: []
 tags:
 - name: Entry Points
 paths:
-  /organizations/{organizationId}/entrypoints:
+  /organizations/{orgId}/configuration/entrypoints:
     get:
       tags:
       - Entry Points
-      summary: List entrypoints
-      description: User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned entrypoint is filtered and contains only basic information such as id and name.
-      operationId: listEntrypoints
+      summary: List the platform entrypoints
+      description: User must have the MANAGEMENT_ENTRYPOINT[READ] permission to use this service
+      operationId: getEntrypoints
       parameters:
-      - name: organizationId
+      - name: orgId
         in: path
+        description: The ID of the Organization
         required: true
         schema:
           type: string
+          default: DEFAULT
       responses:
         '200':
-          description: List all the entrypoints
+          description: List of platform entrypoints
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Entrypoint'
-        '500':
-          description: Internal server error
-    post:
-      tags:
-      - Entry Points
-      summary: Create a entrypoint
-      description: User must have the ORGANIZATION_ENTRYPOINT[CREATE] permission on the specified organization
-      operationId: createEntrypoint
-      parameters:
-      - name: organizationId
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NewEntrypoint'
-        required: true
-      responses:
-        '201':
-          description: Entrypoint successfully created
-        '500':
-          description: Internal server error
-  /organizations/{organizationId}/entrypoints/{entrypointId}:
-    get:
-      tags:
-      - Entry Points
-      summary: Get a sharding entrypoint
-      description: User must have the ORGANIZATION_ENTRYPOINT[READ] permission on the specified organization
-      operationId: getEntrypoint
-      parameters:
-      - name: organizationId
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: entrypointId
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Sharding entrypoint
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Entrypoint'
+                  $ref: '#/components/schemas/EntrypointEntity'
         '500':
           description: Internal server error
     put:
       tags:
       - Entry Points
-      summary: Update the sharding entrypoint
-      description: User must have the ORGANIZATION_ENTRYPOINT[UPDATE] permission on the specified organization
+      summary: Update a platform entrypoint
+      description: User must have the MANAGEMENT_ENTRYPOINT[UPDATE] permission to use this service
       operationId: updateEntrypoint
       parameters:
-      - name: organizationId
+      - name: orgId
         in: path
+        description: The ID of the Organization
         required: true
         schema:
           type: string
-      - name: entrypointId
-        in: path
-        required: true
-        schema:
-          type: string
+          default: DEFAULT
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateEntrypoint'
+              $ref: '#/components/schemas/UpdateEntryPointEntity'
         required: true
       responses:
         '200':
-          description: Sharding entrypoint successfully updated
+          description: Updated entrypoint
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Entrypoint'
+                $ref: '#/components/schemas/EntrypointEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Entry Points
+      summary: Create a platform entrypoint
+      description: User must have the MANAGEMENT_ENTRYPOINT[CREATE] permission to use this service
+      operationId: createEntrypoint
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewEntryPointEntity'
+        required: true
+      responses:
+        '201':
+          description: Entrypoint successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrypointEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/entrypoints/{entrypoint}:
+    get:
+      tags:
+      - Entry Points
+      summary: Get a platform entrypoints
+      description: User must have the MANAGEMENT_ENTRYPOINT[READ] permission to use this service
+      operationId: getEntrypoint
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A platform entrypoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrypointEntity'
+        '404':
+          description: Entrypoint not found
         '500':
           description: Internal server error
     delete:
       tags:
       - Entry Points
-      summary: Delete the sharding entrypoint
-      description: User must have the ORGANIZATION_ENTRYPOINT[DELETE] permission on the specified organization
+      summary: Delete a platform entrypoint
+      description: User must have the MANAGEMENT_ENTRYPOINT[DELETE] permission to use this service
       operationId: deleteEntrypoint
       parameters:
-      - name: organizationId
+      - name: entrypoint
         in: path
         required: true
         schema:
           type: string
-      - name: entrypointId
+      - name: orgId
         in: path
+        description: The ID of the Organization
         required: true
         schema:
           type: string
+          default: DEFAULT
       responses:
         '204':
-          description: Sharding entrypoint successfully deleted
+          description: Entrrypoint successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/entrypoints:
+    get:
+      tags:
+      - Entry Points
+      summary: List the platform entrypoints
+      description: User must have the MANAGEMENT_ENTRYPOINT[READ] permission to use this service
+      operationId: getEntrypoints_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of platform entrypoints
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntrypointEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Entry Points
+      summary: Update a platform entrypoint
+      description: User must have the MANAGEMENT_ENTRYPOINT[UPDATE] permission to use this service
+      operationId: updateEntrypoint_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEntryPointEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated entrypoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrypointEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Entry Points
+      summary: Create a platform entrypoint
+      description: User must have the MANAGEMENT_ENTRYPOINT[CREATE] permission to use this service
+      operationId: createEntrypoint_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewEntryPointEntity'
+        required: true
+      responses:
+        '201':
+          description: Entrypoint successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrypointEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/entrypoints/{entrypoint}:
+    get:
+      tags:
+      - Entry Points
+      summary: Get a platform entrypoints
+      description: User must have the MANAGEMENT_ENTRYPOINT[READ] permission to use this service
+      operationId: getEntrypoint_1
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A platform entrypoint
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrypointEntity'
+        '404':
+          description: Entrypoint not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Entry Points
+      summary: Delete a platform entrypoint
+      description: User must have the MANAGEMENT_ENTRYPOINT[DELETE] permission to use this service
+      operationId: deleteEntrypoint_1
+      parameters:
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Entrrypoint successfully deleted
         '500':
           description: Internal server error
 components:
   schemas:
-    NewEntrypoint:
+    NewEntryPointEntity:
       required:
-      - name
       - tags
-      - url
+      - value
       type: object
       properties:
-        description:
-          type: string
-        name:
-          type: string
         tags:
+          maxItems: 2147483647
+          minItems: 1
           type: array
           items:
             type: string
-        url:
+        value:
+          maxLength: 2147483647
+          minLength: 1
           type: string
-    UpdateEntrypoint:
+    UpdateEntryPointEntity:
       required:
-      - name
       - tags
-      - url
+      - value
       type: object
       properties:
-        description:
-          type: string
-        name:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-        url:
-          type: string
-    Entrypoint:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-        defaultEntrypoint:
-          type: boolean
-        description:
-          type: string
         id:
           type: string
-        name:
+        tags:
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          items:
+            type: string
+        value:
+          maxLength: 2147483647
+          minLength: 1
           type: string
-        organizationId:
+    EntrypointEntity:
+      type: object
+      properties:
+        id:
           type: string
         tags:
           type: array
           items:
             type: string
-        updatedAt:
-          type: string
-          format: date-time
-        url:
+        value:
           type: string
   securitySchemes:
     gravitee-auth:
       type: http
-      scheme: Bearer
+      scheme: basic

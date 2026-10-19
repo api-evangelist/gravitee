@@ -1,0 +1,190 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Audits API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Audits
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/audit:
+    get:
+      tags:
+      - API Audits
+      summary: Retrieve audit logs for the API
+      description: User must have the API_AUDIT[READ] permission to use this service
+      operationId: getApiAudits
+      parameters:
+      - name: environment
+        in: query
+        schema:
+          type: string
+      - name: api
+        in: query
+        schema:
+          type: string
+      - name: application
+        in: query
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: filter on the type of audit
+        schema:
+          $ref: '#/components/schemas/AuditType'
+      - name: event
+        in: query
+        description: filter by the name of an event.
+        schema:
+          type: string
+        example: APPLICATION_UPDATED, API_CREATED, METADATA_DELETED, ...
+      - name: from
+        in: query
+        description: Timestamp used to define the start date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        description: Timestamp used to define the end date of the time window to query
+        schema:
+          type: integer
+          format: int64
+      - name: size
+        in: query
+        description: Number of elements per page
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataPageAuditEntity'
+  /organizations/{orgId}/environments/{envId}/apis/{api}/audit/events:
+    get:
+      tags:
+      - API Audits
+      summary: List available audit event type for API
+      description: User must have the API_AUDIT[READ] permission to use this service
+      operationId: getApiAuditEvents
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+components:
+  schemas:
+    AuditEntity:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        event:
+          type: string
+        id:
+          type: string
+        patch:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        referenceId:
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/AuditReferenceType'
+        user:
+          type: string
+    MetadataPageAuditEntity:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEntity'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        pageElements:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+    AuditType:
+      type: string
+      enum:
+      - ORGANIZATION
+      - ENVIRONMENT
+      - APPLICATION
+      - API
+    AuditReferenceType:
+      type: string
+      enum:
+      - ORGANIZATION
+      - ENVIRONMENT
+      - APPLICATION
+      - API
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

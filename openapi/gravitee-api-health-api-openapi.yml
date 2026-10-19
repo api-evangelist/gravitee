@@ -1,0 +1,395 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Health API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Health
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/health:
+    get:
+      tags:
+      - API Health
+      summary: Health-check statistics for API
+      operationId: getApiHealth
+      parameters:
+      - name: type
+        in: query
+        schema:
+          $ref: '#/components/schemas/HealthcheckType'
+      - name: field
+        in: query
+        schema:
+          $ref: '#/components/schemas/HealthcheckField'
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API health
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMetrics'
+  /organizations/{orgId}/environments/{envId}/apis/{api}/health/average:
+    get:
+      tags:
+      - API Health
+      summary: Health-check average statistics for API
+      operationId: getApiHealthAverage
+      parameters:
+      - name: from
+        in: query
+        schema:
+          minimum: 0
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        schema:
+          minimum: 0
+          type: integer
+          format: int64
+      - name: interval
+        in: query
+        schema:
+          maximum: 1000000000
+          minimum: 1000
+          type: integer
+          format: int64
+      - name: type
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/AnalyticsAverageType'
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{orgId}/environments/{envId}/apis/{api}/health/logs:
+    get:
+      tags:
+      - API Health
+      summary: Health-check logs
+      operationId: getApiHealthCheckLogs
+      parameters:
+      - name: from
+        in: query
+        schema:
+          minimum: 0
+          type: integer
+          format: int64
+      - name: to
+        in: query
+        schema:
+          minimum: 0
+          type: integer
+          format: int64
+      - name: query
+        in: query
+        schema:
+          type: string
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: transition
+        in: query
+        schema:
+          type: boolean
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchLogResponse'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/health/logs/{log}:
+    get:
+      tags:
+      - API Health
+      summary: Health-check log
+      operationId: getApiHealthCheckLog
+      parameters:
+      - name: log
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Single health-check log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Log'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    ApiMetrics:
+      type: object
+      properties:
+        buckets:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: number
+        global:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+    Log:
+      type: object
+      properties:
+        available:
+          type: boolean
+        endpoint:
+          type: string
+        gateway:
+          type: string
+        id:
+          type: string
+        message:
+          type: string
+        request:
+          $ref: '#/components/schemas/Request'
+        response:
+          $ref: '#/components/schemas/Response'
+        responseTime:
+          type: integer
+          format: int64
+        state:
+          type: integer
+          format: int32
+        success:
+          type: boolean
+        timestamp:
+          type: integer
+          format: int64
+    SearchLogResponse:
+      type: object
+      properties:
+        logs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Log'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: string
+        total:
+          type: integer
+          format: int64
+    HealthcheckType:
+      type: string
+      enum:
+      - AVAILABILITY
+      - RESPONSE_TIME
+    MediaType:
+      type: object
+      properties:
+        QUALITY_FACTOR_PARAMETER:
+          type: string
+        charset:
+          type: object
+          properties:
+            registered:
+              type: boolean
+        concrete:
+          type: boolean
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+        qualityFactor:
+          type: number
+          format: double
+        subtype:
+          type: string
+        type:
+          type: string
+        wildcardSubtype:
+          type: boolean
+        wildcardType:
+          type: boolean
+    Request:
+      type: object
+      properties:
+        body:
+          type: string
+        headers:
+          type: object
+          properties:
+            accept:
+              type: array
+              items:
+                $ref: '#/components/schemas/MediaType'
+            all:
+              type: object
+              additionalProperties:
+                type: string
+              writeOnly: true
+            empty:
+              type: boolean
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        method:
+          type: string
+          enum:
+          - CONNECT
+          - DELETE
+          - GET
+          - HEAD
+          - OPTIONS
+          - PATCH
+          - POST
+          - PUT
+          - TRACE
+          - OTHER
+        uri:
+          type: string
+    AnalyticsAverageType:
+      type: string
+      enum:
+      - AVAILABILITY
+      - RESPONSE_TIME
+    Response:
+      type: object
+      properties:
+        body:
+          type: string
+        headers:
+          type: object
+          properties:
+            accept:
+              type: array
+              items:
+                $ref: '#/components/schemas/MediaType'
+            all:
+              type: object
+              additionalProperties:
+                type: string
+              writeOnly: true
+            empty:
+              type: boolean
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        status:
+          type: integer
+          format: int32
+    HealthcheckField:
+      type: string
+      enum:
+      - ENDPOINT
+      - GATEWAY
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

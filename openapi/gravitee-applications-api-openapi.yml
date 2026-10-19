@@ -1,135 +1,949 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io APIM Management Applications API
-  description: 'The Gravitee API Management (APIM) Management API is the administrative
-
-    control plane for the Gravitee platform.'
-  contact:
-    name: GraviteeSource Team
-    url: https://gravitee.io
-    email: team-apim@graviteesource.com
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 2.0.0
+  title: Gravitee.io - Management Applications API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
 servers:
-- url: https://{host}/management/v2
-  description: APIM Management API v2 - default base URL
-  variables:
-    host:
-      default: apim.example.com
-      description: Hostname of the Gravitee APIM Management API
-- url: https://{host}/management/v2/organizations/{orgId}
-  description: APIM Management API v2 - per-organization base URL
-  variables:
-    host:
-      default: apim.example.com
-    orgId:
-      default: DEFAULT
+- url: http://localhost:8083/management
 security:
-- BasicAuth: []
-- CookieAuth: []
-- BearerAuth: []
+- gravitee-auth: []
 tags:
 - name: Applications
-  description: Manage consumer applications
 paths:
-  /environments/{envId}/applications:
+  /organizations/{orgId}/environments/{envId}/applications:
     get:
       tags:
       - Applications
-      operationId: listApplications
-      summary: List Applications
+      summary: List all the applications accessible to authenticated user
+      description: User must have MANAGEMENT_APPLICATION[READ] and PORTAL_APPLICATION[READ] permission to list applications. User must have ORGANIZATION:ADMIN role to list all ARCHIVED applications.
+      operationId: getApplications
       parameters:
-      - $ref: '#/components/parameters/EnvId'
-      responses:
-        '200':
-          description: Applications page
-    post:
-      tags:
-      - Applications
-      operationId: createApplication
-      summary: Create an Application
-      parameters:
-      - $ref: '#/components/parameters/EnvId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Application'
-      responses:
-        '201':
-          description: Application created
-  /environments/{envId}/applications/{applicationId}:
-    get:
-      tags:
-      - Applications
-      operationId: getApplication
-      summary: Get an Application by Identifier
-      parameters:
-      - $ref: '#/components/parameters/EnvId'
-      - in: path
-        name: applicationId
+      - name: group
+        in: query
+        schema:
+          type: string
+      - name: query
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+          default: ACTIVE
+      - name: ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: exclude
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - PICTURE
+            - OWNER
+      - name: envId
+        in: path
+        description: The ID of the environment
         required: true
         schema:
           type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '200':
-          description: The application
+          description: User's applications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationEntity'
+        '500':
+          description: Internal server error
+      deprecated: true
+    post:
+      tags:
+      - Applications
+      summary: Create an application
+      description: User must have MANAGEMENT_APPLICATION[CREATE] permission to create an application.
+      operationId: createApplication
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApplicationEntity'
+        required: true
+      responses:
+        '201':
+          description: Application successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/_paged:
+    get:
+      tags:
+      - Applications
+      summary: List all the applications accessible to authenticated user
+      description: User must have MANAGEMENT_APPLICATION[READ] and PORTAL_APPLICATION[READ] permission to list applications. User must have ORGANIZATION:ADMIN role to list all ARCHIVED applications.
+      operationId: getApplicationsPaged
+      parameters:
+      - name: group
+        in: query
+        schema:
+          type: string
+      - name: query
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+          default: ACTIVE
+      - name: ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: order
+        in: query
+        schema:
+          type: string
+          description: By default, sort is ASC. If *field* starts with '-', the order sort is DESC. Currently, only **name** and **updated_at** are supported
+          default: name
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: exclude
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - PICTURE
+            - OWNER
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's applications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationListItemPagedResult'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/hooks:
+    get:
+      tags:
+      - Applications
+      summary: Get the list of available hooks
+      operationId: getApplicationHooks
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of hooks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hook'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}:
+    get:
+      tags:
+      - Applications
+      summary: Get an application
+      description: User must have the READ permission to use this service
+      operationId: getApplication
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Applications
+      summary: Update an application
+      description: User must have APPLICATION_DEFINITION[UPDATE] permission to update an application.
+      operationId: updateApplication
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Applications
+      summary: Delete an application
+      description: User must have the DELETE permission to use this service
+      operationId: deleteApplication
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Application successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/_restore:
+    post:
+      tags:
+      - Applications
+      summary: Restore the application
+      description: User must have ORGANIZATION:ADMIN role to restore an application.
+      operationId: restoreApplication
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Restored application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/background:
+    get:
+      tags:
+      - Applications
+      summary: Get the application's background
+      description: User must have the READ permission to use this service
+      operationId: getApplicationBackground
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Application's background
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/configuration:
+    get:
+      tags:
+      - Applications
+      summary: Get application type definition of an application
+      description: User must have the READ permission to use this service
+      operationId: getApplicationType
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: ApplicationType
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationTypeEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/notifiers:
+    get:
+      tags:
+      - Applications
+      summary: List available notifiers for application
+      description: User must have the APPLICATION_NOTIFICATION[READ] permission to use this service
+      operationId: getApplicationNotifiers
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of notifiers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotifierEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/picture:
+    get:
+      tags:
+      - Applications
+      summary: Get the application's picture
+      description: User must have the READ permission to use this service
+      operationId: getApplicationPicture
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Application's picture
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/renew_secret:
+    post:
+      tags:
+      - Applications
+      summary: Renew the client secret for an OAuth2 application
+      description: User must have APPLICATION_DEFINITION[UPDATE] permission to update an application.
+      operationId: renewApplicationClientSecret
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Updated application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationEntity'
+        '500':
+          description: Internal server error
 components:
-  parameters:
-    EnvId:
-      in: path
-      name: envId
-      required: true
-      schema:
-        type: string
-      description: The environment identifier
   schemas:
-    Application:
+    OAuthClientSettings:
       type: object
       properties:
+        application_type:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        client_uri:
+          type: string
+        grant_types:
+          type: array
+          items:
+            type: string
+        logo_uri:
+          type: string
+        redirect_uris:
+          type: array
+          items:
+            type: string
+        renew_client_secret_supported:
+          type: boolean
+        response_types:
+          type: array
+          items:
+            type: string
+    SimpleApplicationSettings:
+      type: object
+      properties:
+        client_id:
+          type: string
+        type:
+          type: string
+    ApplicationTypeEntity:
+      type: object
+      properties:
+        allowed_grant_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationGrantTypeEntity'
+        default_grant_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationGrantTypeEntity'
+        description:
+          type: string
+        id:
+          type: string
+        mandatory_grant_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationGrantTypeEntity'
+        name:
+          type: string
+        requires_redirect_uris:
+          type: boolean
+    Hook:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        hidden:
+          type: boolean
+        label:
+          type: string
+        scope:
+          type: string
+          enum:
+          - API
+          - APPLICATION
+          - PORTAL
+          - TEMPLATES_FOR_ACTION
+          - TEMPLATES_FOR_ALERT
+        template:
+          type: string
+    ApiKeyMode:
+      type: string
+      enum:
+      - SHARED
+      - EXCLUSIVE
+      - UNSPECIFIED
+    PrimaryOwnerEntity:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user or group display name.
+          example: John Doe
+        email:
+          type: string
+          description: The user or group email.
+          example: contact@gravitee.io
+        id:
+          type: string
+          description: The user or group id.
+          example: 005197cc-cc84-86a6-a75a-88f9772c67db
+        type:
+          type: string
+          description: The primary owner type
+          example: USER
+      description: The user with role PRIMARY_OWNER on this API.
+    NotifierEntity:
+      type: object
+      properties:
+        description:
+          type: string
         id:
           type: string
         name:
           type: string
+        plugin:
+          $ref: '#/components/schemas/PluginEntity'
+        version:
+          type: string
+    UpdateApplicationEntity:
+      required:
+      - description
+      - name
+      - settings
+      type: object
+      properties:
+        api_key_mode:
+          $ref: '#/components/schemas/ApiKeyMode'
+        background:
+          type: string
+        clientId:
+          type: string
         description:
+          type: string
+          description: Application's description. A short description of your App.
+          example: I can use a hundred characters to describe this App.
+        disable_membership_notifications:
+          type: boolean
+        domain:
+          type: string
+          description: Domain used by the application, if relevant
+          example: https://my-app.com
+        groups:
+          uniqueItems: true
+          type: array
+          description: Application groups. Used to add teams to your application.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: Application groups. Used to add teams to your application.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        name:
+          type: string
+          description: Application's name. Duplicate names can exists.
+          example: My App
+        picture:
+          type: string
+        picture_url:
+          type: string
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        type:
+          type: string
+          description: a string to describe the type of your app.
+          example: iOS
+    PluginEntity:
+      type: object
+      properties:
+        dependencies:
+          type: array
+          items:
+            type: string
+            format: url
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        plugin:
           type: string
         type:
           type: string
-          enum:
-          - SIMPLE
-          - BROWSER
-          - WEB
-          - NATIVE
-          - BACKEND_TO_BACKEND
+        version:
+          type: string
+    ApplicationEntity:
+      type: object
+      properties:
+        api_key_mode:
+          $ref: '#/components/schemas/ApiKeyMode'
+        background:
+          type: string
+        created_at:
+          type: string
+          description: The date (as a timestamp) when the application was created.
+          format: date-time
+        description:
+          type: string
+          description: Application's description. A short description of your App.
+          example: I can use a hundred characters to describe this App.
+        disable_membership_notifications:
+          type: boolean
+        domain:
+          type: string
+          description: Domain used by the application, if relevant
+          example: https://my-app.com
+        groups:
+          uniqueItems: true
+          type: array
+          description: Application groups. Used to add teams to your application.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: Application groups. Used to add teams to your application.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        id:
+          type: string
+          description: Application's uuid.
+          example: 00f8c9e7-78fc-4907-b8c9-e778fc790750
+        name:
+          type: string
+          description: Application's name. Duplicate names can exists.
+          example: My App
+        owner:
+          $ref: '#/components/schemas/PrimaryOwnerEntity'
+        picture:
+          type: string
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
         status:
           type: string
-          enum:
-          - ACTIVE
-          - ARCHIVED
+          description: if the app is ACTIVE or ARCHIVED.
+          example: ACTIVE
+        type:
+          type: string
+          description: a string to describe the type of your app.
+          example: iOS
+        updated_at:
+          type: string
+          description: The last date (as a timestamp) when the application was updated.
+          format: date-time
+    Page:
+      type: object
+      properties:
+        current:
+          type: integer
+          format: int32
+        per_page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        total_elements:
+          type: integer
+          format: int32
+        total_pages:
+          type: integer
+          format: int32
+    NewApplicationEntity:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        api_key_mode:
+          $ref: '#/components/schemas/ApiKeyMode'
+        background:
+          type: string
+        clientId:
+          type: string
+        description:
+          type: string
+          description: Application's description. A short description of your App.
+          example: I can use a hundred characters to describe this App.
+        domain:
+          type: string
+          description: Domain used by the application, if relevant
+          example: https://my-app.com
+        groups:
+          uniqueItems: true
+          type: array
+          description: Application groups. Used to add teams to your application.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: Application groups. Used to add teams to your application.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        name:
+          type: string
+          description: Application's name. Duplicate names can exists.
+          example: My App
+        picture:
+          type: string
         settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        type:
+          type: string
+          description: a string to describe the type of your app.
+          example: iOS
+    ApplicationListItemPagedResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationListItem'
+        metadata:
           type: object
-          properties:
-            app:
+          additionalProperties:
+            type: object
+            additionalProperties:
               type: object
-              properties:
-                client_id:
-                  type: string
-                type:
-                  type: string
-            oauth:
-              type: object
+        page:
+          $ref: '#/components/schemas/Page'
+    ApplicationListItem:
+      type: object
+      properties:
+        api_key_mode:
+          $ref: '#/components/schemas/ApiKeyMode'
+        background:
+          type: string
+        background_url:
+          type: string
+        created_at:
+          type: string
+          description: The date (as a timestamp) when the application was created.
+          format: date-time
+        description:
+          type: string
+          description: Application's description. A short description of your App.
+          example: I can use a hundred characters to describe this App.
+        disable_membership_notifications:
+          type: boolean
+        domain:
+          type: string
+          description: Domain used by the application, if relevant
+          example: https://my-app.com
+        groups:
+          uniqueItems: true
+          type: array
+          description: Application groups. Used to add teams to your application.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: Application groups. Used to add teams to your application.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        id:
+          type: string
+          description: Application's uuid.
+          example: 00f8c9e7-78fc-4907-b8c9-e778fc790750
+        name:
+          type: string
+          description: Application's name. Duplicate names can exists.
+          example: My App
+        owner:
+          $ref: '#/components/schemas/PrimaryOwnerEntity'
+        picture:
+          type: string
+        picture_url:
+          type: string
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        status:
+          type: string
+          description: if the app is ACTIVE or ARCHIVED.
+          example: ACTIVE
+        type:
+          type: string
+          description: a string to describe the type of your app.
+          example: iOS
+        updated_at:
+          type: string
+          description: The last date (as a timestamp) when the application was updated.
+          format: date-time
+    ApplicationSettings:
+      type: object
+      properties:
+        app:
+          $ref: '#/components/schemas/SimpleApplicationSettings'
+        oauth:
+          $ref: '#/components/schemas/OAuthClientSettings'
+    ApplicationGrantTypeEntity:
+      type: object
+      properties:
+        name:
+          type: string
+        response_types:
+          type: array
+          items:
+            type: string
+        type:
+          type: string
   securitySchemes:
-    BasicAuth:
+    gravitee-auth:
       type: http
       scheme: basic
-    CookieAuth:
-      type: apiKey
-      in: cookie
-      name: Auth-Graviteeio-APIM
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT

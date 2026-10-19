@@ -1,0 +1,51 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Organization Groups API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Organization Groups
+paths:
+  /organizations/{orgId}/groups:
+    get:
+      tags:
+      - Organization Groups
+      summary: Find groups
+      description: Find all groups for current organizationOnly users with ORGANIZATION_TAG permissions could see API groups.
+      operationId: getGroups_1
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupSimpleEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    GroupSimpleEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

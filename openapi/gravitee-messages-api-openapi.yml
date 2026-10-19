@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Messages API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Messages
+paths:
+  /organizations/{orgId}/environments/{envId}/messages:
+    post:
+      tags:
+      - Messages
+      summary: Send a message to users depending on their profile
+      description: User must have the MANAGEMENT_MESSAGE[CREATE] permission to use this service
+      operationId: createMessage
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageEntity'
+      responses:
+        '200':
+          description: Message successfully sent
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    MessageEntity:
+      type: object
+      properties:
+        channel:
+          $ref: '#/components/schemas/MessageChannel'
+        params:
+          type: object
+          additionalProperties:
+            type: string
+        recipient:
+          $ref: '#/components/schemas/MessageRecipientEntity'
+        text:
+          type: string
+        title:
+          type: string
+        useSystemProxy:
+          type: boolean
+    MessageChannel:
+      type: string
+      enum:
+      - MAIL
+      - PORTAL
+      - HTTP
+    MessageRecipientEntity:
+      type: object
+      properties:
+        role_scope:
+          type: string
+        role_value:
+          type: array
+          items:
+            type: string
+        url:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

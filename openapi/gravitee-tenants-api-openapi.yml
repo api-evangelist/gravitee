@@ -1,0 +1,327 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Tenants API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Tenants
+paths:
+  /organizations/{orgId}/configuration/tenants:
+    get:
+      tags:
+      - Tenants
+      summary: List tenants
+      operationId: getTenants
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Tenants
+      summary: Update a tenant
+      description: User must have the MANAGEMENT_TENANT[UPDATE] permission to use this service
+      operationId: updateTenants
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateTenantEntity'
+        required: true
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Tenants
+      summary: Create a tenant
+      description: User must have the MANAGEMENT_TENANT[CREATE] permission to use this service
+      operationId: createTenants
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/NewTenantEntity'
+        required: true
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/tenants/{tenant}:
+    delete:
+      tags:
+      - Tenants
+      summary: Delete a tenant
+      description: User must have the MANAGEMENT_TENANT[DELETE] permission to use this service
+      operationId: deleteTenant
+      parameters:
+      - name: tenant
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/tenants:
+    get:
+      tags:
+      - Tenants
+      summary: List tenants
+      operationId: getTenants_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Tenants
+      summary: Update a tenant
+      description: User must have the MANAGEMENT_TENANT[UPDATE] permission to use this service
+      operationId: updateTenants_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateTenantEntity'
+        required: true
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Tenants
+      summary: Create a tenant
+      description: User must have the MANAGEMENT_TENANT[CREATE] permission to use this service
+      operationId: createTenants_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/NewTenantEntity'
+        required: true
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/tenants/{tenant}:
+    delete:
+      tags:
+      - Tenants
+      summary: Delete a tenant
+      description: User must have the MANAGEMENT_TENANT[DELETE] permission to use this service
+      operationId: deleteTenant_1
+      parameters:
+      - name: tenant
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of tenants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TenantEntity'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateTenantEntity:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+    TenantEntity:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+    NewTenantEntity:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

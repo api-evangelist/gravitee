@@ -1,0 +1,964 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Keys API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Keys
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/{subscription}/apikeys:
+    get:
+      tags:
+      - API Keys
+      summary: List all API Keys for a subscription
+      description: User must have the MANAGE_API_KEYS permission to use this service
+      operationId: getApiKeysForApiSubscription
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of API Keys for a subscription
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKeyEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/{subscription}/apikeys/_renew:
+    post:
+      tags:
+      - API Keys
+      summary: Renew an API key
+      description: User must have the MANAGE_API_KEYS permission to use this service
+      operationId: renewSubscriptionApiKeysForApiSubscription
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: customApiKey
+        in: query
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: A new API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyEntity'
+        '400':
+          description: Bad custom API Key format or custom API Key definition disabled
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/{subscription}/apikeys/{apikey}:
+    put:
+      tags:
+      - API Keys
+      summary: Update API Key
+      description: User must have the API_SUBSCRIPTION:UPDATE permission to use this service
+      operationId: updateApiKeyForApiSubscription
+      parameters:
+      - name: apikey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyEntity'
+        required: true
+      responses:
+        '200':
+          description: API Key successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyEntity'
+        '400':
+          description: Bad API Key key format
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - API Keys
+      summary: Revoke API key
+      description: User must have the API_SUBSCRIPTION:DELETE permission to use this service
+      operationId: revokeApiKeyForApiSubscription
+      parameters:
+      - name: apikey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/{subscription}/apikeys/{apikey}/_reactivate:
+    post:
+      tags:
+      - API Keys
+      summary: Reactivate an API key
+      description: User must have the API_SUBSCRIPTION permission to use this service
+      operationId: reactivateApiKeyForApiSubscription
+      parameters:
+      - name: apikey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: API key successfully reactivated
+        '400':
+          description: API Key does not correspond to the subscription
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/apikeys:
+    get:
+      tags:
+      - API Keys
+      summary: List all API Keys for an application
+      description: User must have the READ permission to use this service
+      operationId: getApiKeysForApplication
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of API Keys for application
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKeyEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/apikeys/_renew:
+    post:
+      tags:
+      - API Keys
+      summary: Renew an API key
+      description: User must have the MANAGE_API_KEYS permission to use this service
+      operationId: renewApiKeyForApplicationSubscription
+      parameters:
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: A new API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/apikeys/{apikey}:
+    delete:
+      tags:
+      - API Keys
+      summary: Revoke an API key
+      description: User must have the MANAGE_API_KEYS permission to use this service
+      operationId: revokeApiKeyForApplication
+      parameters:
+      - name: apikey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: API key successfully revoked
+        '400':
+          description: API Key does not correspond to the application
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/subscriptions/{subscription}/apikeys:
+    get:
+      tags:
+      - API Keys
+      summary: List all API Keys for a subscription
+      description: User must have the READ permission to use this service
+      operationId: getApiKeysForApplicationSubscription
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of API Keys for a subscription
+          content:
+            application/json:
+              schema:
+                uniqueItems: true
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKeyEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/subscriptions/{subscription}/apikeys/_renew:
+    post:
+      tags:
+      - API Keys
+      summary: Renew an API key
+      description: User must have the MANAGE_API_KEYS permission to use this service
+      operationId: renewApiKeyForApplicationSubscription_1
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: A new API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/applications/{application}/subscriptions/{subscription}/apikeys/{apikey}:
+    delete:
+      tags:
+      - API Keys
+      summary: Revoke an API key
+      description: User must have the MANAGE_API_KEYS permission to use this service
+      operationId: revokeApiKeyForApplicationSubscription
+      parameters:
+      - name: apikey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: API key successfully revoked
+        '400':
+          description: API Key does not correspond to the subscription
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/{subscription}/apikeys:
+    get:
+      tags:
+      - API Keys
+      summary: List all API Keys for a subscription
+      description: User must have the MANAGE_API_KEYS permission to use this service
+      operationId: getApiKeysForApiSubscription_1
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of API Keys for a subscription
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiKeyEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/{subscription}/apikeys/_renew:
+    post:
+      tags:
+      - API Keys
+      summary: Renew an API key
+      description: User must have the MANAGE_API_KEYS permission to use this service
+      operationId: renewSubscriptionApiKeysForApiSubscription_1
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: customApiKey
+        in: query
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: A new API Key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyEntity'
+        '400':
+          description: Bad custom API Key format or custom API Key definition disabled
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/{subscription}/apikeys/{apikey}:
+    put:
+      tags:
+      - API Keys
+      summary: Update API Key
+      description: User must have the API_SUBSCRIPTION:UPDATE permission to use this service
+      operationId: updateApiKeyForApiSubscription_1
+      parameters:
+      - name: apikey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKeyEntity'
+        required: true
+      responses:
+        '200':
+          description: API Key successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyEntity'
+        '400':
+          description: Bad API Key key format
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - API Keys
+      summary: Revoke API key
+      description: User must have the API_SUBSCRIPTION:DELETE permission to use this service
+      operationId: revokeApiKeyForApiSubscription_1
+      parameters:
+      - name: apikey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/{subscription}/apikeys/{apikey}/_reactivate:
+    post:
+      tags:
+      - API Keys
+      summary: Reactivate an API key
+      description: User must have the API_SUBSCRIPTION permission to use this service
+      operationId: reactivateApiKeyForApiSubscription_1
+      parameters:
+      - name: apikey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: API key successfully reactivated
+        '400':
+          description: API Key does not correspond to the subscription
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    OAuthClientSettings:
+      type: object
+      properties:
+        application_type:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        client_uri:
+          type: string
+        grant_types:
+          type: array
+          items:
+            type: string
+        logo_uri:
+          type: string
+        redirect_uris:
+          type: array
+          items:
+            type: string
+        renew_client_secret_supported:
+          type: boolean
+        response_types:
+          type: array
+          items:
+            type: string
+    SimpleApplicationSettings:
+      type: object
+      properties:
+        client_id:
+          type: string
+        type:
+          type: string
+    SubscriptionEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        application:
+          type: string
+        client_id:
+          type: string
+        closed_at:
+          type: string
+          format: date-time
+        configuration:
+          type: string
+        consumerPausedAt:
+          type: string
+          format: date-time
+        consumerStatus:
+          $ref: '#/components/schemas/SubscriptionConsumerStatus'
+        created_at:
+          type: string
+          format: date-time
+        daysToExpirationOnLastNotification:
+          type: integer
+          format: int32
+        ending_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        keys:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        paused_at:
+          type: string
+          format: date-time
+        plan:
+          type: string
+        processed_at:
+          type: string
+          format: date-time
+        processed_by:
+          type: string
+        reason:
+          type: string
+        request:
+          type: string
+        security:
+          type: string
+        starting_at:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/SubscriptionStatus'
+        subscribed_by:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    ApiKeyMode:
+      type: string
+      enum:
+      - SHARED
+      - EXCLUSIVE
+      - UNSPECIFIED
+    ApiKeyEntity:
+      type: object
+      properties:
+        application:
+          $ref: '#/components/schemas/ApplicationEntity'
+        created_at:
+          type: string
+          format: date-time
+        daysToExpirationOnLastNotification:
+          type: integer
+          format: int32
+        expire_at:
+          type: string
+          format: date-time
+        expired:
+          type: boolean
+        id:
+          type: string
+        key:
+          type: string
+        paused:
+          type: boolean
+        revoked:
+          type: boolean
+        revoked_at:
+          type: string
+          format: date-time
+        subscriptions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEntity'
+        updated_at:
+          type: string
+          format: date-time
+    PrimaryOwnerEntity:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user or group display name.
+          example: John Doe
+        email:
+          type: string
+          description: The user or group email.
+          example: contact@gravitee.io
+        id:
+          type: string
+          description: The user or group id.
+          example: 005197cc-cc84-86a6-a75a-88f9772c67db
+        type:
+          type: string
+          description: The primary owner type
+          example: USER
+      description: The user with role PRIMARY_OWNER on this API.
+    SubscriptionConsumerStatus:
+      type: string
+      enum:
+      - STARTED
+      - STOPPED
+    ApplicationEntity:
+      type: object
+      properties:
+        api_key_mode:
+          $ref: '#/components/schemas/ApiKeyMode'
+        background:
+          type: string
+        created_at:
+          type: string
+          description: The date (as a timestamp) when the application was created.
+          format: date-time
+        description:
+          type: string
+          description: Application's description. A short description of your App.
+          example: I can use a hundred characters to describe this App.
+        disable_membership_notifications:
+          type: boolean
+        domain:
+          type: string
+          description: Domain used by the application, if relevant
+          example: https://my-app.com
+        groups:
+          uniqueItems: true
+          type: array
+          description: Application groups. Used to add teams to your application.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: Application groups. Used to add teams to your application.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        id:
+          type: string
+          description: Application's uuid.
+          example: 00f8c9e7-78fc-4907-b8c9-e778fc790750
+        name:
+          type: string
+          description: Application's name. Duplicate names can exists.
+          example: My App
+        owner:
+          $ref: '#/components/schemas/PrimaryOwnerEntity'
+        picture:
+          type: string
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        status:
+          type: string
+          description: if the app is ACTIVE or ARCHIVED.
+          example: ACTIVE
+        type:
+          type: string
+          description: a string to describe the type of your app.
+          example: iOS
+        updated_at:
+          type: string
+          description: The last date (as a timestamp) when the application was updated.
+          format: date-time
+    SubscriptionStatus:
+      type: string
+      enum:
+      - PENDING
+      - REJECTED
+      - ACCEPTED
+      - CLOSED
+      - PAUSED
+      - RESUMED
+    ApplicationSettings:
+      type: object
+      properties:
+        app:
+          $ref: '#/components/schemas/SimpleApplicationSettings'
+        oauth:
+          $ref: '#/components/schemas/OAuthClientSettings'
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

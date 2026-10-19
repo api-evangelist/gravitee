@@ -1,0 +1,174 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Quality API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Quality
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/quality-rules:
+    get:
+      tags:
+      - API Quality
+      summary: List quality rules for an API
+      description: User must have the API_QUALITY_RULE[READ] permission to use this service
+      operationId: getApiQualityRules
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiQualityRuleEntity'
+    post:
+      tags:
+      - API Quality
+      summary: Create a new quality rules for an API
+      description: User must have the API_QUALITY_RULE[CREATE] permission to use this service
+      operationId: createApiQualityRule
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiQualityRuleEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiQualityRuleEntity'
+  /organizations/{orgId}/environments/{envId}/apis/{api}/quality-rules/{qualityRule}:
+    put:
+      tags:
+      - API Quality
+      summary: Update an existing quality rules for an API
+      description: User must have the API_QUALITY_RULE[UPDATE] permission to use this service
+      operationId: updateApiQualityRule
+      parameters:
+      - name: qualityRule
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiQualityRuleEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiQualityRuleEntity'
+components:
+  schemas:
+    UpdateApiQualityRuleEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        checked:
+          type: boolean
+        quality_rule:
+          type: string
+    NewApiQualityRuleEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        checked:
+          type: boolean
+        quality_rule:
+          type: string
+    ApiQualityRuleEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        checked:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        quality_rule:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

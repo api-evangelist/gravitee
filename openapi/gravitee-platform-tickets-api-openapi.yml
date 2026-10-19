@@ -1,0 +1,326 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Platform Tickets API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Platform Tickets
+paths:
+  /organizations/{orgId}/environments/{envId}/platform/tickets:
+    get:
+      tags:
+      - Platform Tickets
+      summary: Search for platform tickets written by current user
+      operationId: getTickets
+      parameters:
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: apiId
+        in: query
+        description: The api identifier used to filter tickets
+        schema:
+          type: string
+      - name: applicationId
+        in: query
+        description: The application identifier used to filter tickets
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: 'The field used to sort results. Can be asc or desc (prefix with minus ''-'') '
+        schema:
+          type: string
+        example: -subject
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List platform tickets written by current user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketEntityPage'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Platform Tickets
+      summary: Create a platform ticket
+      operationId: createPlatformTicket
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTicketEntity'
+        required: true
+      responses:
+        '201':
+          description: Ticket succesfully created
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/platform/tickets/{ticket}:
+    get:
+      tags:
+      - Platform Tickets
+      summary: Get a specific ticket
+      operationId: getTicket
+      parameters:
+      - name: ticket
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Get a platform ticket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketEntity'
+        '404':
+          description: Ticket not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/tickets:
+    get:
+      tags:
+      - Platform Tickets
+      summary: Search for platform tickets written by current user
+      operationId: getTickets_1
+      parameters:
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: apiId
+        in: query
+        description: The api identifier used to filter tickets
+        schema:
+          type: string
+      - name: applicationId
+        in: query
+        description: The application identifier used to filter tickets
+        schema:
+          type: string
+      - name: order
+        in: query
+        description: 'The field used to sort results. Can be asc or desc (prefix with minus ''-'') '
+        schema:
+          type: string
+        example: -subject
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List platform tickets written by current user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketEntityPage'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Platform Tickets
+      summary: Create a platform ticket
+      operationId: createPlatformTicket_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTicketEntity'
+        required: true
+      responses:
+        '201':
+          description: Ticket succesfully created
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/tickets/{ticket}:
+    get:
+      tags:
+      - Platform Tickets
+      summary: Get a specific ticket
+      operationId: getTicket_1
+      parameters:
+      - name: ticket
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Get a platform ticket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketEntity'
+        '404':
+          description: Ticket not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    TicketEntityPage:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TicketEntity'
+        pageElements:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+    TicketEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        application:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        from_user:
+          type: string
+        id:
+          type: string
+        subject:
+          type: string
+    NewTicketEntity:
+      required:
+      - content
+      - subject
+      type: object
+      properties:
+        api:
+          type: string
+        application:
+          type: string
+        content:
+          type: string
+        copyToSender:
+          type: boolean
+        subject:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

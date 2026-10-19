@@ -1,115 +1,1053 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io APIM Management Plugins API
-  description: 'The Gravitee API Management (APIM) Management API is the administrative
-
-    control plane for the Gravitee platform.'
-  contact:
-    name: GraviteeSource Team
-    url: https://gravitee.io
-    email: team-apim@graviteesource.com
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 2.0.0
+  title: Gravitee.io - Management Plugins API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
 servers:
-- url: https://{host}/management/v2
-  description: APIM Management API v2 - default base URL
-  variables:
-    host:
-      default: apim.example.com
-      description: Hostname of the Gravitee APIM Management API
-- url: https://{host}/management/v2/organizations/{orgId}
-  description: APIM Management API v2 - per-organization base URL
-  variables:
-    host:
-      default: apim.example.com
-    orgId:
-      default: DEFAULT
+- url: http://localhost:8083/management
 security:
-- BasicAuth: []
-- CookieAuth: []
-- BearerAuth: []
+- gravitee-auth: []
 tags:
 - name: Plugins
-  description: Discover policies, endpoints, entrypoints, and resources installed in the gateway
 paths:
-  /plugins/endpoints:
+  /organizations/{orgId}/environments/{envId}/connectors:
     get:
       tags:
       - Plugins
-      operationId: listEndpointPlugins
-      summary: List Endpoint Plugins
-      responses:
-        '200':
-          description: Endpoint plugins
-  /plugins/endpoints/{endpointId}:
-    get:
-      tags:
-      - Plugins
-      operationId: getEndpointPlugin
-      summary: Get an Endpoint Plugin
+      summary: List connector plugins
+      description: User must have the ENVIRONMENT_API[READ] permission to use this service
+      operationId: getConnectors
       parameters:
-      - in: path
-        name: endpointId
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
         required: true
         schema:
           type: string
-      responses:
-        '200':
-          description: The endpoint plugin
-  /plugins/entrypoints:
-    get:
-      tags:
-      - Plugins
-      operationId: listEntrypointPlugins
-      summary: List Entrypoint Plugins
-      responses:
-        '200':
-          description: Entrypoint plugins
-  /plugins/policies:
-    get:
-      tags:
-      - Plugins
-      operationId: listPolicyPlugins
-      summary: List Policy Plugins
-      responses:
-        '200':
-          description: Policy plugins
-  /plugins/policies/{policyId}:
-    get:
-      tags:
-      - Plugins
-      operationId: getPolicyPlugin
-      summary: Get a Policy Plugin
-      parameters:
-      - in: path
-        name: policyId
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
         required: true
         schema:
           type: string
+          default: DEFAULT
       responses:
         '200':
-          description: The policy plugin
-  /plugins/resources:
+          description: List of connectors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectorListItem'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/connectors/{connector}:
     get:
       tags:
       - Plugins
-      operationId: listResourcePlugins
-      summary: List Resource Plugins
+      summary: Get a connector
+      description: User must have the ENVIRONMENT_API[READ] permission to use this service
+      operationId: getConnector
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '200':
-          description: Resource plugins
+          description: Connector plugin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformPluginEntity'
+        '404':
+          description: Connector not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/connectors/{connector}/documentation:
+    get:
+      tags:
+      - Plugins
+      summary: Get a connector's documentation
+      description: User must have the ENVIRONMENT_API[READ] permission to use this service
+      operationId: getConnectorDoc
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Connector documentation
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Connector not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/connectors/{connector}/schema:
+    get:
+      tags:
+      - Plugins
+      summary: Get a connector's schema
+      description: User must have the ENVIRONMENT_API[READ] permission to use this service
+      operationId: getConnectorSchema
+      parameters:
+      - name: connector
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Connector schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Connector not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/fetchers:
+    get:
+      tags:
+      - Plugins
+      summary: List of fetcher plugins
+      operationId: getFetchers
+      parameters:
+      - name: expand
+        in: query
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: import
+        in: query
+        schema:
+          type: boolean
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of fetchers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FetcherListItem'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/fetchers/{fetcher}:
+    get:
+      tags:
+      - Plugins
+      summary: Get a fetcher plugin
+      operationId: getFetcher
+      parameters:
+      - name: fetcher
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Fetcher
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetcherEntity'
+        '404':
+          description: Fetcher not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/fetchers/{fetcher}/schema:
+    get:
+      tags:
+      - Plugins
+      summary: Get a fetcher plugin's schema
+      operationId: getFetcherSchema
+      parameters:
+      - name: fetcher
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Fetcher's schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Fetcher not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/notifiers:
+    get:
+      tags:
+      - Plugins
+      summary: List notifier plugins
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getNotifiers
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of notifiers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotifierListItem'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/notifiers/{notifier}:
+    get:
+      tags:
+      - Plugins
+      summary: Get a notifier
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getNotifier
+      parameters:
+      - name: notifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Notifier plugin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotifierEntity'
+        '404':
+          description: Notifier not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/notifiers/{notifier}/schema:
+    get:
+      tags:
+      - Plugins
+      summary: Get a notifier's schema
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getNotifierSchema
+      parameters:
+      - name: notifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Notifier's schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Notifier not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/policies:
+    get:
+      tags:
+      - Plugins
+      summary: List policies
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getPolicies
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: withResource
+        in: query
+        schema:
+          type: boolean
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicyListItem'
+  /organizations/{orgId}/environments/{envId}/policies/swagger:
+    get:
+      tags:
+      - Plugins
+      summary: List policies which are handling Swagger / OAI definition
+      description: These policies are used when importing an OAI to create an API
+      operationId: getSwaggerPolicy
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicyListItem'
+  /organizations/{orgId}/environments/{envId}/policies/{policy}:
+    get:
+      tags:
+      - Plugins
+      summary: Get a policy
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getPolicy
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyEntity'
+  /organizations/{orgId}/environments/{envId}/policies/{policy}/documentation:
+    get:
+      tags:
+      - Plugins
+      summary: Get a policy's documentation
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getPolicyDoc
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /organizations/{orgId}/environments/{envId}/policies/{policy}/icon:
+    get:
+      tags:
+      - Plugins
+      summary: Get a policy's icon
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getPolicyIcon
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /organizations/{orgId}/environments/{envId}/policies/{policy}/schema:
+    get:
+      tags:
+      - Plugins
+      summary: Get a policy's schema
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getPolicySchema
+      parameters:
+      - name: policy
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: string
+  /organizations/{orgId}/environments/{envId}/resources:
+    get:
+      tags:
+      - Plugins
+      summary: List resource plugins
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getResources
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of resources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceListItem'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/resources/{resource}:
+    get:
+      tags:
+      - Plugins
+      summary: Get a resource
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getResource
+      parameters:
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Resource plugin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformPluginEntity'
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/resources/{resource}/documentation:
+    get:
+      tags:
+      - Plugins
+      summary: Get a resource's documentation
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getResourceDoc
+      parameters:
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /organizations/{orgId}/environments/{envId}/resources/{resource}/schema:
+    get:
+      tags:
+      - Plugins
+      summary: Get a resource's schema
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getResourceSchema
+      parameters:
+      - name: resource
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: string
+  /organizations/{orgId}/environments/{envId}/services-discovery:
+    get:
+      tags:
+      - Plugins
+      summary: List service discovery plugins
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getServicesDiscoverResources
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of service discovery plugins
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceListItem'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/services-discovery/{plugin}:
+    get:
+      tags:
+      - Plugins
+      summary: Get a service discovery
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getServiceDiscovery
+      parameters:
+      - name: plugin
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Service discovery plugin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformPluginEntity'
+        '404':
+          description: Resource not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/services-discovery/{plugin}/schema:
+    get:
+      tags:
+      - Plugins
+      summary: Get a service discovery's schema
+      description: User must have the MANAGEMENT_API[READ] permission to use this service
+      operationId: getServiceDiscoverySchema
+      parameters:
+      - name: plugin
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Service discovery plugin's schema
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: Service discovery not found
+        '500':
+          description: Internal server error
 components:
+  schemas:
+    PlatformPluginEntity:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+    FetcherListItem:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        schema:
+          type: string
+        version:
+          type: string
+    PolicyEntity:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        dev:
+          $ref: '#/components/schemas/PolicyDevelopmentEntity'
+        id:
+          type: string
+        name:
+          type: string
+        plugin:
+          $ref: '#/components/schemas/PluginEntity'
+        type:
+          $ref: '#/components/schemas/PolicyType'
+        version:
+          type: string
+    FetcherEntity:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+    NotifierListItem:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        schema:
+          type: string
+        version:
+          type: string
+    PolicyListItem:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        documentation:
+          type: string
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        onRequest:
+          type: boolean
+        onResponse:
+          type: boolean
+        schema:
+          type: string
+        type:
+          $ref: '#/components/schemas/PolicyType'
+        version:
+          type: string
+    ConnectorListItem:
+      type: object
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        schema:
+          type: string
+        supportedTypes:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+    NotifierEntity:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        plugin:
+          $ref: '#/components/schemas/PluginEntity'
+        version:
+          type: string
+    PluginEntity:
+      type: object
+      properties:
+        dependencies:
+          type: array
+          items:
+            type: string
+            format: url
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        plugin:
+          type: string
+        type:
+          type: string
+        version:
+          type: string
+    PolicyType:
+      type: string
+      enum:
+      - REQUEST
+      - RESPONSE
+      - REQUEST_RESPONSE
+    ResourceListItem:
+      type: object
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        schema:
+          type: string
+        version:
+          type: string
+    PolicyDevelopmentEntity:
+      type: object
+      properties:
+        class:
+          type: string
+        configuration_class:
+          type: string
+        on_request_method:
+          type: string
+        on_response_method:
+          type: string
   securitySchemes:
-    BasicAuth:
+    gravitee-auth:
       type: http
       scheme: basic
-    CookieAuth:
-      type: apiKey
-      in: cookie
-      name: Auth-Graviteeio-APIM
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT

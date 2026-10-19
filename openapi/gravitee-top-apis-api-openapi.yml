@@ -1,0 +1,190 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Top APIs API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Top APIs
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/top-apis:
+    get:
+      tags:
+      - Top APIs
+      summary: List of top APIs
+      description: User must have the PORTAL_TOP_APIS[READ] permission to use this service
+      operationId: getTopApis
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of top APIs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopApiEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Top APIs
+      summary: Update a top API
+      description: User must have the PORTAL_TOP_APIS[UPDATE] permission to use this service
+      operationId: updateTopApi
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateTopApiEntity'
+        required: true
+      responses:
+        '200':
+          description: List of top APIs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopApiEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Top APIs
+      summary: Create a top API
+      description: User must have the PORTAL_TOP_APIS[CREATE] permission to use this service
+      operationId: createTopApi
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTopApiEntity'
+        required: true
+      responses:
+        '200':
+          description: List of top APIs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TopApiEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/top-apis/{topAPI}:
+    delete:
+      tags:
+      - Top APIs
+      summary: Delete an existing top API
+      description: User must have the PORTAL_TOP_APIS[DELETE] permission to use this service
+      operationId: deleteTopApi
+      parameters:
+      - name: topAPI
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Top API successfully deleted
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    TopApiEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        picture_url:
+          type: string
+        version:
+          type: string
+    NewTopApiEntity:
+      type: object
+      properties:
+        api:
+          type: string
+    UpdateTopApiEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        order:
+          type: integer
+          format: int32
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

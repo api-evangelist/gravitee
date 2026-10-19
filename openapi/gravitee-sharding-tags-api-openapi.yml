@@ -1,137 +1,327 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management Sharding Tags API
-  version: 4.12.0-alpha.3
+  title: Gravitee.io - Management Sharding Tags API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
 servers:
-- url: /management
+- url: http://localhost:8083/management
 security:
 - gravitee-auth: []
 tags:
-- name: sharding-tags
+- name: Sharding Tags
 paths:
-  /organizations/{organizationId}/tags:
+  /organizations/{orgId}/configuration/tags:
     get:
       tags:
-      - sharding-tags
+      - Sharding Tags
       summary: List sharding tags
-      description: User must have the ORGANIZATION[LIST] permission on the specified organization. Each returned tag is filtered and contains only basic information such as id and name.
-      operationId: listShardingTags
+      operationId: getTags
       parameters:
-      - name: organizationId
+      - name: orgId
         in: path
+        description: The ID of the Organization
         required: true
         schema:
           type: string
+          default: DEFAULT
       responses:
         '200':
-          description: List all the sharding tags
+          description: List of sharding tags
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Domain'
+                  $ref: '#/components/schemas/TagEntity'
         '500':
           description: Internal server error
     post:
       tags:
-      - sharding-tags
-      summary: Create a sharding tags
-      description: User must have the ORGANIZATION_TAG[CREATE] permission on the specified organization
-      operationId: createShardingTag
+      - Sharding Tags
+      summary: Create a sharding tag
+      description: User must have the MANAGEMENT_TAG[CREATE] permission to use this service
+      operationId: createTag
       parameters:
-      - name: organizationId
+      - name: orgId
         in: path
+        description: The ID of the Organization
         required: true
         schema:
           type: string
+          default: DEFAULT
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewTag'
+              $ref: '#/components/schemas/NewTagEntity'
         required: true
       responses:
         '201':
-          description: Sharding tag successfully created
+          description: A new sharding tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagEntity'
         '500':
           description: Internal server error
-  /organizations/{organizationId}/tags/{tag}:
+  /organizations/{orgId}/configuration/tags/{tag}:
     get:
       tags:
-      - sharding-tags
+      - Sharding Tags
       summary: Get a sharding tag
-      description: User must have the ORGANIZATION_TAG[READ] permission on the specified organization
+      description: User must have the MANAGEMENT_TAG[READ] permission to use this service
       operationId: getTag
       parameters:
-      - name: organizationId
-        in: path
-        required: true
-        schema:
-          type: string
       - name: tag
         in: path
         required: true
         schema:
           type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Sharding Tags
+      summary: Update an existing sharding tag
+      description: User must have the MANAGEMENT_TAG[UPDATE] permission to use this service
+      operationId: updateTag
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTagEntity'
+        required: true
       responses:
         '200':
           description: Sharding tag
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tag'
-        '500':
-          description: Internal server error
-    put:
-      tags:
-      - sharding-tags
-      summary: Update the sharding tag
-      description: User must have the ORGANIZATION_TAG[UPDATE] permission on the specified organization
-      operationId: updateTag
-      parameters:
-      - name: organizationId
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: tag
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateTag'
-        required: true
-      responses:
-        '200':
-          description: Sharding tag successfully updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: '#/components/schemas/TagEntity'
         '500':
           description: Internal server error
     delete:
       tags:
-      - sharding-tags
-      summary: Delete the sharding tag
-      description: User must have the ORGANIZATION_TAG[DELETE] permission on the specified organization
+      - Sharding Tags
+      summary: Delete an existing sharding tag
+      description: User must have the MANAGEMENT_TAG[DELETE] permission to use this service
       operationId: deleteTag
       parameters:
-      - name: organizationId
-        in: path
-        required: true
-        schema:
-          type: string
       - name: tag
         in: path
         required: true
         schema:
           type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Sharding tag successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/tags:
+    get:
+      tags:
+      - Sharding Tags
+      summary: List sharding tags
+      operationId: getTags_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of sharding tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Sharding Tags
+      summary: Create a sharding tag
+      description: User must have the MANAGEMENT_TAG[CREATE] permission to use this service
+      operationId: createTag_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTagEntity'
+        required: true
+      responses:
+        '201':
+          description: A new sharding tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/tags/{tag}:
+    get:
+      tags:
+      - Sharding Tags
+      summary: Get a sharding tag
+      description: User must have the MANAGEMENT_TAG[READ] permission to use this service
+      operationId: getTag_1
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Sharding Tags
+      summary: Update an existing sharding tag
+      description: User must have the MANAGEMENT_TAG[UPDATE] permission to use this service
+      operationId: updateTag_1
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTagEntity'
+        required: true
+      responses:
+        '200':
+          description: Sharding tag
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Sharding Tags
+      summary: Delete an existing sharding tag
+      description: User must have the MANAGEMENT_TAG[DELETE] permission to use this service
+      operationId: deleteTag_1
+      parameters:
+      - name: tag
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '204':
           description: Sharding tag successfully deleted
@@ -139,7 +329,41 @@ paths:
           description: Internal server error
 components:
   schemas:
-    NewTag:
+    UpdateTagEntity:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        restricted_groups:
+          type: array
+          items:
+            type: string
+    TagEntity:
+      required:
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        restricted_groups:
+          type: array
+          items:
+            type: string
+    NewTagEntity:
       required:
       - name
       type: object
@@ -147,579 +371,14 @@ components:
         description:
           type: string
         name:
+          maxLength: 2147483647
+          minLength: 1
           type: string
-    UpdateTag:
-      required:
-      - name
-      type: object
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-    TrustedIssuer:
-      type: object
-      properties:
-        certificate:
-          type: string
-        issuer:
-          type: string
-        jwksUri:
-          type: string
-        keyResolutionMethod:
-          type: string
-          enum:
-          - JWKS_URL
-          - PEM
-        scopeMappings:
-          type: object
-          additionalProperties:
-            type: string
-        userBindingCriteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserBindingCriterion'
-        userBindingEnabled:
-          type: boolean
-    TokenExchangeOAuthSettings:
-      type: object
-      properties:
-        inherited:
-          type: boolean
-        scopeHandling:
-          type: string
-          enum:
-          - DOWNSCOPING
-          - PERMISSIVE
-    VirtualHost:
-      type: object
-      properties:
-        host:
-          type: string
-        overrideEntrypoint:
-          type: boolean
-        path:
-          type: string
-    Tag:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-        description:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        organizationId:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-    CorsSettings:
-      type: object
-      properties:
-        allowCredentials:
-          type: boolean
-        allowedHeaders:
-          uniqueItems: true
+        restricted_groups:
           type: array
           items:
             type: string
-        allowedMethods:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        allowedOrigins:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        enabled:
-          type: boolean
-        maxAge:
-          type: integer
-          format: int32
-    CIBASettings:
-      type: object
-      properties:
-        authReqExpiry:
-          type: integer
-          format: int32
-        bindingMessageLength:
-          type: integer
-          format: int32
-        deviceNotifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/CIBASettingNotifier'
-        enabled:
-          type: boolean
-        tokenReqInterval:
-          type: integer
-          format: int32
-    CIBASettingNotifier:
-      type: object
-      properties:
-        id:
-          type: string
-    ClientRegistrationSettings:
-      type: object
-      properties:
-        allowHttpSchemeRedirectUri:
-          type: boolean
-        allowLocalhostRedirectUri:
-          type: boolean
-        allowRedirectUriParamsExpressionLanguage:
-          type: boolean
-        allowWildCardRedirectUri:
-          type: boolean
-        allowedScopes:
-          type: array
-          items:
-            type: string
-        allowedScopesEnabled:
-          type: boolean
-        clientTemplateEnabled:
-          type: boolean
-        defaultScopes:
-          type: array
-          items:
-            type: string
-        dynamicClientRegistrationEnabled:
-          type: boolean
-        openDynamicClientRegistrationEnabled:
-          type: boolean
-    SelfServiceAccountManagementSettings:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-        resetPassword:
-          $ref: '#/components/schemas/ResetPasswordSettings'
-    AccountSettings:
-      type: object
-      properties:
-        accountBlockedDuration:
-          type: integer
-          format: int32
-        autoLoginAfterRegistration:
-          type: boolean
-        autoLoginAfterResetPassword:
-          type: boolean
-        botDetectionPlugin:
-          type: string
-        completeRegistrationWhenResetPassword:
-          type: boolean
-        defaultIdentityProviderForRegistration:
-          type: string
-        deletePasswordlessDevicesAfterResetPassword:
-          type: boolean
-        dynamicUserRegistration:
-          type: boolean
-        inherited:
-          type: boolean
-        loginAttemptsDetectionEnabled:
-          type: boolean
-        loginAttemptsResetTime:
-          type: integer
-          format: int32
-        maxLoginAttempts:
-          type: integer
-          format: int32
-        mfaChallengeAttemptsDetectionEnabled:
-          type: boolean
-        mfaChallengeAttemptsResetTime:
-          type: integer
-          format: int32
-        mfaChallengeMaxAttempts:
-          type: integer
-          format: int32
-        mfaChallengeSendVerifyAlertEmail:
-          type: boolean
-        redirectUriAfterRegistration:
-          type: string
-        redirectUriAfterResetPassword:
-          type: string
-        rememberMe:
-          type: boolean
-        rememberMeDuration:
-          type: integer
-          format: int32
-        resetPasswordConfirmIdentity:
-          type: boolean
-        resetPasswordCustomForm:
-          type: boolean
-        resetPasswordCustomFormFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FormField'
-        resetPasswordInvalidateTokens:
-          type: boolean
-        sendRecoverAccountEmail:
-          type: boolean
-        sendVerifyRegistrationAccountEmail:
-          type: boolean
-        useBotDetection:
-          type: boolean
-    Domain:
-      type: object
-      properties:
-        accountSettings:
-          $ref: '#/components/schemas/AccountSettings'
-        alertEnabled:
-          type: boolean
-        certificateSettings:
-          $ref: '#/components/schemas/CertificateSettings'
-        corsSettings:
-          $ref: '#/components/schemas/CorsSettings'
-        createdAt:
-          type: string
-          format: date-time
-        dataPlaneId:
-          type: string
-        description:
-          type: string
-        dynamicClientRegistrationEnabled:
-          type: boolean
-        dynamicClientRegistrationTemplateEnabled:
-          type: boolean
-        enabled:
-          type: boolean
-        hrid:
-          type: string
-        id:
-          type: string
-        identities:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        loginSettings:
-          $ref: '#/components/schemas/LoginSettings'
-        master:
-          type: boolean
-        name:
-          type: string
-        oidc:
-          $ref: '#/components/schemas/OIDCSettings'
-        openDynamicClientRegistrationEnabled:
-          type: boolean
-        passwordSettings:
-          $ref: '#/components/schemas/PasswordSettings'
-        path:
-          type: string
-        redirectUriExpressionLanguageEnabled:
-          type: boolean
-        redirectUriLocalhostAllowed:
-          type: boolean
-        redirectUriStrictMatching:
-          type: boolean
-        redirectUriUnsecuredHttpSchemeAllowed:
-          type: boolean
-        redirectUriWildcardAllowed:
-          type: boolean
-        referenceId:
-          type: string
-        referenceType:
-          type: string
-          enum:
-          - PLATFORM
-          - DOMAIN
-          - APPLICATION
-          - ORGANIZATION
-          - ENVIRONMENT
-          - PROTECTED_RESOURCE
-        saml:
-          $ref: '#/components/schemas/SAMLSettings'
-        scim:
-          $ref: '#/components/schemas/SCIMSettings'
-        secretExpirationSettings:
-          $ref: '#/components/schemas/SecretExpirationSettings'
-        selfServiceAccountManagementSettings:
-          $ref: '#/components/schemas/SelfServiceAccountManagementSettings'
-        tags:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-        tokenExchangeSettings:
-          $ref: '#/components/schemas/TokenExchangeSettings'
-        uma:
-          $ref: '#/components/schemas/UMASettings'
-        updatedAt:
-          type: string
-          format: date-time
-        version:
-          type: string
-          enum:
-          - V1_0
-          - V2_0
-        vhostMode:
-          type: boolean
-        vhosts:
-          type: array
-          items:
-            $ref: '#/components/schemas/VirtualHost'
-        webAuthnSettings:
-          $ref: '#/components/schemas/WebAuthnSettings'
-    UMASettings:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-    ResetPasswordSettings:
-      type: object
-      properties:
-        oldPasswordRequired:
-          type: boolean
-        tokenAge:
-          type: integer
-          format: int32
-    SAMLSettings:
-      type: object
-      properties:
-        certificate:
-          type: string
-        enabled:
-          type: boolean
-        entityId:
-          type: string
-    SCIMSettings:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-        idpSelectionEnabled:
-          type: boolean
-        idpSelectionRule:
-          type: string
-    SecurityProfileSettings:
-      type: object
-      properties:
-        enableFapiBrazil:
-          type: boolean
-        enablePlainFapi:
-          type: boolean
-    LoginSettings:
-      type: object
-      properties:
-        certificateBasedAuthEnabled:
-          type: boolean
-        certificateBasedAuthUrl:
-          type: string
-        enforcePasswordPolicyEnabled:
-          type: boolean
-        forgotPasswordEnabled:
-          type: boolean
-        hideForm:
-          type: boolean
-        identifierFirstEnabled:
-          type: boolean
-        inherited:
-          type: boolean
-        magicLinkAuthEnabled:
-          type: boolean
-        passwordlessDeviceNamingEnabled:
-          type: boolean
-        passwordlessEnabled:
-          type: boolean
-        passwordlessEnforcePasswordEnabled:
-          type: boolean
-        passwordlessEnforcePasswordMaxAge:
-          type: integer
-          format: int32
-        passwordlessRememberDeviceEnabled:
-          type: boolean
-        registerEnabled:
-          type: boolean
-        rememberMeEnabled:
-          type: boolean
-        resetPasswordOnExpiration:
-          type: boolean
-    UserBindingCriterion:
-      type: object
-      properties:
-        attribute:
-          type: string
-        expression:
-          type: string
-    CIMDSettings:
-      type: object
-      properties:
-        allowPrivateIpAddress:
-          type: boolean
-        allowUnsecuredHttpUri:
-          type: boolean
-        allowedDomains:
-          type: array
-          items:
-            type: string
-        cacheMaxEntries:
-          type: integer
-          format: int32
-        cacheTtlSeconds:
-          type: integer
-          format: int32
-        enabled:
-          type: boolean
-        fetchTimeoutMs:
-          type: integer
-          format: int32
-        maxResponseSizeKb:
-          type: integer
-          format: int32
-        revokeOnDocumentChange:
-          type: boolean
-        templateId:
-          type: string
-    TokenExchangeSettings:
-      type: object
-      properties:
-        allowDelegation:
-          type: boolean
-        allowImpersonation:
-          type: boolean
-        allowedActorTokenTypes:
-          type: array
-          items:
-            type: string
-        allowedRequestedTokenTypes:
-          type: array
-          items:
-            type: string
-        allowedSubjectTokenTypes:
-          type: array
-          items:
-            type: string
-        enabled:
-          type: boolean
-        maxDelegationDepth:
-          type: integer
-          format: int32
-        tokenExchangeOAuthSettings:
-          $ref: '#/components/schemas/TokenExchangeOAuthSettings'
-        trustedIssuers:
-          type: array
-          items:
-            $ref: '#/components/schemas/TrustedIssuer'
-    SecretExpirationSettings:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-        expiryTimeSeconds:
-          type: integer
-          format: int64
-    WebAuthnSettings:
-      type: object
-      properties:
-        attestationConveyancePreference:
-          type: string
-          enum:
-          - NONE
-          - INDIRECT
-          - DIRECT
-        authenticatorAttachment:
-          type: string
-          enum:
-          - CROSS_PLATFORM
-          - PLATFORM
-        certificates:
-          type: object
-          additionalProperties:
-            type: object
-        enforceAuthenticatorIntegrity:
-          type: boolean
-        enforceAuthenticatorIntegrityMaxAge:
-          type: integer
-          format: int32
-        forceRegistration:
-          type: boolean
-        origin:
-          type: string
-        relyingPartyId:
-          type: string
-        relyingPartyName:
-          type: string
-        requireResidentKey:
-          type: boolean
-        userVerification:
-          type: string
-          enum:
-          - REQUIRED
-          - PREFERRED
-          - DISCOURAGED
-    CertificateSettings:
-      type: object
-      properties:
-        fallbackCertificate:
-          type: string
-    PasswordSettings:
-      type: object
-      properties:
-        excludePasswordsInDictionary:
-          type: boolean
-        excludeUserProfileInfoInPassword:
-          type: boolean
-        expiryDuration:
-          type: integer
-          format: int32
-        includeNumbers:
-          type: boolean
-        includeSpecialCharacters:
-          type: boolean
-        inherited:
-          type: boolean
-        lettersInMixedCase:
-          type: boolean
-        maxConsecutiveLetters:
-          type: integer
-          format: int32
-        maxLength:
-          type: integer
-          format: int32
-        minLength:
-          type: integer
-          format: int32
-        oldPasswords:
-          type: integer
-          format: int32
-        passwordHistoryEnabled:
-          type: boolean
-    FormField:
-      type: object
-      properties:
-        key:
-          type: string
-        label:
-          type: string
-        type:
-          type: string
-    OIDCSettings:
-      type: object
-      properties:
-        cibaSettings:
-          $ref: '#/components/schemas/CIBASettings'
-        cimdSettings:
-          $ref: '#/components/schemas/CIMDSettings'
-        clientRegistrationSettings:
-          $ref: '#/components/schemas/ClientRegistrationSettings'
-        postLogoutRedirectUris:
-          type: array
-          items:
-            type: string
-        redirectUriStrictMatching:
-          type: boolean
-        requestUris:
-          type: array
-          items:
-            type: string
-        securityProfileSettings:
-          $ref: '#/components/schemas/SecurityProfileSettings'
   securitySchemes:
     gravitee-auth:
       type: http
-      scheme: Bearer
+      scheme: basic

@@ -1,0 +1,135 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io APIM Management Applications API
+  description: 'The Gravitee API Management (APIM) Management API is the administrative
+
+    control plane for the Gravitee platform.'
+  contact:
+    name: GraviteeSource Team
+    url: https://gravitee.io
+    email: team-apim@graviteesource.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 2.0.0
+servers:
+- url: https://{host}/management/v2
+  description: APIM Management API v2 - default base URL
+  variables:
+    host:
+      default: apim.example.com
+      description: Hostname of the Gravitee APIM Management API
+- url: https://{host}/management/v2/organizations/{orgId}
+  description: APIM Management API v2 - per-organization base URL
+  variables:
+    host:
+      default: apim.example.com
+    orgId:
+      default: DEFAULT
+security:
+- BasicAuth: []
+- CookieAuth: []
+- BearerAuth: []
+tags:
+- name: Applications
+  description: Manage consumer applications
+paths:
+  /environments/{envId}/applications:
+    get:
+      tags:
+      - Applications
+      operationId: listApplications
+      summary: List Applications
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      responses:
+        '200':
+          description: Applications page
+    post:
+      tags:
+      - Applications
+      operationId: createApplication
+      summary: Create an Application
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '201':
+          description: Application created
+  /environments/{envId}/applications/{applicationId}:
+    get:
+      tags:
+      - Applications
+      operationId: getApplication
+      summary: Get an Application by Identifier
+      parameters:
+      - $ref: '#/components/parameters/EnvId'
+      - in: path
+        name: applicationId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The application
+components:
+  parameters:
+    EnvId:
+      in: path
+      name: envId
+      required: true
+      schema:
+        type: string
+      description: The environment identifier
+  schemas:
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+          enum:
+          - SIMPLE
+          - BROWSER
+          - WEB
+          - NATIVE
+          - BACKEND_TO_BACKEND
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - ARCHIVED
+        settings:
+          type: object
+          properties:
+            app:
+              type: object
+              properties:
+                client_id:
+                  type: string
+                type:
+                  type: string
+            oauth:
+              type: object
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: Auth-Graviteeio-APIM
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

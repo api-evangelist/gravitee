@@ -1,0 +1,1360 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Pages API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Pages
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/pages:
+    get:
+      tags:
+      - API Pages
+      summary: List pages
+      description: User must have the READ permission to use this service
+      operationId: getApiPages
+      parameters:
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+      - name: homepage
+        in: query
+        schema:
+          type: boolean
+      - name: type
+        in: query
+        schema:
+          $ref: '#/components/schemas/PageType'
+      - name: parent
+        in: query
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: root
+        in: query
+        schema:
+          type: boolean
+      - name: translated
+        in: query
+        schema:
+          type: boolean
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of pages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Pages
+      summary: Create a page
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: createApiPage
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/pages/_fetch:
+    post:
+      tags:
+      - API Pages
+      summary: Refresh all pages by calling their associated fetcher
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: fetchAllApiPages
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: Pages successfully refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/pages/_import:
+    put:
+      tags:
+      - API Pages
+      summary: Import pages
+      description: User must be ADMIN to use this service
+      operationId: updateApiPageImportFiles
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Pages
+      summary: Import pages
+      description: User must be ADMIN to use this service
+      operationId: importApiPageFiles
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/pages/{page}:
+    get:
+      tags:
+      - API Pages
+      summary: Get a page
+      description: User must have the READ permission to use this service
+      operationId: getApiPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+      - name: portal
+        in: query
+        schema:
+          type: boolean
+      - name: translated
+        in: query
+        schema:
+          type: boolean
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - API Pages
+      summary: Update a page
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: updateApiPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - API Pages
+      summary: Delete a page
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: deleteApiPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Page successfully deleted
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - API Pages
+      summary: Update a page
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: partialUpdateApiPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePageEntity'
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/pages/{page}/_fetch:
+    post:
+      tags:
+      - API Pages
+      summary: Refresh page by calling the associated fetcher
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: fetchApiPage
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: Page successfully refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/pages/{page}/content:
+    get:
+      tags:
+      - API Pages
+      summary: Get the page's content
+      description: User must have the READ permission to use this service
+      operationId: getApiPageContent
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Page's content
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - API Pages
+      summary: Put the page's content
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: updatePageContent
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '201':
+          description: Page content successfully updated
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/pages:
+    get:
+      tags:
+      - API Pages
+      summary: List pages
+      description: User must have the READ permission to use this service
+      operationId: getApiPages_1
+      parameters:
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+      - name: homepage
+        in: query
+        schema:
+          type: boolean
+      - name: type
+        in: query
+        schema:
+          $ref: '#/components/schemas/PageType'
+      - name: parent
+        in: query
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: root
+        in: query
+        schema:
+          type: boolean
+      - name: translated
+        in: query
+        schema:
+          type: boolean
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of pages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Pages
+      summary: Create a page
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: createApiPage_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/pages/_fetch:
+    post:
+      tags:
+      - API Pages
+      summary: Refresh all pages by calling their associated fetcher
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: fetchAllApiPages_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: Pages successfully refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/pages/_import:
+    put:
+      tags:
+      - API Pages
+      summary: Import pages
+      description: User must be ADMIN to use this service
+      operationId: updateApiPageImportFiles_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Pages
+      summary: Import pages
+      description: User must be ADMIN to use this service
+      operationId: importApiPageFiles_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportPageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/pages/{page}:
+    get:
+      tags:
+      - API Pages
+      summary: Get a page
+      description: User must have the READ permission to use this service
+      operationId: getApiPage_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Accept-Language
+        in: header
+        schema:
+          type: string
+      - name: portal
+        in: query
+        schema:
+          type: boolean
+      - name: translated
+        in: query
+        schema:
+          type: boolean
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - API Pages
+      summary: Update a page
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: updateApiPage_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePageEntity'
+        required: true
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - API Pages
+      summary: Delete a page
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: deleteApiPage_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Page successfully deleted
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - API Pages
+      summary: Update a page
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: partialUpdateApiPage_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePageEntity'
+      responses:
+        '201':
+          description: Page successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/pages/{page}/_fetch:
+    post:
+      tags:
+      - API Pages
+      summary: Refresh page by calling the associated fetcher
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: fetchApiPage_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: Page successfully refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/pages/{page}/content:
+    get:
+      tags:
+      - API Pages
+      summary: Get the page's content
+      description: User must have the READ permission to use this service
+      operationId: getApiPageContent_1
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Page's content
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - API Pages
+      summary: Put the page's content
+      description: User must have the MANAGE_PAGES permission to use this service
+      operationId: updatePageContent_2
+      parameters:
+      - name: page
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '201':
+          description: Page content successfully updated
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Visibility:
+      type: string
+      description: The visibility of the API regarding the portal.
+      example: PUBLIC
+      enum:
+      - PUBLIC
+      - PRIVATE
+    PageSourceEntity:
+      type: object
+      properties:
+        configuration:
+          type: string
+        type:
+          type: string
+    PageType:
+      type: string
+      enum:
+      - ASCIIDOC
+      - ASYNCAPI
+      - MARKDOWN
+      - MARKDOWN_TEMPLATE
+      - SWAGGER
+      - FOLDER
+      - LINK
+      - ROOT
+      - SYSTEM_FOLDER
+      - TRANSLATION
+    PageMediaEntity:
+      type: object
+      properties:
+        attachedAt:
+          type: string
+          format: date-time
+        mediaHash:
+          type: string
+        mediaName:
+          type: string
+    UpdatePageEntity:
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        attached_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageMediaEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        content:
+          type: string
+        crossId:
+          type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        homepage:
+          type: boolean
+        lastContributor:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        parentId:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        useAutoFetch:
+          type: boolean
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    NewPageEntity:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        attached_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageMediaEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        content:
+          type: string
+        crossId:
+          type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        homepage:
+          type: boolean
+        lastContributor:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        order:
+          type: integer
+          format: int32
+        parentId:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        type:
+          $ref: '#/components/schemas/PageType'
+        useAutoFetch:
+          type: boolean
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    AccessControlEntity:
+      type: object
+      properties:
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+    PageEntity:
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        attached_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageMediaEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        content:
+          type: string
+        contentRevisionId:
+          $ref: '#/components/schemas/PageRevisionId'
+        contentType:
+          type: string
+        crossId:
+          type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        generalConditions:
+          type: boolean
+          readOnly: true
+        homepage:
+          type: boolean
+        id:
+          type: string
+        lastContributor:
+          type: string
+        lastModificationDate:
+          type: string
+          format: date-time
+        messages:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        parentId:
+          type: string
+        parentPath:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        translations:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageEntity'
+        type:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+    PageRevisionId:
+      type: object
+      properties:
+        pageId:
+          type: string
+        revision:
+          type: integer
+          format: int32
+    ImportPageEntity:
+      required:
+      - type
+      type: object
+      properties:
+        accessControls:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessControlEntity'
+        configuration:
+          type: object
+          additionalProperties:
+            type: string
+        excludedAccessControls:
+          type: boolean
+        excluded_groups:
+          type: array
+          items:
+            type: string
+        lastContributor:
+          type: string
+        published:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/PageSourceEntity'
+        type:
+          $ref: '#/components/schemas/PageType'
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

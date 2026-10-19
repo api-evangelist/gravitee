@@ -1,0 +1,76 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management 🧪 V4 - Endpoints API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: 🧪 V4 - Endpoints
+paths:
+  /organizations/{orgId}/environments/{envId}/v4/endpoints:
+    get:
+      tags:
+      - 🧪 V4 - Endpoints
+      summary: List endpoint plugins
+      description: User must have the ENVIRONMENT_API[READ] permission to use this service
+      operationId: getEndpoints
+      parameters:
+      - name: expand
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of endpoints
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectorListItem'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    ConnectorListItem:
+      type: object
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        schema:
+          type: string
+        supportedTypes:
+          type: array
+          items:
+            type: string
+        version:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,400 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Gateway API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Gateway
+paths:
+  /organizations/{orgId}/environments/{envId}/instances:
+    get:
+      tags:
+      - Gateway
+      summary: List gateway instances
+      operationId: getInstances
+      parameters:
+      - name: includeStopped
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: from
+        in: query
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      - name: to
+        in: query
+        schema:
+          type: integer
+          format: int64
+          default: 0
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageInstanceListItem'
+  /organizations/{orgId}/environments/{envId}/instances/{instance}:
+    get:
+      tags:
+      - Gateway
+      summary: Get a gateway instance
+      operationId: getInstance
+      parameters:
+      - name: instance
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceEntity'
+  /organizations/{orgId}/environments/{envId}/instances/{instance}/monitoring/{gatewayId}:
+    get:
+      tags:
+      - Gateway
+      summary: Get monitoring metrics for a gateway instance
+      operationId: getInstanceMonitoring
+      parameters:
+      - name: gatewayId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: instance
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitoringData'
+components:
+  schemas:
+    MonitoringData:
+      type: object
+      properties:
+        cpu:
+          $ref: '#/components/schemas/MonitoringCPU'
+        gc:
+          $ref: '#/components/schemas/MonitoringGC'
+        jvm:
+          $ref: '#/components/schemas/MonitoringJVM'
+        process:
+          $ref: '#/components/schemas/MonitoringProcess'
+        thread:
+          $ref: '#/components/schemas/MonitoringThread'
+    InstanceState:
+      type: string
+      enum:
+      - STARTED
+      - UNKNOWN
+      - STOPPED
+    InstanceListItem:
+      type: object
+      properties:
+        event:
+          type: string
+        hostname:
+          type: string
+        id:
+          type: string
+        ip:
+          type: string
+        last_heartbeat_at:
+          type: string
+          format: date-time
+        operating_system_name:
+          type: string
+        port:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+        state:
+          $ref: '#/components/schemas/InstanceState'
+        stopped_at:
+          type: string
+          format: date-time
+        tags:
+          type: array
+          items:
+            type: string
+        tenant:
+          type: string
+        version:
+          type: string
+    InstanceEntity:
+      type: object
+      properties:
+        environments:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        environments_hrids:
+          type: array
+          items:
+            type: string
+        event:
+          type: string
+        hostname:
+          type: string
+        id:
+          type: string
+        ip:
+          type: string
+        last_heartbeat_at:
+          type: string
+          format: date-time
+        organizations_hrids:
+          type: array
+          items:
+            type: string
+        plugins:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PluginEntity'
+        port:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+        state:
+          $ref: '#/components/schemas/InstanceState'
+        stopped_at:
+          type: string
+          format: date-time
+        systemProperties:
+          type: object
+          additionalProperties:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        tenant:
+          type: string
+        version:
+          type: string
+    MonitoringJVM:
+      type: object
+      properties:
+        heap_committed_in_bytes:
+          type: integer
+          format: int64
+        heap_max_in_bytes:
+          type: integer
+          format: int64
+        heap_used_in_bytes:
+          type: integer
+          format: int64
+        heap_used_percent:
+          type: integer
+          format: int32
+        non_heap_committed_in_bytes:
+          type: integer
+          format: int64
+        non_heap_used_in_bytes:
+          type: integer
+          format: int64
+        old_pool_max_in_bytes:
+          type: integer
+          format: int64
+        old_pool_peak_max_in_bytes:
+          type: integer
+          format: int64
+        old_pool_peak_used_in_bytes:
+          type: integer
+          format: int64
+        old_pool_used_in_bytes:
+          type: integer
+          format: int64
+        survivor_pool_max_in_bytes:
+          type: integer
+          format: int64
+        survivor_pool_peak_max_in_bytes:
+          type: integer
+          format: int64
+        survivor_pool_peak_used_in_bytes:
+          type: integer
+          format: int64
+        survivor_pool_used_in_bytes:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        uptime_in_millis:
+          type: integer
+          format: int64
+        young_pool_max_in_bytes:
+          type: integer
+          format: int64
+        young_pool_peak_max_in_bytes:
+          type: integer
+          format: int64
+        young_pool_peak_used_in_bytes:
+          type: integer
+          format: int64
+        young_pool_used_in_bytes:
+          type: integer
+          format: int64
+    PluginEntity:
+      type: object
+      properties:
+        dependencies:
+          type: array
+          items:
+            type: string
+            format: url
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        plugin:
+          type: string
+        type:
+          type: string
+        version:
+          type: string
+    PageInstanceListItem:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstanceListItem'
+        pageElements:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+    MonitoringThread:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+        peak_count:
+          type: integer
+          format: int32
+    MonitoringProcess:
+      type: object
+      properties:
+        cpu_percent:
+          type: integer
+          format: int32
+        max_file_descriptors:
+          type: integer
+          format: int32
+        open_file_descriptors:
+          type: integer
+          format: int32
+    MonitoringCPU:
+      type: object
+      properties:
+        load_average:
+          type: object
+          additionalProperties:
+            type: object
+        percent_use:
+          type: integer
+          format: int32
+    MonitoringGC:
+      type: object
+      properties:
+        old_collection_count:
+          type: integer
+          format: int32
+        old_collection_time_in_millis:
+          type: integer
+          format: int64
+        young_collection_count:
+          type: integer
+          format: int32
+        young_collection_time_in_millis:
+          type: integer
+          format: int64
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

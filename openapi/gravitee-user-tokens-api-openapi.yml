@@ -1,0 +1,488 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management User Tokens API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: User Tokens
+paths:
+  /organizations/{orgId}/environments/{envId}/user/tokens:
+    get:
+      tags:
+      - User Tokens
+      summary: List user's personal tokens
+      operationId: getTokens_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's personal tokens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TokenEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - User Tokens
+      summary: Create a personal token
+      operationId: createTokens_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTokenEntity'
+        required: true
+      responses:
+        '201':
+          description: A new personal token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - User Tokens
+      summary: Revoke all user's personal tokens
+      operationId: revokeAllTokens_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User's personal tokens revoked
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/user/tokens/{token}:
+    delete:
+      tags:
+      - User Tokens
+      summary: Revoke a single user's personal tokens
+      operationId: revokeToken_1
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User's personal token revoked
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/tokens:
+    get:
+      tags:
+      - User Tokens
+      summary: List user's personal tokens
+      operationId: getUserTokens
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's personal tokens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TokenEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - User Tokens
+      summary: Create a personal token
+      operationId: createToken
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTokenEntity'
+        required: true
+      responses:
+        '201':
+          description: A new personal token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/tokens/{token}:
+    delete:
+      tags:
+      - User Tokens
+      summary: Revoke a single user's personal tokens
+      operationId: revokeToken_2
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User's personal token revoked
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/user/tokens:
+    get:
+      tags:
+      - User Tokens
+      summary: List user's personal tokens
+      operationId: getTokens
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's personal tokens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TokenEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - User Tokens
+      summary: Create a personal token
+      operationId: createTokens
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTokenEntity'
+        required: true
+      responses:
+        '201':
+          description: A new personal token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - User Tokens
+      summary: Revoke all user's personal tokens
+      operationId: revokeAllTokens
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User's personal tokens revoked
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/user/tokens/{token}:
+    delete:
+      tags:
+      - User Tokens
+      summary: Revoke a single user's personal tokens
+      operationId: revokeToken
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User's personal token revoked
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/tokens:
+    get:
+      tags:
+      - User Tokens
+      summary: List user's personal tokens
+      operationId: getUserTokens_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's personal tokens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TokenEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - User Tokens
+      summary: Create a personal token
+      operationId: createToken_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTokenEntity'
+        required: true
+      responses:
+        '201':
+          description: A new personal token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/tokens/{token}:
+    delete:
+      tags:
+      - User Tokens
+      summary: Revoke a single user's personal tokens
+      operationId: revokeToken_3
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User's personal token revoked
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    NewTokenEntity:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+    TokenEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        last_use_at:
+          type: string
+          format: date-time
+        name:
+          type: string
+        token:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

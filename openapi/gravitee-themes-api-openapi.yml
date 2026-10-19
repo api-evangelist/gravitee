@@ -1,0 +1,429 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Themes API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Themes
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/themes:
+    post:
+      tags:
+      - Themes
+      operationId: createTheme
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewThemeEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeEntity'
+      summary: Create theme
+      x-summary-source: derived
+  /organizations/{orgId}/environments/{envId}/configuration/themes/{themeId}:
+    get:
+      tags:
+      - Themes
+      operationId: getTheme
+      parameters:
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeEntity'
+      summary: Get theme
+      x-summary-source: derived
+    put:
+      tags:
+      - Themes
+      operationId: updateTheme
+      parameters:
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateThemeEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeEntity'
+      summary: Update theme
+      x-summary-source: derived
+    delete:
+      tags:
+      - Themes
+      operationId: deleteTheme
+      parameters:
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+      summary: Delete theme
+      x-summary-source: derived
+  /organizations/{orgId}/environments/{envId}/configuration/themes/{themeId}/backgroundImage:
+    get:
+      tags:
+      - Themes
+      operationId: getThemeBackground
+      parameters:
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+      summary: Get theme background
+      x-summary-source: derived
+  /organizations/{orgId}/environments/{envId}/configuration/themes/{themeId}/favicon:
+    get:
+      tags:
+      - Themes
+      operationId: getFavicon
+      parameters:
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+      summary: Get favicon
+      x-summary-source: derived
+  /organizations/{orgId}/environments/{envId}/configuration/themes/{themeId}/logo:
+    get:
+      tags:
+      - Themes
+      operationId: getThemeLogo
+      parameters:
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+      summary: Get theme logo
+      x-summary-source: derived
+  /organizations/{orgId}/environments/{envId}/configuration/themes/{themeId}/optionalLogo:
+    get:
+      tags:
+      - Themes
+      operationId: getLogoLight
+      parameters:
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+      summary: Get logo light
+      x-summary-source: derived
+  /organizations/{orgId}/environments/{envId}/configuration/themes/{themeId}/reset:
+    post:
+      tags:
+      - Themes
+      operationId: resetTheme
+      parameters:
+      - name: themeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeEntity'
+      summary: Reset theme
+      x-summary-source: derived
+components:
+  schemas:
+    NewThemeEntity:
+      required:
+      - name
+      type: object
+      properties:
+        backgroundImage:
+          type: string
+        definition:
+          $ref: '#/components/schemas/ThemeDefinition'
+        enabled:
+          type: boolean
+        favicon:
+          type: string
+        logo:
+          type: string
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        optionalLogo:
+          type: string
+    ThemeDefinition:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThemeComponentDefinition'
+    ThemeComponentDefinition:
+      type: object
+      properties:
+        css:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThemeCssDefinition'
+        name:
+          type: string
+    ThemeEntity:
+      required:
+      - name
+      type: object
+      properties:
+        backgroundImage:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        definition:
+          $ref: '#/components/schemas/ThemeDefinition'
+        enabled:
+          type: boolean
+        favicon:
+          type: string
+        id:
+          type: string
+        logo:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        optionalLogo:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    UpdateThemeEntity:
+      required:
+      - definition
+      - name
+      type: object
+      properties:
+        backgroundImage:
+          type: string
+        definition:
+          $ref: '#/components/schemas/ThemeDefinition'
+        enabled:
+          type: boolean
+        favicon:
+          type: string
+        id:
+          type: string
+        logo:
+          type: string
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+        optionalLogo:
+          type: string
+    ThemeCssType:
+      type: string
+      enum:
+      - color
+      - length
+      - string
+      - image
+    ThemeCssDefinition:
+      type: object
+      properties:
+        default:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ThemeCssType'
+        value:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

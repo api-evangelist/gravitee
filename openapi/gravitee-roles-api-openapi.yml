@@ -1,0 +1,796 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Roles API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Roles
+paths:
+  /organizations/{orgId}/configuration/rolescopes:
+    get:
+      tags:
+      - Roles
+      summary: List availables role scopes
+      operationId: getRoleScopes
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of role scopes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScopesLinkedHashMap'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/rolescopes/{scope}/roles:
+    get:
+      tags:
+      - Roles
+      summary: List of roles
+      description: User must have the MANAGEMENT_ROLE[READ] permission to use this service
+      operationId: getRoles
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Role successfully removed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Roles
+      summary: Create a role
+      description: User must have the MANAGEMENT_ROLE[CREATE] permission to use this service
+      operationId: createRole
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRoleEntity'
+        required: true
+      responses:
+        '200':
+          description: Role successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/rolescopes/{scope}/roles/{role}:
+    get:
+      tags:
+      - Roles
+      summary: Get a role
+      description: User must have the MANAGEMENT_ROLE[READ] permission to use this service
+      operationId: getRole
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '404':
+          description: Role not found
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Roles
+      summary: Update a role
+      description: User must have the MANAGEMENT_ROLE[UPDATE] permission to use this service
+      operationId: updateRole
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleEntity'
+        required: true
+      responses:
+        '200':
+          description: Role successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '404':
+          description: Role not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Roles
+      summary: Delete a role
+      description: User must have the MANAGEMENT_ROLE[DELETE] permission to use this service
+      operationId: deleteRole
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Role successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '404':
+          description: Role not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/rolescopes/{scope}/roles/{role}/users:
+    get:
+      tags:
+      - Roles
+      summary: List users with the given role
+      description: User must have the MANAGEMENT_ROLE[READ] permission to use this service
+      operationId: getUsersPerRole
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: List of user's memberships
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MembershipListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Roles
+      summary: Add or update a role for a user
+      description: User must have the MANAGEMENT_ROLE[CREATE] and MANAGEMENT_ROLE[UPDATE] permission to use this service
+      operationId: addRoleToUser
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleMembership'
+        required: true
+      responses:
+        '201':
+          description: Membership successfully created / updated
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/rolescopes/{scope}/roles/{role}/users/{userId}:
+    delete:
+      tags:
+      - Roles
+      summary: Delete the role for a given user
+      description: User must have the MANAGEMENT_ROLE[DELETE] permission to use this service
+      operationId: deleteRoleForUser
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Role successfully removed
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/rolescopes:
+    get:
+      tags:
+      - Roles
+      summary: List availables role scopes
+      operationId: getRoleScopes_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of role scopes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleScopesLinkedHashMap'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/rolescopes/{scope}/roles:
+    get:
+      tags:
+      - Roles
+      summary: List of roles
+      description: User must have the MANAGEMENT_ROLE[READ] permission to use this service
+      operationId: getRoles_1
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Role successfully removed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Roles
+      summary: Create a role
+      description: User must have the MANAGEMENT_ROLE[CREATE] permission to use this service
+      operationId: createRole_1
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRoleEntity'
+        required: true
+      responses:
+        '200':
+          description: Role successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/rolescopes/{scope}/roles/{role}:
+    get:
+      tags:
+      - Roles
+      summary: Get a role
+      description: User must have the MANAGEMENT_ROLE[READ] permission to use this service
+      operationId: getRole_1
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A role
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '404':
+          description: Role not found
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Roles
+      summary: Update a role
+      description: User must have the MANAGEMENT_ROLE[UPDATE] permission to use this service
+      operationId: updateRole_1
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleEntity'
+        required: true
+      responses:
+        '200':
+          description: Role successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '404':
+          description: Role not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Roles
+      summary: Delete a role
+      description: User must have the MANAGEMENT_ROLE[DELETE] permission to use this service
+      operationId: deleteRole_1
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Role successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleEntity'
+        '404':
+          description: Role not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/rolescopes/{scope}/roles/{role}/users:
+    get:
+      tags:
+      - Roles
+      summary: List users with the given role
+      description: User must have the MANAGEMENT_ROLE[READ] permission to use this service
+      operationId: getUsersPerRole_1
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: List of user's memberships
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MembershipListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Roles
+      summary: Add or update a role for a user
+      description: User must have the MANAGEMENT_ROLE[CREATE] and MANAGEMENT_ROLE[UPDATE] permission to use this service
+      operationId: addRoleToUser_1
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleMembership'
+        required: true
+      responses:
+        '201':
+          description: Membership successfully created / updated
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/rolescopes/{scope}/roles/{role}/users/{userId}:
+    delete:
+      tags:
+      - Roles
+      summary: Delete the role for a given user
+      description: User must have the MANAGEMENT_ROLE[DELETE] permission to use this service
+      operationId: deleteRoleForUser_1
+      parameters:
+      - name: scope
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/RoleScope'
+      - name: role
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Role successfully removed
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateRoleEntity:
+      required:
+      - id
+      - name
+      - scope
+      type: object
+      properties:
+        default:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        scope:
+          $ref: '#/components/schemas/RoleScope'
+    MembershipListItem:
+      type: object
+      properties:
+        displayName:
+          type: string
+        id:
+          type: string
+        role:
+          type: string
+    RoleMembership:
+      type: object
+      properties:
+        id:
+          type: string
+        reference:
+          type: string
+    RoleEntity:
+      required:
+      - id
+      type: object
+      properties:
+        apiPrimaryOwner:
+          type: boolean
+        default:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        scope:
+          $ref: '#/components/schemas/RoleScope'
+        system:
+          type: boolean
+    RoleScope:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - GROUP
+      - ENVIRONMENT
+      - ORGANIZATION
+      - PLATFORM
+    NewRoleEntity:
+      required:
+      - name
+      - scope
+      type: object
+      properties:
+        default:
+          type: boolean
+        description:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        scope:
+          $ref: '#/components/schemas/RoleScope'
+    RoleScopesLinkedHashMap:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,403 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Categories API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Categories
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/categories:
+    get:
+      tags:
+      - Categories
+      summary: Retrieve list of categories
+      operationId: getCategories
+      parameters:
+      - name: include
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryEntity'
+    put:
+      tags:
+      - Categories
+      summary: Update an existing category
+      description: User must have the PORTAL_CATEGORY[UPDATE] permission to use this service
+      operationId: updateCategories
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UpdateCategoryEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryEntity'
+    post:
+      tags:
+      - Categories
+      summary: Create a category
+      description: User must have the PORTAL_CATEGORY[CREATE] permission to use this service
+      operationId: createCategory
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCategoryEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryEntity'
+  /organizations/{orgId}/environments/{envId}/configuration/categories/{categoryId}:
+    get:
+      tags:
+      - Categories
+      summary: Get the category
+      description: User must have the PORTAL_CATEGORY[READ] permission to use this service
+      operationId: getCategory
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Category's definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Categories
+      summary: Update the category
+      description: User must have the PORTAL_CATEGORY[UPDATE] permission to use this service
+      operationId: updateCategory
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCategoryEntity'
+        required: true
+      responses:
+        '200':
+          description: Category successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Categories
+      summary: Delete the category
+      description: User must have the PORTAL_CATEGORY[DELETE] permission to use this service
+      operationId: deleteCategory
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Category successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/categories/{categoryId}/background:
+    get:
+      tags:
+      - Categories
+      summary: Get the Category's background
+      description: User must have the READ permission to use this service
+      operationId: getCategoryBackground
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Category's background
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/categories/{categoryId}/picture:
+    get:
+      tags:
+      - Categories
+      summary: Get the category's picture
+      description: User must have the PORTAL_CATEGORY[READ] permission to use this service
+      operationId: getCategoryPicture
+      parameters:
+      - name: categoryId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Category's picture
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    UpdateCategoryEntity:
+      required:
+      - name
+      type: object
+      properties:
+        background:
+          type: string
+        defaultCategory:
+          type: boolean
+        description:
+          type: string
+        hidden:
+          type: boolean
+        highlightApi:
+          type: string
+        id:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        order:
+          type: integer
+          format: int32
+        page:
+          type: string
+        picture:
+          type: string
+        picture_url:
+          type: string
+    CategoryEntity:
+      required:
+      - name
+      type: object
+      properties:
+        background:
+          type: string
+        background_url:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        description:
+          type: string
+        hidden:
+          type: boolean
+        highlightApi:
+          type: string
+        id:
+          type: string
+        key:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        order:
+          type: integer
+          format: int32
+        page:
+          type: string
+        picture:
+          type: string
+        picture_url:
+          type: string
+        totalApis:
+          type: integer
+          format: int64
+        updatedAt:
+          type: string
+          format: date-time
+    NewCategoryEntity:
+      required:
+      - name
+      type: object
+      properties:
+        background:
+          type: string
+        description:
+          type: string
+        hidden:
+          type: boolean
+        highlightApi:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        order:
+          type: integer
+          format: int32
+        page:
+          type: string
+        picture:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

@@ -1,0 +1,1535 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Configuration API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Configuration
+paths:
+  /organizations/{orgId}/configuration/identities:
+    get:
+      tags:
+      - Configuration
+      summary: Get the list of identity providers
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[READ] permission to use this service
+      operationId: getIdentityProviders
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List identity providers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdentityProviderListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Configuration
+      summary: Create an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[CREATE] permission to use this service
+      operationId: createIdentityProvider
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewIdentityProviderEntity'
+        required: true
+      responses:
+        '201':
+          description: Identity provider successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProviderEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/identities/{identityProvider}:
+    get:
+      tags:
+      - Configuration
+      summary: Get an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[READ] permission to use this service
+      operationId: getIdentityProvider
+      parameters:
+      - name: identityProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: An identity provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProviderEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Configuration
+      summary: Update an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[UPDATE] permission to use this service
+      operationId: updateIdentityProvider
+      parameters:
+      - name: identityProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIdentityProviderEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated identity provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProviderEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Configuration
+      summary: Delete an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[DELETE] permission to use this service
+      operationId: deleteIdentityProvider
+      parameters:
+      - name: identityProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Identity provider successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/apiheaders:
+    get:
+      tags:
+      - Configuration
+      summary: List API headers
+      operationId: getApiHeaders
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of API headers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiHeaderEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Configuration
+      summary: Create an API header
+      description: User must have the PORTAL_API_HEADER[CREATE] permission to use this service
+      operationId: createApiHeader
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewApiHeaderEntity'
+        required: true
+      responses:
+        '200':
+          description: API header successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiHeaderEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/apiheaders/{id}:
+    put:
+      tags:
+      - Configuration
+      summary: Update an API header
+      description: User must have the PORTAL_API_HEADER[UPDATE] permission to use this service
+      operationId: updateApiHeader
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApiHeaderEntity'
+        required: true
+      responses:
+        '200':
+          description: API header successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiHeaderEntity'
+        '404':
+          description: API header not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Configuration
+      summary: Delete an API header
+      description: User must have the PORTAL_API_HEADER[DELETE] permission to use this service
+      operationId: deleteApiHeader
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API header successfully deleted
+        '404':
+          description: API header not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/applications/types:
+    get:
+      tags:
+      - Configuration
+      summary: Get the list of enabled application types
+      operationId: getEnabledApplicationTypes
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+  /organizations/{orgId}/environments/{envId}/configuration/dictionaries:
+    get:
+      tags:
+      - Configuration
+      summary: Get the list of global dictionaries
+      description: User must have the DICTIONARY[READ] permission to use this service
+      operationId: getDictionaries
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List global dictionaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DictionaryListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Configuration
+      summary: Create a dictionary
+      description: User must have the DICTIONARY[CREATE] permission to use this service
+      operationId: createDictionary
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewDictionaryEntity'
+        required: true
+      responses:
+        '201':
+          description: Dictionary successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DictionaryEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/dictionaries/{dictionary}:
+    get:
+      tags:
+      - Configuration
+      summary: Get a dictionary
+      description: User must have the DICTIONARY[READ] permission to use this service
+      operationId: getDictionary
+      parameters:
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A dictionary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DictionaryEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Configuration
+      summary: Update a dictionary
+      description: User must have the DICTIONARY[UPDATE] permission to use this service
+      operationId: updateDictionary
+      parameters:
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDictionaryEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated dictionary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DictionaryEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Configuration
+      summary: Manage the dictionary's lifecycle
+      description: User must have the DICTIONARY[LIFECYCLE] permission to use this service
+      operationId: doLifecycleAction
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/LifecycleAction'
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Dictionary state updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DictionaryEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Configuration
+      summary: Delete a dictionary
+      description: User must have the DICTIONARY[DELETE] permission to use this service
+      operationId: deleteDictionary
+      parameters:
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Dictionary successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/dictionaries/{dictionary}/_deploy:
+    post:
+      tags:
+      - Configuration
+      summary: Deploy dictionary to API gateway
+      description: User must have the DICTIONARY[UPDATE] permission to use this service
+      operationId: deployDictionary
+      parameters:
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Dictionary successfully deployed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DictionaryEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/dictionaries/{dictionary}/_undeploy:
+    post:
+      tags:
+      - Configuration
+      summary: Undeploy dictionary to API gateway
+      description: User must have the DICTIONARY[UPDATE] permission to use this service
+      operationId: undeployDictionary
+      parameters:
+      - name: dictionary
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Dictionary successfully undeployed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DictionaryEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/hooks:
+    get:
+      tags:
+      - Configuration
+      summary: Get the list of available hooks
+      operationId: getConfigurationHooks
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hook'
+  /organizations/{orgId}/environments/{envId}/configuration/identities:
+    get:
+      tags:
+      - Configuration
+      summary: Get the list of identity providers
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[READ] permission to use this service
+      operationId: getIdentityProviders_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List identity providers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdentityProviderListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Configuration
+      summary: Create an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[CREATE] permission to use this service
+      operationId: createIdentityProvider_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewIdentityProviderEntity'
+        required: true
+      responses:
+        '201':
+          description: Identity provider successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProviderEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/identities/{identityProvider}:
+    get:
+      tags:
+      - Configuration
+      summary: Get an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[READ] permission to use this service
+      operationId: getIdentityProvider_1
+      parameters:
+      - name: identityProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: An identity provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProviderEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Configuration
+      summary: Update an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[UPDATE] permission to use this service
+      operationId: updateIdentityProvider_1
+      parameters:
+      - name: identityProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIdentityProviderEntity'
+        required: true
+      responses:
+        '200':
+          description: Updated identity provider
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityProviderEntity'
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Configuration
+      summary: Delete an identity provider
+      description: User must have the ORGANIZATION_IDENTITY_PROVIDER[DELETE] permission to use this service
+      operationId: deleteIdentityProvider_1
+      parameters:
+      - name: identityProvider
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Identity provider successfully deleted
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/notifiers:
+    get:
+      tags:
+      - Configuration
+      summary: List of available notifiers
+      operationId: getPortalNotifiers
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of notifiers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotifierEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/quality-rules:
+    get:
+      tags:
+      - Configuration
+      summary: List quality rules
+      operationId: getQualityRules
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of quality rules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QualityRuleEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Configuration
+      summary: Create a quality rule
+      description: User must have the MANAGEMENT_QUALITY_RULE[CREATE] permission to use this service
+      operationId: createQualityRule
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewQualityRuleEntity'
+        required: true
+      responses:
+        '200':
+          description: Quality rule successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QualityRuleEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/quality-rules/{id}:
+    get:
+      tags:
+      - Configuration
+      summary: Get a quality rule
+      description: User must have the MANAGEMENT_QUALITY_RULE[READ] permission to use this service
+      operationId: getQualityRule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Quality rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QualityRuleEntity'
+        '404':
+          description: Quality rule not found
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Configuration
+      summary: Update a quality rule
+      description: User must have the MANAGEMENT_QUALITY_RULE[READ] permission to use this service
+      operationId: updateQualityRule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateQualityRuleEntity'
+        required: true
+      responses:
+        '200':
+          description: Quality rule successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QualityRuleEntity'
+        '404':
+          description: Quality rule not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Configuration
+      summary: Delete a quality rule
+      description: User must have the MANAGEMENT_QUALITY_RULE[READ] permission to use this service
+      operationId: deleteQualityRule
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '201':
+          description: Quality rule successfully deleted
+        '404':
+          description: Quality rule not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/configuration/spel/grammar:
+    get:
+      tags:
+      - Configuration
+      operationId: getGrammar
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonNode'
+      summary: Get grammar
+      x-summary-source: derived
+components:
+  schemas:
+    IdentityProviderType:
+      type: string
+      enum:
+      - GOOGLE
+      - GITHUB
+      - GRAVITEEIO_AM
+      - OIDC
+    NewDictionaryEntity:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 3
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        provider:
+          $ref: '#/components/schemas/DictionaryProviderEntity'
+        trigger:
+          $ref: '#/components/schemas/DictionaryTriggerEntity'
+        type:
+          $ref: '#/components/schemas/DictionaryType'
+    NewIdentityProviderEntity:
+      required:
+      - configuration
+      - name
+      - type
+      type: object
+      properties:
+        configuration:
+          type: object
+          additionalProperties:
+            type: object
+        description:
+          type: string
+        emailRequired:
+          type: boolean
+        enabled:
+          type: boolean
+        name:
+          maxLength: 2147483647
+          minLength: 2
+          type: string
+        syncMappings:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/IdentityProviderType'
+        userProfileMapping:
+          type: object
+          additionalProperties:
+            type: string
+    RoleMappingEntity:
+      required:
+      - environments
+      - organizations
+      type: object
+      properties:
+        condition:
+          type: string
+        environments:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        organizations:
+          type: array
+          items:
+            type: string
+    DictionaryProviderEntity:
+      required:
+      - configuration
+      - type
+      type: object
+      properties:
+        configuration:
+          $ref: '#/components/schemas/JsonNode'
+        type:
+          type: string
+    DictionaryListItem:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        deployed_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        properties:
+          type: integer
+          format: int32
+        provider:
+          type: string
+        state:
+          type: string
+          enum:
+          - INITIALIZED
+          - STOPPED
+          - STOPPING
+          - STARTED
+          - CLOSED
+        type:
+          $ref: '#/components/schemas/DictionaryType'
+        updated_at:
+          type: string
+          format: date-time
+    UpdateQualityRuleEntity:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        description:
+          maxLength: 256
+          minLength: 0
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        weight:
+          maximum: 99999
+          minimum: 0
+          type: integer
+          format: int32
+    UpdateApiHeaderEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        value:
+          type: string
+    NewQualityRuleEntity:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        description:
+          maxLength: 256
+          minLength: 0
+          type: string
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        weight:
+          maximum: 99999
+          minimum: 0
+          type: integer
+          format: int32
+    IdentityProviderListItem:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        enabled:
+          type: boolean
+        id:
+          type: string
+        name:
+          type: string
+        sync:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/IdentityProviderType'
+        updated_at:
+          type: string
+          format: date-time
+    NewApiHeaderEntity:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    Hook:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        hidden:
+          type: boolean
+        label:
+          type: string
+        scope:
+          type: string
+          enum:
+          - API
+          - APPLICATION
+          - PORTAL
+          - TEMPLATES_FOR_ACTION
+          - TEMPLATES_FOR_ALERT
+        template:
+          type: string
+    UpdateDictionaryEntity:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        provider:
+          $ref: '#/components/schemas/DictionaryProviderEntity'
+        trigger:
+          $ref: '#/components/schemas/DictionaryTriggerEntity'
+        type:
+          $ref: '#/components/schemas/DictionaryType'
+    UpdateIdentityProviderEntity:
+      required:
+      - configuration
+      - enabled
+      - name
+      type: object
+      properties:
+        configuration:
+          type: object
+          additionalProperties:
+            type: object
+        description:
+          type: string
+        emailRequired:
+          type: boolean
+        enabled:
+          type: boolean
+        groupMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupMappingEntity'
+        name:
+          type: string
+        roleMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleMappingEntity'
+        syncMappings:
+          type: boolean
+        userProfileMapping:
+          type: object
+          additionalProperties:
+            type: string
+    PluginEntity:
+      type: object
+      properties:
+        dependencies:
+          type: array
+          items:
+            type: string
+            format: url
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        plugin:
+          type: string
+        type:
+          type: string
+        version:
+          type: string
+    QualityRuleEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        weight:
+          type: integer
+          format: int32
+    ApiHeaderEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        name:
+          type: string
+        order:
+          type: integer
+          format: int32
+        updated_at:
+          type: string
+          format: date-time
+        value:
+          type: string
+    LifecycleAction:
+      type: string
+      enum:
+      - START
+      - STOP
+    DictionaryEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        deployed_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+        provider:
+          $ref: '#/components/schemas/DictionaryProviderEntity'
+        state:
+          type: string
+          enum:
+          - INITIALIZED
+          - STOPPED
+          - STOPPING
+          - STARTED
+          - CLOSED
+        trigger:
+          $ref: '#/components/schemas/DictionaryTriggerEntity'
+        type:
+          $ref: '#/components/schemas/DictionaryType'
+        updated_at:
+          type: string
+          format: date-time
+    DictionaryType:
+      type: string
+      enum:
+      - MANUAL
+      - DYNAMIC
+    IdentityProviderEntity:
+      type: object
+      properties:
+        configuration:
+          type: object
+          additionalProperties:
+            type: object
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        emailRequired:
+          type: boolean
+        enabled:
+          type: boolean
+        groupMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupMappingEntity'
+        id:
+          type: string
+        name:
+          type: string
+        organization:
+          type: string
+        roleMappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleMappingEntity'
+        syncMappings:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/IdentityProviderType'
+        updated_at:
+          type: string
+          format: date-time
+        userProfileMapping:
+          type: object
+          additionalProperties:
+            type: string
+    JsonNode:
+      type: object
+    DictionaryTriggerEntity:
+      required:
+      - rate
+      - unit
+      type: object
+      properties:
+        rate:
+          type: integer
+          format: int64
+        unit:
+          type: string
+          enum:
+          - NANOSECONDS
+          - MICROSECONDS
+          - MILLISECONDS
+          - SECONDS
+          - MINUTES
+          - HOURS
+          - DAYS
+    GroupMappingEntity:
+      required:
+      - groups
+      type: object
+      properties:
+        condition:
+          type: string
+        groups:
+          type: array
+          items:
+            type: string
+    NotifierEntity:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        plugin:
+          $ref: '#/components/schemas/PluginEntity'
+        version:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

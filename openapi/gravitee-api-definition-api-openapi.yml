@@ -1,0 +1,122 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Definition API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Definition
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/definition:
+    get:
+      tags:
+      - API Definition
+      summary: Export the API definition in JSON format
+      description: User must have the API_DEFINITION[READ] permission to use this service
+      operationId: getApiDefinition
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonNode'
+        '500':
+          description: Internal server error
+    patch:
+      tags:
+      - API Definition
+      summary: Update the API with json patches
+      description: User must have the API_DEFINITION[UPDATE] permission to use this service
+      operationId: patch
+      parameters:
+      - name: dryRun
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatch'
+        required: true
+      responses:
+        '200':
+          description: API successfully updated with json patches
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonNode'
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    JsonPatch:
+      required:
+      - jsonPath
+      type: object
+      properties:
+        jsonPath:
+          type: string
+        operation:
+          type: string
+          enum:
+          - ADD
+          - REMOVE
+          - REPLACE
+          - TEST
+        value:
+          type: object
+    JsonNode:
+      type: object
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

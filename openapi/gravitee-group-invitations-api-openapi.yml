@@ -1,0 +1,237 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Group Invitations API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Group Invitations
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/groups/{group}/invitations:
+    get:
+      tags:
+      - Group Invitations
+      summary: List existing invitations of a group
+      description: User must have the GROUP_INVITATION[READ] permission to use this service
+      operationId: getGroupInvitations
+      parameters:
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvitationEntity'
+    post:
+      tags:
+      - Group Invitations
+      summary: Create an invitation to join a group
+      description: User must have the GROUP_INVITATION[CREATE] permission to use this service
+      operationId: createGroupInvitation
+      parameters:
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewInvitationEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationEntity'
+  /organizations/{orgId}/environments/{envId}/configuration/groups/{group}/invitations/{invitation}:
+    put:
+      tags:
+      - Group Invitations
+      summary: Update an invitation to join a group
+      description: User must have the GROUP_INVITATION[UPDATE] permission to use this service
+      operationId: updateGroupInvitation
+      parameters:
+      - name: invitation
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInvitationEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationEntity'
+    delete:
+      tags:
+      - Group Invitations
+      summary: Delete an invitation to join a group
+      description: User must have the GROUP_INVITATION[DELETE] permission to use this service
+      operationId: deleteGroupInvitation
+      parameters:
+      - name: invitation
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: group
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+components:
+  schemas:
+    NewInvitationEntity:
+      required:
+      - email
+      - reference_id
+      - reference_type
+      type: object
+      properties:
+        api_role:
+          type: string
+        application_role:
+          type: string
+        email:
+          type: string
+        reference_id:
+          type: string
+        reference_type:
+          $ref: '#/components/schemas/InvitationReferenceType'
+    InvitationEntity:
+      type: object
+      properties:
+        api_role:
+          type: string
+        application_role:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+        id:
+          type: string
+        reference_id:
+          type: string
+        reference_type:
+          $ref: '#/components/schemas/InvitationReferenceType'
+        updated_at:
+          type: string
+          format: date-time
+    InvitationReferenceType:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - GROUP
+    UpdateInvitationEntity:
+      required:
+      - email
+      - reference_id
+      - reference_type
+      type: object
+      properties:
+        api_role:
+          type: string
+        application_role:
+          type: string
+        email:
+          type: string
+        id:
+          type: string
+        reference_id:
+          type: string
+        reference_type:
+          $ref: '#/components/schemas/InvitationReferenceType'
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

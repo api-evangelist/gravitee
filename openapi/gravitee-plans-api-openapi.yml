@@ -1,209 +1,64 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io APIM Management Plans API
-  description: 'The Gravitee API Management (APIM) Management API is the administrative
-
-    control plane for the Gravitee platform.'
-  contact:
-    name: GraviteeSource Team
-    url: https://gravitee.io
-    email: team-apim@graviteesource.com
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 2.0.0
+  title: Gravitee.io - Management Plans API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
 servers:
-- url: https://{host}/management/v2
-  description: APIM Management API v2 - default base URL
-  variables:
-    host:
-      default: apim.example.com
-      description: Hostname of the Gravitee APIM Management API
-- url: https://{host}/management/v2/organizations/{orgId}
-  description: APIM Management API v2 - per-organization base URL
-  variables:
-    host:
-      default: apim.example.com
-    orgId:
-      default: DEFAULT
+- url: http://localhost:8083/management
 security:
-- BasicAuth: []
-- CookieAuth: []
-- BearerAuth: []
+- gravitee-auth: []
 tags:
 - name: Plans
-  description: Manage plans (Keyless, API Key, OAuth2, JWT, mTLS, Push)
 paths:
-  /environments/{envId}/apis/{apiId}/plans:
+  /organizations/{orgId}/environments/{envId}/configuration/plans:
     get:
       tags:
       - Plans
-      operationId: listApiPlans
-      summary: List Plans on an API
+      summary: List of available plan's type
+      operationId: getPlansConfiguration
       parameters:
-      - $ref: '#/components/parameters/EnvId'
-      - $ref: '#/components/parameters/ApiId'
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '200':
-          description: Plans page
-    post:
-      tags:
-      - Plans
-      operationId: createApiPlan
-      summary: Create a Plan on an API
-      parameters:
-      - $ref: '#/components/parameters/EnvId'
-      - $ref: '#/components/parameters/ApiId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Plan'
-      responses:
-        '201':
-          description: Plan created
-  /environments/{envId}/apis/{apiId}/plans/{planId}:
-    get:
-      tags:
-      - Plans
-      operationId: getApiPlan
-      summary: Get a Plan by Identifier
-      parameters:
-      - $ref: '#/components/parameters/EnvId'
-      - $ref: '#/components/parameters/ApiId'
-      - in: path
-        name: planId
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: The plan
-    put:
-      tags:
-      - Plans
-      operationId: updateApiPlan
-      summary: Update a Plan
-      parameters:
-      - $ref: '#/components/parameters/EnvId'
-      - $ref: '#/components/parameters/ApiId'
-      - in: path
-        name: planId
-        required: true
-        schema:
-          type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Plan'
-      responses:
-        '200':
-          description: Plan updated
-  /environments/{envId}/apis/{apiId}/plans/{planId}/_publish:
-    post:
-      tags:
-      - Plans
-      operationId: publishApiPlan
-      summary: Publish a Plan
-      parameters:
-      - $ref: '#/components/parameters/EnvId'
-      - $ref: '#/components/parameters/ApiId'
-      - in: path
-        name: planId
-        required: true
-        schema:
-          type: string
-      responses:
-        '204':
-          description: Plan published
-  /environments/{envId}/apis/{apiId}/plans/{planId}/_close:
-    post:
-      tags:
-      - Plans
-      operationId: closeApiPlan
-      summary: Close a Plan
-      parameters:
-      - $ref: '#/components/parameters/EnvId'
-      - $ref: '#/components/parameters/ApiId'
-      - in: path
-        name: planId
-        required: true
-        schema:
-          type: string
-      responses:
-        '204':
-          description: Plan closed
+          description: List of plans
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlansConfigurationEntity'
+        '500':
+          description: Internal server error
 components:
-  parameters:
-    ApiId:
-      in: path
-      name: apiId
-      required: true
-      schema:
-        type: string
-      description: The API identifier
-    EnvId:
-      in: path
-      name: envId
-      required: true
-      schema:
-        type: string
-      description: The environment identifier
   schemas:
-    Plan:
+    PlanSecurityEntity:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-        description:
+        policy:
           type: string
+    PlansConfigurationEntity:
+      type: object
+      properties:
         security:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - KEY_LESS
-              - API_KEY
-              - OAUTH2
-              - JWT
-              - MTLS
-              - SUBSCRIPTION
-              - PUSH
-            configuration:
-              type: object
-        status:
-          type: string
-          enum:
-          - STAGING
-          - PUBLISHED
-          - DEPRECATED
-          - CLOSED
-        validation:
-          type: string
-          enum:
-          - MANUAL
-          - AUTO
-        order:
-          type: integer
-        characteristics:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/PlanSecurityEntity'
   securitySchemes:
-    BasicAuth:
+    gravitee-auth:
       type: http
       scheme: basic
-    CookieAuth:
-      type: apiKey
-      in: cookie
-      name: Auth-Graviteeio-APIM
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT

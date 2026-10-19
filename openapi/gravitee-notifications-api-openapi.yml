@@ -1,0 +1,186 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Notifications API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Notifications
+paths:
+  /organizations/{orgId}/configuration/notification-templates:
+    get:
+      tags:
+      - Notifications
+      summary: List all notification templates
+      description: User must have the NOTIFICATION_TEMPLATES[READ] permission to use this service
+      operationId: getNotificationTemplates
+      parameters:
+      - name: scope
+        in: query
+        description: filter by notification scope
+        schema:
+          type: string
+      - name: hook
+        in: query
+        description: filter by notification hook
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Notifications templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotificationTemplateEntity'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Notifications
+      summary: Create a notification template
+      description: User must have the NOTIFICATION_TEMPLATES[CREATE] permission to use this service
+      operationId: createNotificationTemplate
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationTemplateEntity'
+      responses:
+        '200':
+          description: Created notification template
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationTemplateEntity'
+        '400':
+          description: There must not be any ID in the payload
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/notification-templates/{notificationTemplateId}:
+    get:
+      tags:
+      - Notifications
+      summary: Get a specific notification template
+      description: User must have the NOTIFICATION_TEMPLATES[READ] permission to use this service
+      operationId: getNotificationTemplate
+      parameters:
+      - name: notificationTemplateId
+        in: path
+        description: ID of the notification template
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Notification template found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationTemplateEntity'
+        '404':
+          description: Notification template not found
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Notifications
+      summary: Update an existing notification template
+      description: User must have the NOTIFICATION_TEMPLATES[UPDATE] permission to use this service
+      operationId: updateNotificationTemplate
+      parameters:
+      - name: notificationTemplateId
+        in: path
+        description: ID of the notification template
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationTemplateEntity'
+      responses:
+        '200':
+          description: Updated notification template
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationTemplateEntity'
+        '400':
+          description: ID in path parameter is not the same as in the payload
+        '404':
+          description: Notification template not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    NotificationTemplateEntity:
+      type: object
+      properties:
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        enabled:
+          type: boolean
+        hook:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        scope:
+          type: string
+        title:
+          type: string
+        type:
+          $ref: '#/components/schemas/NotificationTemplateType'
+        updated_at:
+          type: string
+          format: date-time
+    NotificationTemplateType:
+      type: string
+      enum:
+      - EMAIL
+      - PORTAL
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

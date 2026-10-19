@@ -1,0 +1,34 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Auth API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Auth
+paths:
+  /auth/cockpit:
+    get:
+      operationId: tokenExchange
+      parameters:
+      - name: token
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+      tags:
+      - Auth
+      summary: Token exchange
+      x-summary-source: derived
+components:
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

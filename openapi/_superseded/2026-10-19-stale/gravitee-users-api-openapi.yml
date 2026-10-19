@@ -1,0 +1,79 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io APIM Management Users API
+  description: 'The Gravitee API Management (APIM) Management API is the administrative
+
+    control plane for the Gravitee platform.'
+  contact:
+    name: GraviteeSource Team
+    url: https://gravitee.io
+    email: team-apim@graviteesource.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 2.0.0
+servers:
+- url: https://{host}/management/v2
+  description: APIM Management API v2 - default base URL
+  variables:
+    host:
+      default: apim.example.com
+      description: Hostname of the Gravitee APIM Management API
+- url: https://{host}/management/v2/organizations/{orgId}
+  description: APIM Management API v2 - per-organization base URL
+  variables:
+    host:
+      default: apim.example.com
+    orgId:
+      default: DEFAULT
+security:
+- BasicAuth: []
+- CookieAuth: []
+- BearerAuth: []
+tags:
+- name: Users
+  description: Manage Gravitee users
+paths:
+  /users/{userId}/apis:
+    get:
+      tags:
+      - Users
+      operationId: listUserApis
+      summary: List APIs for a User
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User APIs
+  /users/{userId}/applications:
+    get:
+      tags:
+      - Users
+      operationId: listUserApplications
+      summary: List Applications for a User
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User applications
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: Auth-Graviteeio-APIM
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

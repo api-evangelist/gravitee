@@ -1,0 +1,243 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Organization API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Organization
+paths:
+  /organizations/{orgId}:
+    get:
+      tags:
+      - Organization
+      summary: GET organization
+      operationId: get
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationEntity'
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - Organization
+      summary: Update organization
+      operationId: update
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationEntity'
+      responses:
+        '204':
+          description: Organization successfully updated
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/identities:
+    put:
+      tags:
+      - Organization
+      summary: Update available organization identities
+      operationId: updateOrganizationIdentities
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              uniqueItems: true
+              type: array
+              items:
+                $ref: '#/components/schemas/IdentityProviderActivationEntity'
+      responses:
+        '204':
+          description: Organization successfully updated
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    Flow:
+      type: object
+      properties:
+        condition:
+          type: string
+        consumers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Consumer'
+        enabled:
+          type: boolean
+        methods:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+            - CONNECT
+            - DELETE
+            - GET
+            - HEAD
+            - OPTIONS
+            - PATCH
+            - POST
+            - PUT
+            - TRACE
+            - OTHER
+        name:
+          type: string
+        path-operator:
+          $ref: '#/components/schemas/PathOperator'
+        post:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+        pre:
+          type: array
+          items:
+            $ref: '#/components/schemas/Step'
+    IdentityProviderActivationReferenceType:
+      type: string
+      enum:
+      - ENVIRONMENT
+      - ORGANIZATION
+    Consumer:
+      type: object
+      properties:
+        consumerId:
+          type: string
+        consumerType:
+          type: string
+          enum:
+          - TAG
+    Step:
+      type: object
+      properties:
+        condition:
+          type: string
+        configuration:
+          type: object
+        description:
+          type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        policy:
+          type: string
+    UpdateOrganizationEntity:
+      required:
+      - name
+      type: object
+      properties:
+        cockpitId:
+          type: string
+        description:
+          type: string
+        domainRestrictions:
+          type: array
+          items:
+            type: string
+        flowMode:
+          type: string
+          enum:
+          - DEFAULT
+          - BEST_MATCH
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+        hrids:
+          type: array
+          items:
+            type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+    IdentityProviderActivationEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        identityProvider:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/IdentityProviderActivationReferenceType'
+    PathOperator:
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+          - STARTS_WITH
+          - EQUALS
+        path:
+          type: string
+    OrganizationEntity:
+      required:
+      - name
+      type: object
+      properties:
+        cockpitId:
+          type: string
+        description:
+          type: string
+        domainRestrictions:
+          type: array
+          items:
+            type: string
+        flowMode:
+          type: string
+          enum:
+          - DEFAULT
+          - BEST_MATCH
+        flows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Flow'
+        hrids:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        name:
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

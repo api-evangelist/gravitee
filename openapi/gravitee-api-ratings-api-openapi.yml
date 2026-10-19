@@ -1,0 +1,785 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Ratings API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Ratings
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/ratings:
+    get:
+      tags:
+      - API Ratings
+      summary: List ratings for an API
+      operationId: getApiRating
+      parameters:
+      - name: pageNumber
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageRatingEntity'
+    post:
+      tags:
+      - API Ratings
+      summary: Create a new rating for an API
+      description: User must have the API_RATING[CREATE] permission to use this service
+      operationId: createApiRating
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRatingEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingEntity'
+  /organizations/{orgId}/environments/{envId}/apis/{api}/ratings/current:
+    get:
+      tags:
+      - API Ratings
+      summary: Retrieve current rating for an API provided by the authenticated user
+      operationId: getApiRatingByApiAndUser
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingEntity'
+  /organizations/{orgId}/environments/{envId}/apis/{api}/ratings/summary:
+    get:
+      tags:
+      - API Ratings
+      summary: Get the rating summary for an API
+      operationId: getApiRatingSummaryByApi
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingSummaryEntity'
+  /organizations/{orgId}/environments/{envId}/apis/{api}/ratings/{rating}:
+    put:
+      tags:
+      - API Ratings
+      summary: Update an existing rating for an API
+      description: User must have the API_RATING[UPDATE] permission to use this service
+      operationId: updateApiRating
+      parameters:
+      - name: rating
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRatingEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingEntity'
+    delete:
+      tags:
+      - API Ratings
+      summary: Delete an existing rating for an API
+      description: User must have the API_RATING[DELETE] permission to use this service
+      operationId: deleteApiRating
+      parameters:
+      - name: rating
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+  /organizations/{orgId}/environments/{envId}/apis/{api}/ratings/{rating}/answers:
+    post:
+      tags:
+      - API Ratings
+      summary: Create an answer to a rating for an API
+      description: User must have the API_RATING_ANSWER[CREATE] permission to use this service
+      operationId: createApiRatingAnswer
+      parameters:
+      - name: rating
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRatingAnswerEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingEntity'
+  /organizations/{orgId}/environments/{envId}/apis/{api}/ratings/{rating}/answers/{answer}:
+    delete:
+      tags:
+      - API Ratings
+      summary: Delete an answer to a rating for an API
+      description: User must have the API_RATING_ANSWER[DELETE] permission to use this service
+      operationId: deleteApiRatingAnswer
+      parameters:
+      - name: rating
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: answer
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/ratings:
+    get:
+      tags:
+      - API Ratings
+      summary: List ratings for an API
+      operationId: getApiRating_1
+      parameters:
+      - name: pageNumber
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageRatingEntity'
+    post:
+      tags:
+      - API Ratings
+      summary: Create a new rating for an API
+      description: User must have the API_RATING[CREATE] permission to use this service
+      operationId: createApiRating_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRatingEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingEntity'
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/ratings/current:
+    get:
+      tags:
+      - API Ratings
+      summary: Retrieve current rating for an API provided by the authenticated user
+      operationId: getApiRatingByApiAndUser_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingEntity'
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/ratings/summary:
+    get:
+      tags:
+      - API Ratings
+      summary: Get the rating summary for an API
+      operationId: getApiRatingSummaryByApi_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingSummaryEntity'
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/ratings/{rating}:
+    put:
+      tags:
+      - API Ratings
+      summary: Update an existing rating for an API
+      description: User must have the API_RATING[UPDATE] permission to use this service
+      operationId: updateApiRating_1
+      parameters:
+      - name: rating
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRatingEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingEntity'
+    delete:
+      tags:
+      - API Ratings
+      summary: Delete an existing rating for an API
+      description: User must have the API_RATING[DELETE] permission to use this service
+      operationId: deleteApiRating_1
+      parameters:
+      - name: rating
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/ratings/{rating}/answers:
+    post:
+      tags:
+      - API Ratings
+      summary: Create an answer to a rating for an API
+      description: User must have the API_RATING_ANSWER[CREATE] permission to use this service
+      operationId: createApiRatingAnswer_1
+      parameters:
+      - name: rating
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRatingAnswerEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingEntity'
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/ratings/{rating}/answers/{answer}:
+    delete:
+      tags:
+      - API Ratings
+      summary: Delete an answer to a rating for an API
+      description: User must have the API_RATING_ANSWER[DELETE] permission to use this service
+      operationId: deleteApiRatingAnswer_1
+      parameters:
+      - name: rating
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: answer
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+components:
+  schemas:
+    NewRatingEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        comment:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        rate:
+          type: string
+          format: byte
+        title:
+          maxLength: 64
+          minLength: 0
+          type: string
+    UpdateRatingEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        comment:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        id:
+          type: string
+        rate:
+          type: string
+          format: byte
+        title:
+          maxLength: 64
+          minLength: 0
+          type: string
+    NewRatingAnswerEntity:
+      type: object
+      properties:
+        comment:
+          maxLength: 1024
+          minLength: 0
+          type: string
+        ratingId:
+          type: string
+    PageRatingEntity:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/RatingEntity'
+        pageElements:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+    RatingSummaryEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        averageRate:
+          type: number
+          format: double
+        numberOfRatings:
+          type: integer
+          format: int32
+        numberOfRatingsByRate:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+    RatingAnswerEntity:
+      type: object
+      properties:
+        comment:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        user:
+          type: string
+        userDisplayName:
+          type: string
+    RatingEntity:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/RatingAnswerEntity'
+        api:
+          type: string
+        comment:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        rate:
+          type: string
+          format: byte
+        title:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        user:
+          type: string
+        userDisplayName:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

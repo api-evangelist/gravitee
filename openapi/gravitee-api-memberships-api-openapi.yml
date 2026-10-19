@@ -1,0 +1,531 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Memberships API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Memberships
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/members:
+    get:
+      tags:
+      - API Memberships
+      summary: List API members
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: getApiMembers
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of API's members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MembershipListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Memberships
+      summary: Add or update an API member
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: addOrUpdateApiMember
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ApiMembership'
+        required: true
+      responses:
+        '201':
+          description: Member has been added or updated successfully
+        '400':
+          description: Membership parameter is not valid
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - API Memberships
+      summary: Remove an API member
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: deleteApiMember
+      parameters:
+      - name: user
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Member has been removed successfully
+        '400':
+          description: User does not exist
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/members/permissions:
+    get:
+      tags:
+      - API Memberships
+      summary: Get API members
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: getApiMembersPermissions
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API member's permissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/members/transfer_ownership:
+    post:
+      tags:
+      - API Memberships
+      summary: Transfer the ownership of the API
+      description: User must have the TRANSFER_OWNERSHIP permission to use this service
+      operationId: transferApiMemberOwnership
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/TransferOwnership'
+        required: true
+      responses:
+        '200':
+          description: Ownership has been transferred successfully
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/members:
+    get:
+      tags:
+      - API Memberships
+      summary: List API members
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: getApiMembers_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of API's members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MembershipListItem'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Memberships
+      summary: Add or update an API member
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: addOrUpdateApiMember_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ApiMembership'
+        required: true
+      responses:
+        '201':
+          description: Member has been added or updated successfully
+        '400':
+          description: Membership parameter is not valid
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - API Memberships
+      summary: Remove an API member
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: deleteApiMember_1
+      parameters:
+      - name: user
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Member has been removed successfully
+        '400':
+          description: User does not exist
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/members/permissions:
+    get:
+      tags:
+      - API Memberships
+      summary: Get API members
+      description: User must have the MANAGE_MEMBERS permission to use this service
+      operationId: getApiMembersPermissions_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API member's permissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/members/transfer_ownership:
+    post:
+      tags:
+      - API Memberships
+      summary: Transfer the ownership of the API
+      description: User must have the TRANSFER_OWNERSHIP permission to use this service
+      operationId: transferApiMemberOwnership_1
+      parameters:
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/TransferOwnership'
+        required: true
+      responses:
+        '200':
+          description: Ownership has been transferred successfully
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    MembershipReferenceType:
+      type: string
+      enum:
+      - APPLICATION
+      - API
+      - GROUP
+      - ENVIRONMENT
+      - ORGANIZATION
+      - PLATFORM
+    RoleEntity:
+      required:
+      - id
+      type: object
+      properties:
+        apiPrimaryOwner:
+          type: boolean
+        default:
+          type: boolean
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        scope:
+          $ref: '#/components/schemas/RoleScope'
+        system:
+          type: boolean
+    RoleScope:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - GROUP
+      - ENVIRONMENT
+      - ORGANIZATION
+      - PLATFORM
+    ApiMembership:
+      required:
+      - role
+      type: object
+      properties:
+        id:
+          type: string
+          description: User's technical identifier.
+        reference:
+          type: string
+          description: User's reference for user providing from an identity provider.
+        role:
+          type: string
+          description: Role's name
+    MembershipMemberType:
+      type: string
+      description: Type's name
+      example: USER
+      enum:
+      - USER
+      - GROUP
+    MemberEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        displayName:
+          type: string
+        email:
+          type: string
+        id:
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        referenceId:
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/MembershipReferenceType'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleEntity'
+        type:
+          $ref: '#/components/schemas/MembershipMemberType'
+        updated_at:
+          type: string
+          format: date-time
+    TransferOwnership:
+      required:
+      - role
+      - type
+      type: object
+      properties:
+        id:
+          type: string
+          description: User's technical identifier.
+        reference:
+          type: string
+          description: User's reference for user providing from an identity provider.
+        role:
+          type: string
+          description: Role's name
+        type:
+          $ref: '#/components/schemas/MembershipMemberType'
+    MembershipListItem:
+      type: object
+      properties:
+        displayName:
+          type: string
+        id:
+          type: string
+        role:
+          type: string
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

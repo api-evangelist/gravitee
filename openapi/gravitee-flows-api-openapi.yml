@@ -1,0 +1,86 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Flows API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Flows
+paths:
+  /organizations/{orgId}/configuration/flows:
+    get:
+      tags:
+      - Flows
+      summary: Get the global flow configuration of the organization
+      operationId: hasPolicies
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Platform flows configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationFlowConfiguration'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/configuration/flows/configuration-schema:
+    get:
+      tags:
+      - Flows
+      operationId: getConfigurationSchemaForm
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+      summary: Get configuration schema form
+      x-summary-source: derived
+  /organizations/{orgId}/configuration/flows/flow-schema:
+    get:
+      tags:
+      - Flows
+      operationId: getPlatformFlowSchemaForm
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+      summary: Get platform flow schema form
+      x-summary-source: derived
+components:
+  schemas:
+    OrganizationFlowConfiguration:
+      type: object
+      properties:
+        has_policies:
+          type: boolean
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

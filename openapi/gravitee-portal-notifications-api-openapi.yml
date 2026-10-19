@@ -1,0 +1,225 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management Portal Notifications API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: Portal Notifications
+paths:
+  /organizations/{orgId}/environments/{envId}/configuration/notificationsettings:
+    get:
+      tags:
+      - Portal Notifications
+      summary: Get notification settings
+      operationId: getPortalNotificationSettings
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+    put:
+      tags:
+      - Portal Notifications
+      summary: Update portal notification settings
+      operationId: updatePortalNotificationSettings
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortalNotificationConfigEntity'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalNotificationConfigEntity'
+    post:
+      tags:
+      - Portal Notifications
+      summary: Create notification settings
+      operationId: createPortalNotificationSetting
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericNotificationConfigEntity'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: object
+  /organizations/{orgId}/environments/{envId}/configuration/notificationsettings/{notificationId}:
+    put:
+      tags:
+      - Portal Notifications
+      summary: Update generic notification settings
+      operationId: updateGenericNotificationSettings
+      parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericNotificationConfigEntity'
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericNotificationConfigEntity'
+    delete:
+      tags:
+      - Portal Notifications
+      summary: Delete notification settings
+      operationId: deleteNotificationSettings
+      parameters:
+      - name: notificationId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        default:
+          description: default response
+          content:
+            application/json: {}
+components:
+  schemas:
+    NotificationConfigType:
+      type: string
+      enum:
+      - PORTAL
+      - GENERIC
+    PortalNotificationConfigEntity:
+      type: object
+      properties:
+        config_type:
+          $ref: '#/components/schemas/NotificationConfigType'
+        hooks:
+          type: array
+          items:
+            type: string
+        name:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+        user:
+          type: string
+    GenericNotificationConfigEntity:
+      type: object
+      properties:
+        config:
+          type: string
+        config_type:
+          $ref: '#/components/schemas/NotificationConfigType'
+        hooks:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        name:
+          type: string
+        notifier:
+          type: string
+        referenceId:
+          type: string
+        referenceType:
+          type: string
+        useSystemProxy:
+          type: boolean
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic

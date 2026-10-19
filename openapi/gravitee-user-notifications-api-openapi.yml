@@ -1,68 +1,226 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io - Access Management user notifications API
-  version: 4.12.0-alpha.3
+  title: Gravitee.io - Management User Notifications API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
 servers:
-- url: /management
+- url: http://localhost:8083/management
 security:
 - gravitee-auth: []
 tags:
 - name: User Notifications
 paths:
-  /user/notifications:
+  /organizations/{orgId}/environments/{envId}/user/notifications:
     get:
       tags:
       - User Notifications
-      summary: List notifications received by the current user
-      operationId: listNotifications
+      summary: List user's notifications
+      operationId: getUserNotifications_1
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '200':
-          description: Current user notifications successfully fetched
+          description: User's notifications
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserNotificationContent'
+                $ref: '#/components/schemas/PortalNotificationPageResult'
+        '404':
+          description: User not found
         '500':
           description: Internal server error
-  /user/notifications/{notificationId}/acknowledge:
-    post:
+    delete:
       tags:
       - User Notifications
-      summary: Mark User notification as read
-      operationId: markNotificationAsRead
+      summary: Delete all user's notifications
+      operationId: deleteAllUserNotifications_1
       parameters:
-      - name: notificationId
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Notifications successfully deleted
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/user/notifications/{notification}:
+    delete:
+      tags:
+      - User Notifications
+      summary: Delete a single user's notification
+      operationId: deleteUserNotification_1
+      parameters:
+      - name: notification
         in: path
         required: true
         schema:
           type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '204':
-          description: User notification has been marked as read
+          description: Notification successfully deleted
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/user/notifications:
+    get:
+      tags:
+      - User Notifications
+      summary: List user's notifications
+      operationId: getUserNotifications
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's notifications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalNotificationPageResult'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - User Notifications
+      summary: Delete all user's notifications
+      operationId: deleteAllUserNotifications
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Notifications successfully deleted
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/user/notifications/{notification}:
+    delete:
+      tags:
+      - User Notifications
+      summary: Delete a single user's notification
+      operationId: deleteUserNotification
+      parameters:
+      - name: notification
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: Notification successfully deleted
+        '404':
+          description: User not found
         '500':
           description: Internal server error
 components:
   schemas:
-    UserNotificationContent:
+    Page:
       type: object
       properties:
-        createdAt:
+        current:
+          type: integer
+          format: int32
+        per_page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        total_elements:
+          type: integer
+          format: int32
+        total_pages:
+          type: integer
+          format: int32
+    PortalNotificationPageResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortalNotificationEntity'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        page:
+          $ref: '#/components/schemas/Page'
+    PortalNotificationEntity:
+      type: object
+      properties:
+        created_at:
           type: string
           format: date-time
         id:
           type: string
         message:
           type: string
-        status:
-          type: string
-          enum:
-          - UNREAD
-          - READ
         title:
           type: string
   securitySchemes:
     gravitee-auth:
       type: http
-      scheme: Bearer
+      scheme: basic

@@ -1,79 +1,1114 @@
 openapi: 3.2.0
 info:
-  title: Gravitee.io APIM Management Users API
-  description: 'The Gravitee API Management (APIM) Management API is the administrative
-
-    control plane for the Gravitee platform.'
-  contact:
-    name: GraviteeSource Team
-    url: https://gravitee.io
-    email: team-apim@graviteesource.com
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 2.0.0
+  title: Gravitee.io - Management Users API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
 servers:
-- url: https://{host}/management/v2
-  description: APIM Management API v2 - default base URL
-  variables:
-    host:
-      default: apim.example.com
-      description: Hostname of the Gravitee APIM Management API
-- url: https://{host}/management/v2/organizations/{orgId}
-  description: APIM Management API v2 - per-organization base URL
-  variables:
-    host:
-      default: apim.example.com
-    orgId:
-      default: DEFAULT
+- url: http://localhost:8083/management
 security:
-- BasicAuth: []
-- CookieAuth: []
-- BearerAuth: []
+- gravitee-auth: []
 tags:
 - name: Users
-  description: Manage Gravitee users
 paths:
-  /users/{userId}/apis:
+  /organizations/{orgId}/environments/{envId}/search/users:
     get:
       tags:
       - Users
-      operationId: listUserApis
-      summary: List APIs for a User
+      summary: Search for users
+      operationId: searchUsers
       parameters:
-      - in: path
-        name: userId
+      - name: q
+        in: query
         required: true
         schema:
           type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '200':
-          description: User APIs
-  /users/{userId}/applications:
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchableUser'
+        '400':
+          description: Bad query parameter
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users:
     get:
       tags:
       - Users
-      operationId: listUserApplications
-      summary: List Applications for a User
+      summary: Search for users using the search engine
+      description: User must have the ORGANIZATION_USERS[READ] permission to use this service
+      operationId: getAllUsers
       parameters:
-      - in: path
-        name: userId
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: envId
+        in: path
+        description: The ID of the environment
         required: true
         schema:
           type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
       responses:
         '200':
-          description: User applications
+          description: List users matching the query criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPageResult'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Users
+      summary: Create a user
+      description: User must have the ORGANIZATION_USERS[CREATE] permission to use this service
+      operationId: createUser
+      parameters:
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPreRegisterUserEntity'
+      responses:
+        '200':
+          description: List users matching the query criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}:
+    get:
+      tags:
+      - Users
+      summary: Retrieve a user
+      description: User must have the ORGANIZATION_USERS[READ] permission to use this service
+      operationId: getUser
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Users
+      summary: Delete a user
+      description: User must have the ORGANIZATION_USERS[DELETE] permission to use this service
+      operationId: deleteUser
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User successfully deleted
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/_process:
+    post:
+      tags:
+      - Users
+      summary: Process a user registration by accepting or rejecting it
+      operationId: validateRegistration
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: boolean
+      responses:
+        '200':
+          description: Processed user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/avatar:
+    get:
+      tags:
+      - Users
+      summary: Get the user's avatar
+      operationId: getUserAvatar
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's avatar
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/changePassword:
+    post:
+      tags:
+      - Users
+      summary: Change user password after a reset
+      description: User registration must be enabled
+      operationId: finalizeResetPassword
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ResetPasswordUserEntity'
+      responses:
+        '200':
+          description: User successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/groups:
+    get:
+      tags:
+      - Users
+      summary: List of groups the user belongs to
+      description: User must have the ORGANIZATION_USERS[READ] permission to use this service
+      operationId: getUserGroups
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of user groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGroupEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/memberships:
+    get:
+      tags:
+      - Users
+      summary: List of memberships the user belongs to
+      description: User must have the ORGANIZATION_USERS[READ] permission to use this service
+      operationId: getUserMemberships
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of user memberships
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMembershipList'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/resetPassword:
+    post:
+      tags:
+      - Users
+      summary: Reset the user's password
+      description: User must have the ORGANIZATION_USERS[UPDATE] permission to use this service
+      operationId: resetUserPassword
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User's password reset
+        '400':
+          description: reset page URL must not be null
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/users/{userId}/roles:
+    put:
+      tags:
+      - Users
+      operationId: updateUserRoles
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UserReferenceRoleEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+      summary: Update user roles
+      x-summary-source: derived
+  /organizations/{orgId}/search/users:
+    get:
+      tags:
+      - Users
+      summary: Search for users
+      operationId: searchUsers_1
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchableUser'
+        '400':
+          description: Bad query parameter
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users:
+    get:
+      tags:
+      - Users
+      summary: Search for users using the search engine
+      description: User must have the ORGANIZATION_USERS[READ] permission to use this service
+      operationId: getAllUsers_1
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List users matching the query criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPageResult'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - Users
+      summary: Create a user
+      description: User must have the ORGANIZATION_USERS[CREATE] permission to use this service
+      operationId: createUser_1
+      parameters:
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPreRegisterUserEntity'
+      responses:
+        '200':
+          description: List users matching the query criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}:
+    get:
+      tags:
+      - Users
+      summary: Retrieve a user
+      description: User must have the ORGANIZATION_USERS[READ] permission to use this service
+      operationId: getUser_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: A user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+      - Users
+      summary: Delete a user
+      description: User must have the ORGANIZATION_USERS[DELETE] permission to use this service
+      operationId: deleteUser_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User successfully deleted
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/_process:
+    post:
+      tags:
+      - Users
+      summary: Process a user registration by accepting or rejecting it
+      operationId: validateRegistration_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: boolean
+      responses:
+        '200':
+          description: Processed user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/avatar:
+    get:
+      tags:
+      - Users
+      summary: Get the user's avatar
+      operationId: getUserAvatar_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: User's avatar
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/changePassword:
+    post:
+      tags:
+      - Users
+      summary: Change user password after a reset
+      description: User registration must be enabled
+      operationId: finalizeResetPassword_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ResetPasswordUserEntity'
+      responses:
+        '200':
+          description: User successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/groups:
+    get:
+      tags:
+      - Users
+      summary: List of groups the user belongs to
+      description: User must have the ORGANIZATION_USERS[READ] permission to use this service
+      operationId: getUserGroups_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of user groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserGroupEntity'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/memberships:
+    get:
+      tags:
+      - Users
+      summary: List of memberships the user belongs to
+      description: User must have the ORGANIZATION_USERS[READ] permission to use this service
+      operationId: getUserMemberships_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: List of user memberships
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMembershipList'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/resetPassword:
+    post:
+      tags:
+      - Users
+      summary: Reset the user's password
+      description: User must have the ORGANIZATION_USERS[UPDATE] permission to use this service
+      operationId: resetUserPassword_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '204':
+          description: User's password reset
+        '400':
+          description: reset page URL must not be null
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/users/{userId}/roles:
+    put:
+      tags:
+      - Users
+      operationId: updateUserRoles_1
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UserReferenceRoleEntity'
+        required: true
+      responses:
+        default:
+          description: default response
+          content:
+            '*/*': {}
+      summary: Update user roles 1
+      x-summary-source: derived
 components:
+  schemas:
+    UserReferenceRoleEntity:
+      type: object
+      properties:
+        referenceId:
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/MembershipReferenceType'
+        roles:
+          type: array
+          items:
+            type: string
+        user:
+          type: string
+    MembershipReferenceType:
+      type: string
+      enum:
+      - APPLICATION
+      - API
+      - GROUP
+      - ENVIRONMENT
+      - ORGANIZATION
+      - PLATFORM
+    UserRoleEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        permissions:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        scope:
+          $ref: '#/components/schemas/RoleScope'
+    UserGroupEntity:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            type: string
+    UserPageResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEntity'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        page:
+          $ref: '#/components/schemas/Page'
+    UserMembershipList:
+      type: object
+      properties:
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMembership'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+    Page:
+      type: object
+      properties:
+        current:
+          type: integer
+          format: int32
+        per_page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        total_elements:
+          type: integer
+          format: int32
+        total_pages:
+          type: integer
+          format: int32
+    SearchableUser:
+      type: object
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        firstname:
+          type: string
+        id:
+          type: string
+        lastname:
+          type: string
+        picture:
+          type: string
+        reference:
+          type: string
+    RoleScope:
+      type: string
+      enum:
+      - API
+      - APPLICATION
+      - GROUP
+      - ENVIRONMENT
+      - ORGANIZATION
+      - PLATFORM
+    UserEntity:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        customFields:
+          type: object
+          additionalProperties:
+            type: object
+        displayName:
+          type: string
+          readOnly: true
+        email:
+          type: string
+        envRoles:
+          type: object
+          additionalProperties:
+            uniqueItems: true
+            type: array
+            items:
+              $ref: '#/components/schemas/UserRoleEntity'
+        firstConnectionAt:
+          type: string
+          format: date-time
+        firstname:
+          type: string
+        id:
+          type: string
+        lastConnectionAt:
+          type: string
+          format: date-time
+        lastname:
+          type: string
+        loginCount:
+          type: integer
+          format: int64
+        newsletterSubscribed:
+          type: boolean
+        number_of_active_tokens:
+          type: integer
+          format: int32
+        password:
+          type: string
+        picture:
+          type: string
+        primary_owner:
+          type: boolean
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRoleEntity'
+        source:
+          type: string
+        sourceId:
+          type: string
+        status:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    UserMembership:
+      type: object
+      properties:
+        reference:
+          type: string
+        roles:
+          type: object
+          additionalProperties:
+            type: string
+        source:
+          type: string
+        type:
+          type: string
+    NewPreRegisterUserEntity:
+      required:
+      - email
+      type: object
+      properties:
+        customFields:
+          type: object
+          additionalProperties:
+            type: object
+        email:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        newsletter:
+          type: boolean
+        picture:
+          type: string
+        service:
+          type: boolean
+        source:
+          type: string
+        sourceId:
+          type: string
+    ResetPasswordUserEntity:
+      required:
+      - firstname
+      - lastname
+      - password
+      - token
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        password:
+          type: string
+        token:
+          type: string
   securitySchemes:
-    BasicAuth:
+    gravitee-auth:
       type: http
       scheme: basic
-    CookieAuth:
-      type: apiKey
-      in: cookie
-      name: Auth-Graviteeio-APIM
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT

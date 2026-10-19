@@ -1,0 +1,1581 @@
+openapi: 3.2.0
+info:
+  title: Gravitee.io - Management API Subscriptions API
+  description: Some news resources are in alpha version. This implies that they are likely to be modified or even removed in future versions. They are marked with the 🧪 symbol
+  version: 3.20.0
+servers:
+- url: http://localhost:8083/management
+security:
+- gravitee-auth: []
+tags:
+- name: API Subscriptions
+paths:
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscribers:
+    get:
+      tags:
+      - API Subscriptions
+      summary: List subscribers for the API
+      description: User must have the MANAGE_SUBSCRIPTIONS permission to use this service
+      operationId: getApiSubscribers
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+      - name: exclude
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - PICTURE
+            - OWNER
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Paged result of API subscribers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationListItem'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions:
+    get:
+      tags:
+      - API Subscriptions
+      summary: List subscriptions for the API
+      description: User must have the READ_SUBSCRIPTION permission to use this service
+      operationId: getApiSubscriptions
+      parameters:
+      - name: plan
+        in: query
+        description: plan
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: application
+        in: query
+        description: application
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: status
+        in: query
+        description: Comma separated list of Subscription status, default is ACCEPTED
+        explode: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionStatus'
+      - name: api_key
+        in: query
+        schema:
+          type: string
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: expand
+        in: query
+        description: Expansion of data to return in subscriptions
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - keys
+            - security
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Paged result of API's subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntityPageResult'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Subscriptions
+      summary: Subscribe to a plan
+      description: User must have the MANAGE_SUBSCRIPTIONS permission to use this service
+      operationId: createSubscriptionToApi
+      parameters:
+      - name: application
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: plan
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: customApiKey
+        in: query
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewSubscriptionConfigurationEntity'
+      responses:
+        '201':
+          description: Subscription successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad custom API Key format or custom API Key definition disabled
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/_canCreate:
+    get:
+      tags:
+      - API Subscriptions
+      summary: Check a subscription can be created with given api key, and application
+      description: User must have the API_SUBSCRIPTION:READ permission to use this service
+      operationId: verifyApiKeyCreation
+      parameters:
+      - name: key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API Key creation successfully checked
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad API Key parameter
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/export:
+    get:
+      tags:
+      - API Subscriptions
+      summary: Export API logs as CSV
+      operationId: exportApiSubscriptionsLogsAsCSV
+      parameters:
+      - name: plan
+        in: query
+        description: plan
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: application
+        in: query
+        description: application
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: status
+        in: query
+        description: Comma separated list of Subscription status, default is ACCEPTED
+        explode: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionStatus'
+      - name: api_key
+        in: query
+        schema:
+          type: string
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API logs as CSV
+          content:
+            text/csv:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/{subscription}:
+    get:
+      tags:
+      - API Subscriptions
+      summary: Get a subscription
+      description: User must have the MANAGE_PLANS permission to use this service
+      operationId: getApiSubscription
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Get a subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '404':
+          description: Subscription does not exist
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - API Subscriptions
+      summary: Update a subscription
+      description: User must have the MANAGE_PLANS permission to use this service
+      operationId: updateApiSubscription
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubscriptionEntity'
+        required: true
+      responses:
+        '200':
+          description: Update a subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad subscription format
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/{subscription}/_process:
+    post:
+      tags:
+      - API Subscriptions
+      summary: Update a subscription
+      description: User must have the MANAGE_PLANS permission to use this service
+      operationId: processApiSubscription
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ProcessSubscriptionEntity'
+        required: true
+      responses:
+        '200':
+          description: Update a subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad subscription format
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/{subscription}/_transfer:
+    post:
+      tags:
+      - API Subscriptions
+      summary: Transfer a subscription
+      description: User must have the API_SUBSCRIPTION update permission to use this service
+      operationId: transferApiSubscription
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/TransferSubscriptionEntity'
+        required: true
+      responses:
+        '200':
+          description: Update a subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad subscription format
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/apis/{api}/subscriptions/{subscription}/status:
+    post:
+      tags:
+      - API Subscriptions
+      summary: Change the status of a subscription
+      description: User must have the MANAGE_PLANS permission to use this service
+      operationId: changeApiSubscriptionStatus
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/SubscriptionStatus'
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Subscription status successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Status changes not authorized
+        '404':
+          description: API subscription does not exist
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscribers:
+    get:
+      tags:
+      - API Subscriptions
+      summary: List subscribers for the API
+      description: User must have the MANAGE_SUBSCRIPTIONS permission to use this service
+      operationId: getApiSubscribers_1
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+      - name: exclude
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - PICTURE
+            - OWNER
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Paged result of API subscribers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationListItem'
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions:
+    get:
+      tags:
+      - API Subscriptions
+      summary: List subscriptions for the API
+      description: User must have the READ_SUBSCRIPTION permission to use this service
+      operationId: getApiSubscriptions_1
+      parameters:
+      - name: plan
+        in: query
+        description: plan
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: application
+        in: query
+        description: application
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: status
+        in: query
+        description: Comma separated list of Subscription status, default is ACCEPTED
+        explode: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionStatus'
+      - name: api_key
+        in: query
+        schema:
+          type: string
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: expand
+        in: query
+        description: Expansion of data to return in subscriptions
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - keys
+            - security
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Paged result of API's subscriptions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionEntityPageResult'
+        '500':
+          description: Internal server error
+    post:
+      tags:
+      - API Subscriptions
+      summary: Subscribe to a plan
+      description: User must have the MANAGE_SUBSCRIPTIONS permission to use this service
+      operationId: createSubscriptionToApi_1
+      parameters:
+      - name: application
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: plan
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: customApiKey
+        in: query
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewSubscriptionConfigurationEntity'
+      responses:
+        '201':
+          description: Subscription successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad custom API Key format or custom API Key definition disabled
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/_canCreate:
+    get:
+      tags:
+      - API Subscriptions
+      summary: Check a subscription can be created with given api key, and application
+      description: User must have the API_SUBSCRIPTION:READ permission to use this service
+      operationId: verifyApiKeyCreation_1
+      parameters:
+      - name: key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: application
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API Key creation successfully checked
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad API Key parameter
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/export:
+    get:
+      tags:
+      - API Subscriptions
+      summary: Export API logs as CSV
+      operationId: exportApiSubscriptionsLogsAsCSV_1
+      parameters:
+      - name: plan
+        in: query
+        description: plan
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: application
+        in: query
+        description: application
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: status
+        in: query
+        description: Comma separated list of Subscription status, default is ACCEPTED
+        explode: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionStatus'
+      - name: api_key
+        in: query
+        schema:
+          type: string
+      - name: size
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: page
+        in: query
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+          default: 1
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: API logs as CSV
+          content:
+            text/csv:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/{subscription}:
+    get:
+      tags:
+      - API Subscriptions
+      summary: Get a subscription
+      description: User must have the MANAGE_PLANS permission to use this service
+      operationId: getApiSubscription_1
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Get a subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '404':
+          description: Subscription does not exist
+        '500':
+          description: Internal server error
+    put:
+      tags:
+      - API Subscriptions
+      summary: Update a subscription
+      description: User must have the MANAGE_PLANS permission to use this service
+      operationId: updateApiSubscription_1
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubscriptionEntity'
+        required: true
+      responses:
+        '200':
+          description: Update a subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad subscription format
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/{subscription}/_process:
+    post:
+      tags:
+      - API Subscriptions
+      summary: Update a subscription
+      description: User must have the MANAGE_PLANS permission to use this service
+      operationId: processApiSubscription_1
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ProcessSubscriptionEntity'
+        required: true
+      responses:
+        '200':
+          description: Update a subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad subscription format
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/{subscription}/_transfer:
+    post:
+      tags:
+      - API Subscriptions
+      summary: Transfer a subscription
+      description: User must have the API_SUBSCRIPTION update permission to use this service
+      operationId: transferApiSubscription_1
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/TransferSubscriptionEntity'
+        required: true
+      responses:
+        '200':
+          description: Update a subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad subscription format
+        '500':
+          description: Internal server error
+  /organizations/{orgId}/environments/{envId}/v4/apis/{api}/subscriptions/{subscription}/status:
+    post:
+      tags:
+      - API Subscriptions
+      summary: Change the status of a subscription
+      description: User must have the MANAGE_PLANS permission to use this service
+      operationId: changeApiSubscriptionStatus_1
+      parameters:
+      - name: subscription
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/SubscriptionStatus'
+      - name: api
+        in: path
+        description: The ID of the API
+        required: true
+        schema:
+          type: string
+      - name: envId
+        in: path
+        description: The ID of the environment
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      - name: orgId
+        in: path
+        description: The ID of the Organization
+        required: true
+        schema:
+          type: string
+          default: DEFAULT
+      responses:
+        '200':
+          description: Subscription status successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Status changes not authorized
+        '404':
+          description: API subscription does not exist
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    PrimaryOwnerEntity:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: The user or group display name.
+          example: John Doe
+        email:
+          type: string
+          description: The user or group email.
+          example: contact@gravitee.io
+        id:
+          type: string
+          description: The user or group id.
+          example: 005197cc-cc84-86a6-a75a-88f9772c67db
+        type:
+          type: string
+          description: The primary owner type
+          example: USER
+      description: The user with role PRIMARY_OWNER on this API.
+    SubscriptionConsumerStatus:
+      type: string
+      enum:
+      - STARTED
+      - STOPPED
+    User:
+      type: object
+      properties:
+        displayName:
+          type: string
+        id:
+          type: string
+    TransferSubscriptionEntity:
+      required:
+      - plan
+      type: object
+      properties:
+        id:
+          type: string
+        plan:
+          type: string
+    UpdateSubscriptionEntity:
+      type: object
+      properties:
+        configuration:
+          type: string
+        ending_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        starting_at:
+          type: string
+          format: date-time
+    SubscriptionStatus:
+      type: string
+      enum:
+      - PENDING
+      - REJECTED
+      - ACCEPTED
+      - CLOSED
+      - PAUSED
+      - RESUMED
+    OAuthClientSettings:
+      type: object
+      properties:
+        application_type:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        client_uri:
+          type: string
+        grant_types:
+          type: array
+          items:
+            type: string
+        logo_uri:
+          type: string
+        redirect_uris:
+          type: array
+          items:
+            type: string
+        renew_client_secret_supported:
+          type: boolean
+        response_types:
+          type: array
+          items:
+            type: string
+    SubscriptionEntity:
+      type: object
+      properties:
+        api:
+          type: string
+        application:
+          type: string
+        client_id:
+          type: string
+        closed_at:
+          type: string
+          format: date-time
+        configuration:
+          type: string
+        consumerPausedAt:
+          type: string
+          format: date-time
+        consumerStatus:
+          $ref: '#/components/schemas/SubscriptionConsumerStatus'
+        created_at:
+          type: string
+          format: date-time
+        daysToExpirationOnLastNotification:
+          type: integer
+          format: int32
+        ending_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        keys:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        paused_at:
+          type: string
+          format: date-time
+        plan:
+          type: string
+        processed_at:
+          type: string
+          format: date-time
+        processed_by:
+          type: string
+        reason:
+          type: string
+        request:
+          type: string
+        security:
+          type: string
+        starting_at:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/SubscriptionStatus'
+        subscribed_by:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+    ApiKeyMode:
+      type: string
+      enum:
+      - SHARED
+      - EXCLUSIVE
+      - UNSPECIFIED
+    Page:
+      type: object
+      properties:
+        current:
+          type: integer
+          format: int32
+        per_page:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        total_elements:
+          type: integer
+          format: int32
+        total_pages:
+          type: integer
+          format: int32
+    ApplicationSettings:
+      type: object
+      properties:
+        app:
+          $ref: '#/components/schemas/SimpleApplicationSettings'
+        oauth:
+          $ref: '#/components/schemas/OAuthClientSettings'
+    SubscriptionEntityPageResult:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionEntity'
+        metadata:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: object
+        page:
+          $ref: '#/components/schemas/Page'
+    NewSubscriptionConfigurationEntity:
+      type: object
+      properties:
+        configuration:
+          type: string
+        filter:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    SimpleApplicationSettings:
+      type: object
+      properties:
+        client_id:
+          type: string
+        type:
+          type: string
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        security:
+          type: string
+    Application:
+      type: object
+      properties:
+        apiKeyMode:
+          $ref: '#/components/schemas/ApiKeyMode'
+        description:
+          type: string
+        domain:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/User'
+        type:
+          type: string
+    Api:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          $ref: '#/components/schemas/User'
+        version:
+          type: string
+    ApplicationListItem:
+      type: object
+      properties:
+        api_key_mode:
+          $ref: '#/components/schemas/ApiKeyMode'
+        background:
+          type: string
+        background_url:
+          type: string
+        created_at:
+          type: string
+          description: The date (as a timestamp) when the application was created.
+          format: date-time
+        description:
+          type: string
+          description: Application's description. A short description of your App.
+          example: I can use a hundred characters to describe this App.
+        disable_membership_notifications:
+          type: boolean
+        domain:
+          type: string
+          description: Domain used by the application, if relevant
+          example: https://my-app.com
+        groups:
+          uniqueItems: true
+          type: array
+          description: Application groups. Used to add teams to your application.
+          example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+          items:
+            type: string
+            description: Application groups. Used to add teams to your application.
+            example: '[''MY_GROUP1'', ''MY_GROUP2'']'
+        id:
+          type: string
+          description: Application's uuid.
+          example: 00f8c9e7-78fc-4907-b8c9-e778fc790750
+        name:
+          type: string
+          description: Application's name. Duplicate names can exists.
+          example: My App
+        owner:
+          $ref: '#/components/schemas/PrimaryOwnerEntity'
+        picture:
+          type: string
+        picture_url:
+          type: string
+        settings:
+          $ref: '#/components/schemas/ApplicationSettings'
+        status:
+          type: string
+          description: if the app is ACTIVE or ARCHIVED.
+          example: ACTIVE
+        type:
+          type: string
+          description: a string to describe the type of your app.
+          example: iOS
+        updated_at:
+          type: string
+          description: The last date (as a timestamp) when the application was updated.
+          format: date-time
+    ProcessSubscriptionEntity:
+      required:
+      - accepted
+      type: object
+      properties:
+        accepted:
+          type: boolean
+        customApiKey:
+          type: string
+        ending_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        reason:
+          type: string
+        starting_at:
+          type: string
+          format: date-time
+    Subscription:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/Api'
+        application:
+          $ref: '#/components/schemas/Application'
+        client_id:
+          type: string
+        closed_at:
+          type: string
+          format: date-time
+        consumerStatus:
+          $ref: '#/components/schemas/SubscriptionConsumerStatus'
+        consumer_paused_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        ending_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        paused_at:
+          type: string
+          format: date-time
+        plan:
+          $ref: '#/components/schemas/Plan'
+        processed_at:
+          type: string
+          format: date-time
+        processed_by:
+          type: string
+        reason:
+          type: string
+        request:
+          type: string
+        starting_at:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/SubscriptionStatus'
+        subscribed_by:
+          $ref: '#/components/schemas/User'
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    gravitee-auth:
+      type: http
+      scheme: basic
