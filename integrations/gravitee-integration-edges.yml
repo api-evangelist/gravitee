@@ -10,6 +10,7 @@ checked:
 - https://github.com/cncf/landscape
 - https://github.com/kubernetes-sigs/gateway-api
 - https://openid.net/developers/certified-openid-connect-implementations/
+- artifact-hub/integrations/artifact-hub-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: OpenID Foundation certification
@@ -72,23 +73,6 @@ edges:
   seller_name: Gravitee.io
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
-- partner_name: Datadog (own)
-  partner: datadog
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://github.com/DataDog/integrations-extras/tree/master/gravitee
-  mirror_of: datadog/integrations/datadog-integration-edges.yml
-  apps:
-  - Gravitee APIM
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-  category: Metrics
 - partner_name: CNCF (Cloud Native Landscape)
   partner: cncf
   partner_match: register
@@ -216,5 +200,55 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
+- partner_name: Datadog (own)
+  partner: datadog
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://github.com/DataDog/integrations-extras/tree/master/gravitee
+  mirror_of: datadog/integrations/datadog-integration-edges.yml
+  apps:
+  - Gravitee APIM
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Metrics
+- partner_name: Artifact Hub (artifact-hub)
+  partner: artifact-hub
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: artifact-hub
+  evidence: https://artifacthub.io/packages/search?repo=graviteeio
+  mirror_of: artifact-hub/integrations/artifact-hub-integration-edges.yml
+  apps:
+  - apim3
+  - ae
+  - apim
+  - am
+  - cockpit
+  - gko
+  - federation-agent-apigee
+  - federation-agent-aws-api-gateway
+  - federation-agent-azure-api-management
+  - federation-agent-confluent-platform
+  - federation-agent-edge-stack
+  - federation-agent-ibm-api-connect
+  - federation-agent-mulesoft
+  - federation-agent-solace
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Artifact Hub listing (Helm chart)
+  badges:
+  - 'Verified publisher (Artifact Hub official: publisher owns the software)'
+  - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
 source:
 - datadog/integrations/datadog-integration-edges.yml
